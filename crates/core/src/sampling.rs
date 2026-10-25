@@ -138,13 +138,6 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
             && (i128::from(t) - i128::from(times[a])).abs() > i128::from(options.max_age_ns)
         {
             Some(Status::Stale)
-        } else if signal
-            .row(a)
-            .iter()
-            .chain(signal.row(b))
-            .any(|v| !v.is_finite())
-        {
-            Some(Status::NonFinite)
         } else {
             None
         };
@@ -152,21 +145,33 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
             out.status[i] = status as u8;
             continue;
         }
+        let left = signal.row(a);
+        let right_values = signal.row(b);
         let values = &mut out.values[i * signal.channels()..(i + 1) * signal.channels()];
+        let mut all_finite = true;
         if options.method == Method::Slerp {
-            match slerp(signal.row(a), signal.row(b), alpha) {
-                Some(v) => values.copy_from_slice(&v),
+            if left.iter().chain(right_values).any(|v| !v.is_finite()) {
+                out.status[i] = Status::NonFinite as u8;
+                continue;
+            }
+            match slerp(left, right_values, alpha) {
+                Some(value) => values.copy_from_slice(&value),
                 None => {
                     out.status[i] = Status::InvalidQuaternion as u8;
                     continue;
                 }
             }
+            all_finite = values.iter().all(|v| v.is_finite());
+        } else if a == b {
+            values.copy_from_slice(left);
+            all_finite = values.iter().all(|v| v.is_finite());
         } else {
-            for ((value, &x), &y) in values.iter_mut().zip(signal.row(a)).zip(signal.row(b)) {
+            for ((value, &x), &y) in values.iter_mut().zip(left).zip(right_values) {
                 *value = (1.0 - alpha) * x + alpha * y;
+                all_finite &= x.is_finite() & y.is_finite() & value.is_finite();
             }
         }
-        if values.iter().any(|v| !v.is_finite()) {
+        if !all_finite {
             values.fill(f64::NAN);
             out.status[i] = Status::NonFinite as u8;
             continue;

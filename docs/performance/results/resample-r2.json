@@ -1,0 +1,78 @@
+{
+  "label": "resample-r2",
+  "base_commit": "fb9eb335fd5e751f061d2633527b36451a731b9a",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp"
+  ],
+  "geomean_latency_reduction_pct": 22.708687338610645,
+  "worst_block_reduction_pct": 21.84371592879102,
+  "worst_case_reduction_pct": 6.985236554675279,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "8c169801a630bfcbc4a1ae9a40c2e1582da0f40986adc4f6200c5ba879146f45",
+  "operator": "resample",
+  "round": 2,
+  "decision": "accepted",
+  "method": "fuse finite checks with interpolation writes",
+  "profile_hotspot": "Repeated endpoint checks, arithmetic on held values and separate finite passes",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 349788.2890625,
+      "after_ns": 218753.546875,
+      "latency_reduction_pct": 37.50048350121753,
+      "paired_ratios": [
+        0.6246662076922046,
+        0.6158129470335388,
+        0.6253241222834448,
+        0.6399719465438736
+      ],
+      "worst_paired_reduction_pct": 36.00280534561264
+    },
+    "resample.nearest": {
+      "before_ns": 361342.5859375,
+      "after_ns": 249034.86328125,
+      "latency_reduction_pct": 31.069334269206706,
+      "paired_ratios": [
+        0.6983777418746313,
+        0.6802355727412346,
+        0.6784091026877426,
+        0.7070476613956249
+      ],
+      "worst_paired_reduction_pct": 29.29523386043751
+    },
+    "resample.linear": {
+      "before_ns": 441660.6640625,
+      "after_ns": 410900.6640625,
+      "latency_reduction_pct": 6.985236554675279,
+      "paired_ratios": [
+        0.9368506716529529,
+        0.9234445972535416,
+        0.9205839403107459,
+        0.9481439149011274
+      ],
+      "worst_paired_reduction_pct": 5.185608509887263
+    },
+    "resample.slerp": {
+      "before_ns": 637140.796875,
+      "after_ns": 558767.328125,
+      "latency_reduction_pct": 11.921222511504714,
+      "paired_ratios": [
+        0.8945622657357238,
+        0.8682294225472557,
+        0.8918710406464407,
+        0.869704509123465
+      ],
+      "worst_paired_reduction_pct": 10.543773426427617
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/resample-r2",
+  "validation_sha256": "c2f4df611e044443904b2bf4f226bff3125d9d6e60fb99024f02ea7491bcb930"
+}
