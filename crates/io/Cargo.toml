@@ -1,0 +1,18 @@
+[package]
+name = "mcap-ops-io"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "MCAP and media adapters for mcap-ops"
+
+[dependencies]
+mcap-ops-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+mcap = "0.23"
+memmap2 = "0.9"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+sha2 = "0.10"
+tempfile = "3"

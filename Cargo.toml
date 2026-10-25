@@ -1,0 +1,26 @@
+[workspace]
+members = ["crates/core", "crates/io", "crates/python"]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.90"
+license = "MIT"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+mcap-ops-core = { path = "crates/core", version = "0.1.0" }
+mcap-ops-io = { path = "crates/io", version = "0.1.0" }
+
+[profile.dev]
+debug = 0
+
+[profile.test]
+debug = 0
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
