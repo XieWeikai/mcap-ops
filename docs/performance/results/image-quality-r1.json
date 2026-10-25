@@ -1,0 +1,52 @@
+{
+  "label": "image-quality-r1",
+  "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": 25.304549291757127,
+  "worst_block_reduction_pct": 25.285700408850243,
+  "worst_case_reduction_pct": 19.07800685661707,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "adc929c07b34140a5d4230ca7e5ac4bd707ff8da17d35a9f0653b62257a882dc",
+  "operator": "image_quality",
+  "round": 1,
+  "decision": "accepted",
+  "method": "use chunked two-pass luminance statistics and consume RGB storage",
+  "profile_hotspot": "Per-pixel online moment division and repeated decoded RGB allocation",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 4374023.9375,
+      "after_ns": 3539532.0625,
+      "latency_reduction_pct": 19.07800685661707,
+      "paired_ratios": [
+        0.8036801257043471,
+        0.8062643510554861,
+        0.8121755118121726,
+        0.8147991959713533
+      ],
+      "worst_paired_reduction_pct": 18.520080402864668
+    },
+    "image_quality.noise": {
+      "before_ns": 2989302.6875,
+      "after_ns": 2064394.28125,
+      "latency_reduction_pct": 31.1469287125284,
+      "paired_ratios": [
+        0.6944960737378927,
+        0.6903509654047961,
+        0.6867104603446358,
+        0.6851045743535982
+      ],
+      "worst_paired_reduction_pct": 30.55039262621073
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/image-quality-r1",
+  "validation_sha256": "10ee2a260b0fdaaea245cd855cd8989af089dbf1ed978e1f04aa4b6d7c4616d4"
+}

@@ -68,25 +68,31 @@ pub struct ImageQuality {
     pub rgb_sha256: String,
 }
 pub fn image_quality(bytes: &[u8], options: &ImageOptions) -> Result<ImageQuality> {
-    let rgb = decode(bytes, options)?.to_rgb8();
+    let rgb = decode(bytes, options)?.into_rgb8();
     let (width, height) = rgb.dimensions();
     let count = u64::from(width) * u64::from(height);
     if count == 0 {
         return Err(invalid("empty image"));
     }
     let mut gray = Vec::with_capacity(count as usize);
-    let (mut mean, mut m2, mut dark, mut bright) = (0.0, 0.0, 0u64, 0u64);
-    for (i, pixel) in rgb.pixels().enumerate() {
+    let (mut dark, mut bright) = (0u64, 0u64);
+    for pixel in rgb.pixels() {
         let y = 0.2126 * f64::from(pixel[0])
             + 0.7152 * f64::from(pixel[1])
             + 0.0722 * f64::from(pixel[2]);
         gray.push(y);
-        let delta = y - mean;
-        mean += delta / (i + 1) as f64;
-        m2 += delta * (y - mean);
         dark += u64::from(y <= f64::from(options.dark_threshold));
         bright += u64::from(y >= f64::from(options.bright_threshold));
     }
+    let mean = gray
+        .chunks(256)
+        .map(|chunk| chunk.iter().sum::<f64>())
+        .sum::<f64>()
+        / count as f64;
+    let m2 = gray
+        .chunks(256)
+        .map(|chunk| chunk.iter().map(|&v| (v - mean) * (v - mean)).sum::<f64>())
+        .sum::<f64>();
     let laplacian_variance = if width >= 3 && height >= 3 {
         let (mut n, mut average, mut variance) = (0, 0.0, 0.0);
         let w = width as usize;
