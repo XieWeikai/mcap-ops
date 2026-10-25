@@ -33,15 +33,31 @@ pub struct Signal {
 impl Signal {
     pub fn new(timestamps: Vec<i64>, values: Vec<f64>, channels: usize) -> Result<Self> {
         if channels == 0 || timestamps.len().checked_mul(channels) != Some(values.len()) {
-            return Err(invalid("values must have shape (timestamps.len(), channels > 0)"));
+            return Err(invalid(
+                "values must have shape (timestamps.len(), channels > 0)",
+            ));
         }
-        Ok(Self { timestamps, values, channels })
+        Ok(Self {
+            timestamps,
+            values,
+            channels,
+        })
     }
-    pub fn timestamps(&self) -> &[i64] { &self.timestamps }
-    pub fn values(&self) -> &[f64] { &self.values }
-    pub fn channels(&self) -> usize { self.channels }
-    pub fn len(&self) -> usize { self.timestamps.len() }
-    pub fn is_empty(&self) -> bool { self.timestamps.is_empty() }
+    pub fn timestamps(&self) -> &[i64] {
+        &self.timestamps
+    }
+    pub fn values(&self) -> &[f64] {
+        &self.values
+    }
+    pub fn channels(&self) -> usize {
+        self.channels
+    }
+    pub fn len(&self) -> usize {
+        self.timestamps.len()
+    }
+    pub fn is_empty(&self) -> bool {
+        self.timestamps.is_empty()
+    }
     pub fn row(&self, index: usize) -> &[f64] {
         &self.values[index * self.channels..(index + 1) * self.channels]
     }
@@ -64,4 +80,10 @@ pub struct SignalSpec {
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
-pub enum SignalKind { Continuous, QuaternionXyzw, Command, Discrete, Event }
+pub enum SignalKind {
+    Continuous,
+    QuaternionXyzw,
+    Command,
+    Discrete,
+    Event,
+}
