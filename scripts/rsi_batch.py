@@ -12,6 +12,11 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("rsi_candidates", ROOT / "benchmarks/candidates.py")
 candidates = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(candidates)
+extra_spec = importlib.util.spec_from_file_location("rsi_candidates_extra", ROOT / "benchmarks/candidates_extra.py")
+if extra_spec and Path(extra_spec.origin).exists():
+    extra = importlib.util.module_from_spec(extra_spec)
+    extra_spec.loader.exec_module(extra)
+    candidates.RECIPES.extend(extra.RECIPES)
 
 
 def function_span(source, name):
@@ -54,7 +59,10 @@ def main():
             print("BEGIN", label, recipe["methods"][round_number - 1], flush=True)
             if not trial.exists():
                 source = path.read_text()
-                start, end = function_span(source, recipe["function"])
+                function = recipe["function"]
+                if isinstance(function, list):
+                    function = function[round_number - 1]
+                start, end = function_span(source, function)
                 revised = recipe["rounds"][round_number - 1](source[start:end])
                 if revised == source[start:end]:
                     raise RuntimeError("candidate made no implementation change")
