@@ -107,8 +107,10 @@ def gate2(s):
 
 
 def ema1(s):
+    s=replace(s,"for i in 0..signal.len() {", "for (i,is_valid) in valid.iter_mut().enumerate() {")
+    s=replace(s,"valid[i] = true;", "*is_valid = true;")
     a=s.index("        for c in 0..signal.channels()")
-    b=s.index("        valid[i] = true;",a)
+    b=s.index("        *is_valid = true;",a)
     return s[:a]+'''        let d=signal.channels();
         let (past,tail)=values.split_at_mut(i*d);
         let row=&mut tail[..d];

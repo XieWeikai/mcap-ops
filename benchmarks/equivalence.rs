@@ -133,6 +133,18 @@ fn main() {
             }
         }
     }
+    let extra_images=[
+        image::DynamicImage::ImageRgba8(image::RgbaImage::from_fn(8,7,|x,y|image::Rgba([(x*17) as u8,(y*31) as u8,93,(x+y) as u8]))),
+        image::DynamicImage::ImageLuma16(image::ImageBuffer::from_fn(6,5,|x,y|image::Luma([(x*1000+y*100) as u16]))),
+        image::DynamicImage::ImageRgb16(image::ImageBuffer::from_fn(7,6,|x,y|image::Rgb([(x*1000) as u16,(y*2000) as u16,65535]))),
+    ];
+    for image in extra_images {
+        let mut encoded=Cursor::new(Vec::new());image.write_to(&mut encoded,image::ImageFormat::Png).unwrap();
+        let oa=before_io::image_ops::ImageOptions::default();let ob=after_io::image_ops::ImageOptions::default();
+        let a=before_io::image_ops::transform_image(encoded.get_ref(),&oa,None,Some([9,8]),before_io::image_ops::ResizeFilter::Lanczos3).unwrap();
+        let b=after_io::image_ops::transform_image(encoded.get_ref(),&ob,None,Some([9,8]),after_io::image_ops::ResizeFilter::Lanczos3).unwrap();
+        assert_eq!(image::load_from_memory(&a).unwrap().to_rgba16(),image::load_from_memory(&b).unwrap().to_rgba16());
+    }
     let temp=tempfile::tempdir().unwrap();
     for chunks in [true,false] {
         let path=temp.path().join(format!("fixture-{chunks}.mcap"));
@@ -149,6 +161,10 @@ fn main() {
         let ra=before_io::mcap_ops::inspect_mcap(&path,serde_json::from_value(cfg.clone()).unwrap(),Default::default(),2_000_000).unwrap();
         let rb=after_io::mcap_ops::inspect_mcap(&path,serde_json::from_value(cfg).unwrap(),Default::default(),2_000_000).unwrap();
         json(serde_json::to_value(ra).unwrap(),serde_json::to_value(rb).unwrap());
+        let many=serde_json::json!({"topics":["/z","/q","/x","/b","/empty","/a","/c","/d","/e","/f","/q"]});
+        let ra=before_io::mcap_ops::inspect_mcap(&path,serde_json::from_value(many.clone()).unwrap(),Default::default(),2_000_000).unwrap();
+        let rb=after_io::mcap_ops::inspect_mcap(&path,serde_json::from_value(many).unwrap(),Default::default(),2_000_000).unwrap();
+        json(serde_json::to_value(ra).unwrap(),serde_json::to_value(rb).unwrap());
         let spec=serde_json::json!({"topic":"/q","channels":5,"fields":["/q","/a~1b","/nested/x"]});
         let da:before_io::mcap_ops::JsonSignalSpec=serde_json::from_value(spec.clone()).unwrap();
         let db:after_io::mcap_ops::JsonSignalSpec=serde_json::from_value(spec).unwrap();
@@ -156,5 +172,5 @@ fn main() {
         let b=after_io::mcap_ops::read_signal(&path,Default::default(),Default::default(),&db,1000).unwrap();
         assert_eq!(a.timestamps(),b.timestamps());numbers(a.values(),b.values());
     }
-    println!("equivalence: 180 randomized core scenarios, 10 image fixtures, 2 MCAP fixtures passed");
+    println!("equivalence: 180 randomized core scenarios, 13 image fixtures, 2 MCAP fixtures passed");
 }

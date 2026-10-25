@@ -17,6 +17,11 @@ if extra_spec and Path(extra_spec.origin).exists():
     extra = importlib.util.module_from_spec(extra_spec)
     extra_spec.loader.exec_module(extra)
     candidates.RECIPES.extend(extra.RECIPES)
+io_spec = importlib.util.spec_from_file_location("rsi_candidates_io", ROOT / "benchmarks/candidates_io.py")
+if io_spec and Path(io_spec.origin).exists():
+    io_candidates = importlib.util.module_from_spec(io_spec)
+    io_spec.loader.exec_module(io_candidates)
+    candidates.RECIPES.extend(io_candidates.RECIPES)
 
 
 def function_span(source, name):
@@ -26,6 +31,9 @@ def function_span(source, name):
         lambda match: " " * len(match.group()), source, flags=re.DOTALL,
     )
     matches = list(re.finditer(r"\b(?:pub\s+)?fn\s+" + re.escape(name) + r"\s*[\(<]", masked))
+    matches = [match for match in matches if masked.find("{", match.end()) >= 0
+               and (masked.find(";", match.end()) < 0
+                    or masked.find("{", match.end()) < masked.find(";", match.end()))]
     if len(matches) != 1:
         raise RuntimeError(f"expected unique function {name}")
     start = matches[0].start()
@@ -62,7 +70,7 @@ def main():
                 function = recipe["function"]
                 if isinstance(function, list):
                     function = function[round_number - 1]
-                start, end = function_span(source, function)
+                start, end = (0, len(source)) if function is None else function_span(source, function)
                 revised = recipe["rounds"][round_number - 1](source[start:end])
                 if revised == source[start:end]:
                     raise RuntimeError("candidate made no implementation change")
