@@ -1,0 +1,222 @@
+{
+  "label": "python-bridge-r2",
+  "base_commit": "b54b55f7fbed1212b7b270ecc37d2c12bdce6e41",
+  "cases": [
+    "python.inspect_signal",
+    "python.resample.previous",
+    "python.resample.linear",
+    "python.history_windows",
+    "python.align_timestamps",
+    "python.uniform_grid",
+    "python.ema",
+    "python.fir",
+    "python.lowpass_taps",
+    "python.unwrap_angles",
+    "python.image_quality",
+    "python.transform_image",
+    "python.inspect_mcap",
+    "python.read_json_signal",
+    "python.validate_video"
+  ],
+  "geomean_latency_reduction_pct": 15.545347020081856,
+  "worst_block_reduction_pct": 14.200628360085865,
+  "worst_case_reduction_pct": -0.8799245798613242,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "One layout check with the existing iterator fallback for strided inputs; identical owned snapshots and public return structures",
+  "paths": [
+    "crates/python/src/lib.rs",
+    "python/mcap_ops/__init__.py"
+  ],
+  "measurement_sha256": "fed2b03836db491685b42e0b95a21e01abd414b9913c53992391316ec3ee827d",
+  "operator": "python_bridge",
+  "round": 2,
+  "decision": "accepted",
+  "method": "copy standard-layout input arrays through contiguous slices",
+  "profile_hotspot": "After eliminating JSON, ndarray element iteration dominates input snapshot creation for contiguous arrays",
+  "reason": "236 public-interface comparisons pass; aggregate latency reduction 15.55%, worst paired block 14.20%, no material case regression",
+  "case_results": {
+    "python.inspect_signal": {
+      "before_ns": 1197713.453125,
+      "after_ns": 933451.296875,
+      "latency_reduction_pct": 22.115635018193213,
+      "paired_ratios": [
+        0.7796239827769744,
+        0.7780633168591613,
+        0.7687392244564549,
+        0.8057957283944205
+      ],
+      "worst_paired_reduction_pct": 19.420427160557953
+    },
+    "python.resample.previous": {
+      "before_ns": 437625.453125,
+      "after_ns": 163948.234375,
+      "latency_reduction_pct": 62.390082002629164,
+      "paired_ratios": [
+        0.3766158130325438,
+        0.37558254691487286,
+        0.3725438792045755,
+        0.3981288126295893
+      ],
+      "worst_paired_reduction_pct": 60.18711873704107
+    },
+    "python.resample.linear": {
+      "before_ns": 503828.53125,
+      "after_ns": 240862.109375,
+      "latency_reduction_pct": 52.15265230663486,
+      "paired_ratios": [
+        0.473101022371234,
+        0.47369679048269847,
+        0.48325016338460436,
+        0.5039447272943364
+      ],
+      "worst_paired_reduction_pct": 49.60552727056636
+    },
+    "python.history_windows": {
+      "before_ns": 1251975.4375,
+      "after_ns": 1054699.15625,
+      "latency_reduction_pct": 16.41015561769199,
+      "paired_ratios": [
+        0.8442106351614417,
+        0.8275862524847185,
+        0.9076480865705295,
+        0.8099506210498078
+      ],
+      "worst_paired_reduction_pct": 9.235191342947047
+    },
+    "python.align_timestamps": {
+      "before_ns": 28014.123046875,
+      "after_ns": 28184.62744140625,
+      "latency_reduction_pct": -0.8799245798613242,
+      "paired_ratios": [
+        1.0130166520708472,
+        1.0004057692334547,
+        1.0082643668564286,
+        1.009334124740798
+      ],
+      "worst_paired_reduction_pct": -1.3016652070847234
+    },
+    "python.uniform_grid": {
+      "before_ns": 179919.12890625,
+      "after_ns": 176690.546875,
+      "latency_reduction_pct": 2.5806859908674706,
+      "paired_ratios": [
+        0.971396374769933,
+        0.6114684067072712,
+        0.9871377383723254,
+        0.9769899054127175
+      ],
+      "worst_paired_reduction_pct": 1.2862261627674565
+    },
+    "python.ema": {
+      "before_ns": 1555168.53125,
+      "after_ns": 1347222.125,
+      "latency_reduction_pct": 13.997098609298142,
+      "paired_ratios": [
+        0.8458399873295102,
+        0.7854597467043419,
+        0.8807673450972447,
+        0.8742180404845269
+      ],
+      "worst_paired_reduction_pct": 11.923265490275526
+    },
+    "python.fir": {
+      "before_ns": 3759545.25,
+      "after_ns": 3806269.75,
+      "latency_reduction_pct": -0.5136986175404257,
+      "paired_ratios": [
+        1.002353032242671,
+        0.9871788810983179,
+        1.0241896972580633,
+        1.0079209401081377
+      ],
+      "worst_paired_reduction_pct": -2.4189697258063303
+    },
+    "python.lowpass_taps": {
+      "before_ns": 717.7883605957031,
+      "after_ns": 713.6183624267578,
+      "latency_reduction_pct": 1.3983721105589098,
+      "paired_ratios": [
+        0.9692611108699316,
+        0.9898452929908818,
+        1.0219363341658771,
+        0.98218726479794
+      ],
+      "worst_paired_reduction_pct": -2.1936334165877147
+    },
+    "python.unwrap_angles": {
+      "before_ns": 1450261.65625,
+      "after_ns": 1238277.5625,
+      "latency_reduction_pct": 14.099492866785667,
+      "paired_ratios": [
+        0.8434409514359211,
+        0.8489373655406118,
+        0.8851620216224404,
+        0.8690727771236748
+      ],
+      "worst_paired_reduction_pct": 11.48379783775596
+    },
+    "python.image_quality": {
+      "before_ns": 395198.96875,
+      "after_ns": 393358.40625,
+      "latency_reduction_pct": -0.162026877550292,
+      "paired_ratios": [
+        1.0059662101947864,
+        1.0161313548176054,
+        0.9972743273562193,
+        0.9515156447599821
+      ],
+      "worst_paired_reduction_pct": -1.6131354817605414
+    },
+    "python.transform_image": {
+      "before_ns": 981931.046875,
+      "after_ns": 970992.859375,
+      "latency_reduction_pct": 1.2376382942811404,
+      "paired_ratios": [
+        0.9709244331746891,
+        1.0140934688239434,
+        0.9837728095071397,
+        0.9914744246072376
+      ],
+      "worst_paired_reduction_pct": -1.4093468823943356
+    },
+    "python.inspect_mcap": {
+      "before_ns": 645602.953125,
+      "after_ns": 644865.875,
+      "latency_reduction_pct": 0.11403900978057546,
+      "paired_ratios": [
+        0.9004983462341642,
+        0.9969687752799575,
+        1.000750444524431,
+        1.007754933026919
+      ],
+      "worst_paired_reduction_pct": -0.7754933026919097
+    },
+    "python.read_json_signal": {
+      "before_ns": 923907.4375,
+      "after_ns": 912550.703125,
+      "latency_reduction_pct": 1.9137995871616242,
+      "paired_ratios": [
+        0.9777074156737409,
+        0.9840165925830267,
+        0.974879250627483,
+        1.0057455102347084
+      ],
+      "worst_paired_reduction_pct": -0.5745510234708373
+    },
+    "python.validate_video": {
+      "before_ns": 59847895.0,
+      "after_ns": 59525531.5,
+      "latency_reduction_pct": 0.8163372909810729,
+      "paired_ratios": [
+        0.9971632827799876,
+        0.9865099714003909,
+        1.0294118476805678,
+        0.9863173370227306
+      ],
+      "worst_paired_reduction_pct": -2.9411847680567815
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/python-bridge-r2",
+  "validation_sha256": "2b39477c31a8ffc3dee8db9326ae0a8bf4aeb8fc445f229d06f5c34850b6e4f7"
+}

@@ -1,0 +1,1915 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "python.inspect_signal": {
+          "case": "python.inspect_signal",
+          "median_ns": 1198932.78125,
+          "samples_ns": [
+            1205144.4375,
+            1194030.84375,
+            1198932.78125,
+            1202078.125,
+            1197159.0,
+            1192214.84375,
+            1202514.875
+          ],
+          "iterations": 32
+        },
+        "python.resample.previous": {
+          "case": "python.resample.previous",
+          "median_ns": 439576.5,
+          "samples_ns": [
+            448597.953125,
+            445857.84375,
+            440296.015625,
+            439576.5,
+            437576.40625,
+            434738.609375,
+            431419.21875
+          ],
+          "iterations": 64
+        },
+        "python.resample.linear": {
+          "case": "python.resample.linear",
+          "median_ns": 504411.015625,
+          "samples_ns": [
+            500976.0,
+            504838.03125,
+            504411.015625,
+            504402.953125,
+            571116.515625,
+            515248.703125,
+            500948.5
+          ],
+          "iterations": 64
+        },
+        "python.history_windows": {
+          "case": "python.history_windows",
+          "median_ns": 1251168.125,
+          "samples_ns": [
+            1241589.75,
+            1251168.125,
+            1256518.8125,
+            1253389.25,
+            1253901.4375,
+            1233096.625,
+            1227751.0625
+          ],
+          "iterations": 16
+        },
+        "python.align_timestamps": {
+          "case": "python.align_timestamps",
+          "median_ns": 27691.6923828125,
+          "samples_ns": [
+            27824.4912109375,
+            27911.236328125,
+            27750.326171875,
+            27639.8583984375,
+            27568.134765625,
+            27643.556640625,
+            27691.6923828125
+          ],
+          "iterations": 1024
+        },
+        "python.uniform_grid": {
+          "case": "python.uniform_grid",
+          "median_ns": 178264.1171875,
+          "samples_ns": [
+            177971.53125,
+            178264.1171875,
+            177618.5703125,
+            179873.5625,
+            176324.828125,
+            179264.9765625,
+            179180.9609375
+          ],
+          "iterations": 128
+        },
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1544928.4375,
+          "samples_ns": [
+            1534052.1875,
+            1560562.75,
+            1517468.9375,
+            1544928.4375,
+            1523148.125,
+            1566975.5625,
+            1548802.375
+          ],
+          "iterations": 16
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3801371.625,
+          "samples_ns": [
+            3775526.75,
+            3757255.75,
+            3726265.0,
+            3869112.125,
+            3806629.375,
+            3801832.625,
+            3801371.625
+          ],
+          "iterations": 8
+        },
+        "python.lowpass_taps": {
+          "case": "python.lowpass_taps",
+          "median_ns": 739.5250244140625,
+          "samples_ns": [
+            723.3423156738281,
+            723.9214477539062,
+            724.3102722167969,
+            743.3020629882812,
+            765.1252136230469,
+            742.2566528320312,
+            739.5250244140625
+          ],
+          "iterations": 32768
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1453844.625,
+          "samples_ns": [
+            1490477.9375,
+            1458934.3125,
+            1489741.3125,
+            1453844.625,
+            1442796.125,
+            1450036.1875,
+            1402686.125
+          ],
+          "iterations": 16
+        },
+        "python.image_quality": {
+          "case": "python.image_quality",
+          "median_ns": 388971.796875,
+          "samples_ns": [
+            412473.828125,
+            393295.1875,
+            386157.53125,
+            391889.5,
+            388971.796875,
+            383825.875,
+            381143.375
+          ],
+          "iterations": 64
+        },
+        "python.transform_image": {
+          "case": "python.transform_image",
+          "median_ns": 994993.5,
+          "samples_ns": [
+            983489.625,
+            1003884.375,
+            994993.5,
+            997802.15625,
+            992560.8125,
+            1003294.09375,
+            994447.28125
+          ],
+          "iterations": 32
+        },
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 719749.34375,
+          "samples_ns": [
+            647707.9375,
+            647245.28125,
+            719749.34375,
+            803277.78125,
+            823294.78125,
+            800033.9375,
+            710729.96875
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 939287.96875,
+          "samples_ns": [
+            938689.0625,
+            951220.375,
+            936914.96875,
+            948507.0,
+            973477.71875,
+            939287.96875,
+            910324.53125
+          ],
+          "iterations": 32
+        },
+        "python.validate_video": {
+          "case": "python.validate_video",
+          "median_ns": 60143464.0,
+          "samples_ns": [
+            60143464.0,
+            58895250.0,
+            63571506.0,
+            60424795.0,
+            61012589.0,
+            57922650.0,
+            59051619.0
+          ],
+          "iterations": 1
+        }
+      },
+      "after": {
+        "python.inspect_signal": {
+          "case": "python.inspect_signal",
+          "median_ns": 934716.75,
+          "samples_ns": [
+            938007.78125,
+            924914.59375,
+            923366.90625,
+            934716.75,
+            939810.3125,
+            947051.4375,
+            932618.0625
+          ],
+          "iterations": 32
+        },
+        "python.resample.previous": {
+          "case": "python.resample.previous",
+          "median_ns": 165551.4609375,
+          "samples_ns": [
+            164290.2578125,
+            164106.3125,
+            166174.7578125,
+            163583.5625,
+            165551.4609375,
+            168645.1171875,
+            166477.15625
+          ],
+          "iterations": 128
+        },
+        "python.resample.linear": {
+          "case": "python.resample.linear",
+          "median_ns": 238637.3671875,
+          "samples_ns": [
+            241438.6640625,
+            237399.1796875,
+            237877.5546875,
+            238637.3671875,
+            239285.0625,
+            238295.0703125,
+            238871.6640625
+          ],
+          "iterations": 128
+        },
+        "python.history_windows": {
+          "case": "python.history_windows",
+          "median_ns": 1056249.4375,
+          "samples_ns": [
+            1053949.375,
+            1029845.75,
+            1059077.3125,
+            1061370.46875,
+            1040027.15625,
+            1056249.4375,
+            1068718.53125
+          ],
+          "iterations": 32
+        },
+        "python.align_timestamps": {
+          "case": "python.align_timestamps",
+          "median_ns": 28052.1455078125,
+          "samples_ns": [
+            28291.265625,
+            28181.2822265625,
+            28052.1455078125,
+            28065.1728515625,
+            27959.8466796875,
+            27609.037109375,
+            27730.9033203125
+          ],
+          "iterations": 1024
+        },
+        "python.uniform_grid": {
+          "case": "python.uniform_grid",
+          "median_ns": 173165.1171875,
+          "samples_ns": [
+            171532.375,
+            172105.03125,
+            173165.1171875,
+            174987.6484375,
+            173103.8046875,
+            177937.21875,
+            175247.375
+          ],
+          "iterations": 128
+        },
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1306762.25,
+          "samples_ns": [
+            1287708.75,
+            1319385.5625,
+            1311183.125,
+            1306762.25,
+            1320072.5,
+            1295412.125,
+            1295525.75
+          ],
+          "iterations": 16
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3810316.375,
+          "samples_ns": [
+            3810316.375,
+            3766063.75,
+            3596187.125,
+            4007978.125,
+            3668310.0,
+            5061830.5,
+            3909041.375
+          ],
+          "iterations": 8
+        },
+        "python.lowpass_taps": {
+          "case": "python.lowpass_taps",
+          "median_ns": 716.7928466796875,
+          "samples_ns": [
+            721.1770324707031,
+            719.2865600585938,
+            713.0128479003906,
+            706.8569946289062,
+            707.1739196777344,
+            716.7928466796875,
+            718.7684631347656
+          ],
+          "iterations": 32768
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1226232.09375,
+          "samples_ns": [
+            1223173.3125,
+            1241215.4375,
+            1208068.875,
+            1240357.5625,
+            1240476.03125,
+            1214779.46875,
+            1226232.09375
+          ],
+          "iterations": 32
+        },
+        "python.image_quality": {
+          "case": "python.image_quality",
+          "median_ns": 391292.484375,
+          "samples_ns": [
+            395762.453125,
+            395537.65625,
+            392677.15625,
+            391292.484375,
+            388507.28125,
+            386063.375,
+            385381.59375
+          ],
+          "iterations": 64
+        },
+        "python.transform_image": {
+          "case": "python.transform_image",
+          "median_ns": 966063.5,
+          "samples_ns": [
+            966063.5,
+            964570.1875,
+            963157.5625,
+            960422.21875,
+            980378.21875,
+            976867.9375,
+            992192.8125
+          ],
+          "iterations": 32
+        },
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 648133.09375,
+          "samples_ns": [
+            648278.65625,
+            641017.53125,
+            646249.75,
+            644321.625,
+            651958.75,
+            649202.46875,
+            648133.09375
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 918348.8125,
+          "samples_ns": [
+            903287.125,
+            899834.09375,
+            908084.375,
+            918348.8125,
+            929520.3125,
+            935534.90625,
+            937731.34375
+          ],
+          "iterations": 32
+        },
+        "python.validate_video": {
+          "case": "python.validate_video",
+          "median_ns": 59972854.0,
+          "samples_ns": [
+            59835048.0,
+            60075241.0,
+            59972854.0,
+            57930018.0,
+            57947009.0,
+            60053972.0,
+            60020438.0
+          ],
+          "iterations": 1
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "python.inspect_signal": {
+          "case": "python.inspect_signal",
+          "median_ns": 930948.1875,
+          "samples_ns": [
+            925195.25,
+            925387.125,
+            932268.96875,
+            930948.1875,
+            937085.90625,
+            927205.15625,
+            935446.5
+          ],
+          "iterations": 32
+        },
+        "python.resample.previous": {
+          "case": "python.resample.previous",
+          "median_ns": 163631.703125,
+          "samples_ns": [
+            161909.5,
+            162219.859375,
+            165746.1484375,
+            162270.4296875,
+            164746.703125,
+            164974.6015625,
+            163631.703125
+          ],
+          "iterations": 128
+        },
+        "python.resample.linear": {
+          "case": "python.resample.linear",
+          "median_ns": 240034.3984375,
+          "samples_ns": [
+            239393.984375,
+            241971.296875,
+            240034.3984375,
+            237120.3203125,
+            243237.9140625,
+            241355.40625,
+            239483.6171875
+          ],
+          "iterations": 128
+        },
+        "python.history_windows": {
+          "case": "python.history_windows",
+          "median_ns": 1036785.78125,
+          "samples_ns": [
+            1034448.09375,
+            1051724.71875,
+            1036785.78125,
+            1019564.09375,
+            1048472.9375,
+            1053880.625,
+            1033112.4375
+          ],
+          "iterations": 32
+        },
+        "python.align_timestamps": {
+          "case": "python.align_timestamps",
+          "median_ns": 27984.3583984375,
+          "samples_ns": [
+            27718.447265625,
+            27788.70703125,
+            27984.3583984375,
+            28337.9248046875,
+            27971.1650390625,
+            28368.59375,
+            28692.2939453125
+          ],
+          "iterations": 1024
+        },
+        "python.uniform_grid": {
+          "case": "python.uniform_grid",
+          "median_ns": 178189.9765625,
+          "samples_ns": [
+            176534.96875,
+            177372.8828125,
+            178323.25,
+            178395.3046875,
+            178091.7578125,
+            186410.734375,
+            178189.9765625
+          ],
+          "iterations": 128
+        },
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1333622.1875,
+          "samples_ns": [
+            1360806.625,
+            1363611.3125,
+            1379928.875,
+            1315334.9375,
+            1332560.625,
+            1333622.1875,
+            1284141.6875
+          ],
+          "iterations": 16
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3698710.375,
+          "samples_ns": [
+            3698710.375,
+            3629930.375,
+            3598839.875,
+            3631680.75,
+            3786571.25,
+            3831737.0,
+            3703517.625
+          ],
+          "iterations": 8
+        },
+        "python.lowpass_taps": {
+          "case": "python.lowpass_taps",
+          "median_ns": 710.4438781738281,
+          "samples_ns": [
+            705.065673828125,
+            704.4548645019531,
+            711.5954895019531,
+            706.3520812988281,
+            710.4438781738281,
+            722.0290832519531,
+            729.31201171875
+          ],
+          "iterations": 32768
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1228139.59375,
+          "samples_ns": [
+            1245177.6875,
+            1218667.9375,
+            1211259.46875,
+            1221499.15625,
+            1228139.59375,
+            1287545.78125,
+            1266147.65625
+          ],
+          "iterations": 32
+        },
+        "python.image_quality": {
+          "case": "python.image_quality",
+          "median_ns": 394504.234375,
+          "samples_ns": [
+            394504.234375,
+            392308.21875,
+            394979.125,
+            401962.1875,
+            392849.0,
+            393215.265625,
+            396871.875
+          ],
+          "iterations": 64
+        },
+        "python.transform_image": {
+          "case": "python.transform_image",
+          "median_ns": 983355.25,
+          "samples_ns": [
+            1005357.4375,
+            998708.8125,
+            983355.25,
+            993924.28125,
+            982592.21875,
+            972699.9375,
+            965659.125
+          ],
+          "iterations": 32
+        },
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 644088.3125,
+          "samples_ns": [
+            648941.84375,
+            651395.65625,
+            643209.5,
+            644088.3125,
+            644938.0625,
+            641413.84375,
+            644014.09375
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 906752.59375,
+          "samples_ns": [
+            904679.40625,
+            913988.78125,
+            904523.71875,
+            902010.40625,
+            907158.15625,
+            924135.03125,
+            906752.59375
+          ],
+          "iterations": 32
+        },
+        "python.validate_video": {
+          "case": "python.validate_video",
+          "median_ns": 58991343.0,
+          "samples_ns": [
+            59393302.0,
+            58479072.0,
+            58991343.0,
+            58959890.0,
+            60104493.0,
+            59042839.0,
+            58198332.0
+          ],
+          "iterations": 1
+        }
+      },
+      "before": {
+        "python.inspect_signal": {
+          "case": "python.inspect_signal",
+          "median_ns": 1196494.125,
+          "samples_ns": [
+            1196494.125,
+            1192526.875,
+            1194163.4375,
+            1202506.03125,
+            1196319.40625,
+            1206333.96875,
+            1203709.25
+          ],
+          "iterations": 32
+        },
+        "python.resample.previous": {
+          "case": "python.resample.previous",
+          "median_ns": 435674.40625,
+          "samples_ns": [
+            433780.53125,
+            431387.25,
+            440617.15625,
+            439994.203125,
+            430604.015625,
+            438735.40625,
+            435674.40625
+          ],
+          "iterations": 64
+        },
+        "python.resample.linear": {
+          "case": "python.resample.linear",
+          "median_ns": 506725.828125,
+          "samples_ns": [
+            509224.296875,
+            506725.828125,
+            505686.5,
+            511347.953125,
+            506597.03125,
+            504774.53125,
+            511962.234375
+          ],
+          "iterations": 64
+        },
+        "python.history_windows": {
+          "case": "python.history_windows",
+          "median_ns": 1252782.75,
+          "samples_ns": [
+            1249289.125,
+            1252782.75,
+            1267175.375,
+            1268920.25,
+            1245098.3125,
+            1257157.8125,
+            1249291.0625
+          ],
+          "iterations": 16
+        },
+        "python.align_timestamps": {
+          "case": "python.align_timestamps",
+          "median_ns": 27973.0078125,
+          "samples_ns": [
+            27973.0078125,
+            28266.189453125,
+            28313.0732421875,
+            27996.4755859375,
+            27910.072265625,
+            27903.2392578125,
+            27770.4619140625
+          ],
+          "iterations": 1024
+        },
+        "python.uniform_grid": {
+          "case": "python.uniform_grid",
+          "median_ns": 291413.21875,
+          "samples_ns": [
+            174216.484375,
+            174450.796875,
+            174813.8125,
+            291413.21875,
+            306964.4375,
+            307394.4140625,
+            306097.078125
+          ],
+          "iterations": 128
+        },
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1697887.375,
+          "samples_ns": [
+            2647305.375,
+            2688213.625,
+            2365231.625,
+            1650889.875,
+            1538711.375,
+            1529682.5,
+            1697887.375
+          ],
+          "iterations": 8
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3746747.875,
+          "samples_ns": [
+            3607508.375,
+            3754528.25,
+            3715094.5,
+            3746747.875,
+            3766194.75,
+            3785634.125,
+            3737770.875
+          ],
+          "iterations": 8
+        },
+        "python.lowpass_taps": {
+          "case": "python.lowpass_taps",
+          "median_ns": 717.7322387695312,
+          "samples_ns": [
+            715.4502868652344,
+            714.46044921875,
+            717.7322387695312,
+            718.0229187011719,
+            722.6047973632812,
+            715.6359558105469,
+            718.2908020019531
+          ],
+          "iterations": 32768
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1446678.6875,
+          "samples_ns": [
+            1467344.875,
+            1446678.6875,
+            1453389.9375,
+            1448246.625,
+            1434348.625,
+            1430470.4375,
+            1442841.5
+          ],
+          "iterations": 16
+        },
+        "python.image_quality": {
+          "case": "python.image_quality",
+          "median_ns": 388241.375,
+          "samples_ns": [
+            386964.15625,
+            393480.0625,
+            386848.671875,
+            388364.3125,
+            387634.53125,
+            390615.84375,
+            388241.375
+          ],
+          "iterations": 64
+        },
+        "python.transform_image": {
+          "case": "python.transform_image",
+          "median_ns": 969688.96875,
+          "samples_ns": [
+            963655.0,
+            969688.96875,
+            968242.96875,
+            965063.84375,
+            982879.3125,
+            975948.75,
+            979447.46875
+          ],
+          "iterations": 32
+        },
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 646046.625,
+          "samples_ns": [
+            640913.3125,
+            646286.375,
+            641284.40625,
+            646565.90625,
+            658170.875,
+            646046.625,
+            645986.8125
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 921481.0,
+          "samples_ns": [
+            915766.375,
+            921481.0,
+            919614.625,
+            912657.25,
+            921755.6875,
+            924812.28125,
+            930398.15625
+          ],
+          "iterations": 32
+        },
+        "python.validate_video": {
+          "case": "python.validate_video",
+          "median_ns": 59798020.0,
+          "samples_ns": [
+            59243831.0,
+            59691772.0,
+            60299274.0,
+            59798020.0,
+            59905364.0,
+            59184671.0,
+            60026658.0
+          ],
+          "iterations": 1
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "python.inspect_signal": {
+          "case": "python.inspect_signal",
+          "median_ns": 1212616.46875,
+          "samples_ns": [
+            1258261.90625,
+            1305460.1875,
+            1212616.46875,
+            1217913.03125,
+            1199065.71875,
+            1199039.65625,
+            1205475.0625
+          ],
+          "iterations": 32
+        },
+        "python.resample.previous": {
+          "case": "python.resample.previous",
+          "median_ns": 440927.296875,
+          "samples_ns": [
+            437924.84375,
+            460093.140625,
+            455386.8125,
+            441650.515625,
+            440927.296875,
+            439709.5,
+            433190.203125
+          ],
+          "iterations": 64
+        },
+        "python.resample.linear": {
+          "case": "python.resample.linear",
+          "median_ns": 503246.046875,
+          "samples_ns": [
+            512705.21875,
+            511300.390625,
+            504095.125,
+            503180.59375,
+            499143.328125,
+            503246.046875,
+            499065.015625
+          ],
+          "iterations": 64
+        },
+        "python.history_windows": {
+          "case": "python.history_windows",
+          "median_ns": 1195880.40625,
+          "samples_ns": [
+            1174329.96875,
+            1184666.9375,
+            1195880.40625,
+            1194315.8125,
+            1234874.34375,
+            1230592.3125,
+            1247415.375
+          ],
+          "iterations": 32
+        },
+        "python.align_timestamps": {
+          "case": "python.align_timestamps",
+          "median_ns": 28177.2568359375,
+          "samples_ns": [
+            27983.484375,
+            28151.6708984375,
+            27879.0126953125,
+            28177.2568359375,
+            28435.958984375,
+            28213.216796875,
+            28663.228515625
+          ],
+          "iterations": 1024
+        },
+        "python.uniform_grid": {
+          "case": "python.uniform_grid",
+          "median_ns": 179619.4609375,
+          "samples_ns": [
+            183090.4921875,
+            180983.9609375,
+            177873.0078125,
+            178561.5390625,
+            179619.4609375,
+            177335.796875,
+            181838.3515625
+          ],
+          "iterations": 128
+        },
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1553720.75,
+          "samples_ns": [
+            1528340.0,
+            1553720.75,
+            1550751.0625,
+            1547518.5625,
+            1576692.4375,
+            1570677.6875,
+            1591120.0625
+          ],
+          "iterations": 16
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3745236.0,
+          "samples_ns": [
+            3682868.25,
+            3744005.875,
+            3782750.625,
+            5583018.5,
+            3754666.25,
+            3745236.0,
+            3709353.5
+          ],
+          "iterations": 8
+        },
+        "python.lowpass_taps": {
+          "case": "python.lowpass_taps",
+          "median_ns": 707.5307006835938,
+          "samples_ns": [
+            719.4388732910156,
+            711.0902709960938,
+            707.5307006835938,
+            704.1346130371094,
+            704.0029907226562,
+            703.8984680175781,
+            712.3859558105469
+          ],
+          "iterations": 32768
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1410380.8125,
+          "samples_ns": [
+            1412938.5,
+            1379092.5,
+            1382643.3125,
+            1410871.125,
+            1401788.9375,
+            1427983.75,
+            1410380.8125
+          ],
+          "iterations": 16
+        },
+        "python.image_quality": {
+          "case": "python.image_quality",
+          "median_ns": 401426.140625,
+          "samples_ns": [
+            385774.75,
+            386050.0,
+            401426.140625,
+            400921.734375,
+            407740.71875,
+            407453.25,
+            411741.421875
+          ],
+          "iterations": 64
+        },
+        "python.transform_image": {
+          "case": "python.transform_image",
+          "median_ns": 979548.03125,
+          "samples_ns": [
+            1023731.09375,
+            972841.46875,
+            979548.03125,
+            986075.40625,
+            983023.8125,
+            957207.875,
+            971097.9375
+          ],
+          "iterations": 32
+        },
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 645159.28125,
+          "samples_ns": [
+            654067.25,
+            652447.84375,
+            643529.03125,
+            644992.0625,
+            640691.4375,
+            645969.75,
+            645159.28125
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 924713.65625,
+          "samples_ns": [
+            934836.5625,
+            940308.25,
+            935749.1875,
+            924713.65625,
+            918962.59375,
+            905457.40625,
+            906162.65625
+          ],
+          "iterations": 32
+        },
+        "python.validate_video": {
+          "case": "python.validate_video",
+          "median_ns": 58487009.0,
+          "samples_ns": [
+            57979121.0,
+            57842951.0,
+            57995122.0,
+            59054894.0,
+            60460410.0,
+            58487009.0,
+            59105913.0
+          ],
+          "iterations": 1
+        }
+      },
+      "after": {
+        "python.inspect_signal": {
+          "case": "python.inspect_signal",
+          "median_ns": 932185.84375,
+          "samples_ns": [
+            925234.875,
+            957005.53125,
+            932185.84375,
+            926712.875,
+            927791.1875,
+            934757.40625,
+            941721.6875
+          ],
+          "iterations": 32
+        },
+        "python.resample.previous": {
+          "case": "python.resample.previous",
+          "median_ns": 164264.765625,
+          "samples_ns": [
+            165236.484375,
+            166629.890625,
+            165033.625,
+            164264.765625,
+            163556.140625,
+            163935.8125,
+            163982.8359375
+          ],
+          "iterations": 128
+        },
+        "python.resample.linear": {
+          "case": "python.resample.linear",
+          "median_ns": 243193.734375,
+          "samples_ns": [
+            239553.71875,
+            243364.5546875,
+            242575.9296875,
+            248882.125,
+            243193.734375,
+            246310.9921875,
+            241978.0546875
+          ],
+          "iterations": 128
+        },
+        "python.history_windows": {
+          "case": "python.history_windows",
+          "median_ns": 1085438.5625,
+          "samples_ns": [
+            1077784.8125,
+            1093975.96875,
+            1101724.15625,
+            1085438.5625,
+            1091037.03125,
+            1080461.03125,
+            1076200.5
+          ],
+          "iterations": 32
+        },
+        "python.align_timestamps": {
+          "case": "python.align_timestamps",
+          "median_ns": 28410.1240234375,
+          "samples_ns": [
+            29248.6787109375,
+            28308.1171875,
+            28558.5654296875,
+            28393.1806640625,
+            28331.232421875,
+            28410.1240234375,
+            28445.546875
+          ],
+          "iterations": 1024
+        },
+        "python.uniform_grid": {
+          "case": "python.uniform_grid",
+          "median_ns": 177309.1484375,
+          "samples_ns": [
+            173212.375,
+            176568.1015625,
+            177309.1484375,
+            177347.8984375,
+            177318.625,
+            177456.8828125,
+            176721.7578125
+          ],
+          "iterations": 128
+        },
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1368466.5,
+          "samples_ns": [
+            1356466.0,
+            1374758.375,
+            1368466.5,
+            1345224.1875,
+            1383002.875,
+            1380062.9375,
+            1349143.875
+          ],
+          "iterations": 16
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3835832.125,
+          "samples_ns": [
+            4014664.875,
+            3830415.875,
+            3741680.125,
+            3835832.125,
+            3834302.25,
+            3864641.75,
+            3865137.875
+          ],
+          "iterations": 8
+        },
+        "python.lowpass_taps": {
+          "case": "python.lowpass_taps",
+          "median_ns": 723.0513305664062,
+          "samples_ns": [
+            740.6964416503906,
+            723.0956726074219,
+            723.1320495605469,
+            721.5808410644531,
+            721.5629272460938,
+            723.0513305664062,
+            721.1934509277344
+          ],
+          "iterations": 32768
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1248415.53125,
+          "samples_ns": [
+            1654015.0625,
+            1242202.625,
+            1248415.53125,
+            1235163.90625,
+            1241224.46875,
+            1284269.9375,
+            1319263.375
+          ],
+          "iterations": 32
+        },
+        "python.image_quality": {
+          "case": "python.image_quality",
+          "median_ns": 400331.984375,
+          "samples_ns": [
+            400331.984375,
+            402272.328125,
+            418931.328125,
+            403389.84375,
+            385415.125,
+            393742.265625,
+            388360.3125
+          ],
+          "iterations": 64
+        },
+        "python.transform_image": {
+          "case": "python.transform_image",
+          "median_ns": 963652.71875,
+          "samples_ns": [
+            958992.28125,
+            984854.9375,
+            966319.4375,
+            962871.53125,
+            963652.71875,
+            965552.3125,
+            959701.34375
+          ],
+          "iterations": 32
+        },
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 645643.4375,
+          "samples_ns": [
+            647457.6875,
+            654168.78125,
+            647066.28125,
+            640876.78125,
+            645643.4375,
+            643357.78125,
+            644795.71875
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 901484.15625,
+          "samples_ns": [
+            901197.59375,
+            901484.15625,
+            895621.65625,
+            891493.59375,
+            1346791.875,
+            966148.46875,
+            904337.75
+          ],
+          "iterations": 32
+        },
+        "python.validate_video": {
+          "case": "python.validate_video",
+          "median_ns": 60207220.0,
+          "samples_ns": [
+            61905722.0,
+            61276468.0,
+            60555190.0,
+            60207220.0,
+            57808130.0,
+            58195764.0,
+            59860800.0
+          ],
+          "iterations": 1
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "python.inspect_signal": {
+          "case": "python.inspect_signal",
+          "median_ns": 939619.4375,
+          "samples_ns": [
+            943458.53125,
+            944171.5,
+            937639.21875,
+            939619.4375,
+            925186.0,
+            923886.90625,
+            1005754.90625
+          ],
+          "iterations": 32
+        },
+        "python.resample.previous": {
+          "case": "python.resample.previous",
+          "median_ns": 160491.2421875,
+          "samples_ns": [
+            160123.2109375,
+            161101.90625,
+            162008.59375,
+            160847.375,
+            160491.2421875,
+            160216.609375,
+            160102.875
+          ],
+          "iterations": 128
+        },
+        "python.resample.linear": {
+          "case": "python.resample.linear",
+          "median_ns": 241689.8203125,
+          "samples_ns": [
+            237816.453125,
+            241689.8203125,
+            241400.7109375,
+            241885.0625,
+            243621.2890625,
+            246159.5625,
+            236109.984375
+          ],
+          "iterations": 128
+        },
+        "python.history_windows": {
+          "case": "python.history_windows",
+          "median_ns": 1053148.875,
+          "samples_ns": [
+            1043228.6875,
+            1053148.875,
+            1067177.8125,
+            1051345.46875,
+            1051047.5625,
+            1081663.6875,
+            1059242.59375
+          ],
+          "iterations": 32
+        },
+        "python.align_timestamps": {
+          "case": "python.align_timestamps",
+          "median_ns": 28317.109375,
+          "samples_ns": [
+            28317.109375,
+            28336.8603515625,
+            28406.93359375,
+            28213.978515625,
+            28100.9404296875,
+            28401.0,
+            28209.01953125
+          ],
+          "iterations": 1024
+        },
+        "python.uniform_grid": {
+          "case": "python.uniform_grid",
+          "median_ns": 176071.9453125,
+          "samples_ns": [
+            173201.5078125,
+            174742.8359375,
+            176071.9453125,
+            174062.78125,
+            176278.84375,
+            179610.625,
+            177342.1640625
+          ],
+          "iterations": 128
+        },
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1360822.0625,
+          "samples_ns": [
+            1346584.0,
+            1391912.3125,
+            1412275.9375,
+            1318932.25,
+            1360822.0625,
+            1421831.75,
+            1347939.25
+          ],
+          "iterations": 16
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3802223.125,
+          "samples_ns": [
+            3898028.25,
+            3873768.0,
+            3811764.375,
+            3706939.25,
+            3802223.125,
+            3718597.875,
+            3683634.5
+          ],
+          "iterations": 8
+        },
+        "python.lowpass_taps": {
+          "case": "python.lowpass_taps",
+          "median_ns": 705.0577087402344,
+          "samples_ns": [
+            710.6991882324219,
+            703.1466064453125,
+            714.5074768066406,
+            705.0577087402344,
+            701.0653381347656,
+            708.4040832519531,
+            704.8695983886719
+          ],
+          "iterations": 32768
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1300276.0,
+          "samples_ns": [
+            1282116.21875,
+            1300276.0,
+            1281011.75,
+            1304422.71875,
+            1270666.4375,
+            1401757.375,
+            1518224.6875
+          ],
+          "iterations": 32
+        },
+        "python.image_quality": {
+          "case": "python.image_quality",
+          "median_ns": 392212.578125,
+          "samples_ns": [
+            389702.421875,
+            390523.25,
+            396685.0625,
+            390069.609375,
+            393101.921875,
+            392212.578125,
+            393089.8125
+          ],
+          "iterations": 64
+        },
+        "python.transform_image": {
+          "case": "python.transform_image",
+          "median_ns": 975922.21875,
+          "samples_ns": [
+            971440.28125,
+            983288.40625,
+            975922.21875,
+            989241.96875,
+            980846.625,
+            970894.5,
+            971339.15625
+          ],
+          "iterations": 32
+        },
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 640670.625,
+          "samples_ns": [
+            637224.28125,
+            638256.34375,
+            643248.875,
+            641332.34375,
+            639679.78125,
+            640670.625,
+            643122.59375
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 928404.90625,
+          "samples_ns": [
+            910291.84375,
+            914620.34375,
+            928404.90625,
+            923650.84375,
+            950750.15625,
+            960569.40625,
+            947336.375
+          ],
+          "iterations": 32
+        },
+        "python.validate_video": {
+          "case": "python.validate_video",
+          "median_ns": 59078209.0,
+          "samples_ns": [
+            59580385.0,
+            59153481.0,
+            58940127.0,
+            57941181.0,
+            59078575.0,
+            58851258.0,
+            59078209.0
+          ],
+          "iterations": 1
+        }
+      },
+      "before": {
+        "python.inspect_signal": {
+          "case": "python.inspect_signal",
+          "median_ns": 1166076.46875,
+          "samples_ns": [
+            1162538.78125,
+            1163188.46875,
+            1164347.6875,
+            1180592.90625,
+            1191415.03125,
+            1180644.09375,
+            1166076.46875
+          ],
+          "iterations": 32
+        },
+        "python.resample.previous": {
+          "case": "python.resample.previous",
+          "median_ns": 403113.859375,
+          "samples_ns": [
+            401583.796875,
+            402511.5,
+            402634.109375,
+            406689.53125,
+            403113.859375,
+            599409.859375,
+            403287.5
+          ],
+          "iterations": 64
+        },
+        "python.resample.linear": {
+          "case": "python.resample.linear",
+          "median_ns": 479595.890625,
+          "samples_ns": [
+            480059.625,
+            480943.84375,
+            479595.890625,
+            482490.453125,
+            478952.03125,
+            475324.734375,
+            475798.109375
+          ],
+          "iterations": 64
+        },
+        "python.history_windows": {
+          "case": "python.history_windows",
+          "median_ns": 1300263.0625,
+          "samples_ns": [
+            1318943.125,
+            1300263.0625,
+            1324060.75,
+            1260101.4375,
+            1289629.6875,
+            1289196.5625,
+            1353334.9375
+          ],
+          "iterations": 16
+        },
+        "python.align_timestamps": {
+          "case": "python.align_timestamps",
+          "median_ns": 28055.23828125,
+          "samples_ns": [
+            28174.0859375,
+            28055.23828125,
+            28287.001953125,
+            28148.1767578125,
+            28017.046875,
+            27703.4912109375,
+            27887.6591796875
+          ],
+          "iterations": 1024
+        },
+        "python.uniform_grid": {
+          "case": "python.uniform_grid",
+          "median_ns": 180218.796875,
+          "samples_ns": [
+            179363.7734375,
+            185166.375,
+            188549.2265625,
+            182839.640625,
+            176497.3046875,
+            180218.796875,
+            177039.0859375
+          ],
+          "iterations": 128
+        },
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1556616.3125,
+          "samples_ns": [
+            1573603.0,
+            1650452.6875,
+            1555393.25,
+            1565456.4375,
+            1536936.8125,
+            1556616.3125,
+            1519440.3125
+          ],
+          "iterations": 16
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3772342.625,
+          "samples_ns": [
+            3757102.25,
+            3825872.0,
+            3809400.75,
+            3778806.0,
+            3772342.625,
+            3735557.25,
+            3729139.0
+          ],
+          "iterations": 8
+        },
+        "python.lowpass_taps": {
+          "case": "python.lowpass_taps",
+          "median_ns": 717.844482421875,
+          "samples_ns": [
+            707.6524658203125,
+            706.3902893066406,
+            705.1788330078125,
+            717.844482421875,
+            718.9135437011719,
+            727.0378723144531,
+            729.6855773925781
+          ],
+          "iterations": 32768
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1496164.6875,
+          "samples_ns": [
+            1488777.0,
+            1513815.9375,
+            1500498.0625,
+            1496164.6875,
+            1502397.0625,
+            1483774.75,
+            1478653.4375
+          ],
+          "iterations": 16
+        },
+        "python.image_quality": {
+          "case": "python.image_quality",
+          "median_ns": 412197.71875,
+          "samples_ns": [
+            391934.625,
+            393614.296875,
+            412197.71875,
+            551109.125,
+            652013.484375,
+            606319.75,
+            396514.234375
+          ],
+          "iterations": 64
+        },
+        "python.transform_image": {
+          "case": "python.transform_image",
+          "median_ns": 984314.0625,
+          "samples_ns": [
+            1400748.40625,
+            984314.0625,
+            990163.71875,
+            989310.125,
+            971475.9375,
+            977930.96875,
+            966866.21875
+          ],
+          "iterations": 32
+        },
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 635740.5,
+          "samples_ns": [
+            637039.5625,
+            635957.3125,
+            640951.34375,
+            635456.03125,
+            635739.5,
+            635740.5,
+            633797.21875
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 923101.21875,
+          "samples_ns": [
+            911301.5,
+            938906.875,
+            913456.90625,
+            933161.21875,
+            923101.21875,
+            924711.21875,
+            916854.375
+          ],
+          "iterations": 32
+        },
+        "python.validate_video": {
+          "case": "python.validate_video",
+          "median_ns": 59897770.0,
+          "samples_ns": [
+            63450546.0,
+            59897770.0,
+            58794700.0,
+            58233913.0,
+            59886420.0,
+            59932609.0,
+            60103783.0
+          ],
+          "iterations": 1
+        }
+      }
+    }
+  ],
+  "summary": {
+    "python.inspect_signal": {
+      "before_ns": 1197713.453125,
+      "after_ns": 933451.296875,
+      "latency_reduction_pct": 22.115635018193213,
+      "paired_ratios": [
+        0.7796239827769744,
+        0.7780633168591613,
+        0.7687392244564549,
+        0.8057957283944205
+      ],
+      "worst_paired_reduction_pct": 19.420427160557953
+    },
+    "python.resample.previous": {
+      "before_ns": 437625.453125,
+      "after_ns": 163948.234375,
+      "latency_reduction_pct": 62.390082002629164,
+      "paired_ratios": [
+        0.3766158130325438,
+        0.37558254691487286,
+        0.3725438792045755,
+        0.3981288126295893
+      ],
+      "worst_paired_reduction_pct": 60.18711873704107
+    },
+    "python.resample.linear": {
+      "before_ns": 503828.53125,
+      "after_ns": 240862.109375,
+      "latency_reduction_pct": 52.15265230663486,
+      "paired_ratios": [
+        0.473101022371234,
+        0.47369679048269847,
+        0.48325016338460436,
+        0.5039447272943364
+      ],
+      "worst_paired_reduction_pct": 49.60552727056636
+    },
+    "python.history_windows": {
+      "before_ns": 1251975.4375,
+      "after_ns": 1054699.15625,
+      "latency_reduction_pct": 16.41015561769199,
+      "paired_ratios": [
+        0.8442106351614417,
+        0.8275862524847185,
+        0.9076480865705295,
+        0.8099506210498078
+      ],
+      "worst_paired_reduction_pct": 9.235191342947047
+    },
+    "python.align_timestamps": {
+      "before_ns": 28014.123046875,
+      "after_ns": 28184.62744140625,
+      "latency_reduction_pct": -0.8799245798613242,
+      "paired_ratios": [
+        1.0130166520708472,
+        1.0004057692334547,
+        1.0082643668564286,
+        1.009334124740798
+      ],
+      "worst_paired_reduction_pct": -1.3016652070847234
+    },
+    "python.uniform_grid": {
+      "before_ns": 179919.12890625,
+      "after_ns": 176690.546875,
+      "latency_reduction_pct": 2.5806859908674706,
+      "paired_ratios": [
+        0.971396374769933,
+        0.6114684067072712,
+        0.9871377383723254,
+        0.9769899054127175
+      ],
+      "worst_paired_reduction_pct": 1.2862261627674565
+    },
+    "python.ema": {
+      "before_ns": 1555168.53125,
+      "after_ns": 1347222.125,
+      "latency_reduction_pct": 13.997098609298142,
+      "paired_ratios": [
+        0.8458399873295102,
+        0.7854597467043419,
+        0.8807673450972447,
+        0.8742180404845269
+      ],
+      "worst_paired_reduction_pct": 11.923265490275526
+    },
+    "python.fir": {
+      "before_ns": 3759545.25,
+      "after_ns": 3806269.75,
+      "latency_reduction_pct": -0.5136986175404257,
+      "paired_ratios": [
+        1.002353032242671,
+        0.9871788810983179,
+        1.0241896972580633,
+        1.0079209401081377
+      ],
+      "worst_paired_reduction_pct": -2.4189697258063303
+    },
+    "python.lowpass_taps": {
+      "before_ns": 717.7883605957031,
+      "after_ns": 713.6183624267578,
+      "latency_reduction_pct": 1.3983721105589098,
+      "paired_ratios": [
+        0.9692611108699316,
+        0.9898452929908818,
+        1.0219363341658771,
+        0.98218726479794
+      ],
+      "worst_paired_reduction_pct": -2.1936334165877147
+    },
+    "python.unwrap_angles": {
+      "before_ns": 1450261.65625,
+      "after_ns": 1238277.5625,
+      "latency_reduction_pct": 14.099492866785667,
+      "paired_ratios": [
+        0.8434409514359211,
+        0.8489373655406118,
+        0.8851620216224404,
+        0.8690727771236748
+      ],
+      "worst_paired_reduction_pct": 11.48379783775596
+    },
+    "python.image_quality": {
+      "before_ns": 395198.96875,
+      "after_ns": 393358.40625,
+      "latency_reduction_pct": -0.162026877550292,
+      "paired_ratios": [
+        1.0059662101947864,
+        1.0161313548176054,
+        0.9972743273562193,
+        0.9515156447599821
+      ],
+      "worst_paired_reduction_pct": -1.6131354817605414
+    },
+    "python.transform_image": {
+      "before_ns": 981931.046875,
+      "after_ns": 970992.859375,
+      "latency_reduction_pct": 1.2376382942811404,
+      "paired_ratios": [
+        0.9709244331746891,
+        1.0140934688239434,
+        0.9837728095071397,
+        0.9914744246072376
+      ],
+      "worst_paired_reduction_pct": -1.4093468823943356
+    },
+    "python.inspect_mcap": {
+      "before_ns": 645602.953125,
+      "after_ns": 644865.875,
+      "latency_reduction_pct": 0.11403900978057546,
+      "paired_ratios": [
+        0.9004983462341642,
+        0.9969687752799575,
+        1.000750444524431,
+        1.007754933026919
+      ],
+      "worst_paired_reduction_pct": -0.7754933026919097
+    },
+    "python.read_json_signal": {
+      "before_ns": 923907.4375,
+      "after_ns": 912550.703125,
+      "latency_reduction_pct": 1.9137995871616242,
+      "paired_ratios": [
+        0.9777074156737409,
+        0.9840165925830267,
+        0.974879250627483,
+        1.0057455102347084
+      ],
+      "worst_paired_reduction_pct": -0.5745510234708373
+    },
+    "python.validate_video": {
+      "before_ns": 59847895.0,
+      "after_ns": 59525531.5,
+      "latency_reduction_pct": 0.8163372909810729,
+      "paired_ratios": [
+        0.9971632827799876,
+        0.9865099714003909,
+        1.0294118476805678,
+        0.9863173370227306
+      ],
+      "worst_paired_reduction_pct": -2.9411847680567815
+    }
+  }
+}

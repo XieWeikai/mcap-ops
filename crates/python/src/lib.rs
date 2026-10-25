@@ -33,7 +33,14 @@ fn signal_from_arrays(
         2 => array.shape()[1],
         _ => return Err(PyValueError::new_err("values must be 1-D or 2-D")),
     };
-    let flat = array.iter().copied().collect();
+    let flat = if array.is_standard_layout() {
+        array
+            .as_slice()
+            .expect("standard layout has a contiguous slice")
+            .to_vec()
+    } else {
+        array.iter().copied().collect()
+    };
     Signal::new(times, flat, channels).map_err(|error| PyValueError::new_err(error.to_string()))
 }
 fn map_core_error(error: mcap_ops_core::Error) -> PyErr {
