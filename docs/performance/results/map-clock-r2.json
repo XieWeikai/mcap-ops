@@ -1,0 +1,52 @@
+{
+  "label": "map-clock-r2",
+  "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+  "cases": [
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": 58.886931859198846,
+  "worst_block_reduction_pct": 58.508813443149,
+  "worst_case_reduction_pct": -0.4423279228850552,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "d90063d9f3cbfe41b773c395c93e0e70aa27a44956f1fd064f6f04a05bcf9773",
+  "operator": "map_clock",
+  "round": 2,
+  "decision": "accepted",
+  "method": "fast-path explicitly zero clock drift",
+  "profile_hotspot": "Fallible collection grows Vec and applies wide division even to pure offsets",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "map_clock.offset": {
+      "before_ns": 156727.6640625,
+      "after_ns": 26626.0947265625,
+      "latency_reduction_pct": 83.10309041410284,
+      "paired_ratios": [
+        0.1702405663806961,
+        0.16829446736679193,
+        0.1669273463824114,
+        0.16964372435115146
+      ],
+      "worst_paired_reduction_pct": 82.97594336193039
+    },
+    "map_clock.drift": {
+      "before_ns": 155271.3984375,
+      "after_ns": 155862.62109375,
+      "latency_reduction_pct": -0.4423279228850552,
+      "paired_ratios": [
+        1.0112269939502616,
+        0.9825857804677178,
+        1.0022450782024737,
+        1.0066014802552274
+      ],
+      "worst_paired_reduction_pct": -1.122699395026161
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/map-clock-r2",
+  "validation_sha256": "cc05d6ce2d0cb057496b3f747d55ea65c4066a0105a80ff049a3ec6d2af4dad5"
+}

@@ -43,6 +43,12 @@ pub fn uniform_grid(
 
 /// Explicit ppb correction around `origin`, then offset. Never estimates clocks.
 pub fn map_clock(times: &[i64], origin: i64, offset: i64, rate_ppb: i64) -> Result<Vec<i64>> {
+    if rate_ppb == 0 {
+        return times
+            .iter()
+            .map(|&t| t.checked_add(offset).ok_or(Error::Overflow))
+            .collect();
+    }
     let scale = 1_000_000_000i128 + i128::from(rate_ppb);
     if scale <= 0 {
         return Err(invalid("clock scale must be positive"));
