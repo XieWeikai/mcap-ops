@@ -28,6 +28,7 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
     let mut values = vec![f64::NAN; signal.values().len()];
     let mut valid = vec![false; signal.len()];
     let mut previous: Option<usize> = None;
+    let mut cached_weight: Option<(i128, f64)> = None;
     for (i, is_valid) in valid.iter_mut().enumerate() {
         if signal.row(i).iter().any(|v| !v.is_finite()) {
             previous = None;
@@ -39,10 +40,16 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
         });
         let weight = prior
             .map(|p| {
-                let dt = (i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[p]))
-                    as f64
-                    / 1e9;
-                -(-dt / tau_seconds).exp_m1()
+                let dt_ns = i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[p]);
+                if let Some((cached_dt, weight)) = cached_weight {
+                    if dt_ns == cached_dt {
+                        return weight;
+                    }
+                }
+                let dt = dt_ns as f64 / 1e9;
+                let weight = -(-dt / tau_seconds).exp_m1();
+                cached_weight = Some((dt_ns, weight));
+                weight
             })
             .unwrap_or(1.0);
         let d = signal.channels();
