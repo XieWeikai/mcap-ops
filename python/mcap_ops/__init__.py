@@ -28,7 +28,7 @@ __version__ = package_version()
 
 
 def _loads(value):
-    return json.loads(value)
+    return json.loads(value) if isinstance(value, str) else {key: value[key] for key in sorted(value)}
 
 
 def _normalize_signal(result):

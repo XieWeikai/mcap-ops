@@ -1,7 +1,8 @@
 //! Stable Python seam over the Rust implementations.
 use mcap_ops_core::{filter, quality, sampling, time, Signal};
 use mcap_ops_io::{image_ops, mcap_ops, video};
-use numpy::{PyReadonlyArray1, PyReadonlyArrayDyn};
+use numpy::{IntoPyArray, PyReadonlyArray1, PyReadonlyArrayDyn};
+use pyo3::types::PyDict;
 use pyo3::{
     exceptions::{PyIOError, PyValueError},
     prelude::*,
@@ -50,29 +51,47 @@ fn methods(value: &str) -> PyResult<sampling::Method> {
     }
 }
 
-fn sampled_json(result: &sampling::Sampled) -> PyResult<String> {
-    json(&serde_json::json!({
-        "timestamps": result.timestamps,
-        "values": result.values,
-        "channels": result.channels,
-        "status": result.status,
-        "source_left": result.source_left,
-        "source_right": result.source_right,
-        "alpha": result.alpha,
-        "uses_future": result.uses_future,
-    }))
+fn numpy_values<'py>(py: Python<'py>, mut values: Vec<f64>) -> Bound<'py, numpy::PyArray1<f64>> {
+    // The previous JSON bridge mapped all non-finite floats to NumPy NaN.
+    for value in &mut values {
+        if !value.is_finite() {
+            *value = f64::NAN;
+        }
+    }
+    values.into_pyarray(py)
 }
 
-fn filtered_json(result: &filter::Filtered) -> PyResult<String> {
-    json(&serde_json::json!({
-        "timestamps": result.signal.timestamps(),
-        "values": result.signal.values(),
-        "channels": result.signal.channels(),
-        "valid": result.valid,
-        "mode": format!("{:?}", result.mode).to_lowercase(),
-        "lookahead_samples": result.lookahead_samples,
-        "group_delay_samples": result.group_delay_samples,
-    }))
+fn signal_dict(py: Python<'_>, signal: &Signal) -> PyResult<Py<PyDict>> {
+    let dict = PyDict::new(py);
+    dict.set_item("timestamps", signal.timestamps().to_vec().into_pyarray(py))?;
+    dict.set_item("values", numpy_values(py, signal.values().to_vec()))?;
+    dict.set_item("channels", signal.channels())?;
+    Ok(dict.unbind())
+}
+
+fn sampled_dict(py: Python<'_>, result: sampling::Sampled) -> PyResult<Py<PyDict>> {
+    let dict = PyDict::new(py);
+    dict.set_item("timestamps", result.timestamps.into_pyarray(py))?;
+    dict.set_item("values", numpy_values(py, result.values))?;
+    dict.set_item("channels", result.channels)?;
+    dict.set_item("status", result.status.into_pyarray(py))?;
+    dict.set_item("source_left", result.source_left.into_pyarray(py))?;
+    dict.set_item("source_right", result.source_right.into_pyarray(py))?;
+    dict.set_item("alpha", numpy_values(py, result.alpha))?;
+    dict.set_item("uses_future", result.uses_future.into_pyarray(py))?;
+    Ok(dict.unbind())
+}
+
+fn filtered_dict(py: Python<'_>, result: filter::Filtered) -> PyResult<Py<PyDict>> {
+    let dict = signal_dict(py, &result.signal)?;
+    dict.bind(py).set_item("valid", result.valid)?;
+    dict.bind(py)
+        .set_item("mode", format!("{:?}", result.mode).to_lowercase())?;
+    dict.bind(py)
+        .set_item("lookahead_samples", result.lookahead_samples)?;
+    dict.bind(py)
+        .set_item("group_delay_samples", result.group_delay_samples)?;
+    Ok(dict)
 }
 
 #[pyfunction]
@@ -89,7 +108,9 @@ fn inspect_signal(
 
 #[pyfunction]
 #[pyo3(signature=(timestamps, values, target, method="previous", max_gap_ns=0, max_age_ns=0, allow_future=false))]
+#[allow(clippy::too_many_arguments)]
 fn resample(
+    py: Python<'_>,
     timestamps: PyReadonlyArray1<'_, i64>,
     values: PyReadonlyArrayDyn<'_, f64>,
     target: PyReadonlyArray1<'_, i64>,
@@ -97,7 +118,7 @@ fn resample(
     max_gap_ns: i64,
     max_age_ns: i64,
     allow_future: bool,
-) -> PyResult<String> {
+) -> PyResult<Py<PyDict>> {
     let signal = signal_from_arrays(timestamps, values)?;
     let options = sampling::SampleOptions {
         method: methods(method)?,
@@ -113,13 +134,14 @@ fn resample(
         options,
     )
     .map_err(map_core_error)?;
-    sampled_json(&result)
+    sampled_dict(py, result)
 }
 
 #[pyfunction]
 #[pyo3(signature=(timestamps, values, centers, offsets, method="previous", max_gap_ns=0, max_age_ns=0, allow_future=false))]
 #[allow(clippy::too_many_arguments)]
 fn history_windows(
+    py: Python<'_>,
     timestamps: PyReadonlyArray1<'_, i64>,
     values: PyReadonlyArrayDyn<'_, f64>,
     centers: PyReadonlyArray1<'_, i64>,
@@ -128,7 +150,7 @@ fn history_windows(
     max_gap_ns: i64,
     max_age_ns: i64,
     allow_future: bool,
-) -> PyResult<String> {
+) -> PyResult<Py<PyDict>> {
     let signal = signal_from_arrays(timestamps, values)?;
     let options = sampling::SampleOptions {
         method: methods(method)?,
@@ -147,19 +169,23 @@ fn history_windows(
         options,
     )
     .map_err(map_core_error)?;
-    json(
-        &serde_json::json!({"centers":result.centers,"offsets":result.offsets,"timestamps":result.samples.timestamps,"values":result.samples.values,"channels":result.samples.channels,"status":result.samples.status,"source_left":result.samples.source_left,"source_right":result.samples.source_right,"alpha":result.samples.alpha,"uses_future":result.samples.uses_future}),
-    )
+    let dict = sampled_dict(py, result.samples)?;
+    dict.bind(py)
+        .set_item("centers", result.centers.into_pyarray(py))?;
+    dict.bind(py)
+        .set_item("offsets", result.offsets.into_pyarray(py))?;
+    Ok(dict)
 }
 
 #[pyfunction]
 fn align_timestamps(
+    py: Python<'_>,
     source: PyReadonlyArray1<'_, i64>,
     target: PyReadonlyArray1<'_, i64>,
     nearest: bool,
     max_past_ns: i64,
     max_future_ns: i64,
-) -> PyResult<String> {
+) -> PyResult<Py<PyDict>> {
     let result = time::align_timestamps(
         source
             .as_slice()
@@ -172,9 +198,11 @@ fn align_timestamps(
         max_future_ns,
     )
     .map_err(map_core_error)?;
-    json(
-        &serde_json::json!({"indices":result.indices,"offsets_ns":result.offsets_ns,"valid":result.valid}),
-    )
+    let dict = PyDict::new(py);
+    dict.set_item("indices", result.indices.into_pyarray(py))?;
+    dict.set_item("offsets_ns", result.offsets_ns.into_pyarray(py))?;
+    dict.set_item("valid", result.valid.into_pyarray(py))?;
+    Ok(dict.unbind())
 }
 
 #[pyfunction]
@@ -191,26 +219,28 @@ fn uniform_grid(
 #[pyfunction]
 #[pyo3(signature=(timestamps, values, tau_seconds, max_gap_ns))]
 fn ema(
+    py: Python<'_>,
     timestamps: PyReadonlyArray1<'_, i64>,
     values: PyReadonlyArrayDyn<'_, f64>,
     tau_seconds: f64,
     max_gap_ns: i64,
-) -> PyResult<String> {
+) -> PyResult<Py<PyDict>> {
     let signal = signal_from_arrays(timestamps, values)?;
     let result = filter::ema(&signal, tau_seconds, max_gap_ns).map_err(map_core_error)?;
-    filtered_json(&result)
+    filtered_dict(py, result)
 }
 
 #[pyfunction]
 #[pyo3(signature=(timestamps, values, taps, mode="causal", period_ns=1, tolerance_ns=0))]
 fn fir(
+    py: Python<'_>,
     timestamps: PyReadonlyArray1<'_, i64>,
     values: PyReadonlyArrayDyn<'_, f64>,
     taps: PyReadonlyArray1<'_, f64>,
     mode: &str,
     period_ns: i64,
     tolerance_ns: i64,
-) -> PyResult<String> {
+) -> PyResult<Py<PyDict>> {
     let signal = signal_from_arrays(timestamps, values)?;
     let filter_mode = match mode {
         "causal" => filter::FilterMode::Causal,
@@ -226,7 +256,7 @@ fn fir(
         tolerance_ns,
     )
     .map_err(map_core_error)?;
-    filtered_json(&result)
+    filtered_dict(py, result)
 }
 
 #[pyfunction]
@@ -237,16 +267,15 @@ fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> PyResult<Ve
 #[pyfunction]
 #[pyo3(signature=(timestamps, values, period=std::f64::consts::TAU, max_gap_ns=0))]
 fn unwrap_angles(
+    py: Python<'_>,
     timestamps: PyReadonlyArray1<'_, i64>,
     values: PyReadonlyArrayDyn<'_, f64>,
     period: f64,
     max_gap_ns: i64,
-) -> PyResult<String> {
+) -> PyResult<Py<PyDict>> {
     let signal = signal_from_arrays(timestamps, values)?;
     let result = filter::unwrap_angles(&signal, period, max_gap_ns).map_err(map_core_error)?;
-    json(
-        &serde_json::json!({"timestamps":result.timestamps(),"values":result.values(),"channels":result.channels()}),
-    )
+    signal_dict(py, &result)
 }
 
 #[pyfunction]
@@ -318,6 +347,7 @@ fn inspect_mcap(
 #[pyo3(signature=(path, topic, fields, channels, filter_json=None, limits_json=None, timestamp_pointer=None, publish_clock=false, max_samples=10000000))]
 #[allow(clippy::too_many_arguments)]
 fn read_json_signal(
+    py: Python<'_>,
     path: &str,
     topic: &str,
     fields: Vec<String>,
@@ -327,7 +357,7 @@ fn read_json_signal(
     timestamp_pointer: Option<String>,
     publish_clock: bool,
     max_samples: usize,
-) -> PyResult<String> {
+) -> PyResult<Py<PyDict>> {
     let filter: mcap_ops::MessageFilter = parse(filter_json)?;
     let limits: mcap_ops::ReadLimits = parse(limits_json)?;
     let decoder = mcap_ops::JsonSignalSpec {
@@ -339,9 +369,7 @@ fn read_json_signal(
     };
     let signal = mcap_ops::read_signal(path, filter, limits, &decoder, max_samples)
         .map_err(|e| PyIOError::new_err(e.to_string()))?;
-    json(
-        &serde_json::json!({"timestamps":signal.timestamps(),"values":signal.values(),"channels":signal.channels()}),
-    )
+    signal_dict(py, &signal)
 }
 
 #[pyfunction]

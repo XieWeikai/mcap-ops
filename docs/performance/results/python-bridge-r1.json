@@ -1,0 +1,222 @@
+{
+  "label": "python-bridge-r1",
+  "base_commit": "59f909519f9d0ac9be79c13687fefcd6d7d5cd9a",
+  "cases": [
+    "python.inspect_signal",
+    "python.resample.previous",
+    "python.resample.linear",
+    "python.history_windows",
+    "python.align_timestamps",
+    "python.uniform_grid",
+    "python.ema",
+    "python.fir",
+    "python.lowpass_taps",
+    "python.unwrap_angles",
+    "python.image_quality",
+    "python.transform_image",
+    "python.inspect_mcap",
+    "python.read_json_signal",
+    "python.validate_video"
+  ],
+  "geomean_latency_reduction_pct": 77.76225491711668,
+  "worst_block_reduction_pct": 77.47191688645545,
+  "worst_case_reduction_pct": -0.9516621362168465,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Replace two serialization helpers with small PyDict/NumPy helpers using existing PyO3 and numpy dependencies; preserve non-finite conversion, mapping order and public shapes",
+  "paths": [
+    "crates/python/src/lib.rs",
+    "python/mcap_ops/__init__.py"
+  ],
+  "measurement_sha256": "dc9977d35f9382f8bcb5414a212be706bd2691ae2e1e989c1e17e4be07b67800",
+  "operator": "python_bridge",
+  "round": 1,
+  "decision": "accepted",
+  "method": "transfer numeric results directly into NumPy arrays",
+  "profile_hotspot": "cProfile attributes most resampling interface time to JSON decoding and array reconstruction; native output also serialized large vectors",
+  "reason": "236 public-interface comparisons pass including key order, invalid data and output ownership; all paired aggregate blocks exceed 77%, with no representative-case regression over 3%",
+  "case_results": {
+    "python.inspect_signal": {
+      "before_ns": 1207218.65625,
+      "after_ns": 1205238.421875,
+      "latency_reduction_pct": 1.1759627278870477,
+      "paired_ratios": [
+        0.9849662097728106,
+        0.9915145356694485,
+        1.030840714257938,
+        0.9787927080521386
+      ],
+      "worst_paired_reduction_pct": -3.0840714257938107
+    },
+    "python.resample.previous": {
+      "before_ns": 12805512.25,
+      "after_ns": 434760.5390625,
+      "latency_reduction_pct": 96.58756799844265,
+      "paired_ratios": [
+        0.03410636101084628,
+        0.03417406608434608,
+        0.034142279020300766,
+        0.030767180632077527
+      ],
+      "worst_paired_reduction_pct": 96.5825933915654
+    },
+    "python.resample.linear": {
+      "before_ns": 12983151.25,
+      "after_ns": 506931.71875,
+      "latency_reduction_pct": 96.09707476341973,
+      "paired_ratios": [
+        0.03931452021431054,
+        0.038743984517294924,
+        0.04009934146437652,
+        0.03640578004231364
+      ],
+      "worst_paired_reduction_pct": 95.99006585356234
+    },
+    "python.history_windows": {
+      "before_ns": 20611930.5,
+      "after_ns": 1270747.78125,
+      "latency_reduction_pct": 93.78860093002861,
+      "paired_ratios": [
+        0.06233398324464317,
+        0.05915004750297283,
+        0.0629195706570323,
+        0.06189399815478472
+      ],
+      "worst_paired_reduction_pct": 93.70804293429677
+    },
+    "python.align_timestamps": {
+      "before_ns": 1197925.84375,
+      "after_ns": 27932.0234375,
+      "latency_reduction_pct": 97.67260282897364,
+      "paired_ratios": [
+        0.0235651640434639,
+        0.022943652895388668,
+        0.022982779377063365,
+        0.023917204989010277
+      ],
+      "worst_paired_reduction_pct": 97.60827950109898
+    },
+    "python.uniform_grid": {
+      "before_ns": 175603.41015625,
+      "after_ns": 178568.98828125,
+      "latency_reduction_pct": -0.9516621362168465,
+      "paired_ratios": [
+        1.0026629895112626,
+        1.0068988126743221,
+        1.0121344300500146,
+        1.026542238682368
+      ],
+      "worst_paired_reduction_pct": -2.6542238682367936
+    },
+    "python.ema": {
+      "before_ns": 30466767.0,
+      "after_ns": 1542245.25,
+      "latency_reduction_pct": 94.99055886282645,
+      "paired_ratios": [
+        0.05016093279078673,
+        0.05002788995268439,
+        0.049966804561716247,
+        0.05144584389540154
+      ],
+      "worst_paired_reduction_pct": 94.85541561045984
+    },
+    "python.fir": {
+      "before_ns": 32751735.0,
+      "after_ns": 3796436.9375,
+      "latency_reduction_pct": 88.4084166420178,
+      "paired_ratios": [
+        0.11446181293835771,
+        0.11617241601982885,
+        0.11565925113981528,
+        0.11714366134088107
+      ],
+      "worst_paired_reduction_pct": 88.28563386591189
+    },
+    "python.lowpass_taps": {
+      "before_ns": 718.6342163085938,
+      "after_ns": 709.7213897705078,
+      "latency_reduction_pct": 0.9737262299453375,
+      "paired_ratios": [
+        0.9959558653023554,
+        0.9946062824204808,
+        0.9777796052001689,
+        0.9859191929806126
+      ],
+      "worst_paired_reduction_pct": 0.40441346976446413
+    },
+    "python.unwrap_angles": {
+      "before_ns": 30346047.0,
+      "after_ns": 1445070.3125,
+      "latency_reduction_pct": 95.23742813699081,
+      "paired_ratios": [
+        0.050241283180618095,
+        0.04652489569538137,
+        0.048088928194316115,
+        0.0471625090658677
+      ],
+      "worst_paired_reduction_pct": 94.9758716819382
+    },
+    "python.image_quality": {
+      "before_ns": 393884.9765625,
+      "after_ns": 391565.1171875,
+      "latency_reduction_pct": 0.5707135445631506,
+      "paired_ratios": [
+        0.9901258887487163,
+        1.0185501869769942,
+        0.9929214176461333,
+        0.9956643114626037
+      ],
+      "worst_paired_reduction_pct": -1.8550186976994176
+    },
+    "python.transform_image": {
+      "before_ns": 975856.453125,
+      "after_ns": 974187.234375,
+      "latency_reduction_pct": 0.41828975555284753,
+      "paired_ratios": [
+        0.9876216904158572,
+        1.008110257281006,
+        0.9957467637794569,
+        0.9958874411094862
+      ],
+      "worst_paired_reduction_pct": -0.8110257281005895
+    },
+    "python.inspect_mcap": {
+      "before_ns": 654214.953125,
+      "after_ns": 640728.40625,
+      "latency_reduction_pct": 1.7052924624514243,
+      "paired_ratios": [
+        0.9700761172456014,
+        0.9958180335053701,
+        0.6952596130836359,
+        0.9985158911245825
+      ],
+      "worst_paired_reduction_pct": 0.14841088754175003
+    },
+    "python.read_json_signal": {
+      "before_ns": 2506391.0,
+      "after_ns": 919961.75,
+      "latency_reduction_pct": 63.47572697087165,
+      "paired_ratios": [
+        0.3690737805715556,
+        0.3773182879346368,
+        0.3614116800110115,
+        0.21572032779442898
+      ],
+      "worst_paired_reduction_pct": 62.268171206536316
+    },
+    "python.validate_video": {
+      "before_ns": 58982982.5,
+      "after_ns": 59034163.5,
+      "latency_reduction_pct": -0.3509179726897571,
+      "paired_ratios": [
+        0.9985653337454652,
+        1.011139576941344,
+        0.98388773948586,
+        1.0084530257083302
+      ],
+      "worst_paired_reduction_pct": -1.1139576941344043
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/python-bridge-r1",
+  "validation_sha256": "a80254b3af308b474746dbf11c9e06a3f2c4a5235e9fcd0603b7b9d3465381b8"
+}
