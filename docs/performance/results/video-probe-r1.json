@@ -1,0 +1,52 @@
+{
+  "label": "video-probe-r1",
+  "base_commit": "9e7f7f8592cc328d76de5b93fd0421cc93b15dc3",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 16.302142264448527,
+  "worst_block_reduction_pct": 16.051742242839495,
+  "worst_case_reduction_pct": 13.305551502729696,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "5ace0fe88785d705f65555d82bcff7de4e8dab8c39323b7b8b2e640f2f578725",
+  "operator": "video_probe",
+  "round": 1,
+  "decision": "accepted",
+  "method": "reduce bounded media child polling latency",
+  "profile_hotspot": "Child-completion observation is quantized by a ten-millisecond polling sleep",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 33976961.0,
+      "after_ns": 27293316.0,
+      "latency_reduction_pct": 19.581567030389046,
+      "paired_ratios": [
+        0.8062292630579482,
+        0.794679821029575,
+        0.8021393963342709,
+        0.80986855213872
+      ],
+      "worst_paired_reduction_pct": 19.013144786128
+    },
+    "video_validate": {
+      "before_ns": 67994747.0,
+      "after_ns": 58947672.0,
+      "latency_reduction_pct": 13.305551502729696,
+      "paired_ratios": [
+        0.866310700825986,
+        0.8868112406997162,
+        0.8636091990539729,
+        0.86757826911942
+      ],
+      "worst_paired_reduction_pct": 11.318875930028383
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/video-probe-r1",
+  "validation_sha256": "0a955a6954d32a7f61f62f8363ecbffd021546e6cc0039a30b85f19c1e5980c5"
+}

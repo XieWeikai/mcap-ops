@@ -46,7 +46,7 @@ fn run_tool(program: &OsStr, args: &[&OsStr], timeout: Duration) -> Result<(Stri
                 "media tool timed out or exceeded diagnostic output limit",
             ));
         }
-        std::thread::sleep(Duration::from_millis(10));
+        std::thread::sleep(Duration::from_millis(1));
     };
     let read = |file: &mut File| -> Result<String> {
         if file.metadata()?.len() > MAX_TOOL_OUTPUT {
