@@ -1,0 +1,39 @@
+{
+  "label": "interval-difference-r1",
+  "base_commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae",
+  "cases": [
+    "interval_difference"
+  ],
+  "geomean_latency_reduction_pct": 99.68132056911236,
+  "worst_block_reduction_pct": 99.67991840817835,
+  "worst_case_reduction_pct": 99.68132056911236,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "c3cb0af4f7c39430bb674266c797d01b1eaa7c7407bcc33292b8f7b50103aa7c",
+  "operator": "interval_difference",
+  "round": 1,
+  "decision": "accepted",
+  "method": "reuse a monotone interval subtraction cursor",
+  "profile_hotspot": "Difference restarts scanning the second interval set for every first-set interval",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "interval_difference": {
+      "before_ns": 3530826.6875,
+      "after_ns": 11199.322998046875,
+      "latency_reduction_pct": 99.68132056911236,
+      "paired_ratios": [
+        0.0031823535132355723,
+        0.0032008159182165324,
+        0.003129100446100658,
+        0.003191235104517405
+      ],
+      "worst_paired_reduction_pct": 99.67991840817835
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-difference-r1",
+  "validation_sha256": "1f73835f59c515509dbb78fc96f6564a43b801bb91c67d4a78fa471b4da1e344"
+}

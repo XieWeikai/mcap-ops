@@ -75,14 +75,15 @@ impl IntervalSet {
     }
     pub fn difference(&self, other: &Self) -> Self {
         let mut result = Vec::new();
+        let mut j = 0;
         for a in &self.intervals {
+            while j < other.intervals.len() && other.intervals[j].end_ns <= a.start_ns {
+                j += 1;
+            }
             let mut cursor = a.start_ns;
-            for b in other
-                .intervals
-                .iter()
-                .skip_while(|b| b.end_ns <= a.start_ns)
-                .take_while(|b| b.start_ns < a.end_ns)
-            {
+            let mut k = j;
+            while k < other.intervals.len() && other.intervals[k].start_ns < a.end_ns {
+                let b = other.intervals[k];
                 if cursor < b.start_ns {
                     result.push(Interval {
                         start_ns: cursor,
@@ -93,6 +94,7 @@ impl IntervalSet {
                 if cursor >= a.end_ns {
                     break;
                 }
+                k += 1;
             }
             if cursor < a.end_ns {
                 result.push(Interval {
@@ -100,6 +102,7 @@ impl IntervalSet {
                     end_ns: a.end_ns,
                 });
             }
+            j = k;
         }
         Self { intervals: result }
     }

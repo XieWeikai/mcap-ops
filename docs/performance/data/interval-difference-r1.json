@@ -1,0 +1,179 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "interval_difference": {
+          "case": "interval_difference",
+          "iterations": 8,
+          "median_ns": 3528115.25,
+          "samples_ns": [
+            3471083.0,
+            3533070.375,
+            3528115.25,
+            3502175.25,
+            3504750.375,
+            3546551.25,
+            3551006.625
+          ]
+        }
+      },
+      "after": {
+        "interval_difference": {
+          "case": "interval_difference",
+          "iterations": 2048,
+          "median_ns": 11227.7099609375,
+          "samples_ns": [
+            11227.7099609375,
+            11356.35498046875,
+            11264.37255859375,
+            11122.42724609375,
+            11182.7734375,
+            11253.70849609375,
+            11177.72607421875
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "interval_difference": {
+          "case": "interval_difference",
+          "iterations": 2048,
+          "median_ns": 11310.205078125,
+          "samples_ns": [
+            11329.66796875,
+            11310.205078125,
+            11318.60009765625,
+            11408.568359375,
+            11152.38720703125,
+            11128.62646484375,
+            11249.306640625
+          ]
+        }
+      },
+      "before": {
+        "interval_difference": {
+          "case": "interval_difference",
+          "iterations": 8,
+          "median_ns": 3533538.125,
+          "samples_ns": [
+            3512218.75,
+            3490770.375,
+            3533538.125,
+            3505881.875,
+            3541755.75,
+            3566217.75,
+            3580496.5
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "interval_difference": {
+          "case": "interval_difference",
+          "iterations": 8,
+          "median_ns": 3542249.875,
+          "samples_ns": [
+            3556226.625,
+            3555258.0,
+            3547849.25,
+            3542249.875,
+            3518185.875,
+            3509582.25,
+            3503970.25
+          ]
+        }
+      },
+      "after": {
+        "interval_difference": {
+          "case": "interval_difference",
+          "iterations": 2048,
+          "median_ns": 11084.0556640625,
+          "samples_ns": [
+            10960.7060546875,
+            11084.0556640625,
+            11157.05712890625,
+            10965.8583984375,
+            11062.3642578125,
+            11159.8388671875,
+            11166.0478515625
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "interval_difference": {
+          "case": "interval_difference",
+          "iterations": 2048,
+          "median_ns": 11170.93603515625,
+          "samples_ns": [
+            11268.39453125,
+            11182.70654296875,
+            11194.55029296875,
+            11041.708984375,
+            10984.25830078125,
+            11099.63330078125,
+            11170.93603515625
+          ]
+        }
+      },
+      "before": {
+        "interval_difference": {
+          "case": "interval_difference",
+          "iterations": 8,
+          "median_ns": 3500505.5,
+          "samples_ns": [
+            3497738.25,
+            3510383.5,
+            3466549.25,
+            3522236.75,
+            3525183.0,
+            3500505.5,
+            3468168.125
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "interval_difference": {
+      "before_ns": 3530826.6875,
+      "after_ns": 11199.322998046875,
+      "latency_reduction_pct": 99.68132056911236,
+      "paired_ratios": [
+        0.0031823535132355723,
+        0.0032008159182165324,
+        0.003129100446100658,
+        0.003191235104517405
+      ],
+      "worst_paired_reduction_pct": 99.67991840817835
+    }
+  }
+}
