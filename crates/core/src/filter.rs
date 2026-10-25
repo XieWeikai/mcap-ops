@@ -222,11 +222,15 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
                 continue;
             }
             let delta = b - a;
-            let wrapped = (delta + period / 2.0).rem_euclid(period) - period / 2.0;
-            let adjusted = if wrapped == -period / 2.0 && delta > 0.0 {
-                period / 2.0
+            let adjusted = if delta.abs() < period / 2.0 {
+                delta
             } else {
-                wrapped
+                let wrapped = (delta + period / 2.0).rem_euclid(period) - period / 2.0;
+                if wrapped == -period / 2.0 && delta > 0.0 {
+                    period / 2.0
+                } else {
+                    wrapped
+                }
             };
             values[i * signal.channels() + c] = values[(i - 1) * signal.channels() + c] + adjusted;
         }
