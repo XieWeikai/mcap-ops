@@ -1,0 +1,39 @@
+{
+  "label": "interval-contains-r1",
+  "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+  "cases": [
+    "interval_contains"
+  ],
+  "geomean_latency_reduction_pct": 17.330276444330707,
+  "worst_block_reduction_pct": 10.724770963348318,
+  "worst_case_reduction_pct": 17.330276444330707,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "8f3f68b956786c043a5ec8bee0c0f767bbb2592c8984d34976ae3eaa18ecd1c2",
+  "operator": "interval_contains",
+  "round": 1,
+  "decision": "accepted",
+  "method": "reject queries outside the interval extent early",
+  "profile_hotspot": "Binary membership search includes queries outside the entire interval extent",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "interval_contains": {
+      "before_ns": 298860.22265625,
+      "after_ns": 248319.86328125,
+      "latency_reduction_pct": 17.330276444330707,
+      "paired_ratios": [
+        0.8169838062501553,
+        0.8927522903665168,
+        0.8273598510679331,
+        0.8260346200454528
+      ],
+      "worst_paired_reduction_pct": 10.724770963348318
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-contains-r1",
+  "validation_sha256": "6a00c7901667fcc54de82ced0876b8ce926ac1ce8d13ba7c9e6eec60e4f4d2bd"
+}

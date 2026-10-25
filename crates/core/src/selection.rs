@@ -33,6 +33,11 @@ impl IntervalSet {
         &self.intervals
     }
     pub fn contains(&self, t: i64) -> bool {
+        if self.intervals.first().is_none_or(|v| t < v.start_ns)
+            || self.intervals.last().is_some_and(|v| t >= v.end_ns)
+        {
+            return false;
+        }
         let i = self.intervals.partition_point(|v| v.start_ns <= t);
         i > 0 && t < self.intervals[i - 1].end_ns
     }
