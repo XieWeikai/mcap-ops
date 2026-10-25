@@ -1,0 +1,39 @@
+{
+  "label": "lowpass-taps-r2",
+  "base_commit": "9fb2df8eb41ea444c03aac847259ad08b78529d2",
+  "cases": [
+    "lowpass_taps"
+  ],
+  "geomean_latency_reduction_pct": 39.42055279054313,
+  "worst_block_reduction_pct": 36.90334159572626,
+  "worst_case_reduction_pct": 39.42055279054313,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "7c726bfae2681da557a67765853fe624b3e322c90bf7359360db635425b9e7c6",
+  "operator": "lowpass_taps",
+  "round": 2,
+  "decision": "accepted",
+  "method": "compute symmetric lowpass coefficients once",
+  "profile_hotspot": "Trigonometric evaluations and repeated phase scaling dominate coefficient construction",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 616.5859451293945,
+      "after_ns": 373.3038787841797,
+      "latency_reduction_pct": 39.42055279054313,
+      "paired_ratios": [
+        0.6309665840427374,
+        0.6045611770519747,
+        0.6052794040133026,
+        0.6063095401758347
+      ],
+      "worst_paired_reduction_pct": 36.90334159572626
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/lowpass-taps-r2",
+  "validation_sha256": "b770490af07f526c451e4eefcbf182c54404d0d22a44cc7d55d507b9fff7819c"
+}
