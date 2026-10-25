@@ -280,9 +280,16 @@ impl SignalDecoder for JsonSignalSpec {
             ));
         }
         let payload: serde_json::Value = serde_json::from_slice(&message.data)?;
+        let lookup = |pointer: &str| {
+            if let Some(key) = pointer.strip_prefix('/') {
+                if !key.contains(['/', '~']) && payload.is_object() {
+                    return payload.get(key);
+                }
+            }
+            payload.pointer(pointer)
+        };
         let timestamp_ns = if let Some(pointer) = &self.timestamp_pointer {
-            payload
-                .pointer(pointer)
+            lookup(pointer)
                 .and_then(|v| v.as_i64())
                 .ok_or_else(|| invalid("timestamp pointer must resolve to int64 nanoseconds"))?
         } else {
@@ -295,9 +302,8 @@ impl SignalDecoder for JsonSignalSpec {
         };
         let mut values = Vec::new();
         for pointer in &self.fields {
-            let value = payload
-                .pointer(pointer)
-                .ok_or_else(|| invalid(format!("missing field {pointer}")))?;
+            let value =
+                lookup(pointer).ok_or_else(|| invalid(format!("missing field {pointer}")))?;
             if let Some(array) = value.as_array() {
                 for v in array {
                     values.push(
