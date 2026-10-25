@@ -1,0 +1,52 @@
+{
+  "label": "inspect-time-r2",
+  "base_commit": "7669197d00fcf987ad7a186336fcce2537cdaff3",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": 35.00394967173914,
+  "worst_block_reduction_pct": 31.941995616295348,
+  "worst_case_reduction_pct": 0.6259206061379863,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "821708906cd081f8d33358cde0f32b50a6e71c615314a106ad937073cfdc7947",
+  "operator": "inspect_time",
+  "round": 2,
+  "decision": "accepted",
+  "method": "summarize exactly uniform timestamps without allocating intervals",
+  "profile_hotspot": "Interval collection and ordering dominate time-statistic work",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 59669.576171875,
+      "after_ns": 25443.7685546875,
+      "latency_reduction_pct": 57.469116823069186,
+      "paired_ratios": [
+        0.4270889028052683,
+        0.4277391374430738,
+        0.4235287607333479,
+        0.42256450957841735
+      ],
+      "worst_paired_reduction_pct": 57.22608625569262
+    },
+    "inspect_time.jitter": {
+      "before_ns": 88195.43359375,
+      "after_ns": 87617.37890625,
+      "latency_reduction_pct": 0.6259206061379863,
+      "paired_ratios": [
+        0.9767858406030145,
+        0.9799594047254394,
+        1.093642838486849,
+        1.0075221831518009
+      ],
+      "worst_paired_reduction_pct": -9.364283848684906
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/inspect-time-r2",
+  "validation_sha256": "ecdf6232b03a2eb63a4d64d2c55c3a07601442c834a9f629ea753ef1569287b8"
+}

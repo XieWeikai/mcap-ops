@@ -88,6 +88,29 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
     if max_gap_ns < 0 {
         return Err(invalid("max_gap_ns must be nonnegative"));
     }
+    if times.len() >= 2 {
+        let dt = i128::from(times[1]) - i128::from(times[0]);
+        if dt > 0
+            && times
+                .windows(2)
+                .all(|w| i128::from(w[1]) - i128::from(w[0]) == dt)
+        {
+            let dt = i64::try_from(dt).map_err(|_| Error::Overflow)?;
+            return Ok(TimeStats {
+                samples: times.len(),
+                first_ns: times.first().copied(),
+                last_ns: times.last().copied(),
+                reversals: 0,
+                duplicates: 0,
+                gaps: if dt > max_gap_ns { times.len() - 1 } else { 0 },
+                positive_interval_min_ns: Some(dt),
+                positive_interval_median_ns: Some(dt as f64),
+                positive_interval_p95_ns: Some(dt as f64),
+                positive_interval_max_ns: Some(dt),
+                estimated_hz: Some(1e9 / dt as f64),
+            });
+        }
+    }
     let mut positive = Vec::new();
     let (mut reversals, mut duplicates, mut gaps) = (0, 0, 0);
     for pair in times.windows(2) {
