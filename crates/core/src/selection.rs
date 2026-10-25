@@ -111,13 +111,20 @@ impl IntervalSet {
         if history_ns < 0 || future_ns < 0 {
             return Err(invalid("context lengths must be nonnegative"));
         }
-        let mut result = Vec::with_capacity(self.intervals.len());
+        let mut merged: Vec<Interval> = Vec::with_capacity(self.intervals.len());
         for v in &self.intervals {
-            result.push(Interval {
+            let interval = Interval {
                 start_ns: v.start_ns.checked_sub(future_ns).ok_or(Error::Overflow)?,
                 end_ns: v.end_ns.checked_add(history_ns).ok_or(Error::Overflow)?,
-            });
+            };
+            if let Some(last) = merged.last_mut() {
+                if interval.start_ns <= last.end_ns {
+                    last.end_ns = last.end_ns.max(interval.end_ns);
+                    continue;
+                }
+            }
+            merged.push(interval);
         }
-        Self::new(result)
+        Ok(Self { intervals: merged })
     }
 }
