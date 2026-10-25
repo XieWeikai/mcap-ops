@@ -1,0 +1,39 @@
+{
+  "label": "lowpass-taps-r1",
+  "base_commit": "2c74abb1edffe9e82073ecded03b2fb3647890c8",
+  "cases": [
+    "lowpass_taps"
+  ],
+  "geomean_latency_reduction_pct": 12.06128268592266,
+  "worst_block_reduction_pct": 11.029186651811784,
+  "worst_case_reduction_pct": 12.06128268592266,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "0dcde908624ce87ecc237a8c65cb828f6f72a7a5bba645fbd4ff5bfc30ccde66",
+  "operator": "lowpass_taps",
+  "round": 1,
+  "decision": "accepted",
+  "method": "precompute the Hamming phase increment",
+  "profile_hotspot": "Trigonometric evaluations and repeated phase scaling dominate coefficient construction",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 697.3641510009766,
+      "after_ns": 614.9538955688477,
+      "latency_reduction_pct": 12.06128268592266,
+      "paired_ratios": [
+        0.8897081334818822,
+        0.8784567954120203,
+        0.8803175508695266,
+        0.8727445890961715
+      ],
+      "worst_paired_reduction_pct": 11.029186651811784
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/lowpass-taps-r1",
+  "validation_sha256": "9514dfb2fa611afb6ceda8e00b0d7cd25c673be6e8f4e03783c0747f5f2088fe"
+}

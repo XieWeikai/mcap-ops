@@ -95,6 +95,7 @@ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<
     }
     let fc = cutoff_hz / sample_rate_hz;
     let middle = (taps - 1) as f64 / 2.0;
+    let phase_step = 2.0 * std::f64::consts::PI / (taps - 1) as f64;
     let mut result: Vec<_> = (0..taps)
         .map(|i| {
             let n = i as f64 - middle;
@@ -103,7 +104,7 @@ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<
             } else {
                 (2.0 * std::f64::consts::PI * fc * n).sin() / (std::f64::consts::PI * n)
             };
-            sinc * (0.54 - 0.46 * (2.0 * std::f64::consts::PI * i as f64 / (taps - 1) as f64).cos())
+            sinc * (0.54 - 0.46 * (phase_step * i as f64).cos())
         })
         .collect();
     let sum: f64 = result.iter().sum();
