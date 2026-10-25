@@ -1,0 +1,52 @@
+{
+  "label": "ema-r1",
+  "base_commit": "fe9bcaeefb7b41759547923b3f1ac6ece625b4ad",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": 17.409416123147146,
+  "worst_block_reduction_pct": 16.041765693130017,
+  "worst_case_reduction_pct": 16.924530643862546,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "547b9eff75bd8a1892e724d9ecae1be46159d2bbb417b64e282881e0ccdab74a",
+  "operator": "ema",
+  "round": 1,
+  "decision": "accepted",
+  "method": "zip contiguous EMA rows",
+  "profile_hotspot": "Repeated channel indexing and expm1 evaluation in the EMA loop",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 819050.9375,
+      "after_ns": 673457.984375,
+      "latency_reduction_pct": 17.64003614563421,
+      "paired_ratios": [
+        0.8185779325634928,
+        0.8194003463219002,
+        0.8442832831351276,
+        0.8277989307654157
+      ],
+      "worst_paired_reduction_pct": 15.571671686487242
+    },
+    "ema.jitter": {
+      "before_ns": 820059.3125,
+      "after_ns": 677899.8125,
+      "latency_reduction_pct": 16.924530643862546,
+      "paired_ratios": [
+        0.839187131342543,
+        0.8266018094490726,
+        0.8349075776736764,
+        0.8156265592441542
+      ],
+      "worst_paired_reduction_pct": 16.081286865745703
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ema-r1",
+  "validation_sha256": "5eeeba06b8e27b02ac8b477074040b35975146977dd3f03157800d4542b9ed3f"
+}

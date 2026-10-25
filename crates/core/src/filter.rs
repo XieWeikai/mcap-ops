@@ -28,7 +28,7 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
     let mut values = vec![f64::NAN; signal.values().len()];
     let mut valid = vec![false; signal.len()];
     let mut previous: Option<usize> = None;
-    for i in 0..signal.len() {
+    for (i, is_valid) in valid.iter_mut().enumerate() {
         if signal.row(i).iter().any(|v| !v.is_finite()) {
             previous = None;
             continue;
@@ -45,15 +45,22 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
                 -(-dt / tau_seconds).exp_m1()
             })
             .unwrap_or(1.0);
-        for c in 0..signal.channels() {
-            values[i * signal.channels() + c] = match prior {
-                Some(p) => {
-                    (1.0 - weight) * values[p * signal.channels() + c] + weight * signal.row(i)[c]
+        let d = signal.channels();
+        let (past, tail) = values.split_at_mut(i * d);
+        let row = &mut tail[..d];
+        match prior {
+            Some(p) => {
+                for ((value, &old), &current) in row
+                    .iter_mut()
+                    .zip(&past[p * d..(p + 1) * d])
+                    .zip(signal.row(i))
+                {
+                    *value = (1.0 - weight) * old + weight * current;
                 }
-                None => signal.row(i)[c],
-            };
+            }
+            None => row.copy_from_slice(signal.row(i)),
         }
-        valid[i] = true;
+        *is_valid = true;
         previous = Some(i);
     }
     Ok(Filtered {
