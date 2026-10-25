@@ -31,9 +31,16 @@ def function_span(source, name):
         lambda match: " " * len(match.group()), source, flags=re.DOTALL,
     )
     matches = list(re.finditer(r"\b(?:pub\s+)?fn\s+" + re.escape(name) + r"\s*[\(<]", masked))
-    matches = [match for match in matches if masked.find("{", match.end()) >= 0
-               and (masked.find(";", match.end()) < 0
-                    or masked.find("{", match.end()) < masked.find(";", match.end()))]
+    def has_body(match):
+        brackets = 0
+        for char in masked[match.end():]:
+            brackets += (char == "[") - (char == "]")
+            if char == "{":
+                return True
+            if char == ";" and brackets == 0:
+                return False
+        return False
+    matches = [match for match in matches if has_body(match)]
     if len(matches) != 1:
         raise RuntimeError(f"expected unique function {name}")
     start = matches[0].start()
