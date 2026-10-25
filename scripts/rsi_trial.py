@@ -56,6 +56,7 @@ cp target/release/examples/operator_benchmark .artifacts/rsi/bin/{label}
         setup += f"""
 mkdir -p .artifacts/rsi/python/{label}
 cp -r python/mcap_ops .artifacts/rsi/python/{label}/
+.venv/bin/python scripts/check_python_equivalence.py --before .artifacts/rsi/python/accepted --after .artifacts/rsi/python/{label}
 PYTHONPATH="$PWD/.artifacts/rsi/python/{label}" RSI_PYTHON_ROOT="$PWD/.artifacts/rsi/python/{label}" .venv/bin/python scripts/python_benchmark.py --case python.resample.linear --profile .artifacts/rsi/trials/{label}/profile.prof
 python3 scripts/rsi_measure.py --before .artifacts/rsi/python/accepted --after .artifacts/rsi/python/{label} --cases {cases} --output .artifacts/rsi/trials/{label}/measurement.json
 """
