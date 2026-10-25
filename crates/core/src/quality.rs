@@ -280,49 +280,52 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
         if !ordered {
             continue;
         }
-        let mut previous_velocity: Option<(f64, f64)> = None;
-        for i in 1..signal.len() {
-            let dt_ns = i128::from(times[i]) - i128::from(times[i - 1]);
-            let (a, b) = (signal.row(i - 1)[channel], signal.row(i)[channel]);
-            if dt_ns > i128::from(config.max_gap_ns) || !a.is_finite() || !b.is_finite() {
-                previous_velocity = None;
-                continue;
-            }
-            let dt = dt_ns as f64 / 1e9;
-            let velocity = (b - a) / dt;
-            if let Some(limits) = &config.max_rate {
-                if velocity.abs() > limits[channel] {
-                    emit(
-                        &mut report,
-                        signal,
-                        config,
-                        IssueCode::Rate,
-                        Some(channel),
-                        (i - 1, i + 1),
-                        (finite(velocity.abs()), Some(limits[channel])),
-                    );
+        if config.max_rate.is_some() || config.max_acceleration.is_some() {
+            let mut previous_velocity: Option<(f64, f64)> = None;
+            for i in 1..signal.len() {
+                let dt_ns = i128::from(times[i]) - i128::from(times[i - 1]);
+                let (a, b) = (signal.row(i - 1)[channel], signal.row(i)[channel]);
+                if dt_ns > i128::from(config.max_gap_ns) || !a.is_finite() || !b.is_finite() {
+                    previous_velocity = None;
+                    continue;
                 }
-            }
-            if let (Some((prior, prior_dt)), Some(limits)) =
-                (previous_velocity, &config.max_acceleration)
-            {
-                let acceleration = (velocity - prior) / ((prior_dt + dt) / 2.0);
-                if acceleration.abs() > limits[channel] {
-                    emit(
-                        &mut report,
-                        signal,
-                        config,
-                        IssueCode::Acceleration,
-                        Some(channel),
-                        (i - 2, i + 1),
-                        (finite(acceleration.abs()), Some(limits[channel])),
-                    );
+                let dt = dt_ns as f64 / 1e9;
+                let velocity = (b - a) / dt;
+                if let Some(limits) = &config.max_rate {
+                    if velocity.abs() > limits[channel] {
+                        emit(
+                            &mut report,
+                            signal,
+                            config,
+                            IssueCode::Rate,
+                            Some(channel),
+                            (i - 1, i + 1),
+                            (finite(velocity.abs()), Some(limits[channel])),
+                        );
+                    }
                 }
+                if let (Some((prior, prior_dt)), Some(limits)) =
+                    (previous_velocity, &config.max_acceleration)
+                {
+                    let acceleration = (velocity - prior) / ((prior_dt + dt) / 2.0);
+                    if acceleration.abs() > limits[channel] {
+                        emit(
+                            &mut report,
+                            signal,
+                            config,
+                            IssueCode::Acceleration,
+                            Some(channel),
+                            (i - 2, i + 1),
+                            (finite(acceleration.abs()), Some(limits[channel])),
+                        );
+                    }
+                }
+                previous_velocity = velocity.is_finite().then_some((velocity, dt));
             }
-            previous_velocity = velocity.is_finite().then_some((velocity, dt));
         }
         if let Some(window) = config.hampel_window_ns {
             let mut start = 0;
+            let mut values = Vec::new();
             while start < signal.len() {
                 let mut end = start + 1;
                 while end < signal.len()
@@ -343,10 +346,12 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
                     if b - a > config.max_hampel_samples {
                         return Err(invalid("Hampel window exceeds max_hampel_samples"));
                     }
-                    let mut values: Vec<_> = (a..b)
-                        .map(|j| signal.row(j)[channel])
-                        .filter(|v| v.is_finite())
-                        .collect();
+                    values.clear();
+                    values.extend(
+                        (a..b)
+                            .map(|j| signal.row(j)[channel])
+                            .filter(|v| v.is_finite()),
+                    );
                     if values.len() < 3 {
                         continue;
                     }

@@ -1,0 +1,65 @@
+{
+  "label": "inspect-signal-r1",
+  "base_commit": "5960628396569113de7e0721c82c48175641cf13",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel"
+  ],
+  "geomean_latency_reduction_pct": 31.25710234176409,
+  "worst_block_reduction_pct": 30.431788992634466,
+  "worst_case_reduction_pct": 12.195927823415376,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "One reusable Vec and one option guard; same formulas, checks, issue order and public interface",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "4d78ee7093f9fe1ecd53cc626235ff6fb0d07cb8b66bf0b9c8dba0e20358ac0f",
+  "operator": "inspect_signal",
+  "round": 1,
+  "decision": "accepted",
+  "method": "reuse Hampel scratch and bypass disabled derivative work",
+  "profile_hotspot": "Callgrind: inspect_signal spends substantial instructions in Vec growth and repeated window collection; disabled derivative passes still scan all rows",
+  "reason": "All three fixed cases improve; 31.26% paired aggregate and 30.43% worst block exceed 8%; reference differential, 36 Rust tests and 5 Python tests pass",
+  "case_results": {
+    "inspect_signal.basic": {
+      "before_ns": 3002165.1875,
+      "after_ns": 1486224.3125,
+      "latency_reduction_pct": 50.64570799394003,
+      "paired_ratios": [
+        0.49340964663013454,
+        0.49367619349106495,
+        0.5013813253442527,
+        0.4111369384583082
+      ],
+      "worst_paired_reduction_pct": 49.861867465574726
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 8319669.5,
+      "after_ns": 6308018.375,
+      "latency_reduction_pct": 23.775180100179604,
+      "paired_ratios": [
+        0.768672735591834,
+        0.7504768900619173,
+        0.755823662404574,
+        0.7696272421187975
+      ],
+      "worst_paired_reduction_pct": 23.037275788120247
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 40360894.0,
+      "after_ns": 35346732.5,
+      "latency_reduction_pct": 12.195927823415376,
+      "paired_ratios": [
+        0.8676091936111578,
+        0.8655460045474307,
+        0.8884722499205346,
+        0.8968071049637442
+      ],
+      "worst_paired_reduction_pct": 10.319289503625583
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/inspect-signal-r1",
+  "validation_sha256": "d09a60fa3f732bf6105d94eb6c4b70498e5e31ce7d3b38e801df58e026f5a248"
+}
