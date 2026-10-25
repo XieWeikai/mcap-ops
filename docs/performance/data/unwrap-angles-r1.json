@@ -1,0 +1,179 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "unwrap_angles": {
+          "case": "unwrap_angles",
+          "iterations": 32,
+          "median_ns": 1024684.15625,
+          "samples_ns": [
+            1039850.9687500001,
+            1054506.4375,
+            1012451.5312500001,
+            1036135.5,
+            1021266.46875,
+            1024684.15625,
+            1012880.9375
+          ]
+        }
+      },
+      "after": {
+        "unwrap_angles": {
+          "case": "unwrap_angles",
+          "iterations": 32,
+          "median_ns": 805844.125,
+          "samples_ns": [
+            796128.84375,
+            812458.59375,
+            805844.125,
+            802798.03125,
+            803835.78125,
+            825536.4375,
+            809413.0625
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "unwrap_angles": {
+          "case": "unwrap_angles",
+          "iterations": 32,
+          "median_ns": 809557.78125,
+          "samples_ns": [
+            883816.28125,
+            803365.53125,
+            818000.25,
+            806697.71875,
+            815771.40625,
+            809557.78125,
+            808400.4375
+          ]
+        }
+      },
+      "before": {
+        "unwrap_angles": {
+          "case": "unwrap_angles",
+          "iterations": 32,
+          "median_ns": 1027564.0937500001,
+          "samples_ns": [
+            1019312.9375,
+            1027564.0937500001,
+            1018513.34375,
+            1027237.21875,
+            1035509.2500000001,
+            1028141.1249999999,
+            1031052.75
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "unwrap_angles": {
+          "case": "unwrap_angles",
+          "iterations": 32,
+          "median_ns": 1029863.40625,
+          "samples_ns": [
+            1030692.3125,
+            1029863.40625,
+            1021707.71875,
+            1069225.40625,
+            1025683.9375,
+            1029387.0000000001,
+            1060371.34375
+          ]
+        }
+      },
+      "after": {
+        "unwrap_angles": {
+          "case": "unwrap_angles",
+          "iterations": 32,
+          "median_ns": 811562.46875,
+          "samples_ns": [
+            799487.0625,
+            808301.9375,
+            811562.46875,
+            814091.625,
+            845176.0625,
+            811495.78125,
+            812624.4375
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "unwrap_angles": {
+          "case": "unwrap_angles",
+          "iterations": 32,
+          "median_ns": 809554.6875,
+          "samples_ns": [
+            809554.6875,
+            812537.6875,
+            814640.90625,
+            808751.46875,
+            821794.21875,
+            808858.0625,
+            802504.0625
+          ]
+        }
+      },
+      "before": {
+        "unwrap_angles": {
+          "case": "unwrap_angles",
+          "iterations": 32,
+          "median_ns": 1025990.90625,
+          "samples_ns": [
+            1023835.2812499999,
+            1021122.25,
+            1030763.5625,
+            1031837.125,
+            1025990.90625,
+            1028973.4375000001,
+            1021900.59375
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "unwrap_angles": {
+      "before_ns": 1026777.5,
+      "after_ns": 809556.234375,
+      "latency_reduction_pct": 21.206456395934147,
+      "paired_ratios": [
+        0.7864317215063801,
+        0.7878416404134887,
+        0.7880292316678282,
+        0.7890466499931514
+      ],
+      "worst_paired_reduction_pct": 21.095335000684855
+    }
+  }
+}

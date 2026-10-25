@@ -1,0 +1,39 @@
+{
+  "label": "unwrap-angles-r1",
+  "base_commit": "6922813b35be8a132ba557e514ebd67bc8514b34",
+  "cases": [
+    "unwrap_angles"
+  ],
+  "geomean_latency_reduction_pct": 21.206456395934147,
+  "worst_block_reduction_pct": 21.095335000684855,
+  "worst_case_reduction_pct": 21.206456395934147,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "09ce749d07e416cd0260bf211a705ee7cf75e8775c167498c65c85ef850c5edd",
+  "operator": "unwrap_angles",
+  "round": 1,
+  "decision": "accepted",
+  "method": "process angle channels in row-major order",
+  "profile_hotspot": "Channel-major strides and per-sample modulo dominate angle unwrapping",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 1026777.5,
+      "after_ns": 809556.234375,
+      "latency_reduction_pct": 21.206456395934147,
+      "paired_ratios": [
+        0.7864317215063801,
+        0.7878416404134887,
+        0.7880292316678282,
+        0.7890466499931514
+      ],
+      "worst_paired_reduction_pct": 21.095335000684855
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/unwrap-angles-r1",
+  "validation_sha256": "857ef363af5144fc0beda540ab6dc9fa10277831e5b64289df37224b7714de10"
+}

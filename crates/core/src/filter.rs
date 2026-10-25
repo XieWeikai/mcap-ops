@@ -210,14 +210,15 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
         return Err(invalid("positive period and nonnegative gap required"));
     }
     let mut values = signal.values().to_vec();
-    for c in 0..signal.channels() {
-        for i in 1..signal.len() {
+    for i in 1..signal.len() {
+        if i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[i - 1])
+            > i128::from(max_gap_ns)
+        {
+            continue;
+        }
+        for c in 0..signal.channels() {
             let (a, b) = (signal.row(i - 1)[c], signal.row(i)[c]);
-            if !a.is_finite()
-                || !b.is_finite()
-                || i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[i - 1])
-                    > i128::from(max_gap_ns)
-            {
+            if !a.is_finite() || !b.is_finite() {
                 continue;
             }
             let delta = b - a;
