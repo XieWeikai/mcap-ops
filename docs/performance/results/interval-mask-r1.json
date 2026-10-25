@@ -1,0 +1,52 @@
+{
+  "label": "interval-mask-r1",
+  "base_commit": "832dc378bd9fa67279ef65e61adbd240d18bcbbb",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled"
+  ],
+  "geomean_latency_reduction_pct": 67.26727696917752,
+  "worst_block_reduction_pct": 66.7166801546735,
+  "worst_case_reduction_pct": 0.9047791165674668,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "f81c957022906fafa83b5356d7fa7daf67f39e6aaccd83cf185df42e058474c5",
+  "operator": "interval_mask",
+  "round": 1,
+  "decision": "accepted",
+  "method": "sweep ordered timestamp masks with a monotone cursor",
+  "profile_hotspot": "Each ordered query repeats a binary search through the same intervals",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "interval_mask.ordered": {
+      "before_ns": 234125.46484375,
+      "after_ns": 25465.09765625,
+      "latency_reduction_pct": 89.12927411741829,
+      "paired_ratios": [
+        0.10794241237593946,
+        0.1108165263322232,
+        0.10778940060129516,
+        0.10947210527569476
+      ],
+      "worst_paired_reduction_pct": 88.91834736677768
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 269320.84375,
+      "after_ns": 265465.359375,
+      "latency_reduction_pct": 0.9047791165674668,
+      "paired_ratios": [
+        0.992695037097263,
+        0.9996517817254361,
+        0.9892093805713876,
+        0.9786267891461258
+      ],
+      "worst_paired_reduction_pct": 0.03482182745638829
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-mask-r1",
+  "validation_sha256": "417b5b9284d5c20fc00646836c15d577b0632840477d6ccfc5f6ca21d357d3cb"
+}

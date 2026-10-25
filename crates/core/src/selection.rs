@@ -42,7 +42,18 @@ impl IntervalSet {
         i > 0 && t < self.intervals[i - 1].end_ns
     }
     pub fn mask(&self, times: &[i64]) -> Vec<bool> {
-        times.iter().map(|&t| self.contains(t)).collect()
+        if times.windows(2).any(|w| w[1] < w[0]) {
+            return times.iter().map(|&t| self.contains(t)).collect();
+        }
+        let mut result = Vec::with_capacity(times.len());
+        let mut index = 0;
+        for &t in times {
+            while index < self.intervals.len() && self.intervals[index].end_ns <= t {
+                index += 1;
+            }
+            result.push(index < self.intervals.len() && self.intervals[index].start_ns <= t);
+        }
+        result
     }
     pub fn intersection(&self, other: &Self) -> Self {
         let (mut i, mut j) = (0, 0);
