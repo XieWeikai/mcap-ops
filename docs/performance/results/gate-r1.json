@@ -1,0 +1,52 @@
+{
+  "label": "gate-r1",
+  "base_commit": "7ba8c8b94cb85fe9450e3b776361533302c0ed37",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": 17.59595911145009,
+  "worst_block_reduction_pct": 16.46862921215744,
+  "worst_case_reduction_pct": -0.01531288191203295,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "1e71d7fc75c689a22f51c530db709fad1fa9b709388f7471551f6a01f7ebd707",
+  "operator": "gate",
+  "round": 1,
+  "decision": "accepted",
+  "method": "copy static reason names instead of invoking Debug formatting",
+  "profile_hotspot": "Gate formatting and small repeated reason-vector allocations dominate failure reports",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 8.950040340423584,
+      "after_ns": 8.957534790039062,
+      "latency_reduction_pct": -0.01531288191203295,
+      "paired_ratios": [
+        1.0073404209283054,
+        0.9577538797792141,
+        1.005820649964865,
+        0.9944856076733758
+      ],
+      "worst_paired_reduction_pct": -0.7340420928305447
+    },
+    "gate.fail": {
+      "before_ns": 44.519551277160645,
+      "after_ns": 30.50407123565674,
+      "latency_reduction_pct": 31.7286322073025,
+      "paired_ratios": [
+        0.6803900197622388,
+        0.6850373360917112,
+        0.6937111408420351,
+        0.6764605673473154
+      ],
+      "worst_paired_reduction_pct": 30.628885915796488
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/gate-r1",
+  "validation_sha256": "28c6b0805cf6905f1ef9004891280f13c43b2f1f60f78388dea691856bf49571"
+}

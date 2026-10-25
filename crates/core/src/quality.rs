@@ -463,7 +463,21 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
     }
     for code in &policy.reject_codes {
         if report.all_codes.contains(code) {
-            reasons.push(format!("{code:?}"));
+            reasons.push(
+                match code {
+                    IssueCode::NonFinite => "NonFinite",
+                    IssueCode::BelowRange => "BelowRange",
+                    IssueCode::AboveRange => "AboveRange",
+                    IssueCode::ClockReversal => "ClockReversal",
+                    IssueCode::DuplicateTime => "DuplicateTime",
+                    IssueCode::Gap => "Gap",
+                    IssueCode::Rate => "Rate",
+                    IssueCode::Acceleration => "Acceleration",
+                    IssueCode::Spike => "Spike",
+                    IssueCode::Flatline => "Flatline",
+                }
+                .to_owned(),
+            );
         }
     }
     Ok(GateDecision {
