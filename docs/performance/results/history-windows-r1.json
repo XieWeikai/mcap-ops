@@ -1,0 +1,52 @@
+{
+  "label": "history-windows-r1",
+  "base_commit": "e5e9c2380ea26fc47125f202a7a358441c660a91",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": 28.730708513737934,
+  "worst_block_reduction_pct": 28.22190338815943,
+  "worst_case_reduction_pct": -0.38201979754266535,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "47867785cc3d00eb641b6cf20404a91bde561c4524f0ebd61457c2ec2f95a9fc",
+  "operator": "history_windows",
+  "round": 1,
+  "decision": "accepted",
+  "method": "directly sample already ordered history windows",
+  "profile_hotspot": "History windows sort and scatter even when already time-ordered, and repeat duplicate samples",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 717440.046875,
+      "after_ns": 365455.46875,
+      "latency_reduction_pct": 49.210214231513106,
+      "paired_ratios": [
+        0.5106405440229149,
+        0.5013733670795217,
+        0.5107986828413736,
+        0.505155171346823
+      ],
+      "worst_paired_reduction_pct": 48.92013171586264
+    },
+    "history_windows.overlap": {
+      "before_ns": 824063.078125,
+      "after_ns": 828942.4375,
+      "latency_reduction_pct": -0.38201979754266535,
+      "paired_ratios": [
+        1.004650600321334,
+        1.0029897956295193,
+        1.008635168078278,
+        0.9895934240973329
+      ],
+      "worst_paired_reduction_pct": -0.863516807827791
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/history-windows-r1",
+  "validation_sha256": "98de7876f748b227230c1bfb3511928ae3d61e063c92d52dcf8b9800c5c23d24"
+}

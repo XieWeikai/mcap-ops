@@ -251,6 +251,22 @@ pub fn history_windows(
         .len()
         .checked_mul(offsets.len())
         .ok_or(Error::Overflow)?;
+    if centers.windows(2).all(|w| {
+        i128::from(w[0]) + i128::from(*offsets.last().unwrap())
+            <= i128::from(w[1]) + i128::from(offsets[0])
+    }) {
+        let mut target = Vec::with_capacity(size);
+        for &center in centers {
+            for &offset in offsets {
+                target.push(center.checked_add(offset).ok_or(Error::Overflow)?);
+            }
+        }
+        return Ok(Windowed {
+            centers: centers.to_vec(),
+            offsets: offsets.to_vec(),
+            samples: resample(signal, &target, options)?,
+        });
+    }
     let mut requests = Vec::with_capacity(size);
     for (i, &center) in centers.iter().enumerate() {
         for (j, &offset) in offsets.iter().enumerate() {
