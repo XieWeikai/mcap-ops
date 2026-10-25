@@ -74,7 +74,7 @@ impl IntervalSet {
         Self { intervals: result }
     }
     pub fn difference(&self, other: &Self) -> Self {
-        let mut result = Vec::new();
+        let mut result = Vec::with_capacity(self.intervals.len() + other.intervals.len());
         let mut j = 0;
         for a in &self.intervals {
             while j < other.intervals.len() && other.intervals[j].end_ns <= a.start_ns {
