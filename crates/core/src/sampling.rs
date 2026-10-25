@@ -277,10 +277,17 @@ pub fn history_windows(
         }
     }
     requests.sort_unstable_by_key(|&(t, index)| (t, index));
-    let sorted: Vec<_> = requests.iter().map(|r| r.0).collect();
+    let mut sorted = Vec::with_capacity(requests.len());
+    let mut sample_indices = Vec::with_capacity(requests.len());
+    for &(time, _) in &requests {
+        if sorted.last() != Some(&time) {
+            sorted.push(time);
+        }
+        sample_indices.push(sorted.len() - 1);
+    }
     let sampled = resample(signal, &sorted, options)?;
     let mut result = Sampled::empty(&vec![0; size], signal.channels())?;
-    for (index, &(time, dest)) in requests.iter().enumerate() {
+    for (&index, &(time, dest)) in sample_indices.iter().zip(&requests) {
         result.timestamps[dest] = time;
         result.status[dest] = sampled.status[index];
         result.source_left[dest] = sampled.source_left[index];
