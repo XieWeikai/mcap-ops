@@ -1,0 +1,179 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "interval_affected_centers": {
+          "case": "interval_affected_centers",
+          "iterations": 2048,
+          "median_ns": 12910.27685546875,
+          "samples_ns": [
+            12878.7333984375,
+            12898.69140625,
+            12941.3779296875,
+            12868.603515625,
+            13125.94140625,
+            12919.52490234375,
+            12910.27685546875
+          ]
+        }
+      },
+      "after": {
+        "interval_affected_centers": {
+          "case": "interval_affected_centers",
+          "iterations": 2048,
+          "median_ns": 11008.0439453125,
+          "samples_ns": [
+            11132.90185546875,
+            11114.06787109375,
+            11008.0439453125,
+            11035.48681640625,
+            10992.75,
+            10909.49951171875,
+            10964.2626953125
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "interval_affected_centers": {
+          "case": "interval_affected_centers",
+          "iterations": 2048,
+          "median_ns": 11116.79296875,
+          "samples_ns": [
+            11038.0107421875,
+            11117.23681640625,
+            11116.79296875,
+            11005.62939453125,
+            11065.04931640625,
+            11197.3623046875,
+            11124.2578125
+          ]
+        }
+      },
+      "before": {
+        "interval_affected_centers": {
+          "case": "interval_affected_centers",
+          "iterations": 2048,
+          "median_ns": 13763.0556640625,
+          "samples_ns": [
+            13337.32080078125,
+            13270.5341796875,
+            13206.61572265625,
+            14227.98828125,
+            15113.46142578125,
+            17697.87109375,
+            13763.0556640625
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "interval_affected_centers": {
+          "case": "interval_affected_centers",
+          "iterations": 2048,
+          "median_ns": 12936.484375,
+          "samples_ns": [
+            12940.66552734375,
+            13175.505859375,
+            12898.9033203125,
+            12936.484375,
+            13051.0888671875,
+            12837.66796875,
+            12849.70849609375
+          ]
+        }
+      },
+      "after": {
+        "interval_affected_centers": {
+          "case": "interval_affected_centers",
+          "iterations": 2048,
+          "median_ns": 11140.408203125,
+          "samples_ns": [
+            11159.8154296875,
+            11136.38037109375,
+            11140.408203125,
+            11156.98291015625,
+            11132.83984375,
+            11050.33984375,
+            11286.390625
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "interval_affected_centers": {
+          "case": "interval_affected_centers",
+          "iterations": 2048,
+          "median_ns": 11060.9404296875,
+          "samples_ns": [
+            11226.00146484375,
+            11262.404296875,
+            11063.4599609375,
+            11021.78369140625,
+            10976.78173828125,
+            11012.82177734375,
+            11060.9404296875
+          ]
+        }
+      },
+      "before": {
+        "interval_affected_centers": {
+          "case": "interval_affected_centers",
+          "iterations": 2048,
+          "median_ns": 13053.58203125,
+          "samples_ns": [
+            13072.7626953125,
+            13022.509765625,
+            12949.94140625,
+            13181.9267578125,
+            12954.4892578125,
+            13053.58203125,
+            13247.04541015625
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "interval_affected_centers": {
+      "before_ns": 12995.033203125,
+      "after_ns": 11088.86669921875,
+      "latency_reduction_pct": 14.999673844769855,
+      "paired_ratios": [
+        0.8526574657188338,
+        0.8077270949196037,
+        0.8611619571584725,
+        0.847349057385769
+      ],
+      "worst_paired_reduction_pct": 13.883804284152745
+    }
+  }
+}

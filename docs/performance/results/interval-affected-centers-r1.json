@@ -1,0 +1,39 @@
+{
+  "label": "interval-affected-centers-r1",
+  "base_commit": "3f93cb66bb9cae00b50e6e17308eb8fd964ccf8b",
+  "cases": [
+    "interval_affected_centers"
+  ],
+  "geomean_latency_reduction_pct": 14.999673844769855,
+  "worst_block_reduction_pct": 13.883804284152745,
+  "worst_case_reduction_pct": 14.999673844769855,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "6629c5397d602d87a16e503d836e5d94bcf6836a0808ab59f22e946c516bfa0c",
+  "operator": "interval_affected_centers",
+  "round": 1,
+  "decision": "accepted",
+  "method": "reserve expanded interval storage",
+  "profile_hotspot": "Fallible collection and repeated sorting of order-preserving expanded intervals",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "interval_affected_centers": {
+      "before_ns": 12995.033203125,
+      "after_ns": 11088.86669921875,
+      "latency_reduction_pct": 14.999673844769855,
+      "paired_ratios": [
+        0.8526574657188338,
+        0.8077270949196037,
+        0.8611619571584725,
+        0.847349057385769
+      ],
+      "worst_paired_reduction_pct": 13.883804284152745
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-affected-centers-r1",
+  "validation_sha256": "4e1b40abeb23399282eca6dd9ba69e5fa6842f5252714e13da5799953785fc77"
+}

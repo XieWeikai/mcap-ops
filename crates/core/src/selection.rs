@@ -111,16 +111,13 @@ impl IntervalSet {
         if history_ns < 0 || future_ns < 0 {
             return Err(invalid("context lengths must be nonnegative"));
         }
-        Self::new(
-            self.intervals
-                .iter()
-                .map(|v| {
-                    Ok(Interval {
-                        start_ns: v.start_ns.checked_sub(future_ns).ok_or(Error::Overflow)?,
-                        end_ns: v.end_ns.checked_add(history_ns).ok_or(Error::Overflow)?,
-                    })
-                })
-                .collect::<Result<Vec<_>>>()?,
-        )
+        let mut result = Vec::with_capacity(self.intervals.len());
+        for v in &self.intervals {
+            result.push(Interval {
+                start_ns: v.start_ns.checked_sub(future_ns).ok_or(Error::Overflow)?,
+                end_ns: v.end_ns.checked_add(history_ns).ok_or(Error::Overflow)?,
+            });
+        }
+        Self::new(result)
     }
 }
