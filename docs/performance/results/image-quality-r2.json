@@ -1,0 +1,52 @@
+{
+  "label": "image-quality-r2",
+  "base_commit": "06d3a4465be04acc2fbda9f31fd9441443ae6210",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": 23.03071205759992,
+  "worst_block_reduction_pct": 21.719643312237014,
+  "worst_case_reduction_pct": 17.47018750143384,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "84f8e3ff65893a34f25dcde6499d8283f8d806bbc7ef85583ce5dfe32ad85c5a",
+  "operator": "image_quality",
+  "round": 2,
+  "decision": "accepted",
+  "method": "compute Laplacian variance with two stable passes",
+  "profile_hotspot": "Per-pixel online moment division and repeated decoded RGB allocation",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 3541535.125,
+      "after_ns": 2939507.25,
+      "latency_reduction_pct": 17.47018750143384,
+      "paired_ratios": [
+        0.8138428631869414,
+        0.8314913810047366,
+        0.8672740468140109,
+        0.8191048689665865
+      ],
+      "worst_paired_reduction_pct": 13.272595318598912
+    },
+    "image_quality.noise": {
+      "before_ns": 2058302.34375,
+      "after_ns": 1481451.71875,
+      "latency_reduction_pct": 28.370297543492917,
+      "paired_ratios": [
+        0.7241525849266962,
+        0.7162021023625273,
+        0.7065603157011713,
+        0.7163919467676144
+      ],
+      "worst_paired_reduction_pct": 27.584741507330378
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/image-quality-r2",
+  "validation_sha256": "9a23b79751af8d1843c37235b70d2f770f2a7dea753134c81ea47515f651cb74"
+}

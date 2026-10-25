@@ -94,16 +94,21 @@ pub fn image_quality(bytes: &[u8], options: &ImageOptions) -> Result<ImageQualit
         .map(|chunk| chunk.iter().map(|&v| (v - mean) * (v - mean)).sum::<f64>())
         .sum::<f64>();
     let laplacian_variance = if width >= 3 && height >= 3 {
-        let (mut n, mut average, mut variance) = (0, 0.0, 0.0);
         let w = width as usize;
+        let n = (width as usize - 2) * (height as usize - 2);
+        let lap = |i: usize| gray[i - w] + gray[i + w] + gray[i - 1] + gray[i + 1] - 4.0 * gray[i];
+        let mut sum = 0.0;
         for y in 1..height as usize - 1 {
             for x in 1..w - 1 {
-                let i = y * w + x;
-                let v = gray[i - w] + gray[i + w] + gray[i - 1] + gray[i + 1] - 4.0 * gray[i];
-                n += 1;
-                let delta = v - average;
-                average += delta / n as f64;
-                variance += delta * (v - average);
+                sum += lap(y * w + x);
+            }
+        }
+        let average = sum / n as f64;
+        let mut variance = 0.0;
+        for y in 1..height as usize - 1 {
+            for x in 1..w - 1 {
+                let delta = lap(y * w + x) - average;
+                variance += delta * delta;
             }
         }
         Some(variance / n as f64)
