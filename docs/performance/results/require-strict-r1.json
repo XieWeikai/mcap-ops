@@ -1,0 +1,39 @@
+{
+  "label": "require-strict-r1",
+  "base_commit": "9be8a75ac7ce6a1227df2ece0f8b612502be3791",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": 18.499922333773135,
+  "worst_block_reduction_pct": 16.73035943260095,
+  "worst_case_reduction_pct": 18.499922333773135,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "547a1897ed2b1f9f48fdbd3f3ae9ac9ebbceac754a3739b434ea7c0e9d85c99b",
+  "operator": "require_strict",
+  "round": 1,
+  "decision": "accepted",
+  "method": "zip adjacent timestamp iterators",
+  "profile_hotspot": "Validation performs a branch for every adjacent timestamp",
+  "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 11448.264404296875,
+      "after_ns": 9384.727416992188,
+      "latency_reduction_pct": 18.499922333773135,
+      "paired_ratios": [
+        0.7938023799844156,
+        0.8326964056739905,
+        0.810779617255251,
+        0.8192219360692863
+      ],
+      "worst_paired_reduction_pct": 16.73035943260095
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/require-strict-r1",
+  "validation_sha256": "138f0e1f63029da242bb7b93229790aef13e40c7d15ef32eaf03c3f3f24ac401"
+}

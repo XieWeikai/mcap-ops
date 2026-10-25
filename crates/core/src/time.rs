@@ -2,7 +2,7 @@ use crate::{invalid, Error, Result};
 use serde::{Deserialize, Serialize};
 
 pub fn require_strict(times: &[i64]) -> Result<()> {
-    if times.windows(2).any(|w| w[1] <= w[0]) {
+    if times.iter().zip(times.iter().skip(1)).any(|(a, b)| b <= a) {
         return Err(invalid("source timestamps must be strictly increasing; inspect before resolving duplicates or reversals"));
     }
     Ok(())
