@@ -52,6 +52,31 @@ def fir_planes(s):
 ''' + s[b:]
 
 
+def fir_guarded(s):
+    # Shape and support dispatch learned from the extension's sensitivity failure.
+    anchor = "    let lookahead ="
+    s = replace(s, anchor, '''    let planes = if taps.len() >= 16 && signal.len() >= taps.len()
+        && bad_prefix[signal.len()] == 0 && gap_prefix[signal.len()] == 0 {
+        let mut data = vec![0.0; signal.values().len()];
+        for c in 0..signal.channels() {
+            for (out, row) in data[c*signal.len()..(c+1)*signal.len()].iter_mut()
+                .zip(signal.values().chunks_exact(signal.channels())) { *out = row[c]; }
+        }
+        Some(data)
+    } else { None };
+''' + anchor)
+    a = s.index("            let value = taps")
+    b = s.index("            values[i", a)
+    original = s[a:b].replace("            let value = ", "", 1).strip().removesuffix(";")
+    return s[:a] + '''            let value = if let Some(planes) = &planes {
+                taps.iter().zip(planes[c*signal.len()+start..c*signal.len()+end+1].iter().rev())
+                    .map(|(&w,&v)| w*v).sum::<f64>()
+            } else {
+                ''' + original + '''
+            };
+''' + s[b:]
+
+
 def hampel_cursor(s):
     s = replace(s, "                for i in start..end {", "                let (mut a, mut b) = (start, start);\n                for i in start..end {")
     a = s.index("                    let a = start +")
@@ -308,7 +333,7 @@ RECIPES = [
     recipe("require_strict", TIME, "require_strict", strict_reduce, "require_strict", "reduce timestamp order violations without early branches", "Zipped adjacency beat windows; keep it and allow SIMD through a non-short-circuit boolean reduction.", "Order checks run a predictable branch for every adjacent pair."),
     recipe("expand_batch_timestamps", TIME, "expand_batch_timestamps", batch_clone, "expand_batch_timestamps", "update copied batch offsets through mutable slices", "Iterator spelling and min/max prescans failed; retain per-element checked addition while removing Vec push bookkeeping.", "Batch expansion writes each pre-reserved result through push."),
     recipe("history_windows", SAMPLE, "history_windows", history_key, "history_windows.separate,history_windows.overlap", "sort history requests by timestamp without redundant tie keys", "Deduplication helped; equal-time requests already share one sampled result, so destination tie ordering is unobservable.", "Overlap sorting compares destination indices even when timestamps are identical."),
-    recipe("resample", SAMPLE, "slerp", slerp_reciprocal, "resample.previous,resample.nearest,resample.linear,resample.slerp", "reuse quaternion normalization reciprocals", "Method splitting caused regressions; optimize the existing SLERP helper without duplicating sampling logic.", "SLERP normalization divides four components by each shared norm."),
+    {**recipe("fir", FILTER, "fir", fir_guarded, FIR, "transpose only long FIR kernels with complete regular support", "Round 2 was withdrawn after short-kernel and invalid-support regressions. Preserve the original path for those inputs and require an additional eight-case sensitivity gate.", "Transposition amortizes only across long, fully supported convolutions."), "sensitivity": True},
     recipe("ema", FILTER, "ema", ema_fuse, "ema.uniform,ema.jitter", "fuse EMA finite-input checks into output updates", "Weight caching and zipped rows succeeded; remove the remaining duplicate input scan while preserving invalid-row reset.", "EMA reads current rows for finite checks and again for arithmetic."),
     dict(operator="python_bridge", paths=[CORE, PYTHON], function=None, change=bridge_move, python=True,
          cases="python.ema,python.fir,python.unwrap_angles,python.read_json_signal", method="move owned signal buffers into NumPy without cloning",

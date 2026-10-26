@@ -23,6 +23,7 @@ def main():
     parser.add_argument("--retry", action="store_true")
     parser.add_argument("--blocks", type=int, default=4)
     parser.add_argument("--series", choices=["initial", "extension"], default="initial")
+    parser.add_argument("--sensitivity", action="store_true")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9_.-]+", args.label):
         parser.error("label must be a simple identifier")
@@ -85,6 +86,12 @@ VALGRIND_LIB="$PWD/.tools/valgrind/root/usr/libexec/valgrind" .tools/valgrind/ro
 .tools/valgrind/root/usr/bin/callgrind_annotate --auto=no --inclusive=yes --threshold=100 .artifacts/rsi/trials/{label}/profile.callgrind > .artifacts/rsi/trials/{label}/profile.txt
 python3 scripts/rsi_measure.py --before .artifacts/rsi/bin/accepted --after .artifacts/rsi/bin/{label} --cases {cases} --blocks {args.blocks} --output .artifacts/rsi/trials/{label}/measurement.json
 """
+    if args.sensitivity:
+        setup += f"""
+python3 scripts/prepare_sensitivity.py
+CARGO_TARGET_DIR="$PWD/target/reference" cargo build --offline --release --manifest-path .artifacts/rsi/extension/sensitivity/Cargo.toml -j 12
+python3 scripts/rsi_measure.py --before .artifacts/rsi/extension/sensitivity/before --after .artifacts/rsi/extension/sensitivity/after --output .artifacts/rsi/trials/{label}/sensitivity.json
+"""
     with (destination / "validation.log").open("w") as log:
         result = subprocess.run(["ssh", "reference-linux", setup], stdout=log, stderr=subprocess.STDOUT)
     # Formatting is an expected output of this trial; fetch only explicitly owned paths.
@@ -114,6 +121,12 @@ python3 scripts/rsi_measure.py --before .artifacts/rsi/bin/accepted --after .art
         "paths": args.paths,
         "measurement_sha256": hashlib.sha256((destination / "measurement.json").read_bytes()).hexdigest(),
     }
+    if args.sensitivity:
+        sensitivity = json.loads((destination / "sensitivity.json").read_text())
+        worst_case = min(item["latency_reduction_pct"] for item in sensitivity["summary"].values())
+        audit["sensitivity_worst_case_pct"] = worst_case
+        audit["sensitivity_sha256"] = hashlib.sha256((destination / "sensitivity.json").read_bytes()).hexdigest()
+        audit["performance_gate"] &= worst_case >= -3
     (destination / "audit.json").write_text(json.dumps(audit, indent=2) + "\n")
     (destination / "candidate.patch").write_bytes(subprocess.check_output(
         ["git", "diff", "HEAD", "--", *args.paths], cwd=ROOT))

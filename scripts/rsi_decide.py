@@ -52,6 +52,8 @@ def main():
     data = report_root / "data" / f"{args.label}.json"
     data.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(trial / "measurement.json", data)
+    if "sensitivity_sha256" in audit:
+        shutil.copyfile(trial / "sensitivity.json", data.with_name(args.label + "-sensitivity.json"))
     if args.accept:
         body = [
             f"perf({args.operator}): {args.method} [RSI {'extension ' if args.series != 'initial' else ''}round {args.round}]",
@@ -71,6 +73,9 @@ def main():
             for name, row in measurement["summary"].items()
         ]
         body += ["", f"Correctness: {audit['correctness']}.",
+                 *([f"Expanded workload worst-case reduction: {audit['sensitivity_worst_case_pct']:.2f}%. "
+                    f"Evidence: {data.with_name(args.label + '-sensitivity.json').relative_to(ROOT)}"]
+                   if "sensitivity_sha256" in audit else []),
                  f"Decision: {args.reason}", f"Evidence: {output.relative_to(ROOT)}",
                  f"Raw samples: {data.relative_to(ROOT)}", ""]
         (trial / "commit-message.txt").write_text("\n".join(body))

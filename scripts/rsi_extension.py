@@ -57,6 +57,8 @@ def main():
             command.append("--retry")
         if recipe.get("python"):
             command.append("--python")
+        if recipe.get("sensitivity"):
+            command.append("--sensitivity")
         run(*command)
         audit = json.loads((trial / "audit.json").read_text())
         accepted = audit["performance_gate"]
@@ -72,7 +74,7 @@ def main():
         if accepted:
             run("git", "add", *recipe["paths"],
                 f"docs/performance/extension/results/{label}.json",
-                f"docs/performance/extension/data/{label}.json")
+                *[str(path.relative_to(ROOT)) for path in sorted((result_root / "data").glob(f"{label}*.json"))])
             run("git", "commit", "-F", str(trial / "commit-message.txt"))
             run("ssh", "reference-linux", f"cd . && "
                 f"cp .artifacts/rsi/bin/{label} .artifacts/rsi/bin/accepted && "

@@ -34,7 +34,7 @@ The 20 candidate hypotheses, in execution order:
 13. Branchless reduction of timestamp order violations.
 14. Checked batch expansion inside a copied offsets buffer.
 15. Sort history requests by time without redundant destination tie keys.
-16. Reuse quaternion normalization reciprocals.
+16. Guard FIR channel-plane preparation by kernel length and complete support.
 17. Fuse EMA input finite checks and updates.
 18. Move owned Signal buffers into NumPy rather than clone them.
 19. Partial selection for nonuniform time quantiles.
@@ -44,3 +44,9 @@ Each accepted experiment gets its own performance commit with before/after
 numbers, method, prior lesson and correctness evidence. Rejections retain their
 patches and measurements without changing production code. Final combined
 benchmarks include unchanged paths, so cumulative regressions cannot be hidden.
+
+After round 15, the independent sensitivity suite exposed short-kernel and
+invalid-support regressions in round 2. Its acceptance was withdrawn; original
+evidence remains in `history/`. Round 16 was adapted from the not-yet-executed
+SLERP reciprocal hypothesis to a guarded FIR hypothesis with an additional
+no-regression sensitivity gate. This is still twenty candidate experiments.

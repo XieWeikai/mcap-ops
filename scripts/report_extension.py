@@ -36,6 +36,12 @@ def main():
         assert abs(worst - row["worst_block_reduction_pct"]) < 1e-9
         assert abs(improvement - row["geomean_latency_reduction_pct"]) < 1e-9
         assert row["series"] == "extension"
+        if "sensitivity_sha256" in row:
+            sensitivity_path = data_path.with_name(row["label"] + "-sensitivity.json")
+            assert hashlib.sha256(sensitivity_path.read_bytes()).hexdigest() == row["sensitivity_sha256"]
+            sensitivity = json.loads(sensitivity_path.read_text())
+            if row["decision"] == "accepted":
+                assert min(item["latency_reduction_pct"] for item in sensitivity["summary"].values()) >= -3
         row["record_path"] = str(path.relative_to(ROOT))
         if row["decision"] == "accepted":
             assert worst >= 8 and improvement >= 8
@@ -86,7 +92,11 @@ def main():
         "was introduced during round 4 and rerun on the final accepted tree. Python bridge "
         "changes additionally compare 236 public-interface cases, including output types, "
         "dictionary order, strided arrays, errors and non-finite values.", "",
-        "FIR channel-plane transposition uses an additional 8*N*D bytes of temporary memory. "
+        "The unconditional FIR channel-plane candidate was withdrawn after additional "
+        "workloads revealed regressions, even though its original fixed-case gate passed. "
+        "Its initial acceptance and counterevidence remain in `history/`. The guarded "
+        "follow-up must pass the extra sensitivity gate; channel planes, when used, need "
+        "an additional 8*N*D bytes of temporary memory. "
         "Sorted MAD adds a small private merge helper and preserves window boundaries, "
         "exact medians, issue ordering and overflow behavior. No unsafe buffers, reduced "
         "precision, discarded checks, source modifications or external services are involved.", "",
