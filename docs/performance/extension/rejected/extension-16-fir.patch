@@ -1,0 +1,56 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 6216cd7..95cddea 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -151,6 +151,24 @@ pub fn fir(
+         gap_prefix[i + 1] = gap_prefix[i]
+             + usize::from((delta - i128::from(period_ns)).abs() > i128::from(tolerance_ns));
+     }
++    let planes = if taps.len() >= 16
++        && signal.len() >= taps.len()
++        && bad_prefix[signal.len()] == 0
++        && gap_prefix[signal.len()] == 0
++    {
++        let mut data = vec![0.0; signal.values().len()];
++        for c in 0..signal.channels() {
++            for (out, row) in data[c * signal.len()..(c + 1) * signal.len()]
++                .iter_mut()
++                .zip(signal.values().chunks_exact(signal.channels()))
++            {
++                *out = row[c];
++            }
++        }
++        Some(data)
++    } else {
++        None
++    };
+     let lookahead = if mode == FilterMode::Centered {
+         taps.len() / 2
+     } else {
+@@ -169,11 +187,21 @@ pub fn fir(
+             continue;
+         }
+         for c in 0..signal.channels() {
+-            let value = taps
+-                .iter()
+-                .enumerate()
+-                .map(|(k, w)| w * signal.row(end - k)[c])
+-                .sum::<f64>();
++            let value = if let Some(planes) = &planes {
++                taps.iter()
++                    .zip(
++                        planes[c * signal.len() + start..c * signal.len() + end + 1]
++                            .iter()
++                            .rev(),
++                    )
++                    .map(|(&w, &v)| w * v)
++                    .sum::<f64>()
++            } else {
++                taps.iter()
++                    .enumerate()
++                    .map(|(k, w)| w * signal.row(end - k)[c])
++                    .sum::<f64>()
++            };
+             values[i * signal.channels() + c] = value;
+         }
+         *is_valid = values[i * signal.channels()..(i + 1) * signal.channels()]

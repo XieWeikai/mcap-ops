@@ -1,0 +1,53 @@
+{
+  "label": "extension-07-image-quality",
+  "base_commit": "c8094d1b9f26fdcbfac51827049cbb2a669036ed",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": 2.3113257557876077,
+  "worst_block_reduction_pct": 1.0678558759613987,
+  "worst_case_reduction_pct": 1.7345944371164768,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Avoid reduced precision or approximate statistics; each 256-entry table uses the same f64 multiply as the old pixel loop.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "d0d33956b0048131122c5aea0701c2e018f4e52e271baa83ee5a8a7f9ad391d4",
+  "operator": "image_quality",
+  "round": 7,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "tabulate exact eight-bit luminance contributions",
+  "profile_hotspot": "Luminance construction repeats three identical coefficient multiplications per byte value.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Avoid reduced precision or approximate statistics; each 256-entry table uses the same f64 multiply as the old pixel loop.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 2670994.1875,
+      "after_ns": 2633414.875,
+      "latency_reduction_pct": 1.7345944371164768,
+      "paired_ratios": [
+        0.98026952677248,
+        0.9919088556833033,
+        0.9850385844851904,
+        0.9800158299581516
+      ],
+      "worst_paired_reduction_pct": 0.8091144316696663
+    },
+    "image_quality.noise": {
+      "before_ns": 1247687.078125,
+      "after_ns": 1215427.59375,
+      "latency_reduction_pct": 2.8842331850185143,
+      "paired_ratios": [
+        0.964671558492105,
+        0.9867407761207166,
+        0.9776437778075246,
+        0.9617546377936111
+      ],
+      "worst_paired_reduction_pct": 1.3259223879283355
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-07-image-quality",
+  "validation_sha256": "6949608088eaad420fb2f252bde22fb35e6610bdaacfd34efd831b8fba32d380"
+}

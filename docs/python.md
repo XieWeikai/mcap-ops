@@ -5,6 +5,9 @@ NumPy arrays and returns dictionaries containing NumPy arrays for numeric
 operators. Input arrays are copied into Rust-owned memory; the Rust core never
 mutates caller buffers. Numeric results pass directly to NumPy instead of being
 serialized to JSON and parsed back. Small diagnostic reports still use JSON.
+Rust-owned `Signal` outputs transfer their buffers through `Signal::into_parts()`;
+EMA, FIR, angle unwrapping and decoded MCAP signals avoid a second output copy.
+Input snapshot and output ownership guarantees remain unchanged.
 
 ```python
 import numpy as np

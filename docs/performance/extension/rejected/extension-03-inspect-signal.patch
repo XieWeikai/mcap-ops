@@ -1,0 +1,27 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index ec34770..8eb0bdf 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -334,6 +334,7 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
+                 {
+                     end += 1;
+                 }
++                let (mut a, mut b) = (start, start);
+                 for i in start..end {
+                     let value = signal.row(i)[channel];
+                     if !value.is_finite() {
+@@ -341,8 +342,12 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
+                     }
+                     let low = i128::from(times[i]) - i128::from(window);
+                     let high = i128::from(times[i]) + i128::from(window);
+-                    let a = start + times[start..end].partition_point(|&t| i128::from(t) < low);
+-                    let b = start + times[start..end].partition_point(|&t| i128::from(t) <= high);
++                    while a < end && i128::from(times[a]) < low {
++                        a += 1;
++                    }
++                    while b < end && i128::from(times[b]) <= high {
++                        b += 1;
++                    }
+                     if b - a > config.max_hampel_samples {
+                         return Err(invalid("Hampel window exceeds max_hampel_samples"));
+                     }

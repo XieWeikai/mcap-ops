@@ -19,6 +19,8 @@ The first release is validated on `reference-linux`. The
 [RSI report](docs/performance/RESULTS.md) covers two candidate rounds for every
 processing operator, accepted optimization commits, rejected patches, paired
 measurements and correctness evidence. Benchmarks use generated fixtures.
+The [twenty-round follow-up](docs/performance/extension/RESULTS.md) builds on that
+evidence, includes workload sensitivity checks, and preserves withdrawn results.
 
 All builds and tests run on reference-linux. Synchronize source paths with
 `python3 scripts/sync_sources.py`; after committing a reviewed tree, use

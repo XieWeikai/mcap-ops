@@ -1,0 +1,318 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/accepted",
+      "bytes": 26583688,
+      "sha256": "dc975e7390b8e40eff2eaee32c198c8c70ee9986ef17cb8f771d9049484f4103"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/extension-07-image-quality",
+      "bytes": 26589288,
+      "sha256": "394c1702c7aaec5da913ba11b8f3b1754800147b7ae6525fe1df8f5101089e33"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "image_quality.gradient": {
+          "case": "image_quality.gradient",
+          "iterations": 8,
+          "median_ns": 2689760.625,
+          "samples_ns": [
+            2691006.625,
+            2685105.75,
+            2708276.5,
+            2689760.625,
+            2684592.75,
+            2696070.0,
+            2686429.75
+          ]
+        },
+        "image_quality.noise": {
+          "case": "image_quality.noise",
+          "iterations": 16,
+          "median_ns": 1262659.1875,
+          "samples_ns": [
+            1271765.0,
+            1263500.3125,
+            1259682.4375,
+            1263288.125,
+            1262659.1875,
+            1262371.5625,
+            1262589.125
+          ]
+        }
+      },
+      "after": {
+        "image_quality.gradient": {
+          "case": "image_quality.gradient",
+          "iterations": 8,
+          "median_ns": 2636690.375,
+          "samples_ns": [
+            2636966.125,
+            2633680.75,
+            2639411.75,
+            2630005.0,
+            2636690.375,
+            2639336.75,
+            2633606.875
+          ]
+        },
+        "image_quality.noise": {
+          "case": "image_quality.noise",
+          "iterations": 32,
+          "median_ns": 1218051.40625,
+          "samples_ns": [
+            1218051.40625,
+            1216408.0625,
+            1220917.84375,
+            1215222.84375,
+            1218131.15625,
+            1219336.59375,
+            1215032.625
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "image_quality.gradient": {
+          "case": "image_quality.gradient",
+          "iterations": 8,
+          "median_ns": 2635235.75,
+          "samples_ns": [
+            2631262.75,
+            2631575.875,
+            2639825.125,
+            2635235.75,
+            2635713.75,
+            2628999.125,
+            2644517.5
+          ]
+        },
+        "image_quality.noise": {
+          "case": "image_quality.noise",
+          "iterations": 32,
+          "median_ns": 1216370.125,
+          "samples_ns": [
+            1220268.21875,
+            1216299.875,
+            1216370.125,
+            1218523.28125,
+            1216334.625,
+            1215580.46875,
+            1219115.84375
+          ]
+        }
+      },
+      "before": {
+        "image_quality.gradient": {
+          "case": "image_quality.gradient",
+          "iterations": 8,
+          "median_ns": 2656731.75,
+          "samples_ns": [
+            2668993.5,
+            2650876.5,
+            2657007.75,
+            2657914.75,
+            2654285.0,
+            2656731.75,
+            2649445.875
+          ]
+        },
+        "image_quality.noise": {
+          "case": "image_quality.noise",
+          "iterations": 32,
+          "median_ns": 1232714.96875,
+          "samples_ns": [
+            1230085.5,
+            1232714.96875,
+            1235816.96875,
+            1229805.9375,
+            1234472.65625,
+            1227862.71875,
+            1233377.875
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "image_quality.gradient": {
+          "case": "image_quality.gradient",
+          "iterations": 8,
+          "median_ns": 2655973.625,
+          "samples_ns": [
+            2654743.625,
+            2655973.625,
+            2643194.25,
+            2667006.0,
+            2655156.875,
+            2660080.75,
+            2657664.75
+          ]
+        },
+        "image_quality.noise": {
+          "case": "image_quality.noise",
+          "iterations": 32,
+          "median_ns": 1232390.40625,
+          "samples_ns": [
+            1231370.78125,
+            1232390.40625,
+            1232766.0,
+            1231454.8125,
+            1233081.03125,
+            1235156.25,
+            1230724.65625
+          ]
+        }
+      },
+      "after": {
+        "image_quality.gradient": {
+          "case": "image_quality.gradient",
+          "iterations": 8,
+          "median_ns": 2616236.5,
+          "samples_ns": [
+            2617330.375,
+            2618144.875,
+            2616985.625,
+            2611799.625,
+            2616236.5,
+            2611434.625,
+            2614988.875
+          ]
+        },
+        "image_quality.noise": {
+          "case": "image_quality.noise",
+          "iterations": 32,
+          "median_ns": 1204838.8125,
+          "samples_ns": [
+            1204996.65625,
+            1203062.6875,
+            1204838.8125,
+            1209474.6875,
+            1200373.78125,
+            1205251.1875,
+            1202553.75
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "image_quality.gradient": {
+          "case": "image_quality.gradient",
+          "iterations": 8,
+          "median_ns": 2631594.0,
+          "samples_ns": [
+            2629962.25,
+            2631594.0,
+            2629582.75,
+            2634820.5,
+            2636306.375,
+            2629690.875,
+            2633094.75
+          ]
+        },
+        "image_quality.noise": {
+          "case": "image_quality.noise",
+          "iterations": 32,
+          "median_ns": 1214485.0625,
+          "samples_ns": [
+            1213151.34375,
+            1214485.0625,
+            1214350.25,
+            1217040.1875,
+            1222112.3125,
+            1218016.46875,
+            1213545.25
+          ]
+        }
+      },
+      "before": {
+        "image_quality.gradient": {
+          "case": "image_quality.gradient",
+          "iterations": 8,
+          "median_ns": 2685256.625,
+          "samples_ns": [
+            2681865.75,
+            2682574.0,
+            2687828.625,
+            2685256.625,
+            2680994.125,
+            2689206.5,
+            2689318.0
+          ]
+        },
+        "image_quality.noise": {
+          "case": "image_quality.noise",
+          "iterations": 16,
+          "median_ns": 1262780.5625,
+          "samples_ns": [
+            1263767.25,
+            1262735.875,
+            1260883.625,
+            1265985.3125,
+            1258800.0625,
+            1262780.5625,
+            1266383.0625
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "image_quality.gradient": {
+      "before_ns": 2670994.1875,
+      "after_ns": 2633414.875,
+      "latency_reduction_pct": 1.7345944371164768,
+      "paired_ratios": [
+        0.98026952677248,
+        0.9919088556833033,
+        0.9850385844851904,
+        0.9800158299581516
+      ],
+      "worst_paired_reduction_pct": 0.8091144316696663
+    },
+    "image_quality.noise": {
+      "before_ns": 1247687.078125,
+      "after_ns": 1215427.59375,
+      "latency_reduction_pct": 2.8842331850185143,
+      "paired_ratios": [
+        0.964671558492105,
+        0.9867407761207166,
+        0.9776437778075246,
+        0.9617546377936111
+      ],
+      "worst_paired_reduction_pct": 1.3259223879283355
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "label": "extension-12-map-clock",
+  "base_commit": "d39f968f6a9e3431355830852a2da07c7f3689c6",
+  "cases": [
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": 7.434472419495108,
+  "worst_block_reduction_pct": -1.8370769229451467,
+  "worst_case_reduction_pct": -22.222499584643572,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Zero-drift fast path helped; preserve wide fallback and away-from-zero tie semantics for actual drift.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "5927c64650304eeadb2f23e270937f5047f3061e9286d9c58a12936936eb60db",
+  "operator": "map_clock",
+  "round": 12,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "round clock drift using checked narrow correction arithmetic",
+  "profile_hotspot": "Nonzero clock drift still invokes wide signed division per timestamp.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Zero-drift fast path helped; preserve wide fallback and away-from-zero tie semantics for actual drift.",
+  "case_results": {
+    "map_clock.offset": {
+      "before_ns": 25930.1650390625,
+      "after_ns": 31748.0498046875,
+      "latency_reduction_pct": -22.222499584643572,
+      "paired_ratios": [
+        1.467505435874018,
+        1.4482137058913265,
+        0.9962362858015451,
+        0.9960044358265043
+      ],
+      "worst_paired_reduction_pct": -46.75054358740181
+    },
+    "map_clock.drift": {
+      "before_ns": 149953.958984375,
+      "after_ns": 105999.892578125,
+      "latency_reduction_pct": 29.34660666883864,
+      "paired_ratios": [
+        0.7066951837240182,
+        0.7077838882565393,
+        0.7063726828992092,
+        0.7063233388508537
+      ],
+      "worst_paired_reduction_pct": 29.221611174346073
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-12-map-clock",
+  "validation_sha256": "09b3154f02ed3c50f26e9e3298b54fa0d8f3cf16f44e5c06a7d39c3b99a8049f"
+}

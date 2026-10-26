@@ -1,0 +1,26 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index d24fe4d..e207871 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -64,6 +64,21 @@ pub fn map_clock(times: &[i64], origin: i64, offset: i64, rate_ppb: i64) -> Resu
+     times
+         .iter()
+         .map(|&t| {
++            // Split the integer-nanosecond part before rounding. For negative
++            // deltas subtract one from the half-unit bias to keep ties away from zero.
++            if let Some(delta) = t.checked_sub(origin) {
++                let bias = if delta >= 0 { 500_000_000 } else { 499_999_999 };
++                if let Some(adjusted) = delta
++                    .checked_mul(rate_ppb)
++                    .and_then(|v| v.checked_add(bias))
++                {
++                    let correction = adjusted.div_euclid(1_000_000_000);
++                    return i64::try_from(
++                        i128::from(t) + i128::from(correction) + i128::from(offset),
++                    )
++                    .map_err(|_| Error::Overflow);
++                }
++            }
+             let delta = (i128::from(t) - i128::from(origin)) * scale;
+             let rounded = if delta >= 0 {
+                 (delta + 500_000_000) / 1_000_000_000

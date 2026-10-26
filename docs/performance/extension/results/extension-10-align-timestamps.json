@@ -1,0 +1,53 @@
+{
+  "label": "extension-10-align-timestamps",
+  "base_commit": "3965a5f6873da9d46fefb3ad389e5d63854af9ef",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest"
+  ],
+  "geomean_latency_reduction_pct": 3.781889780091119,
+  "worst_block_reduction_pct": 2.5442573980951955,
+  "worst_case_reduction_pct": 3.7430466865729928,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Push-based outputs and abs_diff both failed; keep zero-initialized buffers and exact i128 tolerance logic.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "c48669dffd8a2b047d390700079c0df5c67025efaae6d6cb45fc0ee1c1d42882",
+  "operator": "align_timestamps",
+  "round": 10,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "zip alignment output buffers with target timestamps",
+  "profile_hotspot": "Alignment writes three separately indexed vectors at every selected target.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Push-based outputs and abs_diff both failed; keep zero-initialized buffers and exact i128 tolerance logic.",
+  "case_results": {
+    "align_timestamps.previous": {
+      "before_ns": 110440.326171875,
+      "after_ns": 106650.734375,
+      "latency_reduction_pct": 3.81961194010898,
+      "paired_ratios": [
+        0.96926799298721,
+        0.9735606492035936,
+        0.9543397682106103,
+        0.9506609835021456
+      ],
+      "worst_paired_reduction_pct": 2.643935079640636
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 146770.298828125,
+      "after_ns": 141379.734375,
+      "latency_reduction_pct": 3.7430466865729928,
+      "paired_ratios": [
+        0.9635135927422553,
+        0.975555223381112,
+        0.9616254735262848,
+        0.9576580821502877
+      ],
+      "worst_paired_reduction_pct": 2.4444776618888
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-10-align-timestamps",
+  "validation_sha256": "326ff537af17871fe00eeab80f9001bfd1eedd34f5158efb0debb13444e25668"
+}

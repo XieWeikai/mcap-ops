@@ -1,0 +1,15 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index 2652c09..670294b 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -217,8 +217,8 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
+     for channel in 0..signal.channels() {
+         let (mut n, mut min, mut max, mut mean, mut m2) =
+             (0usize, f64::INFINITY, f64::NEG_INFINITY, 0.0, 0.0);
+-        for i in 0..signal.len() {
+-            let v = signal.row(i)[channel];
++        for (i, row) in signal.values().chunks_exact(signal.channels()).enumerate() {
++            let v = row[channel];
+             if !v.is_finite() {
+                 emit(
+                     &mut report,

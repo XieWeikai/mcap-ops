@@ -1,0 +1,66 @@
+{
+  "label": "extension-05-inspect-signal",
+  "base_commit": "0f3098d81e0a77da179a2d0fef5a258fd990afeb",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel"
+  ],
+  "geomean_latency_reduction_pct": 2.5727668136864335,
+  "worst_block_reduction_pct": 2.3612019331976652,
+  "worst_case_reduction_pct": 1.7596808763273408,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Keep Welford arithmetic and issue order; scratch and disabled-check work already removed.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "b06da3de91708d0463c738d5be2d13f1f9b2e944e2d3a5d21f49023bb5746382",
+  "operator": "inspect_signal",
+  "round": 5,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "iterate bounded signal rows for channel statistics",
+  "profile_hotspot": "Quality channel scans repeatedly derive row offsets and bounds.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Keep Welford arithmetic and issue order; scratch and disabled-check work already removed.",
+  "case_results": {
+    "inspect_signal.basic": {
+      "before_ns": 1434990.09375,
+      "after_ns": 1391512.65625,
+      "latency_reduction_pct": 3.1241119086113045,
+      "paired_ratios": [
+        0.968866659399044,
+        0.9686511024287299,
+        0.9745200204865386,
+        0.9666601533196605
+      ],
+      "worst_paired_reduction_pct": 2.547997951346137
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 3572213.4375,
+      "after_ns": 3508394.0,
+      "latency_reduction_pct": 1.7596808763273408,
+      "paired_ratios": [
+        0.9836978554654728,
+        0.9810245010106807,
+        0.9831361396118871,
+        0.981670242861566
+      ],
+      "worst_paired_reduction_pct": 1.6302144534527163
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 12236968.5,
+      "after_ns": 11880340.25,
+      "latency_reduction_pct": 3.004508890292501,
+      "paired_ratios": [
+        0.9766558100844507,
+        0.9692325016170903,
+        0.9690834518506171,
+        0.9706773205770597
+      ],
+      "worst_paired_reduction_pct": 2.334418991554932
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-05-inspect-signal",
+  "validation_sha256": "383a024d519470494505c13c26f774472eac37c8fbf1804d759f58cc22233d30"
+}

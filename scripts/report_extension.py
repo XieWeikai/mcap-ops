@@ -57,6 +57,19 @@ def main():
             assert (REPORT / "rejected" / f"{row['label']}.patch").is_file()
         rows.append(row)
     assert len(rows) == 20 and {row["round"] for row in rows} == set(range(1, 21))
+    evidence = REPORT / "evidence" / "manifest.json"
+    if evidence.exists():
+        manifest = {row["label"]: row for row in json.loads(evidence.read_text())}
+        assert set(manifest) == {row["label"] for row in rows}
+        for row in rows:
+            log = REPORT / "evidence" / f"{row['label']}.log"
+            assert hashlib.sha256(log.read_bytes()).hexdigest() == row["validation_sha256"]
+            assert len(manifest[row["label"]]["profiles"]) >= 2
+    verification = REPORT / "final" / "verification.json"
+    if verification.exists():
+        verified = json.loads(verification.read_text())
+        for name, digest in verified["source_sha256"].items():
+            assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest, name
     assert not git("diff", BASE, "--", "docs/performance/results", "docs/performance/data",
                    "docs/performance/rejected", "docs/performance/history"), "original evidence changed"
     accepted = sum(row["decision"] == "accepted" for row in rows)

@@ -1,0 +1,55 @@
+{
+  "label": "extension-16-fir",
+  "base_commit": "eca5319e88fde77f11f79ca55e7f9c9dcedbefc5",
+  "cases": [
+    "fir.scalar",
+    "fir.vector"
+  ],
+  "geomean_latency_reduction_pct": 32.06948066803847,
+  "worst_block_reduction_pct": 31.319197159878055,
+  "worst_case_reduction_pct": 28.34653304517536,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Round 2 was withdrawn after short-kernel and invalid-support regressions. Preserve the original path for those inputs and require an additional eight-case sensitivity gate.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "150e2a82848541ce713b1a339ff75d167bff6886cd8d1f9fe496a4fe105eee62",
+  "sensitivity_worst_case_pct": -19.068082152577492,
+  "sensitivity_sha256": "aa4418eb36322709eef001b5523a58c0fe9cb4fb6ed65a601f26641fb24b9bc3",
+  "operator": "fir",
+  "round": 16,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "transpose only long FIR kernels with complete regular support",
+  "profile_hotspot": "Transposition amortizes only across long, fully supported convolutions.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Round 2 was withdrawn after short-kernel and invalid-support regressions. Preserve the original path for those inputs and require an additional eight-case sensitivity gate.",
+  "case_results": {
+    "fir.scalar": {
+      "before_ns": 500447.39062499994,
+      "after_ns": 320707.125,
+      "latency_reduction_pct": 35.78435282371002,
+      "paired_ratios": [
+        0.6284365363974732,
+        0.6599037075667769,
+        0.6434486297986934,
+        0.6408643137271061
+      ],
+      "worst_paired_reduction_pct": 34.009629243322316
+    },
+    "fir.vector": {
+      "before_ns": 1767913.78125,
+      "after_ns": 1267880.5,
+      "latency_reduction_pct": 28.34653304517536,
+      "paired_ratios": [
+        0.7216214919416352,
+        0.7114478471548575,
+        0.7330892413648404,
+        0.6809409688539683
+      ],
+      "worst_paired_reduction_pct": 26.691075863515955
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-16-fir",
+  "validation_sha256": "455ff4ef9ce95c2e2e5efb9c6ae961560250258136ad0c599252ccb2ec6d5c26"
+}

@@ -1,0 +1,66 @@
+{
+  "label": "extension-03-inspect-signal",
+  "base_commit": "a38997934ed1b82a1630e615b57a1a1c1b1e045b",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel"
+  ],
+  "geomean_latency_reduction_pct": 7.717387376232143,
+  "worst_block_reduction_pct": 7.492928953092193,
+  "worst_case_reduction_pct": 0.10878236667997143,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Scratch reuse helped; wide quickselect was unstable. Remove two binary searches per sample without changing the median algorithm.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "b0056e945f8029fdb03a4004fd4a9f623ea1ec5e324214d6a95d556c42c80e6f",
+  "operator": "inspect_signal",
+  "round": 3,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "advance Hampel window bounds with monotone cursors",
+  "profile_hotspot": "Hampel window lookup repeats partition_point over each gap-delimited segment.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Scratch reuse helped; wide quickselect was unstable. Remove two binary searches per sample without changing the median algorithm.",
+  "case_results": {
+    "inspect_signal.basic": {
+      "before_ns": 1434402.25,
+      "after_ns": 1431398.25,
+      "latency_reduction_pct": 0.10878236667997143,
+      "paired_ratios": [
+        0.9919473940753861,
+        0.9979486136760395,
+        0.999875738990361,
+        1.0019990427094854
+      ],
+      "worst_paired_reduction_pct": -0.19990427094853658
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 6182125.5,
+      "after_ns": 5006042.3125,
+      "latency_reduction_pct": 19.142426190384853,
+      "paired_ratios": [
+        0.8099033863064963,
+        0.8062336864608598,
+        0.8072480898858067,
+        0.8131753323968924
+      ],
+      "worst_paired_reduction_pct": 18.682466760310756
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 34623538.0,
+      "after_ns": 33730874.0,
+      "latency_reduction_pct": 2.532166939435121,
+      "paired_ratios": [
+        0.9746185896109523,
+        0.9756835999330993,
+        0.9747380716003453,
+        0.971568194543222
+      ],
+      "worst_paired_reduction_pct": 2.4316400066900723
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-03-inspect-signal",
+  "validation_sha256": "f6a2e7e99da2fbffd346b73cb14e4104fbb32466962820d19eadfda808de2671"
+}

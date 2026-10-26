@@ -1,0 +1,32 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 3d366fd..064777f 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -17,17 +17,18 @@ impl IntervalSet {
+             return Err(invalid("intervals must be nonempty [start,end)"));
+         }
+         intervals.sort_unstable_by_key(|v| v.start_ns);
+-        let mut merged: Vec<Interval> = Vec::new();
+-        for interval in intervals {
+-            if let Some(last) = merged.last_mut() {
+-                if interval.start_ns <= last.end_ns {
+-                    last.end_ns = last.end_ns.max(interval.end_ns);
+-                    continue;
+-                }
++        let mut written = 0;
++        for read in 0..intervals.len() {
++            let interval = intervals[read];
++            if written > 0 && interval.start_ns <= intervals[written - 1].end_ns {
++                intervals[written - 1].end_ns = intervals[written - 1].end_ns.max(interval.end_ns);
++            } else {
++                intervals[written] = interval;
++                written += 1;
+             }
+-            merged.push(interval);
+         }
+-        Ok(Self { intervals: merged })
++        intervals.truncate(written);
++        Ok(Self { intervals })
+     }
+     pub fn intervals(&self) -> &[Interval] {
+         &self.intervals

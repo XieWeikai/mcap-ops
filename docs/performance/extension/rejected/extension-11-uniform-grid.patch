@@ -1,0 +1,18 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index d24fe4d..a930ddf 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -26,7 +26,12 @@ pub fn uniform_grid(
+     if period_num < rate {
+         return Err(invalid("rate exceeds nanosecond resolution"));
+     }
+-    let mut result = Vec::new();
++    let span = i128::from(end) - i128::from(start);
++    let count = ((span * rate - rate / 2).max(0) + period_num - 1) / period_num;
++    if count > max_points as i128 {
++        return Err(invalid("grid exceeds max_points"));
++    }
++    let mut result = Vec::with_capacity(count as usize);
+     let whole = period_num / rate;
+     let fraction = period_num % rate;
+     let mut residual = rate / 2;

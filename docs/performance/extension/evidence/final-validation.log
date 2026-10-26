@@ -1,0 +1,275 @@
+    Finished `dev` profile [unoptimized] target(s) in 0.05s
+    Finished `test` profile [unoptimized] target(s) in 0.05s
+     Running unittests src/lib.rs (target/debug/deps/mcap_ops_core-79e31c042df1cf4c)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/contracts.rs (target/debug/deps/contracts-0d27a91ba1770a12)
+
+running 26 tests
+test audit_keeps_reversals_and_duplicates ... ok
+test clock_correction_and_overflow ... ok
+test empty_signal_and_shape_contracts ... ok
+test causal_mode_rejects_future_interpolation ... ok
+test fir_marks_edges_gaps_and_delay ... ok
+test ema_causal_reset_and_no_future_dependency ... ok
+test flatline_duration_and_gap_boundaries ... ok
+test full_width_timestamp_distances_do_not_wrap ... ok
+test grid_preserves_epoch_and_half_open_end ... ok
+test linear_exact_endpoints_survive_a_gap ... ok
+test lowpass_coefficients_preserve_dc ... ok
+test fractional_rate_does_not_accumulate_rounding ... ok
+test malformed_clock_skips_dynamic_checks_but_keeps_finite_check ... ok
+test nearest_ties_choose_past_and_before_start_respects_future_policy ... ok
+test nonfinite_support_is_invalid ... ok
+test numeric_summary_ignores_nonfinite_but_reports_it ... ok
+test overlapping_history_preserves_order_and_provenance ... ok
+test previous_is_causal_age_limited_and_never_zero_fills ... ok
+test quality_caps_details_not_gate_evidence ... ok
+test quaternion_shortest_path_and_invalid_norm ... ok
+test rate_uses_actual_dt_and_does_not_cross_gaps ... ok
+test robust_spike_is_not_automatically_removed ... ok
+test unwrap_resets_after_missing_values ... ok
+test selection_is_half_open_and_never_retimes ... ok
+test exact_samples_are_identity ... ok
+test causal_sampling_never_references_future ... ok
+
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src/lib.rs (target/debug/deps/mcap_ops_io-ce7b2bbe428d3f4b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/adapters.rs (target/debug/deps/adapters-c7277cecd23eb204)
+
+running 10 tests
+test image_limits_and_bad_crop_are_errors ... ok
+test image_quality_and_geometry_are_real ... ok
+test topic_and_half_open_time_filter ... ok
+test corrupted_payload_is_caught_by_crc ... ok
+test explicit_json_fields_and_payload_clock ... ok
+test partial_scan_does_not_claim_success ... ok
+test unknown_encoding_and_schema_mismatch_fail_explicitly ... ok
+test mcap_inspection_preserves_order_and_empty_channels ... ok
+test corrupt_media_and_missing_executable_fail ... ok
+test generated_video_is_fully_decoded ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running unittests src/lib.rs (target/debug/deps/_native-f3b4737061b1e7eb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests mcap_ops_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests mcap_ops_io
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests _native
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Reference 66248dacb608859d2cbd0f9f27227c65013a8027; validation workspace: ./.artifacts/rsi/validation
+   Compiling mcap-ops-reference-core v0.1.0 (./.artifacts/rsi/reference/core)
+   Compiling mcap-ops-reference-io v0.1.0 (./.artifacts/rsi/reference/io)
+   Compiling rsi-equivalence v0.0.0 (./.artifacts/rsi/validation)
+    Finished `release` profile [optimized] target(s) in 1.63s
+     Running `target/reference/release/rsi-equivalence`
+extension edge oracle: 3630 clock cases, 168 grids, 75 Hampel cases, 50 SLERP cases passed
+equivalence: 180 randomized core scenarios, 13 image fixtures, 2 MCAP fixtures passed
+📦 Including license file `LICENSE`
+🍹 Building a mixed python/rust project
+🐍 Found CPython 3.12 at ./.venv/bin/python
+🔗 Found pyo3 bindings with abi3-py3.10 support
+📡 Using build options features from pyproject.toml
+Ignoring pytest: markers 'extra == "test"' don't match your environment
+Requirement already satisfied: numpy>=1.24 in ./.venv/lib/python3.12/site-packages (2.5.4)
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.02s
+📦 Built wheel for abi3 Python ≥ 3.10 to /tmp/.tmpKATDY9/mcap_ops-0.1.0-cp310-abi3-linux_x86_64.whl
+✏️ Setting installed package as editable
+🛠 Installed mcap-ops-0.1.0
+.....                                                                    [100%]
+5 passed in 0.06s
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.02s
+Python public-interface equivalence: 236 comparisons passed
+completed block=0 side=before
+completed block=0 side=after
+completed block=1 side=after
+completed block=1 side=before
+completed block=2 side=before
+completed block=2 side=after
+completed block=3 side=after
+completed block=3 side=before
+require_strict                        -0.03% 11616.2 -> 11615.2 ns
+uniform_grid.integer                   0.03% 70521.7 -> 70492.2 ns
+uniform_grid.rational                 -0.02% 2189.6 -> 2189.6 ns
+map_clock.offset                     -21.90% 31835.7 -> 37553.4 ns
+map_clock.drift                        0.05% 150024.5 -> 149902.0 ns
+inspect_time.uniform                   0.05% 24197.1 -> 24183.7 ns
+inspect_time.jitter                   -0.05% 84572.6 -> 84633.6 ns
+align_timestamps.previous              0.39% 61037.8 -> 60632.1 ns
+align_timestamps.nearest               0.20% 98068.1 -> 97869.5 ns
+expand_batch_timestamps               34.37% 29188.8 -> 19191.0 ns
+resample.previous                     -1.41% 207208.8 -> 211713.3 ns
+resample.nearest                      -0.88% 236375.0 -> 239103.8 ns
+resample.linear                       -0.28% 394204.3 -> 395925.8 ns
+resample.slerp                        -0.12% 539511.7 -> 540141.2 ns
+history_windows.separate              -1.36% 147886.3 -> 149803.9 ns
+history_windows.overlap                0.18% 266900.6 -> 266948.2 ns
+inspect_signal.basic                  -0.15% 1432258.7 -> 1434382.4 ns
+inspect_signal.hampel                 45.31% 6420406.6 -> 3511448.8 ns
+inspect_signal.wide_hampel            64.36% 34862881.5 -> 12428945.0 ns
+gate.pass                             -1.00% 8.9 -> 9.0 ns
+gate.fail                              0.01% 29.5 -> 29.5 ns
+ema.uniform                           16.05% 359102.7 -> 299975.1 ns
+ema.jitter                            12.44% 469858.6 -> 411230.7 ns
+lowpass_taps                           0.04% 374.6 -> 374.5 ns
+fir.scalar                            25.20% 444940.1 -> 332792.1 ns
+fir.vector                            17.65% 1858801.2 -> 1529320.3 ns
+unwrap_angles                         10.77% 399200.8 -> 355554.1 ns
+interval_new                          -1.26% 8348.2 -> 8462.3 ns
+interval_contains                      0.11% 239577.9 -> 239378.7 ns
+interval_mask.ordered                 -0.58% 24598.7 -> 24733.2 ns
+interval_mask.shuffled                -0.55% 257833.4 -> 258780.0 ns
+interval_intersection.dense           -2.99% 26927.8 -> 27736.6 ns
+interval_intersection.late            98.68% 12453.9 -> 164.5 ns
+interval_difference                    0.36% 9660.5 -> 9646.7 ns
+interval_affected_centers              0.04% 5535.4 -> 5525.3 ns
+image_decode.png                      -0.05% 1442539.0 -> 1442541.5 ns
+image_decode.jpeg                      1.51% 575941.8 -> 566041.2 ns
+image_quality.gradient                 6.46% 2843062.7 -> 2659753.4 ns
+image_quality.noise                   13.14% 1419118.3 -> 1232674.9 ns
+image_transform.gradient               0.02% 5374039.5 -> 5374298.2 ns
+image_transform.noise                 -0.06% 3999248.6 -> 4003412.6 ns
+raw_reader.chunked                     0.06% 1279619.2 -> 1279676.6 ns
+raw_reader.linear                      0.19% 1606562.5 -> 1600891.2 ns
+raw_reader.topics                     -7.28% 1402267.4 -> 1502114.3 ns
+mcap_inspect                          -0.55% 1674668.4 -> 1679954.1 ns
+json_decode                           -0.39% 203.0 -> 203.8 ns
+mcap_read_signal                      -2.14% 5768385.4 -> 5875244.9 ns
+video_probe                           -1.40% 22866707.0 -> 23071777.5 ns
+video_validate                         0.55% 49269169.5 -> 49012027.5 ns
+completed block=0 side=before
+completed block=0 side=after
+completed block=1 side=after
+completed block=1 side=before
+completed block=2 side=before
+completed block=2 side=after
+completed block=3 side=after
+completed block=3 side=before
+python.inspect_signal                 -0.31% 904360.8 -> 907603.0 ns
+python.resample.previous               2.98% 153911.6 -> 149463.9 ns
+python.resample.linear                -0.97% 223478.7 -> 225539.5 ns
+python.history_windows                 0.23% 383393.1 -> 383107.0 ns
+python.align_timestamps                5.13% 28958.2 -> 27474.9 ns
+python.uniform_grid                   -0.96% 163854.0 -> 165336.8 ns
+python.ema                            56.47% 834186.4 -> 363877.3 ns
+python.fir                             0.07% 3072412.1 -> 3070440.4 ns
+python.lowpass_taps                    1.76% 718.8 -> 705.1 ns
+python.unwrap_angles                  62.93% 800395.5 -> 296975.9 ns
+python.image_quality                  12.95% 383962.7 -> 334869.2 ns
+python.transform_image                -0.03% 951364.3 -> 951265.2 ns
+python.inspect_mcap                    0.18% 638583.9 -> 637460.9 ns
+python.read_json_signal               -1.18% 889160.5 -> 899867.0 ns
+python.validate_video                  0.30% 48978330.0 -> 48907715.5 ns
+./.artifacts/rsi/extension/sensitivity
+   Compiling mcap-ops-sensitivity-reference v0.1.0 (./.artifacts/rsi/extension/sensitivity/reference)
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling rsi-sensitivity v0.0.0 (./.artifacts/rsi/extension/sensitivity)
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.91s
+completed block=0 side=before
+completed block=0 side=after
+completed block=1 side=after
+completed block=1 side=before
+completed block=2 side=before
+completed block=2 side=after
+completed block=3 side=after
+completed block=3 side=before
+sensitivity.fir.short.scalar           1.23% 178090.8 -> 175959.2 ns
+sensitivity.fir.short.vector         -13.69% 328541.0 -> 372451.9 ns
+sensitivity.fir.wide                  -0.28% 6143631.2 -> 6166177.5 ns
+sensitivity.fir.small.scalar           2.30% 260.9 -> 253.8 ns
+sensitivity.fir.small.vector          -7.08% 432.0 -> 462.5 ns
+sensitivity.fir.gapped                -5.35% 112620.4 -> 118385.4 ns
+sensitivity.hampel.random             32.65% 15757984.2 -> 10609202.8 ns
+sensitivity.hampel.constant           11.41% 1891003.1 -> 1676837.2 ns
+📦 Including license file `LICENSE`
+🍹 Building a mixed python/rust project
+🐍 Found CPython 3.12 at ./.venv/bin/python
+🔗 Found pyo3 bindings with abi3-py3.10 support
+📡 Using build options features from pyproject.toml
+   Compiling pyo3-build-config v0.27.2
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling pyo3-macros-backend v0.27.2
+   Compiling pyo3-ffi v0.27.2
+   Compiling pyo3 v0.27.2
+   Compiling numpy v0.27.1
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+   Compiling pyo3-macros v0.27.2
+   Compiling mcap-ops-python v0.1.0 (./crates/python)
+    Finished `release` profile [optimized] target(s) in 6.27s
+📦 Built wheel for abi3 Python ≥ 3.10 to .artifacts/rsi/extension/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl
+Processing ./.artifacts/rsi/extension/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl
+Installing collected packages: mcap-ops
+  Attempting uninstall: mcap-ops
+    Found existing installation: mcap-ops 0.1.0
+    Uninstalling mcap-ops-0.1.0:
+      Successfully uninstalled mcap-ops-0.1.0
+Successfully installed mcap-ops-0.1.0
+.....                                                                    [100%]
+5 passed in 0.05s
+Python public-interface equivalence: 236 comparisons passed
+{
+  "baseline": "bc58f81bb2c3dc43676450ee6685d8015fb99081",
+  "host": "reference-linux",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "numpy": "2.5.4",
+  "rustc": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+  "rust_tests": 36,
+  "python_tests": 5,
+  "public_comparisons": 236,
+  "random_core_scenarios": 180,
+  "clock_edge_cases": 3630,
+  "grid_edge_cases": 168,
+  "hampel_edge_cases": 75,
+  "slerp_edge_cases": 50,
+  "image_fixtures": 13,
+  "mcap_fixtures": 2,
+  "wheel": {
+    "path": "./.artifacts/rsi/extension/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl",
+    "bytes": 1106918,
+    "sha256": "19d8bc9061ba82b7561b0a197686d85cace78c05b48292cb44f5201fd0cc8e7b",
+    "tests": 5,
+    "public_comparisons": 236
+  },
+  "source_sha256": {
+    "crates/core/src/filter.rs": "92cb997f4b79fd960897a60aa63567703f30d8bab93de8c3ea85f80b5c6081b4",
+    "crates/core/src/lib.rs": "ee4447d2da85040e02ee39257c0916c01900844a6da4a28e9fddade3e71dcdca",
+    "crates/core/src/quality.rs": "f993af3eba3683296926a31e2c2f48ad08c9576817eda99345e26cf79600d61b",
+    "crates/core/src/sampling.rs": "458adf73614a5e0482dcee63b9c8aa3df8584ed30c575cc042b124b1d47bee51",
+    "crates/core/src/selection.rs": "3fd2fd35ba1e6c90674e0705681e50e8c21648526fda26d32036663ae73c9b3e",
+    "crates/core/src/time.rs": "d6b9ae1e647333b4fb229af3535c737b7a50847660563cacaf45063483fdfed6",
+    "crates/io/src/image_ops.rs": "dbe3b727e42cf298e2db332fb6ec18dcf76bda187c229f592b6221969f27f8f6",
+    "crates/io/src/lib.rs": "1b1b9c12b43226c889af152084f4ae938f7eec665f5d87997b658642f340ef1a",
+    "crates/io/src/mcap_ops.rs": "b3fb1b741a87851f07006a23378a5275ba585f724165a920027f2a7ea87d2602",
+    "crates/io/src/video.rs": "49d0cf487668cfdea3eb7b5bf57002c2fe0c702bb8bc0d0cd6565011b62121c6",
+    "crates/python/src/lib.rs": "9afc949c8615e6b7deddb19ec6f43e6c0a7b66f357500f5694202f4cbc469f62",
+    "python/mcap_ops/__init__.py": "56e7d6e14dc2da494c359020bc3e853c80fcc786fe443649d18bb8342ff0d2d5"
+  }
+}

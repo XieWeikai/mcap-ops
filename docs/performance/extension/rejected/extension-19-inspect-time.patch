@@ -1,0 +1,54 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index c00feda..b396e1d 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -134,8 +134,10 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+             positive.push(i64::try_from(dt).map_err(|_| Error::Overflow)?);
+         }
+     }
+-    positive.sort_unstable();
+-    let median = quantile(&positive, 0.5);
++    let minimum = positive.iter().min().copied();
++    let maximum = positive.iter().max().copied();
++    let median = select_quantile(&mut positive, 0.5);
++    let p95 = select_quantile(&mut positive, 0.95);
+     Ok(TimeStats {
+         samples: times.len(),
+         first_ns: times.first().copied(),
+@@ -143,22 +145,29 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+         reversals,
+         duplicates,
+         gaps,
+-        positive_interval_min_ns: positive.first().copied(),
++        positive_interval_min_ns: minimum,
+         positive_interval_median_ns: median,
+-        positive_interval_p95_ns: quantile(&positive, 0.95),
+-        positive_interval_max_ns: positive.last().copied(),
++        positive_interval_p95_ns: p95,
++        positive_interval_max_ns: maximum,
+         estimated_hz: median.map(|dt| 1e9 / dt),
+     })
+ }
+ 
+-fn quantile(sorted: &[i64], q: f64) -> Option<f64> {
+-    if sorted.is_empty() {
++fn select_quantile(values: &mut [i64], q: f64) -> Option<f64> {
++    if values.is_empty() {
+         return None;
+     }
+-    let index = (sorted.len() - 1) as f64 * q;
++    let index = (values.len() - 1) as f64 * q;
+     let a = index.floor() as usize;
+     let b = index.ceil() as usize;
+-    Some(sorted[a] as f64 + (sorted[b] as f64 - sorted[a] as f64) * (index - a as f64))
++    let (lower, middle, _) = values.select_nth_unstable(b);
++    let high = *middle as f64;
++    let low = if a == b {
++        high
++    } else {
++        *lower.iter().max().unwrap() as f64
++    };
++    Some(low + (high - low) * (index - a as f64))
+ }
+ 
+ #[derive(Clone, Debug)]

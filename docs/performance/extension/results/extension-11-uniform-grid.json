@@ -1,0 +1,53 @@
+{
+  "label": "extension-11-uniform-grid",
+  "base_commit": "d39f968f6a9e3431355830852a2da07c7f3689c6",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": 2.6165469942362574,
+  "worst_block_reduction_pct": 2.579448939175877,
+  "worst_case_reduction_pct": -1.6319042229731462,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Quotient/remainder recurrence was accepted; now remove geometric vector growth without allocating max_points.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "4a3909efb92eb75dfcad162bbca60c05e64753f67196e081219dcd4bba9a9c5c",
+  "operator": "uniform_grid",
+  "round": 11,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "derive exact bounded grid capacity before generation",
+  "profile_hotspot": "Grid recurrence still grows its output buffer repeatedly.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Quotient/remainder recurrence was accepted; now remove geometric vector growth without allocating max_points.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 70504.47265625,
+      "after_ns": 65782.7109375,
+      "latency_reduction_pct": 6.6902733711796225,
+      "paired_ratios": [
+        0.9328283371480092,
+        0.9333661954283984,
+        0.9320921296351533,
+        0.9334236063593666
+      ],
+      "worst_paired_reduction_pct": 6.657639364063339
+    },
+    "uniform_grid.rational": {
+      "before_ns": 2189.2481994628906,
+      "after_ns": 2224.9742431640625,
+      "latency_reduction_pct": -1.6319042229731462,
+      "paired_ratios": [
+        1.0159024696977643,
+        1.0148420208735476,
+        1.0182216400335435,
+        1.0167356147616988
+      ],
+      "worst_paired_reduction_pct": -1.822164003354354
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-11-uniform-grid",
+  "validation_sha256": "7896a33d87006c8de543a88165f82ebc04e98b406071065bd0c459f6d228ff04"
+}

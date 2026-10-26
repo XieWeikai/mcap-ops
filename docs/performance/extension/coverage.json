@@ -1,0 +1,1111 @@
+{
+  "baseline": "bc58f81bb2c3dc43676450ee6685d8015fb99081",
+  "rounds": 20,
+  "accepted": 7,
+  "rejected": 13,
+  "decisions": [
+    {
+      "label": "extension-01-fir",
+      "base_commit": "9055f7bc2de5754c8f560a7027dc654438c15dcb",
+      "cases": [
+        "fir.scalar",
+        "fir.vector"
+      ],
+      "geomean_latency_reduction_pct": -461.25041821018414,
+      "worst_block_reduction_pct": -480.16718184655093,
+      "worst_case_reduction_pct": -587.9904170561792,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Earlier channel-inner accumulation regressed 26%; retain channel-outer summation and remove repeated row slicing instead.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "f85faeca6ca4e3908254b9d5fe52b942669dc929adda8898782657abe3ea1447",
+      "operator": "fir",
+      "round": 1,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "dot FIR taps against checked strided support slices",
+      "profile_hotspot": "FIR dot loops repeatedly calculate and bound-check row slices.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Earlier channel-inner accumulation regressed 26%; retain channel-outer summation and remove repeated row slicing instead.",
+      "case_results": {
+        "fir.scalar": {
+          "before_ns": 505232.0546875,
+          "after_ns": 2313214.6875,
+          "latency_reduction_pct": -357.85818040359413,
+          "paired_ratios": [
+            4.561373879408661,
+            4.612000032889704,
+            4.53345807352623,
+            4.595789728663222
+          ],
+          "worst_paired_reduction_pct": -361.20000328897044
+        },
+        "fir.vector": {
+          "before_ns": 1882861.59375,
+          "after_ns": 12947000.25,
+          "latency_reduction_pct": -587.9904170561792,
+          "paired_ratios": [
+            6.856313631964677,
+            7.298221086110268,
+            6.691523526308269,
+            6.903494709158909
+          ],
+          "worst_paired_reduction_pct": -629.8221086110268
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-01-fir",
+      "validation_sha256": "9f76f96be713ed4d6e67d6131b47f4e35ad5cb8c722e303858bcf4f2a1cf0cbf",
+      "record_path": "docs/performance/extension/results/extension-01-fir.json"
+    },
+    {
+      "label": "extension-02-fir",
+      "base_commit": "9055f7bc2de5754c8f560a7027dc654438c15dcb",
+      "cases": [
+        "fir.scalar",
+        "fir.vector"
+      ],
+      "geomean_latency_reduction_pct": 33.95695487625614,
+      "worst_block_reduction_pct": 32.446666411557466,
+      "worst_case_reduction_pct": 32.196874328276984,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "One extra input-sized buffer; broadening workloads revealed unacceptable short-kernel and invalid-support costs",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "db6cf0442cb6e94f01e64fb2f108742b5dd98ede91fc1bfaf000b8b191a58d86",
+      "operator": "fir",
+      "round": 2,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "transpose FIR input once into contiguous channel planes",
+      "profile_hotspot": "FIR strided dot products dominate regular long-kernel workloads",
+      "reason": "WITHDRAWN after sensitivity validation: short scalar -24.37%, short vector -115.44%, gapped -33.67%; original fixed-case gain did not generalize. Initial acceptance and samples retained in history/extension-02-initial.json and history/sensitivity-initial.json. Restore the prior implementation.",
+      "case_results": {
+        "fir.scalar": {
+          "before_ns": 509058.859375,
+          "after_ns": 327677.765625,
+          "latency_reduction_pct": 35.58062516380682,
+          "paired_ratios": [
+            0.6426948542652391,
+            0.6442740683765772,
+            0.6441134283472864,
+            0.6451080297706543
+          ],
+          "worst_paired_reduction_pct": 35.48919702293457
+        },
+        "fir.vector": {
+          "before_ns": 1824147.9375,
+          "after_ns": 1235033.71875,
+          "latency_reduction_pct": 32.196874328276984,
+          "paired_ratios": [
+            0.6956158446979255,
+            0.6582058439846161,
+            0.660446668736535,
+            0.7073935942998222
+          ],
+          "worst_paired_reduction_pct": 29.26064057001778
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-02-fir",
+      "validation_sha256": "c0057e8642834af325e42d8ce93d972d6ff8d3143f644c720c0c95200cd2cecc",
+      "record_path": "docs/performance/extension/results/extension-02-fir.json"
+    },
+    {
+      "label": "extension-03-inspect-signal",
+      "base_commit": "a38997934ed1b82a1630e615b57a1a1c1b1e045b",
+      "cases": [
+        "inspect_signal.basic",
+        "inspect_signal.hampel",
+        "inspect_signal.wide_hampel"
+      ],
+      "geomean_latency_reduction_pct": 7.717387376232143,
+      "worst_block_reduction_pct": 7.492928953092193,
+      "worst_case_reduction_pct": 0.10878236667997143,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Scratch reuse helped; wide quickselect was unstable. Remove two binary searches per sample without changing the median algorithm.",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "measurement_sha256": "b0056e945f8029fdb03a4004fd4a9f623ea1ec5e324214d6a95d556c42c80e6f",
+      "operator": "inspect_signal",
+      "round": 3,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "advance Hampel window bounds with monotone cursors",
+      "profile_hotspot": "Hampel window lookup repeats partition_point over each gap-delimited segment.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Scratch reuse helped; wide quickselect was unstable. Remove two binary searches per sample without changing the median algorithm.",
+      "case_results": {
+        "inspect_signal.basic": {
+          "before_ns": 1434402.25,
+          "after_ns": 1431398.25,
+          "latency_reduction_pct": 0.10878236667997143,
+          "paired_ratios": [
+            0.9919473940753861,
+            0.9979486136760395,
+            0.999875738990361,
+            1.0019990427094854
+          ],
+          "worst_paired_reduction_pct": -0.19990427094853658
+        },
+        "inspect_signal.hampel": {
+          "before_ns": 6182125.5,
+          "after_ns": 5006042.3125,
+          "latency_reduction_pct": 19.142426190384853,
+          "paired_ratios": [
+            0.8099033863064963,
+            0.8062336864608598,
+            0.8072480898858067,
+            0.8131753323968924
+          ],
+          "worst_paired_reduction_pct": 18.682466760310756
+        },
+        "inspect_signal.wide_hampel": {
+          "before_ns": 34623538.0,
+          "after_ns": 33730874.0,
+          "latency_reduction_pct": 2.532166939435121,
+          "paired_ratios": [
+            0.9746185896109523,
+            0.9756835999330993,
+            0.9747380716003453,
+            0.971568194543222
+          ],
+          "worst_paired_reduction_pct": 2.4316400066900723
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-03-inspect-signal",
+      "validation_sha256": "f6a2e7e99da2fbffd346b73cb14e4104fbb32466962820d19eadfda808de2671",
+      "record_path": "docs/performance/extension/results/extension-03-inspect-signal.json"
+    },
+    {
+      "label": "extension-04-inspect-signal",
+      "base_commit": "a38997934ed1b82a1630e615b57a1a1c1b1e045b",
+      "cases": [
+        "inspect_signal.basic",
+        "inspect_signal.hampel",
+        "inspect_signal.wide_hampel"
+      ],
+      "geomean_latency_reduction_pct": 41.08114240970278,
+      "worst_block_reduction_pct": 40.95189879818485,
+      "worst_case_reduction_pct": 0.1311787624316052,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. The first median sorts already; exploit that order instead of repeating the previously rejected quickselect hypothesis.",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "measurement_sha256": "4c67d62ac5eec1caaf789d8f865cfc630ed4dcf7c338c91b2108183b5220a764",
+      "operator": "inspect_signal",
+      "round": 4,
+      "series": "extension",
+      "decision": "accepted",
+      "method": "merge ordered absolute deviations through their median",
+      "profile_hotspot": "Baseline Callgrind attributes most Hampel instructions to two sorts per window.",
+      "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. The first median sorts already; exploit that order instead of repeating the previously rejected quickselect hypothesis.",
+      "case_results": {
+        "inspect_signal.basic": {
+          "before_ns": 1434085.53125,
+          "after_ns": 1432204.5625,
+          "latency_reduction_pct": 0.1311787624316052,
+          "paired_ratios": [
+            0.9979098784832434,
+            0.9970441837107139,
+            1.0064822947306773,
+            0.9994665462681245
+          ],
+          "worst_paired_reduction_pct": -0.6482294730677296
+        },
+        "inspect_signal.hampel": {
+          "before_ns": 6171013.375,
+          "after_ns": 3581213.3125,
+          "latency_reduction_pct": 42.00215615484637,
+          "paired_ratios": [
+            0.5841258058250901,
+            0.5791588315472225,
+            0.5797721162743495,
+            0.5801847606287229
+          ],
+          "worst_paired_reduction_pct": 41.58741941749099
+        },
+        "inspect_signal.wide_hampel": {
+          "before_ns": 34575641.0,
+          "after_ns": 12207236.75,
+          "latency_reduction_pct": 64.69817879521231,
+          "paired_ratios": [
+            0.35319951210691863,
+            0.35323223479030497,
+            0.35039171821231696,
+            0.35283691198883516
+          ],
+          "worst_paired_reduction_pct": 64.6767765209695
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-04-inspect-signal",
+      "validation_sha256": "99dda9c108e8c13912df3de3dbefe93ba9c597daeb68bf31147cceb92b472325",
+      "record_path": "docs/performance/extension/results/extension-04-inspect-signal.json",
+      "commit": "ec10cbffe16c8e6a6963740d486848718bf826c1"
+    },
+    {
+      "label": "extension-05-inspect-signal",
+      "base_commit": "0f3098d81e0a77da179a2d0fef5a258fd990afeb",
+      "cases": [
+        "inspect_signal.basic",
+        "inspect_signal.hampel",
+        "inspect_signal.wide_hampel"
+      ],
+      "geomean_latency_reduction_pct": 2.5727668136864335,
+      "worst_block_reduction_pct": 2.3612019331976652,
+      "worst_case_reduction_pct": 1.7596808763273408,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Keep Welford arithmetic and issue order; scratch and disabled-check work already removed.",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "measurement_sha256": "b06da3de91708d0463c738d5be2d13f1f9b2e944e2d3a5d21f49023bb5746382",
+      "operator": "inspect_signal",
+      "round": 5,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "iterate bounded signal rows for channel statistics",
+      "profile_hotspot": "Quality channel scans repeatedly derive row offsets and bounds.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Keep Welford arithmetic and issue order; scratch and disabled-check work already removed.",
+      "case_results": {
+        "inspect_signal.basic": {
+          "before_ns": 1434990.09375,
+          "after_ns": 1391512.65625,
+          "latency_reduction_pct": 3.1241119086113045,
+          "paired_ratios": [
+            0.968866659399044,
+            0.9686511024287299,
+            0.9745200204865386,
+            0.9666601533196605
+          ],
+          "worst_paired_reduction_pct": 2.547997951346137
+        },
+        "inspect_signal.hampel": {
+          "before_ns": 3572213.4375,
+          "after_ns": 3508394.0,
+          "latency_reduction_pct": 1.7596808763273408,
+          "paired_ratios": [
+            0.9836978554654728,
+            0.9810245010106807,
+            0.9831361396118871,
+            0.981670242861566
+          ],
+          "worst_paired_reduction_pct": 1.6302144534527163
+        },
+        "inspect_signal.wide_hampel": {
+          "before_ns": 12236968.5,
+          "after_ns": 11880340.25,
+          "latency_reduction_pct": 3.004508890292501,
+          "paired_ratios": [
+            0.9766558100844507,
+            0.9692325016170903,
+            0.9690834518506171,
+            0.9706773205770597
+          ],
+          "worst_paired_reduction_pct": 2.334418991554932
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-05-inspect-signal",
+      "validation_sha256": "383a024d519470494505c13c26f774472eac37c8fbf1804d759f58cc22233d30",
+      "record_path": "docs/performance/extension/results/extension-05-inspect-signal.json"
+    },
+    {
+      "label": "extension-06-image-quality",
+      "base_commit": "0f3098d81e0a77da179a2d0fef5a258fd990afeb",
+      "cases": [
+        "image_quality.gradient",
+        "image_quality.noise"
+      ],
+      "geomean_latency_reduction_pct": 10.246328214853119,
+      "worst_block_reduction_pct": 9.542753052650921,
+      "worst_case_reduction_pct": 6.6618516871740034,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Two-pass moments helped; preserve those arithmetic orders while reducing per-pixel stencil indexing.",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "measurement_sha256": "c8c25000e505c6f283c3271b9603e1c9cc7ec93fac65f73763966b4c43f8a6f3",
+      "operator": "image_quality",
+      "round": 6,
+      "series": "extension",
+      "decision": "accepted",
+      "method": "zip bounded image rows for Laplacian stencils",
+      "profile_hotspot": "Image profile shows repeated neighbor indexing alongside decoding and hashing.",
+      "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Two-pass moments helped; preserve those arithmetic orders while reducing per-pixel stencil indexing.",
+      "case_results": {
+        "image_quality.gradient": {
+          "before_ns": 2862597.25,
+          "after_ns": 2673154.25,
+          "latency_reduction_pct": 6.6618516871740034,
+          "paired_ratios": [
+            0.9469307347509902,
+            0.9178366237431461,
+            0.9386471981735622,
+            0.9281157680829577
+          ],
+          "worst_paired_reduction_pct": 5.3069265249009785
+        },
+        "image_quality.noise": {
+          "before_ns": 1443100.75,
+          "after_ns": 1233231.96875,
+          "latency_reduction_pct": 13.692475165572526,
+          "paired_ratios": [
+            0.8641089812599029,
+            0.8447174055090912,
+            0.8631188900849809,
+            0.8630316066035685
+          ],
+          "worst_paired_reduction_pct": 13.589101874009712
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-06-image-quality",
+      "validation_sha256": "5d4dab0faee7056100840e10b6fbc40e246e691fa15a56109c363081c6632fe6",
+      "record_path": "docs/performance/extension/results/extension-06-image-quality.json",
+      "commit": "c8094d1b9f26fdcbfac51827049cbb2a669036ed"
+    },
+    {
+      "label": "extension-07-image-quality",
+      "base_commit": "c8094d1b9f26fdcbfac51827049cbb2a669036ed",
+      "cases": [
+        "image_quality.gradient",
+        "image_quality.noise"
+      ],
+      "geomean_latency_reduction_pct": 2.3113257557876077,
+      "worst_block_reduction_pct": 1.0678558759613987,
+      "worst_case_reduction_pct": 1.7345944371164768,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Avoid reduced precision or approximate statistics; each 256-entry table uses the same f64 multiply as the old pixel loop.",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "measurement_sha256": "d0d33956b0048131122c5aea0701c2e018f4e52e271baa83ee5a8a7f9ad391d4",
+      "operator": "image_quality",
+      "round": 7,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "tabulate exact eight-bit luminance contributions",
+      "profile_hotspot": "Luminance construction repeats three identical coefficient multiplications per byte value.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Avoid reduced precision or approximate statistics; each 256-entry table uses the same f64 multiply as the old pixel loop.",
+      "case_results": {
+        "image_quality.gradient": {
+          "before_ns": 2670994.1875,
+          "after_ns": 2633414.875,
+          "latency_reduction_pct": 1.7345944371164768,
+          "paired_ratios": [
+            0.98026952677248,
+            0.9919088556833033,
+            0.9850385844851904,
+            0.9800158299581516
+          ],
+          "worst_paired_reduction_pct": 0.8091144316696663
+        },
+        "image_quality.noise": {
+          "before_ns": 1247687.078125,
+          "after_ns": 1215427.59375,
+          "latency_reduction_pct": 2.8842331850185143,
+          "paired_ratios": [
+            0.964671558492105,
+            0.9867407761207166,
+            0.9776437778075246,
+            0.9617546377936111
+          ],
+          "worst_paired_reduction_pct": 1.3259223879283355
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-07-image-quality",
+      "validation_sha256": "6949608088eaad420fb2f252bde22fb35e6610bdaacfd34efd831b8fba32d380",
+      "record_path": "docs/performance/extension/results/extension-07-image-quality.json"
+    },
+    {
+      "label": "extension-08-interval-intersection",
+      "base_commit": "c8094d1b9f26fdcbfac51827049cbb2a669036ed",
+      "cases": [
+        "interval_intersection.dense",
+        "interval_intersection.late"
+      ],
+      "geomean_latency_reduction_pct": 88.28991213777049,
+      "worst_block_reduction_pct": 86.07793574450704,
+      "worst_case_reduction_pct": -2.8749225841048887,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Unconditional prefix search improved late overlap but regressed dense overlap 13%; guard searches on disjoint first pairs.",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "04cfddfadb2df611dea3904e858417eb1ba233bc4218dc587fc203c57320208e",
+      "operator": "interval_intersection",
+      "round": 8,
+      "series": "extension",
+      "decision": "accepted",
+      "method": "skip disjoint initial interval prefixes conditionally",
+      "profile_hotspot": "Late overlap scans thousands of impossible intersections before producing output.",
+      "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Unconditional prefix search improved late overlap but regressed dense overlap 13%; guard searches on disjoint first pairs.",
+      "case_results": {
+        "interval_intersection.dense": {
+          "before_ns": 26804.10107421875,
+          "after_ns": 27591.1962890625,
+          "latency_reduction_pct": -2.8749225841048887,
+          "paired_ratios": [
+            1.0275477071636063,
+            1.0332552144218383,
+            1.0225598157243616,
+            1.0299507445184914
+          ],
+          "worst_paired_reduction_pct": -3.325521442183832
+        },
+        "interval_intersection.late": {
+          "before_ns": 12492.09033203125,
+          "after_ns": 166.0445899963379,
+          "latency_reduction_pct": 98.66705667753108,
+          "paired_ratios": [
+            0.013352187884144709,
+            0.013226240699395259,
+            0.018954771168743154,
+            0.013306678565233584
+          ],
+          "worst_paired_reduction_pct": 98.10452288312568
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-08-interval-intersection",
+      "validation_sha256": "998f998a66e12283bf7044075b6b97867693600b0cd8f71d3cae82aa41a896dc",
+      "record_path": "docs/performance/extension/results/extension-08-interval-intersection.json",
+      "commit": "3965a5f6873da9d46fefb3ad389e5d63854af9ef"
+    },
+    {
+      "label": "extension-09-interval-new",
+      "base_commit": "3965a5f6873da9d46fefb3ad389e5d63854af9ef",
+      "cases": [
+        "interval_new"
+      ],
+      "geomean_latency_reduction_pct": -6.412120281461853,
+      "worst_block_reduction_pct": -7.076663615723677,
+      "worst_case_reduction_pct": -6.412120281461853,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Reserve and sortedness precheck both failed; avoid the second vector altogether.",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "7cc47d0d729d550284badb850b5e26b09a61f5c9d5b8c37fcb32cff0baf5d5e1",
+      "operator": "interval_new",
+      "round": 9,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "merge sorted intervals in their owned input allocation",
+      "profile_hotspot": "Interval construction copies an already owned vector into a growing merge buffer.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Reserve and sortedness precheck both failed; avoid the second vector altogether.",
+      "case_results": {
+        "interval_new": {
+          "before_ns": 8380.619018554688,
+          "after_ns": 8913.838745117188,
+          "latency_reduction_pct": -6.412120281461853,
+          "paired_ratios": [
+            1.0592093185749485,
+            1.0576810626348123,
+            1.0707666361572368,
+            1.0690330870542886
+          ],
+          "worst_paired_reduction_pct": -7.076663615723677
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-09-interval-new",
+      "validation_sha256": "0b072d9a9254b1e306486e6a3ff6ced1c6524266445f63a428435888a7c062b2",
+      "record_path": "docs/performance/extension/results/extension-09-interval-new.json"
+    },
+    {
+      "label": "extension-10-align-timestamps",
+      "base_commit": "3965a5f6873da9d46fefb3ad389e5d63854af9ef",
+      "cases": [
+        "align_timestamps.previous",
+        "align_timestamps.nearest"
+      ],
+      "geomean_latency_reduction_pct": 3.781889780091119,
+      "worst_block_reduction_pct": 2.5442573980951955,
+      "worst_case_reduction_pct": 3.7430466865729928,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Push-based outputs and abs_diff both failed; keep zero-initialized buffers and exact i128 tolerance logic.",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "c48669dffd8a2b047d390700079c0df5c67025efaae6d6cb45fc0ee1c1d42882",
+      "operator": "align_timestamps",
+      "round": 10,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "zip alignment output buffers with target timestamps",
+      "profile_hotspot": "Alignment writes three separately indexed vectors at every selected target.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Push-based outputs and abs_diff both failed; keep zero-initialized buffers and exact i128 tolerance logic.",
+      "case_results": {
+        "align_timestamps.previous": {
+          "before_ns": 110440.326171875,
+          "after_ns": 106650.734375,
+          "latency_reduction_pct": 3.81961194010898,
+          "paired_ratios": [
+            0.96926799298721,
+            0.9735606492035936,
+            0.9543397682106103,
+            0.9506609835021456
+          ],
+          "worst_paired_reduction_pct": 2.643935079640636
+        },
+        "align_timestamps.nearest": {
+          "before_ns": 146770.298828125,
+          "after_ns": 141379.734375,
+          "latency_reduction_pct": 3.7430466865729928,
+          "paired_ratios": [
+            0.9635135927422553,
+            0.975555223381112,
+            0.9616254735262848,
+            0.9576580821502877
+          ],
+          "worst_paired_reduction_pct": 2.4444776618888
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-10-align-timestamps",
+      "validation_sha256": "326ff537af17871fe00eeab80f9001bfd1eedd34f5158efb0debb13444e25668",
+      "record_path": "docs/performance/extension/results/extension-10-align-timestamps.json"
+    },
+    {
+      "label": "extension-11-uniform-grid",
+      "base_commit": "d39f968f6a9e3431355830852a2da07c7f3689c6",
+      "cases": [
+        "uniform_grid.integer",
+        "uniform_grid.rational"
+      ],
+      "geomean_latency_reduction_pct": 2.6165469942362574,
+      "worst_block_reduction_pct": 2.579448939175877,
+      "worst_case_reduction_pct": -1.6319042229731462,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Quotient/remainder recurrence was accepted; now remove geometric vector growth without allocating max_points.",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "4a3909efb92eb75dfcad162bbca60c05e64753f67196e081219dcd4bba9a9c5c",
+      "operator": "uniform_grid",
+      "round": 11,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "derive exact bounded grid capacity before generation",
+      "profile_hotspot": "Grid recurrence still grows its output buffer repeatedly.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Quotient/remainder recurrence was accepted; now remove geometric vector growth without allocating max_points.",
+      "case_results": {
+        "uniform_grid.integer": {
+          "before_ns": 70504.47265625,
+          "after_ns": 65782.7109375,
+          "latency_reduction_pct": 6.6902733711796225,
+          "paired_ratios": [
+            0.9328283371480092,
+            0.9333661954283984,
+            0.9320921296351533,
+            0.9334236063593666
+          ],
+          "worst_paired_reduction_pct": 6.657639364063339
+        },
+        "uniform_grid.rational": {
+          "before_ns": 2189.2481994628906,
+          "after_ns": 2224.9742431640625,
+          "latency_reduction_pct": -1.6319042229731462,
+          "paired_ratios": [
+            1.0159024696977643,
+            1.0148420208735476,
+            1.0182216400335435,
+            1.0167356147616988
+          ],
+          "worst_paired_reduction_pct": -1.822164003354354
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-11-uniform-grid",
+      "validation_sha256": "7896a33d87006c8de543a88165f82ebc04e98b406071065bd0c459f6d228ff04",
+      "record_path": "docs/performance/extension/results/extension-11-uniform-grid.json"
+    },
+    {
+      "label": "extension-12-map-clock",
+      "base_commit": "d39f968f6a9e3431355830852a2da07c7f3689c6",
+      "cases": [
+        "map_clock.offset",
+        "map_clock.drift"
+      ],
+      "geomean_latency_reduction_pct": 7.434472419495108,
+      "worst_block_reduction_pct": -1.8370769229451467,
+      "worst_case_reduction_pct": -22.222499584643572,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Zero-drift fast path helped; preserve wide fallback and away-from-zero tie semantics for actual drift.",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "5927c64650304eeadb2f23e270937f5047f3061e9286d9c58a12936936eb60db",
+      "operator": "map_clock",
+      "round": 12,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "round clock drift using checked narrow correction arithmetic",
+      "profile_hotspot": "Nonzero clock drift still invokes wide signed division per timestamp.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Zero-drift fast path helped; preserve wide fallback and away-from-zero tie semantics for actual drift.",
+      "case_results": {
+        "map_clock.offset": {
+          "before_ns": 25930.1650390625,
+          "after_ns": 31748.0498046875,
+          "latency_reduction_pct": -22.222499584643572,
+          "paired_ratios": [
+            1.467505435874018,
+            1.4482137058913265,
+            0.9962362858015451,
+            0.9960044358265043
+          ],
+          "worst_paired_reduction_pct": -46.75054358740181
+        },
+        "map_clock.drift": {
+          "before_ns": 149953.958984375,
+          "after_ns": 105999.892578125,
+          "latency_reduction_pct": 29.34660666883864,
+          "paired_ratios": [
+            0.7066951837240182,
+            0.7077838882565393,
+            0.7063726828992092,
+            0.7063233388508537
+          ],
+          "worst_paired_reduction_pct": 29.221611174346073
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-12-map-clock",
+      "validation_sha256": "09b3154f02ed3c50f26e9e3298b54fa0d8f3cf16f44e5c06a7d39c3b99a8049f",
+      "record_path": "docs/performance/extension/results/extension-12-map-clock.json"
+    },
+    {
+      "label": "extension-13-require-strict",
+      "base_commit": "d39f968f6a9e3431355830852a2da07c7f3689c6",
+      "cases": [
+        "require_strict"
+      ],
+      "geomean_latency_reduction_pct": -68.41954465867413,
+      "worst_block_reduction_pct": -87.4365104365161,
+      "worst_case_reduction_pct": -68.41954465867413,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Zipped adjacency beat windows; keep it and allow SIMD through a non-short-circuit boolean reduction.",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "067c5674219110ca0b8bcdcf510050b0939f525004ad5058087ad7e16f6ff7ef",
+      "operator": "require_strict",
+      "round": 13,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "reduce timestamp order violations without early branches",
+      "profile_hotspot": "Order checks run a predictable branch for every adjacent pair.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Zipped adjacency beat windows; keep it and allow SIMD through a non-short-circuit boolean reduction.",
+      "case_results": {
+        "require_strict": {
+          "before_ns": 10009.33447265625,
+          "after_ns": 16673.890625,
+          "latency_reduction_pct": -68.41954465867413,
+          "paired_ratios": [
+            1.8666842228390867,
+            1.5017066703343958,
+            1.4367195906592132,
+            1.874365104365161
+          ],
+          "worst_paired_reduction_pct": -87.4365104365161
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-13-require-strict",
+      "validation_sha256": "6e667f62f50bf9f896719d1a4c1781c4d1e21306ee53da48f0c7e64127138799",
+      "record_path": "docs/performance/extension/results/extension-13-require-strict.json"
+    },
+    {
+      "label": "extension-14-expand-batch-timestamps",
+      "base_commit": "d39f968f6a9e3431355830852a2da07c7f3689c6",
+      "cases": [
+        "expand_batch_timestamps"
+      ],
+      "geomean_latency_reduction_pct": 33.95566412031656,
+      "worst_block_reduction_pct": 33.31004675981974,
+      "worst_case_reduction_pct": 33.95566412031656,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Iterator spelling and min/max prescans failed; retain per-element checked addition while removing Vec push bookkeeping.",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "920a2d5d5d34c6fcf3e4421d69f21f5fa7edb30686ae9be728d9d303024ee214",
+      "operator": "expand_batch_timestamps",
+      "round": 14,
+      "series": "extension",
+      "decision": "accepted",
+      "method": "update copied batch offsets through mutable slices",
+      "profile_hotspot": "Batch expansion writes each pre-reserved result through push.",
+      "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Iterator spelling and min/max prescans failed; retain per-element checked addition while removing Vec push bookkeeping.",
+      "case_results": {
+        "expand_batch_timestamps": {
+          "before_ns": 28933.49560546875,
+          "after_ns": 19084.36669921875,
+          "latency_reduction_pct": 33.95566412031656,
+          "paired_ratios": [
+            0.6668995324018026,
+            0.6666655746122762,
+            0.6536384706374075,
+            0.6542211429813927
+          ],
+          "worst_paired_reduction_pct": 33.31004675981974
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-14-expand-batch-timestamps",
+      "validation_sha256": "5b75730c4ed7fd96dfabc1aa691802ede447b3ec642975ad15a5f2c267fb0252",
+      "record_path": "docs/performance/extension/results/extension-14-expand-batch-timestamps.json",
+      "commit": "527209d032e8871cd7860f4e3c2da498d98d429b"
+    },
+    {
+      "label": "extension-15-history-windows",
+      "base_commit": "527209d032e8871cd7860f4e3c2da498d98d429b",
+      "cases": [
+        "history_windows.separate",
+        "history_windows.overlap"
+      ],
+      "geomean_latency_reduction_pct": 2.734963923574174,
+      "worst_block_reduction_pct": 2.1660109802512317,
+      "worst_case_reduction_pct": -1.2483536017777075,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Deduplication helped; equal-time requests already share one sampled result, so destination tie ordering is unobservable.",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "measurement_sha256": "0b5d095b6fe740907066198b28b5af5e887af7b33e668ffad67cd9c8f6f5942e",
+      "operator": "history_windows",
+      "round": 15,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "sort history requests by timestamp without redundant tie keys",
+      "profile_hotspot": "Overlap sorting compares destination indices even when timestamps are identical.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Deduplication helped; equal-time requests already share one sampled result, so destination tie ordering is unobservable.",
+      "case_results": {
+        "history_windows.separate": {
+          "before_ns": 349447.7890625,
+          "after_ns": 353701.0625,
+          "latency_reduction_pct": -1.2483536017777075,
+          "paired_ratios": [
+            1.013464267724539,
+            1.011443046460964,
+            1.0115028043110152,
+            1.0259788274417045
+          ],
+          "worst_paired_reduction_pct": -2.5978827441704544
+        },
+        "history_windows.overlap": {
+          "before_ns": 576692.421875,
+          "after_ns": 538576.046875,
+          "latency_reduction_pct": 6.614856834009952,
+          "paired_ratios": [
+            0.9339864883882746,
+            0.9337163749315264,
+            0.9347830289787388,
+            0.9329129560483224
+          ],
+          "worst_paired_reduction_pct": 6.521697102126122
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-15-history-windows",
+      "validation_sha256": "850de06bfed85e428d35c0286355d2b5cc8ab985a44aa94ac830d6e8dddd7c10",
+      "record_path": "docs/performance/extension/results/extension-15-history-windows.json"
+    },
+    {
+      "label": "extension-16-fir",
+      "base_commit": "eca5319e88fde77f11f79ca55e7f9c9dcedbefc5",
+      "cases": [
+        "fir.scalar",
+        "fir.vector"
+      ],
+      "geomean_latency_reduction_pct": 32.06948066803847,
+      "worst_block_reduction_pct": 31.319197159878055,
+      "worst_case_reduction_pct": 28.34653304517536,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Round 2 was withdrawn after short-kernel and invalid-support regressions. Preserve the original path for those inputs and require an additional eight-case sensitivity gate.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "150e2a82848541ce713b1a339ff75d167bff6886cd8d1f9fe496a4fe105eee62",
+      "sensitivity_worst_case_pct": -19.068082152577492,
+      "sensitivity_sha256": "aa4418eb36322709eef001b5523a58c0fe9cb4fb6ed65a601f26641fb24b9bc3",
+      "operator": "fir",
+      "round": 16,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "transpose only long FIR kernels with complete regular support",
+      "profile_hotspot": "Transposition amortizes only across long, fully supported convolutions.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Round 2 was withdrawn after short-kernel and invalid-support regressions. Preserve the original path for those inputs and require an additional eight-case sensitivity gate.",
+      "case_results": {
+        "fir.scalar": {
+          "before_ns": 500447.39062499994,
+          "after_ns": 320707.125,
+          "latency_reduction_pct": 35.78435282371002,
+          "paired_ratios": [
+            0.6284365363974732,
+            0.6599037075667769,
+            0.6434486297986934,
+            0.6408643137271061
+          ],
+          "worst_paired_reduction_pct": 34.009629243322316
+        },
+        "fir.vector": {
+          "before_ns": 1767913.78125,
+          "after_ns": 1267880.5,
+          "latency_reduction_pct": 28.34653304517536,
+          "paired_ratios": [
+            0.7216214919416352,
+            0.7114478471548575,
+            0.7330892413648404,
+            0.6809409688539683
+          ],
+          "worst_paired_reduction_pct": 26.691075863515955
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-16-fir",
+      "validation_sha256": "455ff4ef9ce95c2e2e5efb9c6ae961560250258136ad0c599252ccb2ec6d5c26",
+      "record_path": "docs/performance/extension/results/extension-16-fir.json"
+    },
+    {
+      "label": "extension-17-ema",
+      "base_commit": "eca5319e88fde77f11f79ca55e7f9c9dcedbefc5",
+      "cases": [
+        "ema.uniform",
+        "ema.jitter"
+      ],
+      "geomean_latency_reduction_pct": 15.065236550283355,
+      "worst_block_reduction_pct": 14.654355064644431,
+      "worst_case_reduction_pct": 12.951226042619856,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Weight caching and zipped rows succeeded; remove the remaining duplicate input scan while preserving invalid-row reset.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "880a5952e358bb47f0d688630f483ae8b77a649d65a99d5b64181d0850f2bbef",
+      "operator": "ema",
+      "round": 17,
+      "series": "extension",
+      "decision": "accepted",
+      "method": "fuse EMA finite-input checks into output updates",
+      "profile_hotspot": "EMA reads current rows for finite checks and again for arithmetic.",
+      "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Weight caching and zipped rows succeeded; remove the remaining duplicate input scan while preserving invalid-row reset.",
+      "case_results": {
+        "ema.uniform": {
+          "before_ns": 361810.3203125,
+          "after_ns": 299808.890625,
+          "latency_reduction_pct": 16.960340174440457,
+          "paired_ratios": [
+            0.8296478360921475,
+            0.8276254905085311,
+            0.8337889175549533,
+            0.8311453604190434
+          ],
+          "worst_paired_reduction_pct": 16.62110824450467
+        },
+        "ema.jitter": {
+          "before_ns": 471065.546875,
+          "after_ns": 409492.40625,
+          "latency_reduction_pct": 12.951226042619856,
+          "paired_ratios": [
+            0.8699437623578741,
+            0.8710317167897288,
+            0.8735879016947616,
+            0.8675208578760892
+          ],
+          "worst_paired_reduction_pct": 12.641209830523836
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-17-ema",
+      "validation_sha256": "65c08ef9d32ed5bb0fff28c6f31e1cf3408d720434767b71e707be5cc1612093",
+      "record_path": "docs/performance/extension/results/extension-17-ema.json",
+      "commit": "c703007c12d10b511766debff901029934dfa24c"
+    },
+    {
+      "label": "extension-18-python-bridge",
+      "base_commit": "c703007c12d10b511766debff901029934dfa24c",
+      "cases": [
+        "python.ema",
+        "python.fir",
+        "python.unwrap_angles",
+        "python.read_json_signal"
+      ],
+      "geomean_latency_reduction_pct": 15.208085404911131,
+      "worst_block_reduction_pct": 15.01792410522449,
+      "worst_case_reduction_pct": 0.05485508175600007,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Direct NumPy outputs succeeded; Signal-backed results still clone their owned buffers before transfer. Public result types stay unchanged.",
+      "paths": [
+        "crates/core/src/lib.rs",
+        "crates/python/src/lib.rs"
+      ],
+      "measurement_sha256": "1963004dfe416405181d7467c6b99d62974a2e2383dba87307dc0f36455fd177",
+      "operator": "python_bridge",
+      "round": 18,
+      "series": "extension",
+      "decision": "accepted",
+      "method": "move owned signal buffers into NumPy without cloning",
+      "profile_hotspot": "signal_dict clones both time and value arrays even though callers discard the Rust Signal.",
+      "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Direct NumPy outputs succeeded; Signal-backed results still clone their owned buffers before transfer. Public result types stay unchanged.",
+      "case_results": {
+        "python.ema": {
+          "before_ns": 1194940.109375,
+          "after_ns": 885206.125,
+          "latency_reduction_pct": 25.5984493559559,
+          "paired_ratios": [
+            0.7494524863669441,
+            0.7419158180921815,
+            0.7461151947887004,
+            0.7321314765772633
+          ],
+          "worst_paired_reduction_pct": 25.054751363305595
+        },
+        "python.fir": {
+          "before_ns": 3760849.625,
+          "after_ns": 3487664.625,
+          "latency_reduction_pct": 8.074454492683092,
+          "paired_ratios": [
+            0.9111118138061788,
+            0.9273990963401595,
+            0.9108064331502582,
+            0.9867188918630206
+          ],
+          "worst_paired_reduction_pct": 1.3281108136979358
+        },
+        "python.unwrap_angles": {
+          "before_ns": 1135247.921875,
+          "after_ns": 848313.90625,
+          "latency_reduction_pct": 25.181607011922267,
+          "paired_ratios": [
+            0.7534102615911148,
+            0.7554273431350423,
+            0.7429575981704397,
+            0.731283886657031
+          ],
+          "worst_paired_reduction_pct": 24.457265686495766
+        },
+        "python.read_json_signal": {
+          "before_ns": 906243.234375,
+          "after_ns": 903451.765625,
+          "latency_reduction_pct": 0.05485508175600007,
+          "paired_ratios": [
+            1.013822740986102,
+            0.9985422699409251,
+            1.0003606284239548,
+            0.9745065524828297
+          ],
+          "worst_paired_reduction_pct": -1.3822740986102033
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-18-python-bridge",
+      "validation_sha256": "c7415464288c56a9a95981493593fb694c96b09fd03d7906b6c6e52c466d3f25",
+      "record_path": "docs/performance/extension/results/extension-18-python-bridge.json",
+      "commit": "37b2a7a25d5e4ced3f46bd0ba0cdb6f99d4632f8"
+    },
+    {
+      "label": "extension-19-inspect-time",
+      "base_commit": "37b2a7a25d5e4ced3f46bd0ba0cdb6f99d4632f8",
+      "cases": [
+        "inspect_time.uniform",
+        "inspect_time.jitter"
+      ],
+      "geomean_latency_reduction_pct": -35.13026784983844,
+      "worst_block_reduction_pct": -35.78851063070061,
+      "worst_case_reduction_pct": -82.97374259111069,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Uniform fast path helped and is retained; only nonuniform intervals need partial selection.",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "798a8bee143ded37fe09ab2373a99258f9829e6b502fcee8c035603fd3498574",
+      "operator": "inspect_time",
+      "round": 19,
+      "series": "extension",
+      "decision": "rejected",
+      "method": "select clock quantiles without fully sorting intervals",
+      "profile_hotspot": "Jitter statistics sort all positive intervals to obtain four order statistics.",
+      "reason": "Performance gate failed; restore previous accepted implementation. Uniform fast path helped and is retained; only nonuniform intervals need partial selection.",
+      "case_results": {
+        "inspect_time.uniform": {
+          "before_ns": 24189.587890625,
+          "after_ns": 24122.90087890625,
+          "latency_reduction_pct": 0.17446912073524334,
+          "paired_ratios": [
+            0.9976042613211006,
+            1.0065869235422127,
+            0.9989063562641947,
+            0.9909999069808924
+          ],
+          "worst_paired_reduction_pct": -0.6586923542212686
+        },
+        "inspect_time.jitter": {
+          "before_ns": 84490.25390625,
+          "after_ns": 154632.208984375,
+          "latency_reduction_pct": -82.97374259111069,
+          "paired_ratios": [
+            1.8285921034445123,
+            1.831786126767685,
+            1.8298286590503527,
+            1.829646192771861
+          ],
+          "worst_paired_reduction_pct": -83.1786126767685
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-19-inspect-time",
+      "validation_sha256": "9f593c6d0fad2f75e4d76d12b85eef2af0a8ffbeb1546fd2be2884a7de3d1d6a",
+      "record_path": "docs/performance/extension/results/extension-19-inspect-time.json"
+    },
+    {
+      "label": "extension-20-unwrap-angles",
+      "base_commit": "37b2a7a25d5e4ced3f46bd0ba0cdb6f99d4632f8",
+      "cases": [
+        "unwrap_angles"
+      ],
+      "geomean_latency_reduction_pct": 11.072127234309804,
+      "worst_block_reduction_pct": 9.9056743392262,
+      "worst_case_reduction_pct": 11.072127234309804,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Row-major order and modulo bypass helped; retain those and remove repeated channel-index arithmetic.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "25247a1862c1389e1900058a45a53a9216ef06155971183a30ca67cc32b43890",
+      "operator": "unwrap_angles",
+      "round": 20,
+      "series": "extension",
+      "decision": "accepted",
+      "method": "zip disjoint angle rows and accumulated outputs",
+      "profile_hotspot": "Unwrap loop indexes previous/current original rows and accumulated output separately.",
+      "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Row-major order and modulo bypass helped; retain those and remove repeated channel-index arithmetic.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 399641.046875,
+          "after_ns": 356239.7265625,
+          "latency_reduction_pct": 11.072127234309804,
+          "paired_ratios": [
+            0.8907971246514447,
+            0.8637910223788087,
+            0.900943256607738,
+            0.8877603306623593
+          ],
+          "worst_paired_reduction_pct": 9.9056743392262
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/extension-20-unwrap-angles",
+      "validation_sha256": "8ef9d3ed11a6e5c2b45a8e27c60f7fa2595e9e2344c726a8c98e657b3820b418",
+      "record_path": "docs/performance/extension/results/extension-20-unwrap-angles.json",
+      "commit": "4cbe3eeb5a946fbed385e9ab0da480196d13a787"
+    }
+  ]
+}

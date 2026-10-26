@@ -1,0 +1,65 @@
+{
+  "baseline": "bc58f81bb2c3dc43676450ee6685d8015fb99081",
+  "host": "reference-linux",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "numpy": "2.5.4",
+  "rustc": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+  "rust_tests": 36,
+  "python_tests": 5,
+  "public_comparisons": 236,
+  "random_core_scenarios": 180,
+  "clock_edge_cases": 3630,
+  "grid_edge_cases": 168,
+  "hampel_edge_cases": 75,
+  "slerp_edge_cases": 50,
+  "image_fixtures": 13,
+  "mcap_fixtures": 2,
+  "wheel": {
+    "path": "./.artifacts/rsi/extension/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl",
+    "bytes": 1106986,
+    "sha256": "95dbcb2b3b038a28cab636d3c7d8412a962bb1965edd8fff7b7c065a51c191af",
+    "tests": 5,
+    "public_comparisons": 236
+  },
+  "source_sha256": {
+    "crates/core/src/filter.rs": "92cb997f4b79fd960897a60aa63567703f30d8bab93de8c3ea85f80b5c6081b4",
+    "crates/core/src/lib.rs": "ee4447d2da85040e02ee39257c0916c01900844a6da4a28e9fddade3e71dcdca",
+    "crates/core/src/quality.rs": "f993af3eba3683296926a31e2c2f48ad08c9576817eda99345e26cf79600d61b",
+    "crates/core/src/sampling.rs": "458adf73614a5e0482dcee63b9c8aa3df8584ed30c575cc042b124b1d47bee51",
+    "crates/core/src/selection.rs": "3fd2fd35ba1e6c90674e0705681e50e8c21648526fda26d32036663ae73c9b3e",
+    "crates/core/src/time.rs": "d6b9ae1e647333b4fb229af3535c737b7a50847660563cacaf45063483fdfed6",
+    "crates/io/src/image_ops.rs": "dbe3b727e42cf298e2db332fb6ec18dcf76bda187c229f592b6221969f27f8f6",
+    "crates/io/src/lib.rs": "1b1b9c12b43226c889af152084f4ae938f7eec665f5d87997b658642f340ef1a",
+    "crates/io/src/mcap_ops.rs": "b3fb1b741a87851f07006a23378a5275ba585f724165a920027f2a7ea87d2602",
+    "crates/io/src/video.rs": "49d0cf487668cfdea3eb7b5bf57002c2fe0c702bb8bc0d0cd6565011b62121c6",
+    "crates/python/src/lib.rs": "9afc949c8615e6b7deddb19ec6f43e6c0a7b66f357500f5694202f4cbc469f62",
+    "python/mcap_ops/__init__.py": "56e7d6e14dc2da494c359020bc3e853c80fcc786fe443649d18bb8342ff0d2d5"
+  },
+  "benchmark_artifacts": {
+    ".artifacts/rsi/extension/base": {
+      "bytes": 26567576,
+      "sha256": "b35412fae400ca64865374322ac61255fb9fa1496733a73dbcd469e7cc4f778d"
+    },
+    ".artifacts/rsi/extension/final-native": {
+      "bytes": 26580824,
+      "sha256": "af6b66ece3d9ff7ff3e7f016a07c1e9207f0162e043f40ba3cdf4c1b19f8fadb"
+    },
+    "target/reference/release/rsi-sensitivity": {
+      "bytes": 5808672,
+      "sha256": "e69354875c31a0c562ce63238f68ed5d19c87b2f9378b3f227bffd824a0c425a"
+    },
+    "target/reference/release/rsi-sensitivity-control": {
+      "bytes": 5804024,
+      "sha256": "236def9e64b6e39ce1ee5386fa9817d374dcfaebec1627b3f4b22b471b4a48e5"
+    }
+  },
+  "identical_source_control": {
+    "filter.rs": "9a7cc831acf44ab2a897030f81e5d148b885748578289a0b86b6b77955c57758",
+    "lib.rs": "bdbbd8ca898e80ed4d66e9b0cf917aebdf6acc43cc65d52f4d407df8f79672a0",
+    "quality.rs": "f51dad0a505a8321c7d63316f9006ed754ccc6f3f4d16e3357c677bea568e268",
+    "sampling.rs": "458adf73614a5e0482dcee63b9c8aa3df8584ed30c575cc042b124b1d47bee51",
+    "selection.rs": "efa884ad766f4b98a789f34680ac98adf9e6282bb597216b86b7f70be7bf5f1a",
+    "time.rs": "75171ce2e2040ca4c0aa88bf7d49fbd5737fb543ccea0852dd60eaf209e9e4de"
+  }
+}

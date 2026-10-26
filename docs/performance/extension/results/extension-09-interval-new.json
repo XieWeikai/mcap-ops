@@ -1,0 +1,40 @@
+{
+  "label": "extension-09-interval-new",
+  "base_commit": "3965a5f6873da9d46fefb3ad389e5d63854af9ef",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": -6.412120281461853,
+  "worst_block_reduction_pct": -7.076663615723677,
+  "worst_case_reduction_pct": -6.412120281461853,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Reserve and sortedness precheck both failed; avoid the second vector altogether.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "7cc47d0d729d550284badb850b5e26b09a61f5c9d5b8c37fcb32cff0baf5d5e1",
+  "operator": "interval_new",
+  "round": 9,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "merge sorted intervals in their owned input allocation",
+  "profile_hotspot": "Interval construction copies an already owned vector into a growing merge buffer.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Reserve and sortedness precheck both failed; avoid the second vector altogether.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 8380.619018554688,
+      "after_ns": 8913.838745117188,
+      "latency_reduction_pct": -6.412120281461853,
+      "paired_ratios": [
+        1.0592093185749485,
+        1.0576810626348123,
+        1.0707666361572368,
+        1.0690330870542886
+      ],
+      "worst_paired_reduction_pct": -7.076663615723677
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-09-interval-new",
+  "validation_sha256": "0b072d9a9254b1e306486e6a3ff6ced1c6524266445f63a428435888a7c062b2"
+}

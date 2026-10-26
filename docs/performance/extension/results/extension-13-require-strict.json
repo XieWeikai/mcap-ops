@@ -1,0 +1,40 @@
+{
+  "label": "extension-13-require-strict",
+  "base_commit": "d39f968f6a9e3431355830852a2da07c7f3689c6",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": -68.41954465867413,
+  "worst_block_reduction_pct": -87.4365104365161,
+  "worst_case_reduction_pct": -68.41954465867413,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Zipped adjacency beat windows; keep it and allow SIMD through a non-short-circuit boolean reduction.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "067c5674219110ca0b8bcdcf510050b0939f525004ad5058087ad7e16f6ff7ef",
+  "operator": "require_strict",
+  "round": 13,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "reduce timestamp order violations without early branches",
+  "profile_hotspot": "Order checks run a predictable branch for every adjacent pair.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Zipped adjacency beat windows; keep it and allow SIMD through a non-short-circuit boolean reduction.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 10009.33447265625,
+      "after_ns": 16673.890625,
+      "latency_reduction_pct": -68.41954465867413,
+      "paired_ratios": [
+        1.8666842228390867,
+        1.5017066703343958,
+        1.4367195906592132,
+        1.874365104365161
+      ],
+      "worst_paired_reduction_pct": -87.4365104365161
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-13-require-strict",
+  "validation_sha256": "6e667f62f50bf9f896719d1a4c1781c4d1e21306ee53da48f0c7e64127138799"
+}

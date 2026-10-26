@@ -1,0 +1,19 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 6216cd7..053f5dc 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -169,10 +169,12 @@ pub fn fir(
+             continue;
+         }
+         for c in 0..signal.channels() {
++            let support =
++                &signal.values()[start * signal.channels() + c..end * signal.channels() + c + 1];
+             let value = taps
+                 .iter()
+-                .enumerate()
+-                .map(|(k, w)| w * signal.row(end - k)[c])
++                .zip(support.iter().step_by(signal.channels()).rev())
++                .map(|(&w, &v)| w * v)
+                 .sum::<f64>();
+             values[i * signal.channels() + c] = value;
+         }

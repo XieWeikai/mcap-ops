@@ -1,0 +1,53 @@
+{
+  "label": "extension-01-fir",
+  "base_commit": "9055f7bc2de5754c8f560a7027dc654438c15dcb",
+  "cases": [
+    "fir.scalar",
+    "fir.vector"
+  ],
+  "geomean_latency_reduction_pct": -461.25041821018414,
+  "worst_block_reduction_pct": -480.16718184655093,
+  "worst_case_reduction_pct": -587.9904170561792,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Earlier channel-inner accumulation regressed 26%; retain channel-outer summation and remove repeated row slicing instead.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "f85faeca6ca4e3908254b9d5fe52b942669dc929adda8898782657abe3ea1447",
+  "operator": "fir",
+  "round": 1,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "dot FIR taps against checked strided support slices",
+  "profile_hotspot": "FIR dot loops repeatedly calculate and bound-check row slices.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Earlier channel-inner accumulation regressed 26%; retain channel-outer summation and remove repeated row slicing instead.",
+  "case_results": {
+    "fir.scalar": {
+      "before_ns": 505232.0546875,
+      "after_ns": 2313214.6875,
+      "latency_reduction_pct": -357.85818040359413,
+      "paired_ratios": [
+        4.561373879408661,
+        4.612000032889704,
+        4.53345807352623,
+        4.595789728663222
+      ],
+      "worst_paired_reduction_pct": -361.20000328897044
+    },
+    "fir.vector": {
+      "before_ns": 1882861.59375,
+      "after_ns": 12947000.25,
+      "latency_reduction_pct": -587.9904170561792,
+      "paired_ratios": [
+        6.856313631964677,
+        7.298221086110268,
+        6.691523526308269,
+        6.903494709158909
+      ],
+      "worst_paired_reduction_pct": -629.8221086110268
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-01-fir",
+  "validation_sha256": "9f76f96be713ed4d6e67d6131b47f4e35ad5cb8c722e303858bcf4f2a1cf0cbf"
+}

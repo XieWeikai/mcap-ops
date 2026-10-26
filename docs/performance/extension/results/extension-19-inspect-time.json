@@ -1,0 +1,53 @@
+{
+  "label": "extension-19-inspect-time",
+  "base_commit": "37b2a7a25d5e4ced3f46bd0ba0cdb6f99d4632f8",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": -35.13026784983844,
+  "worst_block_reduction_pct": -35.78851063070061,
+  "worst_case_reduction_pct": -82.97374259111069,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Uniform fast path helped and is retained; only nonuniform intervals need partial selection.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "798a8bee143ded37fe09ab2373a99258f9829e6b502fcee8c035603fd3498574",
+  "operator": "inspect_time",
+  "round": 19,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "select clock quantiles without fully sorting intervals",
+  "profile_hotspot": "Jitter statistics sort all positive intervals to obtain four order statistics.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Uniform fast path helped and is retained; only nonuniform intervals need partial selection.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24189.587890625,
+      "after_ns": 24122.90087890625,
+      "latency_reduction_pct": 0.17446912073524334,
+      "paired_ratios": [
+        0.9976042613211006,
+        1.0065869235422127,
+        0.9989063562641947,
+        0.9909999069808924
+      ],
+      "worst_paired_reduction_pct": -0.6586923542212686
+    },
+    "inspect_time.jitter": {
+      "before_ns": 84490.25390625,
+      "after_ns": 154632.208984375,
+      "latency_reduction_pct": -82.97374259111069,
+      "paired_ratios": [
+        1.8285921034445123,
+        1.831786126767685,
+        1.8298286590503527,
+        1.829646192771861
+      ],
+      "worst_paired_reduction_pct": -83.1786126767685
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-19-inspect-time",
+  "validation_sha256": "9f593c6d0fad2f75e4d76d12b85eef2af0a8ffbeb1546fd2be2884a7de3d1d6a"
+}

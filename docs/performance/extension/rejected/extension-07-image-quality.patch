@@ -1,0 +1,21 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 2af84c6..265e54f 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -74,12 +74,13 @@ pub fn image_quality(bytes: &[u8], options: &ImageOptions) -> Result<ImageQualit
+     if count == 0 {
+         return Err(invalid("empty image"));
+     }
++    let red: [f64; 256] = std::array::from_fn(|i| 0.2126 * i as f64);
++    let green: [f64; 256] = std::array::from_fn(|i| 0.7152 * i as f64);
++    let blue: [f64; 256] = std::array::from_fn(|i| 0.0722 * i as f64);
+     let mut gray = Vec::with_capacity(count as usize);
+     let (mut dark, mut bright) = (0u64, 0u64);
+     for pixel in rgb.pixels() {
+-        let y = 0.2126 * f64::from(pixel[0])
+-            + 0.7152 * f64::from(pixel[1])
+-            + 0.0722 * f64::from(pixel[2]);
++        let y = red[pixel[0] as usize] + green[pixel[1] as usize] + blue[pixel[2] as usize];
+         gray.push(y);
+         dark += u64::from(y <= f64::from(options.dark_threshold));
+         bright += u64::from(y >= f64::from(options.bright_threshold));

@@ -1,0 +1,186 @@
+==95235== Callgrind, a call-graph generating cache profiler
+==95235== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==95235== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==95235== Command: .artifacts/rsi/bin/accepted --case fir.scalar,fir.vector --profile
+==95235== 
+==95235== For interactive control, run 'callgrind_control -h'.
+{"case":"fir.scalar","profile":true}
+{"case":"fir.vector","profile":true}
+==95235== 
+==95235== Events    : Ir
+==95235== Collected : 216820170
+==95235== 
+==95235== I   refs:      216,820,170
+   Compiling pyo3-build-config v0.27.2
+    Checking mcap-ops-core v0.1.0 (./crates/core)
+    Checking mcap-ops-io v0.1.0 (./crates/io)
+   Compiling pyo3-ffi v0.27.2
+   Compiling pyo3-macros-backend v0.27.2
+   Compiling pyo3 v0.27.2
+   Compiling numpy v0.27.1
+   Compiling pyo3-macros v0.27.2
+    Checking mcap-ops-python v0.1.0 (./crates/python)
+    Finished `dev` profile [unoptimized] target(s) in 2.36s
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling pyo3-ffi v0.27.2
+   Compiling pyo3 v0.27.2
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+   Compiling numpy v0.27.1
+   Compiling mcap-ops-python v0.1.0 (./crates/python)
+    Finished `test` profile [unoptimized] target(s) in 1.55s
+     Running unittests src/lib.rs (target/debug/deps/mcap_ops_core-79e31c042df1cf4c)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/contracts.rs (target/debug/deps/contracts-0d27a91ba1770a12)
+
+running 26 tests
+test audit_keeps_reversals_and_duplicates ... ok
+test causal_mode_rejects_future_interpolation ... ok
+test empty_signal_and_shape_contracts ... ok
+test clock_correction_and_overflow ... ok
+test ema_causal_reset_and_no_future_dependency ... ok
+test fir_marks_edges_gaps_and_delay ... ok
+test flatline_duration_and_gap_boundaries ... ok
+test grid_preserves_epoch_and_half_open_end ... ok
+test full_width_timestamp_distances_do_not_wrap ... ok
+test linear_exact_endpoints_survive_a_gap ... ok
+test fractional_rate_does_not_accumulate_rounding ... ok
+test lowpass_coefficients_preserve_dc ... ok
+test malformed_clock_skips_dynamic_checks_but_keeps_finite_check ... ok
+test nearest_ties_choose_past_and_before_start_respects_future_policy ... ok
+test numeric_summary_ignores_nonfinite_but_reports_it ... ok
+test nonfinite_support_is_invalid ... ok
+test overlapping_history_preserves_order_and_provenance ... ok
+test previous_is_causal_age_limited_and_never_zero_fills ... ok
+test quaternion_shortest_path_and_invalid_norm ... ok
+test rate_uses_actual_dt_and_does_not_cross_gaps ... ok
+test quality_caps_details_not_gate_evidence ... ok
+test robust_spike_is_not_automatically_removed ... ok
+test selection_is_half_open_and_never_retimes ... ok
+test unwrap_resets_after_missing_values ... ok
+test causal_sampling_never_references_future ... ok
+test exact_samples_are_identity ... ok
+
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running unittests src/lib.rs (target/debug/deps/mcap_ops_io-ce7b2bbe428d3f4b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/adapters.rs (target/debug/deps/adapters-c7277cecd23eb204)
+
+running 10 tests
+test image_limits_and_bad_crop_are_errors ... ok
+test image_quality_and_geometry_are_real ... ok
+test topic_and_half_open_time_filter ... ok
+test corrupted_payload_is_caught_by_crc ... ok
+test explicit_json_fields_and_payload_clock ... ok
+test partial_scan_does_not_claim_success ... ok
+test unknown_encoding_and_schema_mismatch_fail_explicitly ... ok
+test mcap_inspection_preserves_order_and_empty_channels ... ok
+test corrupt_media_and_missing_executable_fail ... ok
+test generated_video_is_fully_decoded ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running unittests src/lib.rs (target/debug/deps/_native-f3b4737061b1e7eb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests mcap_ops_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests mcap_ops_io
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests _native
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Reference 66248dacb608859d2cbd0f9f27227c65013a8027; validation workspace: ./.artifacts/rsi/validation
+   Compiling mcap-ops-reference-core v0.1.0 (./.artifacts/rsi/reference/core)
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling mcap-ops-reference-io v0.1.0 (./.artifacts/rsi/reference/io)
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+   Compiling rsi-equivalence v0.0.0 (./.artifacts/rsi/validation)
+    Finished `release` profile [optimized] target(s) in 1.81s
+     Running `target/reference/release/rsi-equivalence`
+extension edge oracle: 3630 clock cases, 168 grids, 75 Hampel cases, 50 SLERP cases passed
+equivalence: 180 randomized core scenarios, 13 image fixtures, 2 MCAP fixtures passed
+📦 Including license file `LICENSE`
+🍹 Building a mixed python/rust project
+🐍 Found CPython 3.12 at ./.venv/bin/python
+🔗 Found pyo3 bindings with abi3-py3.10 support
+📡 Using build options features from pyproject.toml
+Ignoring pytest: markers 'extra == "test"' don't match your environment
+Requirement already satisfied: numpy>=1.24 in ./.venv/lib/python3.12/site-packages (2.5.4)
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+   Compiling mcap-ops-python v0.1.0 (./crates/python)
+    Finished `release` profile [optimized + debuginfo] target(s) in 4.54s
+📦 Built wheel for abi3 Python ≥ 3.10 to /tmp/.tmpodxXpz/mcap_ops-0.1.0-cp310-abi3-linux_x86_64.whl
+✏️ Setting installed package as editable
+🛠 Installed mcap-ops-0.1.0
+.....                                                                    [100%]
+5 passed in 0.05s
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+    Finished `release` profile [optimized + debuginfo] target(s) in 5.64s
+==97751== Callgrind, a call-graph generating cache profiler
+==97751== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==97751== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==97751== Command: .artifacts/rsi/bin/extension-16-fir --case fir.scalar,fir.vector --profile
+==97751== 
+==97751== For interactive control, run 'callgrind_control -h'.
+{"case":"fir.scalar","profile":true}
+{"case":"fir.vector","profile":true}
+==97751== 
+==97751== Events    : Ir
+==97751== Collected : 106557633
+==97751== 
+==97751== I   refs:      106,557,633
+completed block=0 side=before
+completed block=0 side=after
+completed block=1 side=after
+completed block=1 side=before
+completed block=2 side=before
+completed block=2 side=after
+completed block=3 side=after
+completed block=3 side=before
+fir.scalar                            35.78% 500447.4 -> 320707.1 ns
+fir.vector                            28.35% 1767913.8 -> 1267880.5 ns
+./.artifacts/rsi/extension/sensitivity
+   Compiling mcap-ops-sensitivity-reference v0.1.0 (./.artifacts/rsi/extension/sensitivity/reference)
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling rsi-sensitivity v0.0.0 (./.artifacts/rsi/extension/sensitivity)
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.84s
+completed block=0 side=before
+completed block=0 side=after
+completed block=1 side=after
+completed block=1 side=before
+completed block=2 side=before
+completed block=2 side=after
+completed block=3 side=after
+completed block=3 side=before
+sensitivity.fir.short.scalar          -3.18% 178642.4 -> 184687.5 ns
+sensitivity.fir.short.vector         -19.07% 329564.2 -> 392499.9 ns
+sensitivity.fir.wide                  11.07% 6108804.8 -> 5444536.6 ns
+sensitivity.fir.small.scalar          -3.04% 257.8 -> 265.3 ns
+sensitivity.fir.small.vector          -6.59% 433.8 -> 461.9 ns
+sensitivity.fir.gapped               -11.62% 113790.1 -> 127007.5 ns
+sensitivity.hampel.random             33.05% 15758999.0 -> 10552898.0 ns
+sensitivity.hampel.constant           11.66% 1896606.9 -> 1674093.1 ns

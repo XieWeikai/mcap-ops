@@ -1,0 +1,1062 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/extension/sensitivity/before",
+      "bytes": 101,
+      "sha256": "4a60b2aebe08435dbca340a9c235c8ae4453d79096a1e8140169f763e757fcfa"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/extension/sensitivity/after",
+      "bytes": 100,
+      "sha256": "c415cee6e5a8ca45ab69e4acc2df752d4dbe9b066d9e2699d311609e29005c63"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "sensitivity.fir.short.scalar": {
+          "case": "sensitivity.fir.short.scalar",
+          "iterations": 128,
+          "median_ns": 177960.1953125,
+          "samples_ns": [
+            177960.1953125,
+            178669.0703125,
+            177677.65625,
+            177698.9296875,
+            177881.6328125,
+            180955.125,
+            180482.125
+          ]
+        },
+        "sensitivity.fir.short.vector": {
+          "case": "sensitivity.fir.short.vector",
+          "iterations": 64,
+          "median_ns": 327828.125,
+          "samples_ns": [
+            327828.125,
+            327973.125,
+            327497.828125,
+            327158.28125,
+            326194.921875,
+            327908.5625,
+            329308.90625
+          ]
+        },
+        "sensitivity.fir.wide": {
+          "case": "sensitivity.fir.wide",
+          "iterations": 4,
+          "median_ns": 6151389.75,
+          "samples_ns": [
+            6161733.25,
+            6158921.5,
+            6131231.25,
+            6150593.75,
+            6183601.75,
+            6151389.75,
+            6081664.75
+          ]
+        },
+        "sensitivity.fir.small.scalar": {
+          "case": "sensitivity.fir.small.scalar",
+          "iterations": 131072,
+          "median_ns": 257.3841552734375,
+          "samples_ns": [
+            259.08655548095703,
+            257.5654067993164,
+            256.24842071533203,
+            257.3841552734375,
+            257.8128967285156,
+            257.3442077636719,
+            256.7410888671875
+          ]
+        },
+        "sensitivity.fir.small.vector": {
+          "case": "sensitivity.fir.small.vector",
+          "iterations": 65536,
+          "median_ns": 433.4152374267578,
+          "samples_ns": [
+            431.4272918701172,
+            436.92039489746094,
+            429.4490661621094,
+            433.4152374267578,
+            428.91929626464844,
+            438.70619201660156,
+            437.7989807128906
+          ]
+        },
+        "sensitivity.fir.gapped": {
+          "case": "sensitivity.fir.gapped",
+          "iterations": 256,
+          "median_ns": 111261.890625,
+          "samples_ns": [
+            110911.41015625,
+            110531.2578125,
+            111918.44140625,
+            113085.39453125,
+            111261.890625,
+            110160.859375,
+            111508.7890625
+          ]
+        },
+        "sensitivity.hampel.random": {
+          "case": "sensitivity.hampel.random",
+          "iterations": 2,
+          "median_ns": 15755208.5,
+          "samples_ns": [
+            15749096.5,
+            15755208.5,
+            15762015.0,
+            15808514.499999998,
+            15755359.0,
+            15750116.500000002,
+            15752582.000000002
+          ]
+        },
+        "sensitivity.hampel.constant": {
+          "case": "sensitivity.hampel.constant",
+          "iterations": 16,
+          "median_ns": 1891325.25,
+          "samples_ns": [
+            1893557.1875,
+            1891325.25,
+            1894364.5,
+            1891372.125,
+            1886992.5,
+            1888745.0625,
+            1887858.4375
+          ]
+        }
+      },
+      "after": {
+        "sensitivity.fir.short.scalar": {
+          "case": "sensitivity.fir.short.scalar",
+          "iterations": 128,
+          "median_ns": 175790.2890625,
+          "samples_ns": [
+            175790.2890625,
+            175667.9453125,
+            176313.0546875,
+            175692.7265625,
+            175322.0,
+            177289.890625,
+            176480.3046875
+          ]
+        },
+        "sensitivity.fir.short.vector": {
+          "case": "sensitivity.fir.short.vector",
+          "iterations": 64,
+          "median_ns": 372430.171875,
+          "samples_ns": [
+            372164.703125,
+            371940.140625,
+            373291.21875,
+            373570.046875,
+            372943.71875,
+            371175.765625,
+            372430.171875
+          ]
+        },
+        "sensitivity.fir.wide": {
+          "case": "sensitivity.fir.wide",
+          "iterations": 4,
+          "median_ns": 6160082.0,
+          "samples_ns": [
+            6160082.0,
+            6168685.25,
+            6166014.75,
+            6153521.0,
+            6152495.25,
+            6151840.0,
+            6173546.25
+          ]
+        },
+        "sensitivity.fir.small.scalar": {
+          "case": "sensitivity.fir.small.scalar",
+          "iterations": 131072,
+          "median_ns": 253.63927459716797,
+          "samples_ns": [
+            253.63927459716797,
+            254.3874969482422,
+            253.3452911376953,
+            253.6703948974609,
+            253.19920349121097,
+            253.7140121459961,
+            253.34056854248047
+          ]
+        },
+        "sensitivity.fir.small.vector": {
+          "case": "sensitivity.fir.small.vector",
+          "iterations": 65536,
+          "median_ns": 462.68931579589844,
+          "samples_ns": [
+            461.869140625,
+            462.7245178222656,
+            462.13563537597656,
+            460.69482421875,
+            462.68931579589844,
+            468.5856628417969,
+            466.96722412109375
+          ]
+        },
+        "sensitivity.fir.gapped": {
+          "case": "sensitivity.fir.gapped",
+          "iterations": 256,
+          "median_ns": 118357.74609375,
+          "samples_ns": [
+            119078.34765625,
+            118357.74609375,
+            118334.73046875,
+            118436.859375,
+            118104.5078125,
+            118322.109375,
+            118842.109375
+          ]
+        },
+        "sensitivity.hampel.random": {
+          "case": "sensitivity.hampel.random",
+          "iterations": 2,
+          "median_ns": 10602515.5,
+          "samples_ns": [
+            10617111.0,
+            10597789.0,
+            10602515.5,
+            10624926.0,
+            10596839.0,
+            10591408.0,
+            10720699.0
+          ]
+        },
+        "sensitivity.hampel.constant": {
+          "case": "sensitivity.hampel.constant",
+          "iterations": 16,
+          "median_ns": 1675959.625,
+          "samples_ns": [
+            1679726.375,
+            1675059.3125,
+            1679823.4375,
+            1675959.625,
+            1675780.5,
+            1673067.4375,
+            1678378.5
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "sensitivity.fir.short.scalar": {
+          "case": "sensitivity.fir.short.scalar",
+          "iterations": 128,
+          "median_ns": 176003.6953125,
+          "samples_ns": [
+            176273.6875,
+            176003.6953125,
+            176173.6796875,
+            176443.8203125,
+            175407.9140625,
+            175604.078125,
+            175685.9375
+          ]
+        },
+        "sensitivity.fir.short.vector": {
+          "case": "sensitivity.fir.short.vector",
+          "iterations": 64,
+          "median_ns": 372473.65625,
+          "samples_ns": [
+            374397.390625,
+            373652.703125,
+            373676.671875,
+            372468.921875,
+            371793.484375,
+            372473.65625,
+            371533.703125
+          ]
+        },
+        "sensitivity.fir.wide": {
+          "case": "sensitivity.fir.wide",
+          "iterations": 4,
+          "median_ns": 6170422.5,
+          "samples_ns": [
+            6172766.5,
+            6178218.5,
+            6165271.75,
+            6150458.0,
+            6186867.5,
+            6158262.0,
+            6170422.5
+          ]
+        },
+        "sensitivity.fir.small.scalar": {
+          "case": "sensitivity.fir.small.scalar",
+          "iterations": 131072,
+          "median_ns": 254.01921081542972,
+          "samples_ns": [
+            254.01921081542972,
+            255.43343353271487,
+            253.84886932373047,
+            254.60272979736328,
+            253.3536682128906,
+            253.84711456298825,
+            254.45290374755862
+          ]
+        },
+        "sensitivity.fir.small.vector": {
+          "case": "sensitivity.fir.small.vector",
+          "iterations": 65536,
+          "median_ns": 462.2613525390625,
+          "samples_ns": [
+            460.62538146972656,
+            462.2613525390625,
+            461.7706298828125,
+            463.66326904296875,
+            459.4093322753906,
+            471.3080139160156,
+            469.60643005371094
+          ]
+        },
+        "sensitivity.fir.gapped": {
+          "case": "sensitivity.fir.gapped",
+          "iterations": 256,
+          "median_ns": 118326.58984375,
+          "samples_ns": [
+            118326.58984375,
+            118136.26171875,
+            118256.625,
+            118470.04296875,
+            118711.375,
+            118605.421875,
+            118217.5078125
+          ]
+        },
+        "sensitivity.hampel.random": {
+          "case": "sensitivity.hampel.random",
+          "iterations": 2,
+          "median_ns": 10611510.5,
+          "samples_ns": [
+            10597175.5,
+            10609180.0,
+            10665643.5,
+            10611510.5,
+            10608609.5,
+            10618551.5,
+            10619681.0
+          ]
+        },
+        "sensitivity.hampel.constant": {
+          "case": "sensitivity.hampel.constant",
+          "iterations": 16,
+          "median_ns": 1678066.875,
+          "samples_ns": [
+            1680916.4375,
+            1677858.75,
+            1678066.875,
+            1678738.875,
+            1679540.6875,
+            1672884.9375,
+            1676332.1875
+          ]
+        }
+      },
+      "before": {
+        "sensitivity.fir.short.scalar": {
+          "case": "sensitivity.fir.short.scalar",
+          "iterations": 128,
+          "median_ns": 178056.2109375,
+          "samples_ns": [
+            177858.7890625,
+            177873.953125,
+            178078.1171875,
+            177976.1796875,
+            178056.2109375,
+            178214.078125,
+            178599.453125
+          ]
+        },
+        "sensitivity.fir.short.vector": {
+          "case": "sensitivity.fir.short.vector",
+          "iterations": 64,
+          "median_ns": 327330.984375,
+          "samples_ns": [
+            322179.140625,
+            312287.484375,
+            325175.0,
+            327330.984375,
+            330353.34375,
+            330793.75,
+            331217.5625
+          ]
+        },
+        "sensitivity.fir.wide": {
+          "case": "sensitivity.fir.wide",
+          "iterations": 4,
+          "median_ns": 6172478.0,
+          "samples_ns": [
+            6172478.0,
+            6191513.75,
+            6174986.5,
+            6118964.25,
+            6275448.75,
+            6103204.75,
+            6142133.25
+          ]
+        },
+        "sensitivity.fir.small.scalar": {
+          "case": "sensitivity.fir.small.scalar",
+          "iterations": 131072,
+          "median_ns": 260.6287155151367,
+          "samples_ns": [
+            261.3018798828125,
+            260.6287155151367,
+            259.7649917602539,
+            260.8844985961914,
+            259.8141098022461,
+            261.9650115966797,
+            259.72574615478516
+          ]
+        },
+        "sensitivity.fir.small.vector": {
+          "case": "sensitivity.fir.small.vector",
+          "iterations": 65536,
+          "median_ns": 430.56829833984375,
+          "samples_ns": [
+            429.6033020019531,
+            430.56829833984375,
+            429.6884765625,
+            429.0974578857422,
+            430.62181091308594,
+            441.45166015625,
+            433.90785217285156
+          ]
+        },
+        "sensitivity.fir.gapped": {
+          "case": "sensitivity.fir.gapped",
+          "iterations": 256,
+          "median_ns": 112695.97265625,
+          "samples_ns": [
+            112695.97265625,
+            113248.421875,
+            113977.03125,
+            113577.57421875,
+            111580.59375,
+            111140.69140625,
+            111141.92578125
+          ]
+        },
+        "sensitivity.hampel.random": {
+          "case": "sensitivity.hampel.random",
+          "iterations": 2,
+          "median_ns": 15760759.999999998,
+          "samples_ns": [
+            15754600.0,
+            15750574.0,
+            15776378.5,
+            15760759.999999998,
+            15793834.0,
+            15760755.500000002,
+            15795232.499999998
+          ]
+        },
+        "sensitivity.hampel.constant": {
+          "case": "sensitivity.hampel.constant",
+          "iterations": 16,
+          "median_ns": 1887956.9375,
+          "samples_ns": [
+            1886892.0,
+            1887018.9375,
+            1894693.375,
+            1887956.9375,
+            1900947.5,
+            1885497.375,
+            1891643.0625
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "sensitivity.fir.short.scalar": {
+          "case": "sensitivity.fir.short.scalar",
+          "iterations": 128,
+          "median_ns": 178125.46875,
+          "samples_ns": [
+            178125.46875,
+            177874.0078125,
+            178695.0625,
+            178148.984375,
+            177649.5859375,
+            178654.453125,
+            177912.2578125
+          ]
+        },
+        "sensitivity.fir.short.vector": {
+          "case": "sensitivity.fir.short.vector",
+          "iterations": 64,
+          "median_ns": 329253.921875,
+          "samples_ns": [
+            328940.09375,
+            328117.90625,
+            326286.640625,
+            329325.90625,
+            330034.875,
+            329253.921875,
+            329529.4375
+          ]
+        },
+        "sensitivity.fir.wide": {
+          "case": "sensitivity.fir.wide",
+          "iterations": 4,
+          "median_ns": 6115174.25,
+          "samples_ns": [
+            6213674.0,
+            6080260.25,
+            6243492.25,
+            6080871.0,
+            6145604.5,
+            6087336.25,
+            6115174.25
+          ]
+        },
+        "sensitivity.fir.small.scalar": {
+          "case": "sensitivity.fir.small.scalar",
+          "iterations": 131072,
+          "median_ns": 261.7615203857422,
+          "samples_ns": [
+            260.70777130126953,
+            262.44286346435547,
+            260.7410125732422,
+            261.1519546508789,
+            261.7615203857422,
+            262.5922546386719,
+            262.7646179199219
+          ]
+        },
+        "sensitivity.fir.small.vector": {
+          "case": "sensitivity.fir.small.vector",
+          "iterations": 65536,
+          "median_ns": 428.36924743652344,
+          "samples_ns": [
+            429.1550598144531,
+            427.53741455078125,
+            428.36924743652344,
+            428.35101318359375,
+            427.67579650878906,
+            431.11119079589844,
+            431.8573455810547
+          ]
+        },
+        "sensitivity.fir.gapped": {
+          "case": "sensitivity.fir.gapped",
+          "iterations": 256,
+          "median_ns": 112544.75390625,
+          "samples_ns": [
+            112272.4296875,
+            112418.1171875,
+            112095.12109375,
+            112544.75390625,
+            114076.35546875,
+            113968.37109375,
+            114235.6796875
+          ]
+        },
+        "sensitivity.hampel.random": {
+          "case": "sensitivity.hampel.random",
+          "iterations": 2,
+          "median_ns": 15776590.0,
+          "samples_ns": [
+            15788633.5,
+            15772805.5,
+            15775243.000000002,
+            15776590.0,
+            15817082.5,
+            15766087.000000002,
+            15777929.5
+          ]
+        },
+        "sensitivity.hampel.constant": {
+          "case": "sensitivity.hampel.constant",
+          "iterations": 16,
+          "median_ns": 1890680.9375,
+          "samples_ns": [
+            1891370.375,
+            1887553.3125,
+            1888044.9375,
+            1889218.6875,
+            1892534.4375,
+            1900208.875,
+            1890680.9375
+          ]
+        }
+      },
+      "after": {
+        "sensitivity.fir.short.scalar": {
+          "case": "sensitivity.fir.short.scalar",
+          "iterations": 128,
+          "median_ns": 175914.7734375,
+          "samples_ns": [
+            175737.5546875,
+            176049.15625,
+            175914.7734375,
+            175401.3984375,
+            175613.9453125,
+            176819.921875,
+            177005.859375
+          ]
+        },
+        "sensitivity.fir.short.vector": {
+          "case": "sensitivity.fir.short.vector",
+          "iterations": 64,
+          "median_ns": 374638.09375,
+          "samples_ns": [
+            374638.09375,
+            375075.0625,
+            370345.421875,
+            378124.390625,
+            375862.34375,
+            371566.5625,
+            372261.5625
+          ]
+        },
+        "sensitivity.fir.wide": {
+          "case": "sensitivity.fir.wide",
+          "iterations": 4,
+          "median_ns": 6173738.25,
+          "samples_ns": [
+            6183595.5,
+            6169976.5,
+            6169783.25,
+            6175411.25,
+            6177434.0,
+            6173738.25,
+            6161783.75
+          ]
+        },
+        "sensitivity.fir.small.scalar": {
+          "case": "sensitivity.fir.small.scalar",
+          "iterations": 131072,
+          "median_ns": 253.18836975097656,
+          "samples_ns": [
+            250.01805877685547,
+            249.0245208740234,
+            253.83131408691403,
+            253.1379547119141,
+            254.10720062255857,
+            253.18836975097656,
+            253.31853485107422
+          ]
+        },
+        "sensitivity.fir.small.vector": {
+          "case": "sensitivity.fir.small.vector",
+          "iterations": 65536,
+          "median_ns": 461.3432159423828,
+          "samples_ns": [
+            463.38560485839844,
+            461.17613220214844,
+            461.3432159423828,
+            458.4402160644531,
+            459.6764221191406,
+            471.4832458496094,
+            471.04563903808594
+          ]
+        },
+        "sensitivity.fir.gapped": {
+          "case": "sensitivity.fir.gapped",
+          "iterations": 256,
+          "median_ns": 118922.65234375,
+          "samples_ns": [
+            119105.46875,
+            118922.65234375,
+            118946.8515625,
+            118707.06640625,
+            119005.43359375,
+            118608.1953125,
+            118846.7265625
+          ]
+        },
+        "sensitivity.hampel.random": {
+          "case": "sensitivity.hampel.random",
+          "iterations": 2,
+          "median_ns": 10627948.0,
+          "samples_ns": [
+            10625782.0,
+            10633338.0,
+            10614226.0,
+            10627948.0,
+            10695578.0,
+            10618830.5,
+            10647378.5
+          ]
+        },
+        "sensitivity.hampel.constant": {
+          "case": "sensitivity.hampel.constant",
+          "iterations": 16,
+          "median_ns": 1674347.4375,
+          "samples_ns": [
+            1674236.1875,
+            1677549.0625,
+            1680531.625,
+            1674347.4375,
+            1675729.1875,
+            1673992.4375,
+            1671728.875
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "sensitivity.fir.short.scalar": {
+          "case": "sensitivity.fir.short.scalar",
+          "iterations": 128,
+          "median_ns": 176255.0078125,
+          "samples_ns": [
+            176331.625,
+            177379.15625,
+            176118.078125,
+            175515.59375,
+            176255.0078125,
+            176845.0859375,
+            175962.3046875
+          ]
+        },
+        "sensitivity.fir.short.vector": {
+          "case": "sensitivity.fir.short.vector",
+          "iterations": 64,
+          "median_ns": 370905.5,
+          "samples_ns": [
+            371145.09375,
+            370951.3125,
+            370400.96875,
+            370905.5,
+            370421.453125,
+            370183.3125,
+            373808.84375
+          ]
+        },
+        "sensitivity.fir.wide": {
+          "case": "sensitivity.fir.wide",
+          "iterations": 4,
+          "median_ns": 6161932.5,
+          "samples_ns": [
+            6154668.75,
+            6155618.25,
+            6161932.5,
+            6166055.25,
+            6156494.0,
+            6173269.0,
+            6169637.5
+          ]
+        },
+        "sensitivity.fir.small.scalar": {
+          "case": "sensitivity.fir.small.scalar",
+          "iterations": 131072,
+          "median_ns": 255.79615020751953,
+          "samples_ns": [
+            256.2633285522461,
+            256.0399169921875,
+            255.79615020751953,
+            254.97750091552732,
+            255.1756134033203,
+            255.60219573974607,
+            256.0528869628906
+          ]
+        },
+        "sensitivity.fir.small.vector": {
+          "case": "sensitivity.fir.small.vector",
+          "iterations": 65536,
+          "median_ns": 463.2954864501953,
+          "samples_ns": [
+            461.4925537109375,
+            459.2793731689453,
+            460.5113220214844,
+            463.2954864501953,
+            464.0223846435547,
+            465.9725799560547,
+            469.4248809814453
+          ]
+        },
+        "sensitivity.fir.gapped": {
+          "case": "sensitivity.fir.gapped",
+          "iterations": 256,
+          "median_ns": 118413.08984375,
+          "samples_ns": [
+            118130.5234375,
+            118413.08984375,
+            118370.9453125,
+            118098.90625,
+            118700.2109375,
+            118425.77734375,
+            119177.27734375
+          ]
+        },
+        "sensitivity.hampel.random": {
+          "case": "sensitivity.hampel.random",
+          "iterations": 2,
+          "median_ns": 10606895.0,
+          "samples_ns": [
+            10623435.5,
+            10601504.5,
+            10594127.5,
+            10610614.5,
+            10606895.0,
+            10602270.5,
+            10640741.0
+          ]
+        },
+        "sensitivity.hampel.constant": {
+          "case": "sensitivity.hampel.constant",
+          "iterations": 16,
+          "median_ns": 1677714.875,
+          "samples_ns": [
+            1683034.5625,
+            1673843.25,
+            1676056.875,
+            1678694.0625,
+            1675483.4375,
+            1677714.875,
+            1680126.3125
+          ]
+        }
+      },
+      "before": {
+        "sensitivity.fir.short.scalar": {
+          "case": "sensitivity.fir.short.scalar",
+          "iterations": 128,
+          "median_ns": 179311.9921875,
+          "samples_ns": [
+            180396.140625,
+            179571.9921875,
+            179311.9921875,
+            177932.0859375,
+            177752.4453125,
+            177829.3125,
+            180041.75
+          ]
+        },
+        "sensitivity.fir.short.vector": {
+          "case": "sensitivity.fir.short.vector",
+          "iterations": 64,
+          "median_ns": 329757.15625,
+          "samples_ns": [
+            329454.375,
+            329757.15625,
+            330048.109375,
+            331450.5625,
+            330135.359375,
+            327825.109375,
+            326774.765625
+          ]
+        },
+        "sensitivity.fir.wide": {
+          "case": "sensitivity.fir.wide",
+          "iterations": 4,
+          "median_ns": 6135872.75,
+          "samples_ns": [
+            6154609.25,
+            6098328.75,
+            6098673.5,
+            6135872.75,
+            6072939.25,
+            6187229.25,
+            6164930.0
+          ]
+        },
+        "sensitivity.fir.small.scalar": {
+          "case": "sensitivity.fir.small.scalar",
+          "iterations": 131072,
+          "median_ns": 261.18605041503906,
+          "samples_ns": [
+            259.97601318359375,
+            261.65474700927734,
+            260.6679458618164,
+            261.18605041503906,
+            261.17652893066406,
+            261.3625183105469,
+            261.8078384399414
+          ]
+        },
+        "sensitivity.fir.small.vector": {
+          "case": "sensitivity.fir.small.vector",
+          "iterations": 65536,
+          "median_ns": 433.7683868408203,
+          "samples_ns": [
+            432.16583251953125,
+            433.7683868408203,
+            428.7151336669922,
+            428.9900207519531,
+            433.8400115966797,
+            435.6114807128906,
+            438.70465087890625
+          ]
+        },
+        "sensitivity.fir.gapped": {
+          "case": "sensitivity.fir.gapped",
+          "iterations": 256,
+          "median_ns": 112728.40625,
+          "samples_ns": [
+            112283.73046875,
+            112728.40625,
+            112924.25,
+            113329.69921875,
+            112418.21875,
+            113273.5546875,
+            112118.59765625
+          ]
+        },
+        "sensitivity.hampel.random": {
+          "case": "sensitivity.hampel.random",
+          "iterations": 2,
+          "median_ns": 15741285.5,
+          "samples_ns": [
+            15726464.999999998,
+            15730213.5,
+            15752172.500000002,
+            15753954.5,
+            15741285.5,
+            15742896.999999998,
+            15715783.0
+          ]
+        },
+        "sensitivity.hampel.constant": {
+          "case": "sensitivity.hampel.constant",
+          "iterations": 16,
+          "median_ns": 1894599.0,
+          "samples_ns": [
+            1894599.0,
+            1886773.1875,
+            1894955.1875,
+            1891995.875,
+            1895859.625,
+            1897153.125,
+            1892800.0625
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "sensitivity.fir.short.scalar": {
+      "before_ns": 178090.83984375,
+      "after_ns": 175959.234375,
+      "latency_reduction_pct": 1.2302049805643867,
+      "paired_ratios": [
+        0.9878067887811113,
+        0.9884726535839827,
+        0.987589111607601,
+        0.9829515899204141
+      ],
+      "worst_paired_reduction_pct": 1.152734641601727
+    },
+    "sensitivity.fir.short.vector": {
+      "before_ns": 328541.0234375,
+      "after_ns": 372451.9140625,
+      "latency_reduction_pct": -13.69462850784453,
+      "paired_ratios": [
+        1.1360531433201468,
+        1.1379113925349738,
+        1.1378394268367438,
+        1.1247837779108092
+      ],
+      "worst_paired_reduction_pct": -13.791139253497375
+    },
+    "sensitivity.fir.wide": {
+      "before_ns": 6143631.25,
+      "after_ns": 6166177.5,
+      "latency_reduction_pct": -0.28300842476500776,
+      "paired_ratios": [
+        1.0014130546678497,
+        0.9996669894975729,
+        1.0095768325816716,
+        1.0042471138274502
+      ],
+      "worst_paired_reduction_pct": -0.9576832581671635
+    },
+    "sensitivity.fir.small.scalar": {
+      "before_ns": 260.9073829650879,
+      "after_ns": 253.82924270629883,
+      "latency_reduction_pct": 2.299804835800956,
+      "paired_ratios": [
+        0.9854502283860828,
+        0.9746401516554183,
+        0.9672482394580689,
+        0.9793637516285626
+      ],
+      "worst_paired_reduction_pct": 1.454977161391724
+    },
+    "sensitivity.fir.small.vector": {
+      "before_ns": 431.9917678833008,
+      "after_ns": 462.47533416748047,
+      "latency_reduction_pct": -7.083930753573897,
+      "paired_ratios": [
+        1.0675427992401574,
+        1.0736074957710977,
+        1.0769755735342452,
+        1.0680711193003802
+      ],
+      "worst_paired_reduction_pct": -7.697557353424522
+    },
+    "sensitivity.fir.gapped": {
+      "before_ns": 112620.36328125,
+      "after_ns": 118385.41796875,
+      "latency_reduction_pct": -5.354901213613994,
+      "paired_ratios": [
+        1.0637761539812949,
+        1.0499628962312144,
+        1.056669886566306,
+        1.050428137705974
+      ],
+      "worst_paired_reduction_pct": -6.377615398129488
+    },
+    "sensitivity.hampel.random": {
+      "before_ns": 15757984.25,
+      "after_ns": 10609202.75,
+      "latency_reduction_pct": 32.65301111053493,
+      "paired_ratios": [
+        0.6729530427985133,
+        0.6732867260208265,
+        0.6736530517684747,
+        0.6738264800546309
+      ],
+      "worst_paired_reduction_pct": 32.61735199453691
+    },
+    "sensitivity.hampel.constant": {
+      "before_ns": 1891003.09375,
+      "after_ns": 1676837.25,
+      "latency_reduction_pct": 11.41455833271603,
+      "paired_ratios": [
+        0.8861297785772172,
+        0.8888268803535674,
+        0.8855790547684622,
+        0.8855250504196402
+      ],
+      "worst_paired_reduction_pct": 11.117311964643262
+    }
+  }
+}

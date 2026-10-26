@@ -1,0 +1,32 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index d24fe4d..48e11a0 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -188,7 +188,12 @@ pub fn align_timestamps(
+         valid: vec![false; target.len()],
+     };
+     let mut next = 0;
+-    for (i, &t) in target.iter().enumerate() {
++    for (((&t, out_index), out_offset), out_valid) in target
++        .iter()
++        .zip(&mut result.indices)
++        .zip(&mut result.offsets_ns)
++        .zip(&mut result.valid)
++    {
+         while next < source.len() && source[next] <= t {
+             next += 1;
+         }
+@@ -210,10 +215,10 @@ pub fn align_timestamps(
+             (None, b) => b,
+         };
+         if let Some(index) = chosen {
+-            result.indices[i] = index as i64;
+-            result.offsets_ns[i] = i64::try_from(i128::from(source[index]) - i128::from(t))
++            *out_index = index as i64;
++            *out_offset = i64::try_from(i128::from(source[index]) - i128::from(t))
+                 .map_err(|_| Error::Overflow)?;
+-            result.valid[i] = true;
++            *out_valid = true;
+         }
+     }
+     Ok(result)

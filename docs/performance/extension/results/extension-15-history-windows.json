@@ -1,0 +1,53 @@
+{
+  "label": "extension-15-history-windows",
+  "base_commit": "527209d032e8871cd7860f4e3c2da498d98d429b",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": 2.734963923574174,
+  "worst_block_reduction_pct": 2.1660109802512317,
+  "worst_case_reduction_pct": -1.2483536017777075,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Deduplication helped; equal-time requests already share one sampled result, so destination tie ordering is unobservable.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "0b5d095b6fe740907066198b28b5af5e887af7b33e668ffad67cd9c8f6f5942e",
+  "operator": "history_windows",
+  "round": 15,
+  "series": "extension",
+  "decision": "rejected",
+  "method": "sort history requests by timestamp without redundant tie keys",
+  "profile_hotspot": "Overlap sorting compares destination indices even when timestamps are identical.",
+  "reason": "Performance gate failed; restore previous accepted implementation. Deduplication helped; equal-time requests already share one sampled result, so destination tie ordering is unobservable.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 349447.7890625,
+      "after_ns": 353701.0625,
+      "latency_reduction_pct": -1.2483536017777075,
+      "paired_ratios": [
+        1.013464267724539,
+        1.011443046460964,
+        1.0115028043110152,
+        1.0259788274417045
+      ],
+      "worst_paired_reduction_pct": -2.5978827441704544
+    },
+    "history_windows.overlap": {
+      "before_ns": 576692.421875,
+      "after_ns": 538576.046875,
+      "latency_reduction_pct": 6.614856834009952,
+      "paired_ratios": [
+        0.9339864883882746,
+        0.9337163749315264,
+        0.9347830289787388,
+        0.9329129560483224
+      ],
+      "worst_paired_reduction_pct": 6.521697102126122
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-15-history-windows",
+  "validation_sha256": "850de06bfed85e428d35c0286355d2b5cc8ab985a44aa94ac830d6e8dddd7c10"
+}
