@@ -57,6 +57,14 @@ impl IntervalSet {
     }
     pub fn intersection(&self, other: &Self) -> Self {
         let (mut i, mut j) = (0, 0);
+        // Pay for a binary search only when the first pair is disjoint.
+        if let (Some(a), Some(b)) = (self.intervals.first(), other.intervals.first()) {
+            if a.end_ns <= b.start_ns {
+                i = self.intervals.partition_point(|v| v.end_ns <= b.start_ns);
+            } else if b.end_ns <= a.start_ns {
+                j = other.intervals.partition_point(|v| v.end_ns <= a.start_ns);
+            }
+        }
         let mut result = Vec::new();
         while i < self.intervals.len() && j < other.intervals.len() {
             let a = self.intervals[i];

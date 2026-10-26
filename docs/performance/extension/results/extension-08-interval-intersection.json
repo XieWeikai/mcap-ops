@@ -1,0 +1,53 @@
+{
+  "label": "extension-08-interval-intersection",
+  "base_commit": "c8094d1b9f26fdcbfac51827049cbb2a669036ed",
+  "cases": [
+    "interval_intersection.dense",
+    "interval_intersection.late"
+  ],
+  "geomean_latency_reduction_pct": 88.28991213777049,
+  "worst_block_reduction_pct": 86.07793574450704,
+  "worst_case_reduction_pct": -2.8749225841048887,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Unconditional prefix search improved late overlap but regressed dense overlap 13%; guard searches on disjoint first pairs.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "04cfddfadb2df611dea3904e858417eb1ba233bc4218dc587fc203c57320208e",
+  "operator": "interval_intersection",
+  "round": 8,
+  "series": "extension",
+  "decision": "accepted",
+  "method": "skip disjoint initial interval prefixes conditionally",
+  "profile_hotspot": "Late overlap scans thousands of impossible intersections before producing output.",
+  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Unconditional prefix search improved late overlap but regressed dense overlap 13%; guard searches on disjoint first pairs.",
+  "case_results": {
+    "interval_intersection.dense": {
+      "before_ns": 26804.10107421875,
+      "after_ns": 27591.1962890625,
+      "latency_reduction_pct": -2.8749225841048887,
+      "paired_ratios": [
+        1.0275477071636063,
+        1.0332552144218383,
+        1.0225598157243616,
+        1.0299507445184914
+      ],
+      "worst_paired_reduction_pct": -3.325521442183832
+    },
+    "interval_intersection.late": {
+      "before_ns": 12492.09033203125,
+      "after_ns": 166.0445899963379,
+      "latency_reduction_pct": 98.66705667753108,
+      "paired_ratios": [
+        0.013352187884144709,
+        0.013226240699395259,
+        0.018954771168743154,
+        0.013306678565233584
+      ],
+      "worst_paired_reduction_pct": 98.10452288312568
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-08-interval-intersection",
+  "validation_sha256": "998f998a66e12283bf7044075b6b97867693600b0cd8f71d3cae82aa41a896dc"
+}
