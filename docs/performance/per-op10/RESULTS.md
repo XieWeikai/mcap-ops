@@ -492,3 +492,163 @@ Percentages below compare with each round's previously accepted state. They are 
 | 8 | limit FFmpeg filter workers to 8 | [rejected](results/ten-video-validate-08.json) | +0.46% | -1.12% | `-` |
 | 9 | use one decoder and one filter worker together | [rejected](results/ten-video-validate-09.json) | +1.51% | +0.33% | `-` |
 | 10 | emit periodic FFmpeg progress every two seconds | [rejected](results/ten-video-validate-10.json) | +1.27% | +0.11% | `-` |
+
+## Final native comparison
+
+Both source states use the completed benchmark harness. Negative values are regressions.
+
+| Case | Before us | After us | Paired reduction |
+| --- | ---: | ---: | ---: |
+| `align_timestamps.nearest` | 100.799 | 94.158 | +6.53% |
+| `align_timestamps.previous` | 63.090 | 55.973 | +11.64% |
+| `align_timestamps.repeated` | 113.866 | 106.132 | +6.78% |
+| `align_timestamps.sparse` | 19.244 | 5.346 | +72.17% |
+| `ema.jitter` | 427.928 | 300.627 | +29.59% |
+| `ema.uniform` | 313.373 | 300.732 | +4.66% |
+| `expand_batch_timestamps` | 20.282 | 20.332 | -0.75% |
+| `fir.gapped` | 122.836 | 104.214 | +14.68% |
+| `fir.scalar` | 340.358 | 322.937 | +5.97% |
+| `fir.short_scalar` | 140.340 | 112.697 | +19.66% |
+| `fir.short_vector` | 353.436 | 314.460 | +11.03% |
+| `fir.single` | 272.877 | 234.448 | +13.96% |
+| `fir.small_scalar` | 0.268 | 0.210 | +22.10% |
+| `fir.small_vector` | 0.450 | 0.403 | +10.12% |
+| `fir.vector` | 1562.058 | 1538.253 | +1.69% |
+| `fir.wide` | 6628.425 | 6425.513 | +2.63% |
+| `gate.fail` | 0.030 | 0.029 | +3.59% |
+| `gate.pass` | 0.009 | 0.006 | +29.46% |
+| `history_windows.overlap` | 276.923 | 274.978 | +1.26% |
+| `history_windows.separate` | 157.061 | 154.330 | +1.99% |
+| `image_decode.jpeg` | 576.968 | 579.438 | -0.50% |
+| `image_decode.png` | 1478.911 | 1453.642 | +1.59% |
+| `image_quality.gradient` | 2723.398 | 2719.548 | +0.79% |
+| `image_quality.noise` | 1256.800 | 1259.383 | -0.27% |
+| `image_transform.gradient` | 5522.823 | 5511.450 | +0.54% |
+| `image_transform.noise` | 4134.944 | 4128.069 | +0.56% |
+| `inspect_signal.basic` | 1449.216 | 1415.347 | +2.68% |
+| `inspect_signal.constant_hampel` | 1624.008 | 828.593 | +48.81% |
+| `inspect_signal.hampel` | 3616.404 | 2708.421 | +25.86% |
+| `inspect_signal.issues` | 1474.929 | 1499.344 | -2.30% |
+| `inspect_signal.random_hampel` | 10577.738 | 1035.811 | +90.21% |
+| `inspect_signal.wide_hampel` | 12791.839 | 5407.889 | +57.73% |
+| `inspect_time.jitter` | 87.536 | 86.618 | +0.82% |
+| `inspect_time.uniform` | 25.238 | 25.134 | +0.24% |
+| `interval_affected_centers` | 5.646 | 5.094 | +9.55% |
+| `interval_affected_centers.merged` | 8.328 | 3.280 | +60.61% |
+| `interval_contains` | 245.489 | 246.578 | -0.42% |
+| `interval_contains.small` | 16.581 | 16.537 | +0.26% |
+| `interval_difference` | 9.934 | 9.873 | +0.68% |
+| `interval_difference.empty` | 5.105 | 1.272 | +75.08% |
+| `interval_intersection.dense` | 28.544 | 27.412 | +3.91% |
+| `interval_intersection.late` | 0.168 | 0.170 | -1.34% |
+| `interval_mask.empty` | 19.041 | 0.110 | +99.42% |
+| `interval_mask.late` | 20.117 | 16.950 | +15.99% |
+| `interval_mask.ordered` | 25.271 | 21.012 | +16.69% |
+| `interval_mask.shuffled` | 269.827 | 268.857 | +0.55% |
+| `interval_new` | 9.008 | 3.972 | +55.72% |
+| `json_decode` | 0.212 | 0.210 | +1.52% |
+| `json_decode.deep` | 0.341 | 0.228 | +33.20% |
+| `json_decode.wide` | 0.886 | 0.901 | -1.70% |
+| `lowpass_taps` | 0.385 | 0.258 | +33.00% |
+| `lowpass_taps.long` | 24.688 | 15.728 | +36.29% |
+| `lowpass_taps.short` | 0.033 | 0.015 | +55.28% |
+| `map_clock.drift` | 153.910 | 154.366 | -0.16% |
+| `map_clock.identity` | 26.412 | 5.352 | +79.73% |
+| `map_clock.offset` | 26.184 | 26.386 | -0.86% |
+| `mcap_inspect` | 1717.714 | 1730.588 | -0.74% |
+| `mcap_inspect.many` | 2015.167 | 2009.680 | +0.27% |
+| `mcap_read_signal` | 5950.383 | 6097.522 | -2.68% |
+| `mcap_read_signal.many` | 1214.643 | 1227.768 | -0.95% |
+| `raw_reader.chunked` | 1311.943 | 1321.464 | -0.90% |
+| `raw_reader.linear` | 1669.051 | 1640.625 | +1.50% |
+| `raw_reader.mixed_topics` | 1756.025 | 1331.834 | +23.86% |
+| `raw_reader.topics` | 1554.960 | 1310.488 | +15.41% |
+| `require_strict` | 9.177 | 5.195 | +43.39% |
+| `resample.exact_slerp` | 414.036 | 424.470 | -2.32% |
+| `resample.linear` | 409.727 | 398.861 | +2.85% |
+| `resample.nearest` | 249.189 | 231.005 | +7.30% |
+| `resample.previous` | 221.261 | 218.814 | +0.78% |
+| `resample.repeated` | 167.756 | 156.699 | +6.86% |
+| `resample.slerp` | 561.503 | 577.627 | -2.91% |
+| `resample.sparse_linear` | 18.872 | 5.537 | +70.54% |
+| `uniform_grid.integer` | 71.727 | 49.825 | +30.36% |
+| `uniform_grid.rational` | 2.232 | 1.607 | +27.97% |
+| `unwrap_angles` | 372.223 | 363.735 | +2.28% |
+| `unwrap_angles.wraps` | 434.921 | 419.621 | +3.45% |
+| `video_probe` | 25907.544 | 25489.022 | +1.72% |
+| `video_validate` | 55878.239 | 55169.163 | +1.49% |
+
+## Final python comparison
+
+Both source states use the completed benchmark harness. Negative values are regressions.
+
+| Case | Before us | After us | Paired reduction |
+| --- | ---: | ---: | ---: |
+| `python.align_timestamps` | 28.356 | 24.590 | +13.19% |
+| `python.ema` | 928.708 | 917.502 | +1.15% |
+| `python.ema.small` | 2.483 | 2.466 | -0.19% |
+| `python.fir` | 3351.536 | 3066.559 | +8.49% |
+| `python.fir.small` | 5.494 | 5.084 | +7.57% |
+| `python.history_windows` | 1035.084 | 1035.169 | +0.14% |
+| `python.history_windows.small` | 5.389 | 5.350 | +1.02% |
+| `python.image_quality` | 343.284 | 343.208 | +0.33% |
+| `python.inspect_mcap` | 645.892 | 648.071 | -0.28% |
+| `python.inspect_signal` | 924.918 | 899.838 | +2.59% |
+| `python.lowpass_taps` | 0.737 | 0.595 | +18.38% |
+| `python.read_json_signal` | 937.694 | 923.618 | +1.50% |
+| `python.resample.linear` | 242.891 | 235.664 | +2.84% |
+| `python.resample.previous` | 161.708 | 158.335 | +1.70% |
+| `python.resample.small` | 3.953 | 3.892 | +2.03% |
+| `python.resample.strided` | 2092.438 | 653.433 | +68.75% |
+| `python.transform_image` | 989.201 | 975.214 | +1.91% |
+| `python.uniform_grid` | 170.018 | 162.279 | +4.29% |
+| `python.unwrap_angles` | 837.989 | 845.355 | -0.84% |
+| `python.unwrap_angles.small` | 1.749 | 1.749 | -0.04% |
+| `python.validate_video` | 55402.866 | 55609.379 | -0.42% |
+
+## Verification and limitations
+
+All thirty implementation units completed ten measured candidate rounds. The
+final decision count is 23 accepted and 277 rejected; earlier 60- and 20-round
+campaigns remain separate and unchanged. Compiler repairs and interrupted runs
+were preserved and resumed, not counted as additional completed rounds.
+
+Final validation passed on reference-linux: rustfmt, Clippy, 36 Rust tests, five Python smoke
+tests, 291 public-interface comparisons, and the immutable-reference oracle.
+The oracle covers 180 randomized core scenarios; clock, grid, Hampel and SLERP
+edge cases; 6 coefficient extremes; 16 gapped FIR cases; 15 image fixtures and
+two MCAP fixtures. PNG outputs are compared by decoded pixels and encoded sizes.
+The installed wheel independently passed five tests and 291 interface comparisons.
+
+The full comparison uses 78 native and 21 Python workloads. The original source
+at `9de19ea` was rebuilt with the completed native harness, preserving the same
+Rust toolchain, thin LTO, one codegen unit and flags on both sides. Python final
+timings compare two release wheels with debug information disabled; native
+timings retain line tables on both sides. `baseline-manifest.json` records the
+immutable source and harness hashes.
+
+Initial integration showed approximately 8% slower previous resampling and
+singleton-topic MCAP reading. An independent eight-block repeat found previous
+resampling +2.01%, while singleton filtering remained -6.60%. Restricting the
+existing topic cache to multiple-topic filters fixes that overhead with one
+predicate change. This is a requalification of the retained optimization, not
+an extra candidate round. The four raw-reader workloads still clear the gate:
+10.78% aggregate latency reduction, 10.26% in the worst paired block; the added
+singleton guard measures -0.95%, within the 3% tolerance. See
+`raw-reader-requalification.json` and the preserved `integration-*` observations.
+
+The final full run has no native case slower by more than 3%; its lowest result
+is SLERP at -2.91%. The lowest Python result is angle unwrapping at -0.84%.
+These are measured variations, not speedup claims. Positive results vary by
+workload: the sparse alignment and random-Hampel cases benefit much more than
+already cheap dense or constant-input paths.
+
+The release wheel targets Linux x86-64 / glibc 2.39+ with CPython abi3 (3.10+),
+and was executed with CPython 3.12.3 / NumPy 2.5.4. Source and wheel hashes are
+recorded in `verification.json`. No runtime dependencies, public processing
+signatures, source-data transformations or relaxed validation checks were added.
+
+Limits: all data was generated. No real recording, upstream LeTools/providers
+pipeline, GPU path, multi-worker throughput or non-reference-linux platform was benchmarked.
+The Python bindings still hold the GIL. Callgrind/cProfile supplied profiling
+evidence; their instrumented times were not used as benchmark results.

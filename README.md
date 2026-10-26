@@ -21,6 +21,8 @@ processing operator, accepted optimization commits, rejected patches, paired
 measurements and correctness evidence. Benchmarks use generated fixtures.
 The [twenty-round follow-up](docs/performance/extension/RESULTS.md) builds on that
 evidence, includes workload sensitivity checks, and preserves withdrawn results.
+The [300-round campaign](docs/performance/per-op10/RESULTS.md) adds ten measured
+candidates per operator, with [lessons](docs/performance/per-op10/LESSONS.md) and final release-wheel comparisons.
 
 All builds and tests run on reference-linux. Synchronize source paths with
 `python3 scripts/sync_sources.py`; after committing a reviewed tree, use

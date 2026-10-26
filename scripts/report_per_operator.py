@@ -49,6 +49,18 @@ def main():
         else:assert (REPORT/'rejected'/f"{row['label']}.patch").is_file()
         rows.append(row)
     if not args.partial:assert seen=={(op,r) for op in EXPECTED for r in range(1,11)},'incomplete 300-round coverage'
+    manifest=REPORT/'evidence/manifest.json'
+    if manifest.exists() and not args.partial:
+        evidence={r['label']:r for r in json.loads(manifest.read_text())}
+        assert set(evidence)=={r['label'] for r in rows}
+        for row in rows:
+            log=REPORT/'evidence'/f"{row['label']}.log"
+            assert hashlib.sha256(log.read_bytes()).hexdigest()==row['validation_sha256']
+            assert len(evidence[row['label']]['profiles'])>=2
+    verification=REPORT/'final/verification.json'
+    if verification.exists() and not args.partial:
+        for name,digest in json.loads(verification.read_text())['source_sha256'].items():
+            assert hashlib.sha256((ROOT/name).read_bytes()).hexdigest()==digest,name
     accepted=sum(r['decision']=='accepted' for r in rows)
     # Pending candidates are intentionally excluded from the retained production diff.
     stats=[line.split('\t',2) for line in git('diff','--numstat',BASE,'HEAD','--','crates/core/src','crates/io/src','crates/python/src','python/mcap_ops').splitlines()]

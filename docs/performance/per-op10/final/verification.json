@@ -14,8 +14,10 @@
   "python_profile": "release wheels, thin LTO, one codegen unit, debug disabled on both sides",
   "wheel": {
     "path": "./.artifacts/rsi/per-op10/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl",
-    "bytes": 1117922,
-    "sha256": "7930fef451ac7f82cd8fa0fcf03aca0803ef0ae495f3a22d9d224d52dc44fe2d"
+    "bytes": 1118002,
+    "sha256": "f802c4355395be4f808c5b3fe1194e9046fdbc7b7a7e37636c38553794fdf226",
+    "native_sha256": "41543511e94cea7bd37cfb91b28250fa6ca371208b2672bec303e480af52d353",
+    "matches_timed_release_binary": true
   },
   "source_sha256": {
     "crates/core/src/filter.rs": "4efe6eca3b8b7e9a012effead389b8c16a43de494061e823a01b14d1f157414f",
@@ -30,5 +32,10 @@
     "crates/io/src/video.rs": "49d0cf487668cfdea3eb7b5bf57002c2fe0c702bb8bc0d0cd6565011b62121c6",
     "crates/python/src/lib.rs": "f6b72a7ad51b218bdc7ebf786f8e681e2acfb1a48ee3940d8584c858a7cbc842",
     "python/mcap_ops/__init__.py": "56e7d6e14dc2da494c359020bc3e853c80fcc786fe443649d18bb8342ff0d2d5"
-  }
+  },
+  "native_benchmark_artifacts": {
+    ".artifacts/rsi/per-op10/final-before": "ae14b5dad9242d496bcd8037b495a6b932949a1a3ac467ea91d878afc0764444",
+    ".artifacts/rsi/per-op10/final-after": "787bbe19d82b2b90f3af59409c5cf13ca6fe9950cf8823f160258fd838818853"
+  },
+  "perf_event_paranoid": "4"
 }
