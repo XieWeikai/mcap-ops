@@ -66,6 +66,9 @@ pub struct RawReader {
     limits: ReadLimits,
     seen: usize,
     done: bool,
+    // TEN_CACHE_START
+    topic_cache: std::collections::BTreeMap<u16, (std::sync::Arc<mcap::Channel<'static>>, bool)>,
+    // TEN_CACHE_END
 }
 impl RawReader {
     pub fn open(path: impl AsRef<Path>, filter: MessageFilter, limits: ReadLimits) -> Result<Self> {
@@ -93,6 +96,9 @@ impl RawReader {
             limits,
             seen: 0,
             done: false,
+            // TEN_CACHE_START
+            topic_cache: std::collections::BTreeMap::new(),
+            // TEN_CACHE_END
         })
     }
     fn unchanged(&self) -> Result<()> {
@@ -130,7 +136,32 @@ impl Iterator for RawReader {
                             "MCAP exceeds max_messages; no complete report produced",
                         )));
                     }
-                    if self.filter.accepts(&message) {
+                    let accepted = if self.filter.topics.is_empty() {
+                        self.filter.accepts(&message)
+                    } else {
+                        let known = self
+                            .topic_cache
+                            .get(&message.channel.id)
+                            .filter(|(channel, _)| {
+                                std::sync::Arc::ptr_eq(channel, &message.channel)
+                            })
+                            .map(|(_, value)| *value);
+                        let topic_matches = known.unwrap_or_else(|| {
+                            let value = self.filter.topics.contains(&message.channel.topic);
+                            self.topic_cache
+                                .insert(message.channel.id, (message.channel.clone(), value));
+                            value
+                        });
+                        let t = if self.filter.publish_clock {
+                            message.publish_time
+                        } else {
+                            message.log_time
+                        };
+                        topic_matches
+                            && self.filter.start_ns.is_none_or(|s| t >= s)
+                            && self.filter.end_ns.is_none_or(|e| t < e)
+                    };
+                    if accepted {
                         return Some(Ok(message));
                     }
                 }
