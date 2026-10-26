@@ -17,17 +17,15 @@ impl IntervalSet {
             return Err(invalid("intervals must be nonempty [start,end)"));
         }
         intervals.sort_unstable_by_key(|v| v.start_ns);
-        let mut merged: Vec<Interval> = Vec::new();
-        for interval in intervals {
-            if let Some(last) = merged.last_mut() {
-                if interval.start_ns <= last.end_ns {
-                    last.end_ns = last.end_ns.max(interval.end_ns);
-                    continue;
-                }
+        intervals.dedup_by(|current, previous| {
+            if current.start_ns <= previous.end_ns {
+                previous.end_ns = previous.end_ns.max(current.end_ns);
+                true
+            } else {
+                false
             }
-            merged.push(interval);
-        }
-        Ok(Self { intervals: merged })
+        });
+        Ok(Self { intervals })
     }
     pub fn intervals(&self) -> &[Interval] {
         &self.intervals

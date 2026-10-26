@@ -1,0 +1,40 @@
+{
+  "label": "ten-interval-new-01",
+  "base_commit": "f0e3c40388413ed57077dfc067f1c5e3701ea0b1",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": 43.66757834205721,
+  "worst_block_reduction_pct": 42.7493884248826,
+  "worst_case_reduction_pct": 43.66757834205721,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The earlier manual in-place merge lost; test the library compaction implementation instead.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "43ba008f1958923856f86901f6b5f81bb3b3fe83ebf044fcfdab73b03a6823de",
+  "operator": "interval_new",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "coalesce intervals with Vec deduplication",
+  "profile_hotspot": "The earlier manual in-place merge lost; test the library compaction implementation instead.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. The earlier manual in-place merge lost; test the library compaction implementation instead.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 8899.987182617188,
+      "after_ns": 5007.9697265625,
+      "latency_reduction_pct": 43.66757834205721,
+      "paired_ratios": [
+        0.5491348314863582,
+        0.5571610430480984,
+        0.5725061157511739,
+        0.5694873901107573
+      ],
+      "worst_paired_reduction_pct": 42.7493884248826
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-new-01",
+  "validation_sha256": "23584148fba62361b5d88cb19d006d3851ba193ba7011c59ddbb9224ffb1e926"
+}
