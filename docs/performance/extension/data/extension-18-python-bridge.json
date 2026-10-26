@@ -1,0 +1,576 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/python/accepted/mcap_ops/__init__.py",
+      "bytes": 5251,
+      "sha256": "56e7d6e14dc2da494c359020bc3e853c80fcc786fe443649d18bb8342ff0d2d5"
+    },
+    {
+      "path": "./.artifacts/rsi/python/accepted/mcap_ops/_native.abi3.so",
+      "bytes": 16922688,
+      "sha256": "f3391e3589761619e0f7cc9b3d18b3931b6bf1f1923347617a8a263e9273fb84"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/python/extension-18-python-bridge/mcap_ops/__init__.py",
+      "bytes": 5251,
+      "sha256": "56e7d6e14dc2da494c359020bc3e853c80fcc786fe443649d18bb8342ff0d2d5"
+    },
+    {
+      "path": "./.artifacts/rsi/python/extension-18-python-bridge/mcap_ops/_native.abi3.so",
+      "bytes": 16920776,
+      "sha256": "e14db95935031a7f9240c9969a12fa1ce141bdb43c515160141842148f63bfb0"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1187170.78125,
+          "samples_ns": [
+            1180163.28125,
+            1190243.71875,
+            1191549.6875,
+            1197811.84375,
+            1187170.78125,
+            1176381.6875,
+            1179074.40625
+          ],
+          "iterations": 32
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3877926.75,
+          "samples_ns": [
+            3825788.75,
+            3908529.375,
+            3832435.25,
+            3950626.375,
+            3861537.125,
+            3910015.875,
+            3877926.75
+          ],
+          "iterations": 8
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1135064.59375,
+          "samples_ns": [
+            1126678.125,
+            1135064.59375,
+            1136850.09375,
+            1131358.46875,
+            1136260.875,
+            1131275.15625,
+            1135946.09375
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 903967.78125,
+          "samples_ns": [
+            905332.34375,
+            903189.28125,
+            903967.78125,
+            902356.78125,
+            904178.0625,
+            903515.21875,
+            904129.125
+          ],
+          "iterations": 32
+        }
+      },
+      "after": {
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 889728.09375,
+          "samples_ns": [
+            889875.25,
+            886268.125,
+            888661.1875,
+            891342.4375,
+            892984.59375,
+            889728.09375,
+            889649.3125
+          ],
+          "iterations": 32
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3533224.875,
+          "samples_ns": [
+            3467373.0,
+            3646705.0,
+            3255325.0,
+            3837632.375,
+            3531390.25,
+            3663533.375,
+            3533224.875
+          ],
+          "iterations": 8
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 855169.3125,
+          "samples_ns": [
+            856157.59375,
+            855169.3125,
+            855279.09375,
+            851849.28125,
+            854582.84375,
+            851493.25,
+            857984.4375
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 916463.09375,
+          "samples_ns": [
+            912746.0625,
+            910926.4375,
+            913024.21875,
+            919558.375,
+            923453.34375,
+            919331.875,
+            916463.09375
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 892309.15625,
+          "samples_ns": [
+            893491.71875,
+            896224.34375,
+            892309.15625,
+            888723.3125,
+            896084.71875,
+            891722.6875,
+            889921.4375
+          ],
+          "iterations": 32
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3439185.125,
+          "samples_ns": [
+            3437815.875,
+            3295093.5,
+            3653601.0,
+            3482435.875,
+            3439185.125,
+            3674938.375,
+            3278579.0
+          ],
+          "iterations": 8
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 857735.8125,
+          "samples_ns": [
+            857345.53125,
+            863485.15625,
+            857149.53125,
+            857735.8125,
+            857654.9375,
+            860322.6875,
+            866353.625
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 907194.3125,
+          "samples_ns": [
+            907919.40625,
+            906013.46875,
+            906364.71875,
+            908032.125,
+            908713.21875,
+            907194.3125,
+            905251.34375
+          ],
+          "iterations": 32
+        }
+      },
+      "before": {
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1202709.4375,
+          "samples_ns": [
+            1200401.53125,
+            1203245.1875,
+            1197894.0625,
+            1205484.75,
+            1200469.1875,
+            1202709.4375,
+            1218831.125
+          ],
+          "iterations": 32
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3708419.75,
+          "samples_ns": [
+            3482668.375,
+            3498876.5,
+            3573043.375,
+            3708419.75,
+            3746838.5,
+            3891599.0,
+            3930915.5
+          ],
+          "iterations": 8
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1135431.25,
+          "samples_ns": [
+            1135431.25,
+            1138618.03125,
+            1133358.53125,
+            1127302.71875,
+            1133195.8125,
+            1138907.96875,
+            1138649.5
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 908518.6875,
+          "samples_ns": [
+            911023.03125,
+            907460.75,
+            910313.375,
+            907835.71875,
+            907164.21875,
+            908518.6875,
+            910129.75
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1177345.46875,
+          "samples_ns": [
+            1175940.65625,
+            1173561.03125,
+            1177345.46875,
+            1180911.65625,
+            1176177.0625,
+            1179387.8125,
+            1190932.78125
+          ],
+          "iterations": 32
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3813279.5,
+          "samples_ns": [
+            3762853.625,
+            3813279.5,
+            3824686.75,
+            3861894.625,
+            3808122.5,
+            3879788.0,
+            3813038.25
+          ],
+          "iterations": 8
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1130708.875,
+          "samples_ns": [
+            1128682.03125,
+            1129038.25,
+            1130708.875,
+            1136136.5625,
+            1138336.9375,
+            1135122.125,
+            1126391.28125
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 899384.875,
+          "samples_ns": [
+            895792.90625,
+            899384.875,
+            902972.4375,
+            900449.65625,
+            899210.4375,
+            894897.46875,
+            901586.84375
+          ],
+          "iterations": 32
+        }
+      },
+      "after": {
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 878435.34375,
+          "samples_ns": [
+            870370.65625,
+            878435.34375,
+            879418.65625,
+            875689.625,
+            874113.25,
+            879844.34375,
+            880819.28125
+          ],
+          "iterations": 32
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3473159.5,
+          "samples_ns": [
+            3611515.5,
+            3738790.875,
+            3414388.0,
+            3643275.5,
+            3473159.5,
+            3291613.0,
+            3381266.25
+          ],
+          "iterations": 8
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 840068.75,
+          "samples_ns": [
+            841052.9375,
+            836892.75,
+            837337.6875,
+            844491.59375,
+            846686.0625,
+            840068.75,
+            836729.375
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 899709.21875,
+          "samples_ns": [
+            898746.78125,
+            900609.15625,
+            899779.71875,
+            899111.125,
+            900363.9375,
+            899709.21875,
+            897195.25
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 880684.15625,
+          "samples_ns": [
+            874766.125,
+            883412.25,
+            881063.8125,
+            875512.15625,
+            880684.15625,
+            881784.46875,
+            880245.625
+          ],
+          "iterations": 32
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3502169.75,
+          "samples_ns": [
+            3675461.25,
+            3431630.375,
+            3446092.75,
+            3343659.625,
+            3502169.75,
+            3527456.5,
+            3604308.875
+          ],
+          "iterations": 8
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 841458.5,
+          "samples_ns": [
+            837106.5625,
+            840917.90625,
+            845029.1875,
+            844429.90625,
+            843630.21875,
+            840147.53125,
+            841458.5
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 895216.375,
+          "samples_ns": [
+            892991.25,
+            895997.28125,
+            895216.375,
+            894922.9375,
+            895362.4375,
+            894887.1875,
+            897638.90625
+          ],
+          "iterations": 32
+        }
+      },
+      "before": {
+        "python.ema": {
+          "case": "python.ema",
+          "median_ns": 1202904.375,
+          "samples_ns": [
+            1207789.125,
+            1204874.875,
+            1200977.75,
+            1203035.59375,
+            1201804.0,
+            1202904.375,
+            1199506.375
+          ],
+          "iterations": 32
+        },
+        "python.fir": {
+          "case": "python.fir",
+          "median_ns": 3549308.5,
+          "samples_ns": [
+            3495139.625,
+            3526977.625,
+            3550752.25,
+            3550947.875,
+            3538492.375,
+            3549308.5,
+            3562566.875
+          ],
+          "iterations": 8
+        },
+        "python.unwrap_angles": {
+          "case": "python.unwrap_angles",
+          "median_ns": 1150659.15625,
+          "samples_ns": [
+            1151568.46875,
+            1152113.15625,
+            1149357.65625,
+            1150659.15625,
+            1149607.90625,
+            1150310.0,
+            1156108.3125
+          ],
+          "iterations": 32
+        },
+        "python.read_json_signal": {
+          "case": "python.read_json_signal",
+          "median_ns": 918635.5625,
+          "samples_ns": [
+            915915.3125,
+            915604.71875,
+            919092.0625,
+            927594.6875,
+            918635.5625,
+            919654.59375,
+            916522.375
+          ],
+          "iterations": 32
+        }
+      }
+    }
+  ],
+  "summary": {
+    "python.ema": {
+      "before_ns": 1194940.109375,
+      "after_ns": 885206.125,
+      "latency_reduction_pct": 25.5984493559559,
+      "paired_ratios": [
+        0.7494524863669441,
+        0.7419158180921815,
+        0.7461151947887004,
+        0.7321314765772633
+      ],
+      "worst_paired_reduction_pct": 25.054751363305595
+    },
+    "python.fir": {
+      "before_ns": 3760849.625,
+      "after_ns": 3487664.625,
+      "latency_reduction_pct": 8.074454492683092,
+      "paired_ratios": [
+        0.9111118138061788,
+        0.9273990963401595,
+        0.9108064331502582,
+        0.9867188918630206
+      ],
+      "worst_paired_reduction_pct": 1.3281108136979358
+    },
+    "python.unwrap_angles": {
+      "before_ns": 1135247.921875,
+      "after_ns": 848313.90625,
+      "latency_reduction_pct": 25.181607011922267,
+      "paired_ratios": [
+        0.7534102615911148,
+        0.7554273431350423,
+        0.7429575981704397,
+        0.731283886657031
+      ],
+      "worst_paired_reduction_pct": 24.457265686495766
+    },
+    "python.read_json_signal": {
+      "before_ns": 906243.234375,
+      "after_ns": 903451.765625,
+      "latency_reduction_pct": 0.05485508175600007,
+      "paired_ratios": [
+        1.013822740986102,
+        0.9985422699409251,
+        1.0003606284239548,
+        0.9745065524828297
+      ],
+      "worst_paired_reduction_pct": -1.3822740986102033
+    }
+  }
+}

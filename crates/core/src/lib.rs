@@ -43,6 +43,11 @@ impl Signal {
             channels,
         })
     }
+    /// Consume the signal and transfer its owned row-major buffers without copying.
+    /// Returns (nanosecond timestamps, flat values, channel count).
+    pub fn into_parts(self) -> (Vec<i64>, Vec<f64>, usize) {
+        (self.timestamps, self.values, self.channels)
+    }
     pub fn timestamps(&self) -> &[i64] {
         &self.timestamps
     }

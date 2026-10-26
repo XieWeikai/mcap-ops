@@ -1,0 +1,80 @@
+{
+  "label": "extension-18-python-bridge",
+  "base_commit": "c703007c12d10b511766debff901029934dfa24c",
+  "cases": [
+    "python.ema",
+    "python.fir",
+    "python.unwrap_angles",
+    "python.read_json_signal"
+  ],
+  "geomean_latency_reduction_pct": 15.208085404911131,
+  "worst_block_reduction_pct": 15.01792410522449,
+  "worst_case_reduction_pct": 0.05485508175600007,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Direct NumPy outputs succeeded; Signal-backed results still clone their owned buffers before transfer. Public result types stay unchanged.",
+  "paths": [
+    "crates/core/src/lib.rs",
+    "crates/python/src/lib.rs"
+  ],
+  "measurement_sha256": "1963004dfe416405181d7467c6b99d62974a2e2383dba87307dc0f36455fd177",
+  "operator": "python_bridge",
+  "round": 18,
+  "series": "extension",
+  "decision": "accepted",
+  "method": "move owned signal buffers into NumPy without cloning",
+  "profile_hotspot": "signal_dict clones both time and value arrays even though callers discard the Rust Signal.",
+  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Direct NumPy outputs succeeded; Signal-backed results still clone their owned buffers before transfer. Public result types stay unchanged.",
+  "case_results": {
+    "python.ema": {
+      "before_ns": 1194940.109375,
+      "after_ns": 885206.125,
+      "latency_reduction_pct": 25.5984493559559,
+      "paired_ratios": [
+        0.7494524863669441,
+        0.7419158180921815,
+        0.7461151947887004,
+        0.7321314765772633
+      ],
+      "worst_paired_reduction_pct": 25.054751363305595
+    },
+    "python.fir": {
+      "before_ns": 3760849.625,
+      "after_ns": 3487664.625,
+      "latency_reduction_pct": 8.074454492683092,
+      "paired_ratios": [
+        0.9111118138061788,
+        0.9273990963401595,
+        0.9108064331502582,
+        0.9867188918630206
+      ],
+      "worst_paired_reduction_pct": 1.3281108136979358
+    },
+    "python.unwrap_angles": {
+      "before_ns": 1135247.921875,
+      "after_ns": 848313.90625,
+      "latency_reduction_pct": 25.181607011922267,
+      "paired_ratios": [
+        0.7534102615911148,
+        0.7554273431350423,
+        0.7429575981704397,
+        0.731283886657031
+      ],
+      "worst_paired_reduction_pct": 24.457265686495766
+    },
+    "python.read_json_signal": {
+      "before_ns": 906243.234375,
+      "after_ns": 903451.765625,
+      "latency_reduction_pct": 0.05485508175600007,
+      "paired_ratios": [
+        1.013822740986102,
+        0.9985422699409251,
+        1.0003606284239548,
+        0.9745065524828297
+      ],
+      "worst_paired_reduction_pct": -1.3822740986102033
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-18-python-bridge",
+  "validation_sha256": "c7415464288c56a9a95981493593fb694c96b09fd03d7906b6c6e52c466d3f25"
+}

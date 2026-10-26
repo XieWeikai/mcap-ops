@@ -68,11 +68,12 @@ fn numpy_values<'py>(py: Python<'py>, mut values: Vec<f64>) -> Bound<'py, numpy:
     values.into_pyarray(py)
 }
 
-fn signal_dict(py: Python<'_>, signal: &Signal) -> PyResult<Py<PyDict>> {
+fn signal_dict(py: Python<'_>, signal: Signal) -> PyResult<Py<PyDict>> {
+    let (timestamps, values, channels) = signal.into_parts();
     let dict = PyDict::new(py);
-    dict.set_item("timestamps", signal.timestamps().to_vec().into_pyarray(py))?;
-    dict.set_item("values", numpy_values(py, signal.values().to_vec()))?;
-    dict.set_item("channels", signal.channels())?;
+    dict.set_item("timestamps", timestamps.into_pyarray(py))?;
+    dict.set_item("values", numpy_values(py, values))?;
+    dict.set_item("channels", channels)?;
     Ok(dict.unbind())
 }
 
@@ -90,7 +91,7 @@ fn sampled_dict(py: Python<'_>, result: sampling::Sampled) -> PyResult<Py<PyDict
 }
 
 fn filtered_dict(py: Python<'_>, result: filter::Filtered) -> PyResult<Py<PyDict>> {
-    let dict = signal_dict(py, &result.signal)?;
+    let dict = signal_dict(py, result.signal)?;
     dict.bind(py).set_item("valid", result.valid)?;
     dict.bind(py)
         .set_item("mode", format!("{:?}", result.mode).to_lowercase())?;
@@ -282,7 +283,7 @@ fn unwrap_angles(
 ) -> PyResult<Py<PyDict>> {
     let signal = signal_from_arrays(timestamps, values)?;
     let result = filter::unwrap_angles(&signal, period, max_gap_ns).map_err(map_core_error)?;
-    signal_dict(py, &result)
+    signal_dict(py, result)
 }
 
 #[pyfunction]
@@ -376,7 +377,7 @@ fn read_json_signal(
     };
     let signal = mcap_ops::read_signal(path, filter, limits, &decoder, max_samples)
         .map_err(|e| PyIOError::new_err(e.to_string()))?;
-    signal_dict(py, &signal)
+    signal_dict(py, signal)
 }
 
 #[pyfunction]
