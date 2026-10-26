@@ -1,0 +1,79 @@
+{
+  "label": "ten-interval-mask-03",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled",
+    "interval_mask.empty",
+    "interval_mask.late"
+  ],
+  "geomean_latency_reduction_pct": 72.35009438896915,
+  "worst_block_reduction_pct": 72.10575549779308,
+  "worst_case_reduction_pct": -0.20495285393682394,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. No quality exclusions is a common empty-set case; avoid scanning target order when every answer is false.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "8ef0302a16968f0165e8eeec9bd71c8201b85c2c866c64052cc4658d87c69382",
+  "operator": "interval_mask",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "recognize empty interval masks before ordering checks",
+  "profile_hotspot": "No quality exclusions is a common empty-set case; avoid scanning target order when every answer is false.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. No quality exclusions is a common empty-set case; avoid scanning target order when every answer is false.",
+  "case_results": {
+    "interval_mask.empty": {
+      "before_ns": 19795.26171875,
+      "after_ns": 116.16828346252441,
+      "latency_reduction_pct": 99.41673602617307,
+      "paired_ratios": [
+        0.005936351907842059,
+        0.0058155817319652725,
+        0.0058043987007092845,
+        0.005849697744573316
+      ],
+      "worst_paired_reduction_pct": 99.4063648092158
+    },
+    "interval_mask.late": {
+      "before_ns": 20864.56640625,
+      "after_ns": 20916.8857421875,
+      "latency_reduction_pct": -0.20495285393682394,
+      "paired_ratios": [
+        1.0093791155510954,
+        0.9956538829144082,
+        0.9875576663536633,
+        1.0084451741643283
+      ],
+      "worst_paired_reduction_pct": -0.9379115551095385
+    },
+    "interval_mask.ordered": {
+      "before_ns": 26331.7294921875,
+      "after_ns": 26513.28076171875,
+      "latency_reduction_pct": 0.273499597945448,
+      "paired_ratios": [
+        1.01106938910195,
+        1.0027214857317879,
+        0.9911580078350182,
+        0.9918085223093032
+      ],
+      "worst_paired_reduction_pct": -1.106938910194999
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 280478.56640625,
+      "after_ns": 282949.0390625,
+      "latency_reduction_pct": 0.009250902595669963,
+      "paired_ratios": [
+        0.9993175129120275,
+        0.9981465353127876,
+        1.0272043122966952,
+        1.000497469036059
+      ],
+      "worst_paired_reduction_pct": -2.7204312296695177
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-mask-03",
+  "validation_sha256": "37fa3582b3b8f94ce568bce0c87f6c0742d4ad7f898122633aecdfeddd17157a"
+}

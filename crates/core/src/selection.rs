@@ -43,6 +43,9 @@ impl IntervalSet {
         i > 0 && t < self.intervals[i - 1].end_ns
     }
     pub fn mask(&self, times: &[i64]) -> Vec<bool> {
+        if self.intervals.is_empty() {
+            return vec![false; times.len()];
+        }
         if times.windows(2).any(|w| w[1] < w[0]) {
             return times.iter().map(|&t| self.contains(t)).collect();
         }
