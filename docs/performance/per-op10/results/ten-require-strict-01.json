@@ -1,0 +1,40 @@
+{
+  "label": "ten-require-strict-01",
+  "base_commit": "ac8f228ded760d75da3fdc5ebd6be3306198c75a",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": 24.980275928192597,
+  "worst_block_reduction_pct": 16.75020890355302,
+  "worst_case_reduction_pct": 24.980275928192597,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "ce5c3f0aae965d41db04be37a3d1b87ee484d507300462258aac8c82c7dda349",
+  "operator": "require_strict",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "check timestamp order in 4-pair early-exit blocks",
+  "profile_hotspot": "Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 8910.223388671875,
+      "after_ns": 6719.316650390625,
+      "latency_reduction_pct": 24.980275928192597,
+      "paired_ratios": [
+        0.8309426913234068,
+        0.8324979109644698,
+        0.6694517901127413,
+        0.5196648875805162
+      ],
+      "worst_paired_reduction_pct": 16.75020890355302
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-require-strict-01",
+  "validation_sha256": "fba70c66f4d7ac858dd4d72610fb02373380331d15a21c52f70926e10834ca43"
+}

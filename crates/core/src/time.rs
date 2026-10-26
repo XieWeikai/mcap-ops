@@ -2,7 +2,25 @@ use crate::{invalid, Error, Result};
 use serde::{Deserialize, Serialize};
 
 pub fn require_strict(times: &[i64]) -> Result<()> {
-    if times.iter().zip(times.iter().skip(1)).any(|(a, b)| b <= a) {
+    let bad = if times.len() < 2 {
+        false
+    } else {
+        let mut left = times[..times.len() - 1].chunks_exact(4);
+        let mut right = times[1..].chunks_exact(4);
+        let mut bad = false;
+        for (a, b) in left.by_ref().zip(right.by_ref()) {
+            if (a[0] >= b[0]) | (a[1] >= b[1]) | (a[2] >= b[2]) | (a[3] >= b[3]) {
+                bad = true;
+                break;
+            }
+        }
+        bad || left
+            .remainder()
+            .iter()
+            .zip(right.remainder())
+            .any(|(a, b)| a >= b)
+    };
+    if bad {
         return Err(invalid("source timestamps must be strictly increasing; inspect before resolving duplicates or reversals"));
     }
     Ok(())
