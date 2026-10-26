@@ -312,9 +312,24 @@ impl SignalDecoder for JsonSignalSpec {
         }
         let payload: serde_json::Value = serde_json::from_slice(&message.data)?;
         let lookup = |pointer: &str| {
-            if let Some(key) = pointer.strip_prefix('/') {
-                if !key.contains(['/', '~']) && payload.is_object() {
-                    return payload.get(key);
+            if let Some(path) = pointer.strip_prefix('/') {
+                if !path.contains('~') {
+                    let mut value = &payload;
+                    for token in path.split('/') {
+                        value = match value {
+                            serde_json::Value::Object(object) => object.get(token)?,
+                            serde_json::Value::Array(array) => {
+                                if token.starts_with('+')
+                                    || (token.starts_with('0') && token.len() > 1)
+                                {
+                                    return None;
+                                }
+                                array.get(token.parse::<usize>().ok()?)?
+                            }
+                            _ => return None,
+                        };
+                    }
+                    return Some(value);
                 }
             }
             payload.pointer(pointer)

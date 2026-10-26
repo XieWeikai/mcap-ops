@@ -1,0 +1,66 @@
+{
+  "label": "ten-json-decode-01",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "json_decode",
+    "json_decode.deep",
+    "json_decode.wide"
+  ],
+  "geomean_latency_reduction_pct": 11.70482560010786,
+  "worst_block_reduction_pct": 8.660264536482387,
+  "worst_case_reduction_pct": -2.3785056105712465,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The flat-pointer fast path helped; extend it to nested object/array segments while retaining RFC6901 escapes and index rules.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "5e20b3ab9c292edff202aa6e2959ba018fc130708720a6cf6383ec55850826d5",
+  "operator": "json_decode",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "traverse unescaped JSON pointer segments without allocating strings",
+  "profile_hotspot": "The flat-pointer fast path helped; extend it to nested object/array segments while retaining RFC6901 escapes and index rules.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. The flat-pointer fast path helped; extend it to nested object/array segments while retaining RFC6901 escapes and index rules.",
+  "case_results": {
+    "json_decode": {
+      "before_ns": 210.58435821533203,
+      "after_ns": 215.48211669921875,
+      "latency_reduction_pct": -2.363413176469953,
+      "paired_ratios": [
+        1.0403248461728767,
+        1.0412802371700618,
+        1.0069434173565222,
+        1.0015988724189897
+      ],
+      "worst_paired_reduction_pct": -4.1280237170061795
+    },
+    "json_decode.deep": {
+      "before_ns": 350.4185485839844,
+      "after_ns": 230.67150115966797,
+      "latency_reduction_pct": 34.104177073695155,
+      "paired_ratios": [
+        0.6735104357761403,
+        0.6684601677711933,
+        0.6364030768329766,
+        0.6494562907549036
+      ],
+      "worst_paired_reduction_pct": 32.648956422385965
+    },
+    "json_decode.wide": {
+      "before_ns": 916.5916900634766,
+      "after_ns": 960.9229583740236,
+      "latency_reduction_pct": -2.3785056105712465,
+      "paired_ratios": [
+        1.0875918592749119,
+        1.028461901370053,
+        1.0191082108413718,
+        1.0170010315175746
+      ],
+      "worst_paired_reduction_pct": -8.759185927491187
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-json-decode-01",
+  "validation_sha256": "78b154fb8803c60fa5329326a978f04d1710999e48b90b50dd137f3bc47193e0"
+}
