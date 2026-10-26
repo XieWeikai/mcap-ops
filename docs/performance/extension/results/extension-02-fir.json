@@ -1,0 +1,53 @@
+{
+  "label": "extension-02-fir",
+  "base_commit": "9055f7bc2de5754c8f560a7027dc654438c15dcb",
+  "cases": [
+    "fir.scalar",
+    "fir.vector"
+  ],
+  "geomean_latency_reduction_pct": 33.95695487625614,
+  "worst_block_reduction_pct": 32.446666411557466,
+  "worst_case_reduction_pct": 32.196874328276984,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Earlier loop interchange lost scalar throughput; this candidate keeps reduction order and trades one bounded input copy for contiguous support.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "db6cf0442cb6e94f01e64fb2f108742b5dd98ede91fc1bfaf000b8b191a58d86",
+  "operator": "fir",
+  "round": 2,
+  "series": "extension",
+  "decision": "accepted",
+  "method": "transpose FIR input once into contiguous channel planes",
+  "profile_hotspot": "FIR strided dot products dominate after support checks.",
+  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Earlier loop interchange lost scalar throughput; this candidate keeps reduction order and trades one bounded input copy for contiguous support.",
+  "case_results": {
+    "fir.scalar": {
+      "before_ns": 509058.859375,
+      "after_ns": 327677.765625,
+      "latency_reduction_pct": 35.58062516380682,
+      "paired_ratios": [
+        0.6426948542652391,
+        0.6442740683765772,
+        0.6441134283472864,
+        0.6451080297706543
+      ],
+      "worst_paired_reduction_pct": 35.48919702293457
+    },
+    "fir.vector": {
+      "before_ns": 1824147.9375,
+      "after_ns": 1235033.71875,
+      "latency_reduction_pct": 32.196874328276984,
+      "paired_ratios": [
+        0.6956158446979255,
+        0.6582058439846161,
+        0.660446668736535,
+        0.7073935942998222
+      ],
+      "worst_paired_reduction_pct": 29.26064057001778
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-02-fir",
+  "validation_sha256": "c0057e8642834af325e42d8ce93d972d6ff8d3143f644c720c0c95200cd2cecc"
+}
