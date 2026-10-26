@@ -16,6 +16,9 @@ impl IntervalSet {
         if intervals.iter().any(|v| v.start_ns >= v.end_ns) {
             return Err(invalid("intervals must be nonempty [start,end)"));
         }
+        if intervals.windows(2).all(|w| w[0].end_ns < w[1].start_ns) {
+            return Ok(Self { intervals });
+        }
         intervals.sort_unstable_by_key(|v| v.start_ns);
         intervals.dedup_by(|current, previous| {
             if current.start_ns <= previous.end_ns {

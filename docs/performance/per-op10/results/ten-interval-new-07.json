@@ -1,0 +1,40 @@
+{
+  "label": "ten-interval-new-07",
+  "base_commit": "bf27051a0690192d4fabfbc6405b6cfda283c1f4",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": 22.99050556043213,
+  "worst_block_reduction_pct": 22.75103970097938,
+  "worst_case_reduction_pct": 22.99050556043213,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The old sortedness-only check still copied all intervals; this verifies non-overlap and transfers the owned buffer.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "9a15273e2212b871ddab18d62120dbfdf511a7f571bfbefa4165708080c5ba1f",
+  "operator": "interval_new",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "return already canonical interval buffers without copying",
+  "profile_hotspot": "The old sortedness-only check still copied all intervals; this verifies non-overlap and transfers the owned buffer.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. The old sortedness-only check still copied all intervals; this verifies non-overlap and transfers the owned buffer.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 5133.3651123046875,
+      "after_ns": 3953.1832275390625,
+      "latency_reduction_pct": 22.99050556043213,
+      "paired_ratios": [
+        0.7705778459101309,
+        0.7649725834960358,
+        0.7696120428812265,
+        0.7724896029902062
+      ],
+      "worst_paired_reduction_pct": 22.75103970097938
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-new-07",
+  "validation_sha256": "a374388cd5822b2075ec1451224c4e34af31bee8a0ba945c6cdf6ead81b4719d"
+}
