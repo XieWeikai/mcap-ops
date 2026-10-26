@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-01",
+  "base_commit": "373b3147869c2790bf588b79e3fd1830cde6ef70",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": 12.902850916344576,
+  "worst_block_reduction_pct": 12.257478834430735,
+  "worst_case_reduction_pct": -2.027103227220861,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Avoid walking irrelevant earlier samples while retaining strict source validation and all provenance.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "4ebb07cb3f9ab48db30bc71a29adb6a4afdbea0aace420e4e75909e417f3b0da",
+  "operator": "resample",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "seed resampling at the first target support prefix",
+  "profile_hotspot": "Avoid walking irrelevant earlier samples while retaining strict source validation and all provenance.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Avoid walking irrelevant earlier samples while retaining strict source validation and all provenance.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 227333.80859375,
+      "after_ns": 215188.91796875,
+      "latency_reduction_pct": 5.342397001652477,
+      "paired_ratios": [
+        0.9461357094690926,
+        0.921501414973648,
+        0.9514158828115551,
+        0.9470163504978578
+      ],
+      "worst_paired_reduction_pct": 4.858411718844491
+    },
+    "resample.nearest": {
+      "before_ns": 241310.9453125,
+      "after_ns": 230917.171875,
+      "latency_reduction_pct": 3.6768534167659572,
+      "paired_ratios": [
+        0.9507105159902474,
+        0.9317873597128484,
+        0.9764909965914818,
+        0.9757524156744336
+      ],
+      "worst_paired_reduction_pct": 2.3509003408518248
+    },
+    "resample.linear": {
+      "before_ns": 399113.328125,
+      "after_ns": 400034.421875,
+      "latency_reduction_pct": -0.5944885733109029,
+      "paired_ratios": [
+        1.0196317840580331,
+        1.0038601383780899,
+        0.998241779008642,
+        1.0080296330881282
+      ],
+      "worst_paired_reduction_pct": -1.963178405803312
+    },
+    "resample.slerp": {
+      "before_ns": 565348.0859375,
+      "after_ns": 577716.984375,
+      "latency_reduction_pct": -2.027103227220861,
+      "paired_ratios": [
+        0.9743678580620592,
+        1.016128741071228,
+        1.027659437080541,
+        1.0244133234731891
+      ],
+      "worst_paired_reduction_pct": -2.765943708054097
+    },
+    "resample.sparse_linear": {
+      "before_ns": 12761.55419921875,
+      "after_ns": 5575.5936279296875,
+      "latency_reduction_pct": 56.308557951171665,
+      "paired_ratios": [
+        0.4211890868093752,
+        0.43881828406521717,
+        0.4350105569113494,
+        0.4440169121830391
+      ],
+      "worst_paired_reduction_pct": 55.59830878169609
+    },
+    "resample.repeated": {
+      "before_ns": 166269.640625,
+      "after_ns": 156248.740234375,
+      "latency_reduction_pct": 6.239860336939729,
+      "paired_ratios": [
+        0.9352343544538929,
+        0.9442420367381595,
+        0.9289694050524953,
+        0.9399684388073125
+      ],
+      "worst_paired_reduction_pct": 5.5757963261840455
+    },
+    "resample.exact_slerp": {
+      "before_ns": 421779.8203125,
+      "after_ns": 425288.3203125,
+      "latency_reduction_pct": -0.920499565908317,
+      "paired_ratios": [
+        1.003128348346184,
+        1.013071408825522,
+        1.020746367462801,
+        1.0053385824926442
+      ],
+      "worst_paired_reduction_pct": -2.0746367462801008
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-01",
+  "validation_sha256": "53a49656b8f560fab114bfcecdfb6e89b439c837af65b2c52fe906a9597561eb"
+}

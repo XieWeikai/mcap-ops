@@ -84,7 +84,9 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
     }
     let times = signal.timestamps();
     let mut out = Sampled::empty(target, signal.channels())?;
-    let mut right = 0;
+    let mut right = target
+        .first()
+        .map_or(0, |&t| times.partition_point(|&v| v < t));
     for (i, &t) in target.iter().enumerate() {
         while right < times.len() && times[right] < t {
             right += 1;
