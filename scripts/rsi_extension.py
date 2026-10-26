@@ -65,7 +65,7 @@ def main():
                     "--method", recipe["method"], "--hotspot", recipe["hotspot"],
                     "--complexity", "Bounded safe-Rust local change; no new runtime dependencies. " + recipe["lesson"],
                     "--reason", ("All paired blocks clear 8%, no case regresses more than 3%, correctness passes. "
-                                 if accepted else "Performance gate failed; restore previous accepted implementation. ") + recipe["lesson"]
+                                 if accepted else "Performance gate failed; restore previous accepted implementation. ") + recipe["lesson"]]
         if accepted:
             decision.append("--accept")
         run(*decision)
