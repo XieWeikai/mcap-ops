@@ -45,7 +45,7 @@ def main():
                 '--round',str(number),'--method',recipe['method'],'--hotspot',recipe['hotspot'],
                 '--complexity','Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. '+recipe['lesson'],
                 '--reason',('Accept: every paired block >=8%, representative regression <=3%, correctness passed. ' if accepted else
-                            'Reject: stable 8%/representative-regression gate failed; restore last accepted state. ')+recipe['lesson']
+                            'Reject: stable 8%/representative-regression gate failed; restore last accepted state. ')+recipe['lesson']]
             if accepted:decision.append('--accept')
             run(*decision)
             if accepted:
