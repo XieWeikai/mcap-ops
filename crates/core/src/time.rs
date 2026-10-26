@@ -231,11 +231,11 @@ pub fn expand_batch_timestamps(
     if message_times.len() != counts.len() || count != offsets.len() {
         return Err(invalid("batch counts do not match timestamps and offsets"));
     }
-    let mut result = Vec::with_capacity(offsets.len());
+    let mut result = offsets.to_vec();
     let mut index = 0;
     for (&time, &count) in message_times.iter().zip(counts) {
-        for &offset in &offsets[index..index + count] {
-            result.push(time.checked_add(offset).ok_or(Error::Overflow)?);
+        for value in &mut result[index..index + count] {
+            *value = time.checked_add(*value).ok_or(Error::Overflow)?;
         }
         index += count;
     }

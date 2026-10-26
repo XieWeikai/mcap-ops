@@ -1,0 +1,40 @@
+{
+  "label": "extension-14-expand-batch-timestamps",
+  "base_commit": "d39f968f6a9e3431355830852a2da07c7f3689c6",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 33.95566412031656,
+  "worst_block_reduction_pct": 33.31004675981974,
+  "worst_case_reduction_pct": 33.95566412031656,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Iterator spelling and min/max prescans failed; retain per-element checked addition while removing Vec push bookkeeping.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "920a2d5d5d34c6fcf3e4421d69f21f5fa7edb30686ae9be728d9d303024ee214",
+  "operator": "expand_batch_timestamps",
+  "round": 14,
+  "series": "extension",
+  "decision": "accepted",
+  "method": "update copied batch offsets through mutable slices",
+  "profile_hotspot": "Batch expansion writes each pre-reserved result through push.",
+  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Iterator spelling and min/max prescans failed; retain per-element checked addition while removing Vec push bookkeeping.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 28933.49560546875,
+      "after_ns": 19084.36669921875,
+      "latency_reduction_pct": 33.95566412031656,
+      "paired_ratios": [
+        0.6668995324018026,
+        0.6666655746122762,
+        0.6536384706374075,
+        0.6542211429813927
+      ],
+      "worst_paired_reduction_pct": 33.31004675981974
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-14-expand-batch-timestamps",
+  "validation_sha256": "5b75730c4ed7fd96dfabc1aa691802ede447b3ec642975ad15a5f2c267fb0252"
+}
