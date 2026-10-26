@@ -29,7 +29,8 @@ def raw_cache(sources,kind):
     else:
         field='Option<std::collections::HashSet<String>>';initial='topic_cache'
     text=replace(text,'    done: bool,',f'    done: bool,\n    // TEN_CACHE_START\n    topic_cache: {field},\n    // TEN_CACHE_END')
-    text=replace(text,'            done: false,',f'            done: false,\n            // TEN_CACHE_START\n            topic_cache: {initial},\n            // TEN_CACHE_END')
+    initializer='topic_cache,' if initial=='topic_cache' else f'topic_cache: {initial},'
+    text=replace(text,'            done: false,',f'            done: false,\n            // TEN_CACHE_START\n            {initializer}\n            // TEN_CACHE_END')
     time='''let t=if self.filter.publish_clock {message.publish_time} else {message.log_time};
                         topic_matches && self.filter.start_ns.is_none_or(|s|t>=s) && self.filter.end_ns.is_none_or(|e|t<e)'''
     if kind=='set':
@@ -70,7 +71,7 @@ add('mcap_inspect','inspect_mcap','accumulate per-channel clocks in a hash map',
 def inspect_sorted(s):
     frozen=original(MCAP);a,b=function_span(frozen,'inspect_mcap');s=frozen[a:b]
     s=replace(s,'let mut times: BTreeMap<u16, (Vec<i64>, Vec<i64>, u64)> = BTreeMap::new();',
-        'let mut times:Vec<(u16,(Vec<i64>,Vec<i64>,u64))>=Vec::new();')
+        'type ChannelTimes=(Vec<i64>,Vec<i64>,u64);\n    let mut times:Vec<(u16,ChannelTimes)>=Vec::new();')
     s=replace(s,'let (logs, pubs, bytes) = times.entry(message.channel.id).or_default();',
         '''let index=match times.binary_search_by_key(&message.channel.id,|(id,_)|*id) {
             Ok(i)=>i,Err(i)=>{times.insert(i,(message.channel.id,Default::default()));i}
@@ -81,7 +82,12 @@ def inspect_sorted(s):
 add('mcap_inspect','inspect_mcap','store channel accumulators in a sorted compact vector',inspect_sorted,
     'Keep storage proportional to present channels rather than allocating a 65536-slot table for sparse IDs.')
 def inspect_same_clocks(s):
-    s=replace(s,'(Vec<i64>, Vec<i64>, u64)','(Vec<i64>, Option<Vec<i64>>, u64)')
+    if 'type ChannelTimes' in s:
+        s=replace(s,'(Vec<i64>, Vec<i64>, u64)','(Vec<i64>, Option<Vec<i64>>, u64)')
+    else:
+        s=replace(s,'(Vec<i64>, Vec<i64>, u64)','ChannelTimes')
+        s=replace(s,'    let mut times:',
+            '    type ChannelTimes=(Vec<i64>,Option<Vec<i64>>,u64);\n    let mut times:')
     s=replace(s,'''        logs.push(log);
         pubs.push(publish);''','''        if publish!=log || pubs.is_some() {pubs.get_or_insert_with(||logs.clone()).push(publish);}
         logs.push(log);''')

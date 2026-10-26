@@ -55,6 +55,7 @@ def mad_peek(s):
 add('inspect_signal','sorted_mad','cache each MAD frontier deviation in peekable iterators',mad_peek,
     'Each absolute deviation need only be calculated when its frontier advances.')
 def quality_sliding(s):
+    s=replace(s,'let mut values = Vec::new();','let mut values: Vec<f64> = Vec::new();')
     s=replace(s,'                for i in start..end {',
         '                values.clear();\n                let (mut loaded_a,mut loaded_b)=(start,start);\n                for i in start..end {')
     a=s.index('                    values.clear();');b=s.index('                    if values.len() < 3',a)
@@ -84,6 +85,10 @@ def quality_column(s):
     chunk=s[a:b].replace('            let mut start = 0;',
         '            let column:Vec<_>=signal.values().chunks_exact(signal.channels()).map(|row|row[channel]).collect();\n            let mut start = 0;',1)
     chunk=chunk.replace('signal.row(i)[channel]','column[i]').replace('signal.row(j)[channel]','column[j]')
+    chunk=re.sub(r'for j in loaded_a\.\.a\.min\(loaded_b\) \{\s*let old = column\[j\];',
+        'for &old in &column[loaded_a..a.min(loaded_b)] {',chunk)
+    chunk=re.sub(r'for j in loaded_b\.max\(a\)\.\.b \{\s*let value = column\[j\];',
+        'for &value in &column[loaded_b.max(a)..b] {',chunk)
     return s[:a]+chunk+s[b:]
 add('inspect_signal','inspect_signal','extract only active Hampel channels into contiguous scratch',quality_column,
     'Avoid the prior FIR-wide transpose cost: allocate one channel only when the expensive window detector is enabled.')

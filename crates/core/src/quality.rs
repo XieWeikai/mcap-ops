@@ -513,8 +513,7 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
     })
 }
 
-// median() has already sorted the finite values. Absolute deviations are two
-// monotone sequences on either side of center; merge only through their median.
+// Sorted samples give two monotone deviation sequences, avoiding another sort.
 fn sorted_mad(sorted: &[f64], center: f64) -> f64 {
     let split = sorted.partition_point(|&v| v <= center);
     let left = |i: usize| (sorted[split - 1 - i] - center).abs();

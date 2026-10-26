@@ -71,7 +71,7 @@ def main():
         arrays = [base[:, :4], base[:, ::2], np.asfortranarray(base[:, :4]), base[:, 0], base[::-1, ::2]]
         for data in arrays:
             if count > 3:
-                data = data.copy()
+                # Keep view strides while injecting non-finite input samples.
                 data.flat[1] = np.nan
                 data.flat[3] = np.inf
             target = np.arange(-5, count * 10 + 10, 5, dtype=np.int64)

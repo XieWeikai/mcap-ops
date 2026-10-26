@@ -50,6 +50,7 @@ def main():
         before = destination / "before" / name
         before.parent.mkdir(parents=True, exist_ok=True)
         before.write_bytes(subprocess.check_output(["git", "show", f"HEAD:{name}"], cwd=ROOT))
+    input_hashes = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in args.paths}
     subprocess.run(["python3", str(ROOT / "scripts/sync_sources.py")], cwd=ROOT, check=True)
     label = shlex.quote(args.label)
     cases = shlex.quote(args.cases)
@@ -105,6 +106,8 @@ python3 scripts/rsi_measure.py --before .artifacts/rsi/extension/sensitivity/bef
         result = subprocess.run(["ssh", "reference-linux", setup], stdout=log, stderr=subprocess.STDOUT)
     # Formatting is an expected output of this trial; fetch only explicitly owned paths.
     for name in args.paths:
+        if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != input_hashes[name]:
+            raise RuntimeError(f"local source changed during remote validation; refusing to overwrite {name}")
         subprocess.run(["rsync", "-az", f"reference-linux:{REMOTE}/{name}", str(ROOT / name)], check=True)
     if result.returncode:
         print((destination / "validation.log").read_text()[-9000:])

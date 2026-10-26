@@ -66,9 +66,8 @@ pub struct RawReader {
     limits: ReadLimits,
     seen: usize,
     done: bool,
-    // TEN_CACHE_START
+    // Membership is reusable only while the immutable channel identity is unchanged.
     topic_cache: std::collections::BTreeMap<u16, (std::sync::Arc<mcap::Channel<'static>>, bool)>,
-    // TEN_CACHE_END
 }
 impl RawReader {
     pub fn open(path: impl AsRef<Path>, filter: MessageFilter, limits: ReadLimits) -> Result<Self> {
@@ -96,9 +95,7 @@ impl RawReader {
             limits,
             seen: 0,
             done: false,
-            // TEN_CACHE_START
             topic_cache: std::collections::BTreeMap::new(),
-            // TEN_CACHE_END
         })
     }
     fn unchanged(&self) -> Result<()> {

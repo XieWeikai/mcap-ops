@@ -8,6 +8,8 @@ import argparse
 from pathlib import Path
 import subprocess
 import tempfile
+import json
+import shlex
 
 
 def main():
@@ -16,6 +18,12 @@ def main():
     parser.add_argument("--destination", default=".")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
+    receipt = root / '.artifacts/rsi/sync-receipt.json'
+    if args.host == 'reference-linux' and args.destination == '.' and receipt.exists():
+        expected = json.loads(receipt.read_text())['head']
+        actual = subprocess.check_output(['ssh', args.host, shlex.join(['git', '-C', args.destination, 'rev-parse', 'HEAD'])], text=True).strip()
+        if actual != expected:
+            raise RuntimeError('remote HEAD changed since the last verified publication; inspect it before synchronizing')
     entries = subprocess.check_output(
         ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
         cwd=root,

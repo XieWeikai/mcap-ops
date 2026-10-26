@@ -36,6 +36,8 @@ def main():
             trial=ROOT/'.artifacts/rsi/trials'/label
             print('BEGIN',op,number,recipe['method'],flush=True)
             if not trial.exists():
+                if subprocess.check_output(['git','diff','HEAD','--',*recipe['paths']],cwd=ROOT):
+                    raise RuntimeError(f'unexpected uncommitted changes in candidate paths: {recipe["paths"]}')
                 sources={name:(ROOT/name).read_text() for name in recipe['paths']};old=dict(sources)
                 recipe['apply'](sources)
                 if sources==old:raise RuntimeError(f'no-op candidate {label}; choose a genuinely different hypothesis')
