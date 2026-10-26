@@ -39,7 +39,12 @@ fn signal_from_arrays(
             .expect("standard layout has a contiguous slice")
             .to_vec()
     } else {
-        array.iter().copied().collect()
+        let (flat, offset) = array
+            .as_standard_layout()
+            .into_owned()
+            .into_raw_vec_and_offset();
+        debug_assert_eq!(offset.unwrap_or(0), 0);
+        flat
     };
     Signal::new(times, flat, channels).map_err(|error| PyValueError::new_err(error.to_string()))
 }
