@@ -1,0 +1,53 @@
+{
+  "label": "ten-ema-04",
+  "base_commit": "300b5c83be29a805a7d0ff527848c67599a9aa50",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": 17.928834371663783,
+  "worst_block_reduction_pct": 14.8956020332779,
+  "worst_case_reduction_pct": 3.115931712122366,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "242e9b3053846d13e5a7e15f8343e8db50e3f00b4e35d0f340ec452e3b3f1c19",
+  "operator": "ema",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "cache 2 exact EMA delta weights",
+  "profile_hotspot": "Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 322724.03125,
+      "after_ns": 311677.2890625,
+      "latency_reduction_pct": 3.115931712122366,
+      "paired_ratios": [
+        0.9673801638452822,
+        0.9703012019122704,
+        0.9589519898616797,
+        0.9768743734783335
+      ],
+      "worst_paired_reduction_pct": 2.31256265216665
+    },
+    "ema.jitter": {
+      "before_ns": 445441.3671875,
+      "after_ns": 311053.2734375,
+      "latency_reduction_pct": 30.16854031543801,
+      "paired_ratios": [
+        0.7486982702321135,
+        0.6909808748927414,
+        0.7056483187984983,
+        0.6733342448942231
+      ],
+      "worst_paired_reduction_pct": 25.130172976788646
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-ema-04",
+  "validation_sha256": "76b3e2dc4fc851b51d1a080e5c7e4c8d08633a048b4b952cb7a75c433ba09cc3"
+}
