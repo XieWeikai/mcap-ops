@@ -159,6 +159,23 @@ fn main() {
     let jitter = signal(50_000, 6, true);
     let times = dense.timestamps();
     let target: Vec<_> = (0..25_000).map(|i| i * 2_000_000 + 500_000).collect();
+    let sparse_target: Vec<_> = (0..32).map(|i| 40_000_000_000 + i * 10_000_000).collect();
+    let repeated_target: Vec<_> = target.iter().take(5000).flat_map(|&t| [t; 4]).collect();
+    for (name, grid) in [
+        ("align_timestamps.sparse", &sparse_target),
+        ("align_timestamps.repeated", &repeated_target),
+    ] {
+        runner.bench(name, || {
+            time::align_timestamps(
+                black_box(times),
+                black_box(grid),
+                true,
+                2_000_000,
+                2_000_000,
+            )
+            .unwrap()
+        });
+    }
     let options = sampling::SampleOptions {
         method: sampling::Method::Linear,
         max_gap_ns: 2_000_000,
@@ -194,6 +211,9 @@ fn main() {
             .unwrap()
         });
     }
+    runner.bench("map_clock.identity", || {
+        time::map_clock(black_box(times), 0, black_box(0), black_box(0)).unwrap()
+    });
     for (name, ppb) in [("map_clock.offset", 0), ("map_clock.drift", 1200)] {
         runner.bench(name, || {
             time::map_clock(black_box(times), 0, 17, black_box(ppb)).unwrap()
@@ -270,6 +290,34 @@ fn main() {
         });
     }
     let short = signal(4000, 6, false);
+    let mut seed = 9829u64;
+    for (name, constant) in [
+        ("inspect_signal.random_hampel", false),
+        ("inspect_signal.constant_hampel", true),
+    ] {
+        let s = Signal::new(
+            (0..4000).map(|i| i * 1_000_000).collect(),
+            (0..4000)
+                .map(|_| {
+                    seed = seed.wrapping_mul(6364136223846793005).wrapping_add(1);
+                    if constant {
+                        17.0
+                    } else {
+                        (seed >> 32) as f64 / u32::MAX as f64
+                    }
+                })
+                .collect(),
+            1,
+        )
+        .unwrap();
+        let cfg = quality::QualityConfig {
+            hampel_window_ns: Some(100_000_000),
+            ..Default::default()
+        };
+        runner.bench(name, || {
+            quality::inspect_signal(black_box(&s), black_box(&cfg)).unwrap()
+        });
+    }
     for (name, cfg, s) in [
         (
             "inspect_signal.basic",
@@ -335,6 +383,40 @@ fn main() {
         filter::lowpass_taps(black_box(1000.), black_box(50.), black_box(63)).unwrap()
     });
     let taps = filter::lowpass_taps(1000., 50., 31).unwrap();
+    for (name, n, d, k, invalid) in [
+        ("fir.short_scalar", 20000, 1, 3, false),
+        ("fir.short_vector", 20000, 6, 3, false),
+        ("fir.small_scalar", 32, 1, 3, false),
+        ("fir.small_vector", 32, 6, 31, false),
+        ("fir.wide", 8192, 32, 63, false),
+        ("fir.gapped", 20000, 6, 31, true),
+    ] {
+        let s = Signal::new(
+            (0..n).map(|i| i as i64 * 1000).collect(),
+            (0..n * d)
+                .map(|i| {
+                    if invalid && (i / d) % 17 == 0 {
+                        f64::NAN
+                    } else {
+                        (i as f64 * 0.01).sin()
+                    }
+                })
+                .collect(),
+            d,
+        )
+        .unwrap();
+        let coefficients = vec![1.0 / k as f64; k];
+        runner.bench(name, || {
+            filter::fir(
+                black_box(&s),
+                black_box(&coefficients),
+                filter::FilterMode::Causal,
+                1000,
+                0,
+            )
+            .unwrap()
+        });
+    }
     for (name, d) in [("fir.scalar", 1), ("fir.vector", 6)] {
         let s = signal(20_000, d, false);
         runner.bench(name, || {

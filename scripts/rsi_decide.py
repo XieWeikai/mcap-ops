@@ -15,7 +15,7 @@ def main():
     parser.add_argument("label")
     parser.add_argument("--operator", required=True)
     parser.add_argument("--round", type=int, required=True)
-    parser.add_argument("--series", choices=["initial", "extension"], default="initial")
+    parser.add_argument("--series", choices=["initial", "extension", "per-op10"], default="initial")
     parser.add_argument("--accept", action="store_true")
     parser.add_argument("--method", required=True)
     parser.add_argument("--hotspot", required=True)
@@ -56,7 +56,7 @@ def main():
         shutil.copyfile(trial / "sensitivity.json", data.with_name(args.label + "-sensitivity.json"))
     if args.accept:
         body = [
-            f"perf({args.operator}): {args.method} [RSI {'extension ' if args.series != 'initial' else ''}round {args.round}]",
+            f"perf({args.operator}): {args.method} [RSI {args.series + ' ' if args.series != 'initial' else ''}round {args.round}]",
             "",
             f"Profile: {args.hotspot}",
             f"Change: {args.method}",

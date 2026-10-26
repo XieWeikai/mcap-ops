@@ -22,7 +22,7 @@ def main():
     parser.add_argument("--python", action="store_true")
     parser.add_argument("--retry", action="store_true")
     parser.add_argument("--blocks", type=int, default=4)
-    parser.add_argument("--series", choices=["initial", "extension"], default="initial")
+    parser.add_argument("--series", choices=["initial", "extension", "per-op10"], default="initial")
     parser.add_argument("--sensitivity", action="store_true")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9_.-]+", args.label):
@@ -51,12 +51,12 @@ export PATH="$CARGO_HOME/bin:$PATH" VIRTUAL_ENV="$PWD/.venv"
 export CARGO_PROFILE_RELEASE_DEBUG=1 CARGO_BUILD_JOBS=12
 mkdir -p .artifacts/rsi/trials/{label}
 """
-    if args.series == "extension" and not args.python:
+    if args.series != "initial" and not args.python:
         setup += f"""
 VALGRIND_LIB="$PWD/.tools/valgrind/root/usr/libexec/valgrind" .tools/valgrind/root/usr/bin/valgrind --tool=callgrind --collect-atstart=no --toggle-collect='operator_benchmark::Runner::bench*' --callgrind-out-file=.artifacts/rsi/trials/{label}/before.callgrind .artifacts/rsi/bin/accepted --case {cases} --profile
 .tools/valgrind/root/usr/bin/callgrind_annotate --auto=no --inclusive=yes --threshold=98 .artifacts/rsi/trials/{label}/before.callgrind > .artifacts/rsi/trials/{label}/before-profile.txt
 """
-    if args.series == "extension" and args.python:
+    if args.series != "initial" and args.python:
         setup += f"""
 PYTHONPATH="$PWD/.artifacts/rsi/python/accepted" RSI_PYTHON_ROOT="$PWD/.artifacts/rsi/python/accepted" .venv/bin/python scripts/python_benchmark.py --case {cases} --profile .artifacts/rsi/trials/{label}/before.prof
 """
@@ -72,7 +72,7 @@ cargo build --locked --release -p mcap-ops-io --example operator_benchmark -j 12
 cp target/release/examples/operator_benchmark .artifacts/rsi/bin/{label}
 """
     if args.python:
-        profile_cases = cases if args.series == "extension" else "python.resample.linear"
+        profile_cases = cases if args.series != "initial" else "python.resample.linear"
         setup += f"""
 mkdir -p .artifacts/rsi/python/{label}
 cp -r python/mcap_ops .artifacts/rsi/python/{label}/
