@@ -32,6 +32,7 @@ fn sampled(a:before::sampling::Sampled,b:after::sampling::Sampled) {
 }
 fn rng(seed:&mut u64)->u64 {*seed=seed.wrapping_mul(6364136223846793005).wrapping_add(1442695040888963407);*seed}
 fn main() {
+    extension_edges();
     let mut seed=17;
     for iteration in 0..180 {
         let n=1+(rng(&mut seed)%150) as usize;let d=1+(rng(&mut seed)%6) as usize;
@@ -173,4 +174,81 @@ fn main() {
         assert_eq!(a.timestamps(),b.timestamps());numbers(a.values(),b.values());
     }
     println!("equivalence: 180 randomized core scenarios, 13 image fixtures, 2 MCAP fixtures passed");
+}
+
+// Additional public-interface oracles for the twenty follow-up experiments.
+fn extension_edges() {
+    let extremes = [i64::MIN, i64::MIN+1, -1_000_000_001, -3, -1, 0, 1, 3,
+                    1_000_000_001, i64::MAX-1, i64::MAX];
+    let mut clocks = 0;
+    for origin in [i64::MIN, -1_700_000_000_000_000_000, -1, 0, 1, i64::MAX] {
+        for offset in [i64::MIN, -17, 0, 17, i64::MAX] {
+            for rate in [i64::MIN, -1_000_000_000, -999_999_999, -500_000_000, -1200, -1, 0, 1, 1200, 500_000_000, i64::MAX] {
+                // Test single timestamps too: an early overflow must not hide later tie cases.
+                for t in extremes {
+                    assert_eq!(before::time::map_clock(&[t],origin,offset,rate).map_err(|e|e.to_string()),
+                        after::time::map_clock(&[t],origin,offset,rate).map_err(|e|e.to_string()));
+                    clocks += 1;
+                }
+            }
+        }
+    }
+    for (start,end) in [(0,0),(-9,11),(i64::MIN,i64::MIN+100),(i64::MAX-100,i64::MAX),
+                        (i64::MIN,i64::MAX),(10,0)] {
+        for (num,den) in [(0,1),(1,0),(1,1),(30_000,1001),(1_000_000_000,1),(u32::MAX,u32::MAX),(u32::MAX,1)] {
+            for limit in [0,1,31,64] {
+                assert_eq!(before::time::uniform_grid(start,end,num,den,limit).map_err(|e|e.to_string()),
+                    after::time::uniform_grid(start,end,num,den,limit).map_err(|e|e.to_string()));
+            }
+        }
+    }
+    for times in [vec![],vec![i64::MIN],vec![0,0],vec![i64::MIN,i64::MAX],vec![9,8,8,10],vec![0,2,3,7,20]] {
+        for gap in [0,3,i64::MAX] {
+            let a=before::time::inspect_time(&times,gap);
+            let b=after::time::inspect_time(&times,gap);
+            match (a,b) {
+                (Ok(a),Ok(b)) => json(serde_json::to_value(a).unwrap(),serde_json::to_value(b).unwrap()),
+                (Err(a),Err(b)) => assert_eq!(a.to_string(),b.to_string()),
+                _ => panic!("inspect_time result differs"),
+            }
+        }
+        assert_eq!(before::time::require_strict(&times).map_err(|e|e.to_string()),
+            after::time::require_strict(&times).map_err(|e|e.to_string()));
+    }
+    let mut seed=937;
+    for n in [3,4,31,64,257] {
+        for variant in 0..5 {
+            let times:Vec<_>=(0..n).map(|i|i as i64*10+if i>n/2 {100} else {0}).collect();
+            let values:Vec<f64>=(0..n).map(|i|match variant {
+                0 => (rng(&mut seed)%1000) as f64,
+                1 => if i%2==0 {-0.0} else {0.0},
+                2 => if i%3==0 {f64::NAN} else {(i%5) as f64},
+                3 => if i%2==0 {f64::MAX} else {-f64::MAX},
+                _ => (i as f64*0.13).sin(),
+            }).collect();
+            let a=before::Signal::new(times.clone(),values.clone(),1).unwrap();
+            let b=after::Signal::new(times,values,1).unwrap();
+            for window in [10,50,5000] {
+                let cfg=serde_json::json!({"hampel_window_ns":window,"max_gap_ns":50,"max_issues":1000});
+                let qa=before::quality::inspect_signal(&a,&serde_json::from_value(cfg.clone()).unwrap()).unwrap();
+                let qb=after::quality::inspect_signal(&b,&serde_json::from_value(cfg).unwrap()).unwrap();
+                assert_eq!(qa.flagged_samples,qb.flagged_samples);
+                json(serde_json::to_value(qa).unwrap(),serde_json::to_value(qb).unwrap());
+            }
+        }
+    }
+    for angle in [0.0_f64,0.01,0.5,1.5,3.14] {
+        for scale in [0.98,0.995,1.0,1.005,1.02] {
+            for sign in [-1.0,1.0] {
+                let q=vec![0.0,0.0,0.0,1.0,0.0,0.0,scale*angle.sin()*sign,scale*angle.cos()*sign];
+                let a=before::Signal::new(vec![0,100],q.clone(),4).unwrap();
+                let b=after::Signal::new(vec![0,100],q,4).unwrap();
+                sampled(before::sampling::resample(&a,&[-1,0,1,25,50,99,100,101],before::sampling::SampleOptions{
+                    method:before::sampling::Method::Slerp,max_gap_ns:100,max_age_ns:100,allow_future:true}).unwrap(),
+                    after::sampling::resample(&b,&[-1,0,1,25,50,99,100,101],after::sampling::SampleOptions{
+                    method:after::sampling::Method::Slerp,max_gap_ns:100,max_age_ns:100,allow_future:true}).unwrap());
+            }
+        }
+    }
+    println!("extension edge oracle: {clocks} clock cases, 168 grids, 75 Hampel cases, 50 SLERP cases passed");
 }

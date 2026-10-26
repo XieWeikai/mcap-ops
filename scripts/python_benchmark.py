@@ -24,7 +24,10 @@ def measure(name, operation, args):
     if args.profile:
         profile = cProfile.Profile()
         profile.runcall(operation)
-        profile.dump_stats(args.profile)
+        path = Path(args.profile)
+        if args.case and "," in args.case:
+            path = path.with_name(f"{path.stem}-{name}{path.suffix}")
+        profile.dump_stats(str(path))
         return
     iterations = 1
     millis = float(os.getenv("RSI_MILLIS", "20"))
