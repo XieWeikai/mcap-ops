@@ -63,6 +63,15 @@ def main():
     centers = timestamps[10:8010:2].copy()
     offsets = np.array([-3_000_000, -2_000_000, -1_000_000, 0], dtype=np.int64)
     taps = np.array(ops.lowpass_taps(1000, 50, 31), dtype=np.float64)
+    short_times=timestamps[:64]
+    short_values=values[:64]
+    measure("python.resample.small",lambda:ops.resample(short_times,short_values,target[:32],method="linear",max_gap_ns=2_000_000,max_age_ns=2_000_000,allow_future=True),args)
+    measure("python.history_windows.small",lambda:ops.history_windows(short_times,short_values,short_times[4:20],offsets,max_age_ns=2_000_000),args)
+    measure("python.ema.small",lambda:ops.ema(short_times,short_values,0.05,2_000_000),args)
+    measure("python.fir.small",lambda:ops.fir(short_times,short_values,taps,period_ns=1_000_000),args)
+    measure("python.unwrap_angles.small",lambda:ops.unwrap_angles(short_times,short_values,max_gap_ns=2_000_000),args)
+    strided=np.repeat(values,2,axis=1)[:,::2]
+    measure("python.resample.strided",lambda:ops.resample(timestamps,strided,target,method="linear",max_gap_ns=2_000_000,max_age_ns=2_000_000,allow_future=True),args)
     measure("python.inspect_signal", lambda: ops.inspect_signal(timestamps, values), args)
     for method in ("previous", "linear"):
         measure(f"python.resample.{method}", lambda: ops.resample(

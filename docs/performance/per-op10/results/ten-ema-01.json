@@ -1,0 +1,53 @@
+{
+  "label": "ten-ema-01",
+  "base_commit": "300b5c83be29a805a7d0ff527848c67599a9aa50",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": 2.8400812491993666,
+  "worst_block_reduction_pct": 0.39897932409221903,
+  "worst_case_reduction_pct": 2.79178044463565,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Every EMA row is fully written or filled with NaNs; avoid an unconditional initial NaN fill.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "5881b19b3b3f5ad9520cbb2bbc905c4fdca37f812da365442ff225253b558920",
+  "operator": "ema",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "initialize EMA storage through zeroed allocation",
+  "profile_hotspot": "Every EMA row is fully written or filled with NaNs; avoid an unconditional initial NaN fill.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Every EMA row is fully written or filled with NaNs; avoid an unconditional initial NaN fill.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 323071.515625,
+      "after_ns": 313477.45703125,
+      "latency_reduction_pct": 2.79178044463565,
+      "paired_ratios": [
+        0.9928762620707607,
+        0.9726119681403969,
+        0.9586542141268213,
+        0.9715524229668902
+      ],
+      "worst_paired_reduction_pct": 0.712373792923926
+    },
+    "ema.jitter": {
+      "before_ns": 453343.6796875,
+      "after_ns": 436377.8828125,
+      "latency_reduction_pct": 3.8536506523205727,
+      "paired_ratios": [
+        0.9583785258013438,
+        0.9628595442159754,
+        0.960067442737613,
+        1.0210836888644854
+      ],
+      "worst_paired_reduction_pct": -2.1083688864485417
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-ema-01",
+  "validation_sha256": "a72c1664784dbdcab6cfff156662ba47d9555242fec923f7c85ae6ecc8c270e2"
+}

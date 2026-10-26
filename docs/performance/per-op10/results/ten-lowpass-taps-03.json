@@ -1,0 +1,66 @@
+{
+  "label": "ten-lowpass-taps-03",
+  "base_commit": "54e45b70c82f1036f89d841cf0dd88208dd23ac6",
+  "cases": [
+    "lowpass_taps",
+    "lowpass_taps.short",
+    "lowpass_taps.long"
+  ],
+  "geomean_latency_reduction_pct": 34.62700540272215,
+  "worst_block_reduction_pct": 34.05892623271247,
+  "worst_case_reduction_pct": -28.021071149867893,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "5d72ad320ab8f3132b85820128cc255ee9051c3b04011e48e79b1bec2e389976",
+  "operator": "lowpass_taps",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "advance both phases by trigonometric recurrence",
+  "profile_hotspot": "Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 259.61111068725586,
+      "after_ns": 135.31974601745605,
+      "latency_reduction_pct": 47.88229839111455,
+      "paired_ratios": [
+        0.5199420824067501,
+        0.5225383801863014,
+        0.4561249403036624,
+        0.522411949770959
+      ],
+      "worst_paired_reduction_pct": 47.74616198136986
+    },
+    "lowpass_taps.short": {
+      "before_ns": 31.95762300491333,
+      "after_ns": 41.09217071533203,
+      "latency_reduction_pct": -28.021071149867893,
+      "paired_ratios": [
+        1.2807423690428603,
+        1.2796790539544978,
+        1.077936967438141,
+        1.312864030341282
+      ],
+      "worst_paired_reduction_pct": -31.286403034128195
+    },
+    "lowpass_taps.long": {
+      "before_ns": 16493.6708984375,
+      "after_ns": 6847.015625,
+      "latency_reduction_pct": 58.74478482602442,
+      "paired_ratios": [
+        0.43057746669182795,
+        0.41559451169938777,
+        0.3721071887816242,
+        0.40950979178012387
+      ],
+      "worst_paired_reduction_pct": 56.9422533308172
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-lowpass-taps-03",
+  "validation_sha256": "ae7ce746eb65a8b4cb7f587340d69a1b52f8658ef3d3e7629ce7f03111571442"
+}

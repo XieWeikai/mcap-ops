@@ -1,0 +1,22 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 3b1c49c..b0ba1e4 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -28,7 +28,7 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
+     let mut values = vec![f64::NAN; signal.values().len()];
+     let mut valid = vec![false; signal.len()];
+     let mut previous: Option<usize> = None;
+-    let mut cache = [(-1i128, 0.0f64); 2];
++    let mut cache = [(-1i128, 0.0f64); 8];
+     let mut next_cache = 0;
+     for (i, is_valid) in valid.iter_mut().enumerate() {
+         let prior = previous.filter(|&p| {
+@@ -44,7 +44,7 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
+                 let dt = dt_ns as f64 / 1e9;
+                 let weight = -(-dt / tau_seconds).exp_m1();
+                 cache[next_cache] = (dt_ns, weight);
+-                next_cache = (next_cache + 1) % 2;
++                next_cache = (next_cache + 1) % 8;
+                 weight
+             })
+             .unwrap_or(1.0);

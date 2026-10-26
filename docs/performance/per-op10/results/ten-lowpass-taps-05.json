@@ -1,0 +1,66 @@
+{
+  "label": "ten-lowpass-taps-05",
+  "base_commit": "54e45b70c82f1036f89d841cf0dd88208dd23ac6",
+  "cases": [
+    "lowpass_taps",
+    "lowpass_taps.short",
+    "lowpass_taps.long"
+  ],
+  "geomean_latency_reduction_pct": 5.803959045036211,
+  "worst_block_reduction_pct": 4.674329637356278,
+  "worst_case_reduction_pct": 0.9226460548829474,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Do not turn tiny valid sums into infinite coefficients; retain division when the reciprocal overflows.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "ed252bb7bebac043821ab6de3116112aa9a56dc908e2eddaffdbf8986110490c",
+  "operator": "lowpass_taps",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "normalize coefficients with a guarded reciprocal sum",
+  "profile_hotspot": "Do not turn tiny valid sums into infinite coefficients; retain division when the reciprocal overflows.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Do not turn tiny valid sums into infinite coefficients; retain division when the reciprocal overflows.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 259.61256408691406,
+      "after_ns": 242.5399513244629,
+      "latency_reduction_pct": 6.333314173629101,
+      "paired_ratios": [
+        0.917502294721193,
+        0.9339450406255786,
+        0.9393886759018393,
+        0.9428053152201329
+      ],
+      "worst_paired_reduction_pct": 5.719468477986711
+    },
+    "lowpass_taps.short": {
+      "before_ns": 31.758345603942868,
+      "after_ns": 31.454143047332764,
+      "latency_reduction_pct": 0.9226460548829474,
+      "paired_ratios": [
+        0.9891075155448453,
+        0.9840748225919359,
+        0.9963937860339205,
+        0.9924395633574958
+      ],
+      "worst_paired_reduction_pct": 0.3606213966079519
+    },
+    "lowpass_taps.long": {
+      "before_ns": 16747.042724609375,
+      "after_ns": 15166.58837890625,
+      "latency_reduction_pct": 9.625883163600424,
+      "paired_ratios": [
+        0.9356441623488257,
+        0.8817114632277918,
+        0.8788643489401107,
+        0.9257708735001998
+      ],
+      "worst_paired_reduction_pct": 6.435583765117425
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-lowpass-taps-05",
+  "validation_sha256": "719e4f01e35e6b0eb38d3cc60466aba899995e0664e729ba86692728f7495b78"
+}

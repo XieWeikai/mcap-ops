@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 83bbb81..4b324c7 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -25,7 +25,7 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
+             "positive finite tau and nonnegative max gap required",
+         ));
+     }
+-    let mut values = vec![f64::NAN; signal.values().len()];
++    let mut values = signal.values().to_vec();
+     let mut valid = vec![false; signal.len()];
+     let mut previous: Option<usize> = None;
+     let mut cached_weight: Option<(i128, f64)> = None;

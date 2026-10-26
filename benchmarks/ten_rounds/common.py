@@ -39,7 +39,7 @@ CASES={
  'image_quality':'image_quality.gradient,image_quality.noise',
  'image_transform':'image_transform.gradient,image_transform.noise',
  'video_probe':'video_probe,video_validate','video_validate':'video_validate',
- 'python_bridge':'python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal',
+ 'python_bridge':'python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided',
 }
 
 

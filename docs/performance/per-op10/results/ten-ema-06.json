@@ -1,0 +1,53 @@
+{
+  "label": "ten-ema-06",
+  "base_commit": "6172f7e8979967a087f41a645032d103c6813ee9",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": -1.6852579809073287,
+  "worst_block_reduction_pct": -2.8405214656613387,
+  "worst_case_reduction_pct": -2.014225226724542,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "129e9fc5d4faaaf86e46fd691e240a725f4badb1be6aaacd69e9f10e5f91a03c",
+  "operator": "ema",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "cache 8 exact EMA delta weights",
+  "profile_hotspot": "Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 311169.65234375,
+      "after_ns": 318160.18359375,
+      "latency_reduction_pct": -2.014225226724542,
+      "paired_ratios": [
+        1.0296470579212553,
+        1.0091515840833538,
+        1.021683003362119,
+        1.018601501172372
+      ],
+      "worst_paired_reduction_pct": -2.9647057921255326
+    },
+    "ema.jitter": {
+      "before_ns": 309358.09765625,
+      "after_ns": 316997.984375,
+      "latency_reduction_pct": -1.8363609131512248,
+      "paired_ratios": [
+        1.027164869162185,
+        1.0225619327547615,
+        1.0129839659594244,
+        1.0141652855082628
+      ],
+      "worst_paired_reduction_pct": -2.716486916218508
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-ema-06",
+  "validation_sha256": "3b36dbc0120ee4af8d6472fd5b94f490f2846a04c424113f92d3556fc24a9a7b"
+}

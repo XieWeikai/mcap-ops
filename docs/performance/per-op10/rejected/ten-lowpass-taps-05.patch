@@ -1,0 +1,19 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 90c3cee..775937c 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -117,8 +117,13 @@ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<
+         (sw, cw) = (sw * cwd + cw * swd, cw * cwd - sw * swd);
+     }
+     let sum: f64 = result.iter().sum();
++    let inverse = 1.0 / sum;
+     for value in &mut result {
+-        *value /= sum;
++        if inverse.is_finite() {
++            *value *= inverse;
++        } else {
++            *value /= sum;
++        }
+     }
+     Ok(result)
+ }

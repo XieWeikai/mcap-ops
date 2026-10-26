@@ -22,6 +22,10 @@ The existing gate remains: >=8% geometric-mean latency reduction in every one of
 four alternating paired blocks, no representative case slower by >3%, correctness
 and complexity review passing. Preserve all masks, errors, provenance, limits,
 CRC checks, timestamps, shapes and source data. No runtime dependency is added.
+PNG encoder alternatives also preserve decoded pixels exactly and may not grow
+the largest per-fixture output ratio beyond 1.25x; faster CPU encoding must not
+silently impose a large storage/bandwidth cost. Size pairs are recorded with each
+encoder decision. Python comparisons include reversed strided views.
 Representative fixtures for later operator groups are frozen before those groups
 begin. Existing time-group inputs remain unchanged; final whole-campaign comparisons
 will rebuild the original source with the completed harness so both sides use

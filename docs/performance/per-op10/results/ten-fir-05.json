@@ -1,0 +1,144 @@
+{
+  "label": "ten-fir-05",
+  "base_commit": "f29817816044e429918adbe4fb823ff81d766ea1",
+  "cases": [
+    "fir.scalar",
+    "fir.vector",
+    "fir.short_scalar",
+    "fir.short_vector",
+    "fir.small_scalar",
+    "fir.small_vector",
+    "fir.wide",
+    "fir.gapped",
+    "fir.single"
+  ],
+  "geomean_latency_reduction_pct": -12.254411274145482,
+  "worst_block_reduction_pct": -13.33897024982409,
+  "worst_case_reduction_pct": -42.76722189363387,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. A one-tap window has no interior gap edges; preserve source order, non-finite handling and exact delay metadata.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "476bdca601a35152474360cd1ed6800c505ce0bf05094cd64cd4e1488958106c",
+  "operator": "fir",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "specialize finite one-tap FIR windows",
+  "profile_hotspot": "A one-tap window has no interior gap edges; preserve source order, non-finite handling and exact delay metadata.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. A one-tap window has no interior gap edges; preserve source order, non-finite handling and exact delay metadata.",
+  "case_results": {
+    "fir.single": {
+      "before_ns": 250782.33984375,
+      "after_ns": 167305.89453125,
+      "latency_reduction_pct": 33.37332889340989,
+      "paired_ratios": [
+        0.6717435408269671,
+        0.6686606875760829,
+        0.6575466152412921,
+        0.6638727345557194
+      ],
+      "worst_paired_reduction_pct": 32.82564591730329
+    },
+    "fir.short_scalar": {
+      "before_ns": 119863.7578125,
+      "after_ns": 154123.61328125,
+      "latency_reduction_pct": -28.368737532554753,
+      "paired_ratios": [
+        1.2776362181338126,
+        1.28808303051811,
+        1.3594973431655828,
+        1.2792917201329854
+      ],
+      "worst_paired_reduction_pct": -35.94973431655828
+    },
+    "fir.short_vector": {
+      "before_ns": 349906.546875,
+      "after_ns": 400387.1875,
+      "latency_reduction_pct": -13.340673687317972,
+      "paired_ratios": [
+        1.1145575730498545,
+        1.1244619984057411,
+        1.146186636718496,
+        1.1423514753406185
+      ],
+      "worst_paired_reduction_pct": -14.618663671849607
+    },
+    "fir.small_scalar": {
+      "before_ns": 223.63332748413086,
+      "after_ns": 308.70826721191406,
+      "latency_reduction_pct": -39.06487034308843,
+      "paired_ratios": [
+        1.3715259693981627,
+        1.4527370667099393,
+        1.3470146832573187,
+        1.409771437463606
+      ],
+      "worst_paired_reduction_pct": -45.27370667099393
+    },
+    "fir.small_vector": {
+      "before_ns": 407.0611038208008,
+      "after_ns": 508.3401565551758,
+      "latency_reduction_pct": -24.70466871229644,
+      "paired_ratios": [
+        1.2647463539416297,
+        1.2567827579390634,
+        1.2373106163068655,
+        1.2348932516216349
+      ],
+      "worst_paired_reduction_pct": -26.47463539416297
+    },
+    "fir.wide": {
+      "before_ns": 6760776.75,
+      "after_ns": 6897502.75,
+      "latency_reduction_pct": -1.625116837699192,
+      "paired_ratios": [
+        1.0235868476853318,
+        0.9987373170863045,
+        1.008915489068652,
+        1.0836070493593974
+      ],
+      "worst_paired_reduction_pct": -8.360704935939744
+    },
+    "fir.gapped": {
+      "before_ns": 105050.75,
+      "after_ns": 149978.048828125,
+      "latency_reduction_pct": -42.76722189363387,
+      "paired_ratios": [
+        1.4272477214224526,
+        1.3959603649937362,
+        1.4280967164502247,
+        1.4500093013463402
+      ],
+      "worst_paired_reduction_pct": -45.00093013463402
+    },
+    "fir.scalar": {
+      "before_ns": 328338.625,
+      "after_ns": 366153.4375,
+      "latency_reduction_pct": -11.517113995975858,
+      "paired_ratios": [
+        1.1146522358593611,
+        1.1156900440601558,
+        1.1390819924274755,
+        1.1098824878676066
+      ],
+      "worst_paired_reduction_pct": -13.908199242747553
+    },
+    "fir.vector": {
+      "before_ns": 1633302.0625,
+      "after_ns": 1673655.3125,
+      "latency_reduction_pct": -3.440258600393853,
+      "paired_ratios": [
+        1.0334219585917512,
+        1.0353832134161258,
+        1.0036221483213006,
+        1.0477591465883636
+      ],
+      "worst_paired_reduction_pct": -4.7759146588363555
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-05",
+  "validation_sha256": "a1aaf5123254fa85c40df9b7479f1b345f4c63389ae852f78bfb4c8234899fae"
+}

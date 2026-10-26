@@ -1,0 +1,28 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index e85c4fa..6498119 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -107,7 +107,7 @@ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<
+         return Ok(vec![a / sum, b / sum, a / sum]);
+     }
+     let middle = (taps - 1) as f64 / 2.0;
+-    let mut result = vec![0.0; taps];
++    let mut result = Vec::with_capacity(taps);
+     let (mut sw, mut cw) = (0.0f64, 1.0f64);
+     let (swd, cwd) = (2.0 * std::f64::consts::PI / (taps - 1) as f64).sin_cos();
+     for i in 0..=taps / 2 {
+@@ -118,10 +118,12 @@ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<
+             (2.0 * std::f64::consts::PI * fc * n).sin() / (std::f64::consts::PI * n)
+         };
+         let value = sinc * (0.54 - 0.46 * cw);
+-        result[i] = value;
+-        result[taps - 1 - i] = value;
++        result.push(value);
+         (sw, cw) = (sw * cwd + cw * swd, cw * cwd - sw * swd);
+     }
++    for i in (0..taps / 2).rev() {
++        result.push(result[i]);
++    }
+     let sum: f64 = result.iter().sum();
+     for value in &mut result {
+         *value /= sum;

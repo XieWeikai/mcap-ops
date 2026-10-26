@@ -130,6 +130,7 @@ fn main() {
             for crop in [None,Some([0,0,n,n])] {
                 let x=before_io::image_ops::transform_image(bytes.get_ref(),&oa,crop,Some([n+2,n+1]),before_io::image_ops::ResizeFilter::Lanczos3).unwrap();
                 let y=after_io::image_ops::transform_image(bytes.get_ref(),&ob,crop,Some([n+2,n+1]),after_io::image_ops::ResizeFilter::Lanczos3).unwrap();
+                println!("resource_png {} {}",x.len(),y.len());
                 assert_eq!(image::load_from_memory(&x).unwrap().to_rgba8(),image::load_from_memory(&y).unwrap().to_rgba8());
             }
         }
@@ -144,6 +145,7 @@ fn main() {
         let oa=before_io::image_ops::ImageOptions::default();let ob=after_io::image_ops::ImageOptions::default();
         let a=before_io::image_ops::transform_image(encoded.get_ref(),&oa,None,Some([9,8]),before_io::image_ops::ResizeFilter::Lanczos3).unwrap();
         let b=after_io::image_ops::transform_image(encoded.get_ref(),&ob,None,Some([9,8]),after_io::image_ops::ResizeFilter::Lanczos3).unwrap();
+        println!("resource_png {} {}",a.len(),b.len());
         assert_eq!(image::load_from_memory(&a).unwrap().to_rgba16(),image::load_from_memory(&b).unwrap().to_rgba16());
     }
     let temp=tempfile::tempdir().unwrap();
@@ -203,6 +205,10 @@ fn extension_edges() {
         let mut encoded=Cursor::new(Vec::new());image::DynamicImage::ImageRgb8(rgb).write_to(&mut encoded,image::ImageFormat::Png).unwrap();
         json(serde_json::to_value(before_io::image_ops::image_quality(encoded.get_ref(),&Default::default()).unwrap()).unwrap(),
              serde_json::to_value(after_io::image_ops::image_quality(encoded.get_ref(),&Default::default()).unwrap()).unwrap());
+        let a=before_io::image_ops::transform_image(encoded.get_ref(),&Default::default(),None,Some([w/2,h/2]),before_io::image_ops::ResizeFilter::Lanczos3).unwrap();
+        let b=after_io::image_ops::transform_image(encoded.get_ref(),&Default::default(),None,Some([w/2,h/2]),after_io::image_ops::ResizeFilter::Lanczos3).unwrap();
+        assert_eq!(image::load_from_memory(&a).unwrap().to_rgba8(),image::load_from_memory(&b).unwrap().to_rgba8());
+        println!("resource_png {} {}",a.len(),b.len());
     }
     println!("per-op10 oracle: 6 coefficient extremes, 16 gapped FIR cases, 2 large image fixtures passed");
     let extremes = [i64::MIN, i64::MIN+1, -1_000_000_001, -3, -1, 0, 1, 3,

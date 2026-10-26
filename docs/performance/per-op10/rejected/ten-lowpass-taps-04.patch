@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 90c3cee..624b54b 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -109,7 +109,7 @@ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<
+         let sinc = if n == 0.0 {
+             2.0 * fc
+         } else {
+-            (2.0 * std::f64::consts::PI * fc * n).sin() / (std::f64::consts::PI * n)
++            (2.0 * std::f64::consts::PI * fc * n).sin() / n * std::f64::consts::FRAC_1_PI
+         };
+         let value = sinc * (0.54 - 0.46 * cw);
+         result[i] = value;

@@ -1,0 +1,66 @@
+{
+  "label": "ten-lowpass-taps-04",
+  "base_commit": "54e45b70c82f1036f89d841cf0dd88208dd23ac6",
+  "cases": [
+    "lowpass_taps",
+    "lowpass_taps.short",
+    "lowpass_taps.long"
+  ],
+  "geomean_latency_reduction_pct": 0.18015581740757902,
+  "worst_block_reduction_pct": -0.9215585045333263,
+  "worst_case_reduction_pct": -0.7190803200267659,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Test constant reciprocal lowering while retaining the exact zero-offset coefficient branch.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "38047a8ac246f1b70f4104897ba7fa3fd2822bbf8d28c39f7e970d3efe8297a2",
+  "operator": "lowpass_taps",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "factor the sinc denominator into a reciprocal pi",
+  "profile_hotspot": "Test constant reciprocal lowering while retaining the exact zero-offset coefficient branch.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Test constant reciprocal lowering while retaining the exact zero-offset coefficient branch.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 259.5194435119629,
+      "after_ns": 257.8763542175293,
+      "latency_reduction_pct": 0.34858702054297863,
+      "paired_ratios": [
+        1.0298745721248144,
+        0.9905221534768374,
+        1.002506106112303,
+        0.9754431977395537
+      ],
+      "worst_paired_reduction_pct": -2.987457212481437
+    },
+    "lowpass_taps.short": {
+      "before_ns": 32.48706865310669,
+      "after_ns": 32.295594215393066,
+      "latency_reduction_pct": 0.5892588423618283,
+      "paired_ratios": [
+        0.9950135700776341,
+        1.0118659754446415,
+        0.9932012530751294,
+        0.9794128710351443
+      ],
+      "worst_paired_reduction_pct": -1.1865975444641519
+    },
+    "lowpass_taps.long": {
+      "before_ns": 16437.593017578125,
+      "after_ns": 16596.724609375,
+      "latency_reduction_pct": -0.7190803200267659,
+      "paired_ratios": [
+        1.003086779687089,
+        1.011294826713446,
+        0.9770273663212786,
+        1.0214484291538481
+      ],
+      "worst_paired_reduction_pct": -2.1448429153848148
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-lowpass-taps-04",
+  "validation_sha256": "3132bdf8d0d39a9a001292a2c3897113329336590cf8d084faf31aec4f38fd6d"
+}

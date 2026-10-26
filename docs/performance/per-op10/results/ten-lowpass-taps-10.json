@@ -1,0 +1,66 @@
+{
+  "label": "ten-lowpass-taps-10",
+  "base_commit": "c52eceae06e4c84cc57b4f12b34910acae804400",
+  "cases": [
+    "lowpass_taps",
+    "lowpass_taps.short",
+    "lowpass_taps.long"
+  ],
+  "geomean_latency_reduction_pct": -4.041229973620908,
+  "worst_block_reduction_pct": -6.585407310908975,
+  "worst_case_reduction_pct": -7.8557049495762366,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compare append construction with the existing prefilled symmetric array; output order is unchanged.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "5f0018cac7da5cf972cd08f666911f2ac374215a31bf1b4e354fcb2e638f337a",
+  "operator": "lowpass_taps",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "append the symmetric coefficient half without zero filling",
+  "profile_hotspot": "Compare append construction with the existing prefilled symmetric array; output order is unchanged.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Compare append construction with the existing prefilled symmetric array; output order is unchanged.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 257.1557083129883,
+      "after_ns": 266.02337646484375,
+      "latency_reduction_pct": -2.660185977148455,
+      "paired_ratios": [
+        1.0303219371359003,
+        1.0500298584363075,
+        1.0228817824070688,
+        1.020005943065292
+      ],
+      "worst_paired_reduction_pct": -5.002985843630747
+    },
+    "lowpass_taps.short": {
+      "before_ns": 15.155279159545898,
+      "after_ns": 15.121770858764648,
+      "latency_reduction_pct": 0.1523747187578417,
+      "paired_ratios": [
+        1.0906632503620726,
+        0.9974559360037036,
+        0.9994965696211396,
+        0.9907316927905548
+      ],
+      "worst_paired_reduction_pct": -9.066325036207257
+    },
+    "lowpass_taps.long": {
+      "before_ns": 16541.818115234375,
+      "after_ns": 17981.15625,
+      "latency_reduction_pct": -7.8557049495762366,
+      "paired_ratios": [
+        1.0775306214556404,
+        1.0795834775358844,
+        1.0556677180147864,
+        1.1099928908411945
+      ],
+      "worst_paired_reduction_pct": -10.999289084119447
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-lowpass-taps-10",
+  "validation_sha256": "8645bad7f61e0f57402d976423d89481984367530d64fc6932baa9b051b6ecc7"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-ema-10",
+  "base_commit": "6172f7e8979967a087f41a645032d103c6813ee9",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": 1.4744974611969663,
+  "worst_block_reduction_pct": -3.0515594405631896,
+  "worst_case_reduction_pct": 0.23946910977759028,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Guard reciprocal overflow and retain the original expression for subnormal tau; compare numeric outputs through the oracle.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "4ff55f03ca957d603b8dab60d198db5defcc84b6ded3a88275e7ad0e779c3504",
+  "operator": "ema",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reuse a finite reciprocal time constant",
+  "profile_hotspot": "Guard reciprocal overflow and retain the original expression for subnormal tau; compare numeric outputs through the oracle.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Guard reciprocal overflow and retain the original expression for subnormal tau; compare numeric outputs through the oracle.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 319536.4765625,
+      "after_ns": 312365.3359375,
+      "latency_reduction_pct": 2.2831004737403626,
+      "paired_ratios": [
+        0.9730049094104727,
+        0.9553502322363894,
+        0.9813330811147201,
+        1.040243597533477
+      ],
+      "worst_paired_reduction_pct": -4.024359753347695
+    },
+    "ema.jitter": {
+      "before_ns": 319412.13671875,
+      "after_ns": 317860.2265625,
+      "latency_reduction_pct": 0.23946910977759028,
+      "paired_ratios": [
+        0.9833542763216657,
+        0.9917318584021253,
+        1.003478759402323,
+        1.0208785642432343
+      ],
+      "worst_paired_reduction_pct": -2.087856424323431
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-ema-10",
+  "validation_sha256": "50cd409c9869c7749f169613740e6839b79b4cfb89d1b7c70660fd68d0844c7d"
+}

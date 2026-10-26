@@ -73,6 +73,8 @@ def main():
             for name, row in measurement["summary"].items()
         ]
         body += ["", f"Correctness: {audit['correctness']}.",
+                 *([f"Maximum lossless PNG size ratio: {audit['png_max_growth_ratio']:.4f}x (limit 1.25x)."]
+                   if "png_max_growth_ratio" in audit else []),
                  *([f"Expanded workload worst-case reduction: {audit['sensitivity_worst_case_pct']:.2f}%. "
                     f"Evidence: {data.with_name(args.label + '-sensitivity.json').relative_to(ROOT)}"]
                    if "sensitivity_sha256" in audit else []),

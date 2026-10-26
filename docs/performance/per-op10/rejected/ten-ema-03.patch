@@ -1,0 +1,33 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 83bbb81..9669ebe 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -28,7 +28,8 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
+     let mut values = vec![f64::NAN; signal.values().len()];
+     let mut valid = vec![false; signal.len()];
+     let mut previous: Option<usize> = None;
+-    let mut cached_weight: Option<(i128, f64)> = None;
++    let mut cached_dt = -1i128;
++    let mut cached_weight = 0.0;
+     for (i, is_valid) in valid.iter_mut().enumerate() {
+         let prior = previous.filter(|&p| {
+             i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[p])
+@@ -37,14 +38,13 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
+         let weight = prior
+             .map(|p| {
+                 let dt_ns = i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[p]);
+-                if let Some((cached_dt, weight)) = cached_weight {
+-                    if dt_ns == cached_dt {
+-                        return weight;
+-                    }
++                if dt_ns == cached_dt {
++                    return cached_weight;
+                 }
+                 let dt = dt_ns as f64 / 1e9;
+                 let weight = -(-dt / tau_seconds).exp_m1();
+-                cached_weight = Some((dt_ns, weight));
++                cached_dt = dt_ns;
++                cached_weight = weight;
+                 weight
+             })
+             .unwrap_or(1.0);

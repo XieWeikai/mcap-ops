@@ -136,6 +136,14 @@ python3 scripts/rsi_measure.py --before .artifacts/rsi/extension/sensitivity/bef
         audit["sensitivity_worst_case_pct"] = worst_case
         audit["sensitivity_sha256"] = hashlib.sha256((destination / "sensitivity.json").read_bytes()).hexdigest()
         audit["performance_gate"] &= worst_case >= -3
+    if args.series == "per-op10" and args.label.startswith("ten-image-transform-"):
+        sizes = [tuple(map(int, pair)) for pair in re.findall(
+            r"(?m)^resource_png (\d+) (\d+)$", (destination / "validation.log").read_text())]
+        if not sizes:
+            raise RuntimeError("missing PNG size evidence")
+        audit["png_size_pairs"] = sizes
+        audit["png_max_growth_ratio"] = max(after / before for before, after in sizes)
+        audit["performance_gate"] &= audit["png_max_growth_ratio"] <= 1.25
     (destination / "audit.json").write_text(json.dumps(audit, indent=2) + "\n")
     (destination / "candidate.patch").write_bytes(subprocess.check_output(
         ["git", "diff", "HEAD", "--", *args.paths], cwd=ROOT))

@@ -1,0 +1,66 @@
+{
+  "label": "ten-lowpass-taps-09",
+  "base_commit": "c52eceae06e4c84cc57b4f12b34910acae804400",
+  "cases": [
+    "lowpass_taps",
+    "lowpass_taps.short",
+    "lowpass_taps.long"
+  ],
+  "geomean_latency_reduction_pct": -0.540796250504183,
+  "worst_block_reduction_pct": -1.928771369742588,
+  "worst_case_reduction_pct": -0.6663306475463315,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "c0b367a708c5ace5898771954cb05bc7a4602ecb6be958385d56ccd7110d6b73",
+  "operator": "lowpass_taps",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for lowpass_taps",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 257.2950019836426,
+      "after_ns": 258.41050720214844,
+      "latency_reduction_pct": -0.6663306475463315,
+      "paired_ratios": [
+        1.0192467922586872,
+        0.9761988285733385,
+        1.001501093248876,
+        1.0118255197020505
+      ],
+      "worst_paired_reduction_pct": -1.9246792258687195
+    },
+    "lowpass_taps.short": {
+      "before_ns": 15.286485195159912,
+      "after_ns": 15.363429546356201,
+      "latency_reduction_pct": -0.258901600974637,
+      "paired_ratios": [
+        1.004011609710073,
+        0.9721707200782007,
+        1.0294323204160858,
+        1.0011664223094194
+      ],
+      "worst_paired_reduction_pct": -2.943232041608579
+    },
+    "lowpass_taps.long": {
+      "before_ns": 16563.343017578125,
+      "after_ns": 16679.080810546875,
+      "latency_reduction_pct": 0.177755445770289,
+      "paired_ratios": [
+        0.9895741905768167,
+        0.9025015721775347,
+        1.027167195445633,
+        1.0068707005077775
+      ],
+      "worst_paired_reduction_pct": -2.7167195445632952
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-lowpass-taps-09",
+  "validation_sha256": "cc8986c1e40b51873781f751d3d480dd8b3db4cd87fc4926a5ab25237f691f75"
+}

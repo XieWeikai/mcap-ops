@@ -1,0 +1,53 @@
+{
+  "label": "ten-ema-07",
+  "base_commit": "6172f7e8979967a087f41a645032d103c6813ee9",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": 3.8198122465640805,
+  "worst_block_reduction_pct": 2.8735908474715965,
+  "worst_case_reduction_pct": 3.440713094790948,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep exact NaN/Inf detection while testing floating comparison versus exponent-bit classification.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "a57669673723ff1594d539c99ae7805d984b562ba11a37a598a936ad032ce0f9",
+  "operator": "ema",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "compare finite EMA inputs against the maximum finite magnitude",
+  "profile_hotspot": "Keep exact NaN/Inf detection while testing floating comparison versus exponent-bit classification.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Keep exact NaN/Inf detection while testing floating comparison versus exponent-bit classification.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 313398.72265625,
+      "after_ns": 302105.34765625,
+      "latency_reduction_pct": 3.440713094790948,
+      "paired_ratios": [
+        0.9349290014333865,
+        0.9762051850745971,
+        0.9549805530295841,
+        0.9766454872539224
+      ],
+      "worst_paired_reduction_pct": 2.3354512746077583
+    },
+    "ema.jitter": {
+      "before_ns": 314068.3359375,
+      "after_ns": 302491.98046875,
+      "latency_reduction_pct": 3.930742786221053,
+      "paired_ratios": [
+        0.9554727965526549,
+        0.945405552471326,
+        0.9709291005832216,
+        0.9659123477229241
+      ],
+      "worst_paired_reduction_pct": 2.907089941677843
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-ema-07",
+  "validation_sha256": "b123112d5726241c2bffafe70abced0e17be92f71e955dffd3d5806ac729dac8"
+}

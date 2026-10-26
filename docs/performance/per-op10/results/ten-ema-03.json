@@ -1,0 +1,53 @@
+{
+  "label": "ten-ema-03",
+  "base_commit": "300b5c83be29a805a7d0ff527848c67599a9aa50",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": 1.3390918517197425,
+  "worst_block_reduction_pct": -0.5838457190612045,
+  "worst_case_reduction_pct": 1.306075521283756,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Ordered timestamps guarantee positive deltas; remove the Option tag while preserving exact cached weights.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "8aecf687787074c675f22dc1a5b893fcbf670cf1172c9978d3d96545f4e74fff",
+  "operator": "ema",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "store EMA cache validity in an impossible negative delta",
+  "profile_hotspot": "Ordered timestamps guarantee positive deltas; remove the Option tag while preserving exact cached weights.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Ordered timestamps guarantee positive deltas; remove the Option tag while preserving exact cached weights.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 328234.15625,
+      "after_ns": 320620.5234375,
+      "latency_reduction_pct": 1.306075521283756,
+      "paired_ratios": [
+        1.0017559152859665,
+        0.960461777995898,
+        0.9922273879213906,
+        0.9816511016529342
+      ],
+      "worst_paired_reduction_pct": -0.1755915285966525
+    },
+    "ema.jitter": {
+      "before_ns": 447091.09375,
+      "after_ns": 441420.78125,
+      "latency_reduction_pct": 1.3719010028377499,
+      "paired_ratios": [
+        1.0099376370288586,
+        0.9707427296234612,
+        0.9943472218190326,
+        0.9782147581242124
+      ],
+      "worst_paired_reduction_pct": -0.9937637028858637
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-ema-03",
+  "validation_sha256": "51b6dd00b1f8a8afd0925a82aaeb45fd3d77f0e164581e728e65ceec1c14cdcd"
+}

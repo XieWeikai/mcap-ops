@@ -1,0 +1,53 @@
+{
+  "label": "ten-ema-08",
+  "base_commit": "6172f7e8979967a087f41a645032d103c6813ee9",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": -8.918104506293822,
+  "worst_block_reduction_pct": -9.997415166584943,
+  "worst_case_reduction_pct": -8.592650564074166,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "262abd07d507cc41d1e529f1b09cc4eef31893a338d2b539fff4fc97b5e2ecd1",
+  "operator": "ema",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for ema",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 313584.06640625,
+      "after_ns": 340328.578125,
+      "latency_reduction_pct": -8.040552966177206,
+      "paired_ratios": [
+        1.0503092636234082,
+        1.0762350381624444,
+        1.0845760211610997,
+        1.1200894930367125
+      ],
+      "worst_paired_reduction_pct": -12.008949303671246
+    },
+    "ema.jitter": {
+      "before_ns": 311048.86328125,
+      "after_ns": 338092.7578125,
+      "latency_reduction_pct": -8.592650564074166,
+      "paired_ratios": [
+        1.083361446994573,
+        1.1076510616078126,
+        1.0884915642869104,
+        1.0802200554999293
+      ],
+      "worst_paired_reduction_pct": -10.765106160781258
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-ema-08",
+  "validation_sha256": "1f0bbfd098dff1a00b3603b18d9324eb86816e02dc72f526480d5f461b3c2baf"
+}

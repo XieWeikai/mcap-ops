@@ -68,7 +68,7 @@ def main():
     for count in [0, 1, 3, 17, 64]:
         times = np.arange(count, dtype=np.int64) * 10
         base = rng.normal(size=(count, 8))
-        arrays = [base[:, :4], base[:, ::2], np.asfortranarray(base[:, :4]), base[:, 0]]
+        arrays = [base[:, :4], base[:, ::2], np.asfortranarray(base[:, :4]), base[:, 0], base[::-1, ::2]]
         for data in arrays:
             if count > 3:
                 data = data.copy()

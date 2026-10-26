@@ -1,0 +1,53 @@
+{
+  "label": "ten-ema-02",
+  "base_commit": "300b5c83be29a805a7d0ff527848c67599a9aa50",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": -6.656231943908719,
+  "worst_block_reduction_pct": -7.910429124922813,
+  "worst_case_reduction_pct": -8.971063648212274,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compare bulk copying with fill allocation; non-finite rows still reset and become all-NaN.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "07cf15e8f38c5600ffa3ffe9a2c0c9fe2d4bff716dac79f627ad51199278564d",
+  "operator": "ema",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "initialize EMA storage from the input snapshot",
+  "profile_hotspot": "Compare bulk copying with fill allocation; non-finite rows still reset and become all-NaN.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Compare bulk copying with fill allocation; non-finite rows still reset and become all-NaN.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 319430.34375,
+      "after_ns": 346927.3671875,
+      "latency_reduction_pct": -8.971063648212274,
+      "paired_ratios": [
+        1.0895674421133776,
+        1.089853830850868,
+        1.0669308238957145,
+        1.0954036385606456
+      ],
+      "worst_paired_reduction_pct": -9.540363856064559
+    },
+    "ema.jitter": {
+      "before_ns": 449305.921875,
+      "after_ns": 468524.46875,
+      "latency_reduction_pct": -4.776691282133427,
+      "paired_ratios": [
+        1.034494312711659,
+        1.0684607774268038,
+        1.0475120786354204,
+        1.0480217470072484
+      ],
+      "worst_paired_reduction_pct": -6.846077742680379
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-ema-02",
+  "validation_sha256": "6f04355a506cc38ce86d48ba46af82de493ad1f0e97219523c2dd03b067c7ef6"
+}

@@ -162,7 +162,12 @@ add('fir','specialize finite one-tap FIR windows',fir_single,
     'A one-tap window has no interior gap edges; preserve source order, non-finite handling and exact delay metadata.')
 def fir_unroll(s,width):
     a=s.index('            let value = taps');b=s.index('            values[i',a)
-    code=''.join(f'                value+=taps[k+{i}]*signal.values()[(end-k-{i})*signal.channels()+c];\n' for i in range(width))
+    terms=[]
+    for i in range(width):
+        index='k' if i==0 else f'k+{i}'
+        row='end-k' if i==0 else f'end-k-{i}'
+        terms.append(f'                value+=taps[{index}]*signal.values()[({row})*signal.channels()+c];\n')
+    code=''.join(terms)
     return s[:a]+f'''            let mut value=-0.0;
             let mut k=0;
             while k+{width}<=taps.len() {{

@@ -1,0 +1,66 @@
+{
+  "label": "ten-lowpass-taps-06",
+  "base_commit": "54e45b70c82f1036f89d841cf0dd88208dd23ac6",
+  "cases": [
+    "lowpass_taps",
+    "lowpass_taps.short",
+    "lowpass_taps.long"
+  ],
+  "geomean_latency_reduction_pct": 6.636382955419462,
+  "worst_block_reduction_pct": 4.486865266371575,
+  "worst_case_reduction_pct": 3.944167294328804,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The midpoint is the only zero sinc argument; remove that per-iteration branch while preserving symmetry.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "d86b031bfa2733ccb908990968a5948fc8d54845199263296bce5edfe7aa2e26",
+  "operator": "lowpass_taps",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "set the center coefficient outside the symmetric loop",
+  "profile_hotspot": "The midpoint is the only zero sinc argument; remove that per-iteration branch while preserving symmetry.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The midpoint is the only zero sinc argument; remove that per-iteration branch while preserving symmetry.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 266.77120208740234,
+      "after_ns": 244.87139129638672,
+      "latency_reduction_pct": 7.010989244227095,
+      "paired_ratios": [
+        0.9405355890962473,
+        0.897174266821264,
+        0.9360827482946873,
+        0.9236974668207708
+      ],
+      "worst_paired_reduction_pct": 5.946441090375265
+    },
+    "lowpass_taps.short": {
+      "before_ns": 32.074334144592285,
+      "after_ns": 29.67861557006836,
+      "latency_reduction_pct": 7.469272960585293,
+      "paired_ratios": [
+        0.9252368291069007,
+        0.9253777116813934,
+        0.9432111265518915,
+        0.8927151930643634
+      ],
+      "worst_paired_reduction_pct": 5.678887344810846
+    },
+    "lowpass_taps.long": {
+      "before_ns": 16458.328369140625,
+      "after_ns": 15854.149658203125,
+      "latency_reduction_pct": 3.944167294328804,
+      "paired_ratios": [
+        0.9679302936297045,
+        0.9319931752753985,
+        0.9868840722590386,
+        0.9531863604837194
+      ],
+      "worst_paired_reduction_pct": 1.3115927740961375
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-lowpass-taps-06",
+  "validation_sha256": "a3d39ce0e8b3af30146f12f78b633e7170b140dccafc41a5c2d973d22ce9a277"
+}

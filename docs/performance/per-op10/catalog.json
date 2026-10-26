@@ -1,0 +1,3606 @@
+{
+  "operators": 30,
+  "planned_rounds": 300,
+  "candidates": [
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "initialize EMA storage through zeroed allocation",
+      "lesson": "Every EMA row is fully written or filled with NaNs; avoid an unconditional initial NaN fill.",
+      "hotspot": "Every EMA row is fully written or filled with NaNs; avoid an unconditional initial NaN fill.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "initialize EMA storage from the input snapshot",
+      "lesson": "Compare bulk copying with fill allocation; non-finite rows still reset and become all-NaN.",
+      "hotspot": "Compare bulk copying with fill allocation; non-finite rows still reset and become all-NaN.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "store EMA cache validity in an impossible negative delta",
+      "lesson": "Ordered timestamps guarantee positive deltas; remove the Option tag while preserving exact cached weights.",
+      "hotspot": "Ordered timestamps guarantee positive deltas; remove the Option tag while preserving exact cached weights.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "cache 2 exact EMA delta weights",
+      "lesson": "Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+      "hotspot": "Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "cache 4 exact EMA delta weights",
+      "lesson": "Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+      "hotspot": "Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "cache 8 exact EMA delta weights",
+      "lesson": "Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+      "hotspot": "Single-delta caching helped; bounded multi-delta caches may avoid repeated expm1 for periodic jitter.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "compare finite EMA inputs against the maximum finite magnitude",
+      "lesson": "Keep exact NaN/Inf detection while testing floating comparison versus exponent-bit classification.",
+      "hotspot": "Keep exact NaN/Inf detection while testing floating comparison versus exponent-bit classification.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "measure always inlining for ema",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "measure never inlining for ema",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "ema",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "reuse a finite reciprocal time constant",
+      "lesson": "Guard reciprocal overflow and retain the original expression for subnormal tau; compare numeric outputs through the oracle.",
+      "hotspot": "Guard reciprocal overflow and retain the original expression for subnormal tau; compare numeric outputs through the oracle.",
+      "cases": "ema.uniform,ema.jitter",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "advance sinc phases by trigonometric recurrence",
+      "lesson": "Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+      "hotspot": "Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "advance Hamming phases by trigonometric recurrence",
+      "lesson": "Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+      "hotspot": "Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "advance both phases by trigonometric recurrence",
+      "lesson": "Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+      "hotspot": "Symmetry already removed half the trigonometric calls; evaluate a bounded recurrence under the existing numerical tolerance.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "factor the sinc denominator into a reciprocal pi",
+      "lesson": "Test constant reciprocal lowering while retaining the exact zero-offset coefficient branch.",
+      "hotspot": "Test constant reciprocal lowering while retaining the exact zero-offset coefficient branch.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "normalize coefficients with a guarded reciprocal sum",
+      "lesson": "Do not turn tiny valid sums into infinite coefficients; retain division when the reciprocal overflows.",
+      "hotspot": "Do not turn tiny valid sums into infinite coefficients; retain division when the reciprocal overflows.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "set the center coefficient outside the symmetric loop",
+      "lesson": "The midpoint is the only zero sinc argument; remove that per-iteration branch while preserving symmetry.",
+      "hotspot": "The midpoint is the only zero sinc argument; remove that per-iteration branch while preserving symmetry.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "specialize three-tap coefficient construction",
+      "lesson": "Evaluate the smallest supported filter without skipping argument checks or DC normalization.",
+      "hotspot": "Evaluate the smallest supported filter without skipping argument checks or DC normalization.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "measure always inlining for lowpass_taps",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "measure never inlining for lowpass_taps",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "lowpass_taps",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "append the symmetric coefficient half without zero filling",
+      "lesson": "Compare append construction with the existing prefilled symmetric array; output order is unchanged.",
+      "hotspot": "Compare append construction with the existing prefilled symmetric array; output order is unchanged.",
+      "cases": "lowpass_taps,lowpass_taps.short,lowpass_taps.long",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "index FIR support directly in the flat signal buffer",
+      "lesson": "Strided iterator and transposition attempts failed; remove repeated row-slice construction without changing data layout.",
+      "hotspot": "Strided iterator and transposition attempts failed; remove repeated row-slice construction without changing data layout.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "iterate FIR support as reversed row chunks",
+      "lesson": "Avoid the rejected step_by-reverse iterator and retain channel-outer summation order.",
+      "hotspot": "Avoid the rejected step_by-reverse iterator and retain channel-outer summation order.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "construct row and gap support prefixes in one pass",
+      "lesson": "Retain constant-time window validity while reducing independent scans and loop setup.",
+      "hotspot": "Retain constant-time window validity while reducing independent scans and loop setup.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "track consecutive support while retaining channel-outer convolution",
+      "lesson": "The earlier prefix-removal attempt also interchanged convolution loops; isolate support tracking from that failed loop change.",
+      "hotspot": "The earlier prefix-removal attempt also interchanged convolution loops; isolate support tracking from that failed loop change.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "specialize finite one-tap FIR windows",
+      "lesson": "A one-tap window has no interior gap edges; preserve source order, non-finite handling and exact delay metadata.",
+      "hotspot": "A one-tap window has no interior gap edges; preserve source order, non-finite handling and exact delay metadata.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "unroll ordered FIR accumulation by 2 coefficients",
+      "lesson": "Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "hotspot": "Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "unroll ordered FIR accumulation by 4 coefficients",
+      "lesson": "Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "hotspot": "Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "measure always inlining for fir",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "measure never inlining for fir",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "fir",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "specialize common FIR lengths without transposing data",
+      "lesson": "Compile known 3/31-tap reductions with fixed bounds; retain the general path and all eight representative FIR cases.",
+      "hotspot": "Compile known 3/31-tap reductions with fixed bounds; retain the general path and all eight representative FIR cases.",
+      "cases": "fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "hoist the angle half-period explicitly",
+      "lesson": "Preserve the prior modulo bypass while testing invariant arithmetic placement.",
+      "hotspot": "Preserve the prior modulo bypass while testing invariant arithmetic placement.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "compare angle finiteness through finite magnitudes",
+      "lesson": "Use exact NaN/Inf classification with a different machine comparison form.",
+      "hotspot": "Use exact NaN/Inf classification with a different machine comparison form.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "skip repeated gap arithmetic after a gap-free preflight",
+      "lesson": "Inspect every gap once, then keep the exact fallback when any discontinuity exists.",
+      "hotspot": "Inspect every gap once, then keep the exact fallback when any discontinuity exists.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "iterate adjacent original angle rows as chunks",
+      "lesson": "Zipped output rows succeeded previously; extend that locality to the immutable input rows.",
+      "hotspot": "Zipped output rows succeeded previously; extend that locality to the immutable input rows.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "expand positive-period Euclidean remainder explicitly",
+      "lesson": "The period has already been validated positive, so the generic absolute-divisor step is unnecessary.",
+      "hotspot": "The period has already been validated positive, so the generic absolute-divisor step is unnecessary.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "handle single-turn angle remainders by exact subtraction",
+      "lesson": "Avoid fmod only where the quotient is known; preserve half-period tie behavior and the arbitrary-jump fallback.",
+      "hotspot": "Avoid fmod only where the quotient is known; preserve half-period tie behavior and the arbitrary-jump fallback.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "compare ordered angle gaps as unsigned distances",
+      "lesson": "Source timestamps are strictly ordered; abs_diff preserves full-range integer gaps without signed subtraction overflow.",
+      "hotspot": "Source timestamps are strictly ordered; abs_diff preserves full-range integer gaps without signed subtraction overflow.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "measure always inlining for unwrap_angles",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "measure never inlining for unwrap_angles",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "unwrap_angles",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "method": "copy each angle row immediately before transforming it",
+      "lesson": "Compare streaming copy-and-transform locality with a full-buffer copy followed by a second pass.",
+      "hotspot": "Compare streaming copy-and-transform locality with a full-buffer copy followed by a second pass.",
+      "cases": "unwrap_angles,unwrap_angles.wraps",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_filter.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "read MCAP through a 4096-byte buffer",
+      "lesson": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+      "hotspot": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "read MCAP through a 16384-byte buffer",
+      "lesson": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+      "hotspot": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "read MCAP through a 32768-byte buffer",
+      "lesson": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+      "hotspot": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "read MCAP through a 131072-byte buffer",
+      "lesson": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+      "hotspot": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "cache topic selection for the last immutable channel",
+      "lesson": "Cache only topic membership; every message still checks its own clock bounds, CRC path, count limit and source identity. Mixed-channel fixtures guard against single-topic overfitting.",
+      "hotspot": "Repeated exact topic membership scans occur for every selected or rejected message.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "cache topic selection by channel identity in a small ordered map",
+      "lesson": "Cache only topic membership; every message still checks its own clock bounds, CRC path, count limit and source identity. Mixed-channel fixtures guard against single-topic overfitting.",
+      "hotspot": "Repeated exact topic membership scans occur for every selected or rejected message.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "cache topic selection for the last exact topic string",
+      "lesson": "Cache only topic membership; every message still checks its own clock bounds, CRC path, count limit and source identity. Mixed-channel fixtures guard against single-topic overfitting.",
+      "hotspot": "Repeated exact topic membership scans occur for every selected or rejected message.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "hash long exact-topic filters once per reader",
+      "lesson": "Cache only topic membership; every message still checks its own clock bounds, CRC path, count limit and source identity. Mixed-channel fixtures guard against single-topic overfitting.",
+      "hotspot": "Repeated exact topic membership scans occur for every selected or rejected message.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "measure always inlining for raw_reader",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "raw_reader",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "measure never inlining for raw_reader",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "accumulate per-channel clocks in a hash map",
+      "lesson": "Final channel ordering comes from the complete u16 scan, so the accumulator container need not provide ordering.",
+      "hotspot": "Final channel ordering comes from the complete u16 scan, so the accumulator container need not provide ordering.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "store channel accumulators in a sorted compact vector",
+      "lesson": "Keep storage proportional to present channels rather than allocating a 65536-slot table for sparse IDs.",
+      "hotspot": "Keep storage proportional to present channels rather than allocating a 65536-slot table for sparse IDs.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "materialize a publish-clock vector only after it differs",
+      "lesson": "The old post-hoc equality scan failed; avoid the duplicate vector during ingestion and clone prior logs exactly at the first divergence.",
+      "hotspot": "The old post-hoc equality scan failed; avoid the duplicate vector during ingestion and clone prior logs exactly at the first divergence.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "reserve 8 clock points for each observed channel",
+      "lesson": "Keep initial per-channel memory small and proportional to observed channels while measuring growth overhead.",
+      "hotspot": "Keep initial per-channel memory small and proportional to observed channels while measuring growth overhead.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "reserve 32 clock points for each observed channel",
+      "lesson": "Keep initial per-channel memory small and proportional to observed channels while measuring growth overhead.",
+      "hotspot": "Keep initial per-channel memory small and proportional to observed channels while measuring growth overhead.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "group complete channel lookups in blocks of 8",
+      "lesson": "The library exposes get_channel but no channel iterator; preserve empty channels and all IDs while exposing independent lookups.",
+      "hotspot": "The library exposes get_channel but no channel iterator; preserve empty channels and all IDs while exposing independent lookups.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "group complete channel lookups in blocks of 32",
+      "lesson": "The library exposes get_channel but no channel iterator; preserve empty channels and all IDs while exposing independent lookups.",
+      "hotspot": "The library exposes get_channel but no channel iterator; preserve empty channels and all IDs while exposing independent lookups.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "measure always inlining for mcap_inspect",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "measure never inlining for mcap_inspect",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_inspect",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "reserve report storage for observed channel count",
+      "lesson": "Observed channels provide a bounded lower estimate; empty channels are still discovered and emitted by the full scan.",
+      "hotspot": "Observed channels provide a bounded lower estimate; empty channels are still discovered and emitted by the full scan.",
+      "cases": "mcap_inspect,mcap_inspect.many",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "traverse unescaped JSON pointer segments without allocating strings",
+      "lesson": "The flat-pointer fast path helped; extend it to nested object/array segments while retaining RFC6901 escapes and index rules.",
+      "hotspot": "The flat-pointer fast path helped; extend it to nested object/array segments while retaining RFC6901 escapes and index rules.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "reserve each resolved numeric array before flattening it",
+      "lesson": "Payload array lengths are already known and bounded by the decoded record; avoid repeated output-vector growth.",
+      "hotspot": "Payload array lengths are already known and bounded by the decoded record; avoid repeated output-vector growth.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "parse known UTF-8 JSON through the string parser",
+      "lesson": "Keep the original byte-parser errors for invalid UTF-8; measure the string parser only when UTF-8 validation succeeds.",
+      "hotspot": "Keep the original byte-parser errors for invalid UTF-8; measure the string parser only when UTF-8 validation succeeds.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "collect a single correctly sized numeric array directly",
+      "lesson": "Preserve validation and error precedence; only the common one-field array path skips generic flattening bookkeeping.",
+      "hotspot": "Preserve validation and error precedence; only the common one-field array path skips generic flattening bookkeeping.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "cap initial decoded-field capacity at 8",
+      "lesson": "The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+      "hotspot": "The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "cap initial decoded-field capacity at 16",
+      "lesson": "The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+      "hotspot": "The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "cap initial decoded-field capacity at 64",
+      "lesson": "The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+      "hotspot": "The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "measure always inlining for json_decode",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "measure never inlining for json_decode",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "json_decode",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "detect reserved JSON pointer characters with byte searches",
+      "lesson": "Reserved pointer syntax is ASCII; retain Unicode keys unchanged while comparing byte-search lowering.",
+      "hotspot": "Reserved pointer syntax is ASCII; retain Unicode keys unchanged while comparing byte-search lowering.",
+      "cases": "json_decode,json_decode.deep,json_decode.wide",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "bound initial decoded signal capacity to 512 samples",
+      "lesson": "The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+      "hotspot": "The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "bound initial decoded signal capacity to 1024 samples",
+      "lesson": "The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+      "hotspot": "The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "bound initial decoded signal capacity to 8192 samples",
+      "lesson": "The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+      "hotspot": "The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "copy decoded row slices into accumulated values",
+      "lesson": "Compare slice extension with consuming Vec iteration; keep every decoded row and channel-count check.",
+      "hotspot": "Compare slice extension with consuming Vec iteration; keep every decoded row and channel-count check.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "reuse the first decoded value vector as output storage",
+      "lesson": "Transfer already owned storage once instead of allocating a second initial vector.",
+      "hotspot": "Transfer already owned storage once instead of allocating a second initial vector.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "reserve bounded space for each decoded message batch",
+      "lesson": "Respect remaining sample limits before reserving; retain per-sample errors and exact source iteration.",
+      "hotspot": "Respect remaining sample limits before reserving; retain per-sample errors and exact source iteration.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "consume decoded messages through a borrowed cursor iterator",
+      "lesson": "Measure iterator lowering without early termination or changing full-file validation.",
+      "hotspot": "Measure iterator lowering without early termination or changing full-file validation.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "measure always inlining for mcap_read_signal",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "measure never inlining for mcap_read_signal",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "mcap_read_signal",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "method": "accumulate decoded samples through a fallible fold",
+      "lesson": "Keep the shared decoder seam and all errors, while comparing ownership-aware iteration with the ordinary loop.",
+      "hotspot": "Keep the shared decoder seam and all errors, while comparing ownership-aware iteration with the ordinary loop.",
+      "cases": "mcap_read_signal,mcap_read_signal.many",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_mcap.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure a 1024-byte bounded image input buffer",
+      "lesson": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure a 2048-byte bounded image input buffer",
+      "lesson": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure a 4096-byte bounded image input buffer",
+      "lesson": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure a 16384-byte bounded image input buffer",
+      "lesson": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure a 32768-byte bounded image input buffer",
+      "lesson": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure a 65536-byte bounded image input buffer",
+      "lesson": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure a 131072-byte bounded image input buffer",
+      "lesson": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure a 262144-byte bounded image input buffer",
+      "lesson": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure always inlining for image_decode",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_decode",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure never inlining for image_decode",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "image_decode.png,image_decode.jpeg",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "aggregate luminance moments in blocks of 64",
+      "lesson": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+      "hotspot": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "aggregate luminance moments in blocks of 128",
+      "lesson": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+      "hotspot": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "aggregate luminance moments in blocks of 512",
+      "lesson": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+      "hotspot": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "aggregate luminance moments in blocks of 1024",
+      "lesson": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+      "hotspot": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "reuse computed Laplacians during the variance pass",
+      "lesson": "Measure a bounded extra f64 image plane against recomputing five-neighbor stencils; output statistics retain two passes.",
+      "hotspot": "Measure a bounded extra f64 image plane against recomputing five-neighbor stencils; output statistics retain two passes.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "compute the Laplacian mean from telescoping image boundaries",
+      "lesson": "Interior stencil terms cancel in the sum; retain the full stable variance pass and validate floating-point tolerance on large images.",
+      "hotspot": "Interior stencil terms cancel in the sum; retain the full stable variance pass and validate floating-point tolerance on large images.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "use 4 independent luminance reduction lanes",
+      "lesson": "Independent accumulators expose instruction-level parallelism without fast-math or reduced precision.",
+      "hotspot": "Independent accumulators expose instruction-level parallelism without fast-math or reduced precision.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "use 8 independent luminance reduction lanes",
+      "lesson": "Independent accumulators expose instruction-level parallelism without fast-math or reduced precision.",
+      "hotspot": "Independent accumulators expose instruction-level parallelism without fast-math or reduced precision.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure always inlining for image_quality",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_quality",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure never inlining for image_quality",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "image_quality.gradient,image_quality.noise",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "encode lossless PNG with Fast compression and Up filtering",
+      "lesson": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "encode lossless PNG with Fast compression and Avg filtering",
+      "lesson": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "encode lossless PNG with Fast compression and Paeth filtering",
+      "lesson": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "encode lossless PNG with Fast compression and NoFilter filtering",
+      "lesson": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "encode lossless PNG with Default compression and Adaptive filtering",
+      "lesson": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "encode lossless PNG with Default compression and Sub filtering",
+      "lesson": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "encode lossless PNG with Default compression and Paeth filtering",
+      "lesson": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "encode lossless PNG with Best compression and Adaptive filtering",
+      "lesson": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure always inlining for image_transform",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "image_transform",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "method": "measure never inlining for image_transform",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "image_transform.gradient,image_transform.noise",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "poll media completion every 250 microseconds",
+      "lesson": "The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+      "hotspot": "The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+      "cases": "video_probe,video_validate",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "poll media completion every 500 microseconds",
+      "lesson": "The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+      "hotspot": "The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+      "cases": "video_probe,video_validate",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "poll media completion every 2000 microseconds",
+      "lesson": "The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+      "hotspot": "The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+      "cases": "video_probe,video_validate",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "bound the final media sleep by the remaining timeout",
+      "lesson": "Avoid oversleeping a nearly exhausted timeout while retaining output-size checks on every poll.",
+      "hotspot": "Avoid oversleeping a nearly exhausted timeout while retaining output-size checks on every poll.",
+      "cases": "video_probe,video_validate",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "move valid UTF-8 media output into Strings without copying",
+      "lesson": "Most ffprobe output is ASCII JSON; retain byte-for-byte lossy-decoding behavior for invalid UTF-8.",
+      "hotspot": "Most ffprobe output is ASCII JSON; retain byte-for-byte lossy-decoding behavior for invalid UTF-8.",
+      "cases": "video_probe,video_validate",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "reserve the validated media output length before reading",
+      "lesson": "Use already bounded tempfile metadata to avoid diagnostic-buffer growth; retain read limits and final parsing.",
+      "hotspot": "Use already bounded tempfile metadata to avoid diagnostic-buffer growth; retain read limits and final parsing.",
+      "cases": "video_probe,video_validate",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "append borrowed media arguments individually",
+      "lesson": "Profiled work is dominated by child execution; measure command-builder overhead without shell interpolation or altered arguments.",
+      "hotspot": "Profiled work is dominated by child execution; measure command-builder overhead without shell interpolation or altered arguments.",
+      "cases": "video_probe,video_validate",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "measure always inlining for video_probe",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "video_probe,video_validate",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "measure never inlining for video_probe",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "video_probe,video_validate",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_probe",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "compare media deadlines directly during polling",
+      "lesson": "Hoist the fixed deadline instead of recomputing elapsed duration; preserve the same comparison point and diagnostic limit.",
+      "hotspot": "Hoist the fixed deadline instead of recomputing elapsed duration; preserve the same comparison point and diagnostic limit.",
+      "cases": "video_probe,video_validate",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "limit FFmpeg decoding to 1 threads",
+      "lesson": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+      "hotspot": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+      "cases": "video_validate",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "limit FFmpeg decoding to 2 threads",
+      "lesson": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+      "hotspot": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+      "cases": "video_validate",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "limit FFmpeg decoding to 4 threads",
+      "lesson": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+      "hotspot": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+      "cases": "video_validate",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "limit FFmpeg decoding to 8 threads",
+      "lesson": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+      "hotspot": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+      "cases": "video_validate",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "limit FFmpeg filter workers to 1",
+      "lesson": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+      "hotspot": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+      "cases": "video_validate",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "limit FFmpeg filter workers to 2",
+      "lesson": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+      "hotspot": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+      "cases": "video_validate",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "limit FFmpeg filter workers to 4",
+      "lesson": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+      "hotspot": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+      "cases": "video_validate",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "limit FFmpeg filter workers to 8",
+      "lesson": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+      "hotspot": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+      "cases": "video_validate",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "use one decoder and one filter worker together",
+      "lesson": "Measure the combined worker configuration separately from each individual limit.",
+      "hotspot": "Measure the combined worker configuration separately from each individual limit.",
+      "cases": "video_validate",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "video_validate",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "method": "emit periodic FFmpeg progress every two seconds",
+      "lesson": "The earlier one-second setting failed; retain the mandatory final progress marker and full frame count while measuring a longer interval.",
+      "hotspot": "The earlier one-second setting failed; retain the mandatory final progress marker and full frame count while measuring a longer interval.",
+      "cases": "video_validate",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_media.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "write canonical non-finite outputs with branchless selection",
+      "lesson": "Preserve canonical NaNs and independent owned outputs while testing vectorizable stores.",
+      "hotspot": "Preserve canonical NaNs and independent owned outputs while testing vectorizable stores.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "sanitize NumPy output values in 4-element blocks",
+      "lesson": "Keep exact non-finite handling; compare bounded loop unrolling on both large and small public calls.",
+      "hotspot": "Keep exact non-finite handling; compare bounded loop unrolling on both large and small public calls.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "sanitize NumPy output values in 8-element blocks",
+      "lesson": "Keep exact non-finite handling; compare bounded loop unrolling on both large and small public calls.",
+      "hotspot": "Keep exact non-finite handling; compare bounded loop unrolling on both large and small public calls.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "bypass the sanitizing write pass for all-finite outputs",
+      "lesson": "Most transformed outputs are finite; preserve the full fallback for any NaN or infinity.",
+      "hotspot": "Most transformed outputs are finite; preserve the full fallback for any NaN or infinity.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "use static Python filter-mode names instead of formatting",
+      "lesson": "The enum has two fixed public spellings; avoid a temporary formatted lowercase String.",
+      "hotspot": "The enum has two fixed public spellings; avoid a temporary formatted lowercase String.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "intern fixed Python result-dictionary keys",
+      "lesson": "Reuse the installed PyO3 intern macro for a bounded set of static keys; preserve result order and values.",
+      "hotspot": "Every small public call constructs the same Python key strings repeatedly.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "copy strided inputs through ndarray standard-layout ownership",
+      "lesson": "Keep input snapshots and logical row-major order; compare ndarray copying with scalar iteration for strided and reversed views.",
+      "hotspot": "Keep input snapshots and logical row-major order; compare ndarray copying with scalar iteration for strided and reversed views.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "measure always inlining for python_bridge",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "crates/python/src/lib.rs"
+      ],
+      "method": "measure never inlining for python_bridge",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "python_bridge",
+      "paths": [
+        "python/mcap_ops/__init__.py"
+      ],
+      "method": "reuse the NumPy module binding across public wrapper calls",
+      "lesson": "NumPy is already a required dependency; remove repeated local imports without changing exports or normalization.",
+      "hotspot": "Small wrapper calls repeat module import lookups before normalizing already native arrays.",
+      "cases": "python.resample.previous,python.resample.linear,python.history_windows,python.ema,python.fir,python.unwrap_angles,python.read_json_signal,python.resample.small,python.history_windows.small,python.ema.small,python.fir.small,python.unwrap_angles.small,python.resample.strided",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_python.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "binary-select MAD across the two ordered deviation halves",
+      "lesson": "The accepted merge avoids a second sort; now select its middle rank without visiting half the window.",
+      "hotspot": "The accepted merge avoids a second sort; now select its middle rank without visiting half the window.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "bypass sorting for already ordered finite Hampel samples",
+      "lesson": "Smooth windows often arrive ordered; retain full sorting for other distributions and include random/constant inputs.",
+      "hotspot": "Smooth windows often arrive ordered; retain full sorting for other distributions and include random/constant inputs.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "merge MAD deviations with explicit exhausted-side checks",
+      "lesson": "Remove per-step Option construction from the successful sorted-deviation merge.",
+      "hotspot": "Remove per-step Option construction from the successful sorted-deviation merge.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "cache each MAD frontier deviation in peekable iterators",
+      "lesson": "Each absolute deviation need only be calculated when its frontier advances.",
+      "hotspot": "Each absolute deviation need only be calculated when its frontier advances.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "maintain a sorted Hampel window by insertion and removal",
+      "lesson": "Adjacent windows overlap heavily; retain gap boundaries, finite filtering, sample limits and exact median ordering.",
+      "hotspot": "Adjacent windows overlap heavily; retain gap boundaries, finite filtering, sample limits and exact median ordering.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "restrict Hampel boundary searches to unconsumed suffixes",
+      "lesson": "Use monotonic window bounds without repeating the earlier full linear-cursor candidate.",
+      "hotspot": "Use monotonic window bounds without repeating the earlier full linear-cursor candidate.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "extract only active Hampel channels into contiguous scratch",
+      "lesson": "Avoid the prior FIR-wide transpose cost: allocate one channel only when the expensive window detector is enabled.",
+      "hotspot": "Avoid the prior FIR-wide transpose cost: allocate one channel only when the expensive window detector is enabled.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "measure always inlining for inspect_signal",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "measure never inlining for inspect_signal",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "inspect_signal",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "mark singleton quality spans by direct index",
+      "lesson": "Point anomalies dominate many reports; retain multi-sample range marking for derivative and flatline issues.",
+      "hotspot": "Point anomalies dominate many reports; retain multi-sample range marking for derivative and flatline issues.",
+      "cases": "inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "skip code-policy iteration for issue-free reports",
+      "lesson": "The pass case has no issue codes; avoid repeated searches without allocating a reason buffer.",
+      "hotspot": "The pass case has no issue codes; avoid repeated searches without allocating a reason buffer.",
+      "cases": "gate.pass,gate.fail",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "index present quality codes with a stack bitmap",
+      "lesson": "The code enum has ten fixed variants; preserve duplicate policy reasons and their original order.",
+      "hotspot": "The code enum has ten fixed variants; preserve duplicate policy reasons and their original order.",
+      "cases": "gate.pass,gate.fail",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "index present quality codes with a bit mask",
+      "lesson": "The code enum has ten fixed variants; preserve duplicate policy reasons and their original order.",
+      "hotspot": "The code enum has ten fixed variants; preserve duplicate policy reasons and their original order.",
+      "cases": "gate.pass,gate.fail",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "reserve the exact number of rejection reasons",
+      "lesson": "The earlier unconditional reserve slowed passing reports; exact zero capacity keeps them allocation-free.",
+      "hotspot": "The earlier unconditional reserve slowed passing reports; exact zero capacity keeps them allocation-free.",
+      "cases": "gate.pass,gate.fail",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "reserve a bounded estimate only for likely rejection reasons",
+      "lesson": "Avoid a second membership pass; capacity is a hint, so duplicate policy codes remain intact.",
+      "hotspot": "Avoid a second membership pass; capacity is a hint, so duplicate policy codes remain intact.",
+      "cases": "gate.pass,gate.fail",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "look up static issue names by their enum discriminant",
+      "lesson": "The earlier switch replaced Debug formatting; compare a fixed table without changing spelling or reason ownership.",
+      "hotspot": "The earlier switch replaced Debug formatting; compare a fixed table without changing spelling or reason ownership.",
+      "cases": "gate.pass,gate.fail",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "return an empty decision immediately for fully passing policies",
+      "lesson": "Measure an explicit pass fast path while retaining the complete reason construction on failure.",
+      "hotspot": "Measure an explicit pass fast path while retaining the complete reason construction on failure.",
+      "cases": "gate.pass,gate.fail",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "measure always inlining for gate",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "gate.pass,gate.fail",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "measure never inlining for gate",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "gate.pass,gate.fail",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "gate",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "method": "collect ordered rejection reasons through chained iterators",
+      "lesson": "Keep the same policy order and duplicate behavior while comparing iterator allocation and branch scheduling.",
+      "hotspot": "Keep the same policy order and duplicate behavior while comparing iterator allocation and branch scheduling.",
+      "cases": "gate.pass,gate.fail",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_quality.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "seed resampling at the first target support prefix",
+      "lesson": "Avoid walking irrelevant earlier samples while retaining strict source validation and all provenance.",
+      "hotspot": "Avoid walking irrelevant earlier samples while retaining strict source validation and all provenance.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "reuse sampled values and provenance for duplicate targets",
+      "lesson": "History deduplication helped earlier; direct resampling also permits identical adjacent target times.",
+      "hotspot": "History deduplication helped earlier; direct resampling also permits identical adjacent target times.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "normalize exact quaternion samples without duplicating endpoint work",
+      "lesson": "Only identical borrowed endpoint slices take this path; both normalization steps and invalid-quaternion behavior remain.",
+      "hotspot": "Only identical borrowed endpoint slices take this path; both normalization steps and invalid-quaternion behavior remain.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "reuse bounded quaternion normalization reciprocals",
+      "lesson": "Endpoint norms are validated near one; compare f64 results without changing quaternion validity thresholds.",
+      "hotspot": "Endpoint norms are validated near one; compare f64 results without changing quaternion validity thresholds.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "infer interpolation input finiteness from the computed output",
+      "lesson": "A NaN or infinite endpoint cannot yield a finite weighted sum under IEEE arithmetic, including zero-weight endpoints.",
+      "hotspot": "A NaN or infinite endpoint cannot yield a finite weighted sum under IEEE arithmetic, including zero-weight endpoints.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "use unsigned support distances on ordered resampling brackets",
+      "lesson": "Ordered brackets prove the direction of each difference; preserve full-range integer distances and causal policies.",
+      "hotspot": "Ordered brackets prove the direction of each difference; preserve full-range integer distances and causal policies.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "allocate sampled values as zeroed storage and fill only invalid rows with NaNs",
+      "lesson": "Every valid row is fully written; retain NaNs for each missing, future, stale, gap, non-finite and invalid-quaternion outcome.",
+      "hotspot": "Sampled output initialization writes a full NaN buffer before valid interpolation overwrites it.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "measure always inlining for resample",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "measure never inlining for resample",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "resample",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "zip target timestamps with mutable sample statuses",
+      "lesson": "Remove separate status-vector indexing while leaving values, timestamps and provenance unchanged.",
+      "hotspot": "Remove separate status-vector indexing while leaving values, timestamps and provenance unchanged.",
+      "cases": "resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "stably merge-sort history request timestamps",
+      "lesson": "Removing tie keys alone failed earlier; stable adaptive sorting may exploit the nearly ordered offset streams.",
+      "hotspot": "Removing tie keys alone failed earlier; stable adaptive sorting may exploit the nearly ordered offset streams.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "merge sorted history offset streams with a bounded heap",
+      "lesson": "Each fixed offset gives an ordered center stream; merge K streams instead of sorting all M requests.",
+      "hotspot": "Each fixed offset gives an ordered center stream; merge K streams instead of sorting all M requests.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "merge history streams by scanning their current heads",
+      "lesson": "For short history contexts, a small head scan can beat heap maintenance and whole-request sorting.",
+      "hotspot": "For short history contexts, a small head scan can beat heap maintenance and whole-request sorting.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "scatter history samples with a monotone unique index",
+      "lesson": "The accepted deduplication makes sample_indices reconstructible; avoid storing one extra usize per request.",
+      "hotspot": "The accepted deduplication makes sample_indices reconstructible; avoid storing one extra usize per request.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "sort unique history times and index requests by hash",
+      "lesson": "Heavily overlapping windows have far fewer unique times; deterministic sorting and destination scatter preserve output order.",
+      "hotspot": "Heavily overlapping windows have far fewer unique times; deterministic sorting and destination scatter preserve output order.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "compare history separation using unsigned spans",
+      "lesson": "Strict centers and ordered nonpositive offsets allow an equivalent full-range span comparison.",
+      "hotspot": "Strict centers and ordered nonpositive offsets allow an equivalent full-range span comparison.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "derive flat history destinations from request length",
+      "lesson": "The generation order is already step-major; avoid repeated index multiplication without changing shape.",
+      "hotspot": "The generation order is already step-major; avoid repeated index multiplication without changing shape.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "measure always inlining for history_windows",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "measure never inlining for history_windows",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "history_windows",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "method": "move the history timestamp buffer into empty sampled storage",
+      "lesson": "The overlapping path currently allocates a zero timestamp vector and immediately clones it; transfer its ownership instead.",
+      "hotspot": "History result initialization duplicates a temporary target buffer.",
+      "cases": "history_windows.separate,history_windows.overlap",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_sampling.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "coalesce intervals with Vec deduplication",
+      "lesson": "The earlier manual in-place merge lost; test the library compaction implementation instead.",
+      "hotspot": "The earlier manual in-place merge lost; test the library compaction implementation instead.",
+      "cases": "interval_new",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "order equal-start intervals by their ends",
+      "lesson": "Tie ordering may change merge locality without changing the canonical union.",
+      "hotspot": "Tie ordering may change merge locality without changing the canonical union.",
+      "cases": "interval_new",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "use stable adaptive interval sorting",
+      "lesson": "Already ordered interval runs may favor adaptive stable sorting; preserve merging semantics.",
+      "hotspot": "Already ordered interval runs may favor adaptive stable sorting; preserve merging semantics.",
+      "cases": "interval_new",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "bound initial merge capacity to 128 intervals",
+      "lesson": "Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+      "hotspot": "Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+      "cases": "interval_new",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "bound initial merge capacity to 512 intervals",
+      "lesson": "Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+      "hotspot": "Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+      "cases": "interval_new",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "bound initial merge capacity to 2048 intervals",
+      "lesson": "Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+      "hotspot": "Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+      "cases": "interval_new",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "return already canonical interval buffers without copying",
+      "lesson": "The old sortedness-only check still copied all intervals; this verifies non-overlap and transfers the owned buffer.",
+      "hotspot": "The old sortedness-only check still copied all intervals; this verifies non-overlap and transfers the owned buffer.",
+      "cases": "interval_new",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure always inlining for interval_new",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_new",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure never inlining for interval_new",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_new",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_new",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "keep the active merge interval in a local slot",
+      "lesson": "Avoid repeatedly borrowing the output vector tail during merging; retain one active interval and original order.",
+      "hotspot": "Avoid repeatedly borrowing the output vector tail during merging; retain one active interval and original order.",
+      "cases": "interval_new",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "use binary search on interval start keys",
+      "lesson": "Compare the binary-search primitive while keeping the successful outer extent rejection.",
+      "hotspot": "Compare the binary-search primitive while keeping the successful outer extent rejection.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "walk binary-search bounds explicitly",
+      "lesson": "Measure explicit bounds against the partition_point implementation on both small and large sets.",
+      "hotspot": "Measure explicit bounds against the partition_point implementation on both small and large sets.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "partition interval end times before checking the start",
+      "lesson": "The half-open endpoint can select the candidate directly in canonical disjoint sets.",
+      "hotspot": "The half-open endpoint can select the candidate directly in canonical disjoint sets.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "unroll interval binary search by 2 steps",
+      "lesson": "Measure bounded branch scheduling rather than reintroducing the previously rejected extent changes.",
+      "hotspot": "Measure bounded branch scheduling rather than reintroducing the previously rejected extent changes.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "unroll interval binary search by 4 steps",
+      "lesson": "Measure bounded branch scheduling rather than reintroducing the previously rejected extent changes.",
+      "hotspot": "Measure bounded branch scheduling rather than reintroducing the previously rejected extent changes.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "binary-search by complete interval containment",
+      "lesson": "Use one search result to decide membership instead of re-indexing a predecessor.",
+      "hotspot": "Use one search result to decide membership instead of re-indexing a predecessor.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "linearly search small interval sets after extent rejection",
+      "lesson": "Small sets have different branch costs; a dedicated fixed small-set benchmark prevents extrapolation.",
+      "hotspot": "Small sets have different branch costs; a dedicated fixed small-set benchmark prevents extrapolation.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure always inlining for interval_contains",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure never inlining for interval_contains",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_contains",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "load outer interval bounds together",
+      "lesson": "Preserve extent rejection while reducing repeated optional access to the interval slice.",
+      "hotspot": "Preserve extent rejection while reducing repeated optional access to the interval slice.",
+      "cases": "interval_contains,interval_contains.small",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "seed the mask cursor with a prefix search",
+      "lesson": "The prior linear sweep helped; late query grids can skip an irrelevant prefix once.",
+      "hotspot": "The prior linear sweep helped; late query grids can skip an irrelevant prefix once.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "collect ordered masks through an exact-size iterator",
+      "lesson": "The old prefilled-vector variant failed; test iterator collection with the successful monotone cursor.",
+      "hotspot": "The old prefilled-vector variant failed; test iterator collection with the successful monotone cursor.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "recognize empty interval masks before ordering checks",
+      "lesson": "No quality exclusions is a common empty-set case; avoid scanning target order when every answer is false.",
+      "hotspot": "No quality exclusions is a common empty-set case; avoid scanning target order when every answer is false.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "use the slice sortedness primitive for mask dispatch",
+      "lesson": "Keep the original unordered-query fallback; compare only dispatch code generation.",
+      "hotspot": "Keep the original unordered-query fallback; compare only dispatch code generation.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "fill interval-aligned runs in the mask output",
+      "lesson": "Bulk boolean fills may reduce per-target work for dense runs; unordered targets retain independent membership checks.",
+      "hotspot": "Bulk boolean fills may reduce per-target work for dense runs; unordered targets retain independent membership checks.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "reuse consecutive unordered duplicate membership queries",
+      "lesson": "Reuse only identical input timestamps, never infer temporal ordering in the unordered fallback.",
+      "hotspot": "Reuse only identical input timestamps, never infer temporal ordering in the unordered fallback.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "reuse repeated ordered mask answers",
+      "lesson": "The repeat branch preserves one output per query and does not collapse timestamps.",
+      "hotspot": "The repeat branch preserves one output per query and does not collapse timestamps.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure always inlining for interval_mask",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure never inlining for interval_mask",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_mask",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "walk mask intervals with a peekable iterator",
+      "lesson": "Replace indexed sweep bounds with a cached next-interval reference; preserve original query order.",
+      "hotspot": "Replace indexed sweep bounds with a cached next-interval reference; preserve original query order.",
+      "cases": "interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "skip disjoint interior prefixes beyond 4 intervals",
+      "lesson": "Conditional initial skipping helped; interior skipping must also preserve dense-case throughput.",
+      "hotspot": "Conditional initial skipping helped; interior skipping must also preserve dense-case throughput.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "skip disjoint interior prefixes beyond 16 intervals",
+      "lesson": "Conditional initial skipping helped; interior skipping must also preserve dense-case throughput.",
+      "hotspot": "Conditional initial skipping helped; interior skipping must also preserve dense-case throughput.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "skip disjoint interior prefixes beyond 64 intervals",
+      "lesson": "Conditional initial skipping helped; interior skipping must also preserve dense-case throughput.",
+      "hotspot": "Conditional initial skipping helped; interior skipping must also preserve dense-case throughput.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "advance both intersection cursors at equal ends",
+      "lesson": "Equal endpoints need no second empty comparison; measure a branchless dual-cursor update.",
+      "hotspot": "Equal endpoints need no second empty comparison; measure a branchless dual-cursor update.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "bound initial intersection output capacity at 64",
+      "lesson": "Input-sized reservation previously regressed; test small bounded capacities across dense and late overlap.",
+      "hotspot": "Input-sized reservation previously regressed; test small bounded capacities across dense and late overlap.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "bound initial intersection output capacity at 512",
+      "lesson": "Input-sized reservation previously regressed; test small bounded capacities across dense and late overlap.",
+      "hotspot": "Input-sized reservation previously regressed; test small bounded capacities across dense and late overlap.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "return immediately for globally disjoint sets",
+      "lesson": "Outer bounds can prove no overlap without constructing or walking output intervals.",
+      "hotspot": "Outer bounds can prove no overlap without constructing or walking output intervals.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure always inlining for interval_intersection",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure never inlining for interval_intersection",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_intersection",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "merge intersection tails through peekable iterators",
+      "lesson": "Keep the accepted initial prefix search; replace only the subsequent indexed merge walk.",
+      "hotspot": "Keep the accepted initial prefix search; replace only the subsequent indexed merge walk.",
+      "cases": "interval_intersection.dense,interval_intersection.late",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "clone the input when exclusions are empty",
+      "lesson": "An empty exclusion set is an identity transformation; include it as an explicit benchmark.",
+      "hotspot": "An empty exclusion set is an identity transformation; include it as an explicit benchmark.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "clone globally disjoint interval differences",
+      "lesson": "Retain the linear difference algorithm while detecting identity results from global bounds.",
+      "hotspot": "Retain the linear difference algorithm while detecting identity results from global bounds.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "seed the exclusion cursor by prefix search",
+      "lesson": "Avoid an irrelevant leading exclusion prefix without restarting searches for each input interval.",
+      "hotspot": "Avoid an irrelevant leading exclusion prefix without restarting searches for each input interval.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "combine exclusion bounds checks and interval access",
+      "lesson": "Read each next exclusion through one optional slice access instead of separate bounds and indexing.",
+      "hotspot": "Read each next exclusion through one optional slice access instead of separate bounds and indexing.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "reserve difference storage with exclusion fraction 0",
+      "lesson": "The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+      "hotspot": "The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "reserve difference storage with exclusion fraction 0.5",
+      "lesson": "The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+      "hotspot": "The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "reserve difference storage with exclusion fraction 0.25",
+      "lesson": "The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+      "hotspot": "The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure always inlining for interval_difference",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure never inlining for interval_difference",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_difference",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "use one persistent exclusion iterator for differences",
+      "lesson": "The previous monotone cursor fixed quadratic work; keep that complexity while eliminating separate j/k indices.",
+      "hotspot": "The previous monotone cursor fixed quadratic work; keep that complexity while eliminating separate j/k indices.",
+      "cases": "interval_difference,interval_difference.empty",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "return unchanged intervals for zero context",
+      "lesson": "Identity context expansion needs no per-interval arithmetic; keep validation of negative context first.",
+      "hotspot": "Identity context expansion needs no per-interval arithmetic; keep validation of negative context first.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "prevalidate context arithmetic against global extrema",
+      "lesson": "Check all extrema, not just endpoints, then perform equivalent bounded additions in the merge loop.",
+      "hotspot": "Check all extrema, not just endpoints, then perform equivalent bounded additions in the merge loop.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "compact expanded intervals in the cloned input buffer",
+      "lesson": "Reuse owned storage via library compaction rather than re-sorting expanded intervals.",
+      "hotspot": "Reuse owned storage via library compaction rather than re-sorting expanded intervals.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "keep the expanding merge frontier in a local slot",
+      "lesson": "Use one active interval to avoid repeated output-tail access without changing chronological merging.",
+      "hotspot": "Use one active interval to avoid repeated output-tail access without changing chronological merging.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "check context endpoints with wide arithmetic",
+      "lesson": "Measure arithmetic lowering while retaining exact overflow behavior for extreme timestamps.",
+      "hotspot": "Measure arithmetic lowering while retaining exact overflow behavior for extreme timestamps.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "reserve 16 intervals when the first expanded pair overlaps",
+      "lesson": "Expanded contexts may merge thousands of exclusions into one; include merged and unmerged workloads.",
+      "hotspot": "Expanded contexts may merge thousands of exclusions into one; include merged and unmerged workloads.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "reserve 256 intervals when the first expanded pair overlaps",
+      "lesson": "Expanded contexts may merge thousands of exclusions into one; include merged and unmerged workloads.",
+      "hotspot": "Expanded contexts may merge thousands of exclusions into one; include merged and unmerged workloads.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure always inlining for interval_affected_centers",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "measure never inlining for interval_affected_centers",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "interval_affected_centers",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "method": "merge context expansion through a fallible fold",
+      "lesson": "Retain a single ordered pass and the successful capacity bound while testing ownership-aware fold code generation.",
+      "hotspot": "Retain a single ordered pass and the successful capacity bound while testing ownership-aware fold code generation.",
+      "cases": "interval_affected_centers,interval_affected_centers.merged",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_selection.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "check timestamp order in 4-pair early-exit blocks",
+      "lesson": "Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+      "hotspot": "Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+      "cases": "require_strict",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "check timestamp order in 8-pair early-exit blocks",
+      "lesson": "Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+      "hotspot": "Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+      "cases": "require_strict",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "check timestamp order in 16-pair early-exit blocks",
+      "lesson": "Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+      "hotspot": "Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+      "cases": "require_strict",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "scan adjacent timestamp pairs in reverse order",
+      "lesson": "Reverse streaming may improve late violation detection without changing the generic error.",
+      "hotspot": "Reverse streaming may improve late violation detection without changing the generic error.",
+      "cases": "require_strict",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "locate the first invalid timestamp pair explicitly",
+      "lesson": "Measure position-based early-exit code generation; no checks are removed.",
+      "hotspot": "Measure position-based early-exit code generation; no checks are removed.",
+      "cases": "require_strict",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "check order with a scalar cursor",
+      "lesson": "Keep branchy early exit rather than the rejected full reduction.",
+      "hotspot": "Keep branchy early exit rather than the rejected full reduction.",
+      "cases": "require_strict",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "use a fallible fold for timestamp order validation",
+      "lesson": "An alternative branch structure keeps the exact error contract.",
+      "hotspot": "An alternative branch structure keeps the exact error contract.",
+      "cases": "require_strict",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure always inlining for require_strict",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "require_strict",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure never inlining for require_strict",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "require_strict",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "require_strict",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "zip offset timestamp slices after a short-input guard",
+      "lesson": "Slice offsets avoid the skip adaptor while preserving empty and singleton behavior.",
+      "hotspot": "Slice offsets avoid the skip adaptor while preserving empty and singleton behavior.",
+      "cases": "require_strict",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "bound initial grid capacity at 256 points",
+      "lesson": "Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+      "hotspot": "Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "bound initial grid capacity at 1024 points",
+      "lesson": "Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+      "hotspot": "Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "bound initial grid capacity at 4096 points",
+      "lesson": "Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+      "hotspot": "Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "keep rational-grid residual arithmetic in u64",
+      "lesson": "The residual is below twice a u32 rate; wide timestamp arithmetic remains unchanged.",
+      "hotspot": "The residual is below twice a u32 rate; wide timestamp arithmetic remains unchanged.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "advance the grid with a branchless rational carry",
+      "lesson": "Measure branch removal only for bounded residuals, unlike the failed validation-wide reduction.",
+      "hotspot": "Measure branch removal only for bounded residuals, unlike the failed validation-wide reduction.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "specialize integer-period grids before the recurrence",
+      "lesson": "The existing recurrence succeeded; test whether integer rates can omit residual work entirely.",
+      "hotspot": "The existing recurrence succeeded; test whether integer rates can omit residual work entirely.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "fill an exactly sized grid buffer without push checks",
+      "lesson": "The earlier reserve-only candidate failed; this also removes per-point length/capacity checks.",
+      "hotspot": "The earlier reserve-only candidate failed; this also removes per-point length/capacity checks.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure always inlining for uniform_grid",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure never inlining for uniform_grid",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "uniform_grid",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "terminate grid generation from output length and endpoint",
+      "lesson": "Avoid a second loop counter while keeping the max_points error and half-open endpoint.",
+      "hotspot": "Avoid a second loop counter while keeping the max_points error and half-open endpoint.",
+      "cases": "uniform_grid.integer,uniform_grid.rational",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "copy clock-identity inputs directly",
+      "lesson": "The zero-drift fast path helped earlier; distinguish the frequent identity transform with an explicit benchmark.",
+      "hotspot": "The zero-drift fast path helped earlier; distinguish the frequent identity transform with an explicit benchmark.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "apply pure clock offsets in a cloned output buffer",
+      "lesson": "In-place checked updates improved batch expansion; test that ownership strategy for clock offsets.",
+      "hotspot": "In-place checked updates improved batch expansion; test that ownership strategy for clock offsets.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "validate offset extrema once before vectorizable addition",
+      "lesson": "Retain overflow detection for every possible input; measure an extrema prescan against per-element checked addition.",
+      "hotspot": "Retain overflow detection for every possible input; measure an extrema prescan against per-element checked addition.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "reserve and push nonzero-drift clock outputs",
+      "lesson": "Separate allocation strategy from the earlier rejected narrow-arithmetic algorithm.",
+      "hotspot": "Separate allocation strategy from the earlier rejected narrow-arithmetic algorithm.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "isolate wide drift arithmetic from the offset fast path",
+      "lesson": "Prior drift changes unexpectedly slowed offsets; separate code generation without altering arithmetic.",
+      "hotspot": "Prior drift changes unexpectedly slowed offsets; separate code generation without altering arithmetic.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "hoist the clock output origin and offset sum",
+      "lesson": "Keep i128 arithmetic but remove repeated invariant additions; differential edge cases cover overflow behavior.",
+      "hotspot": "Keep i128 arithmetic but remove repeated invariant additions; differential edge cases cover overflow behavior.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "divide representable drift magnitudes as unsigned integers",
+      "lesson": "Do not reuse the rejected narrow-correction formula; retain the original overflow fallback and tie direction.",
+      "hotspot": "Do not reuse the rejected narrow-correction formula; retain the original overflow fallback and tie direction.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure always inlining for map_clock",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure never inlining for map_clock",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "map_clock",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "unroll pure offset updates in four-element blocks",
+      "lesson": "Measure bounded loop unrolling separately from allocation and arithmetic changes.",
+      "hotspot": "Measure bounded loop unrolling separately from allocation and arithmetic changes.",
+      "cases": "map_clock.identity,map_clock.offset,map_clock.drift",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "reserve the maximum positive-interval count",
+      "lesson": "Keep the successful uniform fast path; bound fallback allocation by the actual input length.",
+      "hotspot": "Keep the successful uniform fast path; bound fallback allocation by the actual input length.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "summarize two-valued interval distributions without sorting",
+      "lesson": "Quickselect lost on low-cardinality jitter; explicitly exploit exactly two interval values and retain full-sort fallback.",
+      "hotspot": "Quickselect lost on low-cardinality jitter; explicitly exploit exactly two interval values and retain full-sort fallback.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "skip fallback sorting when intervals are already ordered",
+      "lesson": "Measure an ordering check on nonuniform intervals rather than repeating the rejected percentile-selection algorithm.",
+      "hotspot": "Measure an ordering check on nonuniform intervals rather than repeating the rejected percentile-selection algorithm.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "zip the uniform-clock comparison pass",
+      "lesson": "Zipped adjacency helped strict validation; apply it only to the established uniform fast path.",
+      "hotspot": "Zipped adjacency helped strict validation; apply it only to the established uniform fast path.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "zip interval statistics input pairs",
+      "lesson": "Preserve the exact positive interval and error semantics while changing fallback iteration.",
+      "hotspot": "Preserve the exact positive interval and error semantics while changing fallback iteration.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "compare stable adaptive sorting for jitter statistics",
+      "lesson": "Ordered/repeated interval runs may favor a stable adaptive sort; measure instead of assuming quickselect is faster.",
+      "hotspot": "Ordered/repeated interval runs may favor a stable adaptive sort; measure instead of assuming quickselect is faster.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "fill a bounded interval buffer then truncate it",
+      "lesson": "Test removal of Vec push bookkeeping while retaining every duplicate, reversal and overflow check.",
+      "hotspot": "Test removal of Vec push bookkeeping while retaining every duplicate, reversal and overflow check.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure always inlining for inspect_time",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure never inlining for inspect_time",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "inspect_time",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "specialize the exact median quantile index",
+      "lesson": "Specialize median indexing after sorting; keep the same interpolation arithmetic for even counts.",
+      "hotspot": "Specialize median indexing after sorting; keep the same interpolation arithmetic for even counts.",
+      "cases": "inspect_time.uniform,inspect_time.jitter",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "start alignment at the first relevant source prefix",
+      "lesson": "Prior output rewrites failed; avoid scanning an irrelevant initial source prefix and include sparse targets.",
+      "hotspot": "Prior output rewrites failed; avoid scanning an irrelevant initial source prefix and include sparse targets.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "binary-search only highly sparse target grids",
+      "lesson": "A monotone walk is best for dense grids; sparse MCAP queries can skip large spans.",
+      "hotspot": "A monotone walk is best for dense grids; sparse MCAP queries can skip large spans.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "reuse alignment results for repeated targets",
+      "lesson": "Target duplicates are valid; include a repeated-target case and preserve every output position.",
+      "hotspot": "Target duplicates are valid; include a repeated-target case and preserve every output position.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "carry candidate distances through alignment selection",
+      "lesson": "Compute each exact i128 distance once rather than recomputing it after tolerance filtering.",
+      "hotspot": "Compute each exact i128 distance once rather than recomputing it after tolerance filtering.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "use checked narrow differences for tolerance rejection",
+      "lesson": "An overflowed positive distance necessarily exceeds an i64 tolerance; tie comparison stays wide.",
+      "hotspot": "An overflowed positive distance necessarily exceeds an i64 tolerance; tie comparison stays wide.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "cast only offsets proven within signed tolerance",
+      "lesson": "A selected offset is bounded by a nonnegative i64 tolerance; retain the preceding checked selection.",
+      "hotspot": "A selected offset is bounded by a nonnegative i64 tolerance; retain the preceding checked selection.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "use the slice sortedness primitive for target validation",
+      "lesson": "Ordered targets permit equality; compare the library predicate without altering source strictness.",
+      "hotspot": "Ordered targets permit equality; compare the library predicate without altering source strictness.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure always inlining for align_timestamps",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure never inlining for align_timestamps",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "align_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "advance alignment with a sliced lookahead iterator",
+      "lesson": "Retain the monotone cursor while moving its end-bound checks into a borrowed slice.",
+      "hotspot": "Retain the monotone cursor while moving its end-bound checks into a borrowed slice.",
+      "cases": "align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "unroll checked batch addition by 4",
+      "lesson": "The copied-buffer strategy succeeded; test bounded unrolling without changing overflow detection.",
+      "hotspot": "The copied-buffer strategy succeeded; test bounded unrolling without changing overflow detection.",
+      "cases": "expand_batch_timestamps",
+      "round": 1,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "unroll checked batch addition by 8",
+      "lesson": "The copied-buffer strategy succeeded; test bounded unrolling without changing overflow detection.",
+      "hotspot": "The copied-buffer strategy succeeded; test bounded unrolling without changing overflow detection.",
+      "cases": "expand_batch_timestamps",
+      "round": 2,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "specialize batches with a common positive width",
+      "lesson": "Nested sensor batches often have a fixed count; keep the general counts fallback and validation.",
+      "hotspot": "Nested sensor batches often have a fixed count; keep the general counts fallback and validation.",
+      "cases": "expand_batch_timestamps",
+      "round": 3,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "split the output tail once per batch",
+      "lesson": "Replace cumulative index arithmetic with disjoint mutable slices of validated lengths.",
+      "hotspot": "Replace cumulative index arithmetic with disjoint mutable slices of validated lengths.",
+      "cases": "expand_batch_timestamps",
+      "round": 4,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "fallibly iterate each batch slice",
+      "lesson": "Compare iterator control flow on the accepted in-place implementation, rather than the old push path.",
+      "hotspot": "Compare iterator control flow on the accepted in-place implementation, rather than the old push path.",
+      "cases": "expand_batch_timestamps",
+      "round": 5,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "accumulate batch overflow flags while adding",
+      "lesson": "Return the same overflow error before exposing any result; a local bit reduction may permit vectorization.",
+      "hotspot": "Return the same overflow error before exposing any result; a local bit reduction may permit vectorization.",
+      "cases": "expand_batch_timestamps",
+      "round": 6,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "skip additions for zero-origin message batches",
+      "lesson": "The output already contains copied offsets, so a zero timestamp needs no arithmetic.",
+      "hotspot": "The output already contains copied offsets, so a zero timestamp needs no arithmetic.",
+      "cases": "expand_batch_timestamps",
+      "round": 7,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure always inlining for expand_batch_timestamps",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "expand_batch_timestamps",
+      "round": 8,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "measure never inlining for expand_batch_timestamps",
+      "lesson": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "cases": "expand_batch_timestamps",
+      "round": 9,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    },
+    {
+      "operator": "expand_batch_timestamps",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "method": "zip original offsets with batch output slices",
+      "lesson": "Measure separate immutable reads and mutable writes while retaining checked addition.",
+      "hotspot": "Measure separate immutable reads and mutable writes while retaining checked addition.",
+      "cases": "expand_batch_timestamps",
+      "round": 10,
+      "recipe_file": "benchmarks/ten_rounds/group_time.py"
+    }
+  ]
+}

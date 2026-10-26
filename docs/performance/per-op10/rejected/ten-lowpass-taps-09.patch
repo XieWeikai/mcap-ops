@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index e85c4fa..2f4d706 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -86,6 +86,7 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
+ }
+ 
+ /// Windowed-sinc FIR. Cutoff and rate are in Hz, odd taps >= 3 required.
++#[inline(never)]
+ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<Vec<f64>> {
+     if !sample_rate_hz.is_finite()
+         || !cutoff_hz.is_finite()

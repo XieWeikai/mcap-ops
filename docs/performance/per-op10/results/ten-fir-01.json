@@ -1,0 +1,144 @@
+{
+  "label": "ten-fir-01",
+  "base_commit": "c52eceae06e4c84cc57b4f12b34910acae804400",
+  "cases": [
+    "fir.scalar",
+    "fir.vector",
+    "fir.short_scalar",
+    "fir.short_vector",
+    "fir.small_scalar",
+    "fir.small_vector",
+    "fir.wide",
+    "fir.gapped",
+    "fir.single"
+  ],
+  "geomean_latency_reduction_pct": 3.881767742162301,
+  "worst_block_reduction_pct": 3.3426164278472226,
+  "worst_case_reduction_pct": -1.1676343642622378,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Strided iterator and transposition attempts failed; remove repeated row-slice construction without changing data layout.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "a14de1b4619f6f5a5506cd4a0fcaba22fcdaf3649b2d7874f6c9734b915abe9a",
+  "operator": "fir",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "index FIR support directly in the flat signal buffer",
+  "profile_hotspot": "Strided iterator and transposition attempts failed; remove repeated row-slice construction without changing data layout.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Strided iterator and transposition attempts failed; remove repeated row-slice construction without changing data layout.",
+  "case_results": {
+    "fir.single": {
+      "before_ns": 270336.5859375,
+      "after_ns": 266360.40625,
+      "latency_reduction_pct": 1.350560045159721,
+      "paired_ratios": [
+        1.0068792569203502,
+        0.9661095421764553,
+        1.0089657181022516,
+        0.9422691030454773
+      ],
+      "worst_paired_reduction_pct": -0.8965718102251552
+    },
+    "fir.short_scalar": {
+      "before_ns": 145125.5703125,
+      "after_ns": 144006.830078125,
+      "latency_reduction_pct": 1.695220078432369,
+      "paired_ratios": [
+        0.9659459070449589,
+        1.0058091455846108,
+        1.0001496913863936,
+        0.9540537288036579
+      ],
+      "worst_paired_reduction_pct": -0.5809145584610764
+    },
+    "fir.short_vector": {
+      "before_ns": 365491.21875,
+      "after_ns": 334756.5546875,
+      "latency_reduction_pct": 8.643640683896702,
+      "paired_ratios": [
+        0.968013145477442,
+        0.912685665538848,
+        0.9144415207832179,
+        0.8817288818361199
+      ],
+      "worst_paired_reduction_pct": 3.1986854522558006
+    },
+    "fir.small_scalar": {
+      "before_ns": 282.17626953125,
+      "after_ns": 279.2144775390625,
+      "latency_reduction_pct": 0.6911154244157669,
+      "paired_ratios": [
+        1.0014999385237835,
+        0.9700508737266589,
+        1.0231165799732314,
+        0.9846777529879012
+      ],
+      "worst_paired_reduction_pct": -2.3116579973231355
+    },
+    "fir.small_vector": {
+      "before_ns": 497.9583740234375,
+      "after_ns": 452.32433319091797,
+      "latency_reduction_pct": 8.6494966507089,
+      "paired_ratios": [
+        0.9078955802605247,
+        0.8884413877138565,
+        0.9334912470057093,
+        0.9191144867252973
+      ],
+      "worst_paired_reduction_pct": 6.650875299429071
+    },
+    "fir.wide": {
+      "before_ns": 6797320.875,
+      "after_ns": 6342934.125,
+      "latency_reduction_pct": 6.5161930343778485,
+      "paired_ratios": [
+        0.9078023577141358,
+        0.9402571523936486,
+        0.9304266865641516,
+        0.9392494527482914
+      ],
+      "worst_paired_reduction_pct": 5.97428476063514
+    },
+    "fir.gapped": {
+      "before_ns": 136333.5,
+      "after_ns": 126738.232421875,
+      "latency_reduction_pct": 7.538094348846802,
+      "paired_ratios": [
+        0.9212785307753476,
+        0.951140606583175,
+        0.9156697205100556,
+        0.9279595822477162
+      ],
+      "worst_paired_reduction_pct": 4.8859393416825
+    },
+    "fir.scalar": {
+      "before_ns": 347513.21875,
+      "after_ns": 351901.1015625,
+      "latency_reduction_pct": -1.1676343642622378,
+      "paired_ratios": [
+        1.0284195349665977,
+        1.0182318267424901,
+        1.0051208605427548,
+        1.0023237937321157
+      ],
+      "worst_paired_reduction_pct": -2.841953496659766
+    },
+    "fir.vector": {
+      "before_ns": 1614668.25,
+      "after_ns": 1577375.9375,
+      "latency_reduction_pct": 2.159791629125807,
+      "paired_ratios": [
+        0.9727933576185909,
+        0.9835201266787087,
+        0.9757606304863417,
+        0.9810435369311423
+      ],
+      "worst_paired_reduction_pct": 1.6479873321291305
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-01",
+  "validation_sha256": "e40015dce4c82c9f8430d5befaac6466279a9cf81d5995e5dfb05d7f6c8b69e4"
+}

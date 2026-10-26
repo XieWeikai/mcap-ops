@@ -1,0 +1,31 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index e85c4fa..046ecd5 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -155,15 +155,19 @@ pub fn fir(
+     let mut values = vec![f64::NAN; signal.values().len()];
+     let mut valid = vec![false; signal.len()];
+     let mut bad_prefix = vec![0usize; signal.len() + 1];
+-    for i in 0..signal.len() {
+-        let bad_row = signal.row(i).iter().any(|v| !v.is_finite());
+-        bad_prefix[i + 1] = bad_prefix[i] + usize::from(bad_row);
+-    }
+     let mut gap_prefix = vec![0usize; signal.len() + 1];
+-    for i in 1..signal.len() {
+-        let delta = i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[i - 1]);
++    for i in 0..signal.len() {
++        bad_prefix[i + 1] =
++            bad_prefix[i] + usize::from(signal.row(i).iter().any(|v| !v.is_finite()));
+         gap_prefix[i + 1] = gap_prefix[i]
+-            + usize::from((delta - i128::from(period_ns)).abs() > i128::from(tolerance_ns));
++            + usize::from(
++                i > 0
++                    && (i128::from(signal.timestamps()[i])
++                        - i128::from(signal.timestamps()[i - 1])
++                        - i128::from(period_ns))
++                    .abs()
++                        > i128::from(tolerance_ns),
++            );
+     }
+     let lookahead = if mode == FilterMode::Centered {
+         taps.len() / 2
