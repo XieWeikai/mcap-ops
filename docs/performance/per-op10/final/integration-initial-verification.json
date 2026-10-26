@@ -1,0 +1,34 @@
+{
+  "baseline": "9de19ead5df7444a9074c71028129b88970ba6ba",
+  "host": "reference-linux",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "numpy": "2.5.4",
+  "rustc": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+  "run_id": "session-9a90601a14b1",
+  "rust_tests": 36,
+  "python_tests": 5,
+  "public_interface_comparisons": 291,
+  "reference_oracle": "180 randomized core scenarios, original image/MCAP fixtures, clock/grid/Hampel/SLERP edges, coefficient extremes, gapped FIR and large images",
+  "native_profile": "release, thin LTO, one codegen unit, debug line tables on both sides",
+  "python_profile": "release wheels, thin LTO, one codegen unit, debug disabled on both sides",
+  "wheel": {
+    "path": "./.artifacts/rsi/per-op10/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl",
+    "bytes": 1117946,
+    "sha256": "87440416b2da69d6ceec64b9ec8616eaab9d9514dd6944d17c3060df3890f0d2"
+  },
+  "source_sha256": {
+    "crates/core/src/filter.rs": "4efe6eca3b8b7e9a012effead389b8c16a43de494061e823a01b14d1f157414f",
+    "crates/core/src/lib.rs": "ee4447d2da85040e02ee39257c0916c01900844a6da4a28e9fddade3e71dcdca",
+    "crates/core/src/quality.rs": "085b4130bdc60c94bb479dc1f69686ee0d4b3711df42ad96ffa646f9027574c9",
+    "crates/core/src/sampling.rs": "e1329df67771179a53faaf4fd1f11ebbae3cda0793a0e15af9b93686b716016f",
+    "crates/core/src/selection.rs": "236aeddddcfd7b0b4427605f220db1e384f641b1fb21643ce00500b6016e14e5",
+    "crates/core/src/time.rs": "c1d8ea60f9c22d7a3f4bc08787e1bf3d9518a81a1a890f05bc03f7790b858f8f",
+    "crates/io/src/image_ops.rs": "dbe3b727e42cf298e2db332fb6ec18dcf76bda187c229f592b6221969f27f8f6",
+    "crates/io/src/lib.rs": "1b1b9c12b43226c889af152084f4ae938f7eec665f5d87997b658642f340ef1a",
+    "crates/io/src/mcap_ops.rs": "b1585842b36f5815b5b031d5109fcd3d6d69baca53fd9b1744bc3173cf7f7c29",
+    "crates/io/src/video.rs": "49d0cf487668cfdea3eb7b5bf57002c2fe0c702bb8bc0d0cd6565011b62121c6",
+    "crates/python/src/lib.rs": "f6b72a7ad51b218bdc7ebf786f8e681e2acfb1a48ee3940d8584c858a7cbc842",
+    "python/mcap_ops/__init__.py": "56e7d6e14dc2da494c359020bc3e853c80fcc786fe443649d18bb8342ff0d2d5"
+  }
+}

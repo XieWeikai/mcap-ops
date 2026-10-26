@@ -133,7 +133,7 @@ impl Iterator for RawReader {
                             "MCAP exceeds max_messages; no complete report produced",
                         )));
                     }
-                    let accepted = if self.filter.topics.is_empty() {
+                    let accepted = if self.filter.topics.len() <= 1 {
                         self.filter.accepts(&message)
                     } else {
                         let known = self

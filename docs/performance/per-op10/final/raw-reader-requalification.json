@@ -1,0 +1,78 @@
+{
+  "purpose": "Requalification of the original raw-reader optimization after restricting cache use to multiple topics; not an additional optimization round.",
+  "baseline_commit": "9de19ead5df7444a9074c71028129b88970ba6ba",
+  "change": "Bypass topic cache when filter.topics.len() <= 1",
+  "cases": [
+    "raw_reader.chunked",
+    "raw_reader.linear",
+    "raw_reader.topics",
+    "raw_reader.mixed_topics"
+  ],
+  "geomean_latency_reduction_pct": 10.778102118110633,
+  "worst_block_reduction_pct": 10.264903551398042,
+  "case_results": {
+    "raw_reader.chunked": {
+      "before_ns": 1311943.34375,
+      "after_ns": 1321464.4375,
+      "latency_reduction_pct": -0.9009029943058078,
+      "paired_ratios": [
+        1.021548154437048,
+        1.0061701157554324,
+        1.0118479441306836,
+        0.9814099249006625
+      ],
+      "worst_paired_reduction_pct": -2.154815443704794
+    },
+    "raw_reader.linear": {
+      "before_ns": 1669051.34375,
+      "after_ns": 1640625.1875,
+      "latency_reduction_pct": 1.4993778496464216,
+      "paired_ratios": [
+        0.9950408640562388,
+        0.9975019963459951,
+        0.9749715789508328,
+        0.9655634115385329
+      ],
+      "worst_paired_reduction_pct": 0.24980036540048767
+    },
+    "raw_reader.topics": {
+      "before_ns": 1554959.5625,
+      "after_ns": 1310487.9375,
+      "latency_reduction_pct": 15.409846627663914,
+      "paired_ratios": [
+        0.8577209530546971,
+        0.8494830763783708,
+        0.8423199910683509,
+        0.8223030068816406
+      ],
+      "worst_paired_reduction_pct": 14.227904694530292
+    },
+    "raw_reader.mixed_topics": {
+      "before_ns": 1756025.46875,
+      "after_ns": 1331834.375,
+      "latency_reduction_pct": 23.86393832639706,
+      "paired_ratios": [
+        0.7247551938689527,
+        0.7605178588696774,
+        0.7648025480840249,
+        0.7622033746023814
+      ],
+      "worst_paired_reduction_pct": 23.519745191597508
+    }
+  },
+  "singleton_guard": {
+    "before_ns": 1214642.609375,
+    "after_ns": 1227767.796875,
+    "latency_reduction_pct": -0.9452465990939629,
+    "paired_ratios": [
+      1.009084627878831,
+      1.0351948570756027,
+      0.9959433411410423,
+      1.0098203041030485
+    ],
+    "worst_paired_reduction_pct": -3.519485707560266
+  },
+  "native_measurement_sha256": "aa38c65d06fd0d20f34fc22c6ad387e2b9f7d2dd6d118467484be912050d01e6",
+  "source_sha256": "c315d285103927216cfb7f2e0e629626a183a034993931e22191c1ed28d2d062",
+  "correctness": "Final fmt, Clippy, Rust tests, immutable-reference differential checks, Python tests and 291 public comparisons passed"
+}

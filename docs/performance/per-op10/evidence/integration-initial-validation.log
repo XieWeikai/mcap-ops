@@ -1,0 +1,508 @@
+Audited 300/300 decisions: 23 accepted, 277 rejected
+    Checking mcap-ops-core v0.1.0 (./crates/core)
+    Checking mcap-ops-io v0.1.0 (./crates/io)
+    Checking mcap-ops-python v0.1.0 (./crates/python)
+    Finished `dev` profile [unoptimized] target(s) in 0.45s
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+   Compiling mcap-ops-python v0.1.0 (./crates/python)
+    Finished `test` profile [unoptimized] target(s) in 0.48s
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 26 tests
+     Running unittests src/lib.rs (target/debug/deps/mcap_ops_core-79e31c042df1cf4c)
+     Running tests/contracts.rs (target/debug/deps/contracts-0d27a91ba1770a12)
+test audit_keeps_reversals_and_duplicates ... ok
+test causal_mode_rejects_future_interpolation ... ok
+test clock_correction_and_overflow ... ok
+test empty_signal_and_shape_contracts ... ok
+test ema_causal_reset_and_no_future_dependency ... ok
+test fir_marks_edges_gaps_and_delay ... ok
+test flatline_duration_and_gap_boundaries ... ok
+test full_width_timestamp_distances_do_not_wrap ... ok
+test grid_preserves_epoch_and_half_open_end ... ok
+test linear_exact_endpoints_survive_a_gap ... ok
+test lowpass_coefficients_preserve_dc ... ok
+test malformed_clock_skips_dynamic_checks_but_keeps_finite_check ... ok
+test nearest_ties_choose_past_and_before_start_respects_future_policy ... ok
+test nonfinite_support_is_invalid ... ok
+test fractional_rate_does_not_accumulate_rounding ... ok
+test numeric_summary_ignores_nonfinite_but_reports_it ... ok
+test overlapping_history_preserves_order_and_provenance ... ok
+test previous_is_causal_age_limited_and_never_zero_fills ... ok
+test quality_caps_details_not_gate_evidence ... ok
+test quaternion_shortest_path_and_invalid_norm ... ok
+test rate_uses_actual_dt_and_does_not_cross_gaps ... ok
+test robust_spike_is_not_automatically_removed ... ok
+test selection_is_half_open_and_never_retimes ... ok
+test unwrap_resets_after_missing_values ... ok
+test causal_sampling_never_references_future ... ok
+test exact_samples_are_identity ... ok
+
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src/lib.rs (target/debug/deps/mcap_ops_io-ce7b2bbe428d3f4b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 10 tests
+     Running tests/adapters.rs (target/debug/deps/adapters-c7277cecd23eb204)
+test image_limits_and_bad_crop_are_errors ... ok
+test image_quality_and_geometry_are_real ... ok
+test topic_and_half_open_time_filter ... ok
+test corrupted_payload_is_caught_by_crc ... ok
+test explicit_json_fields_and_payload_clock ... ok
+test partial_scan_does_not_claim_success ... ok
+test unknown_encoding_and_schema_mismatch_fail_explicitly ... ok
+test mcap_inspection_preserves_order_and_empty_channels ... ok
+test corrupt_media_and_missing_executable_fail ... ok
+test generated_video_is_fully_decoded ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+
+running 0 tests
+     Running unittests src/lib.rs (target/debug/deps/_native-f3b4737061b1e7eb)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests mcap_ops_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests mcap_ops_io
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests _native
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Reference 66248dacb608859d2cbd0f9f27227c65013a8027; validation workspace: ./.artifacts/rsi/validation
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling mcap-ops-reference-core v0.1.0 (./.artifacts/rsi/reference/core)
+   Compiling mcap-ops-reference-io v0.1.0 (./.artifacts/rsi/reference/io)
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+   Compiling rsi-equivalence v0.0.0 (./.artifacts/rsi/validation)
+    Finished `release` profile [optimized] target(s) in 1.87s
+     Running `target/reference/release/rsi-equivalence`
+resource_png 94331 94331
+resource_png 989988 989988
+per-op10 oracle: 6 coefficient extremes, 16 gapped FIR cases, 2 large image fixtures passed
+extension edge oracle: 3630 clock cases, 168 grids, 75 Hampel cases, 50 SLERP cases passed
+resource_png 88 88
+resource_png 88 88
+resource_png 88 88
+resource_png 88 88
+resource_png 107 107
+resource_png 107 107
+resource_png 107 107
+resource_png 107 107
+resource_png 132 132
+resource_png 132 132
+resource_png 132 132
+resource_png 132 132
+resource_png 212 212
+resource_png 212 212
+resource_png 242 242
+resource_png 242 242
+resource_png 4016 4016
+resource_png 4016 4016
+resource_png 6817 6817
+resource_png 6817 6817
+resource_png 214 214
+resource_png 220 220
+resource_png 193 193
+equivalence: 180 randomized core scenarios, 13 image fixtures, 2 MCAP fixtures passed
+📦 Including license file `LICENSE`
+🍹 Building a mixed python/rust project
+🐍 Found CPython 3.12 at ./.venv/bin/python
+🔗 Found pyo3 bindings with abi3-py3.10 support
+📡 Using build options features from pyproject.toml
+Ignoring pytest: markers 'extra == "test"' don't match your environment
+Requirement already satisfied: numpy>=1.24 in ./.venv/lib/python3.12/site-packages (2.5.4)
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+   Compiling mcap-ops-python v0.1.0 (./crates/python)
+    Finished `release` profile [optimized + debuginfo] target(s) in 5.02s
+📦 Built wheel for abi3 Python ≥ 3.10 to /tmp/.tmpY4kZlj/mcap_ops-0.1.0-cp310-abi3-linux_x86_64.whl
+✏️ Setting installed package as editable
+🛠 Installed mcap-ops-0.1.0
+.....                                                                    [100%]
+5 passed in 0.07s
+./.artifacts/rsi/per-op10/baseline
+   Compiling libc v0.2.191
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
+   Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.15
+   Compiling cfg-if v1.0.5
+   Compiling pkg-config v0.3.34
+   Compiling version_check v0.9.5
+   Compiling simd-adler32 v0.3.10
+   Compiling fnv v1.0.7
+   Compiling crc32fast v1.5.3
+   Compiling ident_case v1.0.1
+   Compiling adler2 v2.0.1
+   Compiling autocfg v1.5.1
+   Compiling typenum v1.20.1
+   Compiling serde_core v1.0.229
+   Compiling binrw_derive v0.15.2
+   Compiling zstd-safe v8.2.0
+   Compiling thiserror v2.0.21
+   Compiling bitflags v2.13.2
+   Compiling generic-array v0.14.7
+   Compiling miniz_oxide v0.9.1
+   Compiling paste v1.0.15
+   Compiling num-traits v0.2.19
+   Compiling bytemuck v1.25.2
+   Compiling zmij v1.0.23
+   Compiling rustix v1.1.5
+   Compiling either v1.19.0
+   Compiling getrandom v0.4.3
+   Compiling owo-colors v4.4.0
+   Compiling serde v1.0.229
+   Compiling binrw v0.15.2
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling zune-core v0.5.3
+   Compiling syn v2.0.119
+   Compiling syn v3.0.9
+   Compiling flate2 v1.1.10
+   Compiling jobserver v0.1.35
+   Compiling array-init v2.1.0
+   Compiling linux-raw-sys v0.12.1
+   Compiling pxfm v0.1.30
+   Compiling serde_json v1.0.154
+   Compiling cc v1.10.0
+   Compiling png v0.18.1
+   Compiling num_cpus v1.17.0
+   Compiling zune-jpeg v0.5.15
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling fastrand v2.5.0
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling once_cell v1.21.4
+   Compiling cpufeatures v0.2.17
+   Compiling byteorder v1.5.0
+   Compiling byteorder-lite v0.1.0
+   Compiling log v0.4.34
+   Compiling static_assertions v1.1.0
+   Compiling bimap v0.6.3
+   Compiling sha2 v0.10.9
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+   Compiling lz4-sys v1.11.1+lz4-1.10.0
+   Compiling thiserror-impl v2.0.21
+   Compiling serde_derive v1.0.229
+   Compiling tempfile v3.27.0
+   Compiling darling_core v0.21.3
+   Compiling moxcms v0.8.1
+   Compiling mcap-ops-core v0.1.0 (./.artifacts/rsi/per-op10/baseline/crates/core)
+   Compiling darling_macro v0.21.3
+   Compiling darling v0.21.3
+   Compiling enumset_derive v0.15.1
+   Compiling enumset v1.1.15
+   Compiling image v0.25.10
+   Compiling lz4 v1.28.1
+   Compiling zstd v0.14.3
+   Compiling mcap v0.26.0
+   Compiling mcap-ops-io v0.1.0 (./.artifacts/rsi/per-op10/baseline/crates/io)
+    Finished `release` profile [optimized + debuginfo] target(s) in 16.88s
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+    Finished `release` profile [optimized + debuginfo] target(s) in 6.84s
+completed block=0 side=before
+completed block=0 side=after
+completed block=1 side=after
+completed block=1 side=before
+completed block=2 side=before
+completed block=2 side=after
+completed block=3 side=after
+completed block=3 side=before
+align_timestamps.sparse               71.82% 19061.7 -> 5325.9 ns
+align_timestamps.repeated              7.34% 113679.7 -> 105340.1 ns
+require_strict                        44.22% 9080.6 -> 5063.8 ns
+uniform_grid.integer                  30.87% 71248.8 -> 49251.0 ns
+uniform_grid.rational                 27.80% 2212.7 -> 1597.2 ns
+map_clock.identity                    79.67% 26074.1 -> 5300.6 ns
+map_clock.offset                      -0.48% 26182.7 -> 26355.1 ns
+map_clock.drift                       -1.54% 152693.9 -> 154983.1 ns
+inspect_time.uniform                   0.02% 24672.9 -> 24606.3 ns
+inspect_time.jitter                    0.29% 85824.8 -> 85669.3 ns
+align_timestamps.previous             11.40% 62295.8 -> 55282.2 ns
+align_timestamps.nearest               6.75% 100175.1 -> 93543.6 ns
+expand_batch_timestamps                0.26% 20185.4 -> 20064.5 ns
+resample.previous                     -7.98% 217724.2 -> 235089.4 ns
+resample.nearest                       7.51% 245580.8 -> 227501.5 ns
+resample.linear                        2.96% 408625.7 -> 397192.1 ns
+resample.slerp                        -2.85% 558572.5 -> 574267.1 ns
+resample.sparse_linear                70.60% 18670.5 -> 5480.1 ns
+resample.repeated                      5.59% 166094.8 -> 156946.0 ns
+resample.exact_slerp                  -3.10% 410019.3 -> 421773.7 ns
+history_windows.separate               2.86% 153929.5 -> 149747.1 ns
+history_windows.overlap                2.39% 274904.5 -> 268833.2 ns
+inspect_signal.random_hampel          90.31% 10539326.0 -> 1021363.8 ns
+inspect_signal.constant_hampel        49.33% 1622991.8 -> 825115.6 ns
+inspect_signal.basic                   3.10% 1438947.8 -> 1397603.3 ns
+inspect_signal.hampel                 24.99% 3554751.2 -> 2666314.4 ns
+inspect_signal.wide_hampel            57.46% 12696755.0 -> 5402787.4 ns
+inspect_signal.issues                 -2.12% 1447077.7 -> 1478172.4 ns
+gate.pass                             29.98% 8.9 -> 6.3 ns
+gate.fail                              1.02% 29.5 -> 29.2 ns
+ema.uniform                            4.48% 310014.1 -> 295670.6 ns
+ema.jitter                            30.39% 425075.5 -> 296122.7 ns
+lowpass_taps                          33.20% 382.3 -> 255.5 ns
+lowpass_taps.short                    55.15% 32.0 -> 14.3 ns
+lowpass_taps.long                     36.38% 24449.5 -> 15577.0 ns
+fir.single                            13.58% 269326.2 -> 233019.1 ns
+fir.short_scalar                      20.27% 139633.9 -> 111312.3 ns
+fir.short_vector                      10.89% 347967.5 -> 308936.3 ns
+fir.small_scalar                      21.95% 266.1 -> 208.0 ns
+fir.small_vector                       9.91% 444.9 -> 400.8 ns
+fir.wide                               2.24% 6449227.8 -> 6322368.4 ns
+fir.gapped                            15.33% 121276.5 -> 102547.9 ns
+fir.scalar                             7.05% 335026.8 -> 310621.1 ns
+fir.vector                             2.00% 1549696.5 -> 1518976.2 ns
+unwrap_angles                          2.68% 370006.5 -> 360079.7 ns
+unwrap_angles.wraps                    3.77% 432560.5 -> 416248.4 ns
+interval_new                          55.65% 8952.3 -> 3970.3 ns
+interval_contains.small                1.32% 16426.1 -> 16208.5 ns
+interval_mask.empty                   99.42% 18829.6 -> 109.7 ns
+interval_mask.late                    16.18% 20009.8 -> 16685.4 ns
+interval_difference.empty             75.47% 5156.4 -> 1262.3 ns
+interval_affected_centers.merged      60.62% 8235.2 -> 3241.9 ns
+interval_contains                      0.45% 246440.7 -> 245778.4 ns
+interval_mask.ordered                 17.03% 25058.9 -> 20848.5 ns
+interval_mask.shuffled                 1.51% 271346.3 -> 267338.5 ns
+interval_intersection.dense            3.47% 28311.1 -> 27330.1 ns
+interval_intersection.late            -1.17% 167.2 -> 169.0 ns
+interval_difference                   -0.35% 9785.1 -> 9799.8 ns
+interval_affected_centers              8.09% 5589.4 -> 5137.3 ns
+image_decode.png                       0.59% 1461496.6 -> 1454666.7 ns
+image_decode.jpeg                      0.45% 569182.1 -> 569052.3 ns
+image_quality.gradient                 0.77% 2710287.2 -> 2689339.1 ns
+image_quality.noise                   -0.13% 1245399.8 -> 1247454.3 ns
+image_transform.gradient              -0.12% 5455451.1 -> 5463266.5 ns
+image_transform.noise                 -0.52% 4076163.6 -> 4097664.6 ns
+raw_reader.chunked                    -0.31% 1299291.3 -> 1307293.2 ns
+raw_reader.linear                     -0.36% 1624486.3 -> 1630406.9 ns
+raw_reader.topics                     14.59% 1522701.5 -> 1302117.1 ns
+raw_reader.mixed_topics               22.58% 1723738.9 -> 1329712.7 ns
+mcap_inspect                           0.41% 1702898.2 -> 1695280.7 ns
+mcap_inspect.many                      1.21% 2009268.7 -> 1987535.4 ns
+json_decode                           -0.97% 209.8 -> 211.8 ns
+json_decode.deep                      33.47% 341.9 -> 227.6 ns
+json_decode.wide                      -2.44% 896.1 -> 934.2 ns
+mcap_read_signal                      -2.75% 5882284.5 -> 6067874.1 ns
+mcap_read_signal.many                 -7.72% 1205266.4 -> 1297284.8 ns
+video_probe                            0.45% 25142833.0 -> 25030345.5 ns
+video_validate                         0.73% 53858830.5 -> 53780475.0 ns
+📦 Including license file `LICENSE`
+🍹 Building a mixed python/rust project
+🐍 Found CPython 3.12 at ./.venv/bin/python
+🔗 Found pyo3 bindings with abi3-py3.10 support
+📡 Using build options features from pyproject.toml
+   Compiling libc v0.2.191
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling target-lexicon v0.13.5
+   Compiling autocfg v1.5.1
+   Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.15
+   Compiling cfg-if v1.0.5
+   Compiling pkg-config v0.3.34
+   Compiling version_check v0.9.5
+   Compiling simd-adler32 v0.3.10
+   Compiling crc32fast v1.5.3
+   Compiling ident_case v1.0.1
+   Compiling fnv v1.0.7
+   Compiling serde_core v1.0.229
+   Compiling adler2 v2.0.1
+   Compiling typenum v1.20.1
+   Compiling thiserror v2.0.21
+   Compiling binrw_derive v0.15.2
+   Compiling zstd-safe v8.2.0
+   Compiling generic-array v0.14.7
+   Compiling num-traits v0.2.19
+   Compiling bitflags v2.13.2
+   Compiling matrixmultiply v0.3.11
+   Compiling memoffset v0.9.1
+   Compiling miniz_oxide v0.9.1
+   Compiling getrandom v0.4.3
+   Compiling zmij v1.0.23
+   Compiling either v1.19.0
+   Compiling paste v1.0.15
+   Compiling binrw v0.15.2
+   Compiling owo-colors v4.4.0
+   Compiling heck v0.5.0
+   Compiling serde v1.0.229
+   Compiling bytemuck v1.25.2
+   Compiling pyo3-build-config v0.27.2
+   Compiling rustix v1.1.5
+   Compiling once_cell v1.21.4
+   Compiling flate2 v1.1.10
+   Compiling syn v2.0.119
+   Compiling syn v3.0.9
+   Compiling jobserver v0.1.35
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling zune-core v0.5.3
+   Compiling cc v1.10.0
+   Compiling rawpointer v0.2.1
+   Compiling pxfm v0.1.30
+   Compiling linux-raw-sys v0.12.1
+   Compiling array-init v2.1.0
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling serde_json v1.0.154
+   Compiling digest v0.10.7
+   Compiling png v0.18.1
+   Compiling zune-jpeg v0.5.15
+   Compiling num-integer v0.1.47
+   Compiling pyo3-macros-backend v0.27.2
+   Compiling pyo3-ffi v0.27.2
+   Compiling pyo3 v0.27.2
+   Compiling numpy v0.27.1
+   Compiling num-complex v0.4.6
+   Compiling num_cpus v1.17.0
+   Compiling fastrand v2.5.0
+   Compiling byteorder v1.5.0
+   Compiling cpufeatures v0.2.17
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling log v0.4.34
+   Compiling static_assertions v1.1.0
+   Compiling unindent v0.2.4
+   Compiling byteorder-lite v0.1.0
+   Compiling bimap v0.6.3
+   Compiling indoc v2.0.8
+   Compiling tempfile v3.27.0
+   Compiling zstd-sys v2.1.2+zstd.1.5.7
+   Compiling lz4-sys v1.11.1+lz4-1.10.0
+   Compiling sha2 v0.10.9
+   Compiling ndarray v0.17.2
+   Compiling rustc-hash v2.1.3
+   Compiling thiserror-impl v2.0.21
+   Compiling serde_derive v1.0.229
+   Compiling moxcms v0.8.1
+   Compiling darling_core v0.21.3
+   Compiling mcap-ops-core v0.1.0 (./.artifacts/rsi/per-op10/baseline/crates/core)
+   Compiling darling_macro v0.21.3
+   Compiling darling v0.21.3
+   Compiling enumset_derive v0.15.1
+   Compiling image v0.25.10
+   Compiling enumset v1.1.15
+   Compiling pyo3-macros v0.27.2
+   Compiling lz4 v1.28.1
+   Compiling zstd v0.14.3
+   Compiling mcap v0.26.0
+   Compiling mcap-ops-io v0.1.0 (./.artifacts/rsi/per-op10/baseline/crates/io)
+   Compiling mcap-ops-python v0.1.0 (./.artifacts/rsi/per-op10/baseline/crates/python)
+    Finished `release` profile [optimized] target(s) in 13.45s
+📦 Built wheel for abi3 Python ≥ 3.10 to ./.artifacts/rsi/per-op10/baseline-wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl
+📦 Including license file `LICENSE`
+🍹 Building a mixed python/rust project
+🐍 Found CPython 3.12 at ./.venv/bin/python
+🔗 Found pyo3 bindings with abi3-py3.10 support
+📡 Using build options features from pyproject.toml
+   Compiling pyo3-build-config v0.27.2
+   Compiling mcap-ops-core v0.1.0 (./crates/core)
+   Compiling pyo3-macros-backend v0.27.2
+   Compiling pyo3-ffi v0.27.2
+   Compiling pyo3 v0.27.2
+   Compiling numpy v0.27.1
+   Compiling mcap-ops-io v0.1.0 (./crates/io)
+   Compiling pyo3-macros v0.27.2
+   Compiling mcap-ops-python v0.1.0 (./crates/python)
+    Finished `release` profile [optimized] target(s) in 6.53s
+📦 Built wheel for abi3 Python ≥ 3.10 to .artifacts/rsi/per-op10/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl
+Python public-interface equivalence: 291 comparisons passed
+completed block=0 side=before
+completed block=0 side=after
+completed block=1 side=after
+completed block=1 side=before
+completed block=2 side=before
+completed block=2 side=after
+completed block=3 side=after
+completed block=3 side=before
+python.resample.small                  1.04% 3914.2 -> 3862.9 ns
+python.history_windows.small           2.63% 5420.8 -> 5287.4 ns
+python.ema.small                       2.50% 2486.3 -> 2435.3 ns
+python.fir.small                       8.14% 5490.3 -> 5044.4 ns
+python.unwrap_angles.small            -0.15% 1729.8 -> 1733.6 ns
+python.resample.strided               69.04% 2101684.5 -> 650315.6 ns
+python.inspect_signal                  2.72% 920004.4 -> 894291.3 ns
+python.resample.previous               2.37% 161022.0 -> 156961.8 ns
+python.resample.linear                 2.00% 237373.7 -> 232612.5 ns
+python.history_windows                -0.32% 1012763.4 -> 1016709.6 ns
+python.align_timestamps               12.42% 27881.6 -> 24429.4 ns
+python.uniform_grid                    5.51% 168763.9 -> 159458.0 ns
+python.ema                             0.89% 911998.7 -> 906578.2 ns
+python.fir                             8.74% 3305811.9 -> 3025176.9 ns
+python.lowpass_taps                   17.02% 723.3 -> 601.5 ns
+python.unwrap_angles                   0.50% 833403.6 -> 827551.9 ns
+python.image_quality                   0.83% 341461.3 -> 339789.5 ns
+python.transform_image                 0.26% 965794.4 -> 964226.0 ns
+python.inspect_mcap                   -0.09% 643560.9 -> 643668.5 ns
+python.read_json_signal                1.20% 919636.9 -> 909736.9 ns
+python.validate_video                  0.44% 54429972.5 -> 54213190.5 ns
+Processing ./.artifacts/rsi/per-op10/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl
+Installing collected packages: mcap-ops
+  Attempting uninstall: mcap-ops
+    Found existing installation: mcap-ops 0.1.0
+    Uninstalling mcap-ops-0.1.0:
+      Successfully uninstalled mcap-ops-0.1.0
+Successfully installed mcap-ops-0.1.0
+.....                                                                    [100%]
+5 passed in 0.11s
+Python public-interface equivalence: 291 comparisons passed
+{
+  "baseline": "9de19ead5df7444a9074c71028129b88970ba6ba",
+  "host": "reference-linux",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "numpy": "2.5.4",
+  "rustc": "rustc 1.90.0 (1159e78c4 2025-09-14)",
+  "run_id": "session-9a90601a14b1",
+  "rust_tests": 36,
+  "python_tests": 5,
+  "public_interface_comparisons": 291,
+  "reference_oracle": "180 randomized core scenarios, original image/MCAP fixtures, clock/grid/Hampel/SLERP edges, coefficient extremes, gapped FIR and large images",
+  "native_profile": "release, thin LTO, one codegen unit, debug line tables on both sides",
+  "python_profile": "release wheels, thin LTO, one codegen unit, debug disabled on both sides",
+  "wheel": {
+    "path": "./.artifacts/rsi/per-op10/wheel/mcap_ops-0.1.0-cp310-abi3-manylinux_2_39_x86_64.whl",
+    "bytes": 1117946,
+    "sha256": "87440416b2da69d6ceec64b9ec8616eaab9d9514dd6944d17c3060df3890f0d2"
+  },
+  "source_sha256": {
+    "crates/core/src/filter.rs": "4efe6eca3b8b7e9a012effead389b8c16a43de494061e823a01b14d1f157414f",
+    "crates/core/src/lib.rs": "ee4447d2da85040e02ee39257c0916c01900844a6da4a28e9fddade3e71dcdca",
+    "crates/core/src/quality.rs": "085b4130bdc60c94bb479dc1f69686ee0d4b3711df42ad96ffa646f9027574c9",
+    "crates/core/src/sampling.rs": "e1329df67771179a53faaf4fd1f11ebbae3cda0793a0e15af9b93686b716016f",
+    "crates/core/src/selection.rs": "236aeddddcfd7b0b4427605f220db1e384f641b1fb21643ce00500b6016e14e5",
+    "crates/core/src/time.rs": "c1d8ea60f9c22d7a3f4bc08787e1bf3d9518a81a1a890f05bc03f7790b858f8f",
+    "crates/io/src/image_ops.rs": "dbe3b727e42cf298e2db332fb6ec18dcf76bda187c229f592b6221969f27f8f6",
+    "crates/io/src/lib.rs": "1b1b9c12b43226c889af152084f4ae938f7eec665f5d87997b658642f340ef1a",
+    "crates/io/src/mcap_ops.rs": "b1585842b36f5815b5b031d5109fcd3d6d69baca53fd9b1744bc3173cf7f7c29",
+    "crates/io/src/video.rs": "49d0cf487668cfdea3eb7b5bf57002c2fe0c702bb8bc0d0cd6565011b62121c6",
+    "crates/python/src/lib.rs": "f6b72a7ad51b218bdc7ebf786f8e681e2acfb1a48ee3940d8584c858a7cbc842",
+    "python/mcap_ops/__init__.py": "56e7d6e14dc2da494c359020bc3e853c80fcc786fe443649d18bb8342ff0d2d5"
+  }
+}
