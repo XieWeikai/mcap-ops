@@ -1,0 +1,53 @@
+{
+  "label": "ten-uniform-grid-04",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": 33.37678075438166,
+  "worst_block_reduction_pct": 33.08598301858267,
+  "worst_case_reduction_pct": 31.974930730052552,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. The residual is below twice a u32 rate; wide timestamp arithmetic remains unchanged.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "fa59752b5575c07bb51ce2eda3efafd54e2a2a35f4ed30eb1fa64f6b6b4fb7bd",
+  "operator": "uniform_grid",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "keep rational-grid residual arithmetic in u64",
+  "profile_hotspot": "The residual is below twice a u32 rate; wide timestamp arithmetic remains unchanged.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. The residual is below twice a u32 rate; wide timestamp arithmetic remains unchanged.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 74307.7177734375,
+      "after_ns": 48494.4482421875,
+      "latency_reduction_pct": 34.73787504368839,
+      "paired_ratios": [
+        0.6528398247885773,
+        0.6533421059066084,
+        0.6520588056591876,
+        0.6524026743376549
+      ],
+      "worst_paired_reduction_pct": 34.66578940933916
+    },
+    "uniform_grid.rational": {
+      "before_ns": 2278.6360778808594,
+      "after_ns": 1549.5460815429688,
+      "latency_reduction_pct": 31.974930730052552,
+      "paired_ratios": [
+        0.6858475078537748,
+        0.6789867188602683,
+        0.6797559710615925,
+        0.6807454143373564
+      ],
+      "worst_paired_reduction_pct": 31.41524921462252
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-uniform-grid-04",
+  "validation_sha256": "05d9db370bb9e791fa3a90c867f8cf6a5824d527ce59fc2615ed4bbb10c50898"
+}

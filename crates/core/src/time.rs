@@ -54,7 +54,8 @@ pub fn uniform_grid(
     }
     let mut result = Vec::new();
     let whole = period_num / rate;
-    let fraction = period_num % rate;
+    let fraction = (period_num % rate) as u64;
+    let rate = u64::from(rate_num);
     let mut residual = rate / 2;
     let mut t = i128::from(start);
     for i in 0..=max_points {
