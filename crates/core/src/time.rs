@@ -27,9 +27,11 @@ pub fn uniform_grid(
         return Err(invalid("rate exceeds nanosecond resolution"));
     }
     let mut result = Vec::new();
+    let whole = period_num / rate;
+    let fraction = period_num % rate;
+    let mut residual = rate / 2;
+    let mut t = i128::from(start);
     for i in 0..=max_points {
-        let offset = (i as i128 * period_num + rate / 2) / rate;
-        let t = i128::from(start) + offset;
         if t >= i128::from(end) {
             return Ok(result);
         }
@@ -37,6 +39,12 @@ pub fn uniform_grid(
             return Err(invalid("grid exceeds max_points"));
         }
         result.push(i64::try_from(t).map_err(|_| Error::Overflow)?);
+        t += whole;
+        residual += fraction;
+        if residual >= rate {
+            t += 1;
+            residual -= rate;
+        }
     }
     unreachable!()
 }

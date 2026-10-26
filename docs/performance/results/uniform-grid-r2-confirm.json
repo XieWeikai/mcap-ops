@@ -1,0 +1,61 @@
+{
+  "label": "uniform-grid-r2-confirm",
+  "base_commit": "84c4feede13275212d657ea42d9d51465c18894a",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": 19.281832582851386,
+  "worst_block_reduction_pct": 18.721589533401094,
+  "worst_case_reduction_pct": 18.472072498019987,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "A quotient/remainder accumulator replaces per-point division; bounds, rounding and overflow contracts remain unchanged",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "21c55cddeabd0a8ec4ad2edc883be154d515b2f7e1c4e4a9d20203f5a0965721",
+  "operator": "uniform_grid",
+  "round": 2,
+  "decision": "accepted",
+  "method": "advance rational timestamps with quotient and remainder",
+  "profile_hotspot": "Repeated wide integer division in rational timestamp generation",
+  "reason": "Same round-2 candidate independently confirmed in eight paired blocks: 19.28% aggregate, 18.72% worst block. Initial unstable four-block measurement remains in history and raw data.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 90541.744140625,
+      "after_ns": 72132.0087890625,
+      "latency_reduction_pct": 20.446821224321997,
+      "paired_ratios": [
+        0.7991359464235955,
+        0.7969649117103004,
+        0.7851585833809047,
+        0.808136186446939,
+        0.7940986638032597,
+        0.7975621927244633,
+        0.7919987229160804,
+        0.791647034535886
+      ],
+      "worst_paired_reduction_pct": 19.186381355306104
+    },
+    "uniform_grid.rational": {
+      "before_ns": 2761.3388671875,
+      "after_ns": 2254.4191284179688,
+      "latency_reduction_pct": 18.472072498019987,
+      "paired_ratios": [
+        0.8151422033033454,
+        0.8289172974754884,
+        0.7852133806997366,
+        0.8154163467362547,
+        0.825207677555015,
+        0.8062529427168266,
+        0.808240025378071,
+        0.8231889456279716
+      ],
+      "worst_paired_reduction_pct": 17.108270252451163
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/uniform-grid-r2-confirm",
+  "validation_sha256": "d6014a6cc234c6d03e60cf1b35690a8769cb628481694cdd1bf26ffeaad00d1c",
+  "initial_measurement": "docs/performance/history/uniform-grid-r2-initial.json"
+}

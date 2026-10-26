@@ -1,0 +1,52 @@
+{
+  "label": "uniform-grid-r2",
+  "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": 18.614368185306084,
+  "worst_block_reduction_pct": 2.8286618575240063,
+  "worst_case_reduction_pct": 18.444770665721123,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "46bd53790cebcae9ff4394eba9eb8bbf2a9ee899575721483d73d1db158ac018",
+  "operator": "uniform_grid",
+  "round": 2,
+  "decision": "rejected",
+  "method": "advance rational timestamps with quotient and remainder",
+  "profile_hotspot": "Repeated Vec growth and per-point integer division in rational grid generation",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 89759.47265625,
+      "after_ns": 72387.892578125,
+      "latency_reduction_pct": 19.58660386997749,
+      "paired_ratios": [
+        0.7994398940001586,
+        0.7967536281386037,
+        0.8155003794543243,
+        0.8088280286002916
+      ],
+      "worst_paired_reduction_pct": 18.44996205456757
+    },
+    "uniform_grid.rational": {
+      "before_ns": 2764.0115966796875,
+      "after_ns": 2232.4244995117188,
+      "latency_reduction_pct": 18.444770665721123,
+      "paired_ratios": [
+        0.8014860227732156,
+        1.1850926839779419,
+        0.8199487296367816,
+        0.8111558570487959
+      ],
+      "worst_paired_reduction_pct": -18.509268397794187
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/uniform-grid-r2",
+  "validation_sha256": "b9e6c479c083476b08b157dec37853c23fe4794fe80da93b5e20df21525714da"
+}
