@@ -1,0 +1,66 @@
+{
+  "label": "ten-map-clock-01",
+  "base_commit": "73adddf4bc087f0eda3dd17dd52c0f473477cdf7",
+  "cases": [
+    "map_clock.identity",
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": 43.109104925006456,
+  "worst_block_reduction_pct": 39.380980725274064,
+  "worst_case_reduction_pct": -0.07592727487586437,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. The zero-drift fast path helped earlier; distinguish the frequent identity transform with an explicit benchmark.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "6df595011668855aa0792aa3a359fb05aed5c3db1d8743074db9052a8bee285b",
+  "operator": "map_clock",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "copy clock-identity inputs directly",
+  "profile_hotspot": "The zero-drift fast path helped earlier; distinguish the frequent identity transform with an explicit benchmark.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. The zero-drift fast path helped earlier; distinguish the frequent identity transform with an explicit benchmark.",
+  "case_results": {
+    "map_clock.identity": {
+      "before_ns": 36473.15771484375,
+      "after_ns": 5554.5870361328125,
+      "latency_reduction_pct": 84.77075347999849,
+      "paired_ratios": [
+        0.1523146195409842,
+        0.2225417048323186,
+        0.15227031085904608,
+        0.15142253947936476
+      ],
+      "worst_paired_reduction_pct": 77.74582951676814
+    },
+    "map_clock.offset": {
+      "before_ns": 31695.90673828125,
+      "after_ns": 37565.603515625,
+      "latency_reduction_pct": -0.07592727487586437,
+      "paired_ratios": [
+        1.0005300505838943,
+        0.9996684597562692,
+        1.0009884949136232,
+        1.4536031018452547
+      ],
+      "worst_paired_reduction_pct": -45.36031018452547
+    },
+    "map_clock.drift": {
+      "before_ns": 150065.033203125,
+      "after_ns": 149970.263671875,
+      "latency_reduction_pct": 0.025794446347293665,
+      "paired_ratios": [
+        1.0000419350892225,
+        1.0012887041672796,
+        0.9985649098732031,
+        0.9994421759838317
+      ],
+      "worst_paired_reduction_pct": -0.1288704167279553
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-map-clock-01",
+  "validation_sha256": "89a10e6ef0307626f805f3916feed08e0733a0e6a114bda96d7fe902a1f0123d"
+}
