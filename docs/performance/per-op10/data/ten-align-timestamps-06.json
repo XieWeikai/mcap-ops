@@ -1,0 +1,567 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "run_id": "session-9a90601a14b1",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/accepted",
+      "bytes": 26845200,
+      "sha256": "7be1b7fd1f05df7cfb0757c4fe2e13708511e3a03e5a12cad03d167d1d8e1a3e"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/ten-align-timestamps-06",
+      "bytes": 26844000,
+      "sha256": "e439a8956d7759a7938f0031b1dfb0ff2b0fbb4911741687ed436b5607dfc647"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "align_timestamps.sparse": {
+          "case": "align_timestamps.sparse",
+          "iterations": 4096,
+          "median_ns": 5427.430419921875,
+          "samples_ns": [
+            5487.5849609375,
+            5608.143310546875,
+            5585.39892578125,
+            5421.67822265625,
+            5328.574951171875,
+            5387.79541015625,
+            5427.430419921875
+          ]
+        },
+        "align_timestamps.repeated": {
+          "case": "align_timestamps.repeated",
+          "iterations": 256,
+          "median_ns": 106990.1328125,
+          "samples_ns": [
+            108383.9765625,
+            108862.1015625,
+            106990.1328125,
+            106708.06640625,
+            106488.6015625,
+            106484.82421875,
+            108203.01953125
+          ]
+        },
+        "align_timestamps.previous": {
+          "case": "align_timestamps.previous",
+          "iterations": 256,
+          "median_ns": 105709.265625,
+          "samples_ns": [
+            106229.36328125,
+            106351.25390625,
+            105684.38671875,
+            105416.7265625,
+            105709.265625,
+            105843.3984375,
+            104988.35546875
+          ]
+        },
+        "align_timestamps.nearest": {
+          "case": "align_timestamps.nearest",
+          "iterations": 256,
+          "median_ns": 143253.9765625,
+          "samples_ns": [
+            143152.1875,
+            143253.9765625,
+            146066.875,
+            145309.14453125,
+            145682.83203125,
+            142220.90625,
+            142182.7734375
+          ]
+        }
+      },
+      "after": {
+        "align_timestamps.sparse": {
+          "case": "align_timestamps.sparse",
+          "iterations": 4096,
+          "median_ns": 5331.841552734375,
+          "samples_ns": [
+            5433.612548828125,
+            5331.841552734375,
+            5325.2978515625,
+            5356.636962890625,
+            5345.707763671875,
+            5314.432861328125,
+            5305.400634765625
+          ]
+        },
+        "align_timestamps.repeated": {
+          "case": "align_timestamps.repeated",
+          "iterations": 256,
+          "median_ns": 98266.98828125,
+          "samples_ns": [
+            98865.46875,
+            98407.30859375,
+            98266.98828125,
+            98132.234375,
+            98746.421875,
+            97628.12109375,
+            98171.59765625
+          ]
+        },
+        "align_timestamps.previous": {
+          "case": "align_timestamps.previous",
+          "iterations": 256,
+          "median_ns": 98743.65625,
+          "samples_ns": [
+            98628.05078125,
+            97233.48046875,
+            96978.87109375,
+            100849.125,
+            99975.390625,
+            100936.98828125,
+            98743.65625
+          ]
+        },
+        "align_timestamps.nearest": {
+          "case": "align_timestamps.nearest",
+          "iterations": 256,
+          "median_ns": 132438.265625,
+          "samples_ns": [
+            131884.3046875,
+            131992.984375,
+            132438.265625,
+            132752.8515625,
+            132321.65625,
+            133168.62109375,
+            133585.01953125
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "align_timestamps.sparse": {
+          "case": "align_timestamps.sparse",
+          "iterations": 4096,
+          "median_ns": 5475.72412109375,
+          "samples_ns": [
+            5485.671630859375,
+            5476.44287109375,
+            5346.177978515625,
+            5567.259521484375,
+            5370.41015625,
+            5423.472412109375,
+            5475.72412109375
+          ]
+        },
+        "align_timestamps.repeated": {
+          "case": "align_timestamps.repeated",
+          "iterations": 256,
+          "median_ns": 100425.1015625,
+          "samples_ns": [
+            99671.8125,
+            100425.1015625,
+            101623.14453125,
+            101365.01953125,
+            100725.95703125,
+            99525.71484375,
+            99541.72265625
+          ]
+        },
+        "align_timestamps.previous": {
+          "case": "align_timestamps.previous",
+          "iterations": 256,
+          "median_ns": 98102.5625,
+          "samples_ns": [
+            98102.5625,
+            98678.02734375,
+            99374.12890625,
+            98165.46484375,
+            96644.57421875,
+            97796.47265625,
+            97199.2265625
+          ]
+        },
+        "align_timestamps.nearest": {
+          "case": "align_timestamps.nearest",
+          "iterations": 256,
+          "median_ns": 132114.984375,
+          "samples_ns": [
+            132427.4375,
+            131478.49609375,
+            132228.48046875,
+            132427.19921875,
+            132114.984375,
+            131828.53125,
+            131160.2578125
+          ]
+        }
+      },
+      "before": {
+        "align_timestamps.sparse": {
+          "case": "align_timestamps.sparse",
+          "iterations": 4096,
+          "median_ns": 5504.212158203125,
+          "samples_ns": [
+            5381.188720703125,
+            5557.960205078125,
+            5471.38232421875,
+            5504.212158203125,
+            5545.384033203125,
+            5595.545654296875,
+            5470.817138671875
+          ]
+        },
+        "align_timestamps.repeated": {
+          "case": "align_timestamps.repeated",
+          "iterations": 256,
+          "median_ns": 108446.4609375,
+          "samples_ns": [
+            112341.984375,
+            109695.82421875,
+            109137.1640625,
+            108446.4609375,
+            107583.07421875,
+            107446.87109375,
+            106837.68359375
+          ]
+        },
+        "align_timestamps.previous": {
+          "case": "align_timestamps.previous",
+          "iterations": 256,
+          "median_ns": 105476.8984375,
+          "samples_ns": [
+            104214.0,
+            107831.05078125,
+            106479.91796875,
+            105476.8984375,
+            106332.8671875,
+            103229.140625,
+            103828.984375
+          ]
+        },
+        "align_timestamps.nearest": {
+          "case": "align_timestamps.nearest",
+          "iterations": 256,
+          "median_ns": 143754.0234375,
+          "samples_ns": [
+            143062.13671875,
+            142356.80078125,
+            145795.88671875,
+            145728.8203125,
+            143400.56640625,
+            145858.0859375,
+            143754.0234375
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "align_timestamps.sparse": {
+          "case": "align_timestamps.sparse",
+          "iterations": 4096,
+          "median_ns": 5459.00537109375,
+          "samples_ns": [
+            5340.82666015625,
+            5310.52685546875,
+            5441.478515625,
+            5489.385986328125,
+            5459.00537109375,
+            5466.681884765625,
+            5474.92724609375
+          ]
+        },
+        "align_timestamps.repeated": {
+          "case": "align_timestamps.repeated",
+          "iterations": 256,
+          "median_ns": 107434.25390625,
+          "samples_ns": [
+            107161.0859375,
+            107780.2734375,
+            106916.59765625,
+            107434.25390625,
+            106885.8671875,
+            109490.328125,
+            108489.47265625
+          ]
+        },
+        "align_timestamps.previous": {
+          "case": "align_timestamps.previous",
+          "iterations": 256,
+          "median_ns": 104933.0078125,
+          "samples_ns": [
+            104933.0078125,
+            104367.19921875,
+            104991.109375,
+            107296.87109375,
+            104954.8828125,
+            104882.30078125,
+            104863.40625
+          ]
+        },
+        "align_timestamps.nearest": {
+          "case": "align_timestamps.nearest",
+          "iterations": 256,
+          "median_ns": 142996.11328125,
+          "samples_ns": [
+            143239.26953125,
+            141853.09765625,
+            142840.9609375,
+            143647.0078125,
+            144893.40625,
+            142996.11328125,
+            142386.328125
+          ]
+        }
+      },
+      "after": {
+        "align_timestamps.sparse": {
+          "case": "align_timestamps.sparse",
+          "iterations": 4096,
+          "median_ns": 5339.521728515625,
+          "samples_ns": [
+            5311.672607421875,
+            5300.93115234375,
+            5455.48828125,
+            5391.108642578125,
+            5331.238525390625,
+            5339.521728515625,
+            5354.10205078125
+          ]
+        },
+        "align_timestamps.repeated": {
+          "case": "align_timestamps.repeated",
+          "iterations": 256,
+          "median_ns": 99451.546875,
+          "samples_ns": [
+            99451.546875,
+            99326.875,
+            98156.90234375,
+            101210.72265625,
+            100517.85546875,
+            99084.15625,
+            100449.00390625
+          ]
+        },
+        "align_timestamps.previous": {
+          "case": "align_timestamps.previous",
+          "iterations": 256,
+          "median_ns": 97744.9375,
+          "samples_ns": [
+            97744.9375,
+            97469.3359375,
+            97094.421875,
+            98940.36328125,
+            98060.88671875,
+            97888.8203125,
+            97295.62890625
+          ]
+        },
+        "align_timestamps.nearest": {
+          "case": "align_timestamps.nearest",
+          "iterations": 256,
+          "median_ns": 132140.44921875,
+          "samples_ns": [
+            132265.07421875,
+            131454.48828125,
+            131634.640625,
+            131906.1640625,
+            133057.8671875,
+            132140.44921875,
+            132270.6328125
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "align_timestamps.sparse": {
+          "case": "align_timestamps.sparse",
+          "iterations": 4096,
+          "median_ns": 5349.911865234375,
+          "samples_ns": [
+            5364.5341796875,
+            5323.985595703125,
+            5332.31396484375,
+            5432.802001953125,
+            5345.22119140625,
+            5388.93896484375,
+            5349.911865234375
+          ]
+        },
+        "align_timestamps.repeated": {
+          "case": "align_timestamps.repeated",
+          "iterations": 256,
+          "median_ns": 98818.45703125,
+          "samples_ns": [
+            100821.234375,
+            98447.7890625,
+            98136.9765625,
+            97718.734375,
+            98818.45703125,
+            99758.953125,
+            98902.02734375
+          ]
+        },
+        "align_timestamps.previous": {
+          "case": "align_timestamps.previous",
+          "iterations": 256,
+          "median_ns": 99114.640625,
+          "samples_ns": [
+            99114.640625,
+            99381.78515625,
+            99192.08984375,
+            98721.2578125,
+            99324.65625,
+            97919.63671875,
+            97405.2578125
+          ]
+        },
+        "align_timestamps.nearest": {
+          "case": "align_timestamps.nearest",
+          "iterations": 256,
+          "median_ns": 132878.2890625,
+          "samples_ns": [
+            132507.39453125,
+            133077.703125,
+            132878.2890625,
+            131674.30859375,
+            133287.15625,
+            133636.86328125,
+            132159.7578125
+          ]
+        }
+      },
+      "before": {
+        "align_timestamps.sparse": {
+          "case": "align_timestamps.sparse",
+          "iterations": 4096,
+          "median_ns": 5368.543701171875,
+          "samples_ns": [
+            5326.373046875,
+            5373.110595703125,
+            5339.966796875,
+            5393.284912109375,
+            5458.416748046875,
+            5368.543701171875,
+            5365.173828125
+          ]
+        },
+        "align_timestamps.repeated": {
+          "case": "align_timestamps.repeated",
+          "iterations": 256,
+          "median_ns": 106878.484375,
+          "samples_ns": [
+            106878.484375,
+            106196.09375,
+            107383.875,
+            107080.23046875,
+            108425.56640625,
+            105999.38671875,
+            106559.60546875
+          ]
+        },
+        "align_timestamps.previous": {
+          "case": "align_timestamps.previous",
+          "iterations": 256,
+          "median_ns": 105532.328125,
+          "samples_ns": [
+            104543.6328125,
+            104671.74609375,
+            104243.73046875,
+            105532.328125,
+            106815.06640625,
+            110685.5,
+            106174.75390625
+          ]
+        },
+        "align_timestamps.nearest": {
+          "case": "align_timestamps.nearest",
+          "iterations": 256,
+          "median_ns": 142662.9453125,
+          "samples_ns": [
+            143178.28515625,
+            142428.53125,
+            142596.98046875,
+            145718.73828125,
+            143425.578125,
+            142662.9453125,
+            141903.0625
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "align_timestamps.sparse": {
+      "before_ns": 5443.2178955078125,
+      "after_ns": 5344.716796875,
+      "latency_reduction_pct": 1.1393928348390814,
+      "paired_ratios": [
+        0.9823878226358034,
+        0.994824320667415,
+        0.978112561821095,
+        0.9965294431833659
+      ],
+      "worst_paired_reduction_pct": 0.3470556816634107
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 107212.193359375,
+      "after_ns": 99135.001953125,
+      "latency_reduction_pct": 7.485809245598829,
+      "paired_ratios": [
+        0.9184677661206637,
+        0.9260339221247351,
+        0.925696816974073,
+        0.9245869981139504
+      ],
+      "worst_paired_reduction_pct": 7.396607787526488
+    },
+    "align_timestamps.previous": {
+      "before_ns": 105504.61328125,
+      "after_ns": 98423.109375,
+      "latency_reduction_pct": 6.719777326016452,
+      "paired_ratios": [
+        0.9341059713752032,
+        0.9300857718918457,
+        0.9314984821044677,
+        0.9391874735067113
+      ],
+      "worst_paired_reduction_pct": 6.0812526493288726
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 143125.044921875,
+      "after_ns": 132289.357421875,
+      "latency_reduction_pct": 7.570802366986607,
+      "paired_ratios": [
+        0.9244997507431758,
+        0.9190350378780159,
+        0.9240842019170921,
+        0.9314141718540373
+      ],
+      "worst_paired_reduction_pct": 6.85858281459627
+    }
+  }
+}

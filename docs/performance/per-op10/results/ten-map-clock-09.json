@@ -1,0 +1,66 @@
+{
+  "label": "ten-map-clock-09",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "map_clock.identity",
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": -92.36226155454634,
+  "worst_block_reduction_pct": -101.57518001775104,
+  "worst_case_reduction_pct": -587.1601310660152,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "116a2912d143a91385dd8d3c2f8d3ec6b4b80223ac17818d2dcffba10be745ad",
+  "operator": "map_clock",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for map_clock",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "map_clock.identity": {
+      "before_ns": 5552.1641845703125,
+      "after_ns": 38152.8447265625,
+      "latency_reduction_pct": -587.1601310660152,
+      "paired_ratios": [
+        6.996619680315313,
+        6.724877031002522,
+        7.350299748024543,
+        6.74658294100499
+      ],
+      "worst_paired_reduction_pct": -635.0299748024544
+    },
+    "map_clock.offset": {
+      "before_ns": 37569.59619140625,
+      "after_ns": 38753.1767578125,
+      "latency_reduction_pct": -3.150540100989674,
+      "paired_ratios": [
+        1.0631621535122042,
+        0.6875589533883445,
+        1.1048458144745672,
+        0.9998486485075893
+      ],
+      "worst_paired_reduction_pct": -10.48458144745672
+    },
+    "map_clock.drift": {
+      "before_ns": 150039.037109375,
+      "after_ns": 150701.115234375,
+      "latency_reduction_pct": -0.4412765283636322,
+      "paired_ratios": [
+        1.0076666606524969,
+        0.9981502511621165,
+        1.0085662800359032,
+        1.0011588699147758
+      ],
+      "worst_paired_reduction_pct": -0.8566280035903207
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-map-clock-09",
+  "validation_sha256": "b60132239968ed9d56ec7e826bb153ff13a3b564f362a1882e467ebdf4df1e3f"
+}

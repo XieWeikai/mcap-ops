@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 546f649..81f144b 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -252,6 +252,7 @@ pub fn align_timestamps(
+ }
+ 
+ /// Expand nested samples using explicit nanosecond offsets, without guessing fields.
++#[inline(never)]
+ pub fn expand_batch_timestamps(
+     message_times: &[i64],
+     counts: &[usize],

@@ -1,0 +1,53 @@
+{
+  "label": "ten-uniform-grid-08",
+  "base_commit": "73adddf4bc087f0eda3dd17dd52c0f473477cdf7",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": -25.391581959925034,
+  "worst_block_reduction_pct": -25.40423352469656,
+  "worst_case_reduction_pct": -26.861032763298898,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "acfa028fea5109b96e3e4c6668792eeb1c7664fcc325474a08b6a39e59d75222",
+  "operator": "uniform_grid",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for uniform_grid",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 48502.9453125,
+      "after_ns": 61519.98437499999,
+      "latency_reduction_pct": -26.861032763298898,
+      "paired_ratios": [
+        1.2720293667574467,
+        1.2691238337084594,
+        1.2680968215575188,
+        1.2671227821595545
+      ],
+      "worst_paired_reduction_pct": -27.20293667574467
+    },
+    "uniform_grid.rational": {
+      "before_ns": 1548.4658203125,
+      "after_ns": 1916.7386169433596,
+      "latency_reduction_pct": -23.766355446255382,
+      "paired_ratios": [
+        1.2363096479450495,
+        1.2390174609800582,
+        1.235698132003489,
+        1.240718899243178
+      ],
+      "worst_paired_reduction_pct": -24.07188992431779
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-uniform-grid-08",
+  "validation_sha256": "c43a0cfb4b3b5f0333a12eb63f6d758622fed9a488fd2db5787be9cfbcfb4d67"
+}

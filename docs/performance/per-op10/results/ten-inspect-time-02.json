@@ -1,0 +1,53 @@
+{
+  "label": "ten-inspect-time-02",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": -10.801972317611153,
+  "worst_block_reduction_pct": -11.486898932094313,
+  "worst_case_reduction_pct": -22.400121412952643,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Quickselect lost on low-cardinality jitter; explicitly exploit exactly two interval values and retain full-sort fallback.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "5802c8316225e95db05e90897a13debf360ee5355a0a481ee0ace8173b38d674",
+  "operator": "inspect_time",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "summarize two-valued interval distributions without sorting",
+  "profile_hotspot": "Quickselect lost on low-cardinality jitter; explicitly exploit exactly two interval values and retain full-sort fallback.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Quickselect lost on low-cardinality jitter; explicitly exploit exactly two interval values and retain full-sort fallback.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24130.30224609375,
+      "after_ns": 24169.6064453125,
+      "latency_reduction_pct": -0.2228718703268351,
+      "paired_ratios": [
+        0.9948579263449915,
+        1.0031835691223978,
+        1.0028730272800264,
+        1.0015844101265103
+      ],
+      "worst_paired_reduction_pct": -0.31835691223978113
+    },
+    "inspect_time.jitter": {
+      "before_ns": 84658.443359375,
+      "after_ns": 104186.0390625,
+      "latency_reduction_pct": -22.400121412952643,
+      "paired_ratios": [
+        1.2148634971302554,
+        1.2250402356717613,
+        1.2229621925872916,
+        1.2409666632016627
+      ],
+      "worst_paired_reduction_pct": -24.09666632016627
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-time-02",
+  "validation_sha256": "5410835638d61c7455edc90f3ac3eb22951e2298ee02af0993d9bdf04e0dc5ee"
+}

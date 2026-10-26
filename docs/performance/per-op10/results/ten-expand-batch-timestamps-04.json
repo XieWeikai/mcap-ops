@@ -1,0 +1,40 @@
+{
+  "label": "ten-expand-batch-timestamps-04",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 1.683642659438389,
+  "worst_block_reduction_pct": 1.608232040512525,
+  "worst_case_reduction_pct": 1.683642659438389,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Replace cumulative index arithmetic with disjoint mutable slices of validated lengths.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "4e996bd792f7d9161d51cbf98507e39943a60f3712617419db61bef6f95636b4",
+  "operator": "expand_batch_timestamps",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "split the output tail once per batch",
+  "profile_hotspot": "Replace cumulative index arithmetic with disjoint mutable slices of validated lengths.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Replace cumulative index arithmetic with disjoint mutable slices of validated lengths.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 18869.599853515625,
+      "after_ns": 18448.33349609375,
+      "latency_reduction_pct": 1.683642659438389,
+      "paired_ratios": [
+        0.9695782182823767,
+        0.9827725457919774,
+        0.9835546010192547,
+        0.9839176795948748
+      ],
+      "worst_paired_reduction_pct": 1.608232040512525
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-expand-batch-timestamps-04",
+  "validation_sha256": "bc3ef86d57b616b5f5e0b5c57fd1344660a7cf32aca06ae3ccacd6f471952eeb"
+}

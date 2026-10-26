@@ -1,0 +1,40 @@
+{
+  "label": "ten-expand-batch-timestamps-01",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 6.286663688202665,
+  "worst_block_reduction_pct": 5.7797072212502965,
+  "worst_case_reduction_pct": 6.286663688202665,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The copied-buffer strategy succeeded; test bounded unrolling without changing overflow detection.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "349b10b326494be588683eda60d90881dd47aeeeb7c6d22d6cfcbe7439c6549f",
+  "operator": "expand_batch_timestamps",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "unroll checked batch addition by 4",
+  "profile_hotspot": "The copied-buffer strategy succeeded; test bounded unrolling without changing overflow detection.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The copied-buffer strategy succeeded; test bounded unrolling without changing overflow detection.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 18716.126953125,
+      "after_ns": 17470.033203125,
+      "latency_reduction_pct": 6.286663688202665,
+      "paired_ratios": [
+        0.9321238858408212,
+        0.942202927787497,
+        0.9293571288708043,
+        0.9421428403951255
+      ],
+      "worst_paired_reduction_pct": 5.7797072212502965
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-expand-batch-timestamps-01",
+  "validation_sha256": "16bc3cf6f2225f9334a5d4fa5faec667c3efb5704ec76887a474864471f48252"
+}

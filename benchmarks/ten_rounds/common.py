@@ -24,17 +24,17 @@ CASES={
  'inspect_time':'inspect_time.uniform,inspect_time.jitter',
  'align_timestamps':'align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated',
  'expand_batch_timestamps':'expand_batch_timestamps',
- 'resample':'resample.previous,resample.nearest,resample.linear,resample.slerp',
+ 'resample':'resample.previous,resample.nearest,resample.linear,resample.slerp,resample.sparse_linear,resample.repeated,resample.exact_slerp',
  'history_windows':'history_windows.separate,history_windows.overlap',
- 'inspect_signal':'inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel',
- 'gate':'gate.pass,gate.fail','ema':'ema.uniform,ema.jitter','lowpass_taps':'lowpass_taps',
- 'fir':'fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped',
- 'unwrap_angles':'unwrap_angles','interval_new':'interval_new','interval_contains':'interval_contains',
- 'interval_mask':'interval_mask.ordered,interval_mask.shuffled',
+ 'inspect_signal':'inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues',
+ 'gate':'gate.pass,gate.fail','ema':'ema.uniform,ema.jitter','lowpass_taps':'lowpass_taps,lowpass_taps.short,lowpass_taps.long',
+ 'fir':'fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single',
+ 'unwrap_angles':'unwrap_angles,unwrap_angles.wraps','interval_new':'interval_new','interval_contains':'interval_contains,interval_contains.small',
+ 'interval_mask':'interval_mask.ordered,interval_mask.shuffled,interval_mask.empty,interval_mask.late',
  'interval_intersection':'interval_intersection.dense,interval_intersection.late',
- 'interval_difference':'interval_difference','interval_affected_centers':'interval_affected_centers',
- 'raw_reader':'raw_reader.chunked,raw_reader.linear,raw_reader.topics', 'mcap_inspect':'mcap_inspect',
- 'json_decode':'json_decode','mcap_read_signal':'mcap_read_signal',
+ 'interval_difference':'interval_difference,interval_difference.empty','interval_affected_centers':'interval_affected_centers,interval_affected_centers.merged',
+ 'raw_reader':'raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics', 'mcap_inspect':'mcap_inspect,mcap_inspect.many',
+ 'json_decode':'json_decode,json_decode.deep,json_decode.wide','mcap_read_signal':'mcap_read_signal,mcap_read_signal.many',
  'image_decode':'image_decode.png,image_decode.jpeg',
  'image_quality':'image_quality.gradient,image_quality.noise',
  'image_transform':'image_transform.gradient,image_transform.noise',
@@ -63,9 +63,16 @@ def replace_function(source,name,revised):
 
 def candidate(op,path,function,method,transform,lesson,hotspot=None):
     def apply(sources):
-        base=original(path)
-        start,end=function_span(base,function)
-        value=transform(base[start:end])
+        current=sources[path]
+        start,end=function_span(current,function)
+        try:
+            value=transform(current[start:end])
+        except (AssertionError,ValueError):
+            # Incompatible algorithm/parameter alternatives start from the frozen
+            # operator body, while unrelated accepted operators remain intact.
+            base=original(path)
+            start,end=function_span(base,function)
+            value=transform(base[start:end])
         sources[path]=replace_function(sources[path],function,value)
     return dict(operator=op,paths=[path],apply=apply,method=method,lesson=lesson,
                 hotspot=hotspot or lesson,cases=CASES[op])

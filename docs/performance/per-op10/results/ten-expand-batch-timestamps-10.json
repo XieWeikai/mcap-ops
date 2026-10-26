@@ -1,0 +1,40 @@
+{
+  "label": "ten-expand-batch-timestamps-10",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 0.45774590515283986,
+  "worst_block_reduction_pct": -0.6204835065067638,
+  "worst_case_reduction_pct": 0.45774590515283986,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Measure separate immutable reads and mutable writes while retaining checked addition.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "715653694e19a71b3898087876ba0544b87def05688492dde6290663f18dd4ac",
+  "operator": "expand_batch_timestamps",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "zip original offsets with batch output slices",
+  "profile_hotspot": "Measure separate immutable reads and mutable writes while retaining checked addition.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Measure separate immutable reads and mutable writes while retaining checked addition.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 18512.646728515625,
+      "after_ns": 18391.73583984375,
+      "latency_reduction_pct": 0.45774590515283986,
+      "paired_ratios": [
+        0.9869317313258027,
+        0.9975290884356057,
+        1.0062048350650676,
+        0.9933159934613376
+      ],
+      "worst_paired_reduction_pct": -0.6204835065067638
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-expand-batch-timestamps-10",
+  "validation_sha256": "01ab6c6aba76fcac863d92d45132ec2620967e4f438e7f64e89653faa7423d48"
+}

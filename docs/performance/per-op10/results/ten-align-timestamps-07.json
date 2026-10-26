@@ -1,0 +1,79 @@
+{
+  "label": "ten-align-timestamps-07",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest",
+    "align_timestamps.sparse",
+    "align_timestamps.repeated"
+  ],
+  "geomean_latency_reduction_pct": -5.262017955008558,
+  "worst_block_reduction_pct": -5.7380101592439114,
+  "worst_case_reduction_pct": -18.519623694293806,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Ordered targets permit equality; compare the library predicate without altering source strictness.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "797b37cc5097c2b553895db3714f139e3a9d057bfb89989424e60c9b28e5bb5a",
+  "operator": "align_timestamps",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "use the slice sortedness primitive for target validation",
+  "profile_hotspot": "Ordered targets permit equality; compare the library predicate without altering source strictness.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Ordered targets permit equality; compare the library predicate without altering source strictness.",
+  "case_results": {
+    "align_timestamps.sparse": {
+      "before_ns": 5529.463134765625,
+      "after_ns": 5550.418701171875,
+      "latency_reduction_pct": -0.47379267099576516,
+      "paired_ratios": [
+        0.9922006132820232,
+        1.0156549369115844,
+        0.9986342104169853,
+        1.0108416430029301
+      ],
+      "worst_paired_reduction_pct": -1.5654936911584372
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 109934.033203125,
+      "after_ns": 110986.65625,
+      "latency_reduction_pct": -1.1863490198420479,
+      "paired_ratios": [
+        0.9994407552706575,
+        1.02512356155216,
+        0.9919417514401534,
+        1.0242862251261837
+      ],
+      "worst_paired_reduction_pct": -2.512356155215989
+    },
+    "align_timestamps.previous": {
+      "before_ns": 107373.5546875,
+      "after_ns": 127301.40234375001,
+      "latency_reduction_pct": -18.519623694293806,
+      "paired_ratios": [
+        1.1802343451494637,
+        1.1862532489939084,
+        1.1849306527422268,
+        1.1854618211436496
+      ],
+      "worst_paired_reduction_pct": -18.62532489939084
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 146714.470703125,
+      "after_ns": 150325.880859375,
+      "latency_reduction_pct": -2.121955421539079,
+      "paired_ratios": [
+        1.032978335246165,
+        1.0121030160133269,
+        1.026798685731596,
+        1.0156404226991858
+      ],
+      "worst_paired_reduction_pct": -3.2978335246165003
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-align-timestamps-07",
+  "validation_sha256": "b93eef3963dbb166b7ad9968f774cf321ff9d75e261f5747eedac0047f2256ee"
+}

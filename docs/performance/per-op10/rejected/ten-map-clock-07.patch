@@ -1,0 +1,32 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..d3f5da7 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -78,9 +78,6 @@ pub fn uniform_grid(
+ 
+ /// Explicit ppb correction around `origin`, then offset. Never estimates clocks.
+ pub fn map_clock(times: &[i64], origin: i64, offset: i64, rate_ppb: i64) -> Result<Vec<i64>> {
+-    if rate_ppb == 0 && offset == 0 {
+-        return Ok(times.to_vec());
+-    }
+     if rate_ppb == 0 {
+         return times
+             .iter()
+@@ -95,7 +92,16 @@ pub fn map_clock(times: &[i64], origin: i64, offset: i64, rate_ppb: i64) -> Resu
+         .iter()
+         .map(|&t| {
+             let delta = (i128::from(t) - i128::from(origin)) * scale;
+-            let rounded = if delta >= 0 {
++            let rounded = if let Some(magnitude) =
++                delta.checked_abs().and_then(|v| v.checked_add(500_000_000))
++            {
++                let q = (magnitude as u128 / 1_000_000_000) as i128;
++                if delta < 0 {
++                    -q
++                } else {
++                    q
++                }
++            } else if delta >= 0 {
+                 (delta + 500_000_000) / 1_000_000_000
+             } else {
+                 -((-delta + 500_000_000) / 1_000_000_000)

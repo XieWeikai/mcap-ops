@@ -29,8 +29,10 @@ add('require_strict','require_strict','scan adjacent timestamp pairs in reverse 
     lambda s:replace(s,'times.iter().zip(times.iter().skip(1)).any(|(a, b)| b <= a)',
         'times.windows(2).rev().any(|w| w[1] <= w[0])'),'Reverse streaming may improve late violation detection without changing the generic error.')
 add('require_strict','require_strict','locate the first invalid timestamp pair explicitly',
-    lambda s:replace(s,'times.iter().zip(times.iter().skip(1)).any(|(a, b)| b <= a)',
-        'times.windows(2).position(|w| w[1] <= w[0]).is_some()'),'Measure position-based early-exit code generation; no checks are removed.')
+    lambda s:body(s,'''    match times.windows(2).position(|w|w[1]<=w[0]) {
+        Some(_) => Err(invalid("source timestamps must be strictly increasing; inspect before resolving duplicates or reversals")),
+        None => Ok(()),
+    }'''),'Measure position-based early-exit code generation; no checks are removed.')
 add('require_strict','require_strict','check order with a scalar cursor',lambda s:body(s,'''    let mut i=1;
     while i<times.len() {
         if times[i]<=times[i-1] {return Err(invalid("source timestamps must be strictly increasing; inspect before resolving duplicates or reversals"));}

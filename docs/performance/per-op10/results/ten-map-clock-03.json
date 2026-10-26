@@ -1,0 +1,66 @@
+{
+  "label": "ten-map-clock-03",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "map_clock.identity",
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": -77.5757162139578,
+  "worst_block_reduction_pct": -90.38927710047568,
+  "worst_case_reduction_pct": -455.5762668801538,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Retain overflow detection for every possible input; measure an extrema prescan against per-element checked addition.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "50f7ae35eee2210f694c40895cc59c17f4ceecf88202bc5c0cf6ebf3e96dee4f",
+  "operator": "map_clock",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "validate offset extrema once before vectorizable addition",
+  "profile_hotspot": "Retain overflow detection for every possible input; measure an extrema prescan against per-element checked addition.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Retain overflow detection for every possible input; measure an extrema prescan against per-element checked addition.",
+  "case_results": {
+    "map_clock.identity": {
+      "before_ns": 5661.2283935546875,
+      "after_ns": 31463.20556640625,
+      "latency_reduction_pct": -455.5762668801538,
+      "paired_ratios": [
+        5.396586995750472,
+        5.450567195647832,
+        5.660958141955246,
+        5.668736207787842
+      ],
+      "worst_paired_reduction_pct": -466.8736207787842
+    },
+    "map_clock.offset": {
+      "before_ns": 31781.2412109375,
+      "after_ns": 31478.9453125,
+      "latency_reduction_pct": -2.557991831970785,
+      "paired_ratios": [
+        1.2134034163494427,
+        0.833605578613449,
+        1.2194510614199654,
+        0.837756420289973
+      ],
+      "worst_paired_reduction_pct": -21.94510614199654
+    },
+    "map_clock.drift": {
+      "before_ns": 150107.697265625,
+      "after_ns": 150124.03515625,
+      "latency_reduction_pct": -0.01089221485459646,
+      "paired_ratios": [
+        1.0005099192848605,
+        1.0012164718379661,
+        0.9997079250122316,
+        0.9990427971001838
+      ],
+      "worst_paired_reduction_pct": -0.12164718379661377
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-map-clock-03",
+  "validation_sha256": "14e95ad57adccc26fb316e03be0c28555536fcdb8506ed21416ea8c6686fa72b"
+}

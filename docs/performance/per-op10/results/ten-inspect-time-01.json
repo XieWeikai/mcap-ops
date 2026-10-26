@@ -1,0 +1,53 @@
+{
+  "label": "ten-inspect-time-01",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": 0.2673453757971789,
+  "worst_block_reduction_pct": 0.17279373262079067,
+  "worst_case_reduction_pct": 0.22124296807161103,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Keep the successful uniform fast path; bound fallback allocation by the actual input length.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "d59502bede81beb2cd90a1e781ac9837c9ddfc62ced8f42a7a5c7f2b12e2bf65",
+  "operator": "inspect_time",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve the maximum positive-interval count",
+  "profile_hotspot": "Keep the successful uniform fast path; bound fallback allocation by the actual input length.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Keep the successful uniform fast path; bound fallback allocation by the actual input length.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24196.16064453125,
+      "after_ns": 24112.673828125,
+      "latency_reduction_pct": 0.22124296807161103,
+      "paired_ratios": [
+        0.9970863978350066,
+        0.9988385396894406,
+        0.9984887428035611,
+        0.9822713831277797
+      ],
+      "worst_paired_reduction_pct": 0.11614603105594146
+    },
+    "inspect_time.jitter": {
+      "before_ns": 85720.791015625,
+      "after_ns": 85546.529296875,
+      "latency_reduction_pct": 0.38947781160643125,
+      "paired_ratios": [
+        0.9992328903618107,
+        0.9941550142025083,
+        0.9980554295653631,
+        0.9880453000987761
+      ],
+      "worst_paired_reduction_pct": 0.07671096381892673
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-time-01",
+  "validation_sha256": "0b993c753750ae2c6b55e21310ed35b43c783626537be45957e3bf208940ed54"
+}

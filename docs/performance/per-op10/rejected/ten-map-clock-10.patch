@@ -1,0 +1,31 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..27abf02 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -78,14 +78,19 @@ pub fn uniform_grid(
+ 
+ /// Explicit ppb correction around `origin`, then offset. Never estimates clocks.
+ pub fn map_clock(times: &[i64], origin: i64, offset: i64, rate_ppb: i64) -> Result<Vec<i64>> {
+-    if rate_ppb == 0 && offset == 0 {
+-        return Ok(times.to_vec());
+-    }
+     if rate_ppb == 0 {
+-        return times
+-            .iter()
+-            .map(|&t| t.checked_add(offset).ok_or(Error::Overflow))
+-            .collect();
++        let mut result = times.to_vec();
++        let mut chunks = result.chunks_exact_mut(4);
++        for row in chunks.by_ref() {
++            row[0] = row[0].checked_add(offset).ok_or(Error::Overflow)?;
++            row[1] = row[1].checked_add(offset).ok_or(Error::Overflow)?;
++            row[2] = row[2].checked_add(offset).ok_or(Error::Overflow)?;
++            row[3] = row[3].checked_add(offset).ok_or(Error::Overflow)?;
++        }
++        for value in chunks.into_remainder() {
++            *value = value.checked_add(offset).ok_or(Error::Overflow)?;
++        }
++        return Ok(result);
+     }
+     let scale = 1_000_000_000i128 + i128::from(rate_ppb);
+     if scale <= 0 {

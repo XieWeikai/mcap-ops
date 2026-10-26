@@ -1,0 +1,53 @@
+{
+  "label": "ten-inspect-time-03",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": -6.6757662959118225,
+  "worst_block_reduction_pct": -7.235770973526701,
+  "worst_case_reduction_pct": -12.382343908359239,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Measure an ordering check on nonuniform intervals rather than repeating the rejected percentile-selection algorithm.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "6d75c6eb7cc0d276754a12df90086dea105e550f36563e08debf97b2f8048860",
+  "operator": "inspect_time",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "skip fallback sorting when intervals are already ordered",
+  "profile_hotspot": "Measure an ordering check on nonuniform intervals rather than repeating the rejected percentile-selection algorithm.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Measure an ordering check on nonuniform intervals rather than repeating the rejected percentile-selection algorithm.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24180.0927734375,
+      "after_ns": 24387.73486328125,
+      "latency_reduction_pct": -0.8587308911553349,
+      "paired_ratios": [
+        1.0168162322648362,
+        1.0088110962796417,
+        1.0077247051258322,
+        1.008363521543465
+      ],
+      "worst_paired_reduction_pct": -1.6816232264836195
+    },
+    "inspect_time.jitter": {
+      "before_ns": 85760.11328125,
+      "after_ns": 95772.35546875,
+      "latency_reduction_pct": -12.382343908359239,
+      "paired_ratios": [
+        1.1297177307122415,
+        1.1399072253165439,
+        1.1114795705769194,
+        1.117929147454943
+      ],
+      "worst_paired_reduction_pct": -13.990722531654388
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-time-03",
+  "validation_sha256": "613b9afc0c73947ddaaad2cfbb9713311ffa0c3dd6a4953ecdb7dcd6afd145b3"
+}

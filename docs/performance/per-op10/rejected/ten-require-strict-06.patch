@@ -1,0 +1,44 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 11eed70..8d6e413 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -2,34 +2,12 @@ use crate::{invalid, Error, Result};
+ use serde::{Deserialize, Serialize};
+ 
+ pub fn require_strict(times: &[i64]) -> Result<()> {
+-    let bad = if times.len() < 2 {
+-        false
+-    } else {
+-        let mut left = times[..times.len() - 1].chunks_exact(8);
+-        let mut right = times[1..].chunks_exact(8);
+-        let mut bad = false;
+-        for (a, b) in left.by_ref().zip(right.by_ref()) {
+-            if (a[0] >= b[0])
+-                | (a[1] >= b[1])
+-                | (a[2] >= b[2])
+-                | (a[3] >= b[3])
+-                | (a[4] >= b[4])
+-                | (a[5] >= b[5])
+-                | (a[6] >= b[6])
+-                | (a[7] >= b[7])
+-            {
+-                bad = true;
+-                break;
+-            }
++    let mut i = 1;
++    while i < times.len() {
++        if times[i] <= times[i - 1] {
++            return Err(invalid("source timestamps must be strictly increasing; inspect before resolving duplicates or reversals"));
+         }
+-        bad || left
+-            .remainder()
+-            .iter()
+-            .zip(right.remainder())
+-            .any(|(a, b)| a >= b)
+-    };
+-    if bad {
+-        return Err(invalid("source timestamps must be strictly increasing; inspect before resolving duplicates or reversals"));
++        i += 1;
+     }
+     Ok(())
+ }

@@ -1,0 +1,53 @@
+{
+  "label": "ten-uniform-grid-06",
+  "base_commit": "73adddf4bc087f0eda3dd17dd52c0f473477cdf7",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": -2.040831123135467,
+  "worst_block_reduction_pct": -2.103242509571146,
+  "worst_case_reduction_pct": -29.822710894891856,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. The existing recurrence succeeded; test whether integer rates can omit residual work entirely.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "a6e5b3a9b78c60a7f141176de56ef52a7bcb53526fa27d18ab134b0bf080768d",
+  "operator": "uniform_grid",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "specialize integer-period grids before the recurrence",
+  "profile_hotspot": "The existing recurrence succeeded; test whether integer rates can omit residual work entirely.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The existing recurrence succeeded; test whether integer rates can omit residual work entirely.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 48494.3359375,
+      "after_ns": 38846.7099609375,
+      "latency_reduction_pct": 19.907733962165874,
+      "paired_ratios": [
+        0.8013532990394788,
+        0.8004920217172038,
+        0.8027315115148237,
+        0.7593556449699718
+      ],
+      "worst_paired_reduction_pct": 19.72684884851763
+    },
+    "uniform_grid.rational": {
+      "before_ns": 1548.5094299316406,
+      "after_ns": 2010.31689453125,
+      "latency_reduction_pct": -29.822710894891856,
+      "paired_ratios": [
+        1.2977917331053843,
+        1.3023330461938376,
+        1.2986624847924528,
+        1.2961175273878793
+      ],
+      "worst_paired_reduction_pct": -30.23330461938376
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-uniform-grid-06",
+  "validation_sha256": "b6d23bcd4e1e6566ed9faf7ac038348e5eff94984520713a9fdc9d39f9d27603"
+}

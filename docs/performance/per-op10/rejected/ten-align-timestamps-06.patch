@@ -1,0 +1,14 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 546f649..c53c569 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -243,8 +243,7 @@ pub fn align_timestamps(
+         };
+         if let Some(index) = chosen {
+             result.indices[i] = index as i64;
+-            result.offsets_ns[i] = i64::try_from(i128::from(source[index]) - i128::from(t))
+-                .map_err(|_| Error::Overflow)?;
++            result.offsets_ns[i] = (i128::from(source[index]) - i128::from(t)) as i64;
+             result.valid[i] = true;
+         }
+     }

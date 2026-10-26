@@ -1,0 +1,16 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..5b43d2c 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -77,10 +77,8 @@ pub fn uniform_grid(
+ }
+ 
+ /// Explicit ppb correction around `origin`, then offset. Never estimates clocks.
++#[inline(never)]
+ pub fn map_clock(times: &[i64], origin: i64, offset: i64, rate_ppb: i64) -> Result<Vec<i64>> {
+-    if rate_ppb == 0 && offset == 0 {
+-        return Ok(times.to_vec());
+-    }
+     if rate_ppb == 0 {
+         return times
+             .iter()

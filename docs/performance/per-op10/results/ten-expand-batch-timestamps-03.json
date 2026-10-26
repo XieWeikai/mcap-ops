@@ -1,0 +1,40 @@
+{
+  "label": "ten-expand-batch-timestamps-03",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 6.791648430125097,
+  "worst_block_reduction_pct": 6.360699243770229,
+  "worst_case_reduction_pct": 6.791648430125097,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Nested sensor batches often have a fixed count; keep the general counts fallback and validation.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "c0ba9d7afa88e808051d467499c458adce09b33d9297f58939ddc41323f9e429",
+  "operator": "expand_batch_timestamps",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "specialize batches with a common positive width",
+  "profile_hotspot": "Nested sensor batches often have a fixed count; keep the general counts fallback and validation.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Nested sensor batches often have a fixed count; keep the general counts fallback and validation.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 18916.893310546875,
+      "after_ns": 17654.710693359375,
+      "latency_reduction_pct": 6.791648430125097,
+      "paired_ratios": [
+        0.9301515109637488,
+        0.9287768178568162,
+        0.9363930075622977,
+        0.9340155204337491
+      ],
+      "worst_paired_reduction_pct": 6.360699243770229
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-expand-batch-timestamps-03",
+  "validation_sha256": "4eba77fa9c3101bbc4e84f234b8114431030f11d92274e1eb12a82df1dbd6eca"
+}

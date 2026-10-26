@@ -1,0 +1,20 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 546f649..1a957d0 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -266,7 +266,14 @@ pub fn expand_batch_timestamps(
+     let mut result = offsets.to_vec();
+     let mut index = 0;
+     for (&time, &count) in message_times.iter().zip(counts) {
+-        for value in &mut result[index..index + count] {
++        let mut chunks = result[index..index + count].chunks_exact_mut(4);
++        for row in chunks.by_ref() {
++            row[0] = time.checked_add(row[0]).ok_or(Error::Overflow)?;
++            row[1] = time.checked_add(row[1]).ok_or(Error::Overflow)?;
++            row[2] = time.checked_add(row[2]).ok_or(Error::Overflow)?;
++            row[3] = time.checked_add(row[3]).ok_or(Error::Overflow)?;
++        }
++        for value in chunks.into_remainder() {
+             *value = time.checked_add(*value).ok_or(Error::Overflow)?;
+         }
+         index += count;

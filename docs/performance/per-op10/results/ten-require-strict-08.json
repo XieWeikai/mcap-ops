@@ -1,0 +1,40 @@
+{
+  "label": "ten-require-strict-08",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": -75.97544683413311,
+  "worst_block_reduction_pct": -133.55257898636634,
+  "worst_case_reduction_pct": -75.97544683413311,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "70f6697461064e9f62dab69ad57fa4e977949fcbe8300adc3698022aa4913168",
+  "operator": "require_strict",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for require_strict",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 6609.68408203125,
+      "after_ns": 11615.12744140625,
+      "latency_reduction_pct": -75.97544683413311,
+      "paired_ratios": [
+        1.7519341042228287,
+        2.3355257898636634,
+        1.754614260182304,
+        1.7648946765003584
+      ],
+      "worst_paired_reduction_pct": -133.55257898636634
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-require-strict-08",
+  "validation_sha256": "37a25bcb2b3a7b9d1627c66072e01d56b27a33dca74c946ad5a074088b8abed3"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-inspect-time-10",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": -0.4118412864081211,
+  "worst_block_reduction_pct": -1.2752899245144222,
+  "worst_case_reduction_pct": -0.6596768429866229,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Specialize median indexing after sorting; keep the same interpolation arithmetic for even counts.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "8150055b5de44cef868448d5eb8f40df8b42293461e25c779c8cd8d131492323",
+  "operator": "inspect_time",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "specialize the exact median quantile index",
+  "profile_hotspot": "Specialize median indexing after sorting; keep the same interpolation arithmetic for even counts.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Specialize median indexing after sorting; keep the same interpolation arithmetic for even counts.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24160.3671875,
+      "after_ns": 24152.0205078125,
+      "latency_reduction_pct": -0.1661756336451603,
+      "paired_ratios": [
+        0.9998336670889367,
+        1.0034898455839667,
+        0.9939922839630468,
+        1.0058385604311657
+      ],
+      "worst_paired_reduction_pct": -0.5838560431165707
+    },
+    "inspect_time.jitter": {
+      "before_ns": 84684.234375,
+      "after_ns": 85739.5625,
+      "latency_reduction_pct": -0.6596768429866229,
+      "paired_ratios": [
+        1.0127037810739823,
+        1.0004897557857502,
+        0.9996728191273582,
+        1.0197147686302452
+      ],
+      "worst_paired_reduction_pct": -1.9714768630245239
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-time-10",
+  "validation_sha256": "3270bc03511cc8150c4897c2242a1fbd8f7ed4c00dd06471ccfba98aa6983275"
+}

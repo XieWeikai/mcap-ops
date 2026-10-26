@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 546f649..f12d90f 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -207,7 +207,7 @@ pub fn align_timestamps(
+     max_future_ns: i64,
+ ) -> Result<TimeAlignment> {
+     require_strict(source)?;
+-    if max_past_ns < 0 || max_future_ns < 0 || target.windows(2).any(|w| w[1] < w[0]) {
++    if max_past_ns < 0 || max_future_ns < 0 || !target.is_sorted() {
+         return Err(invalid(
+             "nonnegative tolerances and ordered target required",
+         ));

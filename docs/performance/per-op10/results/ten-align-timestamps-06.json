@@ -1,0 +1,79 @@
+{
+  "label": "ten-align-timestamps-06",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest",
+    "align_timestamps.sparse",
+    "align_timestamps.repeated"
+  ],
+  "geomean_latency_reduction_pct": 5.91988956044045,
+  "worst_block_reduction_pct": 5.249117756732735,
+  "worst_case_reduction_pct": 1.1393928348390814,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. A selected offset is bounded by a nonnegative i64 tolerance; retain the preceding checked selection.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "dba26fbf63ceb1cf621584efb17bfec460eba033b29da7adc7c8b3ce871d915b",
+  "operator": "align_timestamps",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "cast only offsets proven within signed tolerance",
+  "profile_hotspot": "A selected offset is bounded by a nonnegative i64 tolerance; retain the preceding checked selection.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. A selected offset is bounded by a nonnegative i64 tolerance; retain the preceding checked selection.",
+  "case_results": {
+    "align_timestamps.sparse": {
+      "before_ns": 5443.2178955078125,
+      "after_ns": 5344.716796875,
+      "latency_reduction_pct": 1.1393928348390814,
+      "paired_ratios": [
+        0.9823878226358034,
+        0.994824320667415,
+        0.978112561821095,
+        0.9965294431833659
+      ],
+      "worst_paired_reduction_pct": 0.3470556816634107
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 107212.193359375,
+      "after_ns": 99135.001953125,
+      "latency_reduction_pct": 7.485809245598829,
+      "paired_ratios": [
+        0.9184677661206637,
+        0.9260339221247351,
+        0.925696816974073,
+        0.9245869981139504
+      ],
+      "worst_paired_reduction_pct": 7.396607787526488
+    },
+    "align_timestamps.previous": {
+      "before_ns": 105504.61328125,
+      "after_ns": 98423.109375,
+      "latency_reduction_pct": 6.719777326016452,
+      "paired_ratios": [
+        0.9341059713752032,
+        0.9300857718918457,
+        0.9314984821044677,
+        0.9391874735067113
+      ],
+      "worst_paired_reduction_pct": 6.0812526493288726
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 143125.044921875,
+      "after_ns": 132289.357421875,
+      "latency_reduction_pct": 7.570802366986607,
+      "paired_ratios": [
+        0.9244997507431758,
+        0.9190350378780159,
+        0.9240842019170921,
+        0.9314141718540373
+      ],
+      "worst_paired_reduction_pct": 6.85858281459627
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-align-timestamps-06",
+  "validation_sha256": "5bf4816350961929dc2ea413498f47f0b6f5f91037361eb23f58ad3118cf1d12"
+}

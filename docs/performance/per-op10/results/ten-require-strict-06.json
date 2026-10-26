@@ -1,0 +1,40 @@
+{
+  "label": "ten-require-strict-06",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": -97.01342406619221,
+  "worst_block_reduction_pct": -97.5518810472406,
+  "worst_case_reduction_pct": -97.01342406619221,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Keep branchy early exit rather than the rejected full reduction.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "0df8740285835d1631bdeb8e66a96bd5a43d452c96a325fa8eda634c04fafbe2",
+  "operator": "require_strict",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "check order with a scalar cursor",
+  "profile_hotspot": "Keep branchy early exit rather than the rejected full reduction.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Keep branchy early exit rather than the rejected full reduction.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 4980.245849609375,
+      "after_ns": 9806.693359375,
+      "latency_reduction_pct": -97.01342406619221,
+      "paired_ratios": [
+        1.9662916084643396,
+        1.975518810472406,
+        1.973976872859505,
+        1.8785088021780496
+      ],
+      "worst_paired_reduction_pct": -97.5518810472406
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-require-strict-06",
+  "validation_sha256": "fac99eac7065ea9b123bee3127232b481f704476be7365f22cbaf24e4f3d009a"
+}

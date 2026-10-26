@@ -1,0 +1,53 @@
+{
+  "label": "ten-inspect-time-07",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": -3.364133300983574,
+  "worst_block_reduction_pct": -4.3554089819481945,
+  "worst_case_reduction_pct": -5.647489133482919,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Test removal of Vec push bookkeeping while retaining every duplicate, reversal and overflow check.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "a8e61651f233dc4d9a27fcd3fe5c2f5ae0bba6d216dace6c902ff87b478c2b95",
+  "operator": "inspect_time",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "fill a bounded interval buffer then truncate it",
+  "profile_hotspot": "Test removal of Vec push bookkeeping while retaining every duplicate, reversal and overflow check.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Test removal of Vec push bookkeeping while retaining every duplicate, reversal and overflow check.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24067.29541015625,
+      "after_ns": 24366.68505859375,
+      "latency_reduction_pct": -1.2443564619695646,
+      "paired_ratios": [
+        1.014961091092838,
+        1.0250000744497845,
+        1.005887321779496,
+        1.0099260381465534
+      ],
+      "worst_paired_reduction_pct": -2.500007444978447
+    },
+    "inspect_time.jitter": {
+      "before_ns": 85149.078125,
+      "after_ns": 90008.412109375,
+      "latency_reduction_pct": -5.647489133482919,
+      "paired_ratios": [
+        1.0505058223962502,
+        1.0624439602734082,
+        1.0643423993627712,
+        1.0480452410739418
+      ],
+      "worst_paired_reduction_pct": -6.43423993627712
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-time-07",
+  "validation_sha256": "cb8f69696c8e8b0c8a70783d0ac07b95d25b501eed1ed95162ebe8c6c831a894"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-inspect-time-04",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": 3.5709291185745062,
+  "worst_block_reduction_pct": 3.4030277527591912,
+  "worst_case_reduction_pct": -0.6761182283094413,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Zipped adjacency helped strict validation; apply it only to the established uniform fast path.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "e572c5ee7daec0c687d32d9b3edac024d62054fb85673b27622c509e9b981013",
+  "operator": "inspect_time",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "zip the uniform-clock comparison pass",
+  "profile_hotspot": "Zipped adjacency helped strict validation; apply it only to the established uniform fast path.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Zipped adjacency helped strict validation; apply it only to the established uniform fast path.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24139.96240234375,
+      "after_ns": 22290.81884765625,
+      "latency_reduction_pct": 7.45297871363253,
+      "paired_ratios": [
+        0.9288690796917528,
+        0.9137404455629562,
+        0.9220713460355966,
+        0.9305742718748999
+      ],
+      "worst_paired_reduction_pct": 6.942572812510006
+    },
+    "inspect_time.jitter": {
+      "before_ns": 84681.806640625,
+      "after_ns": 85185.595703125,
+      "latency_reduction_pct": -0.6761182283094413,
+      "paired_ratios": [
+        0.9885163580567091,
+        1.015251051920092,
+        1.010810885284221,
+        1.002711479281968
+      ],
+      "worst_paired_reduction_pct": -1.5251051920091907
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-time-04",
+  "validation_sha256": "bade5d1a4b89363952d7e8144a437477ef032493fc526575e8de99ffe6e2c81e"
+}

@@ -1,0 +1,40 @@
+{
+  "label": "ten-require-strict-04",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": -107.69587207143809,
+  "worst_block_reduction_pct": -137.99646269157657,
+  "worst_case_reduction_pct": -107.69587207143809,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Reverse streaming may improve late violation detection without changing the generic error.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "d96c4ef14ff8c99fa55f50616e407e056fda1aa23dc07d41fa0c440066bb25ed",
+  "operator": "require_strict",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "scan adjacent timestamp pairs in reverse order",
+  "profile_hotspot": "Reverse streaming may improve late violation detection without changing the generic error.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Reverse streaming may improve late violation detection without changing the generic error.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 5808.932373046875,
+      "after_ns": 11810.418212890625,
+      "latency_reduction_pct": -107.69587207143809,
+      "paired_ratios": [
+        1.7799244263003902,
+        1.7827712981346768,
+        2.3711461432940855,
+        2.3799646269157657
+      ],
+      "worst_paired_reduction_pct": -137.99646269157657
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-require-strict-04",
+  "validation_sha256": "17829941b1e35d53401d3cbaf3341d49bffd259be7aed96cf4423f8dd29c07f5"
+}

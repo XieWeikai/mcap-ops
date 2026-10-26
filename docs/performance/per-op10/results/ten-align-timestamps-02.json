@@ -1,0 +1,79 @@
+{
+  "label": "ten-align-timestamps-02",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest",
+    "align_timestamps.sparse",
+    "align_timestamps.repeated"
+  ],
+  "geomean_latency_reduction_pct": -6.720079971722237,
+  "worst_block_reduction_pct": -14.79766186647895,
+  "worst_case_reduction_pct": -14.559717112914061,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. A monotone walk is best for dense grids; sparse MCAP queries can skip large spans.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "9c7713f294934f6c1e15a5d579e8828514f883bcb28447e18367ed4e833d9b2c",
+  "operator": "align_timestamps",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "binary-search only highly sparse target grids",
+  "profile_hotspot": "A monotone walk is best for dense grids; sparse MCAP queries can skip large spans.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. A monotone walk is best for dense grids; sparse MCAP queries can skip large spans.",
+  "case_results": {
+    "align_timestamps.sparse": {
+      "before_ns": 6874.9798583984375,
+      "after_ns": 7196.1661376953125,
+      "latency_reduction_pct": -4.666635741551106,
+      "paired_ratios": [
+        1.3851963565553005,
+        1.0463005256456797,
+        0.8007884412885141,
+        1.0470321891853422
+      ],
+      "worst_paired_reduction_pct": -38.51963565553005
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 105969.642578125,
+      "after_ns": 109662.884765625,
+      "latency_reduction_pct": -3.6445437840786576,
+      "paired_ratios": [
+        1.0601705206027177,
+        1.0345157351676255,
+        1.0134039636811776,
+        1.0383751405139476
+      ],
+      "worst_paired_reduction_pct": -6.017052060271766
+    },
+    "align_timestamps.previous": {
+      "before_ns": 102512.142578125,
+      "after_ns": 117684.974609375,
+      "latency_reduction_pct": -14.559717112914061,
+      "paired_ratios": [
+        1.14950340536415,
+        1.1416909368941315,
+        1.1232442909211686,
+        1.179078703280779
+      ],
+      "worst_paired_reduction_pct": -17.9078703280779
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 139844.45703125,
+      "after_ns": 142932.654296875,
+      "latency_reduction_pct": -2.931891078077209,
+      "paired_ratios": [
+        1.0288092114484217,
+        1.0298286101131224,
+        1.0141289130238578,
+        1.0312541748956816
+      ],
+      "worst_paired_reduction_pct": -3.125417489568161
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-align-timestamps-02",
+  "validation_sha256": "c2a81bd4c331355599371cc36d8bc8d2734f396a65e007e75cf82892b5eb2e4d"
+}

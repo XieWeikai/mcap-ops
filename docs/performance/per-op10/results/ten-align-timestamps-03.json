@@ -1,0 +1,79 @@
+{
+  "label": "ten-align-timestamps-03",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest",
+    "align_timestamps.sparse",
+    "align_timestamps.repeated"
+  ],
+  "geomean_latency_reduction_pct": -38.227025860956985,
+  "worst_block_reduction_pct": -38.51178297650941,
+  "worst_case_reduction_pct": -200.24288804329268,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Target duplicates are valid; include a repeated-target case and preserve every output position.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "33ced967bb179af941fe48772419b7f2190a46c363f5d29fc27cba8211cf47ad",
+  "operator": "align_timestamps",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reuse alignment results for repeated targets",
+  "profile_hotspot": "Target duplicates are valid; include a repeated-target case and preserve every output position.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Target duplicates are valid; include a repeated-target case and preserve every output position.",
+  "case_results": {
+    "align_timestamps.sparse": {
+      "before_ns": 5364.743896484375,
+      "after_ns": 16107.261962890625,
+      "latency_reduction_pct": -200.24288804329268,
+      "paired_ratios": [
+        3.0016058955947074,
+        3.0025677465007057,
+        3.002290014365148,
+        3.02186191052315
+      ],
+      "worst_paired_reduction_pct": -202.18619105231502
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 106946.896484375,
+      "after_ns": 80577.912109375,
+      "latency_reduction_pct": 24.71265861139105,
+      "paired_ratios": [
+        0.7548861619124331,
+        0.7508606658597461,
+        0.7560241315331925,
+        0.7478136848433375
+      ],
+      "worst_paired_reduction_pct": 24.397586846680753
+    },
+    "align_timestamps.previous": {
+      "before_ns": 104397.22265625,
+      "after_ns": 141055.916015625,
+      "latency_reduction_pct": -34.76933263136499,
+      "paired_ratios": [
+        1.35804311725291,
+        1.3479798991743903,
+        1.3474067534529093,
+        1.3342577778013927
+      ],
+      "worst_paired_reduction_pct": -35.804311725290994
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 142758.23828125,
+      "after_ns": 171105.11328125,
+      "latency_reduction_pct": -19.543576763519212,
+      "paired_ratios": [
+        1.1961845426653752,
+        1.2029001854149803,
+        1.1920413208026626,
+        1.194686992605009
+      ],
+      "worst_paired_reduction_pct": -20.290018541498036
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-align-timestamps-03",
+  "validation_sha256": "e36cc16d563e975f8c9dcaadca622bac6746e6aaab5cc3df368d11da478b56be"
+}

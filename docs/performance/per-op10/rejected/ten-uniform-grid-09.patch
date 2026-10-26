@@ -1,0 +1,22 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1072f9d..97d5372 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -35,6 +35,7 @@ pub fn require_strict(times: &[i64]) -> Result<()> {
+ }
+ 
+ /// Rounded rational-rate grid in [start, end), with no epoch float conversion.
++#[inline(never)]
+ pub fn uniform_grid(
+     start: i64,
+     end: i64,
+@@ -54,8 +55,7 @@ pub fn uniform_grid(
+     }
+     let mut result = Vec::new();
+     let whole = period_num / rate;
+-    let fraction = (period_num % rate) as u64;
+-    let rate = u64::from(rate_num);
++    let fraction = period_num % rate;
+     let mut residual = rate / 2;
+     let mut t = i128::from(start);
+     for i in 0..=max_points {

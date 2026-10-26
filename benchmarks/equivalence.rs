@@ -178,6 +178,33 @@ fn main() {
 
 // Additional public-interface oracles for the twenty follow-up experiments.
 fn extension_edges() {
+    for (count,cutoff) in [(3,1e-12),(63,499.999),(255,0.001),(1023,50.0),(4095,1e-8),(4095,499.999)] {
+        numbers(&before::filter::lowpass_taps(1000.0,cutoff,count).unwrap(),
+            &after::filter::lowpass_taps(1000.0,cutoff,count).unwrap());
+    }
+    for d in [1,6] {
+        let times:Vec<_>=(0..80).map(|i|i*1000+if i>39 {9000} else {0}).collect();
+        let values:Vec<_>=(0..80*d).map(|i|if i/d==17 {f64::NAN} else {(i as f64*0.1).sin()}).collect();
+        let a=before::Signal::new(times.clone(),values.clone(),d).unwrap();
+        let b=after::Signal::new(times,values,d).unwrap();
+        for count in [1,3,31,63] {
+            let taps=vec![1.0/count as f64;count];
+            for (ma,mb) in [(before::filter::FilterMode::Causal,after::filter::FilterMode::Causal),
+                           (before::filter::FilterMode::Centered,after::filter::FilterMode::Centered)] {
+                let x=before::filter::fir(&a,&taps,ma,1000,0).unwrap();
+                let y=after::filter::fir(&b,&taps,mb,1000,0).unwrap();
+                assert_eq!(x.valid,y.valid);assert_eq!(x.lookahead_samples,y.lookahead_samples);
+                assert_eq!(x.group_delay_samples,y.group_delay_samples);numbers(x.signal.values(),y.signal.values());
+            }
+        }
+    }
+    for (w,h) in [(512,384),(1920,1080)] {
+        let rgb=image::RgbImage::from_fn(w,h,|x,y|image::Rgb([(x.wrapping_mul(31)^y.wrapping_mul(17)) as u8,(y*7) as u8,(x+y) as u8]));
+        let mut encoded=Cursor::new(Vec::new());image::DynamicImage::ImageRgb8(rgb).write_to(&mut encoded,image::ImageFormat::Png).unwrap();
+        json(serde_json::to_value(before_io::image_ops::image_quality(encoded.get_ref(),&Default::default()).unwrap()).unwrap(),
+             serde_json::to_value(after_io::image_ops::image_quality(encoded.get_ref(),&Default::default()).unwrap()).unwrap());
+    }
+    println!("per-op10 oracle: 6 coefficient extremes, 16 gapped FIR cases, 2 large image fixtures passed");
     let extremes = [i64::MIN, i64::MIN+1, -1_000_000_001, -3, -1, 0, 1, 3,
                     1_000_000_001, i64::MAX-1, i64::MAX];
     let mut clocks = 0;

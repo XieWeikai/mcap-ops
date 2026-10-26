@@ -136,6 +136,33 @@ fn mcap_fixture(path: &Path, chunked: bool) {
     }
     writer.finish().unwrap();
 }
+fn multichannel_fixture(path: &Path) {
+    let mut writer = WriteOptions::new()
+        .compression(None)
+        .create(File::create(path).unwrap())
+        .unwrap();
+    let channels: Vec<_> = (0..64)
+        .map(|i| {
+            writer
+                .add_channel(0, &format!("/multi/{i}"), "json", &BTreeMap::new())
+                .unwrap()
+        })
+        .collect();
+    for i in 0..20_000u32 {
+        writer
+            .write_to_known_channel(
+                &MessageHeader {
+                    channel_id: channels[i as usize % channels.len()],
+                    sequence: i,
+                    log_time: i as u64 * 1_000_000,
+                    publish_time: i as u64 * 1_000_000,
+                },
+                br#"{"q":[1,2,3,4],"t":17}"#,
+            )
+            .unwrap();
+    }
+    writer.finish().unwrap();
+}
 fn main() {
     let args: Vec<_> = std::env::args().collect();
     let selected = args
@@ -274,6 +301,36 @@ fn main() {
         });
     }
     let history_offsets = [-3_000_000, -2_000_000, -1_000_000, 0];
+    runner.bench("resample.sparse_linear", || {
+        sampling::resample(
+            black_box(&dense),
+            black_box(&sparse_target),
+            black_box(options),
+        )
+        .unwrap()
+    });
+    runner.bench("resample.repeated", || {
+        sampling::resample(
+            black_box(&dense),
+            black_box(&repeated_target),
+            sampling::SampleOptions {
+                method: sampling::Method::Previous,
+                ..options
+            },
+        )
+        .unwrap()
+    });
+    runner.bench("resample.exact_slerp", || {
+        sampling::resample(
+            black_box(&q),
+            black_box(&times[..25000]),
+            sampling::SampleOptions {
+                method: sampling::Method::Slerp,
+                ..options
+            },
+        )
+        .unwrap()
+    });
     for (name, step) in [
         ("history_windows.separate", 10_000_000),
         ("history_windows.overlap", 1_000_000),
@@ -346,6 +403,14 @@ fn main() {
         });
     }
     let pass = quality::inspect_signal(&short, &quality::QualityConfig::default()).unwrap();
+    let issues_config = quality::QualityConfig {
+        upper: Some(vec![0.0; 6]),
+        max_issues: 128,
+        ..Default::default()
+    };
+    runner.bench("inspect_signal.issues", || {
+        quality::inspect_signal(black_box(&dense), black_box(&issues_config)).unwrap()
+    });
     let fail = quality::inspect_signal(
         &short,
         &quality::QualityConfig {
@@ -383,7 +448,13 @@ fn main() {
         filter::lowpass_taps(black_box(1000.), black_box(50.), black_box(63)).unwrap()
     });
     let taps = filter::lowpass_taps(1000., 50., 31).unwrap();
+    for (name, count) in [("lowpass_taps.short", 3), ("lowpass_taps.long", 4095)] {
+        runner.bench(name, || {
+            filter::lowpass_taps(black_box(1000.0), black_box(50.0), black_box(count)).unwrap()
+        });
+    }
     for (name, n, d, k, invalid) in [
+        ("fir.single", 20000, 6, 1, false),
         ("fir.short_scalar", 20000, 1, 3, false),
         ("fir.short_vector", 20000, 6, 3, false),
         ("fir.small_scalar", 32, 1, 3, false),
@@ -438,6 +509,27 @@ fn main() {
         )
         .unwrap()
     });
+    let wrapped = Signal::new(
+        times.to_vec(),
+        (0..dense.len())
+            .flat_map(|i| {
+                (0..6).map(move |c| {
+                    (i as f64 * 0.9 + c as f64).rem_euclid(std::f64::consts::TAU)
+                        - std::f64::consts::PI
+                })
+            })
+            .collect(),
+        6,
+    )
+    .unwrap();
+    runner.bench("unwrap_angles.wraps", || {
+        filter::unwrap_angles(
+            black_box(&wrapped),
+            black_box(std::f64::consts::TAU),
+            2_000_000,
+        )
+        .unwrap()
+    });
     let iv: Vec<_> = (0..6000)
         .map(|i| selection::Interval {
             start_ns: i * 20,
@@ -445,6 +537,8 @@ fn main() {
         })
         .collect();
     let a = selection::IntervalSet::new(iv.clone()).unwrap();
+    let empty_intervals = selection::IntervalSet::default();
+    let small_intervals = selection::IntervalSet::new(iv[..8].to_vec()).unwrap();
     let b = selection::IntervalSet::new(
         (0..6000)
             .map(|i| selection::Interval {
@@ -463,6 +557,25 @@ fn main() {
         selection::IntervalSet::new(black_box(iv.clone())).unwrap()
     });
     let queries: Vec<_> = (0..30_000).map(|i| i * 5).collect();
+    let late_queries: Vec<_> = (0..30_000).map(|i| 119_000 + i * 5).collect();
+    runner.bench("interval_contains.small", || {
+        black_box(&queries)
+            .iter()
+            .filter(|&&t| black_box(&small_intervals).contains(black_box(t)))
+            .count()
+    });
+    runner.bench("interval_mask.empty", || {
+        black_box(&empty_intervals).mask(black_box(&queries))
+    });
+    runner.bench("interval_mask.late", || {
+        black_box(&a).mask(black_box(&late_queries))
+    });
+    runner.bench("interval_difference.empty", || {
+        black_box(&a).difference(black_box(&empty_intervals))
+    });
+    runner.bench("interval_affected_centers.merged", || {
+        black_box(&a).affected_centers(40, 30).unwrap()
+    });
     let shuffled: Vec<_> = (0..30_000).map(|i| (i * 7919) % 150_000).collect();
     runner.bench("interval_contains", || {
         black_box(&queries)
@@ -542,6 +655,8 @@ fn main() {
     let temp = tempfile::tempdir().unwrap();
     let chunked = temp.path().join("chunked.mcap");
     let linear = temp.path().join("linear.mcap");
+    let many = temp.path().join("many.mcap");
+    multichannel_fixture(&many);
     mcap_fixture(&chunked, true);
     mcap_fixture(&linear, false);
     let limits = mcap_ops::ReadLimits {
@@ -549,6 +664,10 @@ fn main() {
         max_messages: 100_000,
     };
     let default_filter = mcap_ops::MessageFilter::default();
+    let mixed_filter = mcap_ops::MessageFilter {
+        topics: (0..32).map(|i| format!("/multi/{i}")).collect(),
+        ..Default::default()
+    };
     let many_filter = mcap_ops::MessageFilter {
         topics: (0..50)
             .map(|i| format!("/other/{i}"))
@@ -560,6 +679,7 @@ fn main() {
         ("raw_reader.chunked", &chunked, &default_filter),
         ("raw_reader.linear", &linear, &default_filter),
         ("raw_reader.topics", &chunked, &many_filter),
+        ("raw_reader.mixed_topics", &many, &mixed_filter),
     ] {
         runner.bench(name, || {
             let mut total = 0;
@@ -579,6 +699,15 @@ fn main() {
     runner.bench("mcap_inspect", || {
         mcap_ops::inspect_mcap(
             black_box(&chunked),
+            default_filter.clone(),
+            limits.clone(),
+            2_000_000,
+        )
+        .unwrap()
+    });
+    runner.bench("mcap_inspect.many", || {
+        mcap_ops::inspect_mcap(
+            black_box(&many),
             default_filter.clone(),
             limits.clone(),
             2_000_000,
@@ -606,12 +735,59 @@ fn main() {
         data: Cow::Borrowed(br#"{"q":[1,2,3,4],"nested":{"v":5},"t":17}"#),
     };
     runner.bench("json_decode", || decoder.decode(black_box(&msg)).unwrap());
+    let deep = mcap_ops::JsonSignalSpec {
+        fields: vec!["/nested/a/q".into()],
+        ..decoder.clone()
+    };
+    let deep_msg = Message {
+        channel: msg.channel.clone(),
+        sequence: 0,
+        log_time: 0,
+        publish_time: 0,
+        data: Cow::Borrowed(br#"{"nested":{"a":{"q":[1,2,3,4]}},"t":17}"#),
+    };
+    runner.bench("json_decode.deep", || {
+        deep.decode(black_box(&deep_msg)).unwrap()
+    });
+    let wide = mcap_ops::JsonSignalSpec {
+        channels: 64,
+        ..decoder.clone()
+    };
+    let wide_bytes =
+        serde_json::to_vec(&serde_json::json!({"q":(0..64).collect::<Vec<_>>(),"t":17})).unwrap();
+    let wide_msg = Message {
+        channel: msg.channel.clone(),
+        sequence: 0,
+        log_time: 0,
+        publish_time: 0,
+        data: Cow::Borrowed(&wide_bytes),
+    };
+    runner.bench("json_decode.wide", || {
+        wide.decode(black_box(&wide_msg)).unwrap()
+    });
     runner.bench("mcap_read_signal", || {
         mcap_ops::read_signal(
             black_box(&chunked),
             default_filter.clone(),
             limits.clone(),
             black_box(&decoder),
+            100_000,
+        )
+        .unwrap()
+    });
+    let many_decoder = mcap_ops::JsonSignalSpec {
+        topic: "/multi/0".into(),
+        ..decoder.clone()
+    };
+    runner.bench("mcap_read_signal.many", || {
+        mcap_ops::read_signal(
+            black_box(&many),
+            mcap_ops::MessageFilter {
+                topics: vec!["/multi/0".into()],
+                ..Default::default()
+            },
+            limits.clone(),
+            black_box(&many_decoder),
             100_000,
         )
         .unwrap()

@@ -1,0 +1,53 @@
+{
+  "label": "ten-inspect-time-08",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": -0.8915590901279913,
+  "worst_block_reduction_pct": -1.460369446357146,
+  "worst_case_reduction_pct": -1.309617979491584,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "39cf0e008900b472af9b6e117733eec6f60de157291417c47535a4d8d22ff7bb",
+  "operator": "inspect_time",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for inspect_time",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24195.59912109375,
+      "after_ns": 24565.94482421875,
+      "latency_reduction_pct": -1.309617979491584,
+      "paired_ratios": [
+        1.0129384432694624,
+        1.0132539163203693,
+        1.0128568629804033,
+        1.029091660823263
+      ],
+      "worst_paired_reduction_pct": -2.9091660823262977
+    },
+    "inspect_time.jitter": {
+      "before_ns": 85371.1875,
+      "after_ns": 85729.171875,
+      "latency_reduction_pct": 0.2689127405402614,
+      "paired_ratios": [
+        0.9985172599272929,
+        0.996104485261902,
+        1.016353538633272,
+        0.9954462887725037
+      ],
+      "worst_paired_reduction_pct": -1.6353538633272047
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-time-08",
+  "validation_sha256": "d68fd14c4acd10e35c1ee5212947f49a6b562773245030f0f8edd28ca4fcc4f9"
+}

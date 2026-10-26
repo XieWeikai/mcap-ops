@@ -1,0 +1,15 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..7016b60 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -151,8 +151,8 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+     }
+     let mut positive = Vec::new();
+     let (mut reversals, mut duplicates, mut gaps) = (0, 0, 0);
+-    for pair in times.windows(2) {
+-        let dt = i128::from(pair[1]) - i128::from(pair[0]);
++    for (&a, &b) in times.iter().zip(times.iter().skip(1)) {
++        let dt = i128::from(b) - i128::from(a);
+         if dt < 0 {
+             reversals += 1;
+         } else if dt == 0 {

@@ -1,0 +1,15 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..c752017 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -164,7 +164,9 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+             positive.push(i64::try_from(dt).map_err(|_| Error::Overflow)?);
+         }
+     }
+-    positive.sort_unstable();
++    if !positive.is_sorted() {
++        positive.sort_unstable();
++    }
+     let median = quantile(&positive, 0.5);
+     Ok(TimeStats {
+         samples: times.len(),

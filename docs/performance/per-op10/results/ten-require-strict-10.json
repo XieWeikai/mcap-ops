@@ -1,0 +1,40 @@
+{
+  "label": "ten-require-strict-10",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": -77.68705820281734,
+  "worst_block_reduction_pct": -135.20614688330744,
+  "worst_case_reduction_pct": -77.68705820281734,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Slice offsets avoid the skip adaptor while preserving empty and singleton behavior.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "9ab15aaf7bb3424e1b6a836171282fce7f1ada4188ddf9322776bbfbddded015",
+  "operator": "require_strict",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "zip offset timestamp slices after a short-input guard",
+  "profile_hotspot": "Slice offsets avoid the skip adaptor while preserving empty and singleton behavior.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Slice offsets avoid the skip adaptor while preserving empty and singleton behavior.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 6615.844970703125,
+      "after_ns": 11750.579345703125,
+      "latency_reduction_pct": -77.68705820281734,
+      "paired_ratios": [
+        1.7738672237498707,
+        2.3520614688330745,
+        1.778837530703798,
+        1.774903633352549
+      ],
+      "worst_paired_reduction_pct": -135.20614688330744
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-require-strict-10",
+  "validation_sha256": "41fbb871e09686a68d1a07af17dbedce9efc430a1e0a03605c366c6d482a94b1"
+}

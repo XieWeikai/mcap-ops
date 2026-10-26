@@ -1,0 +1,15 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 546f649..30d9e64 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -221,9 +221,7 @@ pub fn align_timestamps(
+         .first()
+         .map_or(0, |&t| source.partition_point(|&v| v <= t));
+     for (i, &t) in target.iter().enumerate() {
+-        while next < source.len() && source[next] <= t {
+-            next += 1;
+-        }
++        next += source[next..].iter().take_while(|&&v| v <= t).count();
+         let past = next
+             .checked_sub(1)
+             .filter(|&j| i128::from(t) - i128::from(source[j]) <= i128::from(max_past_ns));

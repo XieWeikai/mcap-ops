@@ -1,0 +1,66 @@
+{
+  "label": "ten-map-clock-04",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "map_clock.identity",
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": -67.51178162161145,
+  "worst_block_reduction_pct": -68.66632171175398,
+  "worst_case_reduction_pct": -366.9624835328067,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Separate allocation strategy from the earlier rejected narrow-arithmetic algorithm.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "f09bffbc842e05e9a77d8f9b15e4e5661cf6017e05135ea29b7df36fca9c4523",
+  "operator": "map_clock",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve and push nonzero-drift clock outputs",
+  "profile_hotspot": "Separate allocation strategy from the earlier rejected narrow-arithmetic algorithm.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Separate allocation strategy from the earlier rejected narrow-arithmetic algorithm.",
+  "case_results": {
+    "map_clock.identity": {
+      "before_ns": 5550.5634765625,
+      "after_ns": 25925.060546875,
+      "latency_reduction_pct": -366.9624835328067,
+      "paired_ratios": [
+        4.745848720915793,
+        4.669866137931274,
+        4.669383532724859,
+        4.658371705916538
+      ],
+      "worst_paired_reduction_pct": -374.5848720915793
+    },
+    "map_clock.offset": {
+      "before_ns": 25774.56298828125,
+      "after_ns": 25889.39892578125,
+      "latency_reduction_pct": -0.4468316446836429,
+      "paired_ratios": [
+        1.005222114692424,
+        1.003714518201249,
+        1.0078821268664337,
+        1.0020265755981437
+      ],
+      "worst_paired_reduction_pct": -0.7882126866433747
+    },
+    "map_clock.drift": {
+      "before_ns": 150107.7890625,
+      "after_ns": 150683.40625,
+      "latency_reduction_pct": -0.32759368191552785,
+      "paired_ratios": [
+        1.0057943619020784,
+        1.0036626521927106,
+        0.9979306251885108,
+        1.0028892214456
+      ],
+      "worst_paired_reduction_pct": -0.5794361902078382
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-map-clock-04",
+  "validation_sha256": "2e8dfd6e8e1e9525234c7447b2efaa0dcfc881e4c222a9a0f8bd274d7dc6df88"
+}

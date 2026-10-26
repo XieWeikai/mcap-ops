@@ -1,0 +1,79 @@
+{
+  "label": "ten-align-timestamps-04",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest",
+    "align_timestamps.sparse",
+    "align_timestamps.repeated"
+  ],
+  "geomean_latency_reduction_pct": 0.23607901197746362,
+  "worst_block_reduction_pct": 0.03820431173277017,
+  "worst_case_reduction_pct": -2.8152680099032823,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compute each exact i128 distance once rather than recomputing it after tolerance filtering.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "0bbedfff2f378a958c15e80ec8d0a16149c65e584df1db636665f09db995a0f5",
+  "operator": "align_timestamps",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "carry candidate distances through alignment selection",
+  "profile_hotspot": "Compute each exact i128 distance once rather than recomputing it after tolerance filtering.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Compute each exact i128 distance once rather than recomputing it after tolerance filtering.",
+  "case_results": {
+    "align_timestamps.sparse": {
+      "before_ns": 5360.94921875,
+      "after_ns": 5392.4547119140625,
+      "latency_reduction_pct": -0.7351755791081827,
+      "paired_ratios": [
+        0.9965568936560519,
+        0.9987201893544232,
+        1.0191298531784612,
+        1.0159833222277406
+      ],
+      "worst_paired_reduction_pct": -1.9129853178461165
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 106751.44921875,
+      "after_ns": 102957.115234375,
+      "latency_reduction_pct": 3.6965819378065534,
+      "paired_ratios": [
+        0.9687319217007457,
+        0.9611804560964765,
+        0.9631626063658635,
+        0.9629057548780053
+      ],
+      "worst_paired_reduction_pct": 3.1268078299254265
+    },
+    "align_timestamps.previous": {
+      "before_ns": 104428.169921875,
+      "after_ns": 106986.615234375,
+      "latency_reduction_pct": -2.8152680099032823,
+      "paired_ratios": [
+        1.0320385325112313,
+        0.994294460133185,
+        1.0311950715103833,
+        1.0251102886876824
+      ],
+      "worst_paired_reduction_pct": -3.2038532511231343
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 143796.87109375,
+      "after_ns": 141819.470703125,
+      "latency_reduction_pct": 1.50505414831259,
+      "paired_ratios": [
+        0.9985797719707049,
+        0.9703288994490928,
+        0.9864299069168158,
+        0.9834690101169326
+      ],
+      "worst_paired_reduction_pct": 0.14202280292950897
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-align-timestamps-04",
+  "validation_sha256": "1d6bd89097e326ebfcc5535a694ddc473c4ad77eeb2756600ff1dfbd152ebe88"
+}

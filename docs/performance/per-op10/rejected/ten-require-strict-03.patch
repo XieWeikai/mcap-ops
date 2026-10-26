@@ -1,0 +1,30 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 11eed70..ca85de4 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -5,8 +5,8 @@ pub fn require_strict(times: &[i64]) -> Result<()> {
+     let bad = if times.len() < 2 {
+         false
+     } else {
+-        let mut left = times[..times.len() - 1].chunks_exact(8);
+-        let mut right = times[1..].chunks_exact(8);
++        let mut left = times[..times.len() - 1].chunks_exact(16);
++        let mut right = times[1..].chunks_exact(16);
+         let mut bad = false;
+         for (a, b) in left.by_ref().zip(right.by_ref()) {
+             if (a[0] >= b[0])
+@@ -17,6 +17,14 @@ pub fn require_strict(times: &[i64]) -> Result<()> {
+                 | (a[5] >= b[5])
+                 | (a[6] >= b[6])
+                 | (a[7] >= b[7])
++                | (a[8] >= b[8])
++                | (a[9] >= b[9])
++                | (a[10] >= b[10])
++                | (a[11] >= b[11])
++                | (a[12] >= b[12])
++                | (a[13] >= b[13])
++                | (a[14] >= b[14])
++                | (a[15] >= b[15])
+             {
+                 bad = true;
+                 break;

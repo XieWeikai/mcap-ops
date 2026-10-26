@@ -1,0 +1,28 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1072f9d..72ae957 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -54,8 +54,7 @@ pub fn uniform_grid(
+     }
+     let mut result = Vec::new();
+     let whole = period_num / rate;
+-    let fraction = (period_num % rate) as u64;
+-    let rate = u64::from(rate_num);
++    let fraction = period_num % rate;
+     let mut residual = rate / 2;
+     let mut t = i128::from(start);
+     for i in 0..=max_points {
+@@ -68,10 +67,9 @@ pub fn uniform_grid(
+         result.push(i64::try_from(t).map_err(|_| Error::Overflow)?);
+         t += whole;
+         residual += fraction;
+-        if residual >= rate {
+-            t += 1;
+-            residual -= rate;
+-        }
++        let carry = i128::from(residual >= rate);
++        t += carry;
++        residual -= carry * rate;
+     }
+     unreachable!()
+ }

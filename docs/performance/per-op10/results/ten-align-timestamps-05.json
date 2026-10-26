@@ -1,0 +1,79 @@
+{
+  "label": "ten-align-timestamps-05",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest",
+    "align_timestamps.sparse",
+    "align_timestamps.repeated"
+  ],
+  "geomean_latency_reduction_pct": -0.3341982120904863,
+  "worst_block_reduction_pct": -0.9672169573867073,
+  "worst_case_reduction_pct": -10.905305470314763,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. An overflowed positive distance necessarily exceeds an i64 tolerance; tie comparison stays wide.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "b530bb4058c1566d47f088006b290485f27296965afd533b121bc62b56978197",
+  "operator": "align_timestamps",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "use checked narrow differences for tolerance rejection",
+  "profile_hotspot": "An overflowed positive distance necessarily exceeds an i64 tolerance; tie comparison stays wide.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. An overflowed positive distance necessarily exceeds an i64 tolerance; tie comparison stays wide.",
+  "case_results": {
+    "align_timestamps.sparse": {
+      "before_ns": 5417.54052734375,
+      "after_ns": 5406.0228271484375,
+      "latency_reduction_pct": 0.5804252729149528,
+      "paired_ratios": [
+        1.0081474412409375,
+        0.9893386662381757,
+        0.9990528283035253,
+        0.9808471276897466
+      ],
+      "worst_paired_reduction_pct": -0.814744124093747
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 107000.798828125,
+      "after_ns": 100681.126953125,
+      "latency_reduction_pct": 5.6099325021389035,
+      "paired_ratios": [
+        0.9395336346594736,
+        0.9360371212877955,
+        0.9482677152977483,
+        0.9528469965852813
+      ],
+      "worst_paired_reduction_pct": 4.715300341471873
+    },
+    "align_timestamps.previous": {
+      "before_ns": 104898.357421875,
+      "after_ns": 116307.154296875,
+      "latency_reduction_pct": -10.905305470314763,
+      "paired_ratios": [
+        1.1035961134344043,
+        1.1266822289966996,
+        1.1145099959718912,
+        1.1017053221273516
+      ],
+      "worst_paired_reduction_pct": -12.668222899669956
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 142912.673828125,
+      "after_ns": 139267.302734375,
+      "latency_reduction_pct": 2.511689271257156,
+      "paired_ratios": [
+        0.9723827984667579,
+        0.9684286001756384,
+        0.9842788563784984,
+        0.977383416108099
+      ],
+      "worst_paired_reduction_pct": 1.5721143621501565
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-align-timestamps-05",
+  "validation_sha256": "b96fc54a1163b2cc6eaaf14fe118d253bd6fae061a20b20f90de45142704be35"
+}

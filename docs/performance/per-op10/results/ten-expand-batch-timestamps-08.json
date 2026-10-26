@@ -1,0 +1,40 @@
+{
+  "label": "ten-expand-batch-timestamps-08",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 0.09636669006258813,
+  "worst_block_reduction_pct": -1.1075658051418857,
+  "worst_case_reduction_pct": 0.09636669006258813,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "c7057f4dbef81f33c657362fdd50e3c54ff5e158934cd2ced406d113af01ff7c",
+  "operator": "expand_batch_timestamps",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for expand_batch_timestamps",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 18561.9580078125,
+      "after_ns": 18522.037109375,
+      "latency_reduction_pct": 0.09636669006258813,
+      "paired_ratios": [
+        0.989766209283195,
+        1.0110756580514189,
+        0.9993622443602207,
+        0.9987104218385275
+      ],
+      "worst_paired_reduction_pct": -1.1075658051418857
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-expand-batch-timestamps-08",
+  "validation_sha256": "1ce70683900f735f6a0842747ce2fe8ffe782ceff90152fe37e72fca01b60857"
+}

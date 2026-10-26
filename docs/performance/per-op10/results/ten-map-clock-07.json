@@ -1,0 +1,66 @@
+{
+  "label": "ten-map-clock-07",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "map_clock.identity",
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": -84.73022410053899,
+  "worst_block_reduction_pct": -97.16551121702221,
+  "worst_case_reduction_pct": -546.5272836263828,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Do not reuse the rejected narrow-correction formula; retain the original overflow fallback and tie direction.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "4f83608783ee3e6757cc7bc9a4821e855e09ba5a25f5a056ac81286a5b5ad4fd",
+  "operator": "map_clock",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "divide representable drift magnitudes as unsigned integers",
+  "profile_hotspot": "Do not reuse the rejected narrow-correction formula; retain the original overflow fallback and tie direction.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Do not reuse the rejected narrow-correction formula; retain the original overflow fallback and tie direction.",
+  "case_results": {
+    "map_clock.identity": {
+      "before_ns": 5560.05078125,
+      "after_ns": 36483.51953125,
+      "latency_reduction_pct": -546.5272836263828,
+      "paired_ratios": [
+        6.571286664991014,
+        4.750426997475678,
+        6.558608323521832,
+        6.371937349005823
+      ],
+      "worst_paired_reduction_pct": -557.1286664991014
+    },
+    "map_clock.offset": {
+      "before_ns": 25803.1787109375,
+      "after_ns": 31713.5947265625,
+      "latency_reduction_pct": -22.964531137772703,
+      "paired_ratios": [
+        1.0049467339507354,
+        0.6876809112853147,
+        1.4559088961965894,
+        1.4543438888047187
+      ],
+      "worst_paired_reduction_pct": -45.59088961965894
+    },
+    "map_clock.drift": {
+      "before_ns": 150094.07421875,
+      "after_ns": 120454.380859375,
+      "latency_reduction_pct": 19.7253471221028,
+      "paired_ratios": [
+        0.8058814889703404,
+        0.8028047222251818,
+        0.8026883353327622,
+        0.7985341317813968
+      ],
+      "worst_paired_reduction_pct": 19.41185110296596
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-map-clock-07",
+  "validation_sha256": "df1bc8352f755190dc12f97e08a6852aae118320656b60cfa6dbc2c746418de2"
+}

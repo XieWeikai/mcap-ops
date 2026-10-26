@@ -1,0 +1,53 @@
+{
+  "label": "ten-uniform-grid-05",
+  "base_commit": "73adddf4bc087f0eda3dd17dd52c0f473477cdf7",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": -50.24924213386728,
+  "worst_block_reduction_pct": -50.65828226795557,
+  "worst_case_reduction_pct": -53.24293524013966,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Measure branch removal only for bounded residuals, unlike the failed validation-wide reduction.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "ac516e8682faf89215ac91e45afd066eef54dcbc82f7a7d5e1d0195d55f73a82",
+  "operator": "uniform_grid",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "advance the grid with a branchless rational carry",
+  "profile_hotspot": "Measure branch removal only for bounded residuals, unlike the failed validation-wide reduction.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Measure branch removal only for bounded residuals, unlike the failed validation-wide reduction.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 48493.2587890625,
+      "after_ns": 74312.4873046875,
+      "latency_reduction_pct": -53.24293524013966,
+      "paired_ratios": [
+        1.5328142489771766,
+        1.534134638473928,
+        1.5302032317897047,
+        1.5320444558256168
+      ],
+      "worst_paired_reduction_pct": -53.413463847392805
+    },
+    "uniform_grid.rational": {
+      "before_ns": 1547.7852172851562,
+      "after_ns": 2279.1744079589844,
+      "latency_reduction_pct": -47.24753717225374,
+      "paired_ratios": [
+        1.4721809659761786,
+        1.4720918978329698,
+        1.4727697774688964,
+        1.4815443461592699
+      ],
+      "worst_paired_reduction_pct": -48.15443461592699
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-uniform-grid-05",
+  "validation_sha256": "1cbb7d04795bd6c87dce03bde5c30eb09d21a119865be519a5916c8b9c170766"
+}

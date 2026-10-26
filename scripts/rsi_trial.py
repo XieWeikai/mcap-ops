@@ -9,6 +9,7 @@ import re
 import shlex
 import statistics
 import subprocess
+import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 REMOTE = "."
@@ -34,6 +35,14 @@ def main():
         parser.error("trial already has a decision; preserve its evidence and use a new label")
     destination = ROOT / ".artifacts/rsi/trials" / args.label
     destination.mkdir(parents=True, exist_ok=args.retry)
+    if args.retry and (destination / "validation.log").exists():
+        attempts = destination / "attempts"
+        attempts.mkdir(exist_ok=True)
+        previous = attempts / f"{len(list(attempts.iterdir())) + 1:03d}"
+        previous.mkdir()
+        for path in destination.iterdir():
+            if path.is_file():
+                shutil.copyfile(path, previous / path.name)
     base = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     (destination / "candidate.patch").write_bytes(subprocess.check_output(
         ["git", "diff", "HEAD", "--", *args.paths], cwd=ROOT))

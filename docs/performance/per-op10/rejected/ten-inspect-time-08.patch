@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..731753d 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -122,6 +122,7 @@ pub struct TimeStats {
+ }
+ 
+ /// Inspect original order; positive-interval summaries never hide reversals.
++#[inline(always)]
+ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+     if max_gap_ns < 0 {
+         return Err(invalid("max_gap_ns must be nonnegative"));

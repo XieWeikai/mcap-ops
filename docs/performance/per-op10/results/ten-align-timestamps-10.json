@@ -1,0 +1,79 @@
+{
+  "label": "ten-align-timestamps-10",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest",
+    "align_timestamps.sparse",
+    "align_timestamps.repeated"
+  ],
+  "geomean_latency_reduction_pct": -7.527342524358205,
+  "worst_block_reduction_pct": -9.294642240152552,
+  "worst_case_reduction_pct": -20.07897492142017,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Retain the monotone cursor while moving its end-bound checks into a borrowed slice.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "217dd860073552f03b70a6786a5fac37ef01602d2a96acf4b8d8dbe3769c5804",
+  "operator": "align_timestamps",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "advance alignment with a sliced lookahead iterator",
+  "profile_hotspot": "Retain the monotone cursor while moving its end-bound checks into a borrowed slice.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Retain the monotone cursor while moving its end-bound checks into a borrowed slice.",
+  "case_results": {
+    "align_timestamps.sparse": {
+      "before_ns": 5496.105224609375,
+      "after_ns": 5456.8148193359375,
+      "latency_reduction_pct": 0.6035981254268519,
+      "paired_ratios": [
+        0.989644568806868,
+        0.998283468684595,
+        1.009902521880894,
+        0.9857482208547861
+      ],
+      "worst_paired_reduction_pct": -0.9902521880893911
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 109280.306640625,
+      "after_ns": 114580.15625,
+      "latency_reduction_pct": -4.50120359956967,
+      "paired_ratios": [
+        1.0099253749603927,
+        1.0383355313818288,
+        1.0863571247949864,
+        1.0516885406095646
+      ],
+      "worst_paired_reduction_pct": -8.635712479498636
+    },
+    "align_timestamps.previous": {
+      "before_ns": 107140.767578125,
+      "after_ns": 129996.646484375,
+      "latency_reduction_pct": -20.07897492142017,
+      "paired_ratios": [
+        0.9893016155114743,
+        1.2193127833910806,
+        1.2592516362952573,
+        1.1822667150373227
+      ],
+      "worst_paired_reduction_pct": -25.925163629525727
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 143952.287109375,
+      "after_ns": 152726.9453125,
+      "latency_reduction_pct": -5.222292009554219,
+      "paired_ratios": [
+        1.0306731634581594,
+        1.0764778751469122,
+        1.0328348742375522,
+        1.0716109659535322
+      ],
+      "worst_paired_reduction_pct": -7.647787514691218
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-align-timestamps-10",
+  "validation_sha256": "dcfd5151de237e27af6b6165dc659a7856deab520faad65ba7f9ad8191fdbd84"
+}

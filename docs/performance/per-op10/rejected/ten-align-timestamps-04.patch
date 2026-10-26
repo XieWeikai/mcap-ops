@@ -1,0 +1,33 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 546f649..91056b7 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -226,20 +226,17 @@ pub fn align_timestamps(
+         }
+         let past = next
+             .checked_sub(1)
+-            .filter(|&j| i128::from(t) - i128::from(source[j]) <= i128::from(max_past_ns));
++            .map(|j| (j, i128::from(t) - i128::from(source[j])))
++            .filter(|&(_, d)| d <= i128::from(max_past_ns));
+         let future = (nearest && next < source.len())
+             .then_some(next)
+-            .filter(|&j| i128::from(source[j]) - i128::from(t) <= i128::from(max_future_ns));
++            .map(|j| (j, i128::from(source[j]) - i128::from(t)))
++            .filter(|&(_, d)| d <= i128::from(max_future_ns));
+         let chosen = match (past, future) {
+-            (Some(a), Some(b)) => Some(
+-                if i128::from(t) - i128::from(source[a]) <= i128::from(source[b]) - i128::from(t) {
+-                    a
+-                } else {
+-                    b
+-                },
+-            ),
+-            (a, None) => a,
+-            (None, b) => b,
++            (Some((a, da)), Some((b, db))) => Some(if da <= db { a } else { b }),
++            (Some((a, _)), None) => Some(a),
++            (None, Some((b, _))) => Some(b),
++            _ => None,
+         };
+         if let Some(index) = chosen {
+             result.indices[i] = index as i64;

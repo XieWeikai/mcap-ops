@@ -1,0 +1,66 @@
+{
+  "label": "ten-map-clock-02",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "map_clock.identity",
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": -15.91898782768535,
+  "worst_block_reduction_pct": -17.893748637798403,
+  "worst_case_reduction_pct": -174.9457276875557,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. In-place checked updates improved batch expansion; test that ownership strategy for clock offsets.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "4ab55f9914071c470ca0c17d94e002ed61eb071c9f36d962bdb2b09dabe4ccef",
+  "operator": "map_clock",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "apply pure clock offsets in a cloned output buffer",
+  "profile_hotspot": "In-place checked updates improved batch expansion; test that ownership strategy for clock offsets.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. In-place checked updates improved batch expansion; test that ownership strategy for clock offsets.",
+  "case_results": {
+    "map_clock.identity": {
+      "before_ns": 5545.668212890625,
+      "after_ns": 15248.04443359375,
+      "latency_reduction_pct": -174.9457276875557,
+      "paired_ratios": [
+        2.805650288370043,
+        2.828047063282163,
+        2.5830016193046297,
+        2.6932642653810706
+      ],
+      "worst_paired_reduction_pct": -182.80470632821627
+    },
+    "map_clock.offset": {
+      "before_ns": 25802.6376953125,
+      "after_ns": 14110.911865234375,
+      "latency_reduction_pct": 45.29220889103844,
+      "paired_ratios": [
+        0.5467310633148971,
+        0.5478478330499914,
+        0.547424758864334,
+        0.3759654547898024
+      ],
+      "worst_paired_reduction_pct": 45.21521669500086
+    },
+    "map_clock.drift": {
+      "before_ns": 150139.546875,
+      "after_ns": 158953.33203125,
+      "latency_reduction_pct": -5.797932547416451,
+      "paired_ratios": [
+        1.058348159176117,
+        1.0576104917722118,
+        1.0563093928540241,
+        1.0597461572161393
+      ],
+      "worst_paired_reduction_pct": -5.9746157216139295
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-map-clock-02",
+  "validation_sha256": "9c0f089a41eca69833c5efdb9247f8f65d9da8f5ba07909c8c22b6ce320cdc48"
+}

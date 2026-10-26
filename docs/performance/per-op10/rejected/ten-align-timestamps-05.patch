@@ -1,0 +1,17 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 546f649..120a81f 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -226,10 +226,10 @@ pub fn align_timestamps(
+         }
+         let past = next
+             .checked_sub(1)
+-            .filter(|&j| i128::from(t) - i128::from(source[j]) <= i128::from(max_past_ns));
++            .filter(|&j| t.checked_sub(source[j]).is_some_and(|d| d <= max_past_ns));
+         let future = (nearest && next < source.len())
+             .then_some(next)
+-            .filter(|&j| i128::from(source[j]) - i128::from(t) <= i128::from(max_future_ns));
++            .filter(|&j| source[j].checked_sub(t).is_some_and(|d| d <= max_future_ns));
+         let chosen = match (past, future) {
+             (Some(a), Some(b)) => Some(
+                 if i128::from(t) - i128::from(source[a]) <= i128::from(source[b]) - i128::from(t) {

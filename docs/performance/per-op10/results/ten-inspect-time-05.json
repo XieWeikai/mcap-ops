@@ -1,0 +1,53 @@
+{
+  "label": "ten-inspect-time-05",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": -2.4647969858978547,
+  "worst_block_reduction_pct": -3.4087225785163877,
+  "worst_case_reduction_pct": -5.174869225028722,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Preserve the exact positive interval and error semantics while changing fallback iteration.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "483ad39f57c863ad8cd931577eccf85ccc0075ba56386ecc723f6fb9ec370231",
+  "operator": "inspect_time",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "zip interval statistics input pairs",
+  "profile_hotspot": "Preserve the exact positive interval and error semantics while changing fallback iteration.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Preserve the exact positive interval and error semantics while changing fallback iteration.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 24147.6611328125,
+      "after_ns": 24107.0986328125,
+      "latency_reduction_pct": 0.14983837955823143,
+      "paired_ratios": [
+        0.9981826277208401,
+        0.9976716685491187,
+        0.9988206046879953,
+        1.004744224856231
+      ],
+      "worst_paired_reduction_pct": -0.47442248562310496
+    },
+    "inspect_time.jitter": {
+      "before_ns": 84644.15625,
+      "after_ns": 89124.453125,
+      "latency_reduction_pct": -5.174869225028722,
+      "paired_ratios": [
+        1.0382670372558678,
+        1.0527423190269083,
+        1.0507550654736664,
+        1.0642871728723478
+      ],
+      "worst_paired_reduction_pct": -6.428717287234775
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-time-05",
+  "validation_sha256": "c1acaa516acaa61ec5591f799f6d1a8d9cf2288d1fd3977066a8cdf95397bf63"
+}

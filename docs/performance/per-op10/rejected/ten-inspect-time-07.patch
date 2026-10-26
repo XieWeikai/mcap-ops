@@ -1,0 +1,27 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..d47564e 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -149,7 +149,8 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+             });
+         }
+     }
+-    let mut positive = Vec::new();
++    let mut positive = vec![0; times.len().saturating_sub(1)];
++    let mut used = 0;
+     let (mut reversals, mut duplicates, mut gaps) = (0, 0, 0);
+     for pair in times.windows(2) {
+         let dt = i128::from(pair[1]) - i128::from(pair[0]);
+@@ -161,9 +162,11 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+             if dt > i128::from(max_gap_ns) {
+                 gaps += 1;
+             }
+-            positive.push(i64::try_from(dt).map_err(|_| Error::Overflow)?);
++            positive[used] = i64::try_from(dt).map_err(|_| Error::Overflow)?;
++            used += 1;
+         }
+     }
++    positive.truncate(used);
+     positive.sort_unstable();
+     let median = quantile(&positive, 0.5);
+     Ok(TimeStats {

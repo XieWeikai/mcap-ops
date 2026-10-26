@@ -1,0 +1,53 @@
+{
+  "label": "ten-uniform-grid-03",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": 0.9620835846150255,
+  "worst_block_reduction_pct": 0.8231112662339113,
+  "worst_case_reduction_pct": 0.29199471205492156,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "ec6be1548cfe925172a1e07c467d68679423cbaad7d4cce0ef3c7d43db57b3be",
+  "operator": "uniform_grid",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "bound initial grid capacity at 4096 points",
+  "profile_hotspot": "Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Exact-capacity arithmetic failed the prior gate; sweep bounded growth budgets instead of allocating max_points.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 74284.65625,
+      "after_ns": 74100.53515625,
+      "latency_reduction_pct": 0.29199471205492156,
+      "paired_ratios": [
+        0.9975732551046435,
+        0.9965128191715669,
+        0.9965868506542581,
+        0.9990093378539499
+      ],
+      "worst_paired_reduction_pct": 0.09906621460501475
+    },
+    "uniform_grid.rational": {
+      "before_ns": 2277.0054626464844,
+      "after_ns": 2241.06591796875,
+      "latency_reduction_pct": 1.5753296785105952,
+      "paired_ratios": [
+        0.9822236048301404,
+        0.9841534955533974,
+        0.9843399108763907,
+        0.9845809129311462
+      ],
+      "worst_paired_reduction_pct": 1.5419087068853754
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-uniform-grid-03",
+  "validation_sha256": "8f109ef5f193e263779a85c2aec439b9cb36ba56d5fdff118153574f11d68df2"
+}

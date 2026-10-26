@@ -1,0 +1,16 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..cb0b553 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -130,8 +130,9 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+         let dt = i128::from(times[1]) - i128::from(times[0]);
+         if dt > 0
+             && times
+-                .windows(2)
+-                .all(|w| i128::from(w[1]) - i128::from(w[0]) == dt)
++                .iter()
++                .zip(times.iter().skip(1))
++                .all(|(&a, &b)| i128::from(b) - i128::from(a) == dt)
+         {
+             let dt = i64::try_from(dt).map_err(|_| Error::Overflow)?;
+             return Ok(TimeStats {

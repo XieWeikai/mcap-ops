@@ -43,7 +43,7 @@ def main():
             audit=json.loads((trial/'audit.json').read_text());accepted=audit['performance_gate']
             decision=[sys.executable,'scripts/rsi_decide.py',label,'--series','per-op10','--operator',op,
                 '--round',str(number),'--method',recipe['method'],'--hotspot',recipe['hotspot'],
-                '--complexity','Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. '+recipe['lesson'],
+                '--complexity','Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. '+recipe['lesson'],
                 '--reason',('Accept: every paired block >=8%, representative regression <=3%, correctness passed. ' if accepted else
                             'Reject: stable 8%/representative-regression gate failed; restore last accepted state. ')+recipe['lesson']]
             if accepted:decision.append('--accept')

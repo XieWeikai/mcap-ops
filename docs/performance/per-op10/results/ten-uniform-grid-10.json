@@ -1,0 +1,53 @@
+{
+  "label": "ten-uniform-grid-10",
+  "base_commit": "73adddf4bc087f0eda3dd17dd52c0f473477cdf7",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": -34.03992854436368,
+  "worst_block_reduction_pct": -34.36837880405093,
+  "worst_case_reduction_pct": -36.249610914434285,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Avoid a second loop counter while keeping the max_points error and half-open endpoint.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "31efc00d7c1b608c29ab524b370dd4510f427083a0de2accf6fd91cc9a7622bd",
+  "operator": "uniform_grid",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "terminate grid generation from output length and endpoint",
+  "profile_hotspot": "Avoid a second loop counter while keeping the max_points error and half-open endpoint.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Avoid a second loop counter while keeping the max_points error and half-open endpoint.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 48498.357421875,
+      "after_ns": 66086.318359375,
+      "latency_reduction_pct": -36.249610914434285,
+      "paired_ratios": [
+        1.36212719713336,
+        1.3660773090951357,
+        1.3628650211553257,
+        1.3620631175054854
+      ],
+      "worst_paired_reduction_pct": -36.60773090951357
+    },
+    "uniform_grid.rational": {
+      "before_ns": 1548.3463745117188,
+      "after_ns": 2042.0400390625,
+      "latency_reduction_pct": -31.895653153449377,
+      "paired_ratios": [
+        1.3199420467718797,
+        1.3216573543987877,
+        1.3173806218379382,
+        1.3179710162971077
+      ],
+      "worst_paired_reduction_pct": -32.16573543987877
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-uniform-grid-10",
+  "validation_sha256": "d0deac5307f974c40c2f69c07ff9624a4519d415893da3a704615adf741fc76e"
+}

@@ -1,0 +1,40 @@
+{
+  "label": "ten-require-strict-03",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": 5.451875409175422,
+  "worst_block_reduction_pct": -26.114633092057282,
+  "worst_case_reduction_pct": 5.451875409175422,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "19ddeeb2dee2d7ccd683d656091a87f879748b4b944306a993926639ad0bae2d",
+  "operator": "require_strict",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "check timestamp order in 16-pair early-exit blocks",
+  "profile_hotspot": "Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Full-slice boolean reduction was slower; retain early exit between small fixed blocks.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 5812.2467041015625,
+      "after_ns": 6263.9962158203125,
+      "latency_reduction_pct": 5.451875409175422,
+      "paired_ratios": [
+        0.9450697942392775,
+        0.9419960806835791,
+        0.9458926975772142,
+        1.2611463309205728
+      ],
+      "worst_paired_reduction_pct": -26.114633092057282
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-require-strict-03",
+  "validation_sha256": "6d0845715a9b643376f246652cd5b686034cdab29b59b4afd1699ad278ea5d89"
+}

@@ -1,0 +1,40 @@
+{
+  "label": "ten-expand-batch-timestamps-06",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": -12.662994286528972,
+  "worst_block_reduction_pct": -14.257535900676753,
+  "worst_case_reduction_pct": -12.662994286528972,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Return the same overflow error before exposing any result; a local bit reduction may permit vectorization.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "4612700835abffad53114b9fff9d467d7b42576e5fcd4bc66224bdd5d1964292",
+  "operator": "expand_batch_timestamps",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "accumulate batch overflow flags while adding",
+  "profile_hotspot": "Return the same overflow error before exposing any result; a local bit reduction may permit vectorization.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Return the same overflow error before exposing any result; a local bit reduction may permit vectorization.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 18605.7216796875,
+      "after_ns": 21052.61962890625,
+      "latency_reduction_pct": -12.662994286528972,
+      "paired_ratios": [
+        1.1080204997894603,
+        1.1425753590067675,
+        1.1268053805670026,
+        1.1264545051635768
+      ],
+      "worst_paired_reduction_pct": -14.257535900676753
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-expand-batch-timestamps-06",
+  "validation_sha256": "79d62c82501eb753d6fd87cba101ee9cefefac840830c5289c6036c5f8b36664"
+}

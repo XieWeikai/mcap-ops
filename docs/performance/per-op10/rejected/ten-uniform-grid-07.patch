@@ -1,0 +1,43 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1072f9d..901a60b 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -52,20 +52,18 @@ pub fn uniform_grid(
+     if period_num < rate {
+         return Err(invalid("rate exceeds nanosecond resolution"));
+     }
+-    let mut result = Vec::new();
++    let count = (((i128::from(end) - i128::from(start)) * rate - rate / 2).max(0) + period_num - 1)
++        / period_num;
++    if count > max_points as i128 {
++        return Err(invalid("grid exceeds max_points"));
++    }
++    let mut result = vec![0; count as usize];
+     let whole = period_num / rate;
+-    let fraction = (period_num % rate) as u64;
+-    let rate = u64::from(rate_num);
++    let fraction = period_num % rate;
+     let mut residual = rate / 2;
+     let mut t = i128::from(start);
+-    for i in 0..=max_points {
+-        if t >= i128::from(end) {
+-            return Ok(result);
+-        }
+-        if i == max_points {
+-            return Err(invalid("grid exceeds max_points"));
+-        }
+-        result.push(i64::try_from(t).map_err(|_| Error::Overflow)?);
++    for value in &mut result {
++        *value = i64::try_from(t).map_err(|_| Error::Overflow)?;
+         t += whole;
+         residual += fraction;
+         if residual >= rate {
+@@ -73,7 +71,7 @@ pub fn uniform_grid(
+             residual -= rate;
+         }
+     }
+-    unreachable!()
++    Ok(result)
+ }
+ 
+ /// Explicit ppb correction around `origin`, then offset. Never estimates clocks.

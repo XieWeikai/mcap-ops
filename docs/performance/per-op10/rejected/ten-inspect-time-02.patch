@@ -1,0 +1,53 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 1660d77..3473172 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -164,8 +164,32 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+             positive.push(i64::try_from(dt).map_err(|_| Error::Overflow)?);
+         }
+     }
+-    positive.sort_unstable();
+-    let median = quantile(&positive, 0.5);
++    let minimum = positive.iter().min().copied();
++    let maximum = positive.iter().max().copied();
++    let two_bins = minimum
++        .zip(maximum)
++        .filter(|&(lo, hi)| positive.iter().all(|&v| v == lo || v == hi));
++    let (median, p95) = if let Some((lo, hi)) = two_bins {
++        let lows = positive.iter().filter(|&&v| v == lo).count();
++        let q = |p: f64| {
++            let index = (positive.len() - 1) as f64 * p;
++            let a = if (index.floor() as usize) < lows {
++                lo
++            } else {
++                hi
++            } as f64;
++            let b = if (index.ceil() as usize) < lows {
++                lo
++            } else {
++                hi
++            } as f64;
++            Some(a + (b - a) * (index - index.floor()))
++        };
++        (q(0.5), q(0.95))
++    } else {
++        positive.sort_unstable();
++        (quantile(&positive, 0.5), quantile(&positive, 0.95))
++    };
+     Ok(TimeStats {
+         samples: times.len(),
+         first_ns: times.first().copied(),
+@@ -173,10 +197,10 @@ pub fn inspect_time(times: &[i64], max_gap_ns: i64) -> Result<TimeStats> {
+         reversals,
+         duplicates,
+         gaps,
+-        positive_interval_min_ns: positive.first().copied(),
++        positive_interval_min_ns: minimum,
+         positive_interval_median_ns: median,
+-        positive_interval_p95_ns: quantile(&positive, 0.95),
+-        positive_interval_max_ns: positive.last().copied(),
++        positive_interval_p95_ns: p95,
++        positive_interval_max_ns: maximum,
+         estimated_hz: median.map(|dt| 1e9 / dt),
+     })
+ }

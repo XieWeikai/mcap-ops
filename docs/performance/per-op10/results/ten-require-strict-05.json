@@ -1,0 +1,40 @@
+{
+  "label": "ten-require-strict-05",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": -77.01815629966529,
+  "worst_block_reduction_pct": -77.39794870876722,
+  "worst_case_reduction_pct": -77.01815629966529,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Measure position-based early-exit code generation; no checks are removed.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "404820c7cfd28aed3f016b6ef8013a24514c8da7835b7b3c91f9ff5281ed9be2",
+  "operator": "require_strict",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "locate the first invalid timestamp pair explicitly",
+  "profile_hotspot": "Measure position-based early-exit code generation; no checks are removed.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Measure position-based early-exit code generation; no checks are removed.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 4993.801513671875,
+      "after_ns": 8847.294555664062,
+      "latency_reduction_pct": -77.01815629966529,
+      "paired_ratios": [
+        1.769333731572151,
+        1.3360808722170077,
+        1.7739794870876722,
+        1.7710293944211548
+      ],
+      "worst_paired_reduction_pct": -77.39794870876722
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-require-strict-05",
+  "validation_sha256": "fd87a838abf019474f0883aaea5d59edddf47770d421ba02d84cec7020370b97"
+}

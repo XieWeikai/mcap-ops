@@ -80,6 +80,7 @@ def main():
     output.write_text(json.dumps({
         "schema": "mcap-ops-rsi-paired-v1",
         "machine": platform.node(),
+        "boot_id": Path("/proc/sys/kernel/random/boot_id").read_text().strip() if Path("/proc/sys/kernel/random/boot_id").exists() else None,
         "platform": platform.platform(),
         "before_artifacts": identity(args.before),
         "after_artifacts": identity(args.after),

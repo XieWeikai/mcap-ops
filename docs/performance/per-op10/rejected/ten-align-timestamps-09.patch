@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 546f649..66b764a 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -199,6 +199,7 @@ pub struct TimeAlignment {
+     pub valid: Vec<bool>,
+ }
+ 
++#[inline(never)]
+ pub fn align_timestamps(
+     source: &[i64],
+     target: &[i64],

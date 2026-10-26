@@ -1,0 +1,40 @@
+{
+  "label": "ten-expand-batch-timestamps-05",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 0.714864976591667,
+  "worst_block_reduction_pct": 0.04410276582618167,
+  "worst_case_reduction_pct": 0.714864976591667,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compare iterator control flow on the accepted in-place implementation, rather than the old push path.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "291fe08331afcccda4540d1385d3dab3bfe30a2a9cac2af20c54418af7eb1a55",
+  "operator": "expand_batch_timestamps",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "fallibly iterate each batch slice",
+  "profile_hotspot": "Compare iterator control flow on the accepted in-place implementation, rather than the old push path.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Compare iterator control flow on the accepted in-place implementation, rather than the old push path.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 18669.208740234375,
+      "after_ns": 18487.052978515625,
+      "latency_reduction_pct": 0.714864976591667,
+      "paired_ratios": [
+        0.9934463764982001,
+        0.9995589723417382,
+        0.9559721415676865,
+        0.9922563239699665
+      ],
+      "worst_paired_reduction_pct": 0.04410276582618167
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-expand-batch-timestamps-05",
+  "validation_sha256": "172540989800892355c8163c9e0cd7548c02f770120770eb4218b8749c6800e9"
+}

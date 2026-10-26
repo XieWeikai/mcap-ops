@@ -1,0 +1,40 @@
+{
+  "label": "ten-require-strict-07",
+  "base_commit": "5c408c46ac41dadf5568b3f43bcd0a8f626b2131",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": -79.0362072324563,
+  "worst_block_reduction_pct": -79.69170401774544,
+  "worst_case_reduction_pct": -79.0362072324563,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. An alternative branch structure keeps the exact error contract.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "2667c741178db72f56e282f0895f3604ffd4c1e926932239dc2c2af00ff0b8e6",
+  "operator": "require_strict",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "use a fallible fold for timestamp order validation",
+  "profile_hotspot": "An alternative branch structure keeps the exact error contract.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. An alternative branch structure keeps the exact error contract.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 4984.34619140625,
+      "after_ns": 8928.226928710938,
+      "latency_reduction_pct": -79.0362072324563,
+      "paired_ratios": [
+        1.7969170401774543,
+        1.7800235914475107,
+        1.7965589870031768,
+        1.7841651576459492
+      ],
+      "worst_paired_reduction_pct": -79.69170401774544
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-require-strict-07",
+  "validation_sha256": "4f3b75df0bf64d84a50e9a8546840fb74f7f000204e951b10b7aaf363d8cac28"
+}

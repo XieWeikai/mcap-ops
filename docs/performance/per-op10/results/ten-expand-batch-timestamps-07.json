@@ -1,0 +1,40 @@
+{
+  "label": "ten-expand-batch-timestamps-07",
+  "base_commit": "27f036a6690ec5cafb792d7e0b14b7c9c0d83333",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 1.950147088274945,
+  "worst_block_reduction_pct": 1.1560649426905933,
+  "worst_case_reduction_pct": 1.950147088274945,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The output already contains copied offsets, so a zero timestamp needs no arithmetic.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "5fa929a5dc924eb253935a5a1b8abf05ebad698c3f2fc74dfad483824a712a14",
+  "operator": "expand_batch_timestamps",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "skip additions for zero-origin message batches",
+  "profile_hotspot": "The output already contains copied offsets, so a zero timestamp needs no arithmetic.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The output already contains copied offsets, so a zero timestamp needs no arithmetic.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 18827.57177734375,
+      "after_ns": 18531.0205078125,
+      "latency_reduction_pct": 1.950147088274945,
+      "paired_ratios": [
+        0.9673849612198004,
+        0.9800286825296846,
+        0.9884393505730941,
+        0.9809683757048165
+      ],
+      "worst_paired_reduction_pct": 1.1560649426905933
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-expand-batch-timestamps-07",
+  "validation_sha256": "e2a32adc66e7cf0f301659a1b3369cf4b42a598b4c391d33a9a477fb364bca30"
+}

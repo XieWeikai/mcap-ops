@@ -4,9 +4,10 @@ Requested 2026-10-26 (Asia/Shanghai). Baseline source `9de19ea`.
 Thirty existing implementation units each receive ten new candidate experiments:
 **300 additional decisions**, independent of the prior 80 records.
 
-Each round is a small implementation alternative rooted in this campaign's
-starting operator body. It is measured against the most recently accepted state;
-unrelated operators retain their accepted changes. Alternatives include algorithms,
+Each round is a small implementation change measured against the most recently
+accepted state. Compatible transformations reuse accepted changes; incompatible
+algorithm/parameter alternatives start from the frozen operator body. Unrelated
+operators retain their accepted changes. Alternatives include algorithms,
 buffer capacities, loop blocking, library interface choices and inlining policy.
 Parameter sweeps are identified as such; they are not claimed as ten distinct
 algorithms. Identical source changes and prior failed patches are not replayed.
@@ -21,6 +22,10 @@ The existing gate remains: >=8% geometric-mean latency reduction in every one of
 four alternating paired blocks, no representative case slower by >3%, correctness
 and complexity review passing. Preserve all masks, errors, provenance, limits,
 CRC checks, timestamps, shapes and source data. No runtime dependency is added.
+Representative fixtures for later operator groups are frozen before those groups
+begin. Existing time-group inputs remain unchanged; final whole-campaign comparisons
+will rebuild the original source with the completed harness so both sides use
+identical fixture and benchmark code.
 Each accepted round gets its own commit with exact measurements; rejections keep
 their patches and logs. A failed compilation is repaired before timing, not
 presented as a measured optimization. Final full-suite and installed-wheel checks
