@@ -217,7 +217,9 @@ pub fn align_timestamps(
         offsets_ns: vec![0; target.len()],
         valid: vec![false; target.len()],
     };
-    let mut next = 0;
+    let mut next = target
+        .first()
+        .map_or(0, |&t| source.partition_point(|&v| v <= t));
     for (i, &t) in target.iter().enumerate() {
         while next < source.len() && source[next] <= t {
             next += 1;

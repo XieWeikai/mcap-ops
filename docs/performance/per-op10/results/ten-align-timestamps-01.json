@@ -1,0 +1,79 @@
+{
+  "label": "ten-align-timestamps-01",
+  "base_commit": "24b5da701dd03b6846ef2efb31a8fe2ff55341b5",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest",
+    "align_timestamps.sparse",
+    "align_timestamps.repeated"
+  ],
+  "geomean_latency_reduction_pct": 16.295263968787754,
+  "worst_block_reduction_pct": 14.725676768818087,
+  "worst_case_reduction_pct": -0.40926541676342687,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded alternative to the campaign-start implementation. No new unsafe code, runtime dependencies or relaxed checks. Prior output rewrites failed; avoid scanning an irrelevant initial source prefix and include sparse targets.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "23bd7f089ed423ddd6b4c06d53f957144e0af7e99a9b17f2e5b563e6d6708e0c",
+  "operator": "align_timestamps",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "start alignment at the first relevant source prefix",
+  "profile_hotspot": "Prior output rewrites failed; avoid scanning an irrelevant initial source prefix and include sparse targets.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Prior output rewrites failed; avoid scanning an irrelevant initial source prefix and include sparse targets.",
+  "case_results": {
+    "align_timestamps.sparse": {
+      "before_ns": 13876.489990234375,
+      "after_ns": 6878.1575927734375,
+      "latency_reduction_pct": 50.4710888205353,
+      "paired_ratios": [
+        0.4944904985484696,
+        0.49608772504082443,
+        0.496171443800104,
+        0.37535682274308374
+      ],
+      "worst_paired_reduction_pct": 50.382855619989606
+    },
+    "align_timestamps.repeated": {
+      "before_ns": 104631.37890625,
+      "after_ns": 104611.310546875,
+      "latency_reduction_pct": -0.2645080263958821,
+      "paired_ratios": [
+        0.972454443128171,
+        1.0227273860450246,
+        1.0038332972039232,
+        1.0014568633239942
+      ],
+      "worst_paired_reduction_pct": -2.2727386045024556
+    },
+    "align_timestamps.previous": {
+      "before_ns": 102479.8046875,
+      "after_ns": 103209.7109375,
+      "latency_reduction_pct": -0.3360618927233938,
+      "paired_ratios": [
+        0.9888138520785916,
+        1.026247369740855,
+        1.0090998749199753,
+        0.9976213629344927
+      ],
+      "worst_paired_reduction_pct": -2.6247369740854953
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 138772.0078125,
+      "after_ns": 139786.78515625,
+      "latency_reduction_pct": -0.40926541676342687,
+      "paired_ratios": [
+        1.004107530751006,
+        1.0155532535108795,
+        1.0040777775842626,
+        0.9952998963107776
+      ],
+      "worst_paired_reduction_pct": -1.555325351087955
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-align-timestamps-01",
+  "validation_sha256": "388304f2cdfd9a2bb7b936b6f3b161b032a6b8aee5db9d31db0a370fb732f0ca"
+}
