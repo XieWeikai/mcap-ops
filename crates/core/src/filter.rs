@@ -138,15 +138,6 @@ pub fn fir(
     if mode == FilterMode::Centered && taps.len().is_multiple_of(2) {
         return Err(invalid("centered FIR requires odd taps"));
     }
-    let mut planes = vec![0.0; signal.values().len()];
-    for c in 0..signal.channels() {
-        for (out, row) in planes[c * signal.len()..(c + 1) * signal.len()]
-            .iter_mut()
-            .zip(signal.values().chunks_exact(signal.channels()))
-        {
-            *out = row[c];
-        }
-    }
     let mut values = vec![f64::NAN; signal.values().len()];
     let mut valid = vec![false; signal.len()];
     let mut bad_prefix = vec![0usize; signal.len() + 1];
@@ -178,12 +169,12 @@ pub fn fir(
             continue;
         }
         for c in 0..signal.channels() {
-            let support = &planes[c * signal.len() + start..c * signal.len() + end + 1];
-            values[i * signal.channels() + c] = taps
+            let value = taps
                 .iter()
-                .zip(support.iter().rev())
-                .map(|(&w, &v)| w * v)
+                .enumerate()
+                .map(|(k, w)| w * signal.row(end - k)[c])
                 .sum::<f64>();
+            values[i * signal.channels() + c] = value;
         }
         *is_valid = values[i * signal.channels()..(i + 1) * signal.channels()]
             .iter()

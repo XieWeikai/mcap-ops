@@ -10,7 +10,7 @@
   "worst_case_reduction_pct": 32.196874328276984,
   "performance_gate": true,
   "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
-  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Earlier loop interchange lost scalar throughput; this candidate keeps reduction order and trades one bounded input copy for contiguous support.",
+  "complexity_review": "One extra input-sized buffer; broadening workloads revealed unacceptable short-kernel and invalid-support costs",
   "paths": [
     "crates/core/src/filter.rs"
   ],
@@ -18,10 +18,10 @@
   "operator": "fir",
   "round": 2,
   "series": "extension",
-  "decision": "accepted",
+  "decision": "rejected",
   "method": "transpose FIR input once into contiguous channel planes",
-  "profile_hotspot": "FIR strided dot products dominate after support checks.",
-  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Earlier loop interchange lost scalar throughput; this candidate keeps reduction order and trades one bounded input copy for contiguous support.",
+  "profile_hotspot": "FIR strided dot products dominate regular long-kernel workloads",
+  "reason": "WITHDRAWN after sensitivity validation: short scalar -24.37%, short vector -115.44%, gapped -33.67%; original fixed-case gain did not generalize. Initial acceptance and samples retained in history/extension-02-initial.json and history/sensitivity-initial.json. Restore the prior implementation.",
   "case_results": {
     "fir.scalar": {
       "before_ns": 509058.859375,
