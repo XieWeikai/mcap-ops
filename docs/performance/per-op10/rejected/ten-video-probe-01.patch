@@ -1,0 +1,13 @@
+diff --git a/crates/io/src/video.rs b/crates/io/src/video.rs
+index 996149e..ebfdc68 100644
+--- a/crates/io/src/video.rs
++++ b/crates/io/src/video.rs
+@@ -46,7 +46,7 @@ fn run_tool(program: &OsStr, args: &[&OsStr], timeout: Duration) -> Result<(Stri
+                 "media tool timed out or exceeded diagnostic output limit",
+             ));
+         }
+-        std::thread::sleep(Duration::from_millis(1));
++        std::thread::sleep(Duration::from_micros(250));
+     };
+     let read = |file: &mut File| -> Result<String> {
+         if file.metadata()?.len() > MAX_TOOL_OUTPUT {

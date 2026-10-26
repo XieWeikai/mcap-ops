@@ -1,0 +1,20 @@
+diff --git a/crates/python/src/lib.rs b/crates/python/src/lib.rs
+index 5dcaf42..d7e50e5 100644
+--- a/crates/python/src/lib.rs
++++ b/crates/python/src/lib.rs
+@@ -93,8 +93,13 @@ fn sampled_dict(py: Python<'_>, result: sampling::Sampled) -> PyResult<Py<PyDict
+ fn filtered_dict(py: Python<'_>, result: filter::Filtered) -> PyResult<Py<PyDict>> {
+     let dict = signal_dict(py, result.signal)?;
+     dict.bind(py).set_item("valid", result.valid)?;
+-    dict.bind(py)
+-        .set_item("mode", format!("{:?}", result.mode).to_lowercase())?;
++    dict.bind(py).set_item(
++        "mode",
++        match result.mode {
++            filter::FilterMode::Causal => "causal",
++            filter::FilterMode::Centered => "centered",
++        },
++    )?;
+     dict.bind(py)
+         .set_item("lookahead_samples", result.lookahead_samples)?;
+     dict.bind(py)

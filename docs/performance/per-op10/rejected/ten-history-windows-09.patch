@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..a39b5d4 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -234,6 +234,7 @@ pub struct Windowed {
+     pub samples: Sampled,
+ }
+ 
++#[inline(never)]
+ pub fn history_windows(
+     signal: &Signal,
+     centers: &[i64],

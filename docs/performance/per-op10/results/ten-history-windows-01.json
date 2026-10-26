@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-01",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": -5.103783111565852,
+  "worst_block_reduction_pct": -5.575043677083302,
+  "worst_case_reduction_pct": -5.008522069431187,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Removing tie keys alone failed earlier; stable adaptive sorting may exploit the nearly ordered offset streams.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "e883894848b721abd05c49241ec19fd91ecfe136ba68b833312c1154553f42a0",
+  "operator": "history_windows",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "stably merge-sort history request timestamps",
+  "profile_hotspot": "Removing tie keys alone failed earlier; stable adaptive sorting may exploit the nearly ordered offset streams.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Removing tie keys alone failed earlier; stable adaptive sorting may exploit the nearly ordered offset streams.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 351216.7265625,
+      "after_ns": 367836.2109375,
+      "latency_reduction_pct": -5.008522069431187,
+      "paired_ratios": [
+        1.0497016870021978,
+        1.0504687543864262,
+        1.0246013554212563,
+        1.0598033227784358
+      ],
+      "worst_paired_reduction_pct": -5.980332277843581
+    },
+    "history_windows.overlap": {
+      "before_ns": 575757.0390625,
+      "after_ns": 605217.359375,
+      "latency_reduction_pct": -4.850190795143794,
+      "paired_ratios": [
+        1.0587157825828681,
+        1.0452907661459763,
+        1.0429094092673636,
+        1.0517130497568996
+      ],
+      "worst_paired_reduction_pct": -5.871578258286814
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-01",
+  "validation_sha256": "ff02d5680e36c961e286890aeb036422b923c4fdacc15c35cd1c5d2cc81620ba"
+}

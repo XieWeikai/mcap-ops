@@ -1,0 +1,53 @@
+{
+  "label": "ten-image-decode-01",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_decode.png",
+    "image_decode.jpeg"
+  ],
+  "geomean_latency_reduction_pct": -1.7089487856715824,
+  "worst_block_reduction_pct": -2.6497002984627205,
+  "worst_case_reduction_pct": -2.0761073436624145,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "9c707627d396b00e585b92a335ba102290f89c350ac77387b4e5ae538ff91433",
+  "operator": "image_decode",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure a 1024-byte bounded image input buffer",
+  "profile_hotspot": "The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The old default-size buffer did not help; sweep explicit reader capacities across PNG and JPEG without changing decoder limits.",
+  "case_results": {
+    "image_decode.png": {
+      "before_ns": 1474532.59375,
+      "after_ns": 1488271.375,
+      "latency_reduction_pct": -1.1905869896812193,
+      "paired_ratios": [
+        1.016607893836543,
+        1.0196654912954155,
+        1.0072038459570813,
+        1.0055935100049689
+      ],
+      "worst_paired_reduction_pct": -1.9665491295415505
+    },
+    "image_decode.jpeg": {
+      "before_ns": 577264.8125,
+      "after_ns": 586966.921875,
+      "latency_reduction_pct": -2.0761073436624145,
+      "paired_ratios": [
+        1.0364823089853383,
+        1.0232106630287523,
+        1.018311483844496,
+        0.9727209823898931
+      ],
+      "worst_paired_reduction_pct": -3.648230898533833
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-decode-01",
+  "validation_sha256": "599e146054c704d8e137b91b149395ed278be55474b3ca517062840dffd6ea86"
+}

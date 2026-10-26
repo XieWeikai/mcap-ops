@@ -1,0 +1,96 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-json-decode-02/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 98541266
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case json_decode,json_decode.deep,json_decode.wide --profile (PID 1802728, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+163,986 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                file:function
+--------------------------------------------------------------------------------
+163,986 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+163,986 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+163,986 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+163,986 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+163,986 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+163,986 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+163,986 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+163,986 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+163,986 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+163,986 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+163,986 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+163,986 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+163,986 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+163,986 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+100,844 (61.50%)  ./crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode
+ 88,557 (54.00%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 68,573 (41.82%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode
+ 68,411 (41.72%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+ 55,793 (34.02%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+ 52,743 (32.16%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+ 52,515 (32.02%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+ 42,388 (25.85%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/iter.rs:operator_benchmark::Runner::bench
+ 39,250 (23.93%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match [./.artifacts/rsi/bin/accepted]
+ 33,658 (20.52%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 24,458 (14.91%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 22,188 (13.53%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+ 18,959 (11.56%)  crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode [./.artifacts/rsi/bin/accepted]
+ 16,554 (10.09%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::RawVec<T,A>::grow_one [./.artifacts/rsi/bin/accepted]
+ 16,440 (10.03%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value>'2 [./.artifacts/rsi/bin/accepted]
+ 16,359 ( 9.98%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value> [./.artifacts/rsi/bin/accepted]
+ 14,823 ( 9.04%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::finish_grow [./.artifacts/rsi/bin/accepted]
+ 13,701 ( 8.35%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::de::Deserializer<R>::parse_integer [./.artifacts/rsi/bin/accepted]
+ 12,735 ( 7.77%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:alloc::raw_vec::finish_grow
+ 12,597 ( 7.68%)  ./malloc/./malloc/malloc.c:realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 11,732 ( 7.15%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 10,677 ( 6.51%)  ./malloc/./malloc/malloc.c:_int_realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 10,529 ( 6.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:std::io::stdio::_print [./.artifacts/rsi/bin/accepted]
+ 10,247 ( 6.25%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:<&std::io::stdio::Stdout as std::io::Write>::write_fmt [./.artifacts/rsi/bin/accepted]
+ 10,112 ( 6.17%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/mod.rs:<&std::io::stdio::Stdout as std::io::Write>::write_fmt
+ 10,079 ( 6.15%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/mod.rs:core::fmt::write [./.artifacts/rsi/bin/accepted]
+  9,918 ( 6.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/mem/maybe_uninit.rs:core::ptr::drop_in_place<serde_json::value::Value>
+  9,194 ( 5.61%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/rt.rs:core::fmt::write
+  9,185 ( 5.60%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/mod.rs:<serde_json::value::Value as core::fmt::Display>::fmt
+  9,143 ( 5.58%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<serde_json::value::Value as core::fmt::Display>::fmt
+  9,134 ( 5.57%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize
+  8,478 ( 5.17%)  ./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  8,399 ( 5.12%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize
+  8,279 ( 5.05%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+  8,109 ( 4.94%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  8,083 ( 4.93%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  7,921 ( 4.83%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode
+  7,657 ( 4.67%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/impls.rs:std::io::impls::<impl std::io::Write for &mut W>::write_all [./.artifacts/rsi/bin/accepted]
+  7,240 ( 4.42%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  7,186 ( 4.38%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/mod.rs:<std::io::default_write_fmt::Adapter<T> as core::fmt::Write>::write_str [./.artifacts/rsi/bin/accepted]
+  7,105 ( 4.33%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed'2
+  6,991 ( 4.26%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed'2
+  6,622 ( 4.04%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/mod.rs:std::io::impls::<impl std::io::Write for &mut W>::write_all
+  6,213 ( 3.79%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+  6,034 ( 3.68%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all [./.artifacts/rsi/bin/accepted]
+  5,295 ( 3.23%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2 [./.artifacts/rsi/bin/accepted]
+  4,374 ( 2.67%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::SliceRead as serde_json::read::Read>::parse_str
+  4,341 ( 2.65%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::BTreeMap<K,V,A>::insert [./.artifacts/rsi/bin/accepted]
+  4,338 ( 2.65%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/lib.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+  4,188 ( 2.55%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::IntoIter<K,V,A>::dying_next [./.artifacts/rsi/bin/accepted]
+  4,155 ( 2.53%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:serde_json::de::Deserializer<R>::parse_integer
+  3,895 ( 2.38%)  ???:__rustc::__rust_alloc [./.artifacts/rsi/bin/accepted]
+  3,807 ( 2.32%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::SliceRead as serde_json::read::Read>::parse_str [./.artifacts/rsi/bin/accepted]
+  3,716 ( 2.27%)  crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode::{{closure}} [./.artifacts/rsi/bin/accepted]
+  3,630 ( 2.21%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<&mut serde_json::ser::Serializer<W,F> as serde_core::ser::Serializer>::serialize_str [./.artifacts/rsi/bin/accepted]
+  3,278 ( 2.00%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/buffered/linewritershim.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all
+

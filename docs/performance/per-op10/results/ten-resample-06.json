@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-06",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": 3.942576661795183,
+  "worst_block_reduction_pct": 3.6180519226268526,
+  "worst_case_reduction_pct": -8.709218064851498,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Ordered brackets prove the direction of each difference; preserve full-range integer distances and causal policies.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "cfbdf1a2fd1418e4bb0f37f9c9db405810ac23c37ddcbea9bc020e54cc92c805",
+  "operator": "resample",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "use unsigned support distances on ordered resampling brackets",
+  "profile_hotspot": "Ordered brackets prove the direction of each difference; preserve full-range integer distances and causal policies.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Ordered brackets prove the direction of each difference; preserve full-range integer distances and causal policies.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 216511.66015625,
+      "after_ns": 228569.31640625,
+      "latency_reduction_pct": -5.52512229096882,
+      "paired_ratios": [
+        1.047966754656485,
+        1.0625356911628914,
+        1.0693608740758387,
+        1.0192076770431284
+      ],
+      "worst_paired_reduction_pct": -6.9360874075838685
+    },
+    "resample.nearest": {
+      "before_ns": 234025.8984375,
+      "after_ns": 252733.4453125,
+      "latency_reduction_pct": -8.709218064851498,
+      "paired_ratios": [
+        1.0989397652918442,
+        1.0792725099630562,
+        1.0949118513339737,
+        1.0630148646715902
+      ],
+      "worst_paired_reduction_pct": -9.893976529184423
+    },
+    "resample.linear": {
+      "before_ns": 401955.9921875,
+      "after_ns": 293663.57421875,
+      "latency_reduction_pct": 27.186478817330737,
+      "paired_ratios": [
+        0.7362966300424415,
+        0.7279712165239093,
+        0.7116792075255849,
+        0.728299207129476
+      ],
+      "worst_paired_reduction_pct": 26.37033699575585
+    },
+    "resample.slerp": {
+      "before_ns": 580749.328125,
+      "after_ns": 472466.3671875,
+      "latency_reduction_pct": 18.042161907621978,
+      "paired_ratios": [
+        0.8123881760648857,
+        0.8300344917487323,
+        0.8267685857826748,
+        0.7974036321042263
+      ],
+      "worst_paired_reduction_pct": 16.996550825126768
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5530.8189697265625,
+      "after_ns": 5582.0972900390625,
+      "latency_reduction_pct": -0.5746884426393706,
+      "paired_ratios": [
+        1.0191725003004946,
+        0.9964951618426114,
+        1.0014455214719147,
+        1.0100482473808725
+      ],
+      "worst_paired_reduction_pct": -1.9172500300494555
+    },
+    "resample.repeated": {
+      "before_ns": 157955.96875,
+      "after_ns": 168602.35546875,
+      "latency_reduction_pct": -6.633336406856416,
+      "paired_ratios": [
+        1.0864724127684493,
+        1.0990167313607215,
+        1.046194315368679,
+        1.0444650713762549
+      ],
+      "worst_paired_reduction_pct": -9.901673136072153
+    },
+    "resample.exact_slerp": {
+      "before_ns": 426423.3359375,
+      "after_ns": 434950.078125,
+      "latency_reduction_pct": -1.7231139802554196,
+      "paired_ratios": [
+        1.00179885419806,
+        1.0181351037841058,
+        1.0323503267292726,
+        1.0163271758210024
+      ],
+      "worst_paired_reduction_pct": -3.2350326729272627
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-06",
+  "validation_sha256": "250d25fce891934f40ce642bcb4146e952a27af47af92b3f71f075d1dacead2a"
+}

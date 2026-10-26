@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-07",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": -0.4008559972736414,
+  "worst_block_reduction_pct": -0.6514047950522128,
+  "worst_case_reduction_pct": -2.5309766852821713,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Avoid the prior FIR-wide transpose cost: allocate one channel only when the expensive window detector is enabled.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "9a4e13c72a653ef77fb8041ecea93e324c6feda4924aeb5416e45ba09b5f10f5",
+  "operator": "inspect_signal",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "extract only active Hampel channels into contiguous scratch",
+  "profile_hotspot": "Avoid the prior FIR-wide transpose cost: allocate one channel only when the expensive window detector is enabled.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Avoid the prior FIR-wide transpose cost: allocate one channel only when the expensive window detector is enabled.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 1034159.40625,
+      "after_ns": 1037737.59375,
+      "latency_reduction_pct": -0.49335917507444815,
+      "paired_ratios": [
+        0.9977145563966289,
+        0.9859410947856235,
+        1.0121526271048602,
+        1.0289723353321316
+      ],
+      "worst_paired_reduction_pct": -2.8972335332131616
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 836124.53125,
+      "after_ns": 853417.609375,
+      "latency_reduction_pct": -2.5309766852821713,
+      "paired_ratios": [
+        1.0266526680172343,
+        1.0154902516213937,
+        1.0239668656884093,
+        1.0396460636865084
+      ],
+      "worst_paired_reduction_pct": -3.964606368650836
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1416533.40625,
+      "after_ns": 1410609.03125,
+      "latency_reduction_pct": 0.4606981927625764,
+      "paired_ratios": [
+        1.0036554070376342,
+        0.9871306291071141,
+        0.9749048050551454,
+        1.0108404800735875
+      ],
+      "worst_paired_reduction_pct": -1.084048007358751
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 2667718.5,
+      "after_ns": 2666254.0625,
+      "latency_reduction_pct": 0.008963831751396256,
+      "paired_ratios": [
+        1.0004250737339078,
+        1.0233516531646647,
+        0.9993956496310644,
+        0.9955604060660291
+      ],
+      "worst_paired_reduction_pct": -2.33516531646647
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 5397110.875,
+      "after_ns": 5500218.375,
+      "latency_reduction_pct": -1.8598043915950324,
+      "paired_ratios": [
+        1.0182036773962244,
+        1.0312514193455211,
+        1.0189924104356765,
+        0.9964491829392416
+      ],
+      "worst_paired_reduction_pct": -3.1251419345521114
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1506184.90625,
+      "after_ns": 1462152.125,
+      "latency_reduction_pct": 2.7448642656262345,
+      "paired_ratios": [
+        0.992853881384186,
+        0.9839494425160195,
+        0.961153272171456,
+        0.9529947612373475
+      ],
+      "worst_paired_reduction_pct": 0.7146118615814046
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-07",
+  "validation_sha256": "7cd0527f468834fa60c2bf691a45b91e2f7dddaf12fb607399691cab9391d19c"
+}

@@ -1,0 +1,40 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..9298fa3 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -389,20 +389,22 @@ pub fn read_signal(
+     if decoder.channels() == 0 || max_samples == 0 {
+         return Err(invalid("positive channels and max_samples required"));
+     }
+-    let mut timestamps = Vec::new();
+-    let mut values = Vec::new();
+-    for item in RawReader::open(path, filter, limits)? {
+-        for sample in decoder.decode(&item?)? {
+-            if timestamps.len() >= max_samples {
+-                return Err(invalid("decoded signal exceeds max_samples"));
+-            }
+-            if sample.values.len() != decoder.channels() {
+-                return Err(invalid("decoder returned inconsistent channel count"));
++    let (timestamps, values) = RawReader::open(path, filter, limits)?.try_fold(
++        (Vec::new(), Vec::new()),
++        |(mut timestamps, mut values), item| {
++            for sample in decoder.decode(&item?)? {
++                if timestamps.len() >= max_samples {
++                    return Err(invalid("decoded signal exceeds max_samples"));
++                }
++                if sample.values.len() != decoder.channels() {
++                    return Err(invalid("decoder returned inconsistent channel count"));
++                }
++                timestamps.push(sample.timestamp_ns);
++                values.extend(sample.values);
+             }
+-            timestamps.push(sample.timestamp_ns);
+-            values.extend(sample.values);
+-        }
+-    }
++            Ok::<_, crate::Error>((timestamps, values))
++        },
++    )?;
+     if timestamps.is_empty() {
+         return Err(invalid("no decoded samples matched the requested signal"));
+     }

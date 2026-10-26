@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-10",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": -0.36243872211736416,
+  "worst_block_reduction_pct": -2.6034347641915367,
+  "worst_case_reduction_pct": -3.743000977743227,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The overlapping path currently allocates a zero timestamp vector and immediately clones it; transfer its ownership instead.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "cecf29614a8a0624a4aba6854471b3cc97dd305fba4bc11d59fa578e4032035a",
+  "operator": "history_windows",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "move the history timestamp buffer into empty sampled storage",
+  "profile_hotspot": "History result initialization duplicates a temporary target buffer.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The overlapping path currently allocates a zero timestamp vector and immediately clones it; transfer its ownership instead.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 355245.4453125,
+      "after_ns": 368540.421875,
+      "latency_reduction_pct": -3.743000977743227,
+      "paired_ratios": [
+        1.032509252765966,
+        1.0818343068067324,
+        1.0157004444936393,
+        1.0423507667888987
+      ],
+      "worst_paired_reduction_pct": -8.183430680673244
+    },
+    "history_windows.overlap": {
+      "before_ns": 575572.65625,
+      "after_ns": 560841.65625,
+      "latency_reduction_pct": 2.5510840559305192,
+      "paired_ratios": [
+        0.9758658228944771,
+        0.9731124959869125,
+        0.991368457793989,
+        0.9645644293069375
+      ],
+      "worst_paired_reduction_pct": 0.8631542206011034
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-10",
+  "validation_sha256": "ccaa171e935f7ed4e05f70772df0d47c3e58fea361471bfed7c4d4f58b6eae62"
+}

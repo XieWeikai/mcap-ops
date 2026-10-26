@@ -1,0 +1,66 @@
+{
+  "label": "ten-json-decode-02",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "json_decode",
+    "json_decode.deep",
+    "json_decode.wide"
+  ],
+  "geomean_latency_reduction_pct": 2.5363602985517097,
+  "worst_block_reduction_pct": 0.3608053244735232,
+  "worst_case_reduction_pct": -3.134036842430743,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Payload array lengths are already known and bounded by the decoded record; avoid repeated output-vector growth.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "dfb5ab07e2df9650a579997e7974bbbec6a1ab6ff840fd34dd820fa1ca9d9f5f",
+  "operator": "json_decode",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve each resolved numeric array before flattening it",
+  "profile_hotspot": "Payload array lengths are already known and bounded by the decoded record; avoid repeated output-vector growth.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Payload array lengths are already known and bounded by the decoded record; avoid repeated output-vector growth.",
+  "case_results": {
+    "json_decode": {
+      "before_ns": 215.96221542358398,
+      "after_ns": 221.306884765625,
+      "latency_reduction_pct": -2.2784870741388907,
+      "paired_ratios": [
+        1.0357408749324628,
+        1.0073122404042851,
+        1.009828866550315,
+        1.0564567354270096
+      ],
+      "worst_paired_reduction_pct": -5.6456735427009574
+    },
+    "json_decode.deep": {
+      "before_ns": 230.01909255981445,
+      "after_ns": 239.06260299682617,
+      "latency_reduction_pct": -3.134036842430743,
+      "paired_ratios": [
+        1.0346935655022866,
+        1.0279871713463282,
+        1.026105650331238,
+        1.044042744770555
+      ],
+      "worst_paired_reduction_pct": -4.404274477055492
+    },
+    "json_decode.wide": {
+      "before_ns": 929.4665679931641,
+      "after_ns": 810.2490539550781,
+      "latency_reduction_pct": 13.391510278720542,
+      "paired_ratios": [
+        0.9230553889021038,
+        0.8494739945799544,
+        0.8288000463051484,
+        0.8826957998456346
+      ],
+      "worst_paired_reduction_pct": 7.694461109789619
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-json-decode-02",
+  "validation_sha256": "5d7e123280523a788e3f6ecba1fc1eb75930aab2c9dd73f4d1c1aec12d58e4b6"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-inspect-10",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "mcap_inspect",
+    "mcap_inspect.many"
+  ],
+  "geomean_latency_reduction_pct": -0.26594238038781803,
+  "worst_block_reduction_pct": -2.095613588640033,
+  "worst_case_reduction_pct": -0.7002793717168831,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Observed channels provide a bounded lower estimate; empty channels are still discovered and emitted by the full scan.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "1bff66c249b1a8a499637863c001f8c7a93904b7167dd6e54f41836c0fb65146",
+  "operator": "mcap_inspect",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve report storage for observed channel count",
+  "profile_hotspot": "Observed channels provide a bounded lower estimate; empty channels are still discovered and emitted by the full scan.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Observed channels provide a bounded lower estimate; empty channels are still discovered and emitted by the full scan.",
+  "case_results": {
+    "mcap_inspect": {
+      "before_ns": 1720000.59375,
+      "after_ns": 1735110.78125,
+      "latency_reduction_pct": -0.7002793717168831,
+      "paired_ratios": [
+        0.9903785258824884,
+        1.0366360454983023,
+        1.0174322353778957,
+        0.9965733520564419
+      ],
+      "worst_paired_reduction_pct": -3.663604549830235
+    },
+    "mcap_inspect.many": {
+      "before_ns": 2045217.65625,
+      "after_ns": 2019011.46875,
+      "latency_reduction_pct": 0.37262772831007096,
+      "paired_ratios": [
+        1.0161894084559684,
+        1.0055133968480134,
+        0.9870340485857851,
+        0.9807052068584032
+      ],
+      "worst_paired_reduction_pct": -1.618940845596839
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-inspect-10",
+  "validation_sha256": "dbde4cc82fa28b7f62619d79c00d351fc9df335acf61c02587c3888e05441004"
+}

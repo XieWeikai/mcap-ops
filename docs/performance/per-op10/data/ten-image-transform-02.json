@@ -1,0 +1,319 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "run_id": "session-9a90601a14b1",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/accepted",
+      "bytes": 27285488,
+      "sha256": "0a24be8353866acd62094e01a07e92ba528ae045743d9addb2b45d1ad0bb3f54"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/ten-image-transform-02",
+      "bytes": 27297792,
+      "sha256": "1de706aee03f22d80886a15ddd0865bb888140da8f5c82a4155f294041ef1c11"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "image_transform.gradient": {
+          "case": "image_transform.gradient",
+          "iterations": 4,
+          "median_ns": 5491321.0,
+          "samples_ns": [
+            5561140.25,
+            5497034.0,
+            5448459.0,
+            5482076.0,
+            5491321.0,
+            5465352.75,
+            5550604.75
+          ]
+        },
+        "image_transform.noise": {
+          "case": "image_transform.noise",
+          "iterations": 8,
+          "median_ns": 4233004.375,
+          "samples_ns": [
+            4139459.125,
+            4187129.0000000005,
+            4471529.125,
+            4111542.7499999995,
+            4289664.125,
+            4297113.0,
+            4233004.375
+          ]
+        }
+      },
+      "after": {
+        "image_transform.gradient": {
+          "case": "image_transform.gradient",
+          "iterations": 4,
+          "median_ns": 5432924.5,
+          "samples_ns": [
+            5497625.75,
+            5626963.75,
+            5460771.75,
+            5394152.5,
+            5432924.5,
+            5357556.25,
+            5392719.25
+          ]
+        },
+        "image_transform.noise": {
+          "case": "image_transform.noise",
+          "iterations": 8,
+          "median_ns": 4075503.75,
+          "samples_ns": [
+            4075503.75,
+            4060195.7500000005,
+            4158593.1250000005,
+            4030257.7500000005,
+            4109011.5,
+            4074831.9999999995,
+            4083929.7499999995
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "image_transform.gradient": {
+          "case": "image_transform.gradient",
+          "iterations": 4,
+          "median_ns": 5411938.25,
+          "samples_ns": [
+            5438416.75,
+            5490699.25,
+            5460936.75,
+            5373010.25,
+            5349940.0,
+            5411938.25,
+            5397592.0
+          ]
+        },
+        "image_transform.noise": {
+          "case": "image_transform.noise",
+          "iterations": 8,
+          "median_ns": 4200552.5,
+          "samples_ns": [
+            4075366.75,
+            4219028.625,
+            4230775.5,
+            4137720.375,
+            4321932.75,
+            4200552.5,
+            4164120.1250000005
+          ]
+        }
+      },
+      "before": {
+        "image_transform.gradient": {
+          "case": "image_transform.gradient",
+          "iterations": 4,
+          "median_ns": 5506008.25,
+          "samples_ns": [
+            5464878.0,
+            5796491.5,
+            5525026.75,
+            5464681.25,
+            5506008.25,
+            5586004.25,
+            5472442.0
+          ]
+        },
+        "image_transform.noise": {
+          "case": "image_transform.noise",
+          "iterations": 8,
+          "median_ns": 4151732.7499999995,
+          "samples_ns": [
+            4107987.75,
+            4215666.125,
+            4184684.125,
+            4107671.375,
+            4151732.7499999995,
+            4111134.6250000005,
+            4195911.25
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "image_transform.gradient": {
+          "case": "image_transform.gradient",
+          "iterations": 4,
+          "median_ns": 5605482.25,
+          "samples_ns": [
+            5605482.25,
+            5602416.0,
+            5475795.5,
+            5485369.25,
+            5606720.0,
+            5781291.0,
+            5669716.0
+          ]
+        },
+        "image_transform.noise": {
+          "case": "image_transform.noise",
+          "iterations": 8,
+          "median_ns": 4151558.2500000005,
+          "samples_ns": [
+            4211967.125,
+            4115168.3749999995,
+            4151558.2500000005,
+            4145066.9999999995,
+            4123072.9999999995,
+            4207912.75,
+            4154260.6249999995
+          ]
+        }
+      },
+      "after": {
+        "image_transform.gradient": {
+          "case": "image_transform.gradient",
+          "iterations": 4,
+          "median_ns": 5555592.75,
+          "samples_ns": [
+            5455029.25,
+            5453992.0,
+            5555592.75,
+            5643766.75,
+            5530203.25,
+            5675310.0,
+            5931512.25
+          ]
+        },
+        "image_transform.noise": {
+          "case": "image_transform.noise",
+          "iterations": 8,
+          "median_ns": 4098706.1249999995,
+          "samples_ns": [
+            4108754.0,
+            4105398.75,
+            4052016.75,
+            4180394.2500000005,
+            4098706.1249999995,
+            4060727.5,
+            4091502.375
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "image_transform.gradient": {
+          "case": "image_transform.gradient",
+          "iterations": 4,
+          "median_ns": 5458566.0,
+          "samples_ns": [
+            5329624.0,
+            5613938.25,
+            5555119.75,
+            5458566.0,
+            5424072.25,
+            5478571.5,
+            5390196.75
+          ]
+        },
+        "image_transform.noise": {
+          "case": "image_transform.noise",
+          "iterations": 8,
+          "median_ns": 4047485.0,
+          "samples_ns": [
+            4034629.875,
+            4017133.4999999995,
+            4132021.3750000005,
+            4070986.375,
+            4076441.375,
+            4047485.0,
+            4028218.5
+          ]
+        }
+      },
+      "before": {
+        "image_transform.gradient": {
+          "case": "image_transform.gradient",
+          "iterations": 4,
+          "median_ns": 5513309.5,
+          "samples_ns": [
+            5506859.75,
+            5513309.5,
+            5597083.75,
+            5569195.25,
+            5471428.0,
+            5469354.0,
+            5543873.0
+          ]
+        },
+        "image_transform.noise": {
+          "case": "image_transform.noise",
+          "iterations": 8,
+          "median_ns": 4178417.375,
+          "samples_ns": [
+            4102441.6249999995,
+            4239635.375,
+            4252962.5,
+            4157268.625,
+            4178417.375,
+            4190242.875,
+            4080067.2499999995
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "image_transform.gradient": {
+      "before_ns": 5509658.875,
+      "after_ns": 5445745.25,
+      "latency_reduction_pct": 1.028183098432267,
+      "paired_ratios": [
+        0.9893656735783612,
+        0.9829150274157327,
+        0.9910998736995377,
+        0.9900706644529933
+      ],
+      "worst_paired_reduction_pct": 0.890012630046233
+    },
+    "image_transform.noise": {
+      "before_ns": 4165075.0625,
+      "after_ns": 4087104.9375,
+      "latency_reduction_pct": 2.2033035259159783,
+      "paired_ratios": [
+        0.962792236660516,
+        1.011758885491847,
+        0.9872693283299105,
+        0.9686646011517698
+      ],
+      "worst_paired_reduction_pct": -1.1758885491846893
+    }
+  }
+}

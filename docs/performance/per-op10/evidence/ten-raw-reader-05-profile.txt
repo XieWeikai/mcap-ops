@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-raw-reader-05/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 165992447
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-raw-reader-05 --case raw_reader.chunked,raw_reader.linear,raw_reader.topics,raw_reader.mixed_topics --profile (PID 1715137, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+335,914,065 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+335,914,065 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+335,914,065 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+335,914,065 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+335,914,065 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+335,914,065 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+335,914,065 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+335,914,065 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-raw-reader-05]
+335,914,065 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-raw-reader-05]
+335,914,065 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-raw-reader-05]
+335,914,065 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-raw-reader-05]
+335,914,065 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+335,914,065 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-raw-reader-05]
+335,914,065 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-raw-reader-05]
+335,914,065 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-raw-reader-05]
+335,836,148 (99.98%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/ten-raw-reader-05]
+311,862,457 (92.84%)  ./crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+225,671,422 (67.18%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/io.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+218,983,792 (65.19%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/message_reader.rs:mcap::sans_io::message_reader::MessageReader::next_event
+191,880,995 (57.12%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/message_reader.rs:mcap::sans_io::message_reader::MessageReader::next_event [./.artifacts/rsi/bin/ten-raw-reader-05]
+101,250,810 (30.14%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::LinearReader::next_event
+ 84,158,952 (25.05%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::LinearReader::next_event [./.artifacts/rsi/bin/ten-raw-reader-05]
+ 45,617,742 (13.58%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::rw_buf::RwBuf::consume [./.artifacts/rsi/bin/ten-raw-reader-05]
+ 40,809,084 (12.15%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::rw_buf::RwBuf::mark_read [./.artifacts/rsi/bin/ten-raw-reader-05]
+ 35,500,872 (10.57%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/crc32fast-1.5.3/src/specialized/pclmulqdq.rs:crc32fast::Hasher::update
+ 34,536,840 (10.28%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/crc32fast-1.5.3/src/specialized/pclmulqdq.rs:crc32fast::specialized::pclmulqdq::calculate [./.artifacts/rsi/bin/ten-raw-reader-05]
+ 33,820,818 (10.07%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/crc32fast-1.5.3/src/lib.rs:crc32fast::Hasher::update
+ 29,916,420 ( 8.91%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/read.rs:mcap::read::parse_record
+ 27,445,877 ( 8.17%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/cmp.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+ 27,360,000 ( 8.14%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/read.rs:mcap::read::ChannelAccumulator::get
+ 24,785,179 ( 7.38%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/message_reader.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+ 23,929,471 ( 7.12%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::LinearReader::insert
+ 20,747,073 ( 6.18%)  ./string/../sysdeps/x86_64/multiarch/memcmp-avx2-movbe.S:__memcmp_avx2_movbe [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 20,630,871 ( 6.14%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 20,100,000 ( 5.98%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/slice.rs:mcap::sans_io::message_reader::MessageReader::next_event
+ 19,620,000 ( 5.84%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/slice.rs:<T as alloc::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec [./.artifacts/rsi/bin/ten-raw-reader-05]
+ 18,274,188 ( 5.44%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:operator_benchmark::main::{{closure}}
+ 17,919,324 ( 5.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap::sans_io::linear_reader::LinearReader::insert
+ 17,538,669 ( 5.22%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 13,975,254 ( 4.16%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/read.rs:mcap::read::parse_record [./.artifacts/rsi/bin/ten-raw-reader-05]
+ 13,382,559 ( 3.98%)  crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next [./.artifacts/rsi/bin/ten-raw-reader-05]
+ 13,304,979 ( 3.96%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 12,000,000 ( 3.57%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:<T as alloc::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec
+ 11,066,222 ( 3.29%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  9,360,000 ( 2.79%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap::read::ChannelAccumulator::get
+  8,637,403 ( 2.57%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  8,018,625 ( 2.39%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/../../stdarch/crates/core_arch/src/x86/sse2.rs:crc32fast::specialized::pclmulqdq::calculate
+  7,921,872 ( 2.36%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/option.rs:mcap::sans_io::linear_reader::LinearReader::next_event
+  7,614,135 ( 2.27%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/../../stdarch/crates/core_arch/src/x86/pclmulqdq.rs:crc32fast::specialized::pclmulqdq::calculate
+  7,440,000 ( 2.21%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/hash/sip.rs:mcap::read::ChannelAccumulator::get
+  5,801,532 ( 1.73%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/option.rs:mcap::sans_io::message_reader::MessageReader::next_event
+  5,778,882 ( 1.72%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/crc32fast-1.5.3/src/lib.rs:mcap::sans_io::linear_reader::LinearReader::next_event
+  5,777,190 ( 1.72%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/crc32fast-1.5.3/src/lib.rs:crc32fast::Hasher::update [./.artifacts/rsi/bin/ten-raw-reader-05]
+  5,746,086 ( 1.71%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<mcap::McapError> [./.artifacts/rsi/bin/ten-raw-reader-05]
+  5,083,365 ( 1.51%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:crc32fast::specialized::pclmulqdq::calculate
+  3,620,790 ( 1.08%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+  3,540,000 ( 1.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:<T as alloc::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec
+  3,360,000 ( 1.00%)  /rust/deps/hashbrown-0.15.4/src/raw/mod.rs:mcap::read::ChannelAccumulator::get
+  3,303,702 ( 0.98%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+  3,181,056 ( 0.95%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::LinearReader::insert [./.artifacts/rsi/bin/ten-raw-reader-05]
+  2,938,665 ( 0.87%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/non_null.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+  2,801,038 ( 0.83%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:mcap::read::parse_record
+  2,644,434 ( 0.79%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/impls.rs:mcap::read::parse_record
+  2,575,932 ( 0.77%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+  2,180,250 ( 0.65%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/result.rs:mcap::read::parse_record
+  2,162,592 ( 0.64%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::rw_buf::RwBuf::unread [./.artifacts/rsi/bin/ten-raw-reader-05]
+  2,134,491 ( 0.64%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/result.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+  2,101,836 ( 0.63%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/result.rs:operator_benchmark::main::{{closure}}
+  2,053,632 ( 0.61%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap::sans_io::linear_reader::LinearReader::next_event
+  1,920,198 ( 0.57%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap::read::parse_record
+  1,895,196 ( 0.56%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:crc32fast::specialized::pclmulqdq::calculate
+  1,863,648 ( 0.55%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap::read::parse_record
+  1,767,472 ( 0.53%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::finish_grow [./.artifacts/rsi/bin/ten-raw-reader-05]
+  1,714,171 ( 0.51%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::RawVec<T,A>::grow_one [./.artifacts/rsi/bin/ten-raw-reader-05]
+  1,643,090 ( 0.49%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/records.rs:mcap::read::parse_record
+  1,592,773 ( 0.47%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:alloc::raw_vec::finish_grow

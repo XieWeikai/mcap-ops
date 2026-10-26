@@ -1,0 +1,79 @@
+{
+  "label": "ten-raw-reader-09",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "raw_reader.chunked",
+    "raw_reader.linear",
+    "raw_reader.topics",
+    "raw_reader.mixed_topics"
+  ],
+  "geomean_latency_reduction_pct": 2.280933038672739,
+  "worst_block_reduction_pct": 0.5011698746316684,
+  "worst_case_reduction_pct": 0.47049936461105446,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "12c703d0ba9659a087e2676ac50e77c1e1838c7887f4351cfe28ebd0b5645441",
+  "operator": "raw_reader",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for raw_reader",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "raw_reader.chunked": {
+      "before_ns": 1371454.25,
+      "after_ns": 1316216.6875,
+      "latency_reduction_pct": 4.167919776672502,
+      "paired_ratios": [
+        0.9447080957602986,
+        0.9929772345608947,
+        0.933292887688054,
+        0.9719335087062515
+      ],
+      "worst_paired_reduction_pct": 0.7022765439105294
+    },
+    "raw_reader.linear": {
+      "before_ns": 1716809.8125,
+      "after_ns": 1649001.75,
+      "latency_reduction_pct": 4.287372359960417,
+      "paired_ratios": [
+        0.9576974752438691,
+        1.0019730970717065,
+        0.9365189185166475,
+        0.9565550775569227
+      ],
+      "worst_paired_reduction_pct": -0.19730970717064533
+    },
+    "raw_reader.topics": {
+      "before_ns": 1340293.5625,
+      "after_ns": 1326850.03125,
+      "latency_reduction_pct": 1.1622415524173202,
+      "paired_ratios": [
+        0.9399355139413019,
+        1.0000608389418648,
+        0.9766943300097888,
+        1.0125665452369454
+      ],
+      "worst_paired_reduction_pct": -1.2566545236945448
+    },
+    "raw_reader.mixed_topics": {
+      "before_ns": 1354456.15625,
+      "after_ns": 1338339.875,
+      "latency_reduction_pct": 0.47049936461105446,
+      "paired_ratios": [
+        0.9751751696458277,
+        0.9850315116982579,
+        1.0055585010095212,
+        1.0279549589114485
+      ],
+      "worst_paired_reduction_pct": -2.79549589114485
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-raw-reader-09",
+  "validation_sha256": "63fbf48ace93490423c4acbc1f9c480bea67beb4f59b240c2ba11b0f10420c3a"
+}

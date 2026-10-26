@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-03",
+  "base_commit": "274e3383e419fc20e0ae4d77d2811d701f173071",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": -12.520815726208912,
+  "worst_block_reduction_pct": -13.582386795678403,
+  "worst_case_reduction_pct": -22.428610564259355,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Remove per-step Option construction from the successful sorted-deviation merge.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "b5572f075ac63e33e8b0c29b4f18941c455f60ef28e2b38a2741477d58ddbc56",
+  "operator": "inspect_signal",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "merge MAD deviations with explicit exhausted-side checks",
+  "profile_hotspot": "Remove per-step Option construction from the successful sorted-deviation merge.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Remove per-step Option construction from the successful sorted-deviation merge.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 9631684.75,
+      "after_ns": 10865970.25,
+      "latency_reduction_pct": -12.571001429314688,
+      "paired_ratios": [
+        1.125621043282725,
+        1.1357817371231549,
+        1.1257989853035688,
+        1.1227494443610213
+      ],
+      "worst_paired_reduction_pct": -13.57817371231549
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 1362676.0,
+      "after_ns": 1610082.28125,
+      "latency_reduction_pct": -18.128929665441575,
+      "paired_ratios": [
+        1.1935075605707064,
+        1.1838387309897482,
+        1.1717028366552482,
+        1.1787398623190832
+      ],
+      "worst_paired_reduction_pct": -19.35075605707064
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1414923.4375,
+      "after_ns": 1460092.375,
+      "latency_reduction_pct": -2.661332614721701,
+      "paired_ratios": [
+        1.029016226518232,
+        1.0238805555383208,
+        1.0358058380297215,
+        1.024210425776202
+      ],
+      "worst_paired_reduction_pct": -3.580583802972148
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 3095917.625,
+      "after_ns": 3765532.6875,
+      "latency_reduction_pct": -22.01723566006306,
+      "paired_ratios": [
+        1.2091754108384654,
+        1.2232978126938,
+        1.2170469005074616,
+        1.2403717520181583
+      ],
+      "worst_paired_reduction_pct": -24.03717520181583
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 10248870.75,
+      "after_ns": 12545828.5,
+      "latency_reduction_pct": -22.428610564259355,
+      "paired_ratios": [
+        1.1944880184978683,
+        1.2406935743099172,
+        1.2078786369752696,
+        1.2681842137607553
+      ],
+      "worst_paired_reduction_pct": -26.81842137607553
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1487595.3125,
+      "after_ns": 1478011.15625,
+      "latency_reduction_pct": 0.9347509863881109,
+      "paired_ratios": [
+        0.9771833783376802,
+        0.9918026009357016,
+        0.9895023793365361,
+        1.0070284076849072
+      ],
+      "worst_paired_reduction_pct": -0.7028407684907201
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-03",
+  "validation_sha256": "5a65a07e278bba637eeb94f6bee59272c229b7465fc0bf85204a06d163667d59"
+}

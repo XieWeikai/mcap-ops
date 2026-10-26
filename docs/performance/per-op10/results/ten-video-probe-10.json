@@ -1,0 +1,53 @@
+{
+  "label": "ten-video-probe-10",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 0.11356250329590534,
+  "worst_block_reduction_pct": -0.8593453892622005,
+  "worst_case_reduction_pct": -0.30084906214427054,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Hoist the fixed deadline instead of recomputing elapsed duration; preserve the same comparison point and diagnostic limit.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "f51e12a6533039f99770d065835c1fcee50acdab19ff763c762c6afe06170617",
+  "operator": "video_probe",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "compare media deadlines directly during polling",
+  "profile_hotspot": "Hoist the fixed deadline instead of recomputing elapsed duration; preserve the same comparison point and diagnostic limit.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Hoist the fixed deadline instead of recomputing elapsed duration; preserve the same comparison point and diagnostic limit.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 25706919.5,
+      "after_ns": 25875672.5,
+      "latency_reduction_pct": -0.30084906214427054,
+      "paired_ratios": [
+        1.0255951324487975,
+        0.9892094328811689,
+        0.9973543336796707,
+        1.0086626475632148
+      ],
+      "worst_paired_reduction_pct": -2.559513244879752
+    },
+    "video_validate": {
+      "before_ns": 56052427.0,
+      "after_ns": 55675602.0,
+      "latency_reduction_pct": 0.29981291281884204,
+      "paired_ratios": [
+        0.9711897616133348,
+        1.0031729528004252,
+        1.0199592270100584,
+        0.990830788943198
+      ],
+      "worst_paired_reduction_pct": -1.9959227010058367
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-probe-10",
+  "validation_sha256": "f8ae9adfbf9dfd991eb04c8cf592413d1d7b488522a121ae3b37f6b7370c69e0"
+}

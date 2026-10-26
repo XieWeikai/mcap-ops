@@ -1,0 +1,98 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-video-validate-05/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 98654542
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case video_validate --profile (PID 2022990, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+685,423 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                file:function
+--------------------------------------------------------------------------------
+685,423 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+685,423 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+685,423 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+685,423 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+685,423 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+685,423 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+685,423 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+685,423 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+685,423 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+685,423 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+685,423 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+685,423 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+685,423 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+685,423 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+650,902 (94.96%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+603,966 (88.12%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/accepted]
+374,403 (54.62%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+294,307 (42.94%)  crates/io/src/video.rs:operator_benchmark::main::{{closure}}
+292,992 (42.75%)  crates/io/src/video.rs:mcap_ops_io::video::run_tool [./.artifacts/rsi/bin/accepted]
+282,209 (41.17%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:operator_benchmark::main::{{closure}}
+282,206 (41.17%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::de::from_trait [./.artifacts/rsi/bin/accepted]
+282,074 (41.15%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+277,759 (40.52%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+227,305 (33.16%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+227,134 (33.14%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+143,103 (20.88%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value>'2 [./.artifacts/rsi/bin/accepted]
+141,132 (20.59%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+115,756 (16.89%)  crates/io/src/video.rs:mcap_ops_io::video::run_tool::{{closure}} [./.artifacts/rsi/bin/accepted]
+ 97,258 (14.19%)  ./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 88,797 (12.96%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 85,226 (12.43%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::BTreeMap<K,V,A>::insert [./.artifacts/rsi/bin/accepted]
+ 84,494 (12.33%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/map.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 79,326 (11.57%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop'2 [./.artifacts/rsi/bin/accepted]
+ 67,443 ( 9.84%)  ???:__rustc::__rust_alloc [./.artifacts/rsi/bin/accepted]
+ 63,945 ( 9.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/string.rs:alloc::string::String::from_utf8_lossy [./.artifacts/rsi/bin/accepted]
+ 63,537 ( 9.27%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/lossy.rs:<core::str::lossy::Utf8Chunks as core::iter::traits::iterator::Iterator>::next [./.artifacts/rsi/bin/accepted]
+ 62,859 ( 9.17%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value> [./.artifacts/rsi/bin/accepted]
+ 62,771 ( 9.16%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop [./.artifacts/rsi/bin/accepted]
+ 62,266 ( 9.08%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:operator_benchmark::Runner::bench
+ 60,550 ( 8.83%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/mem/maybe_uninit.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop
+ 55,875 ( 8.15%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 50,826 ( 7.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/fs/unix.rs:mcap_ops_io::video::run_tool
+ 50,119 ( 7.31%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::finish_grow [./.artifacts/rsi/bin/accepted]
+ 49,081 ( 7.16%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/fs/unix.rs:std::sys::fs::unix::try_statx [./.artifacts/rsi/bin/accepted]
+ 48,211 ( 7.03%)  ./malloc/./malloc/malloc.c:realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 48,022 ( 7.01%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:alloc::raw_vec::finish_grow
+ 44,760 ( 6.53%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_key_seed::has_next_key [./.artifacts/rsi/bin/accepted]
+ 44,446 ( 6.48%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 43,465 ( 6.34%)  ./malloc/./malloc/malloc.c:_int_realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 41,501 ( 6.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/process.rs:mcap_ops_io::video::run_tool
+ 40,692 ( 5.94%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:mcap_ops_io::video::run_tool::{{closure}}
+ 38,061 ( 5.55%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/process/unix/common.rs:std::sys::process::unix::common::Command::arg [./.artifacts/rsi/bin/accepted]
+ 36,453 ( 5.32%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/mem/maybe_uninit.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop'2
+ 36,225 ( 5.29%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::StrRead as serde_json::read::Read>::parse_str
+ 29,516 ( 4.31%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/cmp.rs:alloc::collections::btree::map::BTreeMap<K,V,A>::insert
+ 29,514 ( 4.31%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_key_seed::has_next_key
+ 26,481 ( 3.86%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::StrRead as serde_json::read::Read>::parse_str [./.artifacts/rsi/bin/accepted]
+ 25,379 ( 3.70%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/ffi/c_str.rs:<&[u8] as alloc::ffi::c_str::CString::new::SpecNewImpl>::spec_new_impl [./.artifacts/rsi/bin/accepted]
+ 24,461 ( 3.57%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/ffi/c_str.rs:std::sys::process::unix::common::Command::arg
+ 23,754 ( 3.47%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop'2
+ 23,430 ( 3.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match [./.artifacts/rsi/bin/accepted]
+ 23,023 ( 3.36%)  ./string/../sysdeps/x86_64/multiarch/memcmp-avx2-movbe.S:__memcmp_avx2_movbe [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 22,500 ( 3.28%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/iter.rs:operator_benchmark::main::{{closure}}
+ 22,064 ( 3.22%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/intrinsics/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 19,481 ( 2.84%)  ./malloc/./malloc/malloc.c:malloc_consolidate [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 18,352 ( 2.68%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 15,875 ( 2.32%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::IntoIter<K,V,A>::dying_next [./.artifacts/rsi/bin/accepted]
+ 15,158 ( 2.21%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/pal/unix/time.rs:mcap_ops_io::video::run_tool
+ 14,524 ( 2.12%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<std::process::Command> [./.artifacts/rsi/bin/accepted]
+ 13,790 ( 2.01%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/pal/unix/thread.rs:mcap_ops_io::video::run_tool
+ 13,728 ( 2.00%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/process.rs:std::process::Command::spawn [./.artifacts/rsi/bin/accepted]
+ 13,566 ( 1.98%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/process/unix/unix.rs:std::sys::process::unix::unix::<impl std::sys::process::unix::common::Command>::spawn [./.artifacts/rsi/bin/accepted]
+

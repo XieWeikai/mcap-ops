@@ -1,0 +1,51 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-expand-batch-timestamps-05/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 31024114
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case expand_batch_timestamps --profile (PID 59021, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+2,701,067 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                  file:function
+--------------------------------------------------------------------------------
+2,701,067 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+2,701,067 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+2,701,067 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+2,701,067 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+2,701,067 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+2,701,067 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+2,701,067 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+2,701,067 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+2,701,067 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+2,701,067 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+2,701,067 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+2,701,067 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+2,701,067 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+2,701,067 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+2,686,083 (99.45%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/accepted]
+2,685,981 (99.44%)  ./crates/core/src/time.rs:mcap_ops_core::time::expand_batch_timestamps
+1,200,213 (44.43%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+1,199,964 (44.43%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::time::expand_batch_timestamps
+  345,000 (12.77%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/option.rs:mcap_ops_core::time::expand_batch_timestamps
+  330,009 (12.22%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/non_null.rs:mcap_ops_core::time::expand_batch_timestamps
+  240,096 ( 8.89%)  crates/core/src/time.rs:mcap_ops_core::time::expand_batch_timestamps [./.artifacts/rsi/bin/accepted]
+  210,015 ( 7.78%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::time::expand_batch_timestamps
+  150,000 ( 5.55%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/int_macros.rs:mcap_ops_core::time::expand_batch_timestamps
+   90,018 ( 3.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::time::expand_batch_timestamps
+   45,012 ( 1.67%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/adapters/zip.rs:mcap_ops_core::time::expand_batch_timestamps
+

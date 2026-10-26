@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index b8c6693..1401957 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -456,6 +456,7 @@ pub struct GateDecision {
+     pub reasons: Vec<String>,
+     pub flagged_fraction: f64,
+ }
++#[inline(never)]
+ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision> {
+     if !policy.max_flagged_fraction.is_finite()
+         || !(0.0..=1.0).contains(&policy.max_flagged_fraction)

@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-video-validate-02/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 98653271
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-video-validate-02 --case video_validate --profile (PID 2013192, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+675,113 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                file:function
+--------------------------------------------------------------------------------
+675,113 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+675,113 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+675,113 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+675,113 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+675,113 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+675,113 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+675,113 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-video-validate-02]
+675,113 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-video-validate-02]
+675,113 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-video-validate-02]
+675,113 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-video-validate-02]
+675,113 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+675,113 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-video-validate-02]
+675,113 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-video-validate-02]
+675,113 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-video-validate-02]
+651,341 (96.48%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+593,864 (87.97%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/ten-video-validate-02]
+374,573 (55.48%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+283,867 (42.05%)  crates/io/src/video.rs:operator_benchmark::main::{{closure}}
+282,547 (41.85%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:operator_benchmark::main::{{closure}}
+282,544 (41.85%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::de::from_trait [./.artifacts/rsi/bin/ten-video-validate-02]
+282,534 (41.85%)  crates/io/src/video.rs:mcap_ops_io::video::run_tool [./.artifacts/rsi/bin/ten-video-validate-02]
+282,412 (41.83%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+278,028 (41.18%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+227,246 (33.66%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+227,075 (33.64%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+142,628 (21.13%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value>'2 [./.artifacts/rsi/bin/ten-video-validate-02]
+141,207 (20.92%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+115,969 (17.18%)  crates/io/src/video.rs:mcap_ops_io::video::run_tool::{{closure}} [./.artifacts/rsi/bin/ten-video-validate-02]
+ 98,780 (14.63%)  ./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 90,545 (13.41%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 84,801 (12.56%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::BTreeMap<K,V,A>::insert [./.artifacts/rsi/bin/ten-video-validate-02]
+ 84,000 (12.44%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/map.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 79,059 (11.71%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop'2 [./.artifacts/rsi/bin/ten-video-validate-02]
+ 68,272 (10.11%)  ???:__rustc::__rust_alloc [./.artifacts/rsi/bin/ten-video-validate-02]
+ 63,945 ( 9.47%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/string.rs:alloc::string::String::from_utf8_lossy [./.artifacts/rsi/bin/ten-video-validate-02]
+ 63,537 ( 9.41%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/lossy.rs:<core::str::lossy::Utf8Chunks as core::iter::traits::iterator::Iterator>::next [./.artifacts/rsi/bin/ten-video-validate-02]
+ 62,651 ( 9.28%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value> [./.artifacts/rsi/bin/ten-video-validate-02]
+ 62,563 ( 9.27%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop [./.artifacts/rsi/bin/ten-video-validate-02]
+ 62,058 ( 9.19%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:operator_benchmark::Runner::bench
+ 60,342 ( 8.94%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/mem/maybe_uninit.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop
+ 56,305 ( 8.34%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 50,081 ( 7.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::finish_grow [./.artifacts/rsi/bin/ten-video-validate-02]
+ 48,173 ( 7.14%)  ./malloc/./malloc/malloc.c:realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 47,984 ( 7.11%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:alloc::raw_vec::finish_grow
+ 44,760 ( 6.63%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_key_seed::has_next_key [./.artifacts/rsi/bin/ten-video-validate-02]
+ 44,596 ( 6.61%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 43,738 ( 6.48%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/process.rs:mcap_ops_io::video::run_tool
+ 43,602 ( 6.46%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/fs/unix.rs:mcap_ops_io::video::run_tool
+ 43,427 ( 6.43%)  ./malloc/./malloc/malloc.c:_int_realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 42,361 ( 6.27%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/fs/unix.rs:std::sys::fs::unix::try_statx [./.artifacts/rsi/bin/ten-video-validate-02]
+ 40,839 ( 6.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:mcap_ops_io::video::run_tool::{{closure}}
+ 40,192 ( 5.95%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/process/unix/common.rs:std::sys::process::unix::common::Command::arg [./.artifacts/rsi/bin/ten-video-validate-02]
+ 36,364 ( 5.39%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/mem/maybe_uninit.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop'2
+ 36,225 ( 5.37%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::StrRead as serde_json::read::Read>::parse_str
+ 29,514 ( 4.37%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_key_seed::has_next_key
+ 29,432 ( 4.36%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/cmp.rs:alloc::collections::btree::map::BTreeMap<K,V,A>::insert
+ 27,485 ( 4.07%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/ffi/c_str.rs:<&[u8] as alloc::ffi::c_str::CString::new::SpecNewImpl>::spec_new_impl [./.artifacts/rsi/bin/ten-video-validate-02]
+ 26,573 ( 3.94%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/ffi/c_str.rs:std::sys::process::unix::common::Command::arg
+ 26,481 ( 3.92%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::StrRead as serde_json::read::Read>::parse_str [./.artifacts/rsi/bin/ten-video-validate-02]
+ 23,754 ( 3.52%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop'2
+ 23,430 ( 3.47%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match [./.artifacts/rsi/bin/ten-video-validate-02]
+ 22,939 ( 3.40%)  ./string/../sysdeps/x86_64/multiarch/memcmp-avx2-movbe.S:__memcmp_avx2_movbe [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 22,752 ( 3.37%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/intrinsics/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 22,500 ( 3.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/iter.rs:operator_benchmark::main::{{closure}}
+ 19,621 ( 2.91%)  ./malloc/./malloc/malloc.c:malloc_consolidate [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 18,498 ( 2.74%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 15,697 ( 2.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::IntoIter<K,V,A>::dying_next [./.artifacts/rsi/bin/ten-video-validate-02]
+ 15,337 ( 2.27%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<std::process::Command> [./.artifacts/rsi/bin/ten-video-validate-02]
+ 14,534 ( 2.15%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:<&[u8] as alloc::ffi::c_str::CString::new::SpecNewImpl>::spec_new_impl
+ 13,764 ( 2.04%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/process.rs:std::process::Command::spawn [./.artifacts/rsi/bin/ten-video-validate-02]
+ 13,602 ( 2.01%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/process/unix/unix.rs:std::sys::process::unix::unix::<impl std::sys::process::unix::common::Command>::spawn [./.artifacts/rsi/bin/ten-video-validate-02]
+ 13,030 ( 1.93%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/pal/unix/time.rs:mcap_ops_io::video::run_tool
+ 12,654 ( 1.87%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+ 12,238 ( 1.81%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:core::ptr::drop_in_place<std::process::Command>
+ 11,830 ( 1.75%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/pal/unix/thread.rs:mcap_ops_io::video::run_tool

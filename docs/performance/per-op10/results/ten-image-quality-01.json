@@ -1,0 +1,53 @@
+{
+  "label": "ten-image-quality-01",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": 2.194111203590088,
+  "worst_block_reduction_pct": 2.154583381483677,
+  "worst_case_reduction_pct": 0.8183530531365113,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "7ec5ca0b41d44a45a5618b0a2e3ea6096056034d7b7e5b40cb7617b2a8b40764",
+  "operator": "image_quality",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "aggregate luminance moments in blocks of 64",
+  "profile_hotspot": "Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Stable two-pass statistics succeeded; tune independent reduction-chain lengths and verify large-image numerical equivalence.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 2724934.6875,
+      "after_ns": 2690739.125,
+      "latency_reduction_pct": 0.8183530531365113,
+      "paired_ratios": [
+        1.0045943312480108,
+        0.954123467877992,
+        1.0105745701134552,
+        0.9790386076892589
+      ],
+      "worst_paired_reduction_pct": -1.0574570113455195
+    },
+    "image_quality.noise": {
+      "before_ns": 1269110.421875,
+      "after_ns": 1216360.625,
+      "latency_reduction_pct": 4.590283925758998,
+      "paired_ratios": [
+        0.9523318282755391,
+        0.955862493209281,
+        0.9464825801857631,
+        0.9778700735660544
+      ],
+      "worst_paired_reduction_pct": 2.2129926433945624
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-quality-01",
+  "validation_sha256": "75328d881d5abe9daaab00804d0d44948daea75c0f902f5e760ee31ad34998fd"
+}

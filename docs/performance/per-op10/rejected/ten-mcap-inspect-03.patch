@@ -1,0 +1,49 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index fce7c44..734beb4 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -215,7 +215,8 @@ pub fn inspect_mcap(
+     }
+     let path = path.as_ref();
+     let mut reader = RawReader::open(path, filter.clone(), limits)?;
+-    let mut times: BTreeMap<u16, (Vec<i64>, Vec<i64>, u64)> = BTreeMap::new();
++    type ChannelTimes = (Vec<i64>, Option<Vec<i64>>, u64);
++    let mut times: BTreeMap<u16, ChannelTimes> = BTreeMap::new();
+     let mut selected = 0;
+     for item in reader.by_ref() {
+         let message = item?;
+@@ -225,8 +226,10 @@ pub fn inspect_mcap(
+         let publish = i64::try_from(message.publish_time)
+             .map_err(|_| invalid("publish timestamp exceeds int64"))?;
+         let (logs, pubs, bytes) = times.entry(message.channel.id).or_default();
++        if publish != log || pubs.is_some() {
++            pubs.get_or_insert_with(|| logs.clone()).push(publish);
++        }
+         logs.push(log);
+-        pubs.push(publish);
+         *bytes += message.data.len() as u64;
+     }
+     let mut channels = Vec::new();
+@@ -238,6 +241,11 @@ pub fn inspect_mcap(
+             continue;
+         }
+         let (logs, pubs, payload_bytes) = times.remove(&id).unwrap_or_default();
++        let log_time = inspect_time(&logs, max_gap_ns)?;
++        let publish_time = match pubs {
++            Some(pubs) => inspect_time(&pubs, max_gap_ns)?,
++            None => log_time.clone(),
++        };
+         channels.push(ChannelReport {
+             channel_id: id,
+             topic: channel.topic.clone(),
+@@ -249,8 +257,8 @@ pub fn inspect_mcap(
+                 .as_ref()
+                 .map(|s| format!("{:x}", Sha256::digest(&s.data))),
+             payload_bytes,
+-            log_time: inspect_time(&logs, max_gap_ns)?,
+-            publish_time: inspect_time(&pubs, max_gap_ns)?,
++            log_time,
++            publish_time,
+         });
+     }
+     Ok(McapReport {

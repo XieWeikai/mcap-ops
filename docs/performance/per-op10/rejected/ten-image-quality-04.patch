@@ -1,0 +1,19 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 2af84c6..99f5534 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -85,12 +85,12 @@ pub fn image_quality(bytes: &[u8], options: &ImageOptions) -> Result<ImageQualit
+         bright += u64::from(y >= f64::from(options.bright_threshold));
+     }
+     let mean = gray
+-        .chunks(256)
++        .chunks(1024)
+         .map(|chunk| chunk.iter().sum::<f64>())
+         .sum::<f64>()
+         / count as f64;
+     let m2 = gray
+-        .chunks(256)
++        .chunks(1024)
+         .map(|chunk| chunk.iter().map(|&v| (v - mean) * (v - mean)).sum::<f64>())
+         .sum::<f64>();
+     let laplacian_variance = if width >= 3 && height >= 3 {

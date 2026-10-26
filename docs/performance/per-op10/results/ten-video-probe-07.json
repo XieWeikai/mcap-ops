@@ -1,0 +1,53 @@
+{
+  "label": "ten-video-probe-07",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 0.5084449089236553,
+  "worst_block_reduction_pct": -0.0773521805426336,
+  "worst_case_reduction_pct": -0.16031014660089493,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Profiled work is dominated by child execution; measure command-builder overhead without shell interpolation or altered arguments.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "0d8fbbb3b7eb2a1f20fbf1053afe7e8a45e7b1762e6f9b66c346576734ae63b9",
+  "operator": "video_probe",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "append borrowed media arguments individually",
+  "profile_hotspot": "Profiled work is dominated by child execution; measure command-builder overhead without shell interpolation or altered arguments.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Profiled work is dominated by child execution; measure command-builder overhead without shell interpolation or altered arguments.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 26288887.0,
+      "after_ns": 26056122.0,
+      "latency_reduction_pct": 0.5842772209877389,
+      "paired_ratios": [
+        0.999267044572642,
+        0.9793870680193757,
+        1.0031379042094446,
+        0.9890474110076032
+      ],
+      "worst_paired_reduction_pct": -0.31379042094445975
+    },
+    "video_validate": {
+      "before_ns": 55917118.0,
+      "after_ns": 55795296.0,
+      "latency_reduction_pct": -0.16031014660089493,
+      "paired_ratios": [
+        0.9770565886982767,
+        1.0047914907134239,
+        0.998414712218594,
+        1.006676739577877
+      ],
+      "worst_paired_reduction_pct": -0.6676739577877067
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-probe-07",
+  "validation_sha256": "2e7237b875f1a8fd928f976afe5ef9f0bc2bc6abe3c246cc8a1fcfa7fd8eb1af"
+}

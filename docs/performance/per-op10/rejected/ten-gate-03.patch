@@ -1,0 +1,18 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index d948683..a051598 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -474,8 +474,12 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
+     if fraction > policy.max_flagged_fraction {
+         reasons.push("flagged_fraction".into());
+     }
++    let mut present = 0u16;
++    for code in &report.all_codes {
++        present |= 1u16 << (*code as usize);
++    }
+     for code in &policy.reject_codes {
+-        if report.all_codes.contains(code) {
++        if (present & (1u16 << (*code as usize))) != 0 {
+             reasons.push(
+                 match code {
+                     IssueCode::NonFinite => "NonFinite",

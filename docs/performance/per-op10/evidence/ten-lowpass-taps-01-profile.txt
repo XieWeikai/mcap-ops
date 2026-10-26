@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-lowpass-taps-01/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 40877441
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-lowpass-taps-01 --case lowpass_taps,lowpass_taps.short,lowpass_taps.long --profile (PID 767827, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+1,056,268 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                  file:function
+--------------------------------------------------------------------------------
+1,056,268 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+1,056,268 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+1,056,268 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+1,056,268 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+1,056,268 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+1,056,268 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+1,056,268 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+1,056,268 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+1,056,268 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+1,056,268 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+1,056,268 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+1,056,268 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+1,056,268 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+1,056,268 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+1,007,484 (95.38%)  ./crates/core/src/filter.rs:mcap_ops_core::filter::lowpass_taps
+  532,782 (50.44%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/num/f64.rs:mcap_ops_core::filter::lowpass_taps
+  524,148 (49.62%)  ./math/../sysdeps/ieee754/dbl-64/s_sin.c:__cos_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]
+  182,034 (17.23%)  crates/core/src/filter.rs:mcap_ops_core::filter::lowpass_taps [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+  100,398 ( 9.50%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:mcap_ops_core::filter::lowpass_taps
+  100,371 ( 9.50%)  ./malloc/./malloc/malloc.c:calloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+   98,511 ( 9.33%)  ./malloc/../string/bits/string_fortified.h:calloc
+   98,493 ( 9.32%)  ???:0x00000000049aa740 [???]
+   98,481 ( 9.32%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+   93,564 ( 8.86%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/range.rs:mcap_ops_core::filter::lowpass_taps
+   62,433 ( 5.91%)  ./math/../sysdeps/x86/fpu/fenv_private.h:__cos_fma
+   43,722 ( 4.14%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::filter::lowpass_taps
+   30,295 ( 2.87%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/iter.rs:operator_benchmark::Runner::bench
+   27,871 ( 2.64%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+   24,984 ( 2.37%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:mcap_ops_core::filter::lowpass_taps
+   14,668 ( 1.39%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+   12,519 ( 1.19%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/range.rs:mcap_ops_core::filter::lowpass_taps
+   12,483 ( 1.18%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/arith.rs:mcap_ops_core::filter::lowpass_taps
+   10,585 ( 1.00%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:std::io::stdio::_print [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+   10,303 ( 0.98%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:<&std::io::stdio::Stdout as std::io::Write>::write_fmt [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+   10,168 ( 0.96%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/mod.rs:<&std::io::stdio::Stdout as std::io::Write>::write_fmt
+   10,135 ( 0.96%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/mod.rs:core::fmt::write [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    9,250 ( 0.88%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/rt.rs:core::fmt::write
+    9,241 ( 0.87%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/mod.rs:<serde_json::value::Value as core::fmt::Display>::fmt
+    9,199 ( 0.87%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<serde_json::value::Value as core::fmt::Display>::fmt
+    9,190 ( 0.87%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize
+    8,455 ( 0.80%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize
+    7,685 ( 0.73%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/impls.rs:std::io::impls::<impl std::io::Write for &mut W>::write_all [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    7,214 ( 0.68%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/mod.rs:<std::io::default_write_fmt::Adapter<T> as core::fmt::Write>::write_str [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    6,650 ( 0.63%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/mod.rs:std::io::impls::<impl std::io::Write for &mut W>::write_all
+    6,062 ( 0.57%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    3,630 ( 0.34%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<&mut serde_json::ser::Serializer<W,F> as serde_core::ser::Serializer>::serialize_str [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    3,390 ( 0.32%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::filter::lowpass_taps
+    3,306 ( 0.31%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/buffered/linewritershim.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all
+    2,826 ( 0.27%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:core::slice::memchr::memrchr [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    2,755 ( 0.26%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize'2
+    2,728 ( 0.26%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize'2 [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    2,457 ( 0.23%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/cmp.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+    2,262 ( 0.21%)  ./math/../sysdeps/ieee754/dbl-64/s_sincos.c:__sincos_fma [/usr/lib/x86_64-linux-gnu/libm.so.6]
+    2,044 ( 0.19%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<&mut serde_json::ser::Serializer<W,F> as serde_core::ser::Serializer>::serialize_str
+    2,022 ( 0.19%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    1,827 ( 0.17%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value> [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    1,761 ( 0.17%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+    1,740 ( 0.16%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+    1,705 ( 0.16%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:operator_benchmark::Runner::bench
+    1,647 ( 0.16%)  ./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    1,554 ( 0.15%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::filter::lowpass_taps
+    1,371 ( 0.13%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    1,344 ( 0.13%)  ./math/../sysdeps/ieee754/dbl-64/s_sin.c:__sincos_fma
+    1,303 ( 0.12%)  ./string/../sysdeps/x86_64/multiarch/memcmp-avx2-movbe.S:__memcmp_avx2_movbe [/usr/lib/x86_64-linux-gnu/libc.so.6]
+      990 ( 0.09%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+      938 ( 0.09%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all
+      809 ( 0.08%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/map.rs:operator_benchmark::Runner::bench
+      807 ( 0.08%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+      803 ( 0.08%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/mod.rs:operator_benchmark::Runner::bench
+      788 ( 0.07%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::BTreeMap<K,V,A>::insert [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+      696 ( 0.07%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+      636 ( 0.06%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::IntoIter<K,V,A>::dying_next [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+      633 ( 0.06%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:core::slice::memchr::memrchr
+      585 ( 0.06%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize [./.artifacts/rsi/bin/ten-lowpass-taps-01]
+      516 ( 0.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop

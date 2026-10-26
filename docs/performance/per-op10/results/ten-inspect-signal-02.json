@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-02",
+  "base_commit": "274e3383e419fc20e0ae4d77d2811d701f173071",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": 0.21907698956997734,
+  "worst_block_reduction_pct": -0.04381820267944647,
+  "worst_case_reduction_pct": -1.0365912630232677,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Smooth windows often arrive ordered; retain full sorting for other distributions and include random/constant inputs.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "dbeb8482f00b8aa35eb75de1df22b44f08ba4cbec6fff93d9733c7d8d9ebdfbc",
+  "operator": "inspect_signal",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "bypass sorting for already ordered finite Hampel samples",
+  "profile_hotspot": "Smooth windows often arrive ordered; retain full sorting for other distributions and include random/constant inputs.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Smooth windows often arrive ordered; retain full sorting for other distributions and include random/constant inputs.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 9642191.5,
+      "after_ns": 9693376.25,
+      "latency_reduction_pct": -0.34831065740219547,
+      "paired_ratios": [
+        1.005052106448139,
+        1.0019141066999049,
+        1.0013322986840694,
+        1.005567493327738
+      ],
+      "worst_paired_reduction_pct": -0.5567493327738093
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 1378321.15625,
+      "after_ns": 1354267.125,
+      "latency_reduction_pct": 0.9418820433429786,
+      "paired_ratios": [
+        0.9995112879666194,
+        0.967456197763924,
+        0.9905778137168898,
+        0.9905845454162507
+      ],
+      "worst_paired_reduction_pct": 0.048871203338063385
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1416130.21875,
+      "after_ns": 1405482.15625,
+      "latency_reduction_pct": 0.8773738815116783,
+      "paired_ratios": [
+        0.9792057152140775,
+        1.003246807155689,
+        1.011137807599079,
+        0.9790367174329976
+      ],
+      "worst_paired_reduction_pct": -1.1137807599078897
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 3081769.3125,
+      "after_ns": 3071320.9375,
+      "latency_reduction_pct": 0.0888628847751427,
+      "paired_ratios": [
+        0.9722832999579868,
+        1.0103475717874515,
+        0.9878751705170455,
+        1.0103980134274544
+      ],
+      "worst_paired_reduction_pct": -1.039801342745439
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 10267090.25,
+      "after_ns": 10325781.25,
+      "latency_reduction_pct": -1.0365912630232677,
+      "paired_ratios": [
+        0.9881271491227052,
+        1.0075321006834697,
+        1.0199871447680633,
+        1.0131997245769957
+      ],
+      "worst_paired_reduction_pct": -1.9987144768063292
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1482920.78125,
+      "after_ns": 1480692.96875,
+      "latency_reduction_pct": 0.6241053620298143,
+      "paired_ratios": [
+        1.0027773871659567,
+        0.9901131922981917,
+        0.9921277815858492,
+        0.9953901111735544
+      ],
+      "worst_paired_reduction_pct": -0.27773871659566574
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-02",
+  "validation_sha256": "a3a8ce46ae7ff13bfcb5f8b814b3c7c43ac89efb7f94b41e3230b42827c0efdd"
+}

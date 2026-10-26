@@ -1,12 +1,12 @@
 # Ten rounds per operator
 
-**160/300 measured decisions; 16 accepted, 144 rejected.**
+**300/300 measured decisions; 23 accepted, 277 rejected.**
 
 Baseline source: `9de19ead5df7444a9074c71028129b88970ba6ba`. Builds, profiles, tests and timing run only on reference-linux. Results use generated fixtures, CPU 12 affinity, four AB/BA paired blocks and seven calibrated samples per side.
 
 Acceptance requires >=8% latency reduction in every aggregate block, no representative case slower by >3%, correctness and complexity checks passing. PNG encoder choices additionally preserve decoded pixels and cap measured output growth at 1.25x.
 
-Retained production diff: 3 files, +112/-62 lines (net +50); pending candidates are excluded.
+Retained production diff: 7 files, +242/-102 lines (net +140); pending candidates are excluded.
 
 | Operator | Completed | Accepted |
 | --- | ---: | ---: |
@@ -14,12 +14,12 @@ Retained production diff: 3 files, +112/-62 lines (net +50); pending candidates 
 | `ema` | 10/10 | 1 |
 | `expand_batch_timestamps` | 10/10 | 0 |
 | `fir` | 10/10 | 1 |
-| `gate` | 0/10 | 0 |
-| `history_windows` | 0/10 | 0 |
-| `image_decode` | 0/10 | 0 |
-| `image_quality` | 0/10 | 0 |
-| `image_transform` | 0/10 | 0 |
-| `inspect_signal` | 0/10 | 0 |
+| `gate` | 10/10 | 1 |
+| `history_windows` | 10/10 | 0 |
+| `image_decode` | 10/10 | 0 |
+| `image_quality` | 10/10 | 0 |
+| `image_transform` | 10/10 | 0 |
+| `inspect_signal` | 10/10 | 2 |
 | `inspect_time` | 10/10 | 0 |
 | `interval_affected_centers` | 10/10 | 2 |
 | `interval_contains` | 10/10 | 0 |
@@ -27,19 +27,19 @@ Retained production diff: 3 files, +112/-62 lines (net +50); pending candidates 
 | `interval_intersection` | 10/10 | 0 |
 | `interval_mask` | 10/10 | 2 |
 | `interval_new` | 10/10 | 2 |
-| `json_decode` | 0/10 | 0 |
+| `json_decode` | 10/10 | 1 |
 | `lowpass_taps` | 10/10 | 2 |
 | `map_clock` | 10/10 | 1 |
-| `mcap_inspect` | 0/10 | 0 |
-| `mcap_read_signal` | 0/10 | 0 |
-| `python_bridge` | 0/10 | 0 |
-| `raw_reader` | 0/10 | 0 |
+| `mcap_inspect` | 10/10 | 0 |
+| `mcap_read_signal` | 10/10 | 0 |
+| `python_bridge` | 10/10 | 1 |
+| `raw_reader` | 10/10 | 1 |
 | `require_strict` | 10/10 | 2 |
-| `resample` | 0/10 | 0 |
+| `resample` | 10/10 | 1 |
 | `uniform_grid` | 10/10 | 1 |
 | `unwrap_angles` | 10/10 | 0 |
-| `video_probe` | 0/10 | 0 |
-| `video_validate` | 0/10 | 0 |
+| `video_probe` | 10/10 | 0 |
+| `video_validate` | 10/10 | 0 |
 
 Percentages below compare with each round's previously accepted state. They are medians of paired ratios, not ratios of separately displayed median timings. A parameter sweep is reported as a parameter sweep, not as distinct algorithms.
 
@@ -102,6 +102,96 @@ Percentages below compare with each round's previously accepted state. They are 
 | 8 | measure always inlining for fir | [rejected](results/ten-fir-08.json) | +5.85% | +5.79% | `-` |
 | 9 | measure never inlining for fir | [rejected](results/ten-fir-09.json) | -0.30% | -0.40% | `-` |
 | 10 | specialize common FIR lengths without transposing data | [rejected](results/ten-fir-10.json) | -9.40% | -9.89% | `-` |
+
+## gate
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | skip code-policy iteration for issue-free reports | [rejected](results/ten-gate-01.json) | +0.79% | -0.66% | `-` |
+| 2 | index present quality codes with a stack bitmap | [rejected](results/ten-gate-02.json) | +2.43% | +0.96% | `-` |
+| 3 | index present quality codes with a bit mask | [rejected](results/ten-gate-03.json) | +1.49% | +0.30% | `-` |
+| 4 | reserve the exact number of rejection reasons | [rejected](results/ten-gate-04.json) | -11.34% | -14.27% | `-` |
+| 5 | reserve a bounded estimate only for likely rejection reasons | [rejected](results/ten-gate-05.json) | -2.37% | -3.90% | `-` |
+| 6 | look up static issue names by their enum discriminant | [rejected](results/ten-gate-06.json) | -2.72% | -4.89% | `-` |
+| 7 | return an empty decision immediately for fully passing policies | [accepted](results/ten-gate-07.json) | +16.73% | +15.33% | `4d628840` |
+| 8 | measure always inlining for gate | [rejected](results/ten-gate-08.json) | -3.48% | -4.93% | `-` |
+| 9 | measure never inlining for gate | [rejected](results/ten-gate-09.json) | -0.03% | -0.51% | `-` |
+| 10 | collect ordered rejection reasons through chained iterators | [rejected](results/ten-gate-10.json) | -9.40% | -10.70% | `-` |
+
+## history_windows
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | stably merge-sort history request timestamps | [rejected](results/ten-history-windows-01.json) | -5.10% | -5.58% | `-` |
+| 2 | merge sorted history offset streams with a bounded heap | [rejected](results/ten-history-windows-02.json) | +1.75% | +0.41% | `-` |
+| 3 | merge history streams by scanning their current heads | [rejected](results/ten-history-windows-03.json) | +7.94% | +6.32% | `-` |
+| 4 | scatter history samples with a monotone unique index | [rejected](results/ten-history-windows-04.json) | +1.36% | +0.12% | `-` |
+| 5 | sort unique history times and index requests by hash | [rejected](results/ten-history-windows-05.json) | -16.19% | -17.61% | `-` |
+| 6 | compare history separation using unsigned spans | [rejected](results/ten-history-windows-06.json) | -1.52% | -1.97% | `-` |
+| 7 | derive flat history destinations from request length | [rejected](results/ten-history-windows-07.json) | +0.71% | -3.40% | `-` |
+| 8 | measure always inlining for history_windows | [rejected](results/ten-history-windows-08.json) | -1.36% | -2.44% | `-` |
+| 9 | measure never inlining for history_windows | [rejected](results/ten-history-windows-09.json) | +0.87% | -1.84% | `-` |
+| 10 | move the history timestamp buffer into empty sampled storage | [rejected](results/ten-history-windows-10.json) | -0.36% | -2.60% | `-` |
+
+## image_decode
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | measure a 1024-byte bounded image input buffer | [rejected](results/ten-image-decode-01.json) | -1.71% | -2.65% | `-` |
+| 2 | measure a 2048-byte bounded image input buffer | [rejected](results/ten-image-decode-02.json) | -1.77% | -3.71% | `-` |
+| 3 | measure a 4096-byte bounded image input buffer | [rejected](results/ten-image-decode-03.json) | -0.91% | -2.86% | `-` |
+| 4 | measure a 16384-byte bounded image input buffer | [rejected](results/ten-image-decode-04.json) | -1.65% | -2.14% | `-` |
+| 5 | measure a 32768-byte bounded image input buffer | [rejected](results/ten-image-decode-05.json) | +0.05% | -1.67% | `-` |
+| 6 | measure a 65536-byte bounded image input buffer | [rejected](results/ten-image-decode-06.json) | +0.30% | -0.37% | `-` |
+| 7 | measure a 131072-byte bounded image input buffer | [rejected](results/ten-image-decode-07.json) | -0.27% | -0.92% | `-` |
+| 8 | measure a 262144-byte bounded image input buffer | [rejected](results/ten-image-decode-08.json) | -0.77% | -2.49% | `-` |
+| 9 | measure always inlining for image_decode | [rejected](results/ten-image-decode-09.json) | +0.81% | +0.18% | `-` |
+| 10 | measure never inlining for image_decode | [rejected](results/ten-image-decode-10.json) | +0.33% | -0.16% | `-` |
+
+## image_quality
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | aggregate luminance moments in blocks of 64 | [rejected](results/ten-image-quality-01.json) | +2.19% | +2.15% | `-` |
+| 2 | aggregate luminance moments in blocks of 128 | [rejected](results/ten-image-quality-02.json) | +2.87% | +2.52% | `-` |
+| 3 | aggregate luminance moments in blocks of 512 | [rejected](results/ten-image-quality-03.json) | -2.13% | -2.69% | `-` |
+| 4 | aggregate luminance moments in blocks of 1024 | [rejected](results/ten-image-quality-04.json) | -1.28% | -3.64% | `-` |
+| 5 | reuse computed Laplacians during the variance pass | [rejected](results/ten-image-quality-05.json) | -31.61% | -32.54% | `-` |
+| 6 | compute the Laplacian mean from telescoping image boundaries | [rejected](results/ten-image-quality-06.json) | +7.51% | +6.52% | `-` |
+| 7 | use 4 independent luminance reduction lanes | [rejected](results/ten-image-quality-07.json) | +4.56% | +3.98% | `-` |
+| 8 | use 8 independent luminance reduction lanes | [rejected](results/ten-image-quality-08.json) | +5.67% | +4.60% | `-` |
+| 9 | measure always inlining for image_quality | [rejected](results/ten-image-quality-09.json) | -2.18% | -4.07% | `-` |
+| 10 | measure never inlining for image_quality | [rejected](results/ten-image-quality-10.json) | +0.50% | -0.13% | `-` |
+
+## image_transform
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | encode lossless PNG with Fast compression and Up filtering | [rejected](results/ten-image-transform-01.json) | +2.63% | +1.84% | `-` |
+| 2 | encode lossless PNG with Fast compression and Avg filtering | [rejected](results/ten-image-transform-02.json) | +1.58% | +0.28% | `-` |
+| 3 | encode lossless PNG with Fast compression and Paeth filtering | [rejected](results/ten-image-transform-03.json) | +1.14% | +0.79% | `-` |
+| 4 | encode lossless PNG with Fast compression and NoFilter filtering | [rejected](results/ten-image-transform-04.json) | +2.89% | +1.08% | `-` |
+| 5 | encode lossless PNG with Default compression and Adaptive filtering | [rejected](results/ten-image-transform-05.json) | -38.88% | -40.58% | `-` |
+| 6 | encode lossless PNG with Default compression and Sub filtering | [rejected](results/ten-image-transform-06.json) | -56.84% | -59.55% | `-` |
+| 7 | encode lossless PNG with Default compression and Paeth filtering | [rejected](results/ten-image-transform-07.json) | -39.55% | -41.67% | `-` |
+| 8 | encode lossless PNG with Best compression and Adaptive filtering | [rejected](results/ten-image-transform-08.json) | -44.66% | -46.61% | `-` |
+| 9 | measure always inlining for image_transform | [rejected](results/ten-image-transform-09.json) | -0.39% | -0.96% | `-` |
+| 10 | measure never inlining for image_transform | [rejected](results/ten-image-transform-10.json) | -0.32% | -1.07% | `-` |
+
+## inspect_signal
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | binary-select MAD across the two ordered deviation halves | [accepted](results/ten-inspect-signal-01.json) | +9.81% | +9.44% | `274e3383` |
+| 2 | bypass sorting for already ordered finite Hampel samples | [rejected](results/ten-inspect-signal-02.json) | +0.22% | -0.04% | `-` |
+| 3 | merge MAD deviations with explicit exhausted-side checks | [rejected](results/ten-inspect-signal-03.json) | -12.52% | -13.58% | `-` |
+| 4 | cache each MAD frontier deviation in peekable iterators | [rejected](results/ten-inspect-signal-04.json) | -15.54% | -16.83% | `-` |
+| 5 | maintain a sorted Hampel window by insertion and removal | [accepted](results/ten-inspect-signal-05.json) | +44.00% | +43.97% | `52093013` |
+| 6 | restrict Hampel boundary searches to unconsumed suffixes | [rejected](results/ten-inspect-signal-06.json) | +12.08% | +11.87% | `-` |
+| 7 | extract only active Hampel channels into contiguous scratch | [rejected](results/ten-inspect-signal-07.json) | -0.40% | -0.65% | `-` |
+| 8 | measure always inlining for inspect_signal | [rejected](results/ten-inspect-signal-08.json) | -0.60% | -0.98% | `-` |
+| 9 | measure never inlining for inspect_signal | [rejected](results/ten-inspect-signal-09.json) | -0.06% | -1.00% | `-` |
+| 10 | mark singleton quality spans by direct index | [rejected](results/ten-inspect-signal-10.json) | +0.22% | -0.01% | `-` |
 
 ## inspect_time
 
@@ -208,6 +298,21 @@ Percentages below compare with each round's previously accepted state. They are 
 | 9 | measure never inlining for interval_new | [rejected](results/ten-interval-new-09.json) | +0.46% | -0.38% | `-` |
 | 10 | keep the active merge interval in a local slot | [rejected](results/ten-interval-new-10.json) | -128.08% | -143.60% | `-` |
 
+## json_decode
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | traverse unescaped JSON pointer segments without allocating strings | [accepted](results/ten-json-decode-01.json) | +11.70% | +8.66% | `c20a2b9b` |
+| 2 | reserve each resolved numeric array before flattening it | [rejected](results/ten-json-decode-02.json) | +2.54% | +0.36% | `-` |
+| 3 | parse known UTF-8 JSON through the string parser | [rejected](results/ten-json-decode-03.json) | +1.75% | -0.61% | `-` |
+| 4 | collect a single correctly sized numeric array directly | [rejected](results/ten-json-decode-04.json) | -0.82% | -2.38% | `-` |
+| 5 | cap initial decoded-field capacity at 8 | [rejected](results/ten-json-decode-05.json) | +2.46% | -0.17% | `-` |
+| 6 | cap initial decoded-field capacity at 16 | [rejected](results/ten-json-decode-06.json) | +2.95% | +2.23% | `-` |
+| 7 | cap initial decoded-field capacity at 64 | [rejected](results/ten-json-decode-07.json) | +5.45% | +2.54% | `-` |
+| 8 | measure always inlining for json_decode | [rejected](results/ten-json-decode-08.json) | -2.01% | -4.93% | `-` |
+| 9 | measure never inlining for json_decode | [rejected](results/ten-json-decode-09.json) | +1.28% | -1.46% | `-` |
+| 10 | detect reserved JSON pointer characters with byte searches | [rejected](results/ten-json-decode-10.json) | -10.25% | -11.97% | `-` |
+
 ## lowpass_taps
 
 | Round | Method | Decision | Gain | Worst block | Commit |
@@ -238,6 +343,66 @@ Percentages below compare with each round's previously accepted state. They are 
 | 9 | measure never inlining for map_clock | [rejected](results/ten-map-clock-09.json) | -92.36% | -101.58% | `-` |
 | 10 | unroll pure offset updates in four-element blocks | [rejected](results/ten-map-clock-10.json) | +5.07% | -6.43% | `-` |
 
+## mcap_inspect
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | accumulate per-channel clocks in a hash map | [rejected](results/ten-mcap-inspect-01.json) | -8.98% | -9.49% | `-` |
+| 2 | store channel accumulators in a sorted compact vector | [rejected](results/ten-mcap-inspect-02.json) | -2.35% | -3.09% | `-` |
+| 3 | materialize a publish-clock vector only after it differs | [rejected](results/ten-mcap-inspect-03.json) | +2.72% | +1.06% | `-` |
+| 4 | reserve 8 clock points for each observed channel | [rejected](results/ten-mcap-inspect-04.json) | -0.06% | -0.72% | `-` |
+| 5 | reserve 32 clock points for each observed channel | [rejected](results/ten-mcap-inspect-05.json) | +0.77% | -0.49% | `-` |
+| 6 | group complete channel lookups in blocks of 8 | [rejected](results/ten-mcap-inspect-06.json) | -2.76% | -5.05% | `-` |
+| 7 | group complete channel lookups in blocks of 32 | [rejected](results/ten-mcap-inspect-07.json) | -3.93% | -4.95% | `-` |
+| 8 | measure always inlining for mcap_inspect | [rejected](results/ten-mcap-inspect-08.json) | -1.66% | -1.93% | `-` |
+| 9 | measure never inlining for mcap_inspect | [rejected](results/ten-mcap-inspect-09.json) | +0.06% | -1.79% | `-` |
+| 10 | reserve report storage for observed channel count | [rejected](results/ten-mcap-inspect-10.json) | -0.27% | -2.10% | `-` |
+
+## mcap_read_signal
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | bound initial decoded signal capacity to 512 samples | [rejected](results/ten-mcap-read-signal-01.json) | +0.75% | -0.47% | `-` |
+| 2 | bound initial decoded signal capacity to 1024 samples | [rejected](results/ten-mcap-read-signal-02.json) | +1.41% | -0.41% | `-` |
+| 3 | bound initial decoded signal capacity to 8192 samples | [rejected](results/ten-mcap-read-signal-03.json) | -0.03% | -0.40% | `-` |
+| 4 | copy decoded row slices into accumulated values | [rejected](results/ten-mcap-read-signal-04.json) | +1.42% | -0.10% | `-` |
+| 5 | reuse the first decoded value vector as output storage | [rejected](results/ten-mcap-read-signal-05.json) | -0.34% | -1.62% | `-` |
+| 6 | reserve bounded space for each decoded message batch | [rejected](results/ten-mcap-read-signal-06.json) | -0.46% | -0.66% | `-` |
+| 7 | consume decoded messages through a borrowed cursor iterator | [rejected](results/ten-mcap-read-signal-07.json) | +0.68% | +0.02% | `-` |
+| 8 | measure always inlining for mcap_read_signal | [rejected](results/ten-mcap-read-signal-08.json) | -0.06% | -1.21% | `-` |
+| 9 | measure never inlining for mcap_read_signal | [rejected](results/ten-mcap-read-signal-09.json) | +0.92% | -2.19% | `-` |
+| 10 | accumulate decoded samples through a fallible fold | [rejected](results/ten-mcap-read-signal-10.json) | -2.29% | -3.07% | `-` |
+
+## python_bridge
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | write canonical non-finite outputs with branchless selection | [rejected](results/ten-python-bridge-01.json) | +1.02% | +0.59% | `-` |
+| 2 | sanitize NumPy output values in 4-element blocks | [rejected](results/ten-python-bridge-02.json) | +1.39% | +1.08% | `-` |
+| 3 | sanitize NumPy output values in 8-element blocks | [rejected](results/ten-python-bridge-03.json) | +0.88% | +0.51% | `-` |
+| 4 | bypass the sanitizing write pass for all-finite outputs | [rejected](results/ten-python-bridge-04.json) | +1.33% | +1.21% | `-` |
+| 5 | use static Python filter-mode names instead of formatting | [rejected](results/ten-python-bridge-05.json) | +1.28% | +0.46% | `-` |
+| 6 | intern fixed Python result-dictionary keys | [rejected](results/ten-python-bridge-06.json) | +3.01% | +2.68% | `-` |
+| 7 | copy strided inputs through ndarray standard-layout ownership | [accepted](results/ten-python-bridge-07.json) | +9.55% | +8.68% | `7f3ffd76` |
+| 8 | measure always inlining for python_bridge | [rejected](results/ten-python-bridge-08.json) | -1.49% | -2.16% | `-` |
+| 9 | measure never inlining for python_bridge | [rejected](results/ten-python-bridge-09.json) | +0.15% | -0.07% | `-` |
+| 10 | reuse the NumPy module binding across public wrapper calls | [rejected](results/ten-python-bridge-10.json) | +1.18% | +0.12% | `-` |
+
+## raw_reader
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | read MCAP through a 4096-byte buffer | [rejected](results/ten-raw-reader-01.json) | +0.06% | -0.39% | `-` |
+| 2 | read MCAP through a 16384-byte buffer | [rejected](results/ten-raw-reader-02.json) | -0.74% | -5.33% | `-` |
+| 3 | read MCAP through a 32768-byte buffer | [rejected](results/ten-raw-reader-03.json) | -0.55% | -1.58% | `-` |
+| 4 | read MCAP through a 131072-byte buffer | [rejected](results/ten-raw-reader-04.json) | -0.20% | -1.43% | `-` |
+| 5 | cache topic selection for the last immutable channel | [rejected](results/ten-raw-reader-05.json) | +1.85% | +1.08% | `-` |
+| 6 | cache topic selection by channel identity in a small ordered map | [accepted](results/ten-raw-reader-06.json) | +10.87% | +9.62% | `725bf9c5` |
+| 7 | cache topic selection for the last exact topic string | [rejected](results/ten-raw-reader-07.json) | -11.29% | -14.50% | `-` |
+| 8 | hash long exact-topic filters once per reader | [rejected](results/ten-raw-reader-08.json) | -7.99% | -11.63% | `-` |
+| 9 | measure always inlining for raw_reader | [rejected](results/ten-raw-reader-09.json) | +2.28% | +0.50% | `-` |
+| 10 | measure never inlining for raw_reader | [rejected](results/ten-raw-reader-10.json) | -0.83% | -2.02% | `-` |
+
 ## require_strict
 
 | Round | Method | Decision | Gain | Worst block | Commit |
@@ -252,6 +417,21 @@ Percentages below compare with each round's previously accepted state. They are 
 | 8 | measure always inlining for require_strict | [rejected](results/ten-require-strict-08.json) | -75.98% | -133.55% | `-` |
 | 9 | measure never inlining for require_strict | [rejected](results/ten-require-strict-09.json) | -82.04% | -82.92% | `-` |
 | 10 | zip offset timestamp slices after a short-input guard | [rejected](results/ten-require-strict-10.json) | -77.69% | -135.21% | `-` |
+
+## resample
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | seed resampling at the first target support prefix | [accepted](results/ten-resample-01.json) | +12.90% | +12.26% | `06d455cd` |
+| 2 | reuse sampled values and provenance for duplicate targets | [rejected](results/ten-resample-02.json) | +3.57% | +3.09% | `-` |
+| 3 | normalize exact quaternion samples without duplicating endpoint work | [rejected](results/ten-resample-03.json) | -3.48% | -4.40% | `-` |
+| 4 | reuse bounded quaternion normalization reciprocals | [rejected](results/ten-resample-04.json) | +1.99% | +1.63% | `-` |
+| 5 | infer interpolation input finiteness from the computed output | [rejected](results/ten-resample-05.json) | +3.17% | +1.69% | `-` |
+| 6 | use unsigned support distances on ordered resampling brackets | [rejected](results/ten-resample-06.json) | +3.94% | +3.62% | `-` |
+| 7 | allocate sampled values as zeroed storage and fill only invalid rows with NaNs | [rejected](results/ten-resample-07.json) | -0.90% | -1.50% | `-` |
+| 8 | measure always inlining for resample | [rejected](results/ten-resample-08.json) | -0.67% | -1.06% | `-` |
+| 9 | measure never inlining for resample | [rejected](results/ten-resample-09.json) | +0.68% | +0.31% | `-` |
+| 10 | zip target timestamps with mutable sample statuses | [rejected](results/ten-resample-10.json) | -15.97% | -16.42% | `-` |
 
 ## uniform_grid
 
@@ -282,3 +462,33 @@ Percentages below compare with each round's previously accepted state. They are 
 | 8 | measure always inlining for unwrap_angles | [rejected](results/ten-unwrap-angles-08.json) | -5.54% | -7.46% | `-` |
 | 9 | measure never inlining for unwrap_angles | [rejected](results/ten-unwrap-angles-09.json) | -1.12% | -2.15% | `-` |
 | 10 | copy each angle row immediately before transforming it | [rejected](results/ten-unwrap-angles-10.json) | +7.88% | +5.57% | `-` |
+
+## video_probe
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | poll media completion every 250 microseconds | [rejected](results/ten-video-probe-01.json) | +1.07% | -1.79% | `-` |
+| 2 | poll media completion every 500 microseconds | [rejected](results/ten-video-probe-02.json) | +0.36% | -1.39% | `-` |
+| 3 | poll media completion every 2000 microseconds | [rejected](results/ten-video-probe-03.json) | -1.76% | -2.54% | `-` |
+| 4 | bound the final media sleep by the remaining timeout | [rejected](results/ten-video-probe-04.json) | -0.05% | -1.16% | `-` |
+| 5 | move valid UTF-8 media output into Strings without copying | [rejected](results/ten-video-probe-05.json) | +1.30% | -0.33% | `-` |
+| 6 | reserve the validated media output length before reading | [rejected](results/ten-video-probe-06.json) | +0.15% | -1.39% | `-` |
+| 7 | append borrowed media arguments individually | [rejected](results/ten-video-probe-07.json) | +0.51% | -0.08% | `-` |
+| 8 | measure always inlining for video_probe | [rejected](results/ten-video-probe-08.json) | +0.81% | -1.11% | `-` |
+| 9 | measure never inlining for video_probe | [rejected](results/ten-video-probe-09.json) | -1.04% | -3.73% | `-` |
+| 10 | compare media deadlines directly during polling | [rejected](results/ten-video-probe-10.json) | +0.11% | -0.86% | `-` |
+
+## video_validate
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | limit FFmpeg decoding to 1 threads | [rejected](results/ten-video-validate-01.json) | -0.39% | -2.09% | `-` |
+| 2 | limit FFmpeg decoding to 2 threads | [rejected](results/ten-video-validate-02.json) | -1.63% | -3.17% | `-` |
+| 3 | limit FFmpeg decoding to 4 threads | [rejected](results/ten-video-validate-03.json) | -4.25% | -5.21% | `-` |
+| 4 | limit FFmpeg decoding to 8 threads | [rejected](results/ten-video-validate-04.json) | -8.51% | -9.48% | `-` |
+| 5 | limit FFmpeg filter workers to 1 | [rejected](results/ten-video-validate-05.json) | -1.64% | -2.28% | `-` |
+| 6 | limit FFmpeg filter workers to 2 | [rejected](results/ten-video-validate-06.json) | -1.60% | -3.52% | `-` |
+| 7 | limit FFmpeg filter workers to 4 | [rejected](results/ten-video-validate-07.json) | -0.86% | -6.35% | `-` |
+| 8 | limit FFmpeg filter workers to 8 | [rejected](results/ten-video-validate-08.json) | +0.46% | -1.12% | `-` |
+| 9 | use one decoder and one filter worker together | [rejected](results/ten-video-validate-09.json) | +1.51% | +0.33% | `-` |
+| 10 | emit periodic FFmpeg progress every two seconds | [rejected](results/ten-video-validate-10.json) | +1.27% | +0.11% | `-` |

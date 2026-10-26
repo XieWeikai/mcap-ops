@@ -1,0 +1,74 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-gate-02/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 39717604
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case gate.pass,gate.fail --profile (PID 1668131, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+32,755 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir               file:function
+--------------------------------------------------------------------------------
+32,755 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+32,755 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+32,755 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+32,755 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+32,755 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+32,755 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+32,755 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+32,755 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+32,755 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+32,755 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+32,755 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+32,755 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+32,755 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+32,755 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+17,107 (52.23%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/iter.rs:operator_benchmark::Runner::bench
+15,359 (46.89%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match [./.artifacts/rsi/bin/accepted]
+ 7,441 (22.72%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+ 7,045 (21.51%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:std::io::stdio::_print [./.artifacts/rsi/bin/accepted]
+ 6,810 (20.79%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:<&std::io::stdio::Stdout as std::io::Write>::write_fmt [./.artifacts/rsi/bin/accepted]
+ 6,720 (20.52%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/mod.rs:<&std::io::stdio::Stdout as std::io::Write>::write_fmt
+ 6,698 (20.45%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/mod.rs:core::fmt::write [./.artifacts/rsi/bin/accepted]
+ 6,108 (18.65%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/rt.rs:core::fmt::write
+ 6,102 (18.63%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/mod.rs:<serde_json::value::Value as core::fmt::Display>::fmt
+ 6,074 (18.54%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<serde_json::value::Value as core::fmt::Display>::fmt
+ 6,068 (18.53%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize
+ 5,578 (17.03%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize
+ 5,158 (15.75%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/impls.rs:std::io::impls::<impl std::io::Write for &mut W>::write_all [./.artifacts/rsi/bin/accepted]
+ 4,844 (14.79%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/mod.rs:<std::io::default_write_fmt::Adapter<T> as core::fmt::Write>::write_str [./.artifacts/rsi/bin/accepted]
+ 4,468 (13.64%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/mod.rs:std::io::impls::<impl std::io::Write for &mut W>::write_all
+ 4,076 (12.44%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all [./.artifacts/rsi/bin/accepted]
+ 2,420 ( 7.39%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<&mut serde_json::ser::Serializer<W,F> as serde_core::ser::Serializer>::serialize_str [./.artifacts/rsi/bin/accepted]
+ 2,236 ( 6.83%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/buffered/linewritershim.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all
+ 1,916 ( 5.85%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:core::slice::memchr::memrchr [./.artifacts/rsi/bin/accepted]
+ 1,818 ( 5.55%)  ./crates/core/src/quality.rs:mcap_ops_core::quality::gate
+ 1,778 ( 5.43%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize'2
+ 1,760 ( 5.37%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize'2 [./.artifacts/rsi/bin/accepted]
+ 1,747 ( 5.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:operator_benchmark::Runner::bench
+ 1,700 ( 5.19%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 1,489 ( 4.55%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 1,304 ( 3.98%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<&mut serde_json::ser::Serializer<W,F> as serde_core::ser::Serializer>::serialize_str
+ 1,239 ( 3.78%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/cmp.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+ 1,218 ( 3.72%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value> [./.artifacts/rsi/bin/accepted]
+ 1,174 ( 3.58%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:<alloc::collections::btree::map::BTreeMap<K,V,A> as core::ops::drop::Drop>::drop [./.artifacts/rsi/bin/accepted]
+ 1,170 ( 3.57%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+ 1,080 ( 3.30%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+   803 ( 2.45%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/mod.rs:operator_benchmark::Runner::bench
+   698 ( 2.13%)  ./string/../sysdeps/x86_64/multiarch/memcmp-avx2-movbe.S:__memcmp_avx2_movbe [/usr/lib/x86_64-linux-gnu/libc.so.6]
+   636 ( 1.94%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+

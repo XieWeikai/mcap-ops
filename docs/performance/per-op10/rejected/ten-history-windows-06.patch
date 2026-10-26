@@ -1,0 +1,19 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..741f0b4 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -253,10 +253,10 @@ pub fn history_windows(
+         .len()
+         .checked_mul(offsets.len())
+         .ok_or(Error::Overflow)?;
+-    if centers.windows(2).all(|w| {
+-        i128::from(w[0]) + i128::from(*offsets.last().unwrap())
+-            <= i128::from(w[1]) + i128::from(offsets[0])
+-    }) {
++    if centers
++        .windows(2)
++        .all(|w| w[1].abs_diff(w[0]) >= offsets.last().unwrap().abs_diff(offsets[0]))
++    {
+         let mut target = Vec::with_capacity(size);
+         for &center in centers {
+             for &offset in offsets {

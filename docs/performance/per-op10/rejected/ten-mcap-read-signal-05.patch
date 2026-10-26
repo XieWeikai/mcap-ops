@@ -1,0 +1,17 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..3ec2306 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -400,7 +400,11 @@ pub fn read_signal(
+                 return Err(invalid("decoder returned inconsistent channel count"));
+             }
+             timestamps.push(sample.timestamp_ns);
+-            values.extend(sample.values);
++            if values.is_empty() {
++                values = sample.values;
++            } else {
++                values.extend(sample.values);
++            }
+         }
+     }
+     if timestamps.is_empty() {

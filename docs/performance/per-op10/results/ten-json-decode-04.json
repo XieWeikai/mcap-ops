@@ -1,0 +1,66 @@
+{
+  "label": "ten-json-decode-04",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "json_decode",
+    "json_decode.deep",
+    "json_decode.wide"
+  ],
+  "geomean_latency_reduction_pct": -0.8161003750568607,
+  "worst_block_reduction_pct": -2.383696618435671,
+  "worst_case_reduction_pct": -3.5798474438847094,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Preserve validation and error precedence; only the common one-field array path skips generic flattening bookkeeping.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "39b37fd02d7ae46b045b27e28b8de81a6c665f20d0ed0515d114b847b884f894",
+  "operator": "json_decode",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "collect a single correctly sized numeric array directly",
+  "profile_hotspot": "Preserve validation and error precedence; only the common one-field array path skips generic flattening bookkeeping.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Preserve validation and error precedence; only the common one-field array path skips generic flattening bookkeeping.",
+  "case_results": {
+    "json_decode": {
+      "before_ns": 214.90496826171875,
+      "after_ns": 213.92474746704102,
+      "latency_reduction_pct": 0.4559998078682237,
+      "paired_ratios": [
+        0.9730033213171589,
+        0.9946038572774242,
+        1.0219591801595107,
+        0.9962761465652114
+      ],
+      "worst_paired_reduction_pct": -2.1959180159510705
+    },
+    "json_decode.deep": {
+      "before_ns": 230.4010353088379,
+      "after_ns": 233.03833770751953,
+      "latency_reduction_pct": -0.38057938874533903,
+      "paired_ratios": [
+        0.9664791825059016,
+        1.0034783727204446,
+        1.0600737100405904,
+        1.0041332150544624
+      ],
+      "worst_paired_reduction_pct": -6.007371004059037
+    },
+    "json_decode.wide": {
+      "before_ns": 907.0897216796875,
+      "after_ns": 929.3814849853516,
+      "latency_reduction_pct": -3.5798474438847094,
+      "paired_ratios": [
+        1.0509218729563587,
+        1.0206750759213352,
+        0.9513912022106871,
+        1.0728063919342068
+      ],
+      "worst_paired_reduction_pct": -7.280639193420679
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-json-decode-04",
+  "validation_sha256": "e675de2f7a1d2115a93e4726ffb00d1efa40d7e1f4fa8be032075a4d88cb9204"
+}

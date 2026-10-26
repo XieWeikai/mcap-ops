@@ -1,0 +1,12 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 2af84c6..badaa5c 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -24,6 +24,7 @@ impl Default for ImageOptions {
+         }
+     }
+ }
++#[inline(always)]
+ pub fn decode(bytes: &[u8], options: &ImageOptions) -> Result<DynamicImage> {
+     if options.max_width == 0
+         || options.max_height == 0

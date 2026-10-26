@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-map-clock-09/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 32880223
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case map_clock.identity,map_clock.offset,map_clock.drift --profile (PID 296851, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+17,616,630 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                   file:function
+--------------------------------------------------------------------------------
+17,616,630 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+17,616,630 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+17,616,630 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+17,616,630 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+17,616,630 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+17,616,630 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+17,616,630 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+17,616,630 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+17,616,630 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+17,616,630 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+17,616,630 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+17,616,630 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+17,616,630 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+17,616,630 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+17,571,907 (99.75%)  ./crates/core/src/time.rs:mcap_ops_core::time::map_clock
+12,600,282 (71.52%)  crates/core/src/time.rs:mcap_ops_core::time::map_clock [./.artifacts/rsi/bin/accepted]
+ 9,300,000 (52.79%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/compiler-builtins/compiler-builtins/src/macros.rs:__divti3 [./.artifacts/rsi/bin/accepted]
+ 4,050,000 (22.99%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/compiler-builtins/compiler-builtins/src/int/udiv.rs:__divti3
+ 3,450,000 (19.58%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/compiler-builtins/compiler-builtins/src/int/specialized_div_rem/asymmetric.rs:compiler_builtins::int::specialized_div_rem::u128_div_rem [./.artifacts/rsi/bin/accepted]
+ 3,150,000 (17.88%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/compiler-builtins/compiler-builtins/src/int/sdiv.rs:__divti3
+ 1,500,028 ( 8.51%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::time::map_clock
+ 1,200,897 ( 6.82%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 1,200,000 ( 6.81%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/compiler-builtins/compiler-builtins/src/int/specialized_div_rem/mod.rs:compiler_builtins::int::specialized_div_rem::u128_div_rem
+ 1,199,976 ( 6.81%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:mcap_ops_core::time::map_clock
+   750,009 ( 4.26%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::time::map_clock
+   450,000 ( 2.55%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/traits/iterator.rs:mcap_ops_core::time::map_clock
+   300,030 ( 1.70%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/convert/num.rs:mcap_ops_core::time::map_clock
+

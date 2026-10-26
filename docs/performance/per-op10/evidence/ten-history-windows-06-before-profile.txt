@@ -1,0 +1,67 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-history-windows-06/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 50619458
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case history_windows.separate,history_windows.overlap --profile (PID 1575400, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+37,427,379 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                   file:function
+--------------------------------------------------------------------------------
+40,485,075 (108.2%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/quicksort.rs:core::slice::sort::unstable::quicksort::quicksort'2 [./.artifacts/rsi/bin/accepted]
+37,427,379 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+37,427,379 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+37,427,379 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+37,427,379 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+37,427,379 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+37,427,379 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+37,427,379 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+37,427,379 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+37,427,379 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+37,427,379 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+37,427,379 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+37,427,379 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+37,427,379 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+37,427,379 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+37,383,499 (99.88%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/accepted]
+37,383,085 (99.88%)  ./crates/core/src/sampling.rs:mcap_ops_core::sampling::history_windows
+31,953,673 (85.38%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::history_windows [./.artifacts/rsi/bin/accepted]
+16,565,125 (44.26%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::resample [./.artifacts/rsi/bin/accepted]
+11,360,157 (30.35%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/mod.rs:core::slice::<impl [T]>::sort_unstable_by_key [./.artifacts/rsi/bin/accepted]
+11,360,142 (30.35%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/mod.rs:core::slice::sort::unstable::ipnsort [./.artifacts/rsi/bin/accepted]
+11,359,911 (30.35%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/quicksort.rs:core::slice::sort::unstable::quicksort::quicksort [./.artifacts/rsi/bin/accepted]
+ 3,770,629 (10.07%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::Sampled::empty [./.artifacts/rsi/bin/accepted]
+ 3,645,927 ( 9.74%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::Sampled::empty
+ 3,075,339 ( 8.22%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/tuple.rs:core::slice::sort::unstable::quicksort::quicksort'2
+ 2,354,110 ( 6.29%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 2,160,324 ( 5.77%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::resample
+ 2,100,687 ( 5.61%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::sampling::resample
+ 2,040,300 ( 5.45%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::sampling::resample
+ 2,034,672 ( 5.44%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 1,929,309 ( 5.15%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/smallsort.rs:core::slice::sort::unstable::quicksort::quicksort'2
+ 1,843,491 ( 4.93%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::slice::sort::unstable::quicksort::quicksort'2
+ 1,644,018 ( 4.39%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::sampling::history_windows
+ 1,612,800 ( 4.31%)  crates/core/src/lib.rs:mcap_ops_core::sampling::resample
+ 1,197,150 ( 3.20%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/smallsort.rs:core::slice::sort::shared::smallsort::sort8_stable [./.artifacts/rsi/bin/accepted]
+ 1,093,836 ( 2.92%)  ./crates/core/src/time.rs:mcap_ops_core::time::require_strict
+ 1,080,162 ( 2.89%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:mcap_ops_core::sampling::resample
+ 1,012,308 ( 2.70%)  crates/core/src/time.rs:mcap_ops_core::time::require_strict [./.artifacts/rsi/bin/accepted]
+   876,009 ( 2.34%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::history_windows
+   763,263 ( 2.04%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:mcap_ops_core::sampling::history_windows
+   579,345 ( 1.55%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:core::slice::sort::unstable::quicksort::quicksort'2
+

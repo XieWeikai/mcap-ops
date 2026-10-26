@@ -1,0 +1,41 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index fce7c44..929b039 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -67,7 +67,7 @@ pub struct RawReader {
+     seen: usize,
+     done: bool,
+     // TEN_CACHE_START
+-    topic_cache: std::collections::BTreeMap<u16, (std::sync::Arc<mcap::Channel<'static>>, bool)>,
++    topic_cache: Option<(String, bool)>,
+     // TEN_CACHE_END
+ }
+ impl RawReader {
+@@ -97,7 +97,7 @@ impl RawReader {
+             seen: 0,
+             done: false,
+             // TEN_CACHE_START
+-            topic_cache: std::collections::BTreeMap::new(),
++            topic_cache: None,
+             // TEN_CACHE_END
+         })
+     }
+@@ -141,15 +141,12 @@ impl Iterator for RawReader {
+                     } else {
+                         let known = self
+                             .topic_cache
+-                            .get(&message.channel.id)
+-                            .filter(|(channel, _)| {
+-                                std::sync::Arc::ptr_eq(channel, &message.channel)
+-                            })
++                            .as_ref()
++                            .filter(|(topic, _)| topic == &message.channel.topic)
+                             .map(|(_, value)| *value);
+                         let topic_matches = known.unwrap_or_else(|| {
+                             let value = self.filter.topics.contains(&message.channel.topic);
+-                            self.topic_cache
+-                                .insert(message.channel.id, (message.channel.clone(), value));
++                            self.topic_cache = Some((message.channel.topic.clone(), value));
+                             value
+                         });
+                         let t = if self.filter.publish_clock {

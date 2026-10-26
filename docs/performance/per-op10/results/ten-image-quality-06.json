@@ -1,0 +1,53 @@
+{
+  "label": "ten-image-quality-06",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": 7.514599362703889,
+  "worst_block_reduction_pct": 6.52248973629781,
+  "worst_case_reduction_pct": 5.473065231175478,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Interior stencil terms cancel in the sum; retain the full stable variance pass and validate floating-point tolerance on large images.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "f86a876cb83e8455f4e503eada624f8c27f743f05771ca2afce78ce70bb6df1b",
+  "operator": "image_quality",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "compute the Laplacian mean from telescoping image boundaries",
+  "profile_hotspot": "Interior stencil terms cancel in the sum; retain the full stable variance pass and validate floating-point tolerance on large images.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Interior stencil terms cancel in the sum; retain the full stable variance pass and validate floating-point tolerance on large images.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 2712304.0625,
+      "after_ns": 2573999.5,
+      "latency_reduction_pct": 5.473065231175478,
+      "paired_ratios": [
+        0.9398732009059995,
+        0.9506654944704911,
+        0.9612656536760906,
+        0.9255599194507557
+      ],
+      "worst_paired_reduction_pct": 3.8734346323909374
+    },
+    "image_quality.noise": {
+      "before_ns": 1255305.96875,
+      "after_ns": 1141850.53125,
+      "latency_reduction_pct": 9.298096660593558,
+      "paired_ratios": [
+        0.9047496501228897,
+        0.9050234888008317,
+        0.9090145779872972,
+        0.9102177618738284
+      ],
+      "worst_paired_reduction_pct": 8.97822381261716
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-quality-06",
+  "validation_sha256": "95f2eebe52cd6e342f94dfe346d056b74e4007677c18c011f750d0ebba35dbca"
+}

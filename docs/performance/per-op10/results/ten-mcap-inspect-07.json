@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-inspect-07",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "mcap_inspect",
+    "mcap_inspect.many"
+  ],
+  "geomean_latency_reduction_pct": -3.93400829440429,
+  "worst_block_reduction_pct": -4.946356435061472,
+  "worst_case_reduction_pct": -3.5374400178938004,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The library exposes get_channel but no channel iterator; preserve empty channels and all IDs while exposing independent lookups.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "9def607df6a836041d8ac422aaa71bd715bbee1470494f80c40300d18260a5ec",
+  "operator": "mcap_inspect",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "group complete channel lookups in blocks of 32",
+  "profile_hotspot": "The library exposes get_channel but no channel iterator; preserve empty channels and all IDs while exposing independent lookups.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The library exposes get_channel but no channel iterator; preserve empty channels and all IDs while exposing independent lookups.",
+  "case_results": {
+    "mcap_inspect": {
+      "before_ns": 1734871.625,
+      "after_ns": 1802655.65625,
+      "latency_reduction_pct": -3.5374400178938004,
+      "paired_ratios": [
+        1.0835625526119996,
+        1.0269092166996507,
+        1.0364866885723898,
+        1.034262111785486
+      ],
+      "worst_paired_reduction_pct": -8.356255261199962
+    },
+    "mcap_inspect.many": {
+      "before_ns": 2018209.78125,
+      "after_ns": 2057322.28125,
+      "latency_reduction_pct": -2.4761125087889413,
+      "paired_ratios": [
+        1.0003822767620647,
+        1.0109316453093404,
+        1.0385906048664384,
+        1.0648884459261043
+      ],
+      "worst_paired_reduction_pct": -6.488844592610432
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-inspect-07",
+  "validation_sha256": "0c83d2d9c9a0f23ade7fcabcab7189534a8b8b65d513831fe02fba874a88eaf2"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-video-probe-09",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": -1.0435847508694085,
+  "worst_block_reduction_pct": -3.733980810197135,
+  "worst_case_reduction_pct": -3.807475775553759,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "7d05e9449d5f172ca70cd408b8d792a9bdeae667f8a2db2ebddc1f00df6577ad",
+  "operator": "video_probe",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for video_probe",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 25255076.0,
+      "after_ns": 26215114.5,
+      "latency_reduction_pct": -3.807475775553759,
+      "paired_ratios": [
+        1.0506578752872924,
+        1.0254916402237828,
+        1.0580488779918877,
+        0.9970189166354317
+      ],
+      "worst_paired_reduction_pct": -5.804887799188774
+    },
+    "video_validate": {
+      "before_ns": 56036548.5,
+      "after_ns": 55892313.5,
+      "latency_reduction_pct": 0.2575793330163778,
+      "paired_ratios": [
+        0.9942343130315807,
+        0.9699286177950188,
+        1.017036074472625,
+        1.0006141003080917
+      ],
+      "worst_paired_reduction_pct": -1.7036074472625007
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-probe-09",
+  "validation_sha256": "c12b29326e896d2b8d757b97c9d7dc034ff0f93e51487d615099546495c080f0"
+}

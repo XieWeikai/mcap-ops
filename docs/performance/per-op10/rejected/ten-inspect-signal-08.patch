@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index d948683..503fdb3 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -176,6 +176,7 @@ fn emit(
+ }
+ 
+ /// O(ND) basic checks. Optional Hampel is bounded by max_hampel_samples per window.
++#[inline(always)]
+ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<QualityReport> {
+     validate(config, signal.channels())?;
+     let mut report = QualityReport {

@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-history-windows-01/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 52675084
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-history-windows-01 --case history_windows.separate,history_windows.overlap --profile (PID 1561223, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+37,640,649 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                   file:function
+--------------------------------------------------------------------------------
+37,640,649 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+37,640,649 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+37,640,649 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+37,640,649 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+37,640,649 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+37,640,649 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+37,640,649 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-history-windows-01]
+37,640,649 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-history-windows-01]
+37,640,649 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-history-windows-01]
+37,640,649 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-history-windows-01]
+37,640,649 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+37,640,649 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-history-windows-01]
+37,640,649 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-history-windows-01]
+37,640,649 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-history-windows-01]
+37,596,769 (99.88%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/ten-history-windows-01]
+37,596,355 (99.88%)  ./crates/core/src/sampling.rs:mcap_ops_core::sampling::history_windows
+32,167,579 (85.46%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::history_windows [./.artifacts/rsi/bin/ten-history-windows-01]
+25,228,596 (67.02%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/stable/quicksort.rs:core::slice::sort::stable::quicksort::quicksort'2 [./.artifacts/rsi/bin/ten-history-windows-01]
+16,565,125 (44.01%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::resample [./.artifacts/rsi/bin/ten-history-windows-01]
+11,574,063 (30.75%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/stable/mod.rs:alloc::slice::<impl [T]>::sort_by_key [./.artifacts/rsi/bin/ten-history-windows-01]
+11,574,036 (30.75%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/stable/mod.rs:core::slice::sort::stable::driftsort_main [./.artifacts/rsi/bin/ten-history-windows-01]
+11,572,359 (30.74%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/stable/drift.rs:core::slice::sort::stable::drift::sort [./.artifacts/rsi/bin/ten-history-windows-01]
+11,530,392 (30.63%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/stable/quicksort.rs:core::slice::sort::stable::quicksort::quicksort [./.artifacts/rsi/bin/ten-history-windows-01]
+ 4,707,022 (12.51%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 3,770,629 (10.02%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::Sampled::empty [./.artifacts/rsi/bin/ten-history-windows-01]
+ 3,645,927 ( 9.69%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::Sampled::empty
+ 2,608,098 ( 6.93%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::slice::sort::stable::quicksort::quicksort'2
+ 2,160,324 ( 5.74%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::resample
+ 2,100,687 ( 5.58%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::sampling::resample
+ 2,040,300 ( 5.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::sampling::resample
+ 2,034,480 ( 5.41%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 1,644,018 ( 4.37%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::sampling::history_windows
+ 1,612,800 ( 4.28%)  crates/core/src/lib.rs:mcap_ops_core::sampling::resample
+ 1,421,316 ( 3.78%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:core::slice::sort::stable::quicksort::quicksort'2
+ 1,303,293 ( 3.46%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::slice::sort::stable::quicksort::quicksort
+ 1,295,907 ( 3.44%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/smallsort.rs:core::slice::sort::stable::quicksort::quicksort'2
+ 1,093,836 ( 2.91%)  ./crates/core/src/time.rs:mcap_ops_core::time::require_strict
+ 1,080,162 ( 2.87%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:mcap_ops_core::sampling::resample
+ 1,012,308 ( 2.69%)  crates/core/src/time.rs:mcap_ops_core::time::require_strict [./.artifacts/rsi/bin/ten-history-windows-01]
+   938,352 ( 2.49%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/smallsort.rs:core::slice::sort::shared::smallsort::sort8_stable [./.artifacts/rsi/bin/ten-history-windows-01]
+   889,554 ( 2.36%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mut_ptr.rs:core::slice::sort::stable::quicksort::quicksort'2
+   876,009 ( 2.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::history_windows
+   763,071 ( 2.03%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:mcap_ops_core::sampling::history_windows
+   504,048 ( 1.34%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/non_null.rs:mcap_ops_core::sampling::history_windows
+   480,072 ( 1.28%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/non_null.rs:mcap_ops_core::sampling::resample
+   435,657 ( 1.16%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/const_ptr.rs:core::slice::sort::stable::quicksort::quicksort'2
+   420,063 ( 1.12%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::sampling::resample
+   360,054 ( 0.96%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/int_macros.rs:mcap_ops_core::sampling::resample
+   336,012 ( 0.89%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/option.rs:mcap_ops_core::sampling::history_windows
+   333,321 ( 0.89%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:core::slice::sort::stable::quicksort::quicksort
+   324,099 ( 0.86%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::sampling::history_windows
+   274,032 ( 0.73%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:core::slice::sort::shared::smallsort::sort8_stable
+   249,642 ( 0.66%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/pivot.rs:core::slice::sort::shared::pivot::median3_rec'2 [./.artifacts/rsi/bin/ten-history-windows-01]
+   248,442 ( 0.66%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/pivot.rs:core::slice::sort::stable::quicksort::quicksort'2
+   246,417 ( 0.65%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mut_ptr.rs:core::slice::sort::stable::quicksort::quicksort
+   245,160 ( 0.65%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/pivot.rs:core::slice::sort::shared::pivot::median3_rec [./.artifacts/rsi/bin/ten-history-windows-01]
+   224,208 ( 0.60%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/const_ptr.rs:core::slice::sort::shared::smallsort::sort8_stable
+   200,928 ( 0.53%)  ./malloc/./malloc/malloc.c:calloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+   198,072 ( 0.53%)  ./malloc/../string/bits/string_fortified.h:calloc
+   198,036 ( 0.53%)  ???:0x00000000049aa740 [???]
+   194,536 ( 0.52%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/slice.rs:mcap_ops_core::sampling::history_windows
+   194,494 ( 0.52%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/slice.rs:<T as alloc::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec [./.artifacts/rsi/bin/ten-history-windows-01]
+   192,108 ( 0.51%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:<T as alloc::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec
+   192,042 ( 0.51%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::sampling::history_windows
+   158,487 ( 0.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:mcap_ops_core::sampling::history_windows
+   155,847 ( 0.41%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/range.rs:core::slice::sort::stable::quicksort::quicksort'2
+   144,192 ( 0.38%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/adapters/zip.rs:mcap_ops_core::sampling::history_windows
+   132,864 ( 0.35%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::slice::sort::shared::smallsort::sort8_stable
+   123,343 ( 0.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:mcap_ops_core::sampling::Sampled::empty
+   120,018 ( 0.32%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter.rs:mcap_ops_core::sampling::resample
+   120,006 ( 0.32%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/traits/iterator.rs:mcap_ops_core::sampling::resample
+    96,000 ( 0.26%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:mcap_ops_core::sampling::history_windows
+    96,000 ( 0.26%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/int_macros.rs:mcap_ops_core::sampling::history_windows
+    90,960 ( 0.24%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/spec_from_elem.rs:<T as alloc::vec::spec_from_elem::SpecFromElem>::from_elem [./.artifacts/rsi/bin/ten-history-windows-01]
+    90,873 ( 0.24%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:<T as alloc::vec::spec_from_elem::SpecFromElem>::from_elem

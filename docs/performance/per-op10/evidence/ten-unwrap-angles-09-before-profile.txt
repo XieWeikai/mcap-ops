@@ -1,0 +1,52 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-unwrap-angles-09/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 53998773
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case unwrap_angles,unwrap_angles.wraps --profile (PID 1485470, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+66,379,242 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                   file:function
+--------------------------------------------------------------------------------
+66,379,242 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+66,379,242 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+66,379,242 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+66,379,242 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+66,379,242 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+66,379,242 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+66,379,242 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+66,379,242 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+66,379,242 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+66,379,242 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+66,379,242 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+66,379,242 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+66,379,242 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+66,379,242 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+66,345,910 (99.95%)  ./crates/core/src/filter.rs:mcap_ops_core::filter::unwrap_angles
+32,575,956 (49.08%)  crates/core/src/filter.rs:mcap_ops_core::filter::unwrap_angles [./.artifacts/rsi/bin/accepted]
+16,209,240 (24.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:mcap_ops_core::filter::unwrap_angles
+ 5,399,892 ( 8.13%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/adapters/zip.rs:mcap_ops_core::filter::unwrap_angles
+ 3,985,670 ( 6.00%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 3,985,194 ( 6.00%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::filter::unwrap_angles
+ 3,260,148 ( 4.91%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::filter::unwrap_angles
+ 2,320,380 ( 3.50%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/compiler-builtins/compiler-builtins/src/macros.rs:fmod [./.artifacts/rsi/bin/accepted]
+ 1,612,692 ( 2.43%)  crates/core/src/lib.rs:mcap_ops_core::filter::unwrap_angles
+ 1,500,018 ( 2.26%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::filter::unwrap_angles
+ 1,418,010 ( 2.14%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/compiler-builtins/compiler-builtins/src/math/../../../libm/src/math/generic/fmod.rs:fmod
+ 1,012,668 ( 1.53%)  ./crates/core/src/time.rs:mcap_ops_core::time::require_strict
+

@@ -1,0 +1,53 @@
+{
+  "label": "ten-video-probe-02",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 0.3615562858563903,
+  "worst_block_reduction_pct": -1.386080191343142,
+  "worst_case_reduction_pct": -0.6657401809097685,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "26f5a3b537a9bfb384d13a0577b60bfcbcc25ddfef1bf3ff73094a16ca1370aa",
+  "operator": "video_probe",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "poll media completion every 500 microseconds",
+  "profile_hotspot": "The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The original ten-to-one millisecond change helped; quantify the remaining latency versus polling-cost tradeoff without reducing checks.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 25772566.5,
+      "after_ns": 25875998.5,
+      "latency_reduction_pct": -0.6657401809097685,
+      "paired_ratios": [
+        1.0188921242898847,
+        1.0127538556743196,
+        1.0005609479438757,
+        0.996982830596668
+      ],
+      "worst_paired_reduction_pct": -1.8892124289884737
+    },
+    "video_validate": {
+      "before_ns": 56301879.5,
+      "after_ns": 55751142.5,
+      "latency_reduction_pct": 1.2973916124543239,
+      "paired_ratios": [
+        1.0088543243701573,
+        0.9799184029300806,
+        0.9925910278512662,
+        0.9814611398996475
+      ],
+      "worst_paired_reduction_pct": -0.8854324370157318
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-probe-02",
+  "validation_sha256": "4164fcdcbc1ee6731c1abcddbf781d39bf119a1822690604bc0c579763ebe647"
+}

@@ -1,0 +1,76 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index b8c6693..dfad3c4 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -467,45 +467,32 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
+     } else {
+         report.flagged_sample_count as f64 / report.time.samples as f64
+     };
+-    if report.time.samples >= policy.min_samples
+-        && fraction <= policy.max_flagged_fraction
+-        && policy
+-            .reject_codes
+-            .iter()
+-            .all(|code| !report.all_codes.contains(code))
+-    {
+-        return Ok(GateDecision {
+-            passed: true,
+-            reasons: Vec::new(),
+-            flagged_fraction: fraction,
+-        });
+-    }
+-    let mut reasons = Vec::new();
+-    if report.time.samples < policy.min_samples {
+-        reasons.push("too_few_samples".into());
+-    }
+-    if fraction > policy.max_flagged_fraction {
+-        reasons.push("flagged_fraction".into());
+-    }
+-    for code in &policy.reject_codes {
+-        if report.all_codes.contains(code) {
+-            reasons.push(
+-                match code {
+-                    IssueCode::NonFinite => "NonFinite",
+-                    IssueCode::BelowRange => "BelowRange",
+-                    IssueCode::AboveRange => "AboveRange",
+-                    IssueCode::ClockReversal => "ClockReversal",
+-                    IssueCode::DuplicateTime => "DuplicateTime",
+-                    IssueCode::Gap => "Gap",
+-                    IssueCode::Rate => "Rate",
+-                    IssueCode::Acceleration => "Acceleration",
+-                    IssueCode::Spike => "Spike",
+-                    IssueCode::Flatline => "Flatline",
+-                }
+-                .to_owned(),
+-            );
+-        }
+-    }
++    let reasons: Vec<String> = (report.time.samples < policy.min_samples)
++        .then_some("too_few_samples")
++        .into_iter()
++        .chain((fraction > policy.max_flagged_fraction).then_some("flagged_fraction"))
++        .chain(
++            policy
++                .reject_codes
++                .iter()
++                .filter(|code| report.all_codes.contains(code))
++                .map(|code| {
++                    [
++                        "NonFinite",
++                        "BelowRange",
++                        "AboveRange",
++                        "ClockReversal",
++                        "DuplicateTime",
++                        "Gap",
++                        "Rate",
++                        "Acceleration",
++                        "Spike",
++                        "Flatline",
++                    ][*code as usize]
++                }),
++        )
++        .map(str::to_owned)
++        .collect();
+     Ok(GateDecision {
+         passed: reasons.is_empty(),
+         reasons,

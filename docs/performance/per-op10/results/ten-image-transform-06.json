@@ -1,0 +1,156 @@
+{
+  "label": "ten-image-transform-06",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_transform.gradient",
+    "image_transform.noise"
+  ],
+  "geomean_latency_reduction_pct": -56.837887297543396,
+  "worst_block_reduction_pct": -59.552261270548044,
+  "worst_case_reduction_pct": -85.93483412691299,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "130c8f761e0d352d6b2824cb38e0efd1d6272fcc63bb236f84405dbb3f306812",
+  "png_size_pairs": [
+    [
+      94331,
+      29655
+    ],
+    [
+      989988,
+      97741
+    ],
+    [
+      88,
+      71
+    ],
+    [
+      88,
+      71
+    ],
+    [
+      88,
+      71
+    ],
+    [
+      88,
+      71
+    ],
+    [
+      107,
+      95
+    ],
+    [
+      107,
+      95
+    ],
+    [
+      107,
+      107
+    ],
+    [
+      107,
+      107
+    ],
+    [
+      132,
+      103
+    ],
+    [
+      132,
+      103
+    ],
+    [
+      132,
+      109
+    ],
+    [
+      132,
+      109
+    ],
+    [
+      212,
+      152
+    ],
+    [
+      212,
+      152
+    ],
+    [
+      242,
+      226
+    ],
+    [
+      242,
+      226
+    ],
+    [
+      4016,
+      794
+    ],
+    [
+      4016,
+      794
+    ],
+    [
+      6817,
+      7724
+    ],
+    [
+      6817,
+      7724
+    ],
+    [
+      214,
+      151
+    ],
+    [
+      220,
+      157
+    ],
+    [
+      193,
+      142
+    ]
+  ],
+  "png_max_growth_ratio": 1.1330497286196275,
+  "operator": "image_transform",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "encode lossless PNG with Default compression and Sub filtering",
+  "profile_hotspot": "Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Fast/Sub failed in the prior campaign; compare other documented encoder hints while checking exact decoded pixels and encoded-size growth.",
+  "case_results": {
+    "image_transform.gradient": {
+      "before_ns": 5565994.75,
+      "after_ns": 7399892.75,
+      "latency_reduction_pct": -33.12852482662683,
+      "paired_ratios": [
+        1.3052440756613661,
+        1.3518016461948397,
+        1.3217728278137104,
+        1.3407976687188263
+      ],
+      "worst_paired_reduction_pct": -35.18016461948397
+    },
+    "image_transform.noise": {
+      "before_ns": 4144453.5,
+      "after_ns": 7652667.875,
+      "latency_reduction_pct": -85.93483412691299,
+      "paired_ratios": [
+        1.8628534181947174,
+        1.8831848702214138,
+        1.8226193762433376,
+        1.8558432643435423
+      ],
+      "worst_paired_reduction_pct": -88.31848702214138
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-transform-06",
+  "validation_sha256": "72a3450811520e66d20f722c0043a99bd889ea7a8e4390b1b6847910baf80df4"
+}

@@ -1,0 +1,12 @@
+diff --git a/crates/io/src/video.rs b/crates/io/src/video.rs
+index 996149e..415c0c0 100644
+--- a/crates/io/src/video.rs
++++ b/crates/io/src/video.rs
+@@ -12,6 +12,7 @@ use std::{
+ const MAX_TOOL_OUTPUT: u64 = 2 * 1024 * 1024;
+ 
+ /// No shell interpolation. Temporary files avoid pipe backpressure deadlocks.
++#[inline(always)]
+ fn run_tool(program: &OsStr, args: &[&OsStr], timeout: Duration) -> Result<(String, String)> {
+     if timeout.is_zero() || timeout > Duration::from_secs(86_400) {
+         return Err(invalid("timeout must be in (0,86400] seconds"));

@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..a09fa86 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -73,6 +73,7 @@ impl Sampled {
+ }
+ 
+ /// Ordered target grids use a monotone cursor: O(N + M + M*channels).
++#[inline(never)]
+ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Result<Sampled> {
+     options.validate()?;
+     signal.require_ordered()?;

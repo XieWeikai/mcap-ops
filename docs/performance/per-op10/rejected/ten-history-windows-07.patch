@@ -1,0 +1,19 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..f74cdb7 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -270,11 +270,11 @@ pub fn history_windows(
+         });
+     }
+     let mut requests = Vec::with_capacity(size);
+-    for (i, &center) in centers.iter().enumerate() {
+-        for (j, &offset) in offsets.iter().enumerate() {
++    for &center in centers {
++        for &offset in offsets {
+             requests.push((
+                 center.checked_add(offset).ok_or(Error::Overflow)?,
+-                i * offsets.len() + j,
++                requests.len(),
+             ));
+         }
+     }

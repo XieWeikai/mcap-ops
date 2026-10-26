@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-inspect-02",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "mcap_inspect",
+    "mcap_inspect.many"
+  ],
+  "geomean_latency_reduction_pct": -2.35428688232453,
+  "worst_block_reduction_pct": -3.092734255116869,
+  "worst_case_reduction_pct": -6.156929139657308,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep storage proportional to present channels rather than allocating a 65536-slot table for sparse IDs.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "0da01c2d6a3a2cc3a82155d043f9e3335109bd85a1fececcf61abb665acee9fc",
+  "operator": "mcap_inspect",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "store channel accumulators in a sorted compact vector",
+  "profile_hotspot": "Keep storage proportional to present channels rather than allocating a 65536-slot table for sparse IDs.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Keep storage proportional to present channels rather than allocating a 65536-slot table for sparse IDs.",
+  "case_results": {
+    "mcap_inspect": {
+      "before_ns": 1731883.84375,
+      "after_ns": 1701574.75,
+      "latency_reduction_pct": 1.6855486799859598,
+      "paired_ratios": [
+        0.9925561639180739,
+        0.9737328624822068,
+        0.9960865215494888,
+        0.9699347630322875
+      ],
+      "worst_paired_reduction_pct": 0.3913478450511154
+    },
+    "mcap_inspect.many": {
+      "before_ns": 2036540.03125,
+      "after_ns": 2152090.09375,
+      "latency_reduction_pct": -6.156929139657308,
+      "paired_ratios": [
+        1.0707819106419247,
+        1.076344791080943,
+        1.0513221298706124,
+        1.0523566721512216
+      ],
+      "worst_paired_reduction_pct": -7.634479108094294
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-inspect-02",
+  "validation_sha256": "1ce761e6804993d9208426ff176c7691e1e5237c5727e612e4ed5f912044c802"
+}

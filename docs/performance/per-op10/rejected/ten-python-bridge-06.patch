@@ -1,0 +1,113 @@
+diff --git a/crates/python/src/lib.rs b/crates/python/src/lib.rs
+index 5dcaf42..8856911 100644
+--- a/crates/python/src/lib.rs
++++ b/crates/python/src/lib.rs
+@@ -71,34 +71,53 @@ fn numpy_values<'py>(py: Python<'py>, mut values: Vec<f64>) -> Bound<'py, numpy:
+ fn signal_dict(py: Python<'_>, signal: Signal) -> PyResult<Py<PyDict>> {
+     let (timestamps, values, channels) = signal.into_parts();
+     let dict = PyDict::new(py);
+-    dict.set_item("timestamps", timestamps.into_pyarray(py))?;
+-    dict.set_item("values", numpy_values(py, values))?;
+-    dict.set_item("channels", channels)?;
++    dict.set_item(pyo3::intern!(py, "timestamps"), timestamps.into_pyarray(py))?;
++    dict.set_item(pyo3::intern!(py, "values"), numpy_values(py, values))?;
++    dict.set_item(pyo3::intern!(py, "channels"), channels)?;
+     Ok(dict.unbind())
+ }
+ 
+ fn sampled_dict(py: Python<'_>, result: sampling::Sampled) -> PyResult<Py<PyDict>> {
+     let dict = PyDict::new(py);
+-    dict.set_item("timestamps", result.timestamps.into_pyarray(py))?;
+-    dict.set_item("values", numpy_values(py, result.values))?;
+-    dict.set_item("channels", result.channels)?;
+-    dict.set_item("status", result.status.into_pyarray(py))?;
+-    dict.set_item("source_left", result.source_left.into_pyarray(py))?;
+-    dict.set_item("source_right", result.source_right.into_pyarray(py))?;
+-    dict.set_item("alpha", numpy_values(py, result.alpha))?;
+-    dict.set_item("uses_future", result.uses_future.into_pyarray(py))?;
++    dict.set_item(
++        pyo3::intern!(py, "timestamps"),
++        result.timestamps.into_pyarray(py),
++    )?;
++    dict.set_item(pyo3::intern!(py, "values"), numpy_values(py, result.values))?;
++    dict.set_item(pyo3::intern!(py, "channels"), result.channels)?;
++    dict.set_item(pyo3::intern!(py, "status"), result.status.into_pyarray(py))?;
++    dict.set_item(
++        pyo3::intern!(py, "source_left"),
++        result.source_left.into_pyarray(py),
++    )?;
++    dict.set_item(
++        pyo3::intern!(py, "source_right"),
++        result.source_right.into_pyarray(py),
++    )?;
++    dict.set_item(pyo3::intern!(py, "alpha"), numpy_values(py, result.alpha))?;
++    dict.set_item(
++        pyo3::intern!(py, "uses_future"),
++        result.uses_future.into_pyarray(py),
++    )?;
+     Ok(dict.unbind())
+ }
+ 
+ fn filtered_dict(py: Python<'_>, result: filter::Filtered) -> PyResult<Py<PyDict>> {
+     let dict = signal_dict(py, result.signal)?;
+-    dict.bind(py).set_item("valid", result.valid)?;
+     dict.bind(py)
+-        .set_item("mode", format!("{:?}", result.mode).to_lowercase())?;
+-    dict.bind(py)
+-        .set_item("lookahead_samples", result.lookahead_samples)?;
+-    dict.bind(py)
+-        .set_item("group_delay_samples", result.group_delay_samples)?;
++        .set_item(pyo3::intern!(py, "valid"), result.valid)?;
++    dict.bind(py).set_item(
++        pyo3::intern!(py, "mode"),
++        format!("{:?}", result.mode).to_lowercase(),
++    )?;
++    dict.bind(py).set_item(
++        pyo3::intern!(py, "lookahead_samples"),
++        result.lookahead_samples,
++    )?;
++    dict.bind(py).set_item(
++        pyo3::intern!(py, "group_delay_samples"),
++        result.group_delay_samples,
++    )?;
+     Ok(dict)
+ }
+ 
+@@ -178,10 +197,14 @@ fn history_windows(
+     )
+     .map_err(map_core_error)?;
+     let dict = sampled_dict(py, result.samples)?;
+-    dict.bind(py)
+-        .set_item("centers", result.centers.into_pyarray(py))?;
+-    dict.bind(py)
+-        .set_item("offsets", result.offsets.into_pyarray(py))?;
++    dict.bind(py).set_item(
++        pyo3::intern!(py, "centers"),
++        result.centers.into_pyarray(py),
++    )?;
++    dict.bind(py).set_item(
++        pyo3::intern!(py, "offsets"),
++        result.offsets.into_pyarray(py),
++    )?;
+     Ok(dict)
+ }
+ 
+@@ -207,9 +230,15 @@ fn align_timestamps(
+     )
+     .map_err(map_core_error)?;
+     let dict = PyDict::new(py);
+-    dict.set_item("indices", result.indices.into_pyarray(py))?;
+-    dict.set_item("offsets_ns", result.offsets_ns.into_pyarray(py))?;
+-    dict.set_item("valid", result.valid.into_pyarray(py))?;
++    dict.set_item(
++        pyo3::intern!(py, "indices"),
++        result.indices.into_pyarray(py),
++    )?;
++    dict.set_item(
++        pyo3::intern!(py, "offsets_ns"),
++        result.offsets_ns.into_pyarray(py),
++    )?;
++    dict.set_item(pyo3::intern!(py, "valid"), result.valid.into_pyarray(py))?;
+     Ok(dict.unbind())
+ }
+ 

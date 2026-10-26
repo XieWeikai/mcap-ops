@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-mcap-read-signal-04/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 198111932
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-mcap-read-signal-04 --case mcap_read_signal,mcap_read_signal.many --profile (PID 1845083, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+480,421,902 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+480,421,902 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+480,421,902 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+480,421,902 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+480,421,902 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+480,421,902 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+480,421,902 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+480,421,902 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+480,421,902 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+480,421,902 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+480,421,902 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+480,421,902 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+480,421,902 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+480,421,902 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+480,421,902 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+480,336,932 (99.98%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+480,336,143 (99.98%)  ./crates/io/src/mcap_ops.rs:mcap_ops_io::mcap_ops::read_signal
+456,953,186 (95.11%)  crates/io/src/mcap_ops.rs:mcap_ops_io::mcap_ops::read_signal [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+321,470,832 (66.91%)  crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+201,025,871 (41.84%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode
+199,928,969 (41.62%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+140,949,354 (29.34%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+133,049,947 (27.69%)  crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+109,247,085 (22.74%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+105,543,346 (21.97%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/io.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+102,947,176 (21.43%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/message_reader.rs:mcap::sans_io::message_reader::MessageReader::next_event
+ 90,378,041 (18.81%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/message_reader.rs:mcap::sans_io::message_reader::MessageReader::next_event [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 72,243,213 (15.04%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value> [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 63,366,135 (13.19%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+ 61,068,294 (12.71%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+ 59,926,827 (12.47%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 56,816,589 (11.83%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 52,417,271 (10.91%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+ 46,083,312 ( 9.59%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::LinearReader::next_event
+ 40,128,525 ( 8.35%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value>'2 [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 37,845,699 ( 7.88%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::LinearReader::next_event [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 36,304,783 ( 7.56%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 35,634,045 ( 7.42%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::SliceRead as serde_json::read::Read>::parse_str
+ 35,455,134 ( 7.38%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 35,206,299 ( 7.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/mem/maybe_uninit.rs:core::ptr::drop_in_place<serde_json::value::Value>
+ 30,561,201 ( 6.36%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::SliceRead as serde_json::read::Read>::parse_str [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 29,408,565 ( 6.12%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 29,171,380 ( 6.07%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::BTreeMap<K,V,A>::insert [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 27,165,858 ( 5.65%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::de::Deserializer<R>::parse_integer [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 25,662,226 ( 5.34%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::IntoIter<K,V,A>::dying_next [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 24,558,129 ( 5.11%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/map.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+ 23,332,686 ( 4.86%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::rw_buf::RwBuf::consume [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 22,058,883 ( 4.59%)  crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode::{{closure}} [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 20,921,766 ( 4.35%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::rw_buf::RwBuf::mark_read [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 18,972,066 ( 3.95%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/crc32fast-1.5.3/src/specialized/pclmulqdq.rs:crc32fast::Hasher::update
+ 18,488,478 ( 3.85%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/crc32fast-1.5.3/src/specialized/pclmulqdq.rs:crc32fast::specialized::pclmulqdq::calculate [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 18,171,933 ( 3.78%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:core::ptr::drop_in_place<serde_json::value::Value>
+ 17,416,323 ( 3.63%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/crc32fast-1.5.3/src/lib.rs:crc32fast::Hasher::update
+ 16,394,224 ( 3.41%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/read.rs:mcap::read::parse_record
+ 16,087,921 ( 3.35%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:mcap_ops_io::mcap_ops::read_signal
+ 16,075,590 ( 3.35%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::RawVec<T,A>::grow_one [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 15,641,508 ( 3.26%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:core::ptr::drop_in_place<serde_json::value::Value>
+ 13,680,000 ( 2.85%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/read.rs:mcap::read::ChannelAccumulator::get
+ 13,439,968 ( 2.80%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::finish_grow [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 12,337,985 ( 2.57%)  ???:__rustc::__rust_alloc [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 12,124,333 ( 2.52%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 11,749,035 ( 2.45%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/converts.rs:core::str::converts::from_utf8 [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 11,700,000 ( 2.44%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:core::ptr::drop_in_place<serde_json::value::Value>'2
+ 11,489,205 ( 2.39%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_key_seed::has_next_key [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 10,979,253 ( 2.29%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2 [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+ 10,754,277 ( 2.24%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 10,525,140 ( 2.19%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:alloc::collections::btree::map::IntoIter<K,V,A>::dying_next
+ 10,020,000 ( 2.09%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/slice.rs:mcap::sans_io::message_reader::MessageReader::next_event
+  9,992,605 ( 2.08%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/message_reader.rs:<mcap_ops_io::mcap_ops::RawReader as core::iter::traits::iterator::Iterator>::next
+  9,982,252 ( 2.08%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mcap-0.26.0/src/sans_io/linear_reader.rs:mcap::sans_io::linear_reader::LinearReader::insert
+  9,898,242 ( 2.06%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap::sans_io::linear_reader::LinearReader::insert
+  9,891,969 ( 2.06%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  9,780,000 ( 2.04%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/slice.rs:<T as alloc::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec [./.artifacts/rsi/bin/ten-mcap-read-signal-04]
+  9,565,545 ( 1.99%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+  9,201,789 ( 1.92%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode
+  9,170,304 ( 1.91%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:serde_json::de::Deserializer<R>::parse_integer

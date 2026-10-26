@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-json-decode-10/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 98543021
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-json-decode-10 --case json_decode,json_decode.deep,json_decode.wide --profile (PID 1831840, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+172,807 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                file:function
+--------------------------------------------------------------------------------
+172,807 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+172,807 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+172,807 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+172,807 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+172,807 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+172,807 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+172,807 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-json-decode-10]
+172,807 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-json-decode-10]
+172,807 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-json-decode-10]
+172,807 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-json-decode-10]
+172,807 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+172,807 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-json-decode-10]
+172,807 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-json-decode-10]
+172,807 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-json-decode-10]
+110,211 (63.78%)  ./crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode
+ 88,782 (51.38%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 67,470 (39.04%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode
+ 67,308 (38.95%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+ 56,018 (32.42%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+ 52,887 (30.60%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+ 52,659 (30.47%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed
+ 42,388 (24.53%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/iter.rs:operator_benchmark::Runner::bench
+ 39,250 (22.71%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match [./.artifacts/rsi/bin/ten-json-decode-10]
+ 33,658 (19.48%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 27,227 (15.76%)  crates/io/src/mcap_ops.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode [./.artifacts/rsi/bin/ten-json-decode-10]
+ 24,458 (14.15%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 22,188 (12.84%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+ 18,102 (10.48%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::RawVec<T,A>::grow_one [./.artifacts/rsi/bin/ten-json-decode-10]
+ 17,969 (10.40%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::finish_grow [./.artifacts/rsi/bin/ten-json-decode-10]
+ 16,464 ( 9.53%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value>'2 [./.artifacts/rsi/bin/ten-json-decode-10]
+ 16,383 ( 9.48%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<serde_json::value::Value> [./.artifacts/rsi/bin/ten-json-decode-10]
+ 14,301 ( 8.28%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:alloc::raw_vec::finish_grow
+ 14,145 ( 8.19%)  ./malloc/./malloc/malloc.c:realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 13,701 ( 7.93%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::de::Deserializer<R>::parse_integer [./.artifacts/rsi/bin/ten-json-decode-10]
+ 12,225 ( 7.07%)  ./malloc/./malloc/malloc.c:_int_realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 11,876 ( 6.87%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+ 10,673 ( 6.18%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/mod.rs:serde_json::value::Value::pointer
+ 10,529 ( 6.09%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:std::io::stdio::_print [./.artifacts/rsi/bin/ten-json-decode-10]
+ 10,247 ( 5.93%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:<&std::io::stdio::Stdout as std::io::Write>::write_fmt [./.artifacts/rsi/bin/ten-json-decode-10]
+ 10,112 ( 5.85%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/mod.rs:<&std::io::stdio::Stdout as std::io::Write>::write_fmt
+ 10,079 ( 5.83%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/mod.rs:core::fmt::write [./.artifacts/rsi/bin/ten-json-decode-10]
+  9,942 ( 5.75%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/mem/maybe_uninit.rs:core::ptr::drop_in_place<serde_json::value::Value>
+  9,585 ( 5.55%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  9,325 ( 5.40%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:<mcap_ops_io::mcap_ops::JsonSignalSpec as mcap_ops_io::mcap_ops::SignalDecoder>::decode
+  9,194 ( 5.32%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/rt.rs:core::fmt::write
+  9,185 ( 5.32%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/mod.rs:<serde_json::value::Value as core::fmt::Display>::fmt
+  9,143 ( 5.29%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<serde_json::value::Value as core::fmt::Display>::fmt
+  9,134 ( 5.29%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize
+  8,914 ( 5.16%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  8,503 ( 4.92%)  ./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  8,399 ( 4.86%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:serde_json::value::ser::<impl serde_core::ser::Serialize for serde_json::value::Value>::serialize
+  7,657 ( 4.43%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/impls.rs:std::io::impls::<impl std::io::Write for &mut W>::write_all [./.artifacts/rsi/bin/ten-json-decode-10]
+  7,186 ( 4.16%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/mod.rs:<std::io::default_write_fmt::Adapter<T> as core::fmt::Write>::write_str [./.artifacts/rsi/bin/ten-json-decode-10]
+  7,181 ( 4.16%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/mod.rs:serde_json::value::Value::pointer [./.artifacts/rsi/bin/ten-json-decode-10]
+  7,105 ( 4.11%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed'2
+  7,004 ( 4.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/str.rs:alloc::str::<impl str>::replace [./.artifacts/rsi/bin/ten-json-decode-10]
+  6,991 ( 4.05%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/de/mod.rs:<serde_json::de::MapAccess<R> as serde_core::de::MapAccess>::next_value_seed'2
+  6,881 ( 3.98%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize
+  6,622 ( 3.83%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/fmt/mod.rs:std::io::impls::<impl std::io::Write for &mut W>::write_all
+  6,554 ( 3.79%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  6,213 ( 3.60%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+  6,034 ( 3.49%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all [./.artifacts/rsi/bin/ten-json-decode-10]
+  5,295 ( 3.06%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/value/de.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2 [./.artifacts/rsi/bin/ten-json-decode-10]
+  4,485 ( 2.60%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::BTreeMap<K,V,A>::insert [./.artifacts/rsi/bin/ten-json-decode-10]
+  4,374 ( 2.53%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::SliceRead as serde_json::read::Read>::parse_str
+  4,338 ( 2.51%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/lib.rs:serde_json::value::de::<impl serde_core::de::Deserialize for serde_json::value::Value>::deserialize'2
+  4,188 ( 2.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/btree/map.rs:alloc::collections::btree::map::IntoIter<K,V,A>::dying_next [./.artifacts/rsi/bin/ten-json-decode-10]
+  4,155 ( 2.40%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:serde_json::de::Deserializer<R>::parse_integer
+  3,807 ( 2.20%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/read.rs:<serde_json::read::SliceRead as serde_json::read::Read>::parse_str [./.artifacts/rsi/bin/ten-json-decode-10]
+  3,630 ( 2.10%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/ser.rs:<&mut serde_json::ser::Serializer<W,F> as serde_core::ser::Serializer>::serialize_str [./.artifacts/rsi/bin/ten-json-decode-10]
+  3,278 ( 1.90%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/buffered/linewritershim.rs:<std::io::stdio::StdoutLock as std::io::Write>::write_all
+  3,171 ( 1.83%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/cmp.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+  2,952 ( 1.71%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:alloc::str::<impl str>::replace
+  2,915 ( 1.69%)  ./string/../sysdeps/x86_64/multiarch/memcmp-avx2-movbe.S:__memcmp_avx2_movbe [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  2,798 ( 1.62%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:core::slice::memchr::memrchr [./.artifacts/rsi/bin/ten-json-decode-10]

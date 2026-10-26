@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-06",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": 12.082340022352822,
+  "worst_block_reduction_pct": 11.86647511606732,
+  "worst_case_reduction_pct": -3.1525110260490985,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Use monotonic window bounds without repeating the earlier full linear-cursor candidate.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "3acb11ccdd9116978ecfc4cb79795c6fe167a443f6e593a039546da694775519",
+  "operator": "inspect_signal",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "restrict Hampel boundary searches to unconsumed suffixes",
+  "profile_hotspot": "Use monotonic window bounds without repeating the earlier full linear-cursor candidate.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Use monotonic window bounds without repeating the earlier full linear-cursor candidate.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 1028885.171875,
+      "after_ns": 882022.0,
+      "latency_reduction_pct": 14.27390176163279,
+      "paired_ratios": [
+        0.8695190026500391,
+        0.8522506837327903,
+        0.856474137173283,
+        0.8580478275940612
+      ],
+      "worst_paired_reduction_pct": 13.048099734996088
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 834357.859375,
+      "after_ns": 721832.46875,
+      "latency_reduction_pct": 13.629114007170672,
+      "paired_ratios": [
+        0.8829732101108545,
+        0.8575893569060274,
+        0.8628291539331017,
+        0.8645885659234849
+      ],
+      "worst_paired_reduction_pct": 11.702678988914549
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1404764.0,
+      "after_ns": 1447858.5625,
+      "latency_reduction_pct": -3.1525110260490985,
+      "paired_ratios": [
+        1.0272734019920875,
+        1.0455384082822745,
+        1.0336843431927643,
+        1.0293658773282177
+      ],
+      "worst_paired_reduction_pct": -4.553840828227451
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 2651344.625,
+      "after_ns": 1903556.9375,
+      "latency_reduction_pct": 28.136918989246862,
+      "paired_ratios": [
+        0.7018710268478112,
+        0.7211938634039297,
+        0.7255153041663843,
+        0.7160677568111331
+      ],
+      "worst_paired_reduction_pct": 27.448469583361568
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 5413197.375,
+      "after_ns": 4639234.375,
+      "latency_reduction_pct": 14.120466998657355,
+      "paired_ratios": [
+        0.8496268375996405,
+        0.8622376595910118,
+        0.8605549622503774,
+        0.8570356977764755
+      ],
+      "worst_paired_reduction_pct": 13.776234040898816
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1512807.09375,
+      "after_ns": 1475577.375,
+      "latency_reduction_pct": 2.3152467810299893,
+      "paired_ratios": [
+        0.9626060083069999,
+        0.9862365592121227,
+        0.9679406265509081,
+        0.9857544378284923
+      ],
+      "worst_paired_reduction_pct": 1.376344078787728
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-06",
+  "validation_sha256": "1127f409a3701971ec2f9bd82c79ea20c415a8be244312553fd13d7d04be113a"
+}

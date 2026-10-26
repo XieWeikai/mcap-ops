@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-inspect-signal-08/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 141634083
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-inspect-signal-08 --case inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues --profile (PID 1656290, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+732,117,428 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+732,117,428 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+732,117,428 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+732,117,428 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+732,117,428 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+732,117,428 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+732,117,428 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+732,117,428 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-inspect-signal-08]
+732,117,428 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-inspect-signal-08]
+732,117,428 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-inspect-signal-08]
+732,117,428 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-inspect-signal-08]
+732,117,428 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+732,117,428 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-inspect-signal-08]
+732,117,428 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-inspect-signal-08]
+732,117,428 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-inspect-signal-08]
+732,011,244 (99.99%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/ten-inspect-signal-08]
+307,636,560 (42.02%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/mod.rs:operator_benchmark::main::{{closure}}
+306,628,560 (41.88%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/mod.rs:core::slice::sort::unstable::ipnsort [./.artifacts/rsi/bin/ten-inspect-signal-08]
+249,877,002 (34.13%)  crates/core/src/quality.rs:operator_benchmark::main::{{closure}}
+174,808,320 (23.88%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:core::slice::sort::unstable::ipnsort
+ 66,780,834 ( 9.12%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/mod.rs:operator_benchmark::main::{{closure}}
+ 58,080,498 ( 7.93%)  crates/core/src/quality.rs:mcap_ops_core::quality::sorted_mad [./.artifacts/rsi/bin/ten-inspect-signal-08]
+ 43,660,080 ( 5.96%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:core::slice::sort::unstable::ipnsort
+ 41,408,346 ( 5.66%)  crates/core/src/quality.rs:mcap_ops_core::quality::sorted_mad::{{closure}} [./.artifacts/rsi/bin/ten-inspect-signal-08]
+ 31,010,625 ( 4.24%)  crates/core/src/quality.rs:mcap_ops_core::quality::emit [./.artifacts/rsi/bin/ten-inspect-signal-08]
+ 23,710,047 ( 3.24%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:operator_benchmark::main::{{closure}}
+ 22,735,015 ( 3.11%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 22,370,892 ( 3.06%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:operator_benchmark::main::{{closure}}
+ 12,346,776 ( 1.69%)  crates/core/src/lib.rs:operator_benchmark::main::{{closure}}
+ 10,869,942 ( 1.48%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/hint.rs:operator_benchmark::main::{{closure}}
+ 10,380,792 ( 1.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:operator_benchmark::main::{{closure}}
+  9,430,659 ( 1.29%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/specialize.rs:mcap_ops_core::quality::emit
+  8,533,344 ( 1.17%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/mod.rs:mcap_ops_core::quality::sorted_mad
+  7,982,793 ( 1.09%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  7,716,522 ( 1.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:operator_benchmark::main::{{closure}}
+  7,324,216 ( 1.00%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:operator_benchmark::main::{{closure}}
+  6,949,896 ( 0.95%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:operator_benchmark::main::{{closure}}
+  5,917,080 ( 0.81%)  ./crates/core/src/time.rs:mcap_ops_core::time::inspect_time
+  4,436,856 ( 0.61%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:mcap_ops_core::quality::sorted_mad::{{closure}}
+  3,481,026 ( 0.48%)  crates/core/src/time.rs:mcap_ops_core::time::inspect_time [./.artifacts/rsi/bin/ten-inspect-signal-08]
+  2,694,465 ( 0.37%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::quality::emit
+  2,255,751 ( 0.31%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:mcap_ops_core::quality::emit
+  1,831,368 ( 0.25%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/range.rs:operator_benchmark::main::{{closure}}
+  1,536,840 ( 0.21%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:mcap_ops_core::quality::sorted_mad::{{closure}}
+  1,404,582 ( 0.19%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:operator_benchmark::main::{{closure}}
+  1,347,237 ( 0.18%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/non_null.rs:mcap_ops_core::quality::emit
+  1,347,237 ( 0.18%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::quality::emit
+  1,198,224 ( 0.16%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/hint.rs:mcap_ops_core::quality::sorted_mad
+  1,043,946 ( 0.14%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/convert/num.rs:operator_benchmark::main::{{closure}}
+    898,158 ( 0.12%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::quality::emit
+    696,000 ( 0.10%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/convert/num.rs:mcap_ops_core::time::inspect_time
+    696,000 ( 0.10%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter.rs:mcap_ops_core::time::inspect_time
+    695,964 ( 0.10%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/traits/iterator.rs:mcap_ops_core::time::inspect_time
+    512,280 ( 0.07%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::quality::sorted_mad::{{closure}}
+    453,597 ( 0.06%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mut_ptr.rs:operator_benchmark::main::{{closure}}
+    449,466 ( 0.06%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:mcap_ops_core::quality::emit
+    435,216 ( 0.06%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:operator_benchmark::main::{{closure}}
+    361,406 ( 0.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:operator_benchmark::main::{{closure}}
+    353,896 ( 0.05%)  ./malloc/./malloc/malloc.c:calloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    348,540 ( 0.05%)  ./malloc/../string/bits/string_fortified.h:calloc
+    348,486 ( 0.05%)  ???:0x00000000049aa740 [???]
+    348,000 ( 0.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/traits/accum.rs:operator_benchmark::main::{{closure}}
+    347,982 ( 0.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::time::inspect_time
+    336,000 ( 0.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::quality::sorted_mad
+    336,000 ( 0.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/mod.rs:core::slice::sort::unstable::ipnsort
+    168,000 ( 0.02%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/intrinsics/mod.rs:operator_benchmark::main::{{closure}}
+    116,953 ( 0.02%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::RawVec<T,A>::grow_one [./.artifacts/rsi/bin/ten-inspect-signal-08]
+    104,233 ( 0.01%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:alloc::raw_vec::finish_grow [./.artifacts/rsi/bin/ten-inspect-signal-08]
+     90,743 ( 0.01%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:alloc::raw_vec::finish_grow
+     89,462 ( 0.01%)  ./malloc/./malloc/malloc.c:realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+     70,022 ( 0.01%)  ./malloc/./malloc/malloc.c:_int_realloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+     66,076 ( 0.01%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/iter.rs:operator_benchmark::Runner::bench
+     61,696 ( 0.01%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match [./.artifacts/rsi/bin/ten-inspect-signal-08]
+     37,840 ( 0.01%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+     33,862 ( 0.00%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+     25,478 ( 0.00%)  ./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]

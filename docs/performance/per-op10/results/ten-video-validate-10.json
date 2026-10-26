@@ -1,0 +1,40 @@
+{
+  "label": "ten-video-validate-10",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 1.2682754046050349,
+  "worst_block_reduction_pct": 0.1131547110950093,
+  "worst_case_reduction_pct": 1.2682754046050349,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The earlier one-second setting failed; retain the mandatory final progress marker and full frame count while measuring a longer interval.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "489ad1a83ae27094995a60e5cf28e7e543b05b58d73e05eb7993d4d027b442a9",
+  "operator": "video_validate",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "emit periodic FFmpeg progress every two seconds",
+  "profile_hotspot": "The earlier one-second setting failed; retain the mandatory final progress marker and full frame count while measuring a longer interval.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The earlier one-second setting failed; retain the mandatory final progress marker and full frame count while measuring a longer interval.",
+  "case_results": {
+    "video_validate": {
+      "before_ns": 56636718.0,
+      "after_ns": 55719935.0,
+      "latency_reduction_pct": 1.2682754046050349,
+      "paired_ratios": [
+        0.9988684528890499,
+        0.9861293872122714,
+        0.9815200251300269,
+        0.9885051046956279
+      ],
+      "worst_paired_reduction_pct": 0.1131547110950093
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-validate-10",
+  "validation_sha256": "a93b3ba081b04f4859dbd7bbe0573025d33db76c197426a3ee644637bc764272"
+}

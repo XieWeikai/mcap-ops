@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-03",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": -3.4792524949054604,
+  "worst_block_reduction_pct": -4.403327151873704,
+  "worst_case_reduction_pct": -16.09257539331681,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Only identical borrowed endpoint slices take this path; both normalization steps and invalid-quaternion behavior remain.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "0e7ecd2ca6494970f05201128716ee07b8d5a4d5e7e3a54cc3733331c59c3529",
+  "operator": "resample",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "normalize exact quaternion samples without duplicating endpoint work",
+  "profile_hotspot": "Only identical borrowed endpoint slices take this path; both normalization steps and invalid-quaternion behavior remain.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Only identical borrowed endpoint slices take this path; both normalization steps and invalid-quaternion behavior remain.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 218787.984375,
+      "after_ns": 244334.8125,
+      "latency_reduction_pct": -11.542440485685823,
+      "paired_ratios": [
+        1.1186572230066156,
+        1.1176557708428732,
+        1.1131930388708433,
+        1.1100140021530949
+      ],
+      "worst_paired_reduction_pct": -11.865722300661563
+    },
+    "resample.nearest": {
+      "before_ns": 232754.2890625,
+      "after_ns": 253716.57421875,
+      "latency_reduction_pct": -9.307084108116737,
+      "paired_ratios": [
+        1.0976083439850615,
+        1.0367916311329466,
+        1.1043578027673717,
+        1.0885333381772735
+      ],
+      "worst_paired_reduction_pct": -10.435780276737173
+    },
+    "resample.linear": {
+      "before_ns": 412056.4375,
+      "after_ns": 417622.625,
+      "latency_reduction_pct": -1.7477361817136217,
+      "paired_ratios": [
+        1.0315914879758488,
+        1.003363235658424,
+        0.961100115806748,
+        1.033624332750203
+      ],
+      "worst_paired_reduction_pct": -3.3624332750203045
+    },
+    "resample.slerp": {
+      "before_ns": 580336.25,
+      "after_ns": 645908.0625,
+      "latency_reduction_pct": -11.294082251430758,
+      "paired_ratios": [
+        1.1517218792397237,
+        1.0938872541007778,
+        1.0751355889530092,
+        1.1319943909278374
+      ],
+      "worst_paired_reduction_pct": -15.17218792397237
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5607.9520263671875,
+      "after_ns": 5599.938720703125,
+      "latency_reduction_pct": 0.4002323271846908,
+      "paired_ratios": [
+        0.9912009999115122,
+        1.0099260664248424,
+        0.9713966387269496,
+        1.0007943535447938
+      ],
+      "worst_paired_reduction_pct": -0.9926066424842395
+    },
+    "resample.repeated": {
+      "before_ns": 159248.703125,
+      "after_ns": 183567.0859375,
+      "latency_reduction_pct": -16.09257539331681,
+      "paired_ratios": [
+        1.1633091090901433,
+        1.1675770967019399,
+        1.1585423987761927,
+        1.146879850859242
+      ],
+      "worst_paired_reduction_pct": -16.75770967019399
+    },
+    "resample.exact_slerp": {
+      "before_ns": 427632.0546875,
+      "after_ns": 344369.0390625,
+      "latency_reduction_pct": 19.622793159798846,
+      "paired_ratios": [
+        0.8037920662518252,
+        0.8037520705521979,
+        0.7966500986319294,
+        0.8249128196490817
+      ],
+      "worst_paired_reduction_pct": 17.50871803509183
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-03",
+  "validation_sha256": "9ff2d29994a58a80c94997e098aac4daa08c67bd1ade118eb396c020d50aa602"
+}

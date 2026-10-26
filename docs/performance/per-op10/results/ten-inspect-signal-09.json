@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-09",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": -0.0582433932022397,
+  "worst_block_reduction_pct": -0.9955836948908559,
+  "worst_case_reduction_pct": -1.5806074586379282,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "2b645c60db9e8f95e283c867f4b2486a30a24acb9854c4844de9d5534840edad",
+  "operator": "inspect_signal",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for inspect_signal",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 1030050.796875,
+      "after_ns": 1019742.609375,
+      "latency_reduction_pct": 0.7901625184548289,
+      "paired_ratios": [
+        0.9957037220261326,
+        0.9937108530070514,
+        0.990485896623852,
+        0.9824968543130658
+      ],
+      "worst_paired_reduction_pct": 0.4296277973867446
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 830930.3125,
+      "after_ns": 844172.125,
+      "latency_reduction_pct": -0.9442586683984455,
+      "paired_ratios": [
+        1.0010727444567602,
+        1.017812428911209,
+        1.0299140124945885,
+        0.9946906542550246
+      ],
+      "worst_paired_reduction_pct": -2.991401249458847
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1413086.90625,
+      "after_ns": 1411372.8125,
+      "latency_reduction_pct": -0.30575819722871156,
+      "paired_ratios": [
+        0.9989441058249934,
+        1.0190243663487193,
+        1.007171058119581,
+        0.9974799959123102
+      ],
+      "worst_paired_reduction_pct": -1.902436634871929
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 2623779.125,
+      "after_ns": 2642110.0,
+      "latency_reduction_pct": -0.431769591709541,
+      "paired_ratios": [
+        1.0159324644858372,
+        1.0084544740351882,
+        0.9737946830217477,
+        1.0001809177990024
+      ],
+      "worst_paired_reduction_pct": -1.5932464485837183
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 5443395.625,
+      "after_ns": 5424024.375,
+      "latency_reduction_pct": 0.4143199069435166,
+      "paired_ratios": [
+        0.9906946766031643,
+        1.0059808934397012,
+        0.9963693127987585,
+        0.9953442890623713
+      ],
+      "worst_paired_reduction_pct": -0.5980893439701207
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1492033.34375,
+      "after_ns": 1513518.53125,
+      "latency_reduction_pct": -1.5806074586379282,
+      "paired_ratios": [
+        0.9914713121356182,
+        1.014976343134214,
+        1.0166358060385448,
+        1.0221254964656776
+      ],
+      "worst_paired_reduction_pct": -2.212549646567763
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-09",
+  "validation_sha256": "bcd4d95be5df7b83e3e1ca615f0c7d227d54f4c434f4602ae36d4eca5032be99"
+}

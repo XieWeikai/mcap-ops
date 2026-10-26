@@ -1,0 +1,15 @@
+diff --git a/crates/python/src/lib.rs b/crates/python/src/lib.rs
+index 5dcaf42..044f2d2 100644
+--- a/crates/python/src/lib.rs
++++ b/crates/python/src/lib.rs
+@@ -61,9 +61,7 @@ fn methods(value: &str) -> PyResult<sampling::Method> {
+ fn numpy_values<'py>(py: Python<'py>, mut values: Vec<f64>) -> Bound<'py, numpy::PyArray1<f64>> {
+     // The previous JSON bridge mapped all non-finite floats to NumPy NaN.
+     for value in &mut values {
+-        if !value.is_finite() {
+-            *value = f64::NAN;
+-        }
++        *value = if value.is_finite() { *value } else { f64::NAN };
+     }
+     values.into_pyarray(py)
+ }

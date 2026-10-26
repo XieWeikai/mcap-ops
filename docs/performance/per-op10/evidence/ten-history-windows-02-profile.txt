@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-history-windows-02/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 49995145
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-history-windows-02 --case history_windows.separate,history_windows.overlap --profile (PID 1564661, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+32,894,064 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                   file:function
+--------------------------------------------------------------------------------
+32,894,064 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+32,894,064 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+32,894,064 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+32,894,064 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+32,894,064 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+32,894,064 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+32,894,064 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-history-windows-02]
+32,894,064 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-history-windows-02]
+32,894,064 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-history-windows-02]
+32,894,064 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-history-windows-02]
+32,894,064 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+32,894,064 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-history-windows-02]
+32,894,064 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-history-windows-02]
+32,894,064 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-history-windows-02]
+32,850,183 (99.87%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/ten-history-windows-02]
+32,849,769 (99.87%)  ./crates/core/src/sampling.rs:mcap_ops_core::sampling::history_windows
+21,205,324 (64.47%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::history_windows [./.artifacts/rsi/bin/ten-history-windows-02]
+16,565,173 (50.36%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::resample [./.artifacts/rsi/bin/ten-history-windows-02]
+ 3,770,533 (11.46%)  crates/core/src/sampling.rs:mcap_ops_core::sampling::Sampled::empty [./.artifacts/rsi/bin/ten-history-windows-02]
+ 3,645,831 (11.08%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::Sampled::empty
+ 3,131,931 ( 9.52%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::history_windows
+ 2,354,062 ( 7.16%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 2,219,955 ( 6.75%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::sampling::history_windows
+ 2,160,324 ( 6.57%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::sampling::resample
+ 2,100,687 ( 6.39%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::sampling::resample
+ 2,040,300 ( 6.20%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::sampling::resample
+ 2,034,048 ( 6.18%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 1,691,781 ( 5.14%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/collections/binary_heap/mod.rs:mcap_ops_core::sampling::history_windows
+ 1,612,800 ( 4.90%)  crates/core/src/lib.rs:mcap_ops_core::sampling::resample
+ 1,458,609 ( 4.43%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:mcap_ops_core::sampling::history_windows
+ 1,093,836 ( 3.33%)  ./crates/core/src/time.rs:mcap_ops_core::time::require_strict
+ 1,080,162 ( 3.28%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:mcap_ops_core::sampling::resample
+ 1,012,308 ( 3.08%)  crates/core/src/time.rs:mcap_ops_core::time::require_strict [./.artifacts/rsi/bin/ten-history-windows-02]
+   599,868 ( 1.82%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:mcap_ops_core::sampling::history_windows
+   480,072 ( 1.46%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/non_null.rs:mcap_ops_core::sampling::resample
+   420,063 ( 1.28%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::sampling::resample
+   384,003 ( 1.17%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mut_ptr.rs:mcap_ops_core::sampling::history_windows
+   360,054 ( 1.09%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/int_macros.rs:mcap_ops_core::sampling::resample
+   336,051 ( 1.02%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/non_null.rs:mcap_ops_core::sampling::history_windows
+   311,901 ( 0.95%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/tuple.rs:mcap_ops_core::sampling::history_windows
+   288,030 ( 0.88%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/option.rs:mcap_ops_core::sampling::history_windows
+   254,966 ( 0.78%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/raw_vec/mod.rs:mcap_ops_core::sampling::history_windows
+   200,496 ( 0.61%)  ./malloc/./malloc/malloc.c:calloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+   197,640 ( 0.60%)  ./malloc/../string/bits/string_fortified.h:calloc
+   197,604 ( 0.60%)  ???:0x00000000049aa740 [???]
+   194,587 ( 0.59%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/slice.rs:mcap_ops_core::sampling::history_windows
+   194,542 ( 0.59%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/slice.rs:<T as alloc::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec [./.artifacts/rsi/bin/ten-history-windows-02]
+   192,156 ( 0.58%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:<T as alloc::slice::<impl [T]>::to_vec_in::ConvertVec>::to_vec
+   192,042 ( 0.58%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::sampling::history_windows
+   144,201 ( 0.44%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/adapters/zip.rs:mcap_ops_core::sampling::history_windows
+   144,105 ( 0.44%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::sampling::history_windows
+   123,343 ( 0.37%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:mcap_ops_core::sampling::Sampled::empty
+   120,018 ( 0.36%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter.rs:mcap_ops_core::sampling::resample
+   120,006 ( 0.36%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/traits/iterator.rs:mcap_ops_core::sampling::resample
+    96,000 ( 0.29%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/int_macros.rs:mcap_ops_core::sampling::history_windows
+    96,000 ( 0.29%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/const_ptr.rs:mcap_ops_core::sampling::history_windows
+    90,528 ( 0.28%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/spec_from_elem.rs:<T as alloc::vec::spec_from_elem::SpecFromElem>::from_elem [./.artifacts/rsi/bin/ten-history-windows-02]
+    90,441 ( 0.27%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:<T as alloc::vec::spec_from_elem::SpecFromElem>::from_elem
+    81,024 ( 0.25%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter.rs:mcap_ops_core::time::require_strict
+    60,009 ( 0.18%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/adapters/enumerate.rs:mcap_ops_core::sampling::resample
+    48,003 ( 0.15%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/mod.rs:mcap_ops_core::sampling::history_windows
+    24,072 ( 0.07%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter.rs:mcap_ops_core::sampling::history_windows
+    24,036 ( 0.07%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/traits/iterator.rs:mcap_ops_core::sampling::history_windows
+    19,568 ( 0.06%)  ./malloc/./malloc/malloc.c:free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    19,192 ( 0.06%)  ./malloc/./malloc/malloc.c:malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    19,150 ( 0.06%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/iter.rs:operator_benchmark::Runner::bench
+    17,402 ( 0.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/str/pattern.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match [./.artifacts/rsi/bin/ten-history-windows-02]
+    17,258 ( 0.05%)  ./malloc/./malloc/malloc.c:_int_malloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    16,396 ( 0.05%)  ./malloc/./malloc/malloc.c:_int_free [/usr/lib/x86_64-linux-gnu/libc.so.6]
+    14,181 ( 0.04%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<mcap_ops_core::sampling::Sampled> [./.artifacts/rsi/bin/ten-history-windows-02]
+    13,974 ( 0.04%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:core::ptr::drop_in_place<mcap_ops_core::sampling::Sampled>
+    11,909 ( 0.04%)  ./malloc/./malloc/malloc.c:_int_free_merge_chunk [/usr/lib/x86_64-linux-gnu/libc.so.6]
+     9,822 ( 0.03%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:operator_benchmark::Runner::bench
+     9,252 ( 0.03%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/memchr.rs:<core::str::pattern::CharSearcher as core::str::pattern::Searcher>::next_match
+     7,259 ( 0.02%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/io/stdio.rs:std::io::stdio::_print [./.artifacts/rsi/bin/ten-history-windows-02]

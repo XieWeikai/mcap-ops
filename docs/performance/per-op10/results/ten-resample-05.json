@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-05",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": 3.173563810795088,
+  "worst_block_reduction_pct": 1.6860617508169473,
+  "worst_case_reduction_pct": 0.021489303293087403,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. A NaN or infinite endpoint cannot yield a finite weighted sum under IEEE arithmetic, including zero-weight endpoints.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "f3f1acb47a0a6b2686db4dbf2aeb13b1a1637f5f9a98567976fd67fd1adfcdc3",
+  "operator": "resample",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "infer interpolation input finiteness from the computed output",
+  "profile_hotspot": "A NaN or infinite endpoint cannot yield a finite weighted sum under IEEE arithmetic, including zero-weight endpoints.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. A NaN or infinite endpoint cannot yield a finite weighted sum under IEEE arithmetic, including zero-weight endpoints.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 217881.83984375,
+      "after_ns": 213837.92578125,
+      "latency_reduction_pct": 2.0986962969624434,
+      "paired_ratios": [
+        0.9965843687592059,
+        0.9614417053015453,
+        0.9478816182455315,
+        1.009491129186024
+      ],
+      "worst_paired_reduction_pct": -0.9491129186024017
+    },
+    "resample.nearest": {
+      "before_ns": 233676.84765625,
+      "after_ns": 226609.25,
+      "latency_reduction_pct": 2.8210390743736324,
+      "paired_ratios": [
+        0.9662761099128053,
+        0.9750532854295288,
+        0.9703474895226876,
+        0.9732317289898399
+      ],
+      "worst_paired_reduction_pct": 2.494671457047115
+    },
+    "resample.linear": {
+      "before_ns": 408266.2265625,
+      "after_ns": 379054.3203125,
+      "latency_reduction_pct": 6.9269598935280285,
+      "paired_ratios": [
+        0.9180429767651478,
+        0.920396800075671,
+        0.947262625631103,
+        0.9410640020537685
+      ],
+      "worst_paired_reduction_pct": 5.273737436889703
+    },
+    "resample.slerp": {
+      "before_ns": 576250.640625,
+      "after_ns": 567276.9296875,
+      "latency_reduction_pct": 1.780937861905496,
+      "paired_ratios": [
+        0.9691255911735673,
+        0.9961317920599508,
+        0.9835153074381773,
+        0.9808659353237128
+      ],
+      "worst_paired_reduction_pct": 0.3868207940049162
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5572.4974365234375,
+      "after_ns": 5534.231201171875,
+      "latency_reduction_pct": 0.509928517922742,
+      "paired_ratios": [
+        1.00178845286521,
+        0.9899599202553223,
+        0.9533264013429525,
+        0.9998415093862228
+      ],
+      "worst_paired_reduction_pct": -0.17884528652098997
+    },
+    "resample.repeated": {
+      "before_ns": 157848.0078125,
+      "after_ns": 158119.1484375,
+      "latency_reduction_pct": 0.021489303293087403,
+      "paired_ratios": [
+        0.9415848667918434,
+        0.9826610392619056,
+        1.0182145592949365,
+        1.0169091746722327
+      ],
+      "worst_paired_reduction_pct": -1.8214559294936539
+    },
+    "resample.exact_slerp": {
+      "before_ns": 433124.640625,
+      "after_ns": 411018.3203125,
+      "latency_reduction_pct": 4.439532821196424,
+      "paired_ratios": [
+        0.9365203650216483,
+        0.9652543609572253,
+        0.9483901354185644,
+        0.962819208157507
+      ],
+      "worst_paired_reduction_pct": 3.4745639042774723
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-05",
+  "validation_sha256": "af7d5a8cd9dce5d9364e07f4d852b1fa14530865302c95ee34f8533e58708c53"
+}

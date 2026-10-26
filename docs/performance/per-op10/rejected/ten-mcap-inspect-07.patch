@@ -1,0 +1,59 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index fce7c44..edbbf40 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -230,28 +230,33 @@ pub fn inspect_mcap(
+         *bytes += message.data.len() as u64;
+     }
+     let mut channels = Vec::new();
+-    for id in 0..=u16::MAX {
+-        let Some(channel) = reader.reader.get_channel(id) else {
+-            continue;
+-        };
+-        if !filter.topics.is_empty() && !filter.topics.contains(&channel.topic) {
+-            continue;
++    for base in (0u32..65536).step_by(32) {
++        let slots: [_; 32] =
++            std::array::from_fn(|index| reader.reader.get_channel((base + index as u32) as u16));
++        for (offset, channel) in slots.into_iter().enumerate() {
++            let id = (base + offset as u32) as u16;
++            let Some(channel) = channel else {
++                continue;
++            };
++            if !filter.topics.is_empty() && !filter.topics.contains(&channel.topic) {
++                continue;
++            }
++            let (logs, pubs, payload_bytes) = times.remove(&id).unwrap_or_default();
++            channels.push(ChannelReport {
++                channel_id: id,
++                topic: channel.topic.clone(),
++                message_encoding: channel.message_encoding.clone(),
++                schema_name: channel.schema.as_ref().map(|s| s.name.clone()),
++                schema_encoding: channel.schema.as_ref().map(|s| s.encoding.clone()),
++                schema_sha256: channel
++                    .schema
++                    .as_ref()
++                    .map(|s| format!("{:x}", Sha256::digest(&s.data))),
++                payload_bytes,
++                log_time: inspect_time(&logs, max_gap_ns)?,
++                publish_time: inspect_time(&pubs, max_gap_ns)?,
++            });
+         }
+-        let (logs, pubs, payload_bytes) = times.remove(&id).unwrap_or_default();
+-        channels.push(ChannelReport {
+-            channel_id: id,
+-            topic: channel.topic.clone(),
+-            message_encoding: channel.message_encoding.clone(),
+-            schema_name: channel.schema.as_ref().map(|s| s.name.clone()),
+-            schema_encoding: channel.schema.as_ref().map(|s| s.encoding.clone()),
+-            schema_sha256: channel
+-                .schema
+-                .as_ref()
+-                .map(|s| format!("{:x}", Sha256::digest(&s.data))),
+-            payload_bytes,
+-            log_time: inspect_time(&logs, max_gap_ns)?,
+-            publish_time: inspect_time(&pubs, max_gap_ns)?,
+-        });
+     }
+     Ok(McapReport {
+         format: "mcap-ops-inspection-v1".into(),

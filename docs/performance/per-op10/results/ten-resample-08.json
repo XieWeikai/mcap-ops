@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-08",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": -0.6672295841870568,
+  "worst_block_reduction_pct": -1.0555346684803846,
+  "worst_case_reduction_pct": -10.067101121186806,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "e7bd3a3e75b82a0ef7b535b7a58ded1110ad487afb7bd0c578fa7a116e8efacf",
+  "operator": "resample",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for resample",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 218146.71875,
+      "after_ns": 239477.5,
+      "latency_reduction_pct": -10.067101121186806,
+      "paired_ratios": [
+        1.1177132935489011,
+        1.083628728874835,
+        1.1212449566891451,
+        1.0636397262070472
+      ],
+      "worst_paired_reduction_pct": -12.124495668914514
+    },
+    "resample.nearest": {
+      "before_ns": 234559.98046875,
+      "after_ns": 251726.31640625,
+      "latency_reduction_pct": -5.889910319700276,
+      "paired_ratios": [
+        1.1019191751350272,
+        1.0651254136218682,
+        1.0526727927721375,
+        1.0489051121369284
+      ],
+      "worst_paired_reduction_pct": -10.191917513502723
+    },
+    "resample.linear": {
+      "before_ns": 403314.6953125,
+      "after_ns": 396030.7265625,
+      "latency_reduction_pct": 2.284107774551858,
+      "paired_ratios": [
+        0.9704572387889703,
+        0.9793761465958317,
+        0.9849897477219488,
+        0.9749416979131312
+      ],
+      "worst_paired_reduction_pct": 1.5010252278051195
+    },
+    "resample.slerp": {
+      "before_ns": 577236.9296875,
+      "after_ns": 590829.8671875,
+      "latency_reduction_pct": -3.0314510618170365,
+      "paired_ratios": [
+        1.0146122725977837,
+        1.028104235252928,
+        1.0325247859834128,
+        1.0387938657318696
+      ],
+      "worst_paired_reduction_pct": -3.8793865731869603
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5615.6746826171875,
+      "after_ns": 5579.3529052734375,
+      "latency_reduction_pct": 0.44213525080798455,
+      "paired_ratios": [
+        0.9993699193604652,
+        1.0026303686874305,
+        0.987624505717424,
+        0.9917873756233753
+      ],
+      "worst_paired_reduction_pct": -0.26303686874304955
+    },
+    "resample.repeated": {
+      "before_ns": 159198.62109375,
+      "after_ns": 136993.81640625,
+      "latency_reduction_pct": 13.98230954626094,
+      "paired_ratios": [
+        0.84128554500867,
+        0.8540006556898001,
+        0.8810429622264062,
+        0.8663531533849812
+      ],
+      "worst_paired_reduction_pct": 11.89570377735938
+    },
+    "resample.exact_slerp": {
+      "before_ns": 424866.890625,
+      "after_ns": 439679.4140625,
+      "latency_reduction_pct": -3.791622620185575,
+      "paired_ratios": [
+        1.0422499658610032,
+        1.0379006687506875,
+        1.0303996170090022,
+        1.037931783653024
+      ],
+      "worst_paired_reduction_pct": -4.224996586100316
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-08",
+  "validation_sha256": "b3b50f7fe99b1ec8a824c480e126555638a1c5f3079815c92dd01167d830a40b"
+}

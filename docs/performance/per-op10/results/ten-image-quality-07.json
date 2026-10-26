@@ -1,0 +1,53 @@
+{
+  "label": "ten-image-quality-07",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": 4.561434168855849,
+  "worst_block_reduction_pct": 3.9842440033783677,
+  "worst_case_reduction_pct": 2.6900183216372,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Independent accumulators expose instruction-level parallelism without fast-math or reduced precision.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "40213e066a26b266c0a7aa6ac0a21c1c06b6741196eb88fface94163b39d4880",
+  "operator": "image_quality",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "use 4 independent luminance reduction lanes",
+  "profile_hotspot": "Independent accumulators expose instruction-level parallelism without fast-math or reduced precision.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Independent accumulators expose instruction-level parallelism without fast-math or reduced precision.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 2693327.0,
+      "after_ns": 2638626.8125,
+      "latency_reduction_pct": 2.6900183216372,
+      "paired_ratios": [
+        0.968954195047765,
+        0.9402998969677986,
+        0.9897138823007696,
+        0.977245438519491
+      ],
+      "worst_paired_reduction_pct": 1.028611769923038
+    },
+    "image_quality.noise": {
+      "before_ns": 1267441.375,
+      "after_ns": 1179957.4375,
+      "latency_reduction_pct": 6.023356346441277,
+      "paired_ratios": [
+        0.9422581792032909,
+        0.9372746938678835,
+        0.9181456498589465,
+        0.9433684759449417
+      ],
+      "worst_paired_reduction_pct": 5.6631524055058335
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-quality-07",
+  "validation_sha256": "2fd878006eba2887acca7576c9973e5ee345c6a98e633520dbb97163ceb5e513"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-07",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": 0.7081541750429854,
+  "worst_block_reduction_pct": -3.3952490994331397,
+  "worst_case_reduction_pct": 0.5339010827988044,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The generation order is already step-major; avoid repeated index multiplication without changing shape.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "cbcfe2d5f888bd93534112bc22b5d479390bac43114ff515f0bf3c4c71d43f6b",
+  "operator": "history_windows",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "derive flat history destinations from request length",
+  "profile_hotspot": "The generation order is already step-major; avoid repeated index multiplication without changing shape.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The generation order is already step-major; avoid repeated index multiplication without changing shape.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 353292.234375,
+      "after_ns": 352324.1640625,
+      "latency_reduction_pct": 0.5339010827988044,
+      "paired_ratios": [
+        0.996672171371114,
+        0.9926498069729099,
+        1.0400533508643888,
+        0.9878037068708765
+      ],
+      "worst_paired_reduction_pct": -4.005335086438877
+    },
+    "history_windows.overlap": {
+      "before_ns": 580419.9296875,
+      "after_ns": 575304.1484375,
+      "latency_reduction_pct": 0.8808590243746472,
+      "paired_ratios": [
+        0.9861755480742719,
+        0.9962072714382353,
+        1.0278874182222368,
+        0.9836391653231501
+      ],
+      "worst_paired_reduction_pct": -2.7887418222236837
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-07",
+  "validation_sha256": "4e9bd235f5ec444e356a17158ed32fa2d9d659d1bbe497a519a65f487f895ef9"
+}

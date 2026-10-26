@@ -1,0 +1,156 @@
+{
+  "label": "ten-image-transform-10",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_transform.gradient",
+    "image_transform.noise"
+  ],
+  "geomean_latency_reduction_pct": -0.3177032869244645,
+  "worst_block_reduction_pct": -1.0747212207897094,
+  "worst_case_reduction_pct": -0.5187738763844152,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "6d9f5b657acb6617de6d76f1540d587303af55ca8257fc7a93257a12fce09fd4",
+  "png_size_pairs": [
+    [
+      94331,
+      94331
+    ],
+    [
+      989988,
+      989988
+    ],
+    [
+      88,
+      88
+    ],
+    [
+      88,
+      88
+    ],
+    [
+      88,
+      88
+    ],
+    [
+      88,
+      88
+    ],
+    [
+      107,
+      107
+    ],
+    [
+      107,
+      107
+    ],
+    [
+      107,
+      107
+    ],
+    [
+      107,
+      107
+    ],
+    [
+      132,
+      132
+    ],
+    [
+      132,
+      132
+    ],
+    [
+      132,
+      132
+    ],
+    [
+      132,
+      132
+    ],
+    [
+      212,
+      212
+    ],
+    [
+      212,
+      212
+    ],
+    [
+      242,
+      242
+    ],
+    [
+      242,
+      242
+    ],
+    [
+      4016,
+      4016
+    ],
+    [
+      4016,
+      4016
+    ],
+    [
+      6817,
+      6817
+    ],
+    [
+      6817,
+      6817
+    ],
+    [
+      214,
+      214
+    ],
+    [
+      220,
+      220
+    ],
+    [
+      193,
+      193
+    ]
+  ],
+  "png_max_growth_ratio": 1.0,
+  "operator": "image_transform",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for image_transform",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "image_transform.gradient": {
+      "before_ns": 5502393.125,
+      "after_ns": 5530939.0,
+      "latency_reduction_pct": -0.5187738763844152,
+      "paired_ratios": [
+        1.0058809212805888,
+        1.0044945562470993,
+        0.9940153459824717,
+        1.0242062489939434
+      ],
+      "worst_paired_reduction_pct": -2.4206248993943413
+    },
+    "image_transform.noise": {
+      "before_ns": 4162276.375,
+      "after_ns": 4127970.875,
+      "latency_reduction_pct": 0.34646432515528236,
+      "paired_ratios": [
+        1.0156370454719654,
+        1.001840639810932,
+        0.9912300736859624,
+        0.9825997945596757
+      ],
+      "worst_paired_reduction_pct": -1.5637045471965427
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-transform-10",
+  "validation_sha256": "6b3c73810b9b0ddd6062f77fd2190177c9ffb962e722d0144988cabc246b4bfc"
+}

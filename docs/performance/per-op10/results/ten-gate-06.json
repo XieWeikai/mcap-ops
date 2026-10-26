@@ -1,0 +1,53 @@
+{
+  "label": "ten-gate-06",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": -2.724895233574931,
+  "worst_block_reduction_pct": -4.891043155859154,
+  "worst_case_reduction_pct": -5.49814500727801,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The earlier switch replaced Debug formatting; compare a fixed table without changing spelling or reason ownership.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "c5336b29c2ea47617fb0746e0df6c09e9d51a67fbeb25403526063a96b6a64bb",
+  "operator": "gate",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "look up static issue names by their enum discriminant",
+  "profile_hotspot": "The earlier switch replaced Debug formatting; compare a fixed table without changing spelling or reason ownership.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The earlier switch replaced Debug formatting; compare a fixed table without changing spelling or reason ownership.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 9.090160369873047,
+      "after_ns": 9.21559476852417,
+      "latency_reduction_pct": -0.8037935789116268,
+      "paired_ratios": [
+        0.9896171121777111,
+        1.0264587594005217,
+        1.043486184956518,
+        0.9883457967992204
+      ],
+      "worst_paired_reduction_pct": -4.3486184956518015
+    },
+    "gate.fail": {
+      "before_ns": 30.60843515396118,
+      "after_ns": 32.10567855834961,
+      "latency_reduction_pct": -5.49814500727801,
+      "paired_ratios": [
+        1.0556000256832823,
+        1.0379986551577445,
+        1.0543628744622782,
+        1.0573903252439116
+      ],
+      "worst_paired_reduction_pct": -5.739032524391163
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-gate-06",
+  "validation_sha256": "0a191afa31fe63ea9e995ddf330d6cecdca8772f8afed57cbe154a728565e9e0"
+}

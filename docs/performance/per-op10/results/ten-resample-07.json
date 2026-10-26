@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-07",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": -0.9038792687745323,
+  "worst_block_reduction_pct": -1.5001740430659716,
+  "worst_case_reduction_pct": -7.529298280476837,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Every valid row is fully written; retain NaNs for each missing, future, stale, gap, non-finite and invalid-quaternion outcome.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "efbfdbdd0bbf7894a9d248492785152e92c16b6b716035d3f78fec0b5cdb783c",
+  "operator": "resample",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "allocate sampled values as zeroed storage and fill only invalid rows with NaNs",
+  "profile_hotspot": "Sampled output initialization writes a full NaN buffer before valid interpolation overwrites it.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Every valid row is fully written; retain NaNs for each missing, future, stale, gap, non-finite and invalid-quaternion outcome.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 215242.875,
+      "after_ns": 227271.8125,
+      "latency_reduction_pct": -5.727694477190592,
+      "paired_ratios": [
+        1.0499839040318966,
+        1.0525328251380288,
+        1.062021064405783,
+        1.062084637345189
+      ],
+      "worst_paired_reduction_pct": -6.20846373451891
+    },
+    "resample.nearest": {
+      "before_ns": 234068.31640625,
+      "after_ns": 235272.72265625,
+      "latency_reduction_pct": -0.7800167073461095,
+      "paired_ratios": [
+        0.9887325226820665,
+        1.0082275326025796,
+        1.0073728015443426,
+        1.0105594887041829
+      ],
+      "worst_paired_reduction_pct": -1.0559488704182884
+    },
+    "resample.linear": {
+      "before_ns": 403653.359375,
+      "after_ns": 398024.890625,
+      "latency_reduction_pct": 1.0173080578100624,
+      "paired_ratios": [
+        1.007129437478515,
+        1.005170133598097,
+        0.9744837052457018,
+        0.9526682164372264
+      ],
+      "worst_paired_reduction_pct": -0.7129437478514911
+    },
+    "resample.slerp": {
+      "before_ns": 576477.6953125,
+      "after_ns": 582402.203125,
+      "latency_reduction_pct": -0.15766026039736314,
+      "paired_ratios": [
+        1.0291492592535072,
+        1.0104010540978592,
+        0.9895661006177396,
+        0.9927521511100881
+      ],
+      "worst_paired_reduction_pct": -2.91492592535072
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5559.4442138671875,
+      "after_ns": 5567.644775390625,
+      "latency_reduction_pct": -0.009035390133393939,
+      "paired_ratios": [
+        0.9966614944802452,
+        0.9939723483467854,
+        1.0063089822309308,
+        1.0035192133224227
+      ],
+      "worst_paired_reduction_pct": -0.6308982230930793
+    },
+    "resample.repeated": {
+      "before_ns": 157700.697265625,
+      "after_ns": 169575.0,
+      "latency_reduction_pct": -7.529298280476837,
+      "paired_ratios": [
+        1.076740004058503,
+        1.028081990335552,
+        1.0934932452534345,
+        1.0738459615510338
+      ],
+      "worst_paired_reduction_pct": -9.34932452534345
+    },
+    "resample.exact_slerp": {
+      "before_ns": 427019.0625,
+      "after_ns": 410770.8359375,
+      "latency_reduction_pct": 3.885114570004522,
+      "paired_ratios": [
+        0.9611338277459891,
+        0.9747635037799374,
+        0.9306513888043321,
+        0.9611638808539205
+      ],
+      "worst_paired_reduction_pct": 2.523649622006263
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-07",
+  "validation_sha256": "e3b44c39bfef482cf5998f68b9fbf0ee7eeb6ebc6b618286583d3590ae491eb0"
+}

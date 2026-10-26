@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-read-signal-07",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "mcap_read_signal",
+    "mcap_read_signal.many"
+  ],
+  "geomean_latency_reduction_pct": 0.6834631599747065,
+  "worst_block_reduction_pct": 0.021004673267177587,
+  "worst_case_reduction_pct": 0.2225620995664923,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Measure iterator lowering without early termination or changing full-file validation.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "ad554fd186de166258c2e426da1b987df63c2234614fd1f0515df178260a2d71",
+  "operator": "mcap_read_signal",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "consume decoded messages through a borrowed cursor iterator",
+  "profile_hotspot": "Measure iterator lowering without early termination or changing full-file validation.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Measure iterator lowering without early termination or changing full-file validation.",
+  "case_results": {
+    "mcap_read_signal": {
+      "before_ns": 6290046.125,
+      "after_ns": 6239811.375,
+      "latency_reduction_pct": 0.2225620995664923,
+      "paired_ratios": [
+        0.9967862453220653,
+        1.0041905420868003,
+        0.9770148098933795,
+        0.9987625126866049
+      ],
+      "worst_paired_reduction_pct": -0.4190542086800253
+    },
+    "mcap_read_signal.many": {
+      "before_ns": 1305361.6875,
+      "after_ns": 1294201.5625,
+      "latency_reduction_pct": 1.0825391535618234,
+      "paired_ratios": [
+        0.9900191562713464,
+        0.9954086488178501,
+        0.9883300606574171,
+        0.9871390997645954
+      ],
+      "worst_paired_reduction_pct": 0.45913511821499275
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-read-signal-07",
+  "validation_sha256": "a5060165de79f8b90258e21ee7733ab9f51357c1769acfcd402782fed98b2515"
+}

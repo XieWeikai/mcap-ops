@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-02",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": 3.5713142986752544,
+  "worst_block_reduction_pct": 3.0853755154373275,
+  "worst_case_reduction_pct": -4.454374981939813,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. History deduplication helped earlier; direct resampling also permits identical adjacent target times.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "71f5a46319c7b6a758430345093d4d58e90f55404f78d35ce0c96389c984ee59",
+  "operator": "resample",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reuse sampled values and provenance for duplicate targets",
+  "profile_hotspot": "History deduplication helped earlier; direct resampling also permits identical adjacent target times.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. History deduplication helped earlier; direct resampling also permits identical adjacent target times.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 215488.8515625,
+      "after_ns": 225415.5703125,
+      "latency_reduction_pct": -4.454374981939813,
+      "paired_ratios": [
+        1.0545020494097879,
+        1.0345854502290084,
+        1.0827696164789187,
+        1.0293848367787524
+      ],
+      "worst_paired_reduction_pct": -8.276961647891866
+    },
+    "resample.nearest": {
+      "before_ns": 231766.359375,
+      "after_ns": 241164.109375,
+      "latency_reduction_pct": -4.296365765660837,
+      "paired_ratios": [
+        1.0402226880884677,
+        1.045704627224749,
+        1.05040952435804,
+        1.0288773442871264
+      ],
+      "worst_paired_reduction_pct": -5.0409524358040025
+    },
+    "resample.linear": {
+      "before_ns": 404990.734375,
+      "after_ns": 398652.6484375,
+      "latency_reduction_pct": 1.816097343973011,
+      "paired_ratios": [
+        0.9920188597899912,
+        0.9736124548235492,
+        0.9900655982969906,
+        0.9725918352634102
+      ],
+      "worst_paired_reduction_pct": 0.7981140210008841
+    },
+    "resample.slerp": {
+      "before_ns": 576634.03125,
+      "after_ns": 569679.6796875,
+      "latency_reduction_pct": 0.6455262965278097,
+      "paired_ratios": [
+        1.0081221829364218,
+        0.991304501097511,
+        0.9580692554491875,
+        0.9957849729719327
+      ],
+      "worst_paired_reduction_pct": -0.8122182936421751
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5571.400390625,
+      "after_ns": 5543.1014404296875,
+      "latency_reduction_pct": 0.5638353790491157,
+      "paired_ratios": [
+        0.9875167670952222,
+        1.0077201238621714,
+        1.0012065253237954,
+        0.9740980847698029
+      ],
+      "worst_paired_reduction_pct": -0.7720123862171357
+    },
+    "resample.repeated": {
+      "before_ns": 156391.60546875,
+      "after_ns": 120025.994140625,
+      "latency_reduction_pct": 23.135245041511187,
+      "paired_ratios": [
+        0.774932231260049,
+        0.7585640409721902,
+        0.7651852764810649,
+        0.7721098226887113
+      ],
+      "worst_paired_reduction_pct": 22.506776873995104
+    },
+    "resample.exact_slerp": {
+      "before_ns": 424829.6953125,
+      "after_ns": 408098.1484375,
+      "latency_reduction_pct": 4.189327938944332,
+      "paired_ratios": [
+        0.9565554898031604,
+        0.9461974832298568,
+        0.9596579514179531,
+        0.9821398763580217
+      ],
+      "worst_paired_reduction_pct": 1.786012364197831
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-02",
+  "validation_sha256": "54f410de1d2b6276f15fcebe7d2e6f3bbb1fdaa222111e0bc18877069d9c7352"
+}

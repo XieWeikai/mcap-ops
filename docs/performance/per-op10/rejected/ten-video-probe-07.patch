@@ -1,0 +1,18 @@
+diff --git a/crates/io/src/video.rs b/crates/io/src/video.rs
+index 996149e..e375c76 100644
+--- a/crates/io/src/video.rs
++++ b/crates/io/src/video.rs
+@@ -18,8 +18,11 @@ fn run_tool(program: &OsStr, args: &[&OsStr], timeout: Duration) -> Result<(Stri
+     }
+     let mut stdout = tempfile::tempfile()?;
+     let mut stderr = tempfile::tempfile()?;
+-    let mut child = Command::new(program)
+-        .args(args)
++    let mut command = Command::new(program);
++    for argument in args {
++        command.arg(argument);
++    }
++    let mut child = command
+         .stdin(Stdio::null())
+         .stdout(Stdio::from(stdout.try_clone()?))
+         .stderr(Stdio::from(stderr.try_clone()?))

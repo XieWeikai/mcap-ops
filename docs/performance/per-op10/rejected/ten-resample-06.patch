@@ -1,0 +1,51 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..9c770e3 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -105,15 +105,13 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+                 Method::Previous => before.map(|j| (j, j, 0.0)),
+                 Method::Nearest => {
+                     let chosen = match (before, after) {
+-                        (Some(a), Some(b)) if options.allow_future => Some(
+-                            if i128::from(t) - i128::from(times[a])
+-                                <= i128::from(times[b]) - i128::from(t)
+-                            {
++                        (Some(a), Some(b)) if options.allow_future => {
++                            Some(if t.abs_diff(times[a]) <= times[b].abs_diff(t) {
+                                 a
+                             } else {
+                                 b
+-                            },
+-                        ),
++                            })
++                        }
+                         (Some(a), _) => Some(a),
+                         (None, Some(b)) if options.allow_future => Some(b),
+                         _ => None,
+@@ -121,8 +119,8 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+                     chosen.map(|j| (j, j, 0.0))
+                 }
+                 Method::Linear | Method::Slerp => before.zip(after).map(|(a, b)| {
+-                    let dt = (i128::from(times[b]) - i128::from(times[a])) as f64;
+-                    (a, b, (i128::from(t) - i128::from(times[a])) as f64 / dt)
++                    let dt = (times[b].abs_diff(times[a])) as f64;
++                    (a, b, (t.abs_diff(times[a])) as f64 / dt)
+                 }),
+             }
+         };
+@@ -132,13 +130,9 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+         let future = times[b] > t;
+         let failure = if future && !options.allow_future {
+             Some(Status::Future)
+-        } else if a != b
+-            && i128::from(times[b]) - i128::from(times[a]) > i128::from(options.max_gap_ns)
+-        {
++        } else if a != b && times[b].abs_diff(times[a]) > options.max_gap_ns as u64 {
+             Some(Status::Gap)
+-        } else if a == b
+-            && (i128::from(t) - i128::from(times[a])).abs() > i128::from(options.max_age_ns)
+-        {
++        } else if a == b && t.abs_diff(times[a]) > options.max_age_ns as u64 {
+             Some(Status::Stale)
+         } else {
+             None

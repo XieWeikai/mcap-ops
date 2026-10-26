@@ -1,0 +1,40 @@
+{
+  "label": "ten-video-validate-09",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 1.5098412688106189,
+  "worst_block_reduction_pct": 0.32968443720938767,
+  "worst_case_reduction_pct": 1.5098412688106189,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Measure the combined worker configuration separately from each individual limit.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "7447da49a47be9819d4c389d1e846c06e4391f3ad5ec42457ff3a342782cb74d",
+  "operator": "video_validate",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "use one decoder and one filter worker together",
+  "profile_hotspot": "Measure the combined worker configuration separately from each individual limit.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Measure the combined worker configuration separately from each individual limit.",
+  "case_results": {
+    "video_validate": {
+      "before_ns": 55934481.5,
+      "after_ns": 55118984.5,
+      "latency_reduction_pct": 1.5098412688106189,
+      "paired_ratios": [
+        0.9967031556279061,
+        0.9838683174895455,
+        0.9858349507828121,
+        0.9839682238409756
+      ],
+      "worst_paired_reduction_pct": 0.32968443720938767
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-validate-09",
+  "validation_sha256": "2bd9cacc9c6d75486b688d6c5c75cdaa65306f5bb53414d1a0089c4d8adab14f"
+}

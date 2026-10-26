@@ -1,0 +1,14 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..10673ae 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -391,7 +391,8 @@ pub fn read_signal(
+     }
+     let mut timestamps = Vec::new();
+     let mut values = Vec::new();
+-    for item in RawReader::open(path, filter, limits)? {
++    let mut reader = RawReader::open(path, filter, limits)?;
++    for item in std::iter::from_fn(|| reader.next()) {
+         for sample in decoder.decode(&item?)? {
+             if timestamps.len() >= max_samples {
+                 return Err(invalid("decoded signal exceeds max_samples"));

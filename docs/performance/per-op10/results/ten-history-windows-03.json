@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-03",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": 7.944473961427989,
+  "worst_block_reduction_pct": 6.323064765038044,
+  "worst_case_reduction_pct": -3.331197307136091,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. For short history contexts, a small head scan can beat heap maintenance and whole-request sorting.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "e6ad7b1a4104dbb33dabe98581e22b393ce7a8e472d79e4f37fb838aba78206f",
+  "operator": "history_windows",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "merge history streams by scanning their current heads",
+  "profile_hotspot": "For short history contexts, a small head scan can beat heap maintenance and whole-request sorting.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. For short history contexts, a small head scan can beat heap maintenance and whole-request sorting.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 353242.1484375,
+      "after_ns": 366426.0625,
+      "latency_reduction_pct": -3.331197307136091,
+      "paired_ratios": [
+        1.0226535223030495,
+        1.0388033024072114,
+        1.0437470901767645,
+        1.0278206437355104
+      ],
+      "worst_paired_reduction_pct": -4.374709017676448
+    },
+    "history_windows.overlap": {
+      "before_ns": 573351.6171875,
+      "after_ns": 470270.671875,
+      "latency_reduction_pct": 17.97861602546622,
+      "paired_ratios": [
+        0.8204247632418398,
+        0.8447574410555068,
+        0.8200029162488359,
+        0.8017202638565285
+      ],
+      "worst_paired_reduction_pct": 15.524255894449324
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-03",
+  "validation_sha256": "ffa2c5d4970be6bb443554be036a9ff1d30fa3076d23c9580e3836102d85efe9"
+}

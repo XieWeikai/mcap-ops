@@ -1,0 +1,66 @@
+{
+  "label": "ten-json-decode-09",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "json_decode",
+    "json_decode.deep",
+    "json_decode.wide"
+  ],
+  "geomean_latency_reduction_pct": 1.2781014045761485,
+  "worst_block_reduction_pct": -1.460750202322636,
+  "worst_case_reduction_pct": 0.9575996026607303,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "7207a22130155a61306569b636b107bfeffda8a4fd67b9571f4d60996be848de",
+  "operator": "json_decode",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for json_decode",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "json_decode": {
+      "before_ns": 216.39453887939453,
+      "after_ns": 213.7343406677246,
+      "latency_reduction_pct": 0.9575996026607303,
+      "paired_ratios": [
+        0.9947337347673182,
+        0.9630202313817501,
+        1.0108639028103161,
+        0.9861142731794673
+      ],
+      "worst_paired_reduction_pct": -1.0863902810316128
+    },
+    "json_decode.deep": {
+      "before_ns": 231.3792953491211,
+      "after_ns": 227.02689361572266,
+      "latency_reduction_pct": 2.079823744396303,
+      "paired_ratios": [
+        1.0054281564189964,
+        0.9666179403014695,
+        0.9917855848106045,
+        0.9647180008038794
+      ],
+      "worst_paired_reduction_pct": -0.542815641899641
+    },
+    "json_decode.wide": {
+      "before_ns": 932.9306793212891,
+      "after_ns": 901.1501770019531,
+      "latency_reduction_pct": 3.904598550261329,
+      "paired_ratios": [
+        0.9431592190575621,
+        0.9389256398120369,
+        0.9787488099372113,
+        1.0979095948004214
+      ],
+      "worst_paired_reduction_pct": -9.790959480042138
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-json-decode-09",
+  "validation_sha256": "63790a5bc838777687b1b59c25a9c484b10db1025eaa2028d5e545d93b936035"
+}

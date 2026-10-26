@@ -1,0 +1,60 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-inspect-signal-01/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 358772490
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case inspect_signal.basic,inspect_signal.hampel,inspect_signal.wide_hampel,inspect_signal.random_hampel,inspect_signal.constant_hampel,inspect_signal.issues --profile (PID 1592312, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+1,920,759,133 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                      file:function
+--------------------------------------------------------------------------------
+1,920,759,133 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+1,920,759,133 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+1,920,759,133 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+1,920,759,133 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+1,920,759,133 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+1,920,759,133 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+1,920,759,133 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+1,920,759,133 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+1,920,759,133 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+1,920,759,133 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+1,920,759,133 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+1,920,759,133 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+1,920,759,133 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+1,920,759,133 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+1,920,652,095 (99.99%)  ./crates/core/src/quality.rs:mcap_ops_core::quality::inspect_signal
+  693,681,903 (36.11%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/mod.rs:mcap_ops_core::quality::inspect_signal
+  692,505,903 (36.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/shared/mod.rs:core::slice::sort::unstable::ipnsort [./.artifacts/rsi/bin/accepted]
+  507,399,822 (26.42%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/quicksort.rs:core::slice::sort::unstable::quicksort::quicksort'2 [./.artifacts/rsi/bin/accepted]
+  400,598,556 (20.86%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/mod.rs:core::slice::sort::unstable::ipnsort
+  400,164,852 (20.83%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/sort/unstable/quicksort.rs:core::slice::sort::unstable::quicksort::quicksort [./.artifacts/rsi/bin/accepted]
+  322,597,299 (16.80%)  crates/core/src/quality.rs:mcap_ops_core::quality::inspect_signal [./.artifacts/rsi/bin/accepted]
+  162,365,040 ( 8.45%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::quality::inspect_signal
+  154,658,280 ( 8.05%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/traits/iterator.rs:mcap_ops_core::quality::inspect_signal
+  153,144,312 ( 7.97%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:core::slice::sort::unstable::ipnsort
+  132,840,195 ( 6.92%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/alloc/src/vec/mod.rs:mcap_ops_core::quality::inspect_signal
+  106,743,090 ( 5.56%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:mcap_ops_core::quality::inspect_signal
+  106,352,451 ( 5.54%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/f64.rs:core::slice::sort::unstable::quicksort::quicksort'2
+   81,900,798 ( 4.26%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::quality::inspect_signal
+   70,749,075 ( 3.68%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::slice::sort::unstable::quicksort::quicksort'2
+   49,693,344 ( 2.59%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/mod.rs:mcap_ops_core::quality::inspect_signal
+   47,167,248 ( 2.46%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:mcap_ops_core::quality::inspect_signal
+   44,670,996 ( 2.33%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/range.rs:mcap_ops_core::quality::inspect_signal
+   43,833,600 ( 2.28%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/range.rs:mcap_ops_core::quality::inspect_signal
+   37,748,559 ( 1.97%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:core::slice::sort::unstable::quicksort::quicksort'2
+

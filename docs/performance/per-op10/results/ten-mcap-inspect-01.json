@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-inspect-01",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "mcap_inspect",
+    "mcap_inspect.many"
+  ],
+  "geomean_latency_reduction_pct": -8.978927046151153,
+  "worst_block_reduction_pct": -9.49049775845323,
+  "worst_case_reduction_pct": -10.462985391302038,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Final channel ordering comes from the complete u16 scan, so the accumulator container need not provide ordering.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "94773a3be6369f1dc296306248c521600ed9d1bafa0d60f149d62fa39764b1ef",
+  "operator": "mcap_inspect",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "accumulate per-channel clocks in a hash map",
+  "profile_hotspot": "Final channel ordering comes from the complete u16 scan, so the accumulator container need not provide ordering.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Final channel ordering comes from the complete u16 scan, so the accumulator container need not provide ordering.",
+  "case_results": {
+    "mcap_inspect": {
+      "before_ns": 1713206.71875,
+      "after_ns": 1881534.375,
+      "latency_reduction_pct": -10.462985391302038,
+      "paired_ratios": [
+        1.1016162783503454,
+        1.1119192399864037,
+        1.1076434294756956,
+        1.0940301857263033
+      ],
+      "worst_paired_reduction_pct": -11.191923998640373
+    },
+    "mcap_inspect.many": {
+      "before_ns": 2009312.875,
+      "after_ns": 2158993.75,
+      "latency_reduction_pct": -7.725749764365064,
+      "paired_ratios": [
+        1.066619663414681,
+        1.0781510624405097,
+        1.0813493607605427,
+        1.0763639328467915
+      ],
+      "worst_paired_reduction_pct": -8.134936076054267
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-inspect-01",
+  "validation_sha256": "79d50bf1668e5acd78866fcbe0b28a5fe0c1ae299b2e1933d9fdc5848bfd5769"
+}

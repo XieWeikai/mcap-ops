@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-06",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": -1.5212732563455234,
+  "worst_block_reduction_pct": -1.968223407135139,
+  "worst_case_reduction_pct": -1.4825979736040162,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Strict centers and ordered nonpositive offsets allow an equivalent full-range span comparison.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "36daa720f56a88c8f8211053687e901e0496ce9c49abd2493228922f3d1b43d9",
+  "operator": "history_windows",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "compare history separation using unsigned spans",
+  "profile_hotspot": "Strict centers and ordered nonpositive offsets allow an equivalent full-range span comparison.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Strict centers and ordered nonpositive offsets allow an equivalent full-range span comparison.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 352812.140625,
+      "after_ns": 357531.5234375,
+      "latency_reduction_pct": -1.3401049580929802,
+      "paired_ratios": [
+        1.0273954334112114,
+        0.9926223117813948,
+        0.9994066657506481,
+        1.0575517646903485
+      ],
+      "worst_paired_reduction_pct": -5.755176469034851
+    },
+    "history_windows.overlap": {
+      "before_ns": 575147.03125,
+      "after_ns": 582586.7109375,
+      "latency_reduction_pct": -1.4825979736040162,
+      "paired_ratios": [
+        1.0119869453294996,
+        1.0176650141425807,
+        1.022249147308105,
+        0.9831687612806188
+      ],
+      "worst_paired_reduction_pct": -2.224914730810501
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-06",
+  "validation_sha256": "e201e5ce82229165a809401fe02c2c3702f48999d3e32a9051200227c5cc6257"
+}

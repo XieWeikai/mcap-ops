@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-09",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": 0.8725835338245891,
+  "worst_block_reduction_pct": -1.8356864879457202,
+  "worst_case_reduction_pct": -0.2625722942723785,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "fde5a9e0cb859a497bbf7f5de63e0f67e5028df0e27d8d66eb5a4ae1236328e3",
+  "operator": "history_windows",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for history_windows",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 354065.859375,
+      "after_ns": 351257.828125,
+      "latency_reduction_pct": 1.0004827218220491,
+      "paired_ratios": [
+        0.9763861467579107,
+        0.9837651507312514,
+        1.0277295836419724,
+        0.9962251948323076
+      ],
+      "worst_paired_reduction_pct": -2.772958364197242
+    },
+    "history_windows.overlap": {
+      "before_ns": 576682.3046875,
+      "after_ns": 576499.4140625,
+      "latency_reduction_pct": -0.2625722942723785,
+      "paired_ratios": [
+        1.0088816832730951,
+        0.9963697626123523,
+        1.0090696237157184,
+        0.9739720784531645
+      ],
+      "worst_paired_reduction_pct": -0.90696237157184
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-09",
+  "validation_sha256": "c455e6be68695537f701b58c32ef15960c4ff56492d528649b7aab2c5c572c86"
+}

@@ -1,0 +1,19 @@
+diff --git a/crates/io/src/video.rs b/crates/io/src/video.rs
+index 996149e..baf83c0 100644
+--- a/crates/io/src/video.rs
++++ b/crates/io/src/video.rs
+@@ -49,11 +49,12 @@ fn run_tool(program: &OsStr, args: &[&OsStr], timeout: Duration) -> Result<(Stri
+         std::thread::sleep(Duration::from_millis(1));
+     };
+     let read = |file: &mut File| -> Result<String> {
+-        if file.metadata()?.len() > MAX_TOOL_OUTPUT {
++        let length = file.metadata()?.len();
++        if length > MAX_TOOL_OUTPUT {
+             return Err(invalid("media tool output too large"));
+         }
+         file.seek(SeekFrom::Start(0))?;
+-        let mut data = Vec::new();
++        let mut data = Vec::with_capacity(length as usize);
+         file.take(MAX_TOOL_OUTPUT + 1).read_to_end(&mut data)?;
+         Ok(String::from_utf8_lossy(&data).into_owned())
+     };

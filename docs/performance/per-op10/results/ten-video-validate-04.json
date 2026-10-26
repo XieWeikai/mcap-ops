@@ -1,0 +1,40 @@
+{
+  "label": "ten-video-validate-04",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": -8.513548788378289,
+  "worst_block_reduction_pct": -9.478206142459534,
+  "worst_case_reduction_pct": -8.513548788378289,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "054fadd3777c7339df95e5de9f294f8cd11b8f06a6dc20af173b32b9888d8a2f",
+  "operator": "video_validate",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "limit FFmpeg decoding to 8 threads",
+  "profile_hotspot": "Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Child startup and decoding dominate; compare worker overhead under the fixed CPU affinity without skipping frames or errors.",
+  "case_results": {
+    "video_validate": {
+      "before_ns": 55859260.0,
+      "after_ns": 60952663.5,
+      "latency_reduction_pct": -8.513548788378289,
+      "paired_ratios": [
+        1.0885214450780412,
+        1.0817495306895244,
+        1.0947820614245953,
+        1.079824004622599
+      ],
+      "worst_paired_reduction_pct": -9.478206142459534
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-validate-04",
+  "validation_sha256": "e6d5ed85ade3ccba57737a9dcb148dc63ec52a32a309d912013b3b5ebfbf06c8"
+}

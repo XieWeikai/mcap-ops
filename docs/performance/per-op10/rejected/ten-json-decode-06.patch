@@ -1,0 +1,13 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..521184b 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -346,7 +346,7 @@ impl SignalDecoder for JsonSignalSpec {
+             })
+             .map_err(|_| invalid("MCAP timestamp exceeds int64"))?
+         };
+-        let mut values = Vec::new();
++        let mut values = Vec::with_capacity(self.channels.min(16));
+         for pointer in &self.fields {
+             let value =
+                 lookup(pointer).ok_or_else(|| invalid(format!("missing field {pointer}")))?;

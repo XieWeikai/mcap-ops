@@ -1,0 +1,12 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..2a746fc 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -379,6 +379,7 @@ impl SignalDecoder for JsonSignalSpec {
+     }
+ }
+ 
++#[inline(never)]
+ pub fn read_signal(
+     path: impl AsRef<Path>,
+     filter: MessageFilter,

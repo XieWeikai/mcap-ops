@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-read-signal-04",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "mcap_read_signal",
+    "mcap_read_signal.many"
+  ],
+  "geomean_latency_reduction_pct": 1.4195653289468035,
+  "worst_block_reduction_pct": -0.10398796290715939,
+  "worst_case_reduction_pct": 0.6708173948807739,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compare slice extension with consuming Vec iteration; keep every decoded row and channel-count check.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "31a31c58b0785b7e15596ed1646da2ff5e617b419bdc6d3515bd0ea38a58c8dc",
+  "operator": "mcap_read_signal",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "copy decoded row slices into accumulated values",
+  "profile_hotspot": "Compare slice extension with consuming Vec iteration; keep every decoded row and channel-count check.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Compare slice extension with consuming Vec iteration; keep every decoded row and channel-count check.",
+  "case_results": {
+    "mcap_read_signal": {
+      "before_ns": 6214568.625,
+      "after_ns": 6116616.875,
+      "latency_reduction_pct": 1.5510279151743078,
+      "paired_ratios": [
+        0.9776613517312568,
+        0.9655572299916373,
+        0.991318089965257,
+        0.9971323366312421
+      ],
+      "worst_paired_reduction_pct": 0.2867663368757878
+    },
+    "mcap_read_signal.many": {
+      "before_ns": 1301530.5,
+      "after_ns": 1294428.8125,
+      "latency_reduction_pct": 0.6708173948807739,
+      "paired_ratios": [
+        0.9468791890552276,
+        0.9963265571090247,
+        0.9902570949933598,
+        1.0049627354311486
+      ],
+      "worst_paired_reduction_pct": -0.4962735431148557
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-read-signal-04",
+  "validation_sha256": "9efb2819652f1caaf68ea91567c0a7b18bad8b7d727293b366a28559aa4cc59c"
+}

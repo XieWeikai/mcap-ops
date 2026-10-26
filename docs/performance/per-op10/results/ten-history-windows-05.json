@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-05",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": -16.19297835782858,
+  "worst_block_reduction_pct": -17.61281169232063,
+  "worst_case_reduction_pct": -32.40702250862171,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Heavily overlapping windows have far fewer unique times; deterministic sorting and destination scatter preserve output order.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "884a036f652b46819876f992bf0dc135028b9cfb586f13c9c185f824867b8573",
+  "operator": "history_windows",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "sort unique history times and index requests by hash",
+  "profile_hotspot": "Heavily overlapping windows have far fewer unique times; deterministic sorting and destination scatter preserve output order.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Heavily overlapping windows have far fewer unique times; deterministic sorting and destination scatter preserve output order.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 353006.0703125,
+      "after_ns": 361622.84375,
+      "latency_reduction_pct": -2.441624012793131,
+      "paired_ratios": [
+        1.03199301356844,
+        0.9896242189749898,
+        1.0374336390082173,
+        1.0168394666874228
+      ],
+      "worst_paired_reduction_pct": -3.743363900821728
+    },
+    "history_windows.overlap": {
+      "before_ns": 579935.15625,
+      "after_ns": 765777.046875,
+      "latency_reduction_pct": -32.40702250862171,
+      "paired_ratios": [
+        1.3270599875313662,
+        1.3210804626410677,
+        1.33336465621043,
+        1.3087453360463548
+      ],
+      "worst_paired_reduction_pct": -33.336465621043
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-05",
+  "validation_sha256": "587fce1d35461a95f2f809942cfe41b3d1e8be81614cf7ade5a33a564ba9dda3"
+}

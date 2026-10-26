@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-read-signal-05",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "mcap_read_signal",
+    "mcap_read_signal.many"
+  ],
+  "geomean_latency_reduction_pct": -0.33807540754482446,
+  "worst_block_reduction_pct": -1.621773476214794,
+  "worst_case_reduction_pct": -1.142810816237505,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Transfer already owned storage once instead of allocating a second initial vector.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "9d54d171575c17f57b9db340aabcad2c45a842e0cb65446ed1835dd79bf7038e",
+  "operator": "mcap_read_signal",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reuse the first decoded value vector as output storage",
+  "profile_hotspot": "Transfer already owned storage once instead of allocating a second initial vector.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Transfer already owned storage once instead of allocating a second initial vector.",
+  "case_results": {
+    "mcap_read_signal": {
+      "before_ns": 6213835.5,
+      "after_ns": 6332757.375,
+      "latency_reduction_pct": -1.142810816237505,
+      "paired_ratios": [
+        0.9922923428128055,
+        1.0305638735119447,
+        0.9783295745388849,
+        1.0361067757200673
+      ],
+      "worst_paired_reduction_pct": -3.6106775720067263
+    },
+    "mcap_read_signal.many": {
+      "before_ns": 1303008.15625,
+      "after_ns": 1303065.125,
+      "latency_reduction_pct": 0.08305066786875592,
+      "paired_ratios": [
+        0.982146762574419,
+        1.0020713038638667,
+        1.0033676688869164,
+        0.9962676827787582
+      ],
+      "worst_paired_reduction_pct": -0.33676688869164195
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-read-signal-05",
+  "validation_sha256": "c0d4f6a22c1fb087ca61995adf1cf3634845a4126bffaa3a4a904c8beafe3bd4"
+}

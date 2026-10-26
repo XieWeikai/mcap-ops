@@ -1,0 +1,53 @@
+{
+  "label": "ten-gate-04",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": -11.344989181376919,
+  "worst_block_reduction_pct": -14.272281872414826,
+  "worst_case_reduction_pct": -18.413660801925992,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The earlier unconditional reserve slowed passing reports; exact zero capacity keeps them allocation-free.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "7289fb29c308f38e1ca0a73efa5e3d00622e631e0f26e4a72b6b0d66e47731b0",
+  "operator": "gate",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve the exact number of rejection reasons",
+  "profile_hotspot": "The earlier unconditional reserve slowed passing reports; exact zero capacity keeps them allocation-free.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The earlier unconditional reserve slowed passing reports; exact zero capacity keeps them allocation-free.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 9.143497467041016,
+      "after_ns": 10.750761985778809,
+      "latency_reduction_pct": -18.413660801925992,
+      "paired_ratios": [
+        1.1498843954035993,
+        1.2968733084063824,
+        0.8127568467235066,
+        1.2183888206349207
+      ],
+      "worst_paired_reduction_pct": -29.68733084063824
+    },
+    "gate.fail": {
+      "before_ns": 30.562439441680908,
+      "after_ns": 31.280763149261478,
+      "latency_reduction_pct": -2.4073702086049753,
+      "paired_ratios": [
+        1.041252257230207,
+        1.0068951469418923,
+        0.9038803086111661,
+        1.0529980867489608
+      ],
+      "worst_paired_reduction_pct": -5.299808674896078
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-gate-04",
+  "validation_sha256": "973fd7ed2130a5594a3001c14a4e71aff79e6689ac5e8ba9a24e280a17e17251"
+}

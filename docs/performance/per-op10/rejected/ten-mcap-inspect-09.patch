@@ -1,0 +1,12 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index fce7c44..b97e206 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -204,6 +204,7 @@ pub struct McapReport {
+     pub channels: Vec<ChannelReport>,
+ }
+ 
++#[inline(never)]
+ pub fn inspect_mcap(
+     path: impl AsRef<Path>,
+     filter: MessageFilter,

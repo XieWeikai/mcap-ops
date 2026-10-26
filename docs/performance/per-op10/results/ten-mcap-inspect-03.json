@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-inspect-03",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "mcap_inspect",
+    "mcap_inspect.many"
+  ],
+  "geomean_latency_reduction_pct": 2.723505805425308,
+  "worst_block_reduction_pct": 1.0567028601541573,
+  "worst_case_reduction_pct": 0.4025499351884676,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The old post-hoc equality scan failed; avoid the duplicate vector during ingestion and clone prior logs exactly at the first divergence.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "617b0b46bb312d688346e56be0c02cd7e04d910ede58c6673d46b5332c1237fb",
+  "operator": "mcap_inspect",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "materialize a publish-clock vector only after it differs",
+  "profile_hotspot": "The old post-hoc equality scan failed; avoid the duplicate vector during ingestion and clone prior logs exactly at the first divergence.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The old post-hoc equality scan failed; avoid the duplicate vector during ingestion and clone prior logs exactly at the first divergence.",
+  "case_results": {
+    "mcap_inspect": {
+      "before_ns": 1714831.65625,
+      "after_ns": 1709910.6875,
+      "latency_reduction_pct": 0.4025499351884676,
+      "paired_ratios": [
+        0.9957665428069032,
+        1.0080722512702032,
+        0.9785427309423046,
+        0.9961824584893274
+      ],
+      "worst_paired_reduction_pct": -0.8072251270203168
+    },
+    "mcap_inspect.many": {
+      "before_ns": 2039305.03125,
+      "after_ns": 1930964.9375,
+      "latency_reduction_pct": 4.724029475294911,
+      "paired_ratios": [
+        0.9831396846602263,
+        0.9462183308592358,
+        0.9593010796348661,
+        0.929855176791778
+      ],
+      "worst_paired_reduction_pct": 1.6860315339773724
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-inspect-03",
+  "validation_sha256": "b3fc5cecd3273b3e33442eb416a97e7b4307c3dd3ce52c839625bd9c201d1dd7"
+}

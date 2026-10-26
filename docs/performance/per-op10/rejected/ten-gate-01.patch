@@ -1,0 +1,47 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index d948683..1f2f916 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -474,23 +474,25 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
+     if fraction > policy.max_flagged_fraction {
+         reasons.push("flagged_fraction".into());
+     }
+-    for code in &policy.reject_codes {
+-        if report.all_codes.contains(code) {
+-            reasons.push(
+-                match code {
+-                    IssueCode::NonFinite => "NonFinite",
+-                    IssueCode::BelowRange => "BelowRange",
+-                    IssueCode::AboveRange => "AboveRange",
+-                    IssueCode::ClockReversal => "ClockReversal",
+-                    IssueCode::DuplicateTime => "DuplicateTime",
+-                    IssueCode::Gap => "Gap",
+-                    IssueCode::Rate => "Rate",
+-                    IssueCode::Acceleration => "Acceleration",
+-                    IssueCode::Spike => "Spike",
+-                    IssueCode::Flatline => "Flatline",
+-                }
+-                .to_owned(),
+-            );
++    if !report.all_codes.is_empty() {
++        for code in &policy.reject_codes {
++            if report.all_codes.contains(code) {
++                reasons.push(
++                    match code {
++                        IssueCode::NonFinite => "NonFinite",
++                        IssueCode::BelowRange => "BelowRange",
++                        IssueCode::AboveRange => "AboveRange",
++                        IssueCode::ClockReversal => "ClockReversal",
++                        IssueCode::DuplicateTime => "DuplicateTime",
++                        IssueCode::Gap => "Gap",
++                        IssueCode::Rate => "Rate",
++                        IssueCode::Acceleration => "Acceleration",
++                        IssueCode::Spike => "Spike",
++                        IssueCode::Flatline => "Flatline",
++                    }
++                    .to_owned(),
++                );
++            }
+         }
+     }
+     Ok(GateDecision {

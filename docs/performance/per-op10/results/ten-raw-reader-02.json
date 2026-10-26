@@ -1,0 +1,79 @@
+{
+  "label": "ten-raw-reader-02",
+  "base_commit": "4d628840c60ed09fb53d8c225ebf2f31ef03c559",
+  "cases": [
+    "raw_reader.chunked",
+    "raw_reader.linear",
+    "raw_reader.topics",
+    "raw_reader.mixed_topics"
+  ],
+  "geomean_latency_reduction_pct": -0.7405121992539065,
+  "worst_block_reduction_pct": -5.333615957942861,
+  "worst_case_reduction_pct": -1.5288460939541837,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "dc2d82ded292f0247c8b955b75d16deeb6b7c3d0fae419618015ddc887c8240f",
+  "operator": "raw_reader",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "read MCAP through a 16384-byte buffer",
+  "profile_hotspot": "The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The prior 64 KiB buffer failed; measure different bounded sizes with CRCs and full-file limits unchanged.",
+  "case_results": {
+    "raw_reader.chunked": {
+      "before_ns": 1321702.875,
+      "after_ns": 1319575.375,
+      "latency_reduction_pct": -0.5973584352584105,
+      "paired_ratios": [
+        0.9707173684692117,
+        1.067604218396206,
+        1.0133440086042478,
+        0.9986031601009204
+      ],
+      "worst_paired_reduction_pct": -6.760421839620601
+    },
+    "raw_reader.linear": {
+      "before_ns": 1645554.0625,
+      "after_ns": 1677606.0625,
+      "latency_reduction_pct": -1.5288460939541837,
+      "paired_ratios": [
+        1.029603060854704,
+        1.0709018275443398,
+        0.9995977680787724,
+        1.0009738610243797
+      ],
+      "worst_paired_reduction_pct": -7.090182754433982
+    },
+    "raw_reader.topics": {
+      "before_ns": 1544365.84375,
+      "after_ns": 1541568.6875,
+      "latency_reduction_pct": -0.3274810279484397,
+      "paired_ratios": [
+        0.968745567115139,
+        1.0647194090052439,
+        0.9851084956776925,
+        1.0214411248812763
+      ],
+      "worst_paired_reduction_pct": -6.471940900524387
+    },
+    "raw_reader.mixed_topics": {
+      "before_ns": 1736453.59375,
+      "after_ns": 1738528.125,
+      "latency_reduction_pct": -0.12687910935116342,
+      "paired_ratios": [
+        0.9583714461984952,
+        1.0112833590280144,
+        0.9912542231590089,
+        1.0499704929274465
+      ],
+      "worst_paired_reduction_pct": -4.997049292744649
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-raw-reader-02",
+  "validation_sha256": "cccbe2f78a698435a82b04539e8ea5bc3cdae494f79951d3aa296f49fa2e0dcf"
+}

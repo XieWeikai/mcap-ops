@@ -1,0 +1,16 @@
+diff --git a/crates/io/src/video.rs b/crates/io/src/video.rs
+index 996149e..b33d6bb 100644
+--- a/crates/io/src/video.rs
++++ b/crates/io/src/video.rs
+@@ -55,7 +55,10 @@ fn run_tool(program: &OsStr, args: &[&OsStr], timeout: Duration) -> Result<(Stri
+         file.seek(SeekFrom::Start(0))?;
+         let mut data = Vec::new();
+         file.take(MAX_TOOL_OUTPUT + 1).read_to_end(&mut data)?;
+-        Ok(String::from_utf8_lossy(&data).into_owned())
++        Ok(match String::from_utf8(data) {
++            Ok(text) => text,
++            Err(error) => String::from_utf8_lossy(&error.into_bytes()).into_owned(),
++        })
+     };
+     let out = read(&mut stdout)?;
+     let err = read(&mut stderr)?;

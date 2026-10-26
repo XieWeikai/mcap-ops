@@ -1,0 +1,12 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..f6c296b 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -295,6 +295,7 @@ impl SignalDecoder for JsonSignalSpec {
+     fn channels(&self) -> usize {
+         self.channels
+     }
++    #[inline(never)]
+     fn decode(&self, message: &Message<'_>) -> Result<Vec<DecodedSample>> {
+         if message.channel.topic != self.topic {
+             return Ok(Vec::new());

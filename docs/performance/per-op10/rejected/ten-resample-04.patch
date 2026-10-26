@@ -1,0 +1,31 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..c6d3242 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -193,11 +193,12 @@ fn slerp(a: &[f64], b: &[f64], alpha: f64) -> Option<[f64; 4]> {
+     if (na - 1.0).abs() > 0.01 || (nb - 1.0).abs() > 0.01 {
+         return None;
+     }
++    let (inverse_a, inverse_b) = (1.0 / na, 1.0 / nb);
+     let mut qa = [0.0; 4];
+     let mut qb = [0.0; 4];
+     for j in 0..4 {
+-        qa[j] = a[j] / na;
+-        qb[j] = b[j] / nb;
++        qa[j] = a[j] * inverse_a;
++        qb[j] = b[j] * inverse_b;
+     }
+     let mut dot = qa.iter().zip(qb).map(|(x, y)| x * y).sum::<f64>();
+     if dot < 0.0 {
+@@ -219,9 +220,9 @@ fn slerp(a: &[f64], b: &[f64], alpha: f64) -> Option<[f64; 4]> {
+     for j in 0..4 {
+         q[j] = wa * qa[j] + wb * qb[j];
+     }
+-    let n = norm(&q);
++    let inverse = 1.0 / norm(&q);
+     for v in &mut q {
+-        *v /= n;
++        *v *= inverse;
+     }
+     Some(q)
+ }

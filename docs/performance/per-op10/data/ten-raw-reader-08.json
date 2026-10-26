@@ -1,0 +1,567 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "run_id": "session-9a90601a14b1",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/accepted",
+      "bytes": 27284208,
+      "sha256": "e0ef24a1f33608ebffafbd7985765ef3e36ca130ee9c47245c679252f0f2e41d"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/ten-raw-reader-08",
+      "bytes": 27251128,
+      "sha256": "fae6090581ad96bba621778649ebe5b70959bf67410e892e22651fb63b84e4e5"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "raw_reader.chunked": {
+          "case": "raw_reader.chunked",
+          "iterations": 16,
+          "median_ns": 1308186.25,
+          "samples_ns": [
+            1316959.6875,
+            1324597.75,
+            1295117.4375,
+            1308186.25,
+            1307679.75,
+            1294667.875,
+            1318220.8125
+          ]
+        },
+        "raw_reader.linear": {
+          "case": "raw_reader.linear",
+          "iterations": 16,
+          "median_ns": 1681218.5625,
+          "samples_ns": [
+            1685290.1875,
+            1705217.75,
+            1668401.875,
+            1699904.625,
+            1627729.1875,
+            1640515.9375,
+            1681218.5625
+          ]
+        },
+        "raw_reader.topics": {
+          "case": "raw_reader.topics",
+          "iterations": 16,
+          "median_ns": 1327667.25,
+          "samples_ns": [
+            1327667.25,
+            1376003.4375,
+            1307495.9375,
+            1365685.6875,
+            1327319.0,
+            1306912.1875,
+            1335651.4375
+          ]
+        },
+        "raw_reader.mixed_topics": {
+          "case": "raw_reader.mixed_topics",
+          "iterations": 16,
+          "median_ns": 1325340.625,
+          "samples_ns": [
+            1341948.3125,
+            1310727.1875,
+            1327121.125,
+            1338580.125,
+            1312231.5,
+            1319365.5625,
+            1325340.625
+          ]
+        }
+      },
+      "after": {
+        "raw_reader.chunked": {
+          "case": "raw_reader.chunked",
+          "iterations": 16,
+          "median_ns": 1315072.9375,
+          "samples_ns": [
+            1286930.0625,
+            1324465.875,
+            1363559.5625,
+            1297645.9375,
+            1315072.9375,
+            1334981.5,
+            1297917.8125
+          ]
+        },
+        "raw_reader.linear": {
+          "case": "raw_reader.linear",
+          "iterations": 16,
+          "median_ns": 1625253.5,
+          "samples_ns": [
+            1617715.0625,
+            1629026.875,
+            1677768.0625,
+            1625253.5,
+            1627316.6875,
+            1605906.625,
+            1622666.25
+          ]
+        },
+        "raw_reader.topics": {
+          "case": "raw_reader.topics",
+          "iterations": 16,
+          "median_ns": 1566283.625,
+          "samples_ns": [
+            1559953.125,
+            1578070.5,
+            1576334.6875,
+            1566283.625,
+            1558899.25,
+            1537945.125,
+            1595137.5
+          ]
+        },
+        "raw_reader.mixed_topics": {
+          "case": "raw_reader.mixed_topics",
+          "iterations": 16,
+          "median_ns": 1499682.25,
+          "samples_ns": [
+            1499682.25,
+            1513179.5,
+            1483452.5625,
+            1485866.9375,
+            1514008.375,
+            1502540.125,
+            1498074.9375
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "raw_reader.chunked": {
+          "case": "raw_reader.chunked",
+          "iterations": 16,
+          "median_ns": 1309863.0,
+          "samples_ns": [
+            1309863.0,
+            1350965.0625,
+            1290966.125,
+            1351338.125,
+            1298493.8125,
+            1289100.125,
+            1353907.375
+          ]
+        },
+        "raw_reader.linear": {
+          "case": "raw_reader.linear",
+          "iterations": 16,
+          "median_ns": 1656868.9375,
+          "samples_ns": [
+            1650254.5625,
+            1656868.9375,
+            1747408.0,
+            1701343.9375,
+            1636519.3125,
+            1643497.75,
+            1694474.625
+          ]
+        },
+        "raw_reader.topics": {
+          "case": "raw_reader.topics",
+          "iterations": 16,
+          "median_ns": 1578352.5625,
+          "samples_ns": [
+            1571090.5625,
+            1635737.1875,
+            1578352.5625,
+            1576550.375,
+            1554010.9375,
+            1666984.3125,
+            1602173.625
+          ]
+        },
+        "raw_reader.mixed_topics": {
+          "case": "raw_reader.mixed_topics",
+          "iterations": 16,
+          "median_ns": 1497753.25,
+          "samples_ns": [
+            1482039.4375,
+            1497753.25,
+            1500600.8125,
+            1493214.125,
+            1498980.125,
+            1489056.6875,
+            1502531.75
+          ]
+        }
+      },
+      "before": {
+        "raw_reader.chunked": {
+          "case": "raw_reader.chunked",
+          "iterations": 16,
+          "median_ns": 1303233.4375,
+          "samples_ns": [
+            1288819.25,
+            1308498.25,
+            1282980.125,
+            1303233.4375,
+            1310886.0625,
+            1293898.8125,
+            1303654.5625
+          ]
+        },
+        "raw_reader.linear": {
+          "case": "raw_reader.linear",
+          "iterations": 16,
+          "median_ns": 1622888.3125,
+          "samples_ns": [
+            1621408.5,
+            1624902.0,
+            1619178.6875,
+            1613804.9375,
+            1622888.3125,
+            1642955.875,
+            1653730.6875
+          ]
+        },
+        "raw_reader.topics": {
+          "case": "raw_reader.topics",
+          "iterations": 16,
+          "median_ns": 1312973.25,
+          "samples_ns": [
+            1327328.75,
+            1297647.3125,
+            1312973.25,
+            1316539.8125,
+            1301281.25,
+            1314404.3125,
+            1302706.25
+          ]
+        },
+        "raw_reader.mixed_topics": {
+          "case": "raw_reader.mixed_topics",
+          "iterations": 16,
+          "median_ns": 1334108.875,
+          "samples_ns": [
+            1340042.0625,
+            1345475.8125,
+            1352802.0625,
+            1303690.5,
+            1327736.1875,
+            1334108.875,
+            1314902.125
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "raw_reader.chunked": {
+          "case": "raw_reader.chunked",
+          "iterations": 16,
+          "median_ns": 1321750.875,
+          "samples_ns": [
+            1373987.4375,
+            1364005.5625,
+            1297614.75,
+            1316347.25,
+            1321750.875,
+            1291864.625,
+            1329270.6875
+          ]
+        },
+        "raw_reader.linear": {
+          "case": "raw_reader.linear",
+          "iterations": 16,
+          "median_ns": 1645421.625,
+          "samples_ns": [
+            1691127.3125,
+            1645421.625,
+            1644257.375,
+            1644148.625,
+            1631786.25,
+            1665468.625,
+            1668957.875
+          ]
+        },
+        "raw_reader.topics": {
+          "case": "raw_reader.topics",
+          "iterations": 16,
+          "median_ns": 1320683.3125,
+          "samples_ns": [
+            1344027.3125,
+            1306376.125,
+            1331752.25,
+            1320683.3125,
+            1326200.0,
+            1301542.1875,
+            1310537.75
+          ]
+        },
+        "raw_reader.mixed_topics": {
+          "case": "raw_reader.mixed_topics",
+          "iterations": 16,
+          "median_ns": 1328576.1875,
+          "samples_ns": [
+            1336597.625,
+            1312828.3125,
+            1328576.1875,
+            1336171.125,
+            1318184.625,
+            1360586.75,
+            1319656.9375
+          ]
+        }
+      },
+      "after": {
+        "raw_reader.chunked": {
+          "case": "raw_reader.chunked",
+          "iterations": 16,
+          "median_ns": 1384207.625,
+          "samples_ns": [
+            1369073.375,
+            1383248.5625,
+            1389594.5625,
+            1369838.0,
+            1420229.6875,
+            1418449.0625,
+            1384207.625
+          ]
+        },
+        "raw_reader.linear": {
+          "case": "raw_reader.linear",
+          "iterations": 16,
+          "median_ns": 1705736.25,
+          "samples_ns": [
+            1731904.625,
+            1708024.75,
+            1718252.625,
+            1696096.1875,
+            1705736.25,
+            1705151.9375,
+            1699770.25
+          ]
+        },
+        "raw_reader.topics": {
+          "case": "raw_reader.topics",
+          "iterations": 16,
+          "median_ns": 1608322.0,
+          "samples_ns": [
+            1614777.375,
+            1624526.125,
+            1605828.25,
+            1608322.0,
+            1607775.0625,
+            1611684.5625,
+            1606145.8125
+          ]
+        },
+        "raw_reader.mixed_topics": {
+          "case": "raw_reader.mixed_topics",
+          "iterations": 16,
+          "median_ns": 1560227.25,
+          "samples_ns": [
+            1545516.375,
+            1616506.625,
+            1630667.1875,
+            1536629.25,
+            1560227.25,
+            1571861.4375,
+            1507944.625
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "raw_reader.chunked": {
+          "case": "raw_reader.chunked",
+          "iterations": 16,
+          "median_ns": 1315810.3125,
+          "samples_ns": [
+            1301831.125,
+            1322136.1875,
+            1295342.875,
+            1315810.3125,
+            1349926.8125,
+            1296695.375,
+            1333739.0
+          ]
+        },
+        "raw_reader.linear": {
+          "case": "raw_reader.linear",
+          "iterations": 16,
+          "median_ns": 1652285.125,
+          "samples_ns": [
+            1623918.9375,
+            1632950.6875,
+            1706231.375,
+            1652285.125,
+            1665664.0625,
+            1654939.3125,
+            1643445.875
+          ]
+        },
+        "raw_reader.topics": {
+          "case": "raw_reader.topics",
+          "iterations": 16,
+          "median_ns": 1558553.0,
+          "samples_ns": [
+            1559961.3125,
+            1600328.0,
+            1558553.0,
+            1547846.0625,
+            1554111.1875,
+            1559140.5,
+            1535864.375
+          ]
+        },
+        "raw_reader.mixed_topics": {
+          "case": "raw_reader.mixed_topics",
+          "iterations": 16,
+          "median_ns": 1488750.6875,
+          "samples_ns": [
+            1485593.0625,
+            1479576.0625,
+            1481423.0625,
+            1506765.125,
+            1515304.1875,
+            1488750.6875,
+            1499020.375
+          ]
+        }
+      },
+      "before": {
+        "raw_reader.chunked": {
+          "case": "raw_reader.chunked",
+          "iterations": 16,
+          "median_ns": 1311313.75,
+          "samples_ns": [
+            1311313.75,
+            1347037.1875,
+            1302617.375,
+            1334909.4375,
+            1300231.0,
+            1307627.4375,
+            1327955.125
+          ]
+        },
+        "raw_reader.linear": {
+          "case": "raw_reader.linear",
+          "iterations": 16,
+          "median_ns": 1654866.5625,
+          "samples_ns": [
+            1632476.375,
+            1672728.5625,
+            1654866.5625,
+            1638079.875,
+            1671087.5625,
+            1651912.5625,
+            1670721.625
+          ]
+        },
+        "raw_reader.topics": {
+          "case": "raw_reader.topics",
+          "iterations": 16,
+          "median_ns": 1317633.75,
+          "samples_ns": [
+            1341192.625,
+            1303222.6875,
+            1317633.75,
+            1347551.125,
+            1298793.3125,
+            1319770.9375,
+            1314670.0
+          ]
+        },
+        "raw_reader.mixed_topics": {
+          "case": "raw_reader.mixed_topics",
+          "iterations": 16,
+          "median_ns": 1321060.25,
+          "samples_ns": [
+            1321060.25,
+            1314555.125,
+            1326868.4375,
+            1326967.9375,
+            1312491.25,
+            1329868.9375,
+            1310366.9375
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "raw_reader.chunked": {
+      "before_ns": 1309750.0,
+      "after_ns": 1315441.625,
+      "latency_reduction_pct": -0.517565637553763,
+      "paired_ratios": [
+        1.0052643020059262,
+        1.005087010745149,
+        1.0472530422951298,
+        1.0034290515904374
+      ],
+      "worst_paired_reduction_pct": -4.725304229512983
+    },
+    "raw_reader.linear": {
+      "before_ns": 1650144.09375,
+      "after_ns": 1654577.03125,
+      "latency_reduction_pct": -0.968922825600127,
+      "paired_ratios": [
+        0.9667116080274661,
+        1.0209383632491962,
+        1.036656030335082,
+        0.9984400932628065
+      ],
+      "worst_paired_reduction_pct": -3.6656030335082024
+    },
+    "raw_reader.topics": {
+      "before_ns": 1319158.53125,
+      "after_ns": 1572318.09375,
+      "latency_reduction_pct": -19.248161595538438,
+      "paired_ratios": [
+        1.1797260382825592,
+        1.2021208828892744,
+        1.2177953524342726,
+        1.182842349021494
+      ],
+      "worst_paired_reduction_pct": -21.77953524342726
+    },
+    "raw_reader.mixed_topics": {
+      "before_ns": 1326958.40625,
+      "after_ns": 1498717.75,
+      "latency_reduction_pct": -12.924051025068328,
+      "paired_ratios": [
+        1.1315447679723845,
+        1.1226619341693533,
+        1.1743603902279032,
+        1.1269362525289819
+      ],
+      "worst_paired_reduction_pct": -17.436039022790318
+    }
+  }
+}

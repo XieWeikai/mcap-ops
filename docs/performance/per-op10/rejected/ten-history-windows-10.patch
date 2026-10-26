@@ -1,0 +1,42 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..4f20e76 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -58,16 +58,21 @@ impl Sampled {
+             .collect()
+     }
+     fn empty(target: &[i64], channels: usize) -> Result<Self> {
+-        let size = target.len().checked_mul(channels).ok_or(Error::Overflow)?;
++        target.len().checked_mul(channels).ok_or(Error::Overflow)?;
++        Self::empty_owned(target.to_vec(), channels)
++    }
++    fn empty_owned(target: Vec<i64>, channels: usize) -> Result<Self> {
++        let count = target.len();
++        let size = count.checked_mul(channels).ok_or(Error::Overflow)?;
+         Ok(Self {
+-            timestamps: target.to_vec(),
++            timestamps: target,
+             values: vec![f64::NAN; size],
+             channels,
+-            status: vec![Status::Missing as u8; target.len()],
+-            source_left: vec![-1; target.len()],
+-            source_right: vec![-1; target.len()],
+-            alpha: vec![f64::NAN; target.len()],
+-            uses_future: vec![false; target.len()],
++            status: vec![Status::Missing as u8; count],
++            source_left: vec![-1; count],
++            source_right: vec![-1; count],
++            alpha: vec![f64::NAN; count],
++            uses_future: vec![false; count],
+         })
+     }
+ }
+@@ -288,7 +293,7 @@ pub fn history_windows(
+         sample_indices.push(sorted.len() - 1);
+     }
+     let sampled = resample(signal, &sorted, options)?;
+-    let mut result = Sampled::empty(&vec![0; size], signal.channels())?;
++    let mut result = Sampled::empty_owned(vec![0; size], signal.channels())?;
+     for (&index, &(time, dest)) in sample_indices.iter().zip(&requests) {
+         result.timestamps[dest] = time;
+         result.status[dest] = sampled.status[index];

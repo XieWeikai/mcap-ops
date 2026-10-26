@@ -1,0 +1,32 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..2dbd07c 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -278,18 +278,19 @@ pub fn history_windows(
+             ));
+         }
+     }
+-    requests.sort_unstable_by_key(|&(t, index)| (t, index));
+-    let mut sorted = Vec::with_capacity(requests.len());
+-    let mut sample_indices = Vec::with_capacity(requests.len());
++    let mut indices = std::collections::HashMap::with_capacity(requests.len());
+     for &(time, _) in &requests {
+-        if sorted.last() != Some(&time) {
+-            sorted.push(time);
+-        }
+-        sample_indices.push(sorted.len() - 1);
++        indices.entry(time).or_insert(0usize);
++    }
++    let mut sorted: Vec<_> = indices.keys().copied().collect();
++    sorted.sort_unstable();
++    for (i, time) in sorted.iter().enumerate() {
++        *indices.get_mut(time).unwrap() = i;
+     }
+     let sampled = resample(signal, &sorted, options)?;
+     let mut result = Sampled::empty(&vec![0; size], signal.channels())?;
+-    for (&index, &(time, dest)) in sample_indices.iter().zip(&requests) {
++    for &(time, dest) in &requests {
++        let index = indices[&time];
+         result.timestamps[dest] = time;
+         result.status[dest] = sampled.status[index];
+         result.source_left[dest] = sampled.source_left[index];

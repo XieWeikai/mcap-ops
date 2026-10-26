@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-read-signal-02",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "mcap_read_signal",
+    "mcap_read_signal.many"
+  ],
+  "geomean_latency_reduction_pct": 1.4121388529181877,
+  "worst_block_reduction_pct": -0.41234589566150337,
+  "worst_case_reduction_pct": 0.5856175402672248,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "2f381d0da14056083185304a5343b2ff2ba9fa6fc09ff4923ce4856b15cfc6b3",
+  "operator": "mcap_read_signal",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "bound initial decoded signal capacity to 1024 samples",
+  "profile_hotspot": "The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The prior 4096-sample reserve did not help; sweep different bounded allocations across single/multi-channel files.",
+  "case_results": {
+    "mcap_read_signal": {
+      "before_ns": 6349776.0,
+      "after_ns": 6155181.875,
+      "latency_reduction_pct": 2.231395955077331,
+      "paired_ratios": [
+        0.9720461999006883,
+        0.9885666651206324,
+        0.983325880997765,
+        0.9666207683004658
+      ],
+      "worst_paired_reduction_pct": 1.1433334879367596
+    },
+    "mcap_read_signal.many": {
+      "before_ns": 1308528.21875,
+      "after_ns": 1311432.625,
+      "latency_reduction_pct": 0.5856175402672248,
+      "paired_ratios": [
+        0.9923933132447034,
+        1.0199250656544856,
+        0.9958943359499522,
+        0.9807375123136053
+      ],
+      "worst_paired_reduction_pct": -1.9925065654485596
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-read-signal-02",
+  "validation_sha256": "1def6188e7a60d34535dfc7de7bdd365bfdd174c3f4b5ff2faa5d42f8ba6625f"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-gate-01",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": 0.7878384137702477,
+  "worst_block_reduction_pct": -0.6637162142786313,
+  "worst_case_reduction_pct": -0.28980788835553106,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The pass case has no issue codes; avoid repeated searches without allocating a reason buffer.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "965399dd3dbcb2f43e2946f10dca392a59dc8aadee1b58105491be67d95a35e3",
+  "operator": "gate",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "skip code-policy iteration for issue-free reports",
+  "profile_hotspot": "The pass case has no issue codes; avoid repeated searches without allocating a reason buffer.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The pass case has no issue codes; avoid repeated searches without allocating a reason buffer.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 9.000351905822754,
+      "after_ns": 8.961257934570312,
+      "latency_reduction_pct": -0.28980788835553106,
+      "paired_ratios": [
+        1.0241496992569903,
+        1.0121237924410904,
+        0.9936723653260201,
+        0.9736104760003544
+      ],
+      "worst_paired_reduction_pct": -2.4149699256990287
+    },
+    "gate.fail": {
+      "before_ns": 30.423085689544678,
+      "after_ns": 29.956284999847412,
+      "latency_reduction_pct": 2.2749493376760688,
+      "paired_ratios": [
+        0.989424082184503,
+        0.9615092543185266,
+        1.001846915639801,
+        0.9650769310619756
+      ],
+      "worst_paired_reduction_pct": -0.18469156398011055
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-gate-01",
+  "validation_sha256": "6a901030219885a4f7946f7da66364cd36dbd187df604f8f4a1000d3df2c8fd3"
+}

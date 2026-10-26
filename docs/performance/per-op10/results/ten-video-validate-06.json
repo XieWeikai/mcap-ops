@@ -1,0 +1,40 @@
+{
+  "label": "ten-video-validate-06",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": -1.602795918211064,
+  "worst_block_reduction_pct": -3.5230565149452886,
+  "worst_case_reduction_pct": -1.602795918211064,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "2721e235f12b6c2bc34377f6af04c6c0b99576cefa09d387b798172118645183",
+  "operator": "video_validate",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "limit FFmpeg filter workers to 2",
+  "profile_hotspot": "Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Null-output validation still initializes a filter graph; keep complete first-stream decoding and exact frame-count parsing.",
+  "case_results": {
+    "video_validate": {
+      "before_ns": 55350254.0,
+      "after_ns": 56230955.5,
+      "latency_reduction_pct": -1.602795918211064,
+      "paired_ratios": [
+        0.9925622269546521,
+        1.0125702392338862,
+        1.019485679130335,
+        1.0352305651494529
+      ],
+      "worst_paired_reduction_pct": -3.5230565149452886
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-validate-06",
+  "validation_sha256": "9404e2fb3521f3341f6a27e83e5c38e1271ff7780bc189417286ecd153351456"
+}

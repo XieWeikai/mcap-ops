@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..6b0f116 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -170,7 +170,7 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+         } else {
+             for ((value, &x), &y) in values.iter_mut().zip(left).zip(right_values) {
+                 *value = (1.0 - alpha) * x + alpha * y;
+-                all_finite &= x.is_finite() & y.is_finite() & value.is_finite();
++                all_finite &= value.is_finite();
+             }
+         }
+         if !all_finite {

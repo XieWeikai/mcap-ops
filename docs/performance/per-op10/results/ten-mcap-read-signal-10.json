@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-read-signal-10",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "mcap_read_signal",
+    "mcap_read_signal.many"
+  ],
+  "geomean_latency_reduction_pct": -2.2885319711482888,
+  "worst_block_reduction_pct": -3.068863972438196,
+  "worst_case_reduction_pct": -2.7637616912381535,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep the shared decoder seam and all errors, while comparing ownership-aware iteration with the ordinary loop.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "a3eb30b0db95726ba0836d35ee087d16985306a3bb7ea3a7f2982bc684725321",
+  "operator": "mcap_read_signal",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "accumulate decoded samples through a fallible fold",
+  "profile_hotspot": "Keep the shared decoder seam and all errors, while comparing ownership-aware iteration with the ordinary loop.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Keep the shared decoder seam and all errors, while comparing ownership-aware iteration with the ordinary loop.",
+  "case_results": {
+    "mcap_read_signal": {
+      "before_ns": 6169958.25,
+      "after_ns": 6314866.5,
+      "latency_reduction_pct": -2.7637616912381535,
+      "paired_ratios": [
+        1.0345701489621921,
+        1.0112107952914806,
+        1.0207050848625707,
+        1.0495806042688431
+      ],
+      "worst_paired_reduction_pct": -4.958060426884314
+    },
+    "mcap_read_signal.many": {
+      "before_ns": 1303020.6875,
+      "after_ns": 1319513.09375,
+      "latency_reduction_pct": -1.1546688527135363,
+      "paired_ratios": [
+        1.0055683227159344,
+        1.0109566552663072,
+        1.030929348467395,
+        1.0121367217879638
+      ],
+      "worst_paired_reduction_pct": -3.0929348467394924
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-read-signal-10",
+  "validation_sha256": "9b5671afff4c3703bd0aface4a4eb510a9fc139943ef1ac9f42598df1b4bf36c"
+}

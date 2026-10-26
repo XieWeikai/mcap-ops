@@ -1,0 +1,37 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..aa002a8 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -270,15 +270,25 @@ pub fn history_windows(
+         });
+     }
+     let mut requests = Vec::with_capacity(size);
+-    for (i, &center) in centers.iter().enumerate() {
+-        for (j, &offset) in offsets.iter().enumerate() {
+-            requests.push((
+-                center.checked_add(offset).ok_or(Error::Overflow)?,
+-                i * offsets.len() + j,
+-            ));
++    let mut positions = vec![0usize; offsets.len()];
++    while requests.len() < size {
++        let mut best: Option<(i64, usize, usize)> = None;
++        for (j, (&offset, &i)) in offsets.iter().zip(&positions).enumerate() {
++            if i < centers.len() {
++                let item = (
++                    centers[i].checked_add(offset).ok_or(Error::Overflow)?,
++                    i * offsets.len() + j,
++                    j,
++                );
++                if best.is_none_or(|v| item < v) {
++                    best = Some(item);
++                }
++            }
+         }
++        let (time, dest, j) = best.unwrap();
++        requests.push((time, dest));
++        positions[j] += 1;
+     }
+-    requests.sort_unstable_by_key(|&(t, index)| (t, index));
+     let mut sorted = Vec::with_capacity(requests.len());
+     let mut sample_indices = Vec::with_capacity(requests.len());
+     for &(time, _) in &requests {

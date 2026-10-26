@@ -1,0 +1,53 @@
+{
+  "label": "ten-video-probe-04",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": -0.05158632996156154,
+  "worst_block_reduction_pct": -1.1640002000720129,
+  "worst_case_reduction_pct": -0.11846246445412767,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Avoid oversleeping a nearly exhausted timeout while retaining output-size checks on every poll.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "e3b22ec40f9502c9994895fcd5b4a7c7f7583b436e060fba9480b32ddadc3992",
+  "operator": "video_probe",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "bound the final media sleep by the remaining timeout",
+  "profile_hotspot": "Avoid oversleeping a nearly exhausted timeout while retaining output-size checks on every poll.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Avoid oversleeping a nearly exhausted timeout while retaining output-size checks on every poll.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 25980686.5,
+      "after_ns": 26011465.0,
+      "latency_reduction_pct": -0.11846246445412767,
+      "paired_ratios": [
+        1.001012008466437,
+        0.9963558001990802,
+        1.0013572408226454,
+        1.0041864701687604
+      ],
+      "worst_paired_reduction_pct": -0.4186470168760392
+    },
+    "video_validate": {
+      "before_ns": 56026216.5,
+      "after_ns": 56069320.5,
+      "latency_reduction_pct": -0.07690857657614014,
+      "paired_ratios": [
+        1.0223808355864807,
+        1.0026624653244984,
+        0.9853632778545678,
+        0.9988757062070243
+      ],
+      "worst_paired_reduction_pct": -2.238083558648074
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-probe-04",
+  "validation_sha256": "a6eb1ec506e9654364f9e5dc8fad8fe15b3f39a92e3b07ace8bc6d9bc1ba98e0"
+}

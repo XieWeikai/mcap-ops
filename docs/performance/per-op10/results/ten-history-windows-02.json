@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-02",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": 1.7525012091273995,
+  "worst_block_reduction_pct": 0.41397836067078586,
+  "worst_case_reduction_pct": -2.5318887280013858,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Each fixed offset gives an ordered center stream; merge K streams instead of sorting all M requests.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "d06d81fb35943878a5c7327f5d784deee3f62c0801030f7d563a1db8263c9973",
+  "operator": "history_windows",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "merge sorted history offset streams with a bounded heap",
+  "profile_hotspot": "Each fixed offset gives an ordered center stream; merge K streams instead of sorting all M requests.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Each fixed offset gives an ordered center stream; merge K streams instead of sorting all M requests.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 357129.6796875,
+      "after_ns": 366328.796875,
+      "latency_reduction_pct": -2.5318887280013858,
+      "paired_ratios": [
+        1.0209314571340748,
+        1.0297063174259529,
+        1.0341120898592415,
+        1.0184677907468986
+      ],
+      "worst_paired_reduction_pct": -3.4112089859241523
+    },
+    "history_windows.overlap": {
+      "before_ns": 578047.0390625,
+      "after_ns": 547509.984375,
+      "latency_reduction_pct": 5.339069307166689,
+      "paired_ratios": [
+        0.9481940661337813,
+        0.9324750547858631,
+        0.9590232822148761,
+        0.9450245477228849
+      ],
+      "worst_paired_reduction_pct": 4.097671778512391
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-02",
+  "validation_sha256": "dff5b4b8f34fa4a8fb9f99183b118dca5a8ed7a87b695f6c5ab6b5746e551c33"
+}

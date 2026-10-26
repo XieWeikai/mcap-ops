@@ -1,0 +1,51 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index fce7c44..53c429b 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -7,7 +7,6 @@ use mcap_ops_core::{
+ use serde::{Deserialize, Serialize};
+ use sha2::{Digest, Sha256};
+ use std::{
+-    collections::BTreeMap,
+     fs::{File, Metadata},
+     io::BufReader,
+     path::{Path, PathBuf},
+@@ -215,7 +214,8 @@ pub fn inspect_mcap(
+     }
+     let path = path.as_ref();
+     let mut reader = RawReader::open(path, filter.clone(), limits)?;
+-    let mut times: BTreeMap<u16, (Vec<i64>, Vec<i64>, u64)> = BTreeMap::new();
++    type ChannelTimes = (Vec<i64>, Vec<i64>, u64);
++    let mut times: Vec<(u16, ChannelTimes)> = Vec::new();
+     let mut selected = 0;
+     for item in reader.by_ref() {
+         let message = item?;
+@@ -224,7 +224,14 @@ pub fn inspect_mcap(
+             i64::try_from(message.log_time).map_err(|_| invalid("log timestamp exceeds int64"))?;
+         let publish = i64::try_from(message.publish_time)
+             .map_err(|_| invalid("publish timestamp exceeds int64"))?;
+-        let (logs, pubs, bytes) = times.entry(message.channel.id).or_default();
++        let index = match times.binary_search_by_key(&message.channel.id, |(id, _)| *id) {
++            Ok(i) => i,
++            Err(i) => {
++                times.insert(i, (message.channel.id, Default::default()));
++                i
++            }
++        };
++        let (logs, pubs, bytes) = &mut times[index].1;
+         logs.push(log);
+         pubs.push(publish);
+         *bytes += message.data.len() as u64;
+@@ -237,7 +244,11 @@ pub fn inspect_mcap(
+         if !filter.topics.is_empty() && !filter.topics.contains(&channel.topic) {
+             continue;
+         }
+-        let (logs, pubs, payload_bytes) = times.remove(&id).unwrap_or_default();
++        let (logs, pubs, payload_bytes) = times
++            .binary_search_by_key(&id, |(id, _)| *id)
++            .ok()
++            .map(|i| std::mem::take(&mut times[i].1))
++            .unwrap_or_default();
+         channels.push(ChannelReport {
+             channel_id: id,
+             topic: channel.topic.clone(),

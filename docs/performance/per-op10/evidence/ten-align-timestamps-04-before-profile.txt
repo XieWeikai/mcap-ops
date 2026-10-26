@@ -1,0 +1,53 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-align-timestamps-04/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 35970299
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case align_timestamps.previous,align_timestamps.nearest,align_timestamps.sparse,align_timestamps.repeated --profile (PID 25862, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+24,189,989 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                   file:function
+--------------------------------------------------------------------------------
+24,189,989 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+24,189,989 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+24,189,989 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+24,189,989 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+24,189,989 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+24,189,989 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+24,189,989 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+24,189,989 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+24,189,989 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+24,189,989 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+24,189,989 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+24,189,989 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+24,189,989 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+24,189,989 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+24,124,585 (99.73%)  ./crates/core/src/time.rs:mcap_ops_core::time::align_timestamps
+16,543,941 (68.39%)  crates/core/src/time.rs:mcap_ops_core::time::align_timestamps [./.artifacts/rsi/bin/accepted]
+16,164,979 (66.83%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main::{{closure}} [./.artifacts/rsi/bin/accepted]
+ 2,826,587 (11.68%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 2,025,336 ( 8.37%)  crates/core/src/time.rs:mcap_ops_core::time::require_strict [./.artifacts/rsi/bin/accepted]
+ 1,680,207 ( 6.95%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_core::time::align_timestamps
+ 1,470,672 ( 6.08%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/convert/num.rs:mcap_ops_core::time::align_timestamps
+ 1,156,144 ( 4.78%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:mcap_ops_core::time::align_timestamps
+ 1,152,764 ( 4.77%)  ./malloc/./malloc/malloc.c:calloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+ 1,146,525 ( 4.74%)  ./malloc/../string/bits/string_fortified.h:calloc
+ 1,146,466 ( 4.74%)  ???:0x00000000049aa740 [???]
+   840,372 ( 3.47%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::time::align_timestamps
+   480,465 ( 1.99%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::time::align_timestamps
+

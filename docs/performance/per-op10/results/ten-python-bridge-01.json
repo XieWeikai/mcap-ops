@@ -1,0 +1,196 @@
+{
+  "label": "ten-python-bridge-01",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "python.resample.previous",
+    "python.resample.linear",
+    "python.history_windows",
+    "python.ema",
+    "python.fir",
+    "python.unwrap_angles",
+    "python.read_json_signal",
+    "python.resample.small",
+    "python.history_windows.small",
+    "python.ema.small",
+    "python.fir.small",
+    "python.unwrap_angles.small",
+    "python.resample.strided"
+  ],
+  "geomean_latency_reduction_pct": 1.0156243172001256,
+  "worst_block_reduction_pct": 0.5884049199207597,
+  "worst_case_reduction_pct": -1.781437564987498,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Preserve canonical NaNs and independent owned outputs while testing vectorizable stores.",
+  "paths": [
+    "crates/python/src/lib.rs"
+  ],
+  "measurement_sha256": "fd67a3bdfbbee5b4a34a21a0736db49acab317e8380c9a553e5f06ff55013949",
+  "operator": "python_bridge",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "write canonical non-finite outputs with branchless selection",
+  "profile_hotspot": "Preserve canonical NaNs and independent owned outputs while testing vectorizable stores.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Preserve canonical NaNs and independent owned outputs while testing vectorizable stores.",
+  "case_results": {
+    "python.resample.small": {
+      "before_ns": 3967.0358276367188,
+      "after_ns": 3897.303955078125,
+      "latency_reduction_pct": 1.1892406071379868,
+      "paired_ratios": [
+        1.0004939113511444,
+        0.9885873520274996,
+        0.9876278358297407,
+        0.9598923267519558
+      ],
+      "worst_paired_reduction_pct": -0.04939113511444049
+    },
+    "python.history_windows.small": {
+      "before_ns": 5384.4156494140625,
+      "after_ns": 5409.814208984375,
+      "latency_reduction_pct": -0.5258807852988712,
+      "paired_ratios": [
+        1.0090224903698282,
+        1.0116161737610319,
+        0.990486501486363,
+        1.0014951253361493
+      ],
+      "worst_paired_reduction_pct": -1.1616173761031856
+    },
+    "python.ema.small": {
+      "before_ns": 2529.2206420898438,
+      "after_ns": 2473.228515625,
+      "latency_reduction_pct": 2.47341625562012,
+      "paired_ratios": [
+        0.9725481576344185,
+        0.9779835172531792,
+        0.970942085685432,
+        0.9973734080252991
+      ],
+      "worst_paired_reduction_pct": 0.26265919747009425
+    },
+    "python.fir.small": {
+      "before_ns": 5115.1307373046875,
+      "after_ns": 5097.4180908203125,
+      "latency_reduction_pct": 0.8119359207388155,
+      "paired_ratios": [
+        0.9794274416245393,
+        0.9954349092492554,
+        0.9883263723359683,
+        1.0121370156717464
+      ],
+      "worst_paired_reduction_pct": -1.213701567174641
+    },
+    "python.unwrap_angles.small": {
+      "before_ns": 1745.2818603515625,
+      "after_ns": 1708.037109375,
+      "latency_reduction_pct": 1.6045378294822998,
+      "paired_ratios": [
+        0.9628888029069248,
+        0.9892845694493674,
+        0.9786246739609866,
+        0.9966009832062896
+      ],
+      "worst_paired_reduction_pct": 0.3399016793710352
+    },
+    "python.resample.strided": {
+      "before_ns": 2121002.03125,
+      "after_ns": 2124885.3125,
+      "latency_reduction_pct": -0.2566024741873063,
+      "paired_ratios": [
+        1.0090707427539995,
+        0.9960613067297465,
+        0.9807926511125102,
+        1.0154774145815544
+      ],
+      "worst_paired_reduction_pct": -1.5477414581554383
+    },
+    "python.resample.previous": {
+      "before_ns": 168572.91796875,
+      "after_ns": 163002.7734375,
+      "latency_reduction_pct": 4.364498946319473,
+      "paired_ratios": [
+        0.9585399396980108,
+        0.9872165001356956,
+        0.9541700813755997,
+        0.9528975043210424
+      ],
+      "worst_paired_reduction_pct": 1.2783499864304382
+    },
+    "python.resample.linear": {
+      "before_ns": 236036.71484375,
+      "after_ns": 233142.890625,
+      "latency_reduction_pct": 0.9659892861407338,
+      "paired_ratios": [
+        0.9844116542130423,
+        0.9660827552116935,
+        1.0011633529669486,
+        0.9962685600641429
+      ],
+      "worst_paired_reduction_pct": -0.11633529669485831
+    },
+    "python.history_windows": {
+      "before_ns": 1032345.140625,
+      "after_ns": 1038713.53125,
+      "latency_reduction_pct": -0.6737954450623196,
+      "paired_ratios": [
+        1.0151137857649721,
+        1.0171415647341202,
+        0.9983621231362743,
+        0.9788230744404124
+      ],
+      "worst_paired_reduction_pct": -1.7141564734120207
+    },
+    "python.ema": {
+      "before_ns": 918784.203125,
+      "after_ns": 907464.8125,
+      "latency_reduction_pct": 0.7878815919533322,
+      "paired_ratios": [
+        1.0022315815504168,
+        0.9643577753681666,
+        0.9926450017831558,
+        0.9915973663777774
+      ],
+      "worst_paired_reduction_pct": -0.22315815504168057
+    },
+    "python.fir": {
+      "before_ns": 3275068.125,
+      "after_ns": 3237554.75,
+      "latency_reduction_pct": 0.7554688645216467,
+      "paired_ratios": [
+        1.0000410546344716,
+        0.9848495680750956,
+        1.0006601105194244,
+        0.9745116674675289
+      ],
+      "worst_paired_reduction_pct": -0.06601105194243839
+    },
+    "python.unwrap_angles": {
+      "before_ns": 842995.546875,
+      "after_ns": 834389.875,
+      "latency_reduction_pct": 0.5028715295352981,
+      "paired_ratios": [
+        1.012083260506741,
+        0.9712062023746261,
+        1.018713741180649,
+        0.977859308902553
+      ],
+      "worst_paired_reduction_pct": -1.8713741180649057
+    },
+    "python.read_json_signal": {
+      "before_ns": 935714.953125,
+      "after_ns": 952385.9375,
+      "latency_reduction_pct": -1.781437564987498,
+      "paired_ratios": [
+        1.0201905048216677,
+        1.0185216671691988,
+        1.0046795565295386,
+        1.0171070841305512
+      ],
+      "worst_paired_reduction_pct": -2.019050482166773
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-python-bridge-01",
+  "validation_sha256": "50f26a1ba2c97127c902eb4732cc7b7e77f126c9829a484999dbdc0b5ec2d696"
+}

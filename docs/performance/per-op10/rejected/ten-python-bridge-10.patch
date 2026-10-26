@@ -1,0 +1,44 @@
+diff --git a/python/mcap_ops/__init__.py b/python/mcap_ops/__init__.py
+index 497ce3f..ab48377 100644
+--- a/python/mcap_ops/__init__.py
++++ b/python/mcap_ops/__init__.py
+@@ -5,6 +5,7 @@ implementation has completed. Input arrays are copied into Rust-owned memory;
+ outputs are not aliases of caller buffers.
+ """
+ import json
++import numpy as np
+ 
+ from ._native import (
+     align_timestamps as _align_timestamps,
+@@ -32,7 +33,6 @@ def _loads(value):
+ 
+ 
+ def _normalize_signal(result):
+-    import numpy as np
+     channels = int(result["channels"])
+     result["timestamps"] = np.asarray(result["timestamps"], dtype=np.int64)
+     result["values"] = np.asarray(result["values"], dtype=np.float64).reshape(-1, channels)
+@@ -45,7 +45,6 @@ def inspect_signal(timestamps, values, config=None):
+ 
+ def resample(timestamps, values, target, *, method="previous", max_gap_ns=0, max_age_ns=0, allow_future=False):
+     result = _normalize_signal(_loads(_resample(timestamps, values, target, method, max_gap_ns, max_age_ns, allow_future)))
+-    import numpy as np
+     result["status"] = np.asarray(result["status"], dtype=np.uint8)
+     result["source_left"] = np.asarray(result["source_left"], dtype=np.int64)
+     result["source_right"] = np.asarray(result["source_right"], dtype=np.int64)
+@@ -57,7 +56,6 @@ def resample(timestamps, values, target, *, method="previous", max_gap_ns=0, max
+ 
+ def history_windows(timestamps, values, centers, offsets, *, method="previous", max_gap_ns=0, max_age_ns=0, allow_future=False):
+     result = _normalize_signal(_loads(_history_windows(timestamps, values, centers, offsets, method, max_gap_ns, max_age_ns, allow_future)))
+-    import numpy as np
+     result["centers"] = np.asarray(result["centers"], dtype=np.int64)
+     result["offsets"] = np.asarray(result["offsets"], dtype=np.int64)
+     result["status"] = np.asarray(result["status"], dtype=np.uint8)
+@@ -73,7 +71,6 @@ def history_windows(timestamps, values, centers, offsets, *, method="previous",
+ 
+ def align_timestamps(source, target, *, nearest=False, max_past_ns=0, max_future_ns=0):
+     result = _loads(_align_timestamps(source, target, nearest, max_past_ns, max_future_ns))
+-    import numpy as np
+     result["indices"] = np.asarray(result["indices"], dtype=np.int64)
+     result["offsets_ns"] = np.asarray(result["offsets_ns"], dtype=np.int64)
+     result["valid"] = np.asarray(result["valid"], dtype=bool)

@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-read-signal-09",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "mcap_read_signal",
+    "mcap_read_signal.many"
+  ],
+  "geomean_latency_reduction_pct": 0.9223120071130797,
+  "worst_block_reduction_pct": -2.1864218292818816,
+  "worst_case_reduction_pct": -0.030307098181436842,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "ffc470613b97e7880a4fc4aaac9c0b07314221c7f6056caad07051d198389883",
+  "operator": "mcap_read_signal",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for mcap_read_signal",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "mcap_read_signal": {
+      "before_ns": 6263236.125,
+      "after_ns": 6265104.625,
+      "latency_reduction_pct": -0.030307098181436842,
+      "paired_ratios": [
+        1.0328323414265836,
+        1.0044487188703868,
+        0.9906391100904619,
+        0.9961574230932421
+      ],
+      "worst_paired_reduction_pct": -3.2832341426583644
+    },
+    "mcap_read_signal.many": {
+      "before_ns": 1317810.28125,
+      "after_ns": 1296740.75,
+      "latency_reduction_pct": 1.5863138800199406,
+      "paired_ratios": [
+        1.0110125707187865,
+        0.9730800893019019,
+        0.9951936330976993,
+        0.969292450441902
+      ],
+      "worst_paired_reduction_pct": -1.1012570718786474
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-read-signal-09",
+  "validation_sha256": "df25a0acffbba64a8034c40f8c61f5e281def492d04b3c7b4754e1d638c15e5d"
+}

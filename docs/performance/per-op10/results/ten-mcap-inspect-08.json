@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-inspect-08",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "mcap_inspect",
+    "mcap_inspect.many"
+  ],
+  "geomean_latency_reduction_pct": -1.655120324923498,
+  "worst_block_reduction_pct": -1.9318712666442917,
+  "worst_case_reduction_pct": -1.7583175623578473,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "493cf0486e16f03953303260451fb7143ba3dd9aa9428f210fb122a1f4888b04",
+  "operator": "mcap_inspect",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for mcap_inspect",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "mcap_inspect": {
+      "before_ns": 1713944.53125,
+      "after_ns": 1734470.5,
+      "latency_reduction_pct": -1.6285105272677125,
+      "paired_ratios": [
+        1.0149146854051891,
+        1.0176555251401649,
+        0.9939954089488389,
+        1.0177717110025584
+      ],
+      "worst_paired_reduction_pct": -1.7771711002558366
+    },
+    "mcap_inspect.many": {
+      "before_ns": 2025204.21875,
+      "after_ns": 2060827.125,
+      "latency_reduction_pct": -1.7583175623578473,
+      "paired_ratios": [
+        0.9931055606184519,
+        1.014298285491532,
+        1.0407966644473574,
+        1.0208680657556248
+      ],
+      "worst_paired_reduction_pct": -4.079666444735741
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-inspect-08",
+  "validation_sha256": "c333841d9e14cc3580db403490c3d3b46bae7fcb8c6310ef04bb750817c89b2f"
+}

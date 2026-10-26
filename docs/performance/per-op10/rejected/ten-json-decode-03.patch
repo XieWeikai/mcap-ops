@@ -1,0 +1,16 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..0dcd056 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -310,7 +310,10 @@ impl SignalDecoder for JsonSignalSpec {
+                 "nonempty JSON pointers and positive channels required",
+             ));
+         }
+-        let payload: serde_json::Value = serde_json::from_slice(&message.data)?;
++        let payload: serde_json::Value = match std::str::from_utf8(&message.data) {
++            Ok(text) => serde_json::from_str(text)?,
++            Err(_) => serde_json::from_slice(&message.data)?,
++        };
+         let lookup = |pointer: &str| {
+             if let Some(path) = pointer.strip_prefix('/') {
+                 if !path.contains('~') {

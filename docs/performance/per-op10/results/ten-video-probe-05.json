@@ -1,0 +1,53 @@
+{
+  "label": "ten-video-probe-05",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 1.2968327543915859,
+  "worst_block_reduction_pct": -0.32547504870084065,
+  "worst_case_reduction_pct": 0.5986149571412636,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Most ffprobe output is ASCII JSON; retain byte-for-byte lossy-decoding behavior for invalid UTF-8.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "a48370913bc7f6ac7a7b9fd6d91ba64852e6f6bc6af4c41e4b4c076d9fcbbcf1",
+  "operator": "video_probe",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "move valid UTF-8 media output into Strings without copying",
+  "profile_hotspot": "Most ffprobe output is ASCII JSON; retain byte-for-byte lossy-decoding behavior for invalid UTF-8.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Most ffprobe output is ASCII JSON; retain byte-for-byte lossy-decoding behavior for invalid UTF-8.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 26013463.5,
+      "after_ns": 25652421.5,
+      "latency_reduction_pct": 1.4441094899388718,
+      "paired_ratios": [
+        0.9973298338758942,
+        0.9613732561034984,
+        1.007755225526991,
+        0.9737879763253282
+      ],
+      "worst_paired_reduction_pct": -0.7755225526991039
+    },
+    "video_validate": {
+      "before_ns": 55650955.5,
+      "after_ns": 55301980.0,
+      "latency_reduction_pct": 0.5986149571412636,
+      "paired_ratios": [
+        0.9896189769755863,
+        0.9984087238815885,
+        0.9987743738549252,
+        0.9874524673425727
+      ],
+      "worst_paired_reduction_pct": 0.12256261450748207
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-probe-05",
+  "validation_sha256": "a54c4054034afc2602ebdcbc5a4e97190373309973e03e7ead853e44e6eb95cb"
+}

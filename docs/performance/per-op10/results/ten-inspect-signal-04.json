@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-04",
+  "base_commit": "274e3383e419fc20e0ae4d77d2811d701f173071",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": -15.540717249152136,
+  "worst_block_reduction_pct": -16.82749708142253,
+  "worst_case_reduction_pct": -33.188800075802625,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Each absolute deviation need only be calculated when its frontier advances.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "802e994940789ab26b458b427b5f42973c17a976ce07a3bce1b973567a0382d8",
+  "operator": "inspect_signal",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "cache each MAD frontier deviation in peekable iterators",
+  "profile_hotspot": "Each absolute deviation need only be calculated when its frontier advances.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Each absolute deviation need only be calculated when its frontier advances.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 9710030.125,
+      "after_ns": 10887198.25,
+      "latency_reduction_pct": -12.638643009154116,
+      "paired_ratios": [
+        1.1066310810191005,
+        1.1234547957789294,
+        1.1350894986351867,
+        1.129318064404153
+      ],
+      "worst_paired_reduction_pct": -13.508949863518671
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 1374678.09375,
+      "after_ns": 1794738.34375,
+      "latency_reduction_pct": -30.556798597098165,
+      "paired_ratios": [
+        1.3072723666018577,
+        1.3038636053401056,
+        1.3538741465641093,
+        1.2833691032518477
+      ],
+      "worst_paired_reduction_pct": -35.38741465641093
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1422491.21875,
+      "after_ns": 1412624.6875,
+      "latency_reduction_pct": 0.41441374943121945,
+      "paired_ratios": [
+        0.9796106781234105,
+        1.009498188008707,
+        0.9958300962624506,
+        0.995881628748925
+      ],
+      "worst_paired_reduction_pct": -0.9498188008707054
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 3078311.4375,
+      "after_ns": 3847206.3125,
+      "latency_reduction_pct": -24.965705984534004,
+      "paired_ratios": [
+        1.266149595623261,
+        1.233924794461429,
+        1.2575984042557542,
+        1.2417157154349259
+      ],
+      "worst_paired_reduction_pct": -26.614959562326092
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 10198166.0,
+      "after_ns": 13582612.5,
+      "latency_reduction_pct": -33.188800075802625,
+      "paired_ratios": [
+        1.3526057778812461,
+        1.3081928998788883,
+        1.3261221348183452,
+        1.3376538666977071
+      ],
+      "worst_paired_reduction_pct": -35.260577788124614
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1497042.9375,
+      "after_ns": 1479658.03125,
+      "latency_reduction_pct": 0.8691687127745595,
+      "paired_ratios": [
+        0.9582838939705941,
+        1.002691221078263,
+        0.9962108893011633,
+        0.9864057364433455
+      ],
+      "worst_paired_reduction_pct": -0.26912210782630286
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-04",
+  "validation_sha256": "ec09dbfd4ed779165b88a5dae8e05fe91f00660f520c4eff7829acd00fc37e0b"
+}

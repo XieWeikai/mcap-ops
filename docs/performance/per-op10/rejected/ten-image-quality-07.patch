@@ -1,0 +1,42 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 2af84c6..3dfb0b0 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -84,15 +84,28 @@ pub fn image_quality(bytes: &[u8], options: &ImageOptions) -> Result<ImageQualit
+         dark += u64::from(y <= f64::from(options.dark_threshold));
+         bright += u64::from(y >= f64::from(options.bright_threshold));
+     }
+-    let mean = gray
+-        .chunks(256)
+-        .map(|chunk| chunk.iter().sum::<f64>())
+-        .sum::<f64>()
+-        / count as f64;
+-    let m2 = gray
+-        .chunks(256)
+-        .map(|chunk| chunk.iter().map(|&v| (v - mean) * (v - mean)).sum::<f64>())
+-        .sum::<f64>();
++    let moment = |center: Option<f64>| {
++        let mut lanes = [0.0; 4];
++        let mut chunks = gray.chunks_exact(4);
++        for block in chunks.by_ref() {
++            for (lane, &v) in lanes.iter_mut().zip(block) {
++                *lane += center.map_or(v, |m| {
++                    let d = v - m;
++                    d * d
++                });
++            }
++        }
++        let mut total = lanes.iter().sum::<f64>();
++        for &v in chunks.remainder() {
++            total += center.map_or(v, |m| {
++                let d = v - m;
++                d * d
++            });
++        }
++        total
++    };
++    let mean = moment(None) / count as f64;
++    let m2 = moment(Some(mean));
+     let laplacian_variance = if width >= 3 && height >= 3 {
+         let w = width as usize;
+         let n = (width as usize - 2) * (height as usize - 2);

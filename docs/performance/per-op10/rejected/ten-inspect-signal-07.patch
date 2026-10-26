@@ -1,0 +1,45 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index d948683..bdc98e8 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -324,6 +324,11 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
+             }
+         }
+         if let Some(window) = config.hampel_window_ns {
++            let column: Vec<_> = signal
++                .values()
++                .chunks_exact(signal.channels())
++                .map(|row| row[channel])
++                .collect();
+             let mut start = 0;
+             let mut values: Vec<f64> = Vec::new();
+             while start < signal.len() {
+@@ -337,7 +342,7 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
+                 values.clear();
+                 let (mut loaded_a, mut loaded_b) = (start, start);
+                 for i in start..end {
+-                    let value = signal.row(i)[channel];
++                    let value = column[i];
+                     if !value.is_finite() {
+                         continue;
+                     }
+@@ -348,8 +353,7 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
+                     if b - a > config.max_hampel_samples {
+                         return Err(invalid("Hampel window exceeds max_hampel_samples"));
+                     }
+-                    for j in loaded_a..a.min(loaded_b) {
+-                        let old = signal.row(j)[channel];
++                    for &old in &column[loaded_a..a.min(loaded_b)] {
+                         if old.is_finite() {
+                             let index = values
+                                 .binary_search_by(|v| v.total_cmp(&old))
+@@ -357,8 +361,7 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
+                             values.remove(index);
+                         }
+                     }
+-                    for j in loaded_b.max(a)..b {
+-                        let value = signal.row(j)[channel];
++                    for &value in &column[loaded_b.max(a)..b] {
+                         if value.is_finite() {
+                             let index = values.partition_point(|v| v.total_cmp(&value).is_lt());
+                             values.insert(index, value);

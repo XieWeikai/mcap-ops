@@ -1,0 +1,15 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index fce7c44..193eb5b 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -224,7 +224,9 @@ pub fn inspect_mcap(
+             i64::try_from(message.log_time).map_err(|_| invalid("log timestamp exceeds int64"))?;
+         let publish = i64::try_from(message.publish_time)
+             .map_err(|_| invalid("publish timestamp exceeds int64"))?;
+-        let (logs, pubs, bytes) = times.entry(message.channel.id).or_default();
++        let (logs, pubs, bytes) = times
++            .entry(message.channel.id)
++            .or_insert_with(|| (Vec::with_capacity(32), Vec::with_capacity(32), 0));
+         logs.push(log);
+         pubs.push(publish);
+         *bytes += message.data.len() as u64;

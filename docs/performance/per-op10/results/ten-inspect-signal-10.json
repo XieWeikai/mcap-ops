@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-10",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": 0.22229960720783204,
+  "worst_block_reduction_pct": -0.008957805713416533,
+  "worst_case_reduction_pct": -1.1897526421456472,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Point anomalies dominate many reports; retain multi-sample range marking for derivative and flatline issues.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "49e01b9c80e903f5bb258c3deffb144ce8fba46b3c5b68223823b414d6e2c0d1",
+  "operator": "inspect_signal",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "mark singleton quality spans by direct index",
+  "profile_hotspot": "Point anomalies dominate many reports; retain multi-sample range marking for derivative and flatline issues.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Point anomalies dominate many reports; retain multi-sample range marking for derivative and flatline issues.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 1024398.40625,
+      "after_ns": 1030295.140625,
+      "latency_reduction_pct": -0.9279942165021815,
+      "paired_ratios": [
+        1.0063932217710474,
+        1.0159400716596223,
+        1.0121666625589965,
+        0.9938450504855065
+      ],
+      "worst_paired_reduction_pct": -1.5940071659622301
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 831109.046875,
+      "after_ns": 833258.765625,
+      "latency_reduction_pct": -0.26083706595332323,
+      "paired_ratios": [
+        1.0062526587719165,
+        0.9852485726808697,
+        0.9989640825471502,
+        1.0193037090089996
+      ],
+      "worst_paired_reduction_pct": -1.930370900899958
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1411765.84375,
+      "after_ns": 1410766.1875,
+      "latency_reduction_pct": 0.0706152156263351,
+      "paired_ratios": [
+        0.9973450187711963,
+        0.989477209079808,
+        1.0239137337731261,
+        1.001242676916277
+      ],
+      "worst_paired_reduction_pct": -2.391373377312611
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 2640508.0625,
+      "after_ns": 2675986.125,
+      "latency_reduction_pct": -1.1897526421456472,
+      "paired_ratios": [
+        1.0052313673999604,
+        1.0427549964179765,
+        1.0185636854429525,
+        1.0044897549197713
+      ],
+      "worst_paired_reduction_pct": -4.275499641797653
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 5422354.875,
+      "after_ns": 5428101.625,
+      "latency_reduction_pct": 0.28110705657373725,
+      "paired_ratios": [
+        1.023115012432393,
+        0.9958997289987808,
+        0.9984781298697445,
+        0.9906081738988326
+      ],
+      "worst_paired_reduction_pct": -2.311501243239289
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1499107.4375,
+      "after_ns": 1423449.875,
+      "latency_reduction_pct": 5.125680656789067,
+      "paired_ratios": [
+        0.9632139262535928,
+        0.9518978283857508,
+        0.9444903532958299,
+        0.945588558478468
+      ],
+      "worst_paired_reduction_pct": 3.678607374640719
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-10",
+  "validation_sha256": "a563ab61eba7202a3ff2ebf025b6e6379f682cecc40c2272bcc95e97ebdfbead"
+}

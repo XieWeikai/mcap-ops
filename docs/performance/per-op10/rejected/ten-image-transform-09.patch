@@ -1,0 +1,12 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 2af84c6..b09773a 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -150,6 +150,7 @@ pub enum ResizeFilter {
+     Triangle,
+     Lanczos3,
+ }
++#[inline(always)]
+ pub fn transform_image(
+     bytes: &[u8],
+     options: &ImageOptions,

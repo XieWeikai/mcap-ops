@@ -1,0 +1,79 @@
+{
+  "label": "ten-raw-reader-08",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "raw_reader.chunked",
+    "raw_reader.linear",
+    "raw_reader.topics",
+    "raw_reader.mixed_topics"
+  ],
+  "geomean_latency_reduction_pct": -7.990082686273148,
+  "worst_block_reduction_pct": -11.626036354965642,
+  "worst_case_reduction_pct": -19.248161595538438,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Cache only topic membership; every message still checks its own clock bounds, CRC path, count limit and source identity. Mixed-channel fixtures guard against single-topic overfitting.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "3032de8a7ad403e3e278776f2f9a7c078d69389d5e8aeadecd8ee389772d66d1",
+  "operator": "raw_reader",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "hash long exact-topic filters once per reader",
+  "profile_hotspot": "Repeated exact topic membership scans occur for every selected or rejected message.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Cache only topic membership; every message still checks its own clock bounds, CRC path, count limit and source identity. Mixed-channel fixtures guard against single-topic overfitting.",
+  "case_results": {
+    "raw_reader.chunked": {
+      "before_ns": 1309750.0,
+      "after_ns": 1315441.625,
+      "latency_reduction_pct": -0.517565637553763,
+      "paired_ratios": [
+        1.0052643020059262,
+        1.005087010745149,
+        1.0472530422951298,
+        1.0034290515904374
+      ],
+      "worst_paired_reduction_pct": -4.725304229512983
+    },
+    "raw_reader.linear": {
+      "before_ns": 1650144.09375,
+      "after_ns": 1654577.03125,
+      "latency_reduction_pct": -0.968922825600127,
+      "paired_ratios": [
+        0.9667116080274661,
+        1.0209383632491962,
+        1.036656030335082,
+        0.9984400932628065
+      ],
+      "worst_paired_reduction_pct": -3.6656030335082024
+    },
+    "raw_reader.topics": {
+      "before_ns": 1319158.53125,
+      "after_ns": 1572318.09375,
+      "latency_reduction_pct": -19.248161595538438,
+      "paired_ratios": [
+        1.1797260382825592,
+        1.2021208828892744,
+        1.2177953524342726,
+        1.182842349021494
+      ],
+      "worst_paired_reduction_pct": -21.77953524342726
+    },
+    "raw_reader.mixed_topics": {
+      "before_ns": 1326958.40625,
+      "after_ns": 1498717.75,
+      "latency_reduction_pct": -12.924051025068328,
+      "paired_ratios": [
+        1.1315447679723845,
+        1.1226619341693533,
+        1.1743603902279032,
+        1.1269362525289819
+      ],
+      "worst_paired_reduction_pct": -17.436039022790318
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-raw-reader-08",
+  "validation_sha256": "9373db8ee6aa7fb3ce27af30c460056e3700b52c62beb3cb9962a3acaea782dd"
+}

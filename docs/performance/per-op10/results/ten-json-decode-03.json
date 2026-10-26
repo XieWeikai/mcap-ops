@@ -1,0 +1,66 @@
+{
+  "label": "ten-json-decode-03",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "json_decode",
+    "json_decode.deep",
+    "json_decode.wide"
+  ],
+  "geomean_latency_reduction_pct": 1.7484987427725418,
+  "worst_block_reduction_pct": -0.6138032207938515,
+  "worst_case_reduction_pct": -1.4076340691336897,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep the original byte-parser errors for invalid UTF-8; measure the string parser only when UTF-8 validation succeeds.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "d917d1f79a2ac5a2fa883a5c96ba965893c49e2b7bf68955e13a4e283254eb16",
+  "operator": "json_decode",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "parse known UTF-8 JSON through the string parser",
+  "profile_hotspot": "Keep the original byte-parser errors for invalid UTF-8; measure the string parser only when UTF-8 validation succeeds.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Keep the original byte-parser errors for invalid UTF-8; measure the string parser only when UTF-8 validation succeeds.",
+  "case_results": {
+    "json_decode": {
+      "before_ns": 215.8071632385254,
+      "after_ns": 207.30620193481445,
+      "latency_reduction_pct": 4.3942831750499955,
+      "paired_ratios": [
+        0.9868214443162943,
+        0.9612056654502654,
+        0.9509086710487346,
+        0.9495922548081149
+      ],
+      "worst_paired_reduction_pct": 1.317855568370574
+    },
+    "json_decode.deep": {
+      "before_ns": 230.06049346923828,
+      "after_ns": 223.20668411254883,
+      "latency_reduction_pct": 3.5203638940211945,
+      "paired_ratios": [
+        0.9773042284072666,
+        1.0178599852106662,
+        0.9522884937123096,
+        0.9520928484842806
+      ],
+      "worst_paired_reduction_pct": -1.785998521066623
+    },
+    "json_decode.wide": {
+      "before_ns": 937.75048828125,
+      "after_ns": 945.7638244628906,
+      "latency_reduction_pct": -1.4076340691336897,
+      "paired_ratios": [
+        1.0560982936696948,
+        0.9710345586423506,
+        0.9808330270787302,
+        1.0473196543039436
+      ],
+      "worst_paired_reduction_pct": -5.6098293669694765
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-json-decode-03",
+  "validation_sha256": "99f15006585ee13404cdd6f43424fb2c4e3518ea1df9f1200566d758a499cbea"
+}

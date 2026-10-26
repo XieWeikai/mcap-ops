@@ -1,0 +1,22 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..d0dd3c2 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -88,6 +88,17 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+         .first()
+         .map_or(0, |&t| times.partition_point(|&v| v < t));
+     for (i, &t) in target.iter().enumerate() {
++        if i > 0 && t == target[i - 1] {
++            let d = signal.channels();
++            let (past, tail) = out.values.split_at_mut(i * d);
++            tail[..d].copy_from_slice(&past[(i - 1) * d..]);
++            out.status[i] = out.status[i - 1];
++            out.source_left[i] = out.source_left[i - 1];
++            out.source_right[i] = out.source_right[i - 1];
++            out.alpha[i] = out.alpha[i - 1];
++            out.uses_future[i] = out.uses_future[i - 1];
++            continue;
++        }
+         while right < times.len() && times[right] < t {
+             right += 1;
+         }

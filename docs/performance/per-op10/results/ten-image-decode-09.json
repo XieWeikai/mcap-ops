@@ -1,0 +1,53 @@
+{
+  "label": "ten-image-decode-09",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_decode.png",
+    "image_decode.jpeg"
+  ],
+  "geomean_latency_reduction_pct": 0.8135594842639149,
+  "worst_block_reduction_pct": 0.18096318528638689,
+  "worst_case_reduction_pct": 0.5508885296840793,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "6aad3e3ac795a8f42f013987ad88ea67f985e7b558939026e723c4dbfe81263c",
+  "operator": "image_decode",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for image_decode",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "image_decode.png": {
+      "before_ns": 1468593.90625,
+      "after_ns": 1460501.21875,
+      "latency_reduction_pct": 0.5508885296840793,
+      "paired_ratios": [
+        0.9940742877998006,
+        1.0109359336005166,
+        0.9666456724345593,
+        0.994907941606518
+      ],
+      "worst_paired_reduction_pct": -1.093593360051659
+    },
+    "image_decode.jpeg": {
+      "before_ns": 580645.0859375,
+      "after_ns": 575824.171875,
+      "latency_reduction_pct": 0.7642078399422658,
+      "paired_ratios": [
+        0.9995826922110044,
+        0.9856054948141235,
+        0.9991103483870313,
+        0.9789646977402564
+      ],
+      "worst_paired_reduction_pct": 0.04173077889956245
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-decode-09",
+  "validation_sha256": "60c1f1b584d3729f364b87c97a5cc6cd3f64f0aabd09ad1a6045953a8c004904"
+}

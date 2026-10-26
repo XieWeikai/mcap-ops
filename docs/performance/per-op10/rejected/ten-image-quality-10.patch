@@ -1,0 +1,12 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 2af84c6..ea61957 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -67,6 +67,7 @@ pub struct ImageQuality {
+     pub laplacian_variance: Option<f64>,
+     pub rgb_sha256: String,
+ }
++#[inline(never)]
+ pub fn image_quality(bytes: &[u8], options: &ImageOptions) -> Result<ImageQuality> {
+     let rgb = decode(bytes, options)?.into_rgb8();
+     let (width, height) = rgb.dimensions();

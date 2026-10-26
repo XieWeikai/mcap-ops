@@ -1,0 +1,53 @@
+{
+  "label": "ten-gate-10",
+  "base_commit": "4d628840c60ed09fb53d8c225ebf2f31ef03c559",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": -9.400580255508961,
+  "worst_block_reduction_pct": -10.702023495502132,
+  "worst_case_reduction_pct": -10.566052361592915,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep the same policy order and duplicate behavior while comparing iterator allocation and branch scheduling.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "facb342ff7121686fba838a216e3b859a2e963761474cd8d3e686cc5f44e4be2",
+  "operator": "gate",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "collect ordered rejection reasons through chained iterators",
+  "profile_hotspot": "Keep the same policy order and duplicate behavior while comparing iterator allocation and branch scheduling.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Keep the same policy order and duplicate behavior while comparing iterator allocation and branch scheduling.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 6.365147113800049,
+      "after_ns": 6.772998332977295,
+      "latency_reduction_pct": -6.403091635358704,
+      "paired_ratios": [
+        1.0163306257559757,
+        1.0826602901508031,
+        1.1216868844527041,
+        1.045401542556371
+      ],
+      "worst_paired_reduction_pct": -12.168688445270416
+    },
+    "gate.fail": {
+      "before_ns": 29.35647201538086,
+      "after_ns": 32.55837631225586,
+      "latency_reduction_pct": -10.566052361592915,
+      "paired_ratios": [
+        1.0856980705214234,
+        1.130956811604701,
+        1.092545359659631,
+        1.1187756875722272
+      ],
+      "worst_paired_reduction_pct": -13.095681160470107
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-gate-10",
+  "validation_sha256": "a417dd999048a5c0049d16db217569da5a3224e2fb25bff546e4e341147a7fd6"
+}

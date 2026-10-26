@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-10",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": -15.973891984554989,
+  "worst_block_reduction_pct": -16.423144290634937,
+  "worst_case_reduction_pct": -129.3311709224617,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Remove separate status-vector indexing while leaving values, timestamps and provenance unchanged.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "6ac07525fd61e0d37df92194d5dbffbf6869eb3159bebb9bd98f4a853dc89ce0",
+  "operator": "resample",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "zip target timestamps with mutable sample statuses",
+  "profile_hotspot": "Remove separate status-vector indexing while leaving values, timestamps and provenance unchanged.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Remove separate status-vector indexing while leaving values, timestamps and provenance unchanged.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 216350.5625,
+      "after_ns": 238352.1796875,
+      "latency_reduction_pct": -9.868622949246308,
+      "paired_ratios": [
+        1.1022058801033103,
+        1.0750899129252494,
+        1.0951665788816156,
+        1.1051689545172418
+      ],
+      "worst_paired_reduction_pct": -10.516895451724185
+    },
+    "resample.nearest": {
+      "before_ns": 239057.80859375,
+      "after_ns": 237741.7578125,
+      "latency_reduction_pct": -0.8248841418279973,
+      "paired_ratios": [
+        0.9871369705986603,
+        1.0160209851317663,
+        1.0004766977047936,
+        1.0184645107578096
+      ],
+      "worst_paired_reduction_pct": -1.8464510757809638
+    },
+    "resample.linear": {
+      "before_ns": 404335.796875,
+      "after_ns": 398160.0390625,
+      "latency_reduction_pct": 1.1437942348214714,
+      "paired_ratios": [
+        0.9826868492264962,
+        0.9867601741747599,
+        0.9912901456178359,
+        0.9903639411288107
+      ],
+      "worst_paired_reduction_pct": 0.8709854382164095
+    },
+    "resample.slerp": {
+      "before_ns": 576533.125,
+      "after_ns": 589791.453125,
+      "latency_reduction_pct": -2.5056038298350014,
+      "paired_ratios": [
+        1.0387489814614164,
+        1.039767393929623,
+        1.0113630951352839,
+        1.000968855201643
+      ],
+      "worst_paired_reduction_pct": -3.976739392962303
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5609.1134033203125,
+      "after_ns": 12865.22998046875,
+      "latency_reduction_pct": -129.3311709224617,
+      "paired_ratios": [
+        2.2915626196941394,
+        2.295683569841734,
+        2.2918326108580627,
+        2.294790807591171
+      ],
+      "worst_paired_reduction_pct": -129.56835698417342
+    },
+    "resample.repeated": {
+      "before_ns": 156544.3125,
+      "after_ns": 174151.96875,
+      "latency_reduction_pct": -11.460640425941948,
+      "paired_ratios": [
+        1.1070981156875963,
+        1.1155023790724294,
+        1.1159153108134838,
+        1.1137104294464093
+      ],
+      "worst_paired_reduction_pct": -11.591531081348382
+    },
+    "resample.exact_slerp": {
+      "before_ns": 428486.1015625,
+      "after_ns": 427141.2890625,
+      "latency_reduction_pct": 0.3075337709433468,
+      "paired_ratios": [
+        0.9843746008177157,
+        1.0101769875014541,
+        0.9958624863454674,
+        0.9979868382356656
+      ],
+      "worst_paired_reduction_pct": -1.0176987501454127
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-10",
+  "validation_sha256": "b1d799f78547b1e0095f49f9f0c95577e991be978e2a0f771038d146ecf1f5aa"
+}

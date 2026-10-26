@@ -1,0 +1,53 @@
+{
+  "label": "ten-gate-02",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": 2.4305703376749976,
+  "worst_block_reduction_pct": 0.9571094353381215,
+  "worst_case_reduction_pct": 0.35357872817807223,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The code enum has ten fixed variants; preserve duplicate policy reasons and their original order.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "9b62e21cb99cb293dd8e49109133a39cd467afdeadf667de4fcbaabd8126021b",
+  "operator": "gate",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "index present quality codes with a stack bitmap",
+  "profile_hotspot": "The code enum has ten fixed variants; preserve duplicate policy reasons and their original order.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The code enum has ten fixed variants; preserve duplicate policy reasons and their original order.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 9.07936143875122,
+      "after_ns": 8.987038135528564,
+      "latency_reduction_pct": 0.35357872817807223,
+      "paired_ratios": [
+        1.0011546857214897,
+        0.9917737397149489,
+        1.0273903395818023,
+        0.9829396278460901
+      ],
+      "worst_paired_reduction_pct": -2.739033958180226
+    },
+    "gate.fail": {
+      "before_ns": 30.275983810424805,
+      "after_ns": 28.865610599517822,
+      "latency_reduction_pct": 4.524101474091768,
+      "paired_ratios": [
+        0.956001612577576,
+        0.9547207728535915,
+        0.954797197664573,
+        0.9389071908192224
+      ],
+      "worst_paired_reduction_pct": 4.399838742242402
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-gate-02",
+  "validation_sha256": "7063b91e6b7ad823f429618bc503fde8ebea766e5a4a2bdb5df537c6748fe22a"
+}

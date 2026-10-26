@@ -1,0 +1,100 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-image-decode-08/profile.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 118203356
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/ten-image-decode-08 --case image_decode.png,image_decode.jpeg --profile (PID 1890973, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       100
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+141,630,461 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+141,630,461 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+141,630,461 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+141,630,461 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+141,630,461 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+141,630,461 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+141,630,461 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+141,630,461 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/ten-image-decode-08]
+141,630,461 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/ten-image-decode-08]
+141,630,461 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/ten-image-decode-08]
+141,630,461 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/ten-image-decode-08]
+141,630,461 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+141,630,461 (100.0%)  ???:main [./.artifacts/rsi/bin/ten-image-decode-08]
+141,630,461 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/ten-image-decode-08]
+141,630,461 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/ten-image-decode-08]
+141,591,049 (99.97%)  ./crates/io/src/image_ops.rs:mcap_ops_io::image_ops::decode
+139,500,225 (98.50%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/image-0.25.10/src/images/dynimage.rs:mcap_ops_io::image_ops::decode
+139,500,207 (98.50%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/image-0.25.10/src/images/dynimage.rs:image::images::dynimage::decoder_to_image [./.artifacts/rsi/bin/ten-image-decode-08]
+139,499,778 (98.50%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/image-0.25.10/src/io/free_functions.rs:image::io::free_functions::decoder_to_vec
+133,967,488 (94.59%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/image-0.25.10/src/io/decoder.rs:image::io::free_functions::decoder_to_vec
+101,025,993 (71.33%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/image-0.25.10/src/codecs/png.rs:<image::codecs::png::PngDecoder<R> as image::io::decoder::ImageDecoder>::read_image_boxed
+100,992,909 (71.31%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/mod.rs:<image::codecs::png::PngDecoder<R> as image::io::decoder::ImageDecoder>::read_image_boxed
+100,983,792 (71.30%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/mod.rs:png::decoder::Reader<R>::next_interlaced_row_impl [./.artifacts/rsi/bin/ten-image-decode-08]
+ 51,880,713 (36.63%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/read_decoder.rs:png::decoder::read_decoder::ReadDecoder<R>::decode_image_data
+ 51,865,818 (36.62%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/stream.rs:png::decoder::stream::StreamingDecoder::update
+ 51,420,582 (36.31%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/zlib.rs:png::decoder::stream::StreamingDecoder::update
+ 51,409,110 (36.30%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/fdeflate-0.3.7/src/decompress.rs:fdeflate::decompress::Decompressor::read
+ 48,614,889 (34.33%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/fdeflate-0.3.7/src/decompress.rs:fdeflate::decompress::Decompressor::read [./.artifacts/rsi/bin/ten-image-decode-08]
+ 47,067,804 (33.23%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/unfiltering_buffer.rs:png::decoder::unfiltering_buffer::UnfilteringBuffer::unfilter_curr_row_in_place
+ 47,037,576 (33.21%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/unfiltering_buffer.rs:png::decoder::unfiltering_buffer::UnfilteringBuffer::unfilter_curr_row_in_place [./.artifacts/rsi/bin/ten-image-decode-08]
+ 46,974,222 (33.17%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/filter/mod.rs:png::filter::unfilter
+ 32,941,387 (23.26%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/image-0.25.10/src/codecs/jpeg/decoder.rs:<image::codecs::jpeg::decoder::JpegDecoder<R> as image::io::decoder::ImageDecoder>::read_image_boxed
+ 32,937,319 (23.26%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/decoder.rs:<image::codecs::jpeg::decoder::JpegDecoder<R> as image::io::decoder::ImageDecoder>::read_image_boxed
+ 32,675,581 (23.07%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/mcu.rs:zune_jpeg::mcu::<impl zune_jpeg::decoder::JpegDecoder<T>>::decode_mcu_ycbcr_baseline
+ 32,197,422 (22.73%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/filter/paeth.rs:png::filter::unfilter
+ 30,059,625 (21.22%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/mcu.rs:zune_jpeg::mcu::<impl zune_jpeg::decoder::JpegDecoder<T>>::decode_mcu_ycbcr_baseline [./.artifacts/rsi/bin/ten-image-decode-08]
+ 11,535,435 ( 8.14%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/bitstream.rs:zune_jpeg::bitstream::BitStream::decode_mcu_block
+  9,594,012 ( 6.77%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/idct.rs:core::ops::function::FnOnce::call_once [./.artifacts/rsi/bin/ten-image-decode-08]
+  9,594,012 ( 6.77%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/idct.rs:core::ops::function::FnOnce::call_once
+  9,124,893 ( 6.44%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/idct/avx2.rs:zune_jpeg::idct::avx2::idct_avx2_4x4
+  8,637,555 ( 6.10%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/bitstream.rs:zune_jpeg::bitstream::BitStream::decode_mcu_block [./.artifacts/rsi/bin/ten-image-decode-08]
+  7,360,314 ( 5.20%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/cmp.rs:png::filter::unfilter
+  7,052,925 ( 4.98%)  ./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:__memset_avx2_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  5,685,621 ( 4.01%)  ./malloc/./malloc/malloc.c:calloc [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  5,677,686 ( 4.01%)  ./malloc/../string/bits/string_fortified.h:calloc
+  5,677,623 ( 4.01%)  ???:0x00000000049aa740 [???]
+  5,536,764 ( 3.91%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/adapters/zip.rs:png::filter::unfilter
+  5,532,104 ( 3.91%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/alloc/unix.rs:image::io::free_functions::decoder_to_vec
+  5,416,740 ( 3.82%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/mcu.rs:zune_jpeg::mcu::<impl zune_jpeg::decoder::JpegDecoder<T>>::post_process [./.artifacts/rsi/bin/ten-image-decode-08]
+  5,394,060 ( 3.81%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/mcu.rs:zune_jpeg::mcu::<impl zune_jpeg::decoder::JpegDecoder<T>>::post_process::{{closure}} [./.artifacts/rsi/bin/ten-image-decode-08]
+  5,274,720 ( 3.72%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/worker.rs:zune_jpeg::worker::color_convert
+  5,257,440 ( 3.71%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/worker.rs:zune_jpeg::worker::color_convert [./.artifacts/rsi/bin/ten-image-decode-08]
+  5,179,680 ( 3.66%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/worker.rs:zune_jpeg::worker::color_convert_ycbcr [./.artifacts/rsi/bin/ten-image-decode-08]
+  4,017,957 ( 2.84%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/../../stdarch/crates/core_arch/src/x86/avx2.rs:zune_jpeg::idct::avx2::idct_avx2_4x4
+  4,014,720 ( 2.83%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/color_convert/avx.rs:zune_jpeg::color_convert::avx::ycbcr_to_rgb_avx2 [./.artifacts/rsi/bin/ten-image-decode-08]
+  4,014,720 ( 2.83%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/color_convert/avx.rs:zune_jpeg::color_convert::avx::ycbcr_to_rgb_avx2
+  3,955,680 ( 2.79%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/color_convert/avx.rs:zune_jpeg::color_convert::avx::ycbcr_to_rgb_avx2_1 [./.artifacts/rsi/bin/ten-image-decode-08]
+  3,518,335 ( 2.48%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms [/usr/lib/x86_64-linux-gnu/libc.so.6]
+  2,952,000 ( 2.08%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/../../stdarch/crates/core_arch/src/x86/avx2.rs:zune_jpeg::color_convert::avx::ycbcr_to_rgb_avx2_1
+  1,952,652 ( 1.38%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/../../stdarch/crates/core_arch/src/macros.rs:zune_jpeg::idct::avx2::idct_avx2_4x4
+  1,853,226 ( 1.31%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:fdeflate::decompress::Decompressor::read
+  1,845,120 ( 1.30%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:png::filter::unfilter
+  1,351,836 ( 0.95%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zune-jpeg-0.5.15/src/idct/avx2.rs:zune_jpeg::idct::avx2::idct_avx2_4x4 [./.artifacts/rsi/bin/ten-image-decode-08]
+  1,211,337 ( 0.86%)  crates/io/src/image_ops.rs:mcap_ops_io::image_ops::decode [./.artifacts/rsi/bin/ten-image-decode-08]
+  1,210,887 ( 0.85%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/image-0.25.10/src/io/image_reader_type.rs:image::io::image_reader_type::ImageReader<R>::into_decoder
+  1,137,672 ( 0.80%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/option.rs:zune_jpeg::mcu::<impl zune_jpeg::decoder::JpegDecoder<T>>::decode_mcu_ycbcr_baseline
+    917,742 ( 0.65%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/specialize.rs:zune_jpeg::mcu::<impl zune_jpeg::decoder::JpegDecoder<T>>::decode_mcu_ycbcr_baseline
+    875,436 ( 0.62%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:mcap_ops_io::image_ops::decode
+    793,667 ( 0.56%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/mod.rs:image::io::image_reader_type::ImageReader<R>::into_decoder
+    790,029 ( 0.56%)  ./.tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/read_decoder.rs:png::decoder::read_decoder::ReadDecoder<R>::read_header_info
+    786,441 ( 0.56%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:png::decoder::read_decoder::ReadDecoder<R>::read_header_info
+    774,054 ( 0.55%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:zune_jpeg::bitstream::BitStream::decode_mcu_block
+    751,020 ( 0.53%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:zune_jpeg::idct::avx2::idct_avx2_4x4
+    691,488 ( 0.49%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/mod.rs:core::ptr::drop_in_place<zune_jpeg::errors::DecodeErrors> [./.artifacts/rsi/bin/ten-image-decode-08]
+    677,127 ( 0.48%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/unfiltering_buffer.rs:png::decoder::Reader<R>::next_interlaced_row_impl
+    644,406 ( 0.45%)  .tools/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/png-0.18.1/src/decoder/unfiltering_buffer.rs:png::decoder::unfiltering_buffer::UnfilteringBuffer::shift_buffer_left [./.artifacts/rsi/bin/ten-image-decode-08]

@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-04",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": 1.99108934226071,
+  "worst_block_reduction_pct": 1.634244124491524,
+  "worst_case_reduction_pct": -1.122578351862824,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Endpoint norms are validated near one; compare f64 results without changing quaternion validity thresholds.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "75dfcc0a621c94b4eecb5c526b8298a8ddfeaceb8f7073433e117034e2e81862",
+  "operator": "resample",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reuse bounded quaternion normalization reciprocals",
+  "profile_hotspot": "Endpoint norms are validated near one; compare f64 results without changing quaternion validity thresholds.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Endpoint norms are validated near one; compare f64 results without changing quaternion validity thresholds.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 218629.3671875,
+      "after_ns": 221358.2734375,
+      "latency_reduction_pct": -1.122578351862824,
+      "paired_ratios": [
+        1.0278464985046645,
+        1.002067043927766,
+        1.0127645755284669,
+        1.0096869915087894
+      ],
+      "worst_paired_reduction_pct": -2.7846498504664474
+    },
+    "resample.nearest": {
+      "before_ns": 234989.515625,
+      "after_ns": 233883.97265625,
+      "latency_reduction_pct": 0.34128198013633204,
+      "paired_ratios": [
+        0.9974905346233046,
+        0.9904872279078968,
+        0.9958410374336802,
+        0.9973333229635931
+      ],
+      "worst_paired_reduction_pct": 0.25094653766953856
+    },
+    "resample.linear": {
+      "before_ns": 407857.4375,
+      "after_ns": 403156.5859375,
+      "latency_reduction_pct": 1.9546555855943448,
+      "paired_ratios": [
+        0.9861511904428797,
+        0.9557258811293949,
+        0.9747556978452334,
+        0.999936089320949
+      ],
+      "worst_paired_reduction_pct": 0.006391067905098247
+    },
+    "resample.slerp": {
+      "before_ns": 579951.1015625,
+      "after_ns": 561417.40625,
+      "latency_reduction_pct": 3.175285969554631,
+      "paired_ratios": [
+        0.9682848285587333,
+        0.973900112403471,
+        0.968209452050174,
+        0.9592687258050389
+      ],
+      "worst_paired_reduction_pct": 2.6099887596529037
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5611.1435546875,
+      "after_ns": 5545.0888671875,
+      "latency_reduction_pct": 1.1835843824619108,
+      "paired_ratios": [
+        1.0276683883599291,
+        0.9907536497638096,
+        0.9751599815661962,
+        0.9855746625869521
+      ],
+      "worst_paired_reduction_pct": -2.766838835992913
+    },
+    "resample.repeated": {
+      "before_ns": 160759.9765625,
+      "after_ns": 160590.2109375,
+      "latency_reduction_pct": 0.10561740504452244,
+      "paired_ratios": [
+        0.9947666482119089,
+        1.0051535381744237,
+        0.9988531859432083,
+        0.9990344659559013
+      ],
+      "worst_paired_reduction_pct": -0.5153538174423655
+    },
+    "resample.exact_slerp": {
+      "before_ns": 428577.8984375,
+      "after_ns": 389844.3359375,
+      "latency_reduction_pct": 8.721940441620768,
+      "paired_ratios": [
+        0.8903272105503308,
+        0.9048867243045767,
+        0.9295164145754209,
+        0.9206744668630079
+      ],
+      "worst_paired_reduction_pct": 7.048358542457911
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-04",
+  "validation_sha256": "40a64a6000d83f825ff9818cdfb4f8790379017a88f8633e8b2fb6e5aafd4276"
+}

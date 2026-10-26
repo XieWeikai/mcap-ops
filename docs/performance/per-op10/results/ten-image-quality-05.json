@@ -1,0 +1,53 @@
+{
+  "label": "ten-image-quality-05",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": -31.614484375428308,
+  "worst_block_reduction_pct": -32.53948960673716,
+  "worst_case_reduction_pct": -43.46147082533554,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Measure a bounded extra f64 image plane against recomputing five-neighbor stencils; output statistics retain two passes.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "5a73f8ded45575f81db4592bb18f1782cf11fec9c8a5469533b816186af47daa",
+  "operator": "image_quality",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reuse computed Laplacians during the variance pass",
+  "profile_hotspot": "Measure a bounded extra f64 image plane against recomputing five-neighbor stencils; output statistics retain two passes.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Measure a bounded extra f64 image plane against recomputing five-neighbor stencils; output statistics retain two passes.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 2763041.625,
+      "after_ns": 3295370.6875,
+      "latency_reduction_pct": -20.367837109842803,
+      "paired_ratios": [
+        1.1966464351908679,
+        1.210710307005988,
+        1.1706111064021312,
+        1.2258307380249105
+      ],
+      "worst_paired_reduction_pct": -22.58307380249105
+    },
+    "image_quality.noise": {
+      "before_ns": 1272193.9375,
+      "after_ns": 1831061.0625,
+      "latency_reduction_pct": -43.46147082533554,
+      "paired_ratios": [
+        1.4313663310690474,
+        1.4509429880592821,
+        1.4378630854376633,
+        1.42902625119799
+      ],
+      "worst_paired_reduction_pct": -45.09429880592821
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-quality-05",
+  "validation_sha256": "895db45abff41c5a41c176c4d188097189965bdd862a94c9aebd1477cfe92db1"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-inspect-04",
+  "base_commit": "725bf9c5319c8caff3a58af8766ec03cfa42146c",
+  "cases": [
+    "mcap_inspect",
+    "mcap_inspect.many"
+  ],
+  "geomean_latency_reduction_pct": -0.06001462012013015,
+  "worst_block_reduction_pct": -0.7156885280880543,
+  "worst_case_reduction_pct": -1.0364615009194278,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep initial per-channel memory small and proportional to observed channels while measuring growth overhead.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "1f161732ff7110f285faf1ac4d460f34c54581fc516d7edb2625deae0d5abc47",
+  "operator": "mcap_inspect",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve 8 clock points for each observed channel",
+  "profile_hotspot": "Keep initial per-channel memory small and proportional to observed channels while measuring growth overhead.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Keep initial per-channel memory small and proportional to observed channels while measuring growth overhead.",
+  "case_results": {
+    "mcap_inspect": {
+      "before_ns": 1733591.75,
+      "after_ns": 1714589.0625,
+      "latency_reduction_pct": 0.8384499430559078,
+      "paired_ratios": [
+        0.9799688158508996,
+        1.001950249905109,
+        0.9981336993199487,
+        0.9850973018189333
+      ],
+      "worst_paired_reduction_pct": -0.19502499051089472
+    },
+    "mcap_inspect.many": {
+      "before_ns": 2027431.90625,
+      "after_ns": 2046833.09375,
+      "latency_reduction_pct": -1.0364615009194278,
+      "paired_ratios": [
+        1.0101817104787876,
+        1.010547519539601,
+        1.016261641361067,
+        0.9760880006468976
+      ],
+      "worst_paired_reduction_pct": -1.6261641361067003
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-inspect-04",
+  "validation_sha256": "9f791f8e36ff37456ce2e80781c266c9efd92737f53dda0523b4fbd8741c29bc"
+}

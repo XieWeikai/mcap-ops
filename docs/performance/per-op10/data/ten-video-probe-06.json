@@ -1,0 +1,319 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "run_id": "session-9a90601a14b1",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/accepted",
+      "bytes": 27285488,
+      "sha256": "0a24be8353866acd62094e01a07e92ba528ae045743d9addb2b45d1ad0bb3f54"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/ten-video-probe-06",
+      "bytes": 27285960,
+      "sha256": "2964cc940db5689bd5054001906a01443d475f7f1a5c0e8169fd4e2ba664ca3f"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "video_probe": {
+          "case": "video_probe",
+          "iterations": 1,
+          "median_ns": 26084735.0,
+          "samples_ns": [
+            27151110.0,
+            26663032.0,
+            26948762.0,
+            25930792.0,
+            24906701.0,
+            25073843.0,
+            26084735.0
+          ]
+        },
+        "video_validate": {
+          "case": "video_validate",
+          "iterations": 1,
+          "median_ns": 54849567.0,
+          "samples_ns": [
+            55086756.0,
+            54849567.0,
+            54175527.0,
+            54764298.0,
+            55330709.0,
+            54633355.0,
+            58096657.0
+          ]
+        }
+      },
+      "after": {
+        "video_probe": {
+          "case": "video_probe",
+          "iterations": 1,
+          "median_ns": 25772453.0,
+          "samples_ns": [
+            25772453.0,
+            26182291.0,
+            24763885.0,
+            24996836.0,
+            25158079.0,
+            27058210.0,
+            25973781.0
+          ]
+        },
+        "video_validate": {
+          "case": "video_validate",
+          "iterations": 1,
+          "median_ns": 55197993.0,
+          "samples_ns": [
+            56120612.0,
+            55197993.0,
+            54015814.0,
+            57667171.0,
+            56139326.0,
+            54955904.0,
+            54800916.0
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "video_probe": {
+          "case": "video_probe",
+          "iterations": 1,
+          "median_ns": 26814387.0,
+          "samples_ns": [
+            27524979.0,
+            26519348.0,
+            25950657.0,
+            27064282.0,
+            25959858.0,
+            27215545.0,
+            26814387.0
+          ]
+        },
+        "video_validate": {
+          "case": "video_validate",
+          "iterations": 1,
+          "median_ns": 54979651.0,
+          "samples_ns": [
+            56906934.0,
+            55023335.0,
+            54931529.0,
+            56095705.0,
+            54913938.0,
+            54003781.0,
+            54979651.0
+          ]
+        }
+      },
+      "before": {
+        "video_probe": {
+          "case": "video_probe",
+          "iterations": 1,
+          "median_ns": 26374492.0,
+          "samples_ns": [
+            25842513.0,
+            25582903.0,
+            26374492.0,
+            25806249.0,
+            27405251.0,
+            27893305.0,
+            26804316.0
+          ]
+        },
+        "video_validate": {
+          "case": "video_validate",
+          "iterations": 1,
+          "median_ns": 55911077.0,
+          "samples_ns": [
+            57212769.0,
+            55729456.0,
+            53997455.0,
+            55536312.0,
+            56684383.0,
+            55911077.0,
+            55955624.0
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "video_probe": {
+          "case": "video_probe",
+          "iterations": 1,
+          "median_ns": 25653118.0,
+          "samples_ns": [
+            24949711.0,
+            25212739.0,
+            25830755.0,
+            25511366.0,
+            25653118.0,
+            25954242.0,
+            25883674.0
+          ]
+        },
+        "video_validate": {
+          "case": "video_validate",
+          "iterations": 1,
+          "median_ns": 58025165.0,
+          "samples_ns": [
+            58147124.0,
+            57885128.0,
+            58025165.0,
+            58071811.0,
+            64343612.99999999,
+            57669098.0,
+            56963156.0
+          ]
+        }
+      },
+      "after": {
+        "video_probe": {
+          "case": "video_probe",
+          "iterations": 1,
+          "median_ns": 25056698.0,
+          "samples_ns": [
+            25899674.0,
+            25901672.0,
+            25996032.0,
+            25056698.0,
+            24898547.0,
+            24983466.0,
+            25027822.0
+          ]
+        },
+        "video_validate": {
+          "case": "video_validate",
+          "iterations": 1,
+          "median_ns": 56157845.0,
+          "samples_ns": [
+            55076685.0,
+            55863964.0,
+            56011457.0,
+            57093807.0,
+            57338214.0,
+            56780056.0,
+            56157845.0
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "video_probe": {
+          "case": "video_probe",
+          "iterations": 1,
+          "median_ns": 25456797.0,
+          "samples_ns": [
+            25671581.0,
+            25122497.0,
+            24611643.0,
+            24999077.0,
+            25456797.0,
+            25659053.0,
+            26167384.0
+          ]
+        },
+        "video_validate": {
+          "case": "video_validate",
+          "iterations": 1,
+          "median_ns": 57958667.0,
+          "samples_ns": [
+            57260538.0,
+            57921664.0,
+            56999438.0,
+            57958667.0,
+            59151359.0,
+            58881029.0,
+            59237675.0
+          ]
+        }
+      },
+      "before": {
+        "video_probe": {
+          "case": "video_probe",
+          "iterations": 1,
+          "median_ns": 25996957.0,
+          "samples_ns": [
+            25577310.0,
+            25869172.0,
+            26174382.0,
+            27010491.0,
+            26892363.0,
+            25923825.0,
+            25996957.0
+          ]
+        },
+        "video_validate": {
+          "case": "video_validate",
+          "iterations": 1,
+          "median_ns": 55213375.0,
+          "samples_ns": [
+            56892349.0,
+            55130517.0,
+            55875993.0,
+            54972210.0,
+            54964000.0,
+            55213375.0,
+            56942250.0
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "video_probe": {
+      "before_ns": 26040846.0,
+      "after_ns": 25614625.0,
+      "latency_reduction_pct": 1.6374822960049773,
+      "paired_ratios": [
+        0.9880281704989528,
+        1.0166788046571664,
+        0.9767505844708624,
+        0.9792221835809476
+      ],
+      "worst_paired_reduction_pct": -1.6678804657166424
+    },
+    "video_validate": {
+      "before_ns": 55562226.0,
+      "after_ns": 55677919.0,
+      "latency_reduction_pct": 0.5153333671360949,
+      "paired_ratios": [
+        1.0063523929003853,
+        0.9833409397568929,
+        0.967818790347257,
+        1.04972150316839
+      ],
+      "worst_paired_reduction_pct": -4.972150316838997
+    }
+  }
+}

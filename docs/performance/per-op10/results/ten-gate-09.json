@@ -1,0 +1,53 @@
+{
+  "label": "ten-gate-09",
+  "base_commit": "4d628840c60ed09fb53d8c225ebf2f31ef03c559",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": -0.027325436493863542,
+  "worst_block_reduction_pct": -0.5129462971455778,
+  "worst_case_reduction_pct": 0.029413710647085978,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "2dca324506d75698114f090477ecfd7e0758e653ffe8116e5c74417f1a8ec1b9",
+  "operator": "gate",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for gate",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 6.424623966217041,
+      "after_ns": 6.439416885375977,
+      "latency_reduction_pct": 0.029413710647085978,
+      "paired_ratios": [
+        1.0209121873262073,
+        0.9900438873496897,
+        1.0037612902967001,
+        0.9956504354903583
+      ],
+      "worst_paired_reduction_pct": -2.0912187326207254
+    },
+    "gate.fail": {
+      "before_ns": 29.49087429046631,
+      "after_ns": 29.377220153808594,
+      "latency_reduction_pct": 0.44604644911634406,
+      "paired_ratios": [
+        0.9895907305987282,
+        1.001488340418945,
+        1.0058334511033873,
+        0.9858006600986646
+      ],
+      "worst_paired_reduction_pct": -0.5833451103387288
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-gate-09",
+  "validation_sha256": "07f838879c058588796bd2b14de290f855400e281a67029d61d7776f86b27e27"
+}

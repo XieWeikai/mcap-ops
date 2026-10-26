@@ -1,0 +1,37 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index d948683..64e7aa2 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -477,19 +477,19 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
+     for code in &policy.reject_codes {
+         if report.all_codes.contains(code) {
+             reasons.push(
+-                match code {
+-                    IssueCode::NonFinite => "NonFinite",
+-                    IssueCode::BelowRange => "BelowRange",
+-                    IssueCode::AboveRange => "AboveRange",
+-                    IssueCode::ClockReversal => "ClockReversal",
+-                    IssueCode::DuplicateTime => "DuplicateTime",
+-                    IssueCode::Gap => "Gap",
+-                    IssueCode::Rate => "Rate",
+-                    IssueCode::Acceleration => "Acceleration",
+-                    IssueCode::Spike => "Spike",
+-                    IssueCode::Flatline => "Flatline",
+-                }
+-                .to_owned(),
++                [
++                    "NonFinite",
++                    "BelowRange",
++                    "AboveRange",
++                    "ClockReversal",
++                    "DuplicateTime",
++                    "Gap",
++                    "Rate",
++                    "Acceleration",
++                    "Spike",
++                    "Flatline",
++                ][*code as usize]
++                    .to_owned(),
+             );
+         }
+     }

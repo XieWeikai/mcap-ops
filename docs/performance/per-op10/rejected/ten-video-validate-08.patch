@@ -1,0 +1,13 @@
+diff --git a/crates/io/src/video.rs b/crates/io/src/video.rs
+index 996149e..c0b9e76 100644
+--- a/crates/io/src/video.rs
++++ b/crates/io/src/video.rs
+@@ -143,6 +143,8 @@ pub fn validate_video(
+             "file,pipe".as_ref(),
+             "-err_detect".as_ref(),
+             "explode".as_ref(),
++            "-filter_threads".as_ref(),
++            "8".as_ref(),
+             "-i".as_ref(),
+             path.as_os_str(),
+             "-map".as_ref(),

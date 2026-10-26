@@ -1,0 +1,70 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index fce7c44..cb1f146 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -67,7 +67,7 @@ pub struct RawReader {
+     seen: usize,
+     done: bool,
+     // TEN_CACHE_START
+-    topic_cache: std::collections::BTreeMap<u16, (std::sync::Arc<mcap::Channel<'static>>, bool)>,
++    topic_cache: Option<std::collections::HashSet<String>>,
+     // TEN_CACHE_END
+ }
+ impl RawReader {
+@@ -88,6 +88,13 @@ impl RawReader {
+             .with_validate_summary_section_crc(true)
+             .with_check_finishes_after_end_magic(true)
+             .with_record_length_limit(limits.max_record_bytes);
++        // TEN_CACHE_START
++        let topic_cache = if filter.topics.len() >= 16 {
++            Some(filter.topics.iter().cloned().collect())
++        } else {
++            None
++        };
++        // TEN_CACHE_END
+         Ok(Self {
+             reader: MessageReader::new_with_options(BufReader::new(file), options),
+             path,
+@@ -97,7 +104,7 @@ impl RawReader {
+             seen: 0,
+             done: false,
+             // TEN_CACHE_START
+-            topic_cache: std::collections::BTreeMap::new(),
++            topic_cache,
+             // TEN_CACHE_END
+         })
+     }
+@@ -136,22 +143,8 @@ impl Iterator for RawReader {
+                             "MCAP exceeds max_messages; no complete report produced",
+                         )));
+                     }
+-                    let accepted = if self.filter.topics.is_empty() {
+-                        self.filter.accepts(&message)
+-                    } else {
+-                        let known = self
+-                            .topic_cache
+-                            .get(&message.channel.id)
+-                            .filter(|(channel, _)| {
+-                                std::sync::Arc::ptr_eq(channel, &message.channel)
+-                            })
+-                            .map(|(_, value)| *value);
+-                        let topic_matches = known.unwrap_or_else(|| {
+-                            let value = self.filter.topics.contains(&message.channel.topic);
+-                            self.topic_cache
+-                                .insert(message.channel.id, (message.channel.clone(), value));
+-                            value
+-                        });
++                    let accepted = if let Some(topics) = &self.topic_cache {
++                        let topic_matches = topics.contains(&message.channel.topic);
+                         let t = if self.filter.publish_clock {
+                             message.publish_time
+                         } else {
+@@ -160,6 +153,8 @@ impl Iterator for RawReader {
+                         topic_matches
+                             && self.filter.start_ns.is_none_or(|s| t >= s)
+                             && self.filter.end_ns.is_none_or(|e| t < e)
++                    } else {
++                        self.filter.accepts(&message)
+                     };
+                     if accepted {
+                         return Some(Ok(message));

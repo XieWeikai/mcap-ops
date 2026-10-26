@@ -1,0 +1,12 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index fce7c44..c15de15 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -30,6 +30,7 @@ impl MessageFilter {
+         }
+         Ok(())
+     }
++    #[inline(never)]
+     fn accepts(&self, m: &Message<'_>) -> bool {
+         let t = if self.publish_clock {
+             m.publish_time

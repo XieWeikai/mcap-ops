@@ -1,0 +1,17 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index d948683..ada3efb 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -160,7 +160,11 @@ fn emit(
+     if !report.all_codes.contains(&code) {
+         report.all_codes.push(code);
+     }
+-    report.flagged_samples[start..end].fill(true);
++    if end == start + 1 {
++        report.flagged_samples[start] = true;
++    } else {
++        report.flagged_samples[start..end].fill(true);
++    }
+     if report.issues.len() < config.max_issues {
+         report.issues.push(Issue {
+             code,

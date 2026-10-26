@@ -1,0 +1,815 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "run_id": "session-9a90601a14b1",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/accepted",
+      "bytes": 27202656,
+      "sha256": "0d403a0fe96ac5a5758701f09f444601ed93de9f4af3a1018257fd581d50e66b"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/ten-inspect-signal-10",
+      "bytes": 27204016,
+      "sha256": "9cee843367e681568f64c20ae21358f9fb1cae8173ec15ab5ba9eca9c09c2e57"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "inspect_signal.random_hampel": {
+          "case": "inspect_signal.random_hampel",
+          "iterations": 32,
+          "median_ns": 1027318.5000000001,
+          "samples_ns": [
+            1031865.5625,
+            1027318.5000000001,
+            1030351.7499999999,
+            1020007.09375,
+            1033799.0624999999,
+            1023009.96875,
+            1023692.125
+          ]
+        },
+        "inspect_signal.constant_hampel": {
+          "case": "inspect_signal.constant_hampel",
+          "iterations": 32,
+          "median_ns": 828992.34375,
+          "samples_ns": [
+            827713.9375,
+            830407.28125,
+            834498.78125,
+            828992.34375,
+            827213.25,
+            823890.90625,
+            842548.5625
+          ]
+        },
+        "inspect_signal.basic": {
+          "case": "inspect_signal.basic",
+          "iterations": 16,
+          "median_ns": 1413169.125,
+          "samples_ns": [
+            1400807.5,
+            1462013.4375,
+            1413254.4375,
+            1395182.8125,
+            1413169.125,
+            1418878.25,
+            1402488.75
+          ]
+        },
+        "inspect_signal.hampel": {
+          "case": "inspect_signal.hampel",
+          "iterations": 8,
+          "median_ns": 2660489.875,
+          "samples_ns": [
+            2634490.0,
+            2691859.0,
+            2660489.875,
+            2659003.5,
+            2711650.125,
+            2616532.75,
+            2696567.75
+          ]
+        },
+        "inspect_signal.wide_hampel": {
+          "case": "inspect_signal.wide_hampel",
+          "iterations": 4,
+          "median_ns": 5376981.75,
+          "samples_ns": [
+            5396080.25,
+            5405036.25,
+            5343380.0,
+            5519449.5,
+            5372484.0,
+            5342334.5,
+            5376981.75
+          ]
+        },
+        "inspect_signal.issues": {
+          "case": "inspect_signal.issues",
+          "iterations": 16,
+          "median_ns": 1494177.875,
+          "samples_ns": [
+            1529591.875,
+            1494177.875,
+            1477223.5625,
+            1494175.3125,
+            1486090.3125,
+            1538982.5,
+            1511492.5625
+          ]
+        }
+      },
+      "after": {
+        "inspect_signal.random_hampel": {
+          "case": "inspect_signal.random_hampel",
+          "iterations": 32,
+          "median_ns": 1033886.3749999999,
+          "samples_ns": [
+            1034566.5937499999,
+            1044517.2500000001,
+            1027758.9375000001,
+            1033886.3749999999,
+            1037089.8749999999,
+            1028987.46875,
+            1025636.8124999999
+          ]
+        },
+        "inspect_signal.constant_hampel": {
+          "case": "inspect_signal.constant_hampel",
+          "iterations": 32,
+          "median_ns": 834175.75,
+          "samples_ns": [
+            827664.5625,
+            834175.75,
+            833081.15625,
+            843263.875,
+            824347.59375,
+            836114.8125,
+            841536.625
+          ]
+        },
+        "inspect_signal.basic": {
+          "case": "inspect_signal.basic",
+          "iterations": 16,
+          "median_ns": 1409417.1875,
+          "samples_ns": [
+            1416037.875,
+            1409417.1875,
+            1391531.0625,
+            1408405.3125,
+            1412636.875,
+            1404084.6875,
+            1417812.875
+          ]
+        },
+        "inspect_signal.hampel": {
+          "case": "inspect_signal.hampel",
+          "iterations": 8,
+          "median_ns": 2674407.875,
+          "samples_ns": [
+            2713883.125,
+            2674407.875,
+            2666481.875,
+            2648118.375,
+            2728242.375,
+            2665878.5,
+            2737002.125
+          ]
+        },
+        "inspect_signal.wide_hampel": {
+          "case": "inspect_signal.wide_hampel",
+          "iterations": 4,
+          "median_ns": 5501270.75,
+          "samples_ns": [
+            5447387.0,
+            5518536.5,
+            5426975.5,
+            5606343.5,
+            5501270.75,
+            5433328.5,
+            5605248.25
+          ]
+        },
+        "inspect_signal.issues": {
+          "case": "inspect_signal.issues",
+          "iterations": 16,
+          "median_ns": 1439212.9375,
+          "samples_ns": [
+            1420680.0625,
+            1421275.5,
+            1399117.5625,
+            1439212.9375,
+            1483890.875,
+            1448204.5625,
+            1476251.9375
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "inspect_signal.random_hampel": {
+          "case": "inspect_signal.random_hampel",
+          "iterations": 32,
+          "median_ns": 1037760.75,
+          "samples_ns": [
+            1019210.375,
+            1014184.0,
+            1031231.4062500001,
+            1084264.5625,
+            1037760.75,
+            1038145.3437499999,
+            1038466.875
+          ]
+        },
+        "inspect_signal.constant_hampel": {
+          "case": "inspect_signal.constant_hampel",
+          "iterations": 32,
+          "median_ns": 832341.78125,
+          "samples_ns": [
+            852238.59375,
+            838276.96875,
+            842523.6875,
+            829992.21875,
+            825982.96875,
+            830529.96875,
+            832341.78125
+          ]
+        },
+        "inspect_signal.basic": {
+          "case": "inspect_signal.basic",
+          "iterations": 16,
+          "median_ns": 1402273.0625,
+          "samples_ns": [
+            1409506.0,
+            1402273.0625,
+            1400426.9375,
+            1417655.25,
+            1399785.8125,
+            1392314.1875,
+            1425196.375
+          ]
+        },
+        "inspect_signal.hampel": {
+          "case": "inspect_signal.hampel",
+          "iterations": 8,
+          "median_ns": 2730409.25,
+          "samples_ns": [
+            2723349.125,
+            2730409.25,
+            2766156.75,
+            2752334.375,
+            2652831.25,
+            2683937.375,
+            2890527.25
+          ]
+        },
+        "inspect_signal.wide_hampel": {
+          "case": "inspect_signal.wide_hampel",
+          "iterations": 4,
+          "median_ns": 5431120.25,
+          "samples_ns": [
+            5529428.75,
+            5364585.5,
+            5360060.5,
+            5480678.5,
+            5431120.25,
+            5351562.75,
+            5509240.0
+          ]
+        },
+        "inspect_signal.issues": {
+          "case": "inspect_signal.issues",
+          "iterations": 16,
+          "median_ns": 1416555.6875,
+          "samples_ns": [
+            1439222.25,
+            1418068.75,
+            1408016.1875,
+            1473438.0,
+            1416555.6875,
+            1413551.75,
+            1413114.5625
+          ]
+        }
+      },
+      "before": {
+        "inspect_signal.random_hampel": {
+          "case": "inspect_signal.random_hampel",
+          "iterations": 32,
+          "median_ns": 1021478.3125,
+          "samples_ns": [
+            1021071.75,
+            1038512.4375000001,
+            1020546.84375,
+            1017071.4375,
+            1025951.3125,
+            1021478.3125,
+            1025908.03125
+          ]
+        },
+        "inspect_signal.constant_hampel": {
+          "case": "inspect_signal.constant_hampel",
+          "iterations": 32,
+          "median_ns": 844803.84375,
+          "samples_ns": [
+            844803.84375,
+            845448.5625,
+            835172.4375,
+            861779.0625,
+            877117.15625,
+            828836.0,
+            829556.15625
+          ]
+        },
+        "inspect_signal.basic": {
+          "case": "inspect_signal.basic",
+          "iterations": 16,
+          "median_ns": 1417185.8125,
+          "samples_ns": [
+            1439357.6875,
+            1409815.625,
+            1439046.9375,
+            1423476.5,
+            1390288.875,
+            1417185.8125,
+            1408593.5
+          ]
+        },
+        "inspect_signal.hampel": {
+          "case": "inspect_signal.hampel",
+          "iterations": 8,
+          "median_ns": 2618457.125,
+          "samples_ns": [
+            2655122.75,
+            2570981.375,
+            2618457.125,
+            2619200.875,
+            2604518.375,
+            2654527.125,
+            2618448.5
+          ]
+        },
+        "inspect_signal.wide_hampel": {
+          "case": "inspect_signal.wide_hampel",
+          "iterations": 4,
+          "median_ns": 5453481.0,
+          "samples_ns": [
+            5352298.5,
+            5469451.0,
+            5534803.5,
+            5394161.5,
+            5530877.5,
+            5453481.0,
+            5435443.5
+          ]
+        },
+        "inspect_signal.issues": {
+          "case": "inspect_signal.issues",
+          "iterations": 16,
+          "median_ns": 1488138.375,
+          "samples_ns": [
+            1486262.4375,
+            1477373.5,
+            1489102.875,
+            1495635.625,
+            1471562.1875,
+            1488138.375,
+            1543283.1875
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "inspect_signal.random_hampel": {
+          "case": "inspect_signal.random_hampel",
+          "iterations": 32,
+          "median_ns": 1014362.5,
+          "samples_ns": [
+            1013533.2499999999,
+            1019554.4375,
+            1013749.84375,
+            1017217.8125,
+            1014362.5,
+            1014948.1875,
+            1013806.5312500001
+          ]
+        },
+        "inspect_signal.constant_hampel": {
+          "case": "inspect_signal.constant_hampel",
+          "iterations": 32,
+          "median_ns": 831810.96875,
+          "samples_ns": [
+            835291.59375,
+            827438.96875,
+            829677.09375,
+            831810.96875,
+            834349.71875,
+            835930.6875,
+            830334.625
+          ]
+        },
+        "inspect_signal.basic": {
+          "case": "inspect_signal.basic",
+          "iterations": 16,
+          "median_ns": 1401417.5,
+          "samples_ns": [
+            1397294.625,
+            1405060.1875,
+            1405596.375,
+            1390417.4375,
+            1401148.75,
+            1401417.5,
+            1403254.1875
+          ]
+        },
+        "inspect_signal.hampel": {
+          "case": "inspect_signal.hampel",
+          "iterations": 8,
+          "median_ns": 2620526.25,
+          "samples_ns": [
+            2592568.375,
+            2675502.375,
+            2627642.125,
+            2581630.75,
+            2643192.0,
+            2599490.5,
+            2620526.25
+          ]
+        },
+        "inspect_signal.wide_hampel": {
+          "case": "inspect_signal.wide_hampel",
+          "iterations": 4,
+          "median_ns": 5391228.75,
+          "samples_ns": [
+            5382483.75,
+            5391228.75,
+            5349739.0,
+            5427834.5,
+            5441848.0,
+            5363676.25,
+            5431992.5
+          ]
+        },
+        "inspect_signal.issues": {
+          "case": "inspect_signal.issues",
+          "iterations": 16,
+          "median_ns": 1504037.0,
+          "samples_ns": [
+            1504037.0,
+            1586948.0,
+            1526598.5,
+            1494914.125,
+            1513391.125,
+            1501684.1875,
+            1501394.75
+          ]
+        }
+      },
+      "after": {
+        "inspect_signal.random_hampel": {
+          "case": "inspect_signal.random_hampel",
+          "iterations": 32,
+          "median_ns": 1026703.9062500001,
+          "samples_ns": [
+            1026703.9062500001,
+            1034817.25,
+            1036142.21875,
+            1029089.5937500001,
+            1024697.78125,
+            1023374.5625,
+            1024892.53125
+          ]
+        },
+        "inspect_signal.constant_hampel": {
+          "case": "inspect_signal.constant_hampel",
+          "iterations": 32,
+          "median_ns": 830949.28125,
+          "samples_ns": [
+            820021.09375,
+            843208.09375,
+            832374.40625,
+            827733.8125,
+            830949.28125,
+            827230.625,
+            834263.34375
+          ]
+        },
+        "inspect_signal.basic": {
+          "case": "inspect_signal.basic",
+          "iterations": 16,
+          "median_ns": 1434930.625,
+          "samples_ns": [
+            1420088.3125,
+            1435207.5,
+            1430228.6875,
+            1434930.625,
+            1455087.9375,
+            1435555.0,
+            1397505.0
+          ]
+        },
+        "inspect_signal.hampel": {
+          "case": "inspect_signal.hampel",
+          "iterations": 8,
+          "median_ns": 2669172.875,
+          "samples_ns": [
+            2679866.0,
+            2705876.125,
+            2668208.25,
+            2667150.125,
+            2678548.5,
+            2669172.875,
+            2654990.125
+          ]
+        },
+        "inspect_signal.wide_hampel": {
+          "case": "inspect_signal.wide_hampel",
+          "iterations": 4,
+          "median_ns": 5383024.0,
+          "samples_ns": [
+            5382810.25,
+            5383024.0,
+            5360312.25,
+            5418200.0,
+            5458280.0,
+            5376742.5,
+            5420614.0
+          ]
+        },
+        "inspect_signal.issues": {
+          "case": "inspect_signal.issues",
+          "iterations": 16,
+          "median_ns": 1420548.4375,
+          "samples_ns": [
+            1420548.4375,
+            1444610.3125,
+            1408297.5,
+            1475055.375,
+            1429739.9375,
+            1407866.4375,
+            1410740.0
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "inspect_signal.random_hampel": {
+          "case": "inspect_signal.random_hampel",
+          "iterations": 32,
+          "median_ns": 1025375.3437500001,
+          "samples_ns": [
+            1040644.15625,
+            1024004.5937499999,
+            1036928.25,
+            1029387.21875,
+            1023473.40625,
+            1023176.2500000001,
+            1025375.3437500001
+          ]
+        },
+        "inspect_signal.constant_hampel": {
+          "case": "inspect_signal.constant_hampel",
+          "iterations": 32,
+          "median_ns": 846437.0625,
+          "samples_ns": [
+            835067.90625,
+            846437.0625,
+            836776.25,
+            841859.0625,
+            850105.65625,
+            849482.15625,
+            869033.6875
+          ]
+        },
+        "inspect_signal.basic": {
+          "case": "inspect_signal.basic",
+          "iterations": 16,
+          "median_ns": 1412115.1875,
+          "samples_ns": [
+            1419922.375,
+            1412115.1875,
+            1393772.125,
+            1437093.6875,
+            1425222.0625,
+            1402131.0,
+            1401829.25
+          ]
+        },
+        "inspect_signal.hampel": {
+          "case": "inspect_signal.hampel",
+          "iterations": 8,
+          "median_ns": 2677564.375,
+          "samples_ns": [
+            2738954.125,
+            2713076.875,
+            2698563.5,
+            2655938.625,
+            2677564.375,
+            2648173.0,
+            2651560.0
+          ]
+        },
+        "inspect_signal.wide_hampel": {
+          "case": "inspect_signal.wide_hampel",
+          "iterations": 4,
+          "median_ns": 5425083.0,
+          "samples_ns": [
+            5556953.5,
+            5392976.75,
+            5425083.0,
+            5418614.25,
+            5357077.75,
+            5493123.0,
+            5496620.5
+          ]
+        },
+        "inspect_signal.issues": {
+          "case": "inspect_signal.issues",
+          "iterations": 16,
+          "median_ns": 1426351.3125,
+          "samples_ns": [
+            1445793.5625,
+            1419101.375,
+            1406312.5,
+            1434528.4375,
+            1467596.4375,
+            1403005.875,
+            1426351.3125
+          ]
+        }
+      },
+      "before": {
+        "inspect_signal.random_hampel": {
+          "case": "inspect_signal.random_hampel",
+          "iterations": 32,
+          "median_ns": 1031725.5625,
+          "samples_ns": [
+            1016112.0,
+            1037469.8125000001,
+            1028233.4687499999,
+            1043646.8437500001,
+            1034930.5625,
+            1031725.5625,
+            1027893.2812500001
+          ]
+        },
+        "inspect_signal.constant_hampel": {
+          "case": "inspect_signal.constant_hampel",
+          "iterations": 32,
+          "median_ns": 830407.125,
+          "samples_ns": [
+            837173.1875,
+            836957.84375,
+            828031.125,
+            830407.125,
+            828773.3125,
+            830944.75,
+            827046.625
+          ]
+        },
+        "inspect_signal.basic": {
+          "case": "inspect_signal.basic",
+          "iterations": 16,
+          "median_ns": 1410362.5625,
+          "samples_ns": [
+            1417685.75,
+            1408221.4375,
+            1427725.9375,
+            1405334.4375,
+            1405068.375,
+            1412546.25,
+            1410362.5625
+          ]
+        },
+        "inspect_signal.hampel": {
+          "case": "inspect_signal.hampel",
+          "iterations": 8,
+          "median_ns": 2665596.5,
+          "samples_ns": [
+            2691522.375,
+            2681071.75,
+            2665596.5,
+            2638588.5,
+            2648481.875,
+            2756118.875,
+            2662065.875
+          ]
+        },
+        "inspect_signal.wide_hampel": {
+          "case": "inspect_signal.wide_hampel",
+          "iterations": 4,
+          "median_ns": 5476517.5,
+          "samples_ns": [
+            5476517.5,
+            5678656.5,
+            5640214.5,
+            5463740.25,
+            5417157.75,
+            5614590.75,
+            5339927.5
+          ]
+        },
+        "inspect_signal.issues": {
+          "case": "inspect_signal.issues",
+          "iterations": 16,
+          "median_ns": 1508427.0,
+          "samples_ns": [
+            1508427.0,
+            1520528.5,
+            1506073.25,
+            1535784.375,
+            1484208.4375,
+            1505596.1875,
+            1509238.6875
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 1024398.40625,
+      "after_ns": 1030295.140625,
+      "latency_reduction_pct": -0.9279942165021815,
+      "paired_ratios": [
+        1.0063932217710474,
+        1.0159400716596223,
+        1.0121666625589965,
+        0.9938450504855065
+      ],
+      "worst_paired_reduction_pct": -1.5940071659622301
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 831109.046875,
+      "after_ns": 833258.765625,
+      "latency_reduction_pct": -0.26083706595332323,
+      "paired_ratios": [
+        1.0062526587719165,
+        0.9852485726808697,
+        0.9989640825471502,
+        1.0193037090089996
+      ],
+      "worst_paired_reduction_pct": -1.930370900899958
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1411765.84375,
+      "after_ns": 1410766.1875,
+      "latency_reduction_pct": 0.0706152156263351,
+      "paired_ratios": [
+        0.9973450187711963,
+        0.989477209079808,
+        1.0239137337731261,
+        1.001242676916277
+      ],
+      "worst_paired_reduction_pct": -2.391373377312611
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 2640508.0625,
+      "after_ns": 2675986.125,
+      "latency_reduction_pct": -1.1897526421456472,
+      "paired_ratios": [
+        1.0052313673999604,
+        1.0427549964179765,
+        1.0185636854429525,
+        1.0044897549197713
+      ],
+      "worst_paired_reduction_pct": -4.275499641797653
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 5422354.875,
+      "after_ns": 5428101.625,
+      "latency_reduction_pct": 0.28110705657373725,
+      "paired_ratios": [
+        1.023115012432393,
+        0.9958997289987808,
+        0.9984781298697445,
+        0.9906081738988326
+      ],
+      "worst_paired_reduction_pct": -2.311501243239289
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1499107.4375,
+      "after_ns": 1423449.875,
+      "latency_reduction_pct": 5.125680656789067,
+      "paired_ratios": [
+        0.9632139262535928,
+        0.9518978283857508,
+        0.9444903532958299,
+        0.945588558478468
+      ],
+      "worst_paired_reduction_pct": 3.678607374640719
+    }
+  }
+}

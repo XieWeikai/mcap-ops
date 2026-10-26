@@ -1,0 +1,53 @@
+{
+  "label": "ten-video-probe-06",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 0.14904361595078353,
+  "worst_block_reduction_pct": -1.3859251811821016,
+  "worst_case_reduction_pct": 0.5153333671360949,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Use already bounded tempfile metadata to avoid diagnostic-buffer growth; retain read limits and final parsing.",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "f730c3b464a15cecb87531afc10c3b9db7b9bd81ce4bdcf5baee84e4d91c384c",
+  "operator": "video_probe",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve the validated media output length before reading",
+  "profile_hotspot": "Use already bounded tempfile metadata to avoid diagnostic-buffer growth; retain read limits and final parsing.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Use already bounded tempfile metadata to avoid diagnostic-buffer growth; retain read limits and final parsing.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 26040846.0,
+      "after_ns": 25614625.0,
+      "latency_reduction_pct": 1.6374822960049773,
+      "paired_ratios": [
+        0.9880281704989528,
+        1.0166788046571664,
+        0.9767505844708624,
+        0.9792221835809476
+      ],
+      "worst_paired_reduction_pct": -1.6678804657166424
+    },
+    "video_validate": {
+      "before_ns": 55562226.0,
+      "after_ns": 55677919.0,
+      "latency_reduction_pct": 0.5153333671360949,
+      "paired_ratios": [
+        1.0063523929003853,
+        0.9833409397568929,
+        0.967818790347257,
+        1.04972150316839
+      ],
+      "worst_paired_reduction_pct": -4.972150316838997
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-video-probe-06",
+  "validation_sha256": "515ad7d455a4d700bfdfc96b68a94e98489ab007bfc016387bcb54c7df2cb4d3"
+}

@@ -1,0 +1,55 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..8320290 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -84,10 +84,8 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+     }
+     let times = signal.timestamps();
+     let mut out = Sampled::empty(target, signal.channels())?;
+-    let mut right = target
+-        .first()
+-        .map_or(0, |&t| times.partition_point(|&v| v < t));
+-    for (i, &t) in target.iter().enumerate() {
++    let mut right = 0;
++    for (i, (&t, out_status)) in target.iter().zip(out.status.iter_mut()).enumerate() {
+         while right < times.len() && times[right] < t {
+             right += 1;
+         }
+@@ -144,7 +142,7 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+             None
+         };
+         if let Some(status) = failure {
+-            out.status[i] = status as u8;
++            *out_status = status as u8;
+             continue;
+         }
+         let left = signal.row(a);
+@@ -153,13 +151,13 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+         let mut all_finite = true;
+         if options.method == Method::Slerp {
+             if left.iter().chain(right_values).any(|v| !v.is_finite()) {
+-                out.status[i] = Status::NonFinite as u8;
++                *out_status = Status::NonFinite as u8;
+                 continue;
+             }
+             match slerp(left, right_values, alpha) {
+                 Some(value) => values.copy_from_slice(&value),
+                 None => {
+-                    out.status[i] = Status::InvalidQuaternion as u8;
++                    *out_status = Status::InvalidQuaternion as u8;
+                     continue;
+                 }
+             }
+@@ -175,10 +173,10 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+         }
+         if !all_finite {
+             values.fill(f64::NAN);
+-            out.status[i] = Status::NonFinite as u8;
++            *out_status = Status::NonFinite as u8;
+             continue;
+         }
+-        out.status[i] = Status::Valid as u8;
++        *out_status = Status::Valid as u8;
+         out.source_left[i] = a as i64;
+         out.source_right[i] = b as i64;
+         out.alpha[i] = alpha;

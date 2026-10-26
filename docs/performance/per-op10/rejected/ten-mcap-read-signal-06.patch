@@ -1,0 +1,28 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..e3efa57 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -386,13 +386,21 @@ pub fn read_signal(
+     decoder: &dyn SignalDecoder,
+     max_samples: usize,
+ ) -> Result<Signal> {
+-    if decoder.channels() == 0 || max_samples == 0 {
++    let initial_channels = decoder.channels();
++    if initial_channels == 0 || max_samples == 0 {
+         return Err(invalid("positive channels and max_samples required"));
+     }
+     let mut timestamps = Vec::new();
+     let mut values = Vec::new();
+     for item in RawReader::open(path, filter, limits)? {
+-        for sample in decoder.decode(&item?)? {
++        let batch = decoder.decode(&item?)?;
++        let reserve = batch
++            .len()
++            .min(max_samples.saturating_sub(timestamps.len()))
++            .min(1024);
++        timestamps.reserve(reserve);
++        values.reserve(reserve.saturating_mul(initial_channels).min(65536));
++        for sample in batch {
+             if timestamps.len() >= max_samples {
+                 return Err(invalid("decoded signal exceeds max_samples"));
+             }

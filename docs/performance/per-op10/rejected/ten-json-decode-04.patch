@@ -1,0 +1,28 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index 2b5a490..ec1843f 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -346,6 +346,23 @@ impl SignalDecoder for JsonSignalSpec {
+             })
+             .map_err(|_| invalid("MCAP timestamp exceeds int64"))?
+         };
++        if self.fields.len() == 1 {
++            let pointer = &self.fields[0];
++            if let Some(array) = lookup(pointer)
++                .and_then(|v| v.as_array())
++                .filter(|v| v.len() == self.channels)
++            {
++                let values = array
++                    .iter()
++                    .map(|v| v.as_f64())
++                    .collect::<Option<Vec<_>>>()
++                    .ok_or_else(|| invalid(format!("nonnumeric array at {pointer}")))?;
++                return Ok(vec![DecodedSample {
++                    timestamp_ns,
++                    values,
++                }]);
++            }
++        }
+         let mut values = Vec::new();
+         for pointer in &self.fields {
+             let value =

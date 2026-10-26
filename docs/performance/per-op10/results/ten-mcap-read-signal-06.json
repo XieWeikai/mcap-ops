@@ -1,0 +1,53 @@
+{
+  "label": "ten-mcap-read-signal-06",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "mcap_read_signal",
+    "mcap_read_signal.many"
+  ],
+  "geomean_latency_reduction_pct": -0.45844860177224334,
+  "worst_block_reduction_pct": -0.6556789079826597,
+  "worst_case_reduction_pct": -0.7751882089296558,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Respect remaining sample limits before reserving; retain per-sample errors and exact source iteration.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "ba2e31549a0f2e270d1a08ea7f213b4613e7eef88b116928f1f1e30f2c6732cf",
+  "operator": "mcap_read_signal",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve bounded space for each decoded message batch",
+  "profile_hotspot": "Respect remaining sample limits before reserving; retain per-sample errors and exact source iteration.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Respect remaining sample limits before reserving; retain per-sample errors and exact source iteration.",
+  "case_results": {
+    "mcap_read_signal": {
+      "before_ns": 6214145.75,
+      "after_ns": 6270993.25,
+      "latency_reduction_pct": -0.7751882089296558,
+      "paired_ratios": [
+        1.0035985770299418,
+        1.0054577247513816,
+        1.0138790934675426,
+        1.0100460394272115
+      ],
+      "worst_paired_reduction_pct": -1.387909346754257
+    },
+    "mcap_read_signal.many": {
+      "before_ns": 1301263.21875,
+      "after_ns": 1300497.8125,
+      "latency_reduction_pct": -0.03840142236697375,
+      "paired_ratios": [
+        1.0032309361230425,
+        0.9924996058491179,
+        0.9992873668768718,
+        1.0014806615704674
+      ],
+      "worst_paired_reduction_pct": -0.32309361230424827
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-mcap-read-signal-06",
+  "validation_sha256": "d8fc26cb65de1b5626a1601145ac6040e084c3aeba9f7de03b4d0cb7e3ae300d"
+}

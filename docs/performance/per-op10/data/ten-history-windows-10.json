@@ -1,0 +1,319 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "run_id": "session-9a90601a14b1",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/accepted",
+      "bytes": 27200632,
+      "sha256": "6a82ed353b068c4b520450286b0fada8426e6a32ee1333272dda5e1e2cabdf3a"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/ten-history-windows-10",
+      "bytes": 27200200,
+      "sha256": "cf6aadb25b4020869951076a05944f9bdd28fe05b2231178a0eebb04ec9bf76f"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "history_windows.separate": {
+          "case": "history_windows.separate",
+          "iterations": 64,
+          "median_ns": 355624.234375,
+          "samples_ns": [
+            355624.234375,
+            353982.015625,
+            357018.46875,
+            356827.875,
+            354942.71875,
+            358967.6875,
+            352961.171875
+          ]
+        },
+        "history_windows.overlap": {
+          "case": "history_windows.overlap",
+          "iterations": 64,
+          "median_ns": 572431.859375,
+          "samples_ns": [
+            580988.171875,
+            570329.234375,
+            572431.859375,
+            566896.640625,
+            570828.46875,
+            586223.84375,
+            581534.359375
+          ]
+        }
+      },
+      "after": {
+        "history_windows.separate": {
+          "case": "history_windows.separate",
+          "iterations": 64,
+          "median_ns": 367185.3125,
+          "samples_ns": [
+            365962.59375,
+            370982.703125,
+            370117.375,
+            367185.3125,
+            379530.46875,
+            365141.65625,
+            357153.71875
+          ]
+        },
+        "history_windows.overlap": {
+          "case": "history_windows.overlap",
+          "iterations": 64,
+          "median_ns": 558616.6875,
+          "samples_ns": [
+            556790.421875,
+            560657.734375,
+            574198.125,
+            558616.6875,
+            555877.453125,
+            557667.03125,
+            571150.21875
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "history_windows.separate": {
+          "case": "history_windows.separate",
+          "iterations": 64,
+          "median_ns": 380824.625,
+          "samples_ns": [
+            376896.28125,
+            379934.390625,
+            380824.625,
+            389485.640625,
+            390887.90625,
+            384339.984375,
+            378382.1875
+          ]
+        },
+        "history_windows.overlap": {
+          "case": "history_windows.overlap",
+          "iterations": 64,
+          "median_ns": 563066.625,
+          "samples_ns": [
+            564446.0,
+            569001.515625,
+            563066.625,
+            557239.125,
+            559618.796875,
+            566267.53125,
+            561788.8125
+          ]
+        }
+      },
+      "before": {
+        "history_windows.separate": {
+          "case": "history_windows.separate",
+          "iterations": 64,
+          "median_ns": 352017.515625,
+          "samples_ns": [
+            352017.515625,
+            349630.046875,
+            352153.578125,
+            372289.296875,
+            347381.3125,
+            359631.125,
+            351561.46875
+          ]
+        },
+        "history_windows.overlap": {
+          "case": "history_windows.overlap",
+          "iterations": 64,
+          "median_ns": 578624.390625,
+          "samples_ns": [
+            573113.375,
+            575233.453125,
+            567467.390625,
+            579068.53125,
+            578624.390625,
+            592043.59375,
+            587615.46875
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "history_windows.separate": {
+          "case": "history_windows.separate",
+          "iterations": 64,
+          "median_ns": 360810.84375,
+          "samples_ns": [
+            355849.28125,
+            358965.3125,
+            362446.875,
+            357290.984375,
+            369787.8125,
+            367178.53125,
+            360810.84375
+          ]
+        },
+        "history_windows.overlap": {
+          "case": "history_windows.overlap",
+          "iterations": 64,
+          "median_ns": 573890.78125,
+          "samples_ns": [
+            574013.859375,
+            582675.1875,
+            582344.5625,
+            573285.03125,
+            571398.21875,
+            571160.875,
+            573890.78125
+          ]
+        }
+      },
+      "after": {
+        "history_windows.separate": {
+          "case": "history_windows.separate",
+          "iterations": 64,
+          "median_ns": 366475.734375,
+          "samples_ns": [
+            360360.171875,
+            375518.640625,
+            366475.734375,
+            376883.359375,
+            362164.53125,
+            374169.265625,
+            365569.890625
+          ]
+        },
+        "history_windows.overlap": {
+          "case": "history_windows.overlap",
+          "iterations": 64,
+          "median_ns": 568937.21875,
+          "samples_ns": [
+            558239.96875,
+            556564.1875,
+            557469.5,
+            570610.703125,
+            568937.21875,
+            583691.40625,
+            572325.34375
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "history_windows.separate": {
+          "case": "history_windows.separate",
+          "iterations": 64,
+          "median_ns": 369895.53125,
+          "samples_ns": [
+            369895.53125,
+            376961.984375,
+            363792.90625,
+            365602.78125,
+            382431.921875,
+            368628.390625,
+            370859.109375
+          ]
+        },
+        "history_windows.overlap": {
+          "case": "history_windows.overlap",
+          "iterations": 64,
+          "median_ns": 556799.1875,
+          "samples_ns": [
+            556982.90625,
+            556646.421875,
+            570381.765625,
+            562464.28125,
+            555484.296875,
+            554999.34375,
+            556799.1875
+          ]
+        }
+      },
+      "before": {
+        "history_windows.separate": {
+          "case": "history_windows.separate",
+          "iterations": 64,
+          "median_ns": 354866.65625,
+          "samples_ns": [
+            358455.75,
+            351782.9375,
+            352127.703125,
+            356789.25,
+            351652.859375,
+            354866.65625,
+            356339.015625
+          ]
+        },
+        "history_windows.overlap": {
+          "case": "history_windows.overlap",
+          "iterations": 64,
+          "median_ns": 577254.53125,
+          "samples_ns": [
+            571507.1875,
+            579950.921875,
+            573320.828125,
+            578519.921875,
+            577456.671875,
+            577254.53125,
+            570921.5625
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "history_windows.separate": {
+      "before_ns": 355245.4453125,
+      "after_ns": 368540.421875,
+      "latency_reduction_pct": -3.743000977743227,
+      "paired_ratios": [
+        1.032509252765966,
+        1.0818343068067324,
+        1.0157004444936393,
+        1.0423507667888987
+      ],
+      "worst_paired_reduction_pct": -8.183430680673244
+    },
+    "history_windows.overlap": {
+      "before_ns": 575572.65625,
+      "after_ns": 560841.65625,
+      "latency_reduction_pct": 2.5510840559305192,
+      "paired_ratios": [
+        0.9758658228944771,
+        0.9731124959869125,
+        0.991368457793989,
+        0.9645644293069375
+      ],
+      "worst_paired_reduction_pct": 0.8631542206011034
+    }
+  }
+}

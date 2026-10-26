@@ -1,0 +1,53 @@
+{
+  "label": "ten-gate-05",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": -2.3682070942947053,
+  "worst_block_reduction_pct": -3.904662655149771,
+  "worst_case_reduction_pct": -10.314605492805473,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Avoid a second membership pass; capacity is a hint, so duplicate policy codes remain intact.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "54b715844c87e944487e107149b3154df83ac86ce26f8d57ec261ad6ecaebf25",
+  "operator": "gate",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve a bounded estimate only for likely rejection reasons",
+  "profile_hotspot": "Avoid a second membership pass; capacity is a hint, so duplicate policy codes remain intact.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Avoid a second membership pass; capacity is a hint, so duplicate policy codes remain intact.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 8.974266529083252,
+      "after_ns": 9.885769844055176,
+      "latency_reduction_pct": -10.314605492805473,
+      "paired_ratios": [
+        1.0804391755510805,
+        1.0748662240362525,
+        1.125852934305029,
+        1.1372353432951632
+      ],
+      "worst_paired_reduction_pct": -13.723534329516319
+    },
+    "gate.fail": {
+      "before_ns": 30.33488702774048,
+      "after_ns": 28.749714374542236,
+      "latency_reduction_pct": 5.4239477546485615,
+      "paired_ratios": [
+        0.9198277144735482,
+        0.9632399602870496,
+        0.9589333200205924,
+        0.9325877248864363
+      ],
+      "worst_paired_reduction_pct": 3.6760039712950388
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-gate-05",
+  "validation_sha256": "2f7d81cd8a73cbb0b0ee885540d7fad08a4dcd12f10646a7ecef306b4f00dc8d"
+}

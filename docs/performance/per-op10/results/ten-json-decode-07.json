@@ -1,0 +1,66 @@
+{
+  "label": "ten-json-decode-07",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "json_decode",
+    "json_decode.deep",
+    "json_decode.wide"
+  ],
+  "geomean_latency_reduction_pct": 5.451609029847471,
+  "worst_block_reduction_pct": 2.537635014939932,
+  "worst_case_reduction_pct": 0.589040480502756,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "3fc4bea630255bde96c83b429515c9e6950b86941ec258f4118d739443f6ea92",
+  "operator": "json_decode",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "cap initial decoded-field capacity at 64",
+  "profile_hotspot": "The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The prior broad reserve failed on short arrays; compare bounded capacities with a 64-channel payload case.",
+  "case_results": {
+    "json_decode": {
+      "before_ns": 214.68413162231445,
+      "after_ns": 208.53397369384766,
+      "latency_reduction_pct": 2.722559916405509,
+      "paired_ratios": [
+        0.9733451406054958,
+        0.9677561961721439,
+        1.001181784148837,
+        0.9722036610663939
+      ],
+      "worst_paired_reduction_pct": -0.11817841488370728
+    },
+    "json_decode.deep": {
+      "before_ns": 227.86171340942383,
+      "after_ns": 226.51706314086914,
+      "latency_reduction_pct": 0.589040480502756,
+      "paired_ratios": [
+        1.0040638872491674,
+        0.9841553031407775,
+        1.0265907875999514,
+        0.9584481212908497
+      ],
+      "worst_paired_reduction_pct": -2.659078759995137
+    },
+    "json_decode.wide": {
+      "before_ns": 963.1616668701172,
+      "after_ns": 830.2373046875,
+      "latency_reduction_pct": 12.486687544994602,
+      "paired_ratios": [
+        0.8495239976840956,
+        0.8492076258071085,
+        0.9007422514160125,
+        0.9233135301817613
+      ],
+      "worst_paired_reduction_pct": 7.668646981823867
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-json-decode-07",
+  "validation_sha256": "872d7f5a83436f026c083d2520bb526d3cf1677f819e6113171fd34fc2f7b52f"
+}

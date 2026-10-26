@@ -1,0 +1,50 @@
+--------------------------------------------------------------------------------
+Profile data file '.artifacts/rsi/trials/ten-fir-02/before.callgrind' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache:
+D1 cache:
+LL cache:
+Timerange: Basic block 0 - 261203502
+Trigger: Program termination
+Profiled target:  .artifacts/rsi/bin/accepted --case fir.scalar,fir.vector,fir.short_scalar,fir.short_vector,fir.small_scalar,fir.small_vector,fir.wide,fir.gapped,fir.single --profile (PID 803992, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       98
+Include dirs:
+User annotated:
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir
+--------------------------------------------------------------------------------
+964,667,137 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                    file:function
+--------------------------------------------------------------------------------
+964,667,137 (100.0%)  ./csu/../csu/libc-start.c:__libc_start_main@@GLIBC_2.34 [/usr/lib/x86_64-linux-gnu/libc.so.6]
+964,667,137 (100.0%)  ./csu/../sysdeps/nptl/libc_start_call_main.h:(below main) [/usr/lib/x86_64-linux-gnu/libc.so.6]
+964,667,137 (100.0%)  ./crates/io/examples/operator_benchmark.rs:operator_benchmark::main
+964,667,137 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start::{{closure}}
+964,667,137 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::rt::lang_start_internal
+964,667,137 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/function.rs:std::sys::backtrace::__rust_begin_short_backtrace
+964,667,137 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start::{{closure}} [./.artifacts/rsi/bin/accepted]
+964,667,137 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/rt.rs:std::rt::lang_start_internal [./.artifacts/rsi/bin/accepted]
+964,667,137 (100.0%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/std/src/sys/backtrace.rs:std::sys::backtrace::__rust_begin_short_backtrace [./.artifacts/rsi/bin/accepted]
+964,667,137 (100.0%)  ???:(below main) [./.artifacts/rsi/bin/accepted]
+964,667,137 (100.0%)  ???:0x000000000001f540 [/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2]
+964,667,137 (100.0%)  ???:main [./.artifacts/rsi/bin/accepted]
+964,667,137 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::Runner::bench [./.artifacts/rsi/bin/accepted]
+964,667,137 (100.0%)  crates/io/examples/operator_benchmark.rs:operator_benchmark::main [./.artifacts/rsi/bin/accepted]
+964,515,422 (99.98%)  ./crates/core/src/filter.rs:mcap_ops_core::filter::fir
+278,829,339 (28.90%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/iter/macros.rs:mcap_ops_core::filter::fir
+192,794,088 (19.99%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/num/uint_macros.rs:mcap_ops_core::filter::fir
+140,043,558 (14.52%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/slice/index.rs:mcap_ops_core::filter::fir
+ 66,245,811 ( 6.87%)  crates/core/src/lib.rs:mcap_ops_core::filter::fir
+ 64,561,506 ( 6.69%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/adapters/enumerate.rs:mcap_ops_core::filter::fir
+ 63,792,561 ( 6.61%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ops/arith.rs:mcap_ops_core::filter::fir
+ 63,791,970 ( 6.61%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/iter/traits/accum.rs:mcap_ops_core::filter::fir
+ 43,953,774 ( 4.56%)  crates/core/src/filter.rs:mcap_ops_core::filter::fir [./.artifacts/rsi/bin/accepted]
+ 13,096,896 ( 1.36%)  /rustc/1159e78c4747b02ef996e55082b704c09b970588/library/core/src/ptr/non_null.rs:mcap_ops_core::filter::fir
+

@@ -1,0 +1,118 @@
+{
+  "label": "ten-resample-09",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp",
+    "resample.sparse_linear",
+    "resample.repeated",
+    "resample.exact_slerp"
+  ],
+  "geomean_latency_reduction_pct": 0.6845475852734317,
+  "worst_block_reduction_pct": 0.30556904696436016,
+  "worst_case_reduction_pct": -0.062317798736355456,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "7311a3a329e5561656cc5f27540466ef4288f20a92b12dd40374f5c0c9a3e799",
+  "operator": "resample",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for resample",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 218104.0859375,
+      "after_ns": 215961.5625,
+      "latency_reduction_pct": 0.7740474278695952,
+      "paired_ratios": [
+        0.991864149013632,
+        1.0103225999946803,
+        0.9767974330993511,
+        0.9926549024289761
+      ],
+      "worst_paired_reduction_pct": -1.0322599994680326
+    },
+    "resample.nearest": {
+      "before_ns": 233041.3359375,
+      "after_ns": 230219.25,
+      "latency_reduction_pct": 1.0538666220367476,
+      "paired_ratios": [
+        0.9822842597010316,
+        0.99352140740794,
+        0.9947728971940643,
+        0.9854012601513249
+      ],
+      "worst_paired_reduction_pct": 0.5227102805935746
+    },
+    "resample.linear": {
+      "before_ns": 404226.7421875,
+      "after_ns": 406351.84375,
+      "latency_reduction_pct": -0.062317798736355456,
+      "paired_ratios": [
+        1.013684178540901,
+        1.0018958602353822,
+        0.9867241045458807,
+        0.9993504957393446
+      ],
+      "worst_paired_reduction_pct": -1.3684178540900982
+    },
+    "resample.slerp": {
+      "before_ns": 578375.9609375,
+      "after_ns": 577970.65625,
+      "latency_reduction_pct": 0.4031814972817238,
+      "paired_ratios": [
+        0.9775624491544941,
+        1.0013419458927677,
+        1.001350875895039,
+        0.9905944241615978
+      ],
+      "worst_paired_reduction_pct": -0.13508758950389055
+    },
+    "resample.sparse_linear": {
+      "before_ns": 5540.091552734375,
+      "after_ns": 5578.640625,
+      "latency_reduction_pct": 0.3302382638751489,
+      "paired_ratios": [
+        1.0056614539513795,
+        0.9732920734782912,
+        0.9877337807711175,
+        1.0232418690887755
+      ],
+      "worst_paired_reduction_pct": -2.3241869088775458
+    },
+    "resample.repeated": {
+      "before_ns": 156388.24609375,
+      "after_ns": 156288.0625,
+      "latency_reduction_pct": 0.16939581009989269,
+      "paired_ratios": [
+        0.9867371955568627,
+        0.9706709122828259,
+        1.028836712667923,
+        1.0098748882411395
+      ],
+      "worst_paired_reduction_pct": -2.883671266792298
+    },
+    "resample.exact_slerp": {
+      "before_ns": 432416.0390625,
+      "after_ns": 423898.875,
+      "latency_reduction_pct": 1.794885859657791,
+      "paired_ratios": [
+        0.9968855800037002,
+        0.9859075956842536,
+        0.9747725010173653,
+        0.9781946871225907
+      ],
+      "worst_paired_reduction_pct": 0.31144199962998
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-resample-09",
+  "validation_sha256": "09e3a400de10096cf953cfcbc4c2426d093bb81018af3ed8ae9343409ec6a459"
+}

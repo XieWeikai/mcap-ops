@@ -1,0 +1,41 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..0ac682a 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -270,15 +270,30 @@ pub fn history_windows(
+         });
+     }
+     let mut requests = Vec::with_capacity(size);
+-    for (i, &center) in centers.iter().enumerate() {
++    let mut heap = std::collections::BinaryHeap::with_capacity(offsets.len());
++    if let Some(&first) = centers.first() {
+         for (j, &offset) in offsets.iter().enumerate() {
+-            requests.push((
+-                center.checked_add(offset).ok_or(Error::Overflow)?,
+-                i * offsets.len() + j,
+-            ));
++            heap.push(std::cmp::Reverse((
++                first.checked_add(offset).ok_or(Error::Overflow)?,
++                j,
++                0usize,
++                j,
++            )));
++        }
++    }
++    while let Some(std::cmp::Reverse((time, dest, i, j))) = heap.pop() {
++        requests.push((time, dest));
++        if i + 1 < centers.len() {
++            heap.push(std::cmp::Reverse((
++                centers[i + 1]
++                    .checked_add(offsets[j])
++                    .ok_or(Error::Overflow)?,
++                (i + 1) * offsets.len() + j,
++                i + 1,
++                j,
++            )));
+         }
+     }
+-    requests.sort_unstable_by_key(|&(t, index)| (t, index));
+     let mut sorted = Vec::with_capacity(requests.len());
+     let mut sample_indices = Vec::with_capacity(requests.len());
+     for &(time, _) in &requests {

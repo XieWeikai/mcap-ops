@@ -1,0 +1,53 @@
+{
+  "label": "ten-image-quality-09",
+  "base_commit": "c20a2b9b44d6b23231bb25c921701bfee1879c57",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": -2.1768033095278305,
+  "worst_block_reduction_pct": -4.0699281123222075,
+  "worst_case_reduction_pct": -3.787937564827537,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "17cc82b88126482593f4587308676e4edb76cdd518436300bcf113c35b645fa9",
+  "operator": "image_quality",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for image_quality",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 2729907.875,
+      "after_ns": 2766881.8125,
+      "latency_reduction_pct": -1.3728479910157354,
+      "paired_ratios": [
+        1.0237318384285614,
+        1.0264187709542523,
+        0.9958746515457495,
+        1.0037251213917535
+      ],
+      "worst_paired_reduction_pct": -2.641877095425227
+    },
+    "image_quality.noise": {
+      "before_ns": 1256559.8125,
+      "after_ns": 1306824.59375,
+      "latency_reduction_pct": -3.787937564827537,
+      "paired_ratios": [
+        1.05794794405622,
+        1.0212777766215027,
+        1.0398478704770016,
+        1.0359108808195492
+      ],
+      "worst_paired_reduction_pct": -5.794794405622006
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-image-quality-09",
+  "validation_sha256": "020aaf329e6f54f442e08f5f2ac1ece6a60a145471ad0ebb3d71a1e834df14f0"
+}

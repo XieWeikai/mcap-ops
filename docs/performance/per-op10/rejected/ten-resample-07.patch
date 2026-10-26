@@ -1,0 +1,44 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index d89d8f1..8dfb69a 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -61,7 +61,7 @@ impl Sampled {
+         let size = target.len().checked_mul(channels).ok_or(Error::Overflow)?;
+         Ok(Self {
+             timestamps: target.to_vec(),
+-            values: vec![f64::NAN; size],
++            values: vec![0.0; size],
+             channels,
+             status: vec![Status::Missing as u8; target.len()],
+             source_left: vec![-1; target.len()],
+@@ -127,6 +127,7 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+             }
+         };
+         let Some((a, b, alpha)) = support else {
++            out.values[i * signal.channels()..(i + 1) * signal.channels()].fill(f64::NAN);
+             continue;
+         };
+         let future = times[b] > t;
+@@ -145,6 +146,7 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+         };
+         if let Some(status) = failure {
+             out.status[i] = status as u8;
++            out.values[i * signal.channels()..(i + 1) * signal.channels()].fill(f64::NAN);
+             continue;
+         }
+         let left = signal.row(a);
+@@ -154,12 +156,14 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+         if options.method == Method::Slerp {
+             if left.iter().chain(right_values).any(|v| !v.is_finite()) {
+                 out.status[i] = Status::NonFinite as u8;
++                values.fill(f64::NAN);
+                 continue;
+             }
+             match slerp(left, right_values, alpha) {
+                 Some(value) => values.copy_from_slice(&value),
+                 None => {
+                     out.status[i] = Status::InvalidQuaternion as u8;
++                    values.fill(f64::NAN);
+                     continue;
+                 }
+             }

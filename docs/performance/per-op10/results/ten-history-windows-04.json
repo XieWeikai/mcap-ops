@@ -1,0 +1,53 @@
+{
+  "label": "ten-history-windows-04",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "history_windows.separate",
+    "history_windows.overlap"
+  ],
+  "geomean_latency_reduction_pct": 1.3621539330932797,
+  "worst_block_reduction_pct": 0.12191444146627539,
+  "worst_case_reduction_pct": -1.3668404113420962,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The accepted deduplication makes sample_indices reconstructible; avoid storing one extra usize per request.",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "ca36ccee6dae50fffa641799b33bef542c19273d8d7e8cf9c4fb40f34ac0e7df",
+  "operator": "history_windows",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "scatter history samples with a monotone unique index",
+  "profile_hotspot": "The accepted deduplication makes sample_indices reconstructible; avoid storing one extra usize per request.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The accepted deduplication makes sample_indices reconstructible; avoid storing one extra usize per request.",
+  "case_results": {
+    "history_windows.separate": {
+      "before_ns": 352614.9453125,
+      "after_ns": 356397.578125,
+      "latency_reduction_pct": -1.3668404113420962,
+      "paired_ratios": [
+        0.9886308353389757,
+        1.0215454537182183,
+        1.0175230169245437,
+        1.0098137913022984
+      ],
+      "worst_paired_reduction_pct": -2.1545453718218255
+    },
+    "history_windows.overlap": {
+      "before_ns": 578359.6328125,
+      "after_ns": 562738.640625,
+      "latency_reduction_pct": 2.6262499610268275,
+      "paired_ratios": [
+        0.9755497474389265,
+        0.9765235544369079,
+        0.9399912778834241,
+        0.971925253340537
+      ],
+      "worst_paired_reduction_pct": 2.347644556309214
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-history-windows-04",
+  "validation_sha256": "7cd5240d95443e78340fea7a904ec82b623ffd187801db2d094dd2de20605206"
+}
