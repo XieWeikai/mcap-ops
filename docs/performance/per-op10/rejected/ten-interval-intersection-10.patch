@@ -1,0 +1,30 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 19c4fbf..dd800d7 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -70,18 +70,19 @@ impl IntervalSet {
+                 j = other.intervals.partition_point(|v| v.end_ns <= a.start_ns);
+             }
+         }
++        let mut left = self.intervals[i..].iter().peekable();
++        let mut right = other.intervals[j..].iter().peekable();
+         let mut result = Vec::new();
+-        while i < self.intervals.len() && j < other.intervals.len() {
+-            let a = self.intervals[i];
+-            let b = other.intervals[j];
+-            let (start_ns, end_ns) = (a.start_ns.max(b.start_ns), a.end_ns.min(b.end_ns));
++        while let (Some(a), Some(b)) = (left.peek().copied(), right.peek().copied()) {
++            let start_ns = a.start_ns.max(b.start_ns);
++            let end_ns = a.end_ns.min(b.end_ns);
+             if start_ns < end_ns {
+                 result.push(Interval { start_ns, end_ns });
+             }
+             if a.end_ns < b.end_ns {
+-                i += 1;
++                left.next();
+             } else {
+-                j += 1;
++                right.next();
+             }
+         }
+         Self { intervals: result }

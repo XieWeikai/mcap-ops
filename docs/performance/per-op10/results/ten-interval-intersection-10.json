@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-intersection-10",
+  "base_commit": "7a893c113f9ec78f78e55c55c8b864fae2b0df14",
+  "cases": [
+    "interval_intersection.dense",
+    "interval_intersection.late"
+  ],
+  "geomean_latency_reduction_pct": -0.41164102530233393,
+  "worst_block_reduction_pct": -0.7663872018718543,
+  "worst_case_reduction_pct": -10.214648585084163,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep the accepted initial prefix search; replace only the subsequent indexed merge walk.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "ce81316d126d2a08292531d7ccf4c551a895c431cc4f3e4b2264d815f4897f36",
+  "operator": "interval_intersection",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "merge intersection tails through peekable iterators",
+  "profile_hotspot": "Keep the accepted initial prefix search; replace only the subsequent indexed merge walk.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Keep the accepted initial prefix search; replace only the subsequent indexed merge walk.",
+  "case_results": {
+    "interval_intersection.dense": {
+      "before_ns": 27703.9091796875,
+      "after_ns": 25590.1796875,
+      "latency_reduction_pct": 8.294777959808552,
+      "paired_ratios": [
+        0.9128362775184937,
+        0.9418072490979756,
+        0.9173294061215972,
+        0.9167750346822316
+      ],
+      "worst_paired_reduction_pct": 5.819275090202436
+    },
+    "interval_intersection.late": {
+      "before_ns": 176.9279022216797,
+      "after_ns": 194.99946212768555,
+      "latency_reduction_pct": -10.214648585084163,
+      "paired_ratios": [
+        1.0991775670412904,
+        1.0356187835446362,
+        1.1068940690179523,
+        1.1051154046603928
+      ],
+      "worst_paired_reduction_pct": -10.689406901795229
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-intersection-10",
+  "validation_sha256": "74e7880a5945dc1d955f2b9a72544a0d6434d195a81ed42cde8088cd4575328f"
+}

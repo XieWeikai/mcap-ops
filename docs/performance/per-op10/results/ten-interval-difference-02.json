@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-difference-02",
+  "base_commit": "c23981d65e36d8fb36276304f6b1e1409389f047",
+  "cases": [
+    "interval_difference",
+    "interval_difference.empty"
+  ],
+  "geomean_latency_reduction_pct": -6.322455289896367,
+  "worst_block_reduction_pct": -9.19055495248493,
+  "worst_case_reduction_pct": -13.888023592979426,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Retain the linear difference algorithm while detecting identity results from global bounds.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "06da534e92c9130adc290fa02f7f1b547d29ca6b74fc8a4a4342a6718777c60c",
+  "operator": "interval_difference",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "clone globally disjoint interval differences",
+  "profile_hotspot": "Retain the linear difference algorithm while detecting identity results from global bounds.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Retain the linear difference algorithm while detecting identity results from global bounds.",
+  "case_results": {
+    "interval_difference.empty": {
+      "before_ns": 1327.114501953125,
+      "after_ns": 1324.6366882324219,
+      "latency_reduction_pct": 1.4722132943163935,
+      "paired_ratios": [
+        0.9616564522688154,
+        0.9923204765080811,
+        0.978235257605591,
+        1.0298503599201876
+      ],
+      "worst_paired_reduction_pct": -2.9850359920187586
+    },
+    "interval_difference": {
+      "before_ns": 10257.603515625,
+      "after_ns": 11655.237060546875,
+      "latency_reduction_pct": -13.888023592979426,
+      "paired_ratios": [
+        1.1053687988036642,
+        1.1200605035112143,
+        1.1751720587786672,
+        1.1576999683483742
+      ],
+      "worst_paired_reduction_pct": -17.517205877866715
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-difference-02",
+  "validation_sha256": "54926510121cb403d51274068fb24709b968bcb1a613e43a357b92b5f16adbe8"
+}

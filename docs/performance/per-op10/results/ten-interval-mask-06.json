@@ -1,0 +1,79 @@
+{
+  "label": "ten-interval-mask-06",
+  "base_commit": "7e4ad1c52e23fbdff6feec42e10025bbe2b4de87",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled",
+    "interval_mask.empty",
+    "interval_mask.late"
+  ],
+  "geomean_latency_reduction_pct": -1.6011712072299122,
+  "worst_block_reduction_pct": -2.006395982989151,
+  "worst_case_reduction_pct": -4.102964611017201,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Reuse only identical input timestamps, never infer temporal ordering in the unordered fallback.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "97f1f00baaf393244a0820506c84bf98f6be20da13f011cc52ca1014740c2689",
+  "operator": "interval_mask",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reuse consecutive unordered duplicate membership queries",
+  "profile_hotspot": "Reuse only identical input timestamps, never infer temporal ordering in the unordered fallback.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Reuse only identical input timestamps, never infer temporal ordering in the unordered fallback.",
+  "case_results": {
+    "interval_mask.empty": {
+      "before_ns": 115.28650283813477,
+      "after_ns": 115.62621116638184,
+      "latency_reduction_pct": -0.2587682518569778,
+      "paired_ratios": [
+        0.9967942754948088,
+        1.004853873252038,
+        1.0003214917851013,
+        1.0055978545653168
+      ],
+      "worst_paired_reduction_pct": -0.5597854565316807
+    },
+    "interval_mask.late": {
+      "before_ns": 20653.8740234375,
+      "after_ns": 21041.158203125,
+      "latency_reduction_pct": -1.6556106177160634,
+      "paired_ratios": [
+        1.0128270931132133,
+        1.020285119241108,
+        1.0056641814971197,
+        1.0333419104855328
+      ],
+      "worst_paired_reduction_pct": -3.334191048553281
+    },
+    "interval_mask.ordered": {
+      "before_ns": 26539.93896484375,
+      "after_ns": 26435.00048828125,
+      "latency_reduction_pct": 0.6150039093433923,
+      "paired_ratios": [
+        1.0168178199721858,
+        0.9842592977615358,
+        0.9855924875472883,
+        1.0021074342658438
+      ],
+      "worst_paired_reduction_pct": -1.6817819972185788
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 278338.6171875,
+      "after_ns": 288430.53125,
+      "latency_reduction_pct": -4.102964611017201,
+      "paired_ratios": [
+        1.0423140337415755,
+        1.051650188670842,
+        1.023644977874266,
+        1.0397452584787685
+      ],
+      "worst_paired_reduction_pct": -5.165018867084203
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-mask-06",
+  "validation_sha256": "c4e57dff647b650c1aa8baa3fb879c284e3492863fdd5f56a52a18c52ffaf285"
+}

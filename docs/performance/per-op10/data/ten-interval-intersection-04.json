@@ -1,0 +1,319 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "run_id": "session-9a90601a14b1",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/accepted",
+      "bytes": 27199248,
+      "sha256": "c6fd04a44ad137742064b942222a7c8dfda7c8fc0c7cbba2a230b92736b23637"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/bin/ten-interval-intersection-04",
+      "bytes": 27199256,
+      "sha256": "6a7ae19122b2718cc2d230fb7ef9d880162ab0116b537df35d333900cc53aa1a"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 27559.7783203125,
+          "samples_ns": [
+            27552.69921875,
+            27559.7783203125,
+            27639.4609375,
+            27670.33984375,
+            27634.3974609375,
+            27449.509765625,
+            27355.646484375
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 174.68450927734375,
+          "samples_ns": [
+            174.64271545410156,
+            174.68450927734375,
+            173.5225372314453,
+            173.53375244140625,
+            174.9553680419922,
+            174.91270446777344,
+            175.5541229248047
+          ]
+        }
+      },
+      "after": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 27864.04296875,
+          "samples_ns": [
+            27795.7392578125,
+            27864.04296875,
+            27935.3564453125,
+            28061.62890625,
+            28043.1904296875,
+            27790.3203125,
+            27833.578125
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 175.1779556274414,
+          "samples_ns": [
+            175.25198364257812,
+            175.09359741210938,
+            175.64971160888672,
+            175.1779556274414,
+            175.08985900878906,
+            175.2240219116211,
+            174.70162963867188
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 27894.5341796875,
+          "samples_ns": [
+            27654.544921875,
+            27715.56640625,
+            27967.5283203125,
+            28070.4990234375,
+            28031.099609375,
+            27894.5341796875,
+            27581.59375
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 174.32557678222656,
+          "samples_ns": [
+            172.8219451904297,
+            182.18685150146484,
+            173.01387786865234,
+            173.78196716308594,
+            174.32557678222656,
+            182.81785583496094,
+            174.91928100585938
+          ]
+        }
+      },
+      "before": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 27555.73828125,
+          "samples_ns": [
+            27555.73828125,
+            27732.9130859375,
+            27820.560546875,
+            27461.650390625,
+            27024.869140625,
+            27516.8251953125,
+            27655.953125
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 176.67046356201172,
+          "samples_ns": [
+            176.67046356201172,
+            175.2184600830078,
+            173.28152465820312,
+            172.72486877441406,
+            176.73543548583984,
+            177.1751937866211,
+            177.53073120117188
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 27102.6787109375,
+          "samples_ns": [
+            27574.9892578125,
+            27563.8984375,
+            27516.8447265625,
+            27084.1328125,
+            27102.6787109375,
+            27082.173828125,
+            27093.6474609375
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 174.1500701904297,
+          "samples_ns": [
+            173.49624633789062,
+            174.1500701904297,
+            174.023193359375,
+            174.86837768554688,
+            174.3131866455078,
+            173.54305267333984,
+            176.93934631347656
+          ]
+        }
+      },
+      "after": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 27763.484375,
+          "samples_ns": [
+            27810.6123046875,
+            27764.9833984375,
+            27774.693359375,
+            27763.484375,
+            27716.4951171875,
+            27557.392578125,
+            27628.650390625
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 172.8587875366211,
+          "samples_ns": [
+            171.7881622314453,
+            173.32592010498047,
+            173.28443145751953,
+            173.84515380859375,
+            172.8587875366211,
+            171.92655181884766,
+            172.0941619873047
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 27516.7294921875,
+          "samples_ns": [
+            27691.0341796875,
+            27429.7685546875,
+            27087.576171875,
+            27342.8125,
+            27516.7294921875,
+            27722.7705078125,
+            27589.0732421875
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 172.58704376220703,
+          "samples_ns": [
+            171.97209930419922,
+            171.94445037841797,
+            172.94438934326172,
+            172.09605407714844,
+            173.15084838867188,
+            173.7798614501953,
+            172.58704376220703
+          ]
+        }
+      },
+      "before": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 27467.8544921875,
+          "samples_ns": [
+            27863.41796875,
+            27864.5634765625,
+            27653.021484375,
+            27467.8544921875,
+            27461.390625,
+            27400.0712890625,
+            27347.396484375
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 173.57804107666016,
+          "samples_ns": [
+            173.75865173339844,
+            173.45559692382812,
+            172.86839294433594,
+            175.01318359375,
+            173.57804107666016,
+            173.2944107055664,
+            173.8386001586914
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "interval_intersection.dense": {
+      "before_ns": 27511.79638671875,
+      "after_ns": 27813.763671875,
+      "latency_reduction_pct": -1.1667550649385294,
+      "paired_ratios": [
+        1.0110401703853056,
+        1.0122949309134652,
+        1.0243815628377657,
+        1.0017793526616323
+      ],
+      "worst_paired_reduction_pct": -2.4381562837765713
+    },
+    "interval_intersection.late": {
+      "before_ns": 174.41728973388672,
+      "after_ns": 173.59218215942383,
+      "latency_reduction_pct": 0.6562000844184679,
+      "paired_ratios": [
+        1.002824785964932,
+        0.9867273412176105,
+        0.9925852303568031,
+        0.9942907679548275
+      ],
+      "worst_paired_reduction_pct": -0.2824785964931964
+    }
+  }
+}

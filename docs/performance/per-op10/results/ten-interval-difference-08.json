@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-difference-08",
+  "base_commit": "c23981d65e36d8fb36276304f6b1e1409389f047",
+  "cases": [
+    "interval_difference",
+    "interval_difference.empty"
+  ],
+  "geomean_latency_reduction_pct": -0.2487158095163977,
+  "worst_block_reduction_pct": -1.2830199693695254,
+  "worst_case_reduction_pct": -0.9291832786850973,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "98136b47cae310aa9c104378e921556d9928e0add93c537c2fc5337003266760",
+  "operator": "interval_difference",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for interval_difference",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "interval_difference.empty": {
+      "before_ns": 1345.0395812988281,
+      "after_ns": 1333.6088562011719,
+      "latency_reduction_pct": 0.12130857858529964,
+      "paired_ratios": [
+        1.0060789553342029,
+        0.9512683953970275,
+        1.0097279842912528,
+        0.9914948730940912
+      ],
+      "worst_paired_reduction_pct": -0.9727984291252767
+    },
+    "interval_difference": {
+      "before_ns": 10295.911865234375,
+      "after_ns": 10474.498779296875,
+      "latency_reduction_pct": -0.9291832786850973,
+      "paired_ratios": [
+        1.0002622332321511,
+        1.0183214323415508,
+        0.9939500141771059,
+        1.0346246271655923
+      ],
+      "worst_paired_reduction_pct": -3.4624627165592337
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-difference-08",
+  "validation_sha256": "1079d8d185431741f3e8a2f08fecfa86b412120c70c4206d13d1a10181e21c52"
+}

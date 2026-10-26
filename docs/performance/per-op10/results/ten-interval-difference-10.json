@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-difference-10",
+  "base_commit": "c23981d65e36d8fb36276304f6b1e1409389f047",
+  "cases": [
+    "interval_difference",
+    "interval_difference.empty"
+  ],
+  "geomean_latency_reduction_pct": -198.1029653240034,
+  "worst_block_reduction_pct": -200.77983530906027,
+  "worst_case_reduction_pct": -504.9670761525066,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The previous monotone cursor fixed quadratic work; keep that complexity while eliminating separate j/k indices.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "dd102d8d861f60abd3275bf8cee18659aec68f27d431907de23dd6a9324cafff",
+  "operator": "interval_difference",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "use one persistent exclusion iterator for differences",
+  "profile_hotspot": "The previous monotone cursor fixed quadratic work; keep that complexity while eliminating separate j/k indices.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The previous monotone cursor fixed quadratic work; keep that complexity while eliminating separate j/k indices.",
+  "case_results": {
+    "interval_difference.empty": {
+      "before_ns": 1318.4691162109375,
+      "after_ns": 7966.1944580078125,
+      "latency_reduction_pct": -504.9670761525066,
+      "paired_ratios": [
+        6.039590835765777,
+        5.783015304102692,
+        6.121990004319988,
+        6.059750687284356
+      ],
+      "worst_paired_reduction_pct": -512.1990004319988
+    },
+    "interval_difference": {
+      "before_ns": 10295.66552734375,
+      "after_ns": 15231.663330078125,
+      "latency_reduction_pct": -48.341370611196325,
+      "paired_ratios": [
+        1.4979244751614806,
+        1.4961952846106026,
+        1.4474781902927742,
+        1.4706321276133238
+      ],
+      "worst_paired_reduction_pct": -49.792447516148066
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-difference-10",
+  "validation_sha256": "ee9551f1a5e3f25146d472b966b32e8334f249fa59c7536765b0034b7b77e182"
+}

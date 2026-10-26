@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-contains-04",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_contains",
+    "interval_contains.small"
+  ],
+  "geomean_latency_reduction_pct": -35.165433335588126,
+  "worst_block_reduction_pct": -35.94437137247717,
+  "worst_case_reduction_pct": -102.44018715642599,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Measure bounded branch scheduling rather than reintroducing the previously rejected extent changes.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "012d0ccb46b6b7689fca8aef0edf6c80f1cd0473e00d2ea505f1023d05b46490",
+  "operator": "interval_contains",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "unroll interval binary search by 2 steps",
+  "profile_hotspot": "Measure bounded branch scheduling rather than reintroducing the previously rejected extent changes.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Measure bounded branch scheduling rather than reintroducing the previously rejected extent changes.",
+  "case_results": {
+    "interval_contains.small": {
+      "before_ns": 16929.7060546875,
+      "after_ns": 15253.133544921875,
+      "latency_reduction_pct": 9.846671273804352,
+      "paired_ratios": [
+        0.9068848915564407,
+        0.8994512028978169,
+        0.8990545130662478,
+        0.9036153716260961
+      ],
+      "worst_paired_reduction_pct": 9.31151084435593
+    },
+    "interval_contains": {
+      "before_ns": 254941.796875,
+      "after_ns": 517802.203125,
+      "latency_reduction_pct": -102.44018715642599,
+      "paired_ratios": [
+        1.9928466573620491,
+        2.005054762422315,
+        2.055589715558906,
+        2.043748980706205
+      ],
+      "worst_paired_reduction_pct": -105.55897155589058
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-contains-04",
+  "validation_sha256": "543fdcd730a5e7b772abf2107c723f8d64ed5297e052a4a912624f74d1812f46"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-contains-08",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_contains",
+    "interval_contains.small"
+  ],
+  "geomean_latency_reduction_pct": 0.06626393210314996,
+  "worst_block_reduction_pct": -1.3001403671682343,
+  "worst_case_reduction_pct": -0.7420171459704861,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "f8fa32d35e25ebeccc51e63f49cabc3dcce2221da465cd54b40cf76679f88a7d",
+  "operator": "interval_contains",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for interval_contains",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "interval_contains.small": {
+      "before_ns": 17374.50146484375,
+      "after_ns": 17503.2138671875,
+      "latency_reduction_pct": -0.7420171459704861,
+      "paired_ratios": [
+        1.0061596864033129,
+        1.0256041497856148,
+        1.0086806565160966,
+        0.9804039896829951
+      ],
+      "worst_paired_reduction_pct": -2.560414978561476
+    },
+    "interval_contains": {
+      "before_ns": 259214.28125,
+      "after_ns": 259110.61328125,
+      "latency_reduction_pct": -0.13885036412388807,
+      "paired_ratios": [
+        1.0056703862549814,
+        1.0005535216050974,
+        0.9770900680235547,
+        1.0022234856773802
+      ],
+      "worst_paired_reduction_pct": -0.5670386254981397
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-contains-08",
+  "validation_sha256": "e717264d987cb5a140f97414287d8f8dfc59a7466e62cdbc39e096fc34208f72"
+}

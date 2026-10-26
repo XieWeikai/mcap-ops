@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 926c080..23f879b 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -90,7 +90,7 @@ impl IntervalSet {
+         if other.intervals.is_empty() {
+             return self.clone();
+         }
+-        let mut result = Vec::with_capacity(self.intervals.len() + other.intervals.len());
++        let mut result = Vec::with_capacity(self.intervals.len());
+         let mut j = 0;
+         for a in &self.intervals {
+             while j < other.intervals.len() && other.intervals[j].end_ns <= a.start_ns {

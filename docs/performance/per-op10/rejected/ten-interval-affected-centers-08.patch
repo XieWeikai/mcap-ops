@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index e6dacf0..2a7ab61 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -123,6 +123,7 @@ impl IntervalSet {
+         Self { intervals: result }
+     }
+     /// Expand bad intervals to all target centers whose context overlaps them.
++    #[inline(always)]
+     pub fn affected_centers(&self, history_ns: i64, future_ns: i64) -> Result<Self> {
+         if history_ns < 0 || future_ns < 0 {
+             return Err(invalid("context lengths must be nonnegative"));

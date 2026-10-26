@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-intersection-07",
+  "base_commit": "7a893c113f9ec78f78e55c55c8b864fae2b0df14",
+  "cases": [
+    "interval_intersection.dense",
+    "interval_intersection.late"
+  ],
+  "geomean_latency_reduction_pct": 2.0829053539951348,
+  "worst_block_reduction_pct": 1.9267210974640014,
+  "worst_case_reduction_pct": 1.9017570625992741,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Outer bounds can prove no overlap without constructing or walking output intervals.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "6ad23c3e41d8c84675a7dd5977f1b6d48059b11135a163e54c613f246b1cbe06",
+  "operator": "interval_intersection",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "return immediately for globally disjoint sets",
+  "profile_hotspot": "Outer bounds can prove no overlap without constructing or walking output intervals.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Outer bounds can prove no overlap without constructing or walking output intervals.",
+  "case_results": {
+    "interval_intersection.dense": {
+      "before_ns": 27763.982421875,
+      "after_ns": 27187.5146484375,
+      "latency_reduction_pct": 1.9017570625992741,
+      "paired_ratios": [
+        0.9813752919829415,
+        0.9822351000437783,
+        0.9769790215545995,
+        0.980589566765073
+      ],
+      "worst_paired_reduction_pct": 1.7764899956221658
+    },
+    "interval_intersection.late": {
+      "before_ns": 177.05487060546875,
+      "after_ns": 172.69069290161133,
+      "latency_reduction_pct": 2.263707566253248,
+      "paired_ratios": [
+        0.9770817710199751,
+        0.9792327757647756,
+        0.9706288609819681,
+        0.9776440776549599
+      ],
+      "worst_paired_reduction_pct": 2.076722423522437
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-intersection-07",
+  "validation_sha256": "a7a3c8f1065314340ef25e606701a0293eeab7d644526499b41bb2a4160535ea"
+}

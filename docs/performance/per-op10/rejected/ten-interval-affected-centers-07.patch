@@ -1,0 +1,22 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index e6dacf0..4765c53 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -130,7 +130,16 @@ impl IntervalSet {
+         if history_ns == 0 && future_ns == 0 {
+             return Ok(self.clone());
+         }
+-        let mut merged = Vec::with_capacity(self.intervals.len());
++        let mut merged = Vec::with_capacity(
++            if self.intervals.get(1).is_some_and(|next| {
++                i128::from(self.intervals[0].end_ns) + i128::from(history_ns)
++                    >= i128::from(next.start_ns) - i128::from(future_ns)
++            }) {
++                self.intervals.len().min(256)
++            } else {
++                self.intervals.len()
++            },
++        );
+         let mut pending: Option<Interval> = None;
+         for v in &self.intervals {
+             let interval = Interval {

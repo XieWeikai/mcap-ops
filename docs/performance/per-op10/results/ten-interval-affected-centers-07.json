@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-affected-centers-07",
+  "base_commit": "f1cfec74c349fea16fd486b9ca56873920a542cf",
+  "cases": [
+    "interval_affected_centers",
+    "interval_affected_centers.merged"
+  ],
+  "geomean_latency_reduction_pct": 2.1274720654737456,
+  "worst_block_reduction_pct": -1.4127018217042542,
+  "worst_case_reduction_pct": 0.2912560306034928,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Expanded contexts may merge thousands of exclusions into one; include merged and unmerged workloads.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "b12a3bae379e0208db6db07c850c362843912bb6a03ff6b4257a2ce63f019a42",
+  "operator": "interval_affected_centers",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve 256 intervals when the first expanded pair overlaps",
+  "profile_hotspot": "Expanded contexts may merge thousands of exclusions into one; include merged and unmerged workloads.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Expanded contexts may merge thousands of exclusions into one; include merged and unmerged workloads.",
+  "case_results": {
+    "interval_affected_centers.merged": {
+      "before_ns": 3475.2817993164062,
+      "after_ns": 3463.3433837890625,
+      "latency_reduction_pct": 0.2912560306034928,
+      "paired_ratios": [
+        1.0270989984080012,
+        1.0124770880256337,
+        0.9815269330266476,
+        0.9816977913622965
+      ],
+      "worst_paired_reduction_pct": -2.709899840800123
+    },
+    "interval_affected_centers": {
+      "before_ns": 5405.104736328125,
+      "after_ns": 5193.2744140625,
+      "latency_reduction_pct": 3.9188510305917523,
+      "paired_ratios": [
+        1.0013188705975646,
+        0.9653706772264457,
+        0.9562523021617194,
+        0.9323120361620745
+      ],
+      "worst_paired_reduction_pct": -0.13188705975646364
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-affected-centers-07",
+  "validation_sha256": "26b93fd17f0483f90b76ba82382525497ef7c7159507b346ce490ad5d62770b9"
+}

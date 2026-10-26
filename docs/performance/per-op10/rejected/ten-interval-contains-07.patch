@@ -1,0 +1,17 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index be94ccc..47a7fff 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -39,6 +39,12 @@ impl IntervalSet {
+         {
+             return false;
+         }
++        if self.intervals.len() <= 16 {
++            return self
++                .intervals
++                .iter()
++                .any(|v| v.start_ns <= t && t < v.end_ns);
++        }
+         let i = self.intervals.partition_point(|v| v.start_ns <= t);
+         i > 0 && t < self.intervals[i - 1].end_ns
+     }

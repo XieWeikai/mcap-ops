@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-affected-centers-10",
+  "base_commit": "f1cfec74c349fea16fd486b9ca56873920a542cf",
+  "cases": [
+    "interval_affected_centers",
+    "interval_affected_centers.merged"
+  ],
+  "geomean_latency_reduction_pct": -64.39854370830925,
+  "worst_block_reduction_pct": -66.61021764705832,
+  "worst_case_reduction_pct": -154.17324120394355,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Retain a single ordered pass and the successful capacity bound while testing ownership-aware fold code generation.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "eb390168115e959676228c9b955b1b64e6b3d0e83228047e742c9b2b22ace76b",
+  "operator": "interval_affected_centers",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "merge context expansion through a fallible fold",
+  "profile_hotspot": "Retain a single ordered pass and the successful capacity bound while testing ownership-aware fold code generation.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Retain a single ordered pass and the successful capacity bound while testing ownership-aware fold code generation.",
+  "case_results": {
+    "interval_affected_centers.merged": {
+      "before_ns": 3451.0896606445312,
+      "after_ns": 8712.895385742188,
+      "latency_reduction_pct": -154.17324120394355,
+      "paired_ratios": [
+        2.5300946733143186,
+        2.5533701507645525,
+        2.1793232206702906,
+        2.6236601943448714
+      ],
+      "worst_paired_reduction_pct": -162.36601943448713
+    },
+    "interval_affected_centers": {
+      "before_ns": 5438.896484375,
+      "after_ns": 5718.537353515625,
+      "latency_reduction_pct": -4.410815713252436,
+      "paired_ratios": [
+        1.0971512219357806,
+        1.0315827442182055,
+        0.831293676478924,
+        1.056633570046843
+      ],
+      "worst_paired_reduction_pct": -9.715122193578063
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-affected-centers-10",
+  "validation_sha256": "debc22c2efaeb87e2d628dddeb8f654f7d1bde0dc44ed719f3b69a902309aab2"
+}

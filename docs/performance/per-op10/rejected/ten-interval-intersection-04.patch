@@ -1,0 +1,18 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 19c4fbf..7e0269c 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -78,11 +78,8 @@ impl IntervalSet {
+             if start_ns < end_ns {
+                 result.push(Interval { start_ns, end_ns });
+             }
+-            if a.end_ns < b.end_ns {
+-                i += 1;
+-            } else {
+-                j += 1;
+-            }
++            i += usize::from(a.end_ns <= b.end_ns);
++            j += usize::from(b.end_ns <= a.end_ns);
+         }
+         Self { intervals: result }
+     }

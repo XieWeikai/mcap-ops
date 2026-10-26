@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-contains-07",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_contains",
+    "interval_contains.small"
+  ],
+  "geomean_latency_reduction_pct": 5.696505226025916,
+  "worst_block_reduction_pct": 4.689814632301237,
+  "worst_case_reduction_pct": 0.649111871188568,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Small sets have different branch costs; a dedicated fixed small-set benchmark prevents extrapolation.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "540542b15e7e22b2d23bbfb71e37c6a424b03c0c347b7ad72f9fea7ad836ecf7",
+  "operator": "interval_contains",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "linearly search small interval sets after extent rejection",
+  "profile_hotspot": "Small sets have different branch costs; a dedicated fixed small-set benchmark prevents extrapolation.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Small sets have different branch costs; a dedicated fixed small-set benchmark prevents extrapolation.",
+  "case_results": {
+    "interval_contains.small": {
+      "before_ns": 17022.099853515625,
+      "after_ns": 15195.379638671875,
+      "latency_reduction_pct": 10.466803422077398,
+      "paired_ratios": [
+        0.8924649470280694,
+        0.8929054595154147,
+        0.8977584720430374,
+        0.9067668090979668
+      ],
+      "worst_paired_reduction_pct": 9.32331909020332
+    },
+    "interval_contains": {
+      "before_ns": 255086.390625,
+      "after_ns": 252719.79296875,
+      "latency_reduction_pct": 0.649111871188568,
+      "paired_ratios": [
+        0.9882266185859917,
+        0.9987911439902369,
+        0.9878016503486193,
+        1.0018045812530025
+      ],
+      "worst_paired_reduction_pct": -0.1804581253002535
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-contains-07",
+  "validation_sha256": "441e20c52a1ab306832dcc23e1d4b26ca9b7191ee0ee572a709c0754f5193911"
+}

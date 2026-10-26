@@ -1,0 +1,40 @@
+{
+  "label": "ten-interval-new-05",
+  "base_commit": "bf27051a0690192d4fabfbc6405b6cfda283c1f4",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": -75.41321537696103,
+  "worst_block_reduction_pct": -77.0538175687652,
+  "worst_case_reduction_pct": -75.41321537696103,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "11c758ea4a2e6f2aa9fe3fbac0e3fc4d20af92ad861d1a51404ef8853e9f32ad",
+  "operator": "interval_new",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "bound initial merge capacity to 512 intervals",
+  "profile_hotspot": "Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Exact input-sized reservation failed earlier; measure bounded capacity sweeps with eventual growth intact.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 5154.166748046875,
+      "after_ns": 9032.977294921875,
+      "latency_reduction_pct": -75.41321537696103,
+      "paired_ratios": [
+        1.7477925982342295,
+        1.770538175687652,
+        1.7394559186433078,
+        1.7604717093049913
+      ],
+      "worst_paired_reduction_pct": -77.0538175687652
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-new-05",
+  "validation_sha256": "db8e108f65f82f414de4013e5ada6e0875997838ee3ef2a7c80e39916f6c7618"
+}

@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-contains-02",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_contains",
+    "interval_contains.small"
+  ],
+  "geomean_latency_reduction_pct": -50.541641838501405,
+  "worst_block_reduction_pct": -52.07814312568671,
+  "worst_case_reduction_pct": -138.2613272035934,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Measure explicit bounds against the partition_point implementation on both small and large sets.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "0635d7851e4ea400202c424fec33be1d4f2af171476140d3381241920a9eea32",
+  "operator": "interval_contains",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "walk binary-search bounds explicitly",
+  "profile_hotspot": "Measure explicit bounds against the partition_point implementation on both small and large sets.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Measure explicit bounds against the partition_point implementation on both small and large sets.",
+  "case_results": {
+    "interval_contains.small": {
+      "before_ns": 17277.95654296875,
+      "after_ns": 16295.52099609375,
+      "latency_reduction_pct": 5.121090021626539,
+      "paired_ratios": [
+        0.9444724117572587,
+        0.9273802436610808,
+        0.9531057878102105,
+        0.9541488483619233
+      ],
+      "worst_paired_reduction_pct": 4.585115163807673
+    },
+    "interval_contains": {
+      "before_ns": 257861.50390625,
+      "after_ns": 610221.1015625,
+      "latency_reduction_pct": -138.2613272035934,
+      "paired_ratios": [
+        2.448749304760103,
+        2.342694671311381,
+        2.3308504485901724,
+        2.4225318727604868
+      ],
+      "worst_paired_reduction_pct": -144.87493047601032
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-contains-02",
+  "validation_sha256": "354c6f2d4b65137e3b72f5f758093a1caf344cb073234818912dd725d23d0bf4"
+}

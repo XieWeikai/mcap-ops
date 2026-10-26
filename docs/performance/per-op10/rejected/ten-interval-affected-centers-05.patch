@@ -1,0 +1,17 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index e6dacf0..f9e9b12 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -134,8 +134,10 @@ impl IntervalSet {
+         let mut pending: Option<Interval> = None;
+         for v in &self.intervals {
+             let interval = Interval {
+-                start_ns: v.start_ns.checked_sub(future_ns).ok_or(Error::Overflow)?,
+-                end_ns: v.end_ns.checked_add(history_ns).ok_or(Error::Overflow)?,
++                start_ns: i64::try_from(i128::from(v.start_ns) - i128::from(future_ns))
++                    .map_err(|_| Error::Overflow)?,
++                end_ns: i64::try_from(i128::from(v.end_ns) + i128::from(history_ns))
++                    .map_err(|_| Error::Overflow)?,
+             };
+             match pending.as_mut() {
+                 Some(last) if interval.start_ns <= last.end_ns => {

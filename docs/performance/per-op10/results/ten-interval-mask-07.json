@@ -1,0 +1,79 @@
+{
+  "label": "ten-interval-mask-07",
+  "base_commit": "7e4ad1c52e23fbdff6feec42e10025bbe2b4de87",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled",
+    "interval_mask.empty",
+    "interval_mask.late"
+  ],
+  "geomean_latency_reduction_pct": -50.09857965629472,
+  "worst_block_reduction_pct": -51.62726359109793,
+  "worst_case_reduction_pct": -127.47513607471114,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The repeat branch preserves one output per query and does not collapse timestamps.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "cefd2b9a00ed523f0e8cfde227f99dc3eba21a81955b046a78368a5f9c762d6a",
+  "operator": "interval_mask",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reuse repeated ordered mask answers",
+  "profile_hotspot": "The repeat branch preserves one output per query and does not collapse timestamps.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The repeat branch preserves one output per query and does not collapse timestamps.",
+  "case_results": {
+    "interval_mask.empty": {
+      "before_ns": 114.38831520080566,
+      "after_ns": 115.44492530822754,
+      "latency_reduction_pct": -0.5716734161754999,
+      "paired_ratios": [
+        0.9907961199379384,
+        1.0173699017262767,
+        1.0114831910540367,
+        0.9999502772694735
+      ],
+      "worst_paired_reduction_pct": -1.7369901726276726
+    },
+    "interval_mask.late": {
+      "before_ns": 20723.470703125,
+      "after_ns": 47044.9873046875,
+      "latency_reduction_pct": -127.47513607471114,
+      "paired_ratios": [
+        2.2774208848236746,
+        2.2840570168733607,
+        2.272081836670549,
+        2.2628881053287673
+      ],
+      "worst_paired_reduction_pct": -128.40570168733606
+    },
+    "interval_mask.ordered": {
+      "before_ns": 26350.87744140625,
+      "after_ns": 58208.9765625,
+      "latency_reduction_pct": -121.89275323177951,
+      "paired_ratios": [
+        2.140697913244958,
+        2.237668119981972,
+        2.230355570598179,
+        2.2074994940374113
+      ],
+      "worst_paired_reduction_pct": -123.76681199819721
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 277506.20703125,
+      "after_ns": 281262.05078125,
+      "latency_reduction_pct": -1.254179095773833,
+      "paired_ratios": [
+        1.0193948627578922,
+        1.0165475283634895,
+        1.0085360535519872,
+        0.9976677091957402
+      ],
+      "worst_paired_reduction_pct": -1.939486275789215
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-mask-07",
+  "validation_sha256": "b890e4dbde22a6d5a6f9ddbe2d1dc3cf3aef7e93f204de52a7aa73185aac9f77"
+}

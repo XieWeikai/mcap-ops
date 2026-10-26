@@ -1,0 +1,17 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 7505069..864159d 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -51,7 +51,11 @@ impl IntervalSet {
+         }
+         let mut result = Vec::with_capacity(times.len());
+         let mut index = 0;
+-        for &t in times {
++        for (i, &t) in times.iter().enumerate() {
++            if i > 0 && t == times[i - 1] {
++                result.push(result[i - 1]);
++                continue;
++            }
+             while index < self.intervals.len() && self.intervals[index].end_ns <= t {
+                 index += 1;
+             }

@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index be94ccc..d32bc23 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -33,6 +33,7 @@ impl IntervalSet {
+     pub fn intervals(&self) -> &[Interval] {
+         &self.intervals
+     }
++    #[inline(always)]
+     pub fn contains(&self, t: i64) -> bool {
+         if self.intervals.first().is_none_or(|v| t < v.start_ns)
+             || self.intervals.last().is_some_and(|v| t >= v.end_ns)

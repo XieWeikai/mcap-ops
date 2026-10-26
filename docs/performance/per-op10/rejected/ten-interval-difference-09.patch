@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 926c080..45ec6d1 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -86,6 +86,7 @@ impl IntervalSet {
+         }
+         Self { intervals: result }
+     }
++    #[inline(never)]
+     pub fn difference(&self, other: &Self) -> Self {
+         if other.intervals.is_empty() {
+             return self.clone();

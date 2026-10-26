@@ -1,0 +1,29 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 19c4fbf..3ec1473 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -72,6 +72,24 @@ impl IntervalSet {
+         }
+         let mut result = Vec::new();
+         while i < self.intervals.len() && j < other.intervals.len() {
++            if i + 16 < self.intervals.len()
++                && self.intervals[i + 16].end_ns <= other.intervals[j].start_ns
++            {
++                i += self.intervals[i..]
++                    .partition_point(|v| v.end_ns <= other.intervals[j].start_ns);
++                if i == self.intervals.len() {
++                    break;
++                }
++            }
++            if j + 16 < other.intervals.len()
++                && other.intervals[j + 16].end_ns <= self.intervals[i].start_ns
++            {
++                j += other.intervals[j..]
++                    .partition_point(|v| v.end_ns <= self.intervals[i].start_ns);
++                if j == other.intervals.len() {
++                    break;
++                }
++            }
+             let a = self.intervals[i];
+             let b = other.intervals[j];
+             let (start_ns, end_ns) = (a.start_ns.max(b.start_ns), a.end_ns.min(b.end_ns));

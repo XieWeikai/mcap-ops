@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-difference-03",
+  "base_commit": "c23981d65e36d8fb36276304f6b1e1409389f047",
+  "cases": [
+    "interval_difference",
+    "interval_difference.empty"
+  ],
+  "geomean_latency_reduction_pct": -4.985960520511612,
+  "worst_block_reduction_pct": -6.212764351374123,
+  "worst_case_reduction_pct": -10.419070874483083,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Avoid an irrelevant leading exclusion prefix without restarting searches for each input interval.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "90f91196d481202627a9c787ac829379bd19dfa3bfccf487b27c38283631e7e3",
+  "operator": "interval_difference",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "seed the exclusion cursor by prefix search",
+  "profile_hotspot": "Avoid an irrelevant leading exclusion prefix without restarting searches for each input interval.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Avoid an irrelevant leading exclusion prefix without restarting searches for each input interval.",
+  "case_results": {
+    "interval_difference.empty": {
+      "before_ns": 1334.2521362304688,
+      "after_ns": 1322.9653015136719,
+      "latency_reduction_pct": 0.9052370672447907,
+      "paired_ratios": [
+        0.9817116272799238,
+        1.0168964069647537,
+        0.9831736210772801,
+        0.9987216375778242
+      ],
+      "worst_paired_reduction_pct": -1.6896406964753696
+    },
+    "interval_difference": {
+      "before_ns": 10282.220703125,
+      "after_ns": 11503.115478515625,
+      "latency_reduction_pct": -10.419070874483083,
+      "paired_ratios": [
+        1.0788223004447521,
+        1.0614574486490416,
+        1.1445147147421988,
+        1.1295591170449093
+      ],
+      "worst_paired_reduction_pct": -14.451471474219879
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-difference-03",
+  "validation_sha256": "dc1e50acf0881f1a66e45f3e1d486d7b679fc7074327d2c50141a03974d8d228"
+}

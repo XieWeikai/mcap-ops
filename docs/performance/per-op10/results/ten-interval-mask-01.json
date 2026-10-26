@@ -1,0 +1,79 @@
+{
+  "label": "ten-interval-mask-01",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled",
+    "interval_mask.empty",
+    "interval_mask.late"
+  ],
+  "geomean_latency_reduction_pct": 2.3962401461530947,
+  "worst_block_reduction_pct": -1.0677261935197357,
+  "worst_case_reduction_pct": 0.3288269354111195,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The prior linear sweep helped; late query grids can skip an irrelevant prefix once.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "c08028950aa6ffc0fb4933364b14a838b3d42ec16cb1d7633b9889765517099d",
+  "operator": "interval_mask",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "seed the mask cursor with a prefix search",
+  "profile_hotspot": "The prior linear sweep helped; late query grids can skip an irrelevant prefix once.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The prior linear sweep helped; late query grids can skip an irrelevant prefix once.",
+  "case_results": {
+    "interval_mask.empty": {
+      "before_ns": 19798.6201171875,
+      "after_ns": 19630.328125,
+      "latency_reduction_pct": 1.3148811245266345,
+      "paired_ratios": [
+        0.9963063343060301,
+        0.9773960432034372,
+        0.9710280119102241,
+        1.0422883859853826
+      ],
+      "worst_paired_reduction_pct": -4.228838598538265
+    },
+    "interval_mask.late": {
+      "before_ns": 21136.759765625,
+      "after_ns": 19808.349609375,
+      "latency_reduction_pct": 6.641936278360472,
+      "paired_ratios": [
+        0.9442073821458081,
+        0.9204591229808815,
+        0.9229538922869823,
+        0.9759673283921273
+      ],
+      "worst_paired_reduction_pct": 2.40326716078727
+    },
+    "interval_mask.ordered": {
+      "before_ns": 26807.6982421875,
+      "after_ns": 26822.1171875,
+      "latency_reduction_pct": 0.3288269354111195,
+      "paired_ratios": [
+        1.0033314955167145,
+        0.990091965775063,
+        0.9865732845415236,
+        1.0146188729145635
+      ],
+      "worst_paired_reduction_pct": -1.461887291456354
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 281199.03515625,
+      "after_ns": 280046.8203125,
+      "latency_reduction_pct": 0.6651872961264571,
+      "paired_ratios": [
+        0.989517162750641,
+        0.984412249050078,
+        0.9971790913268299,
+        1.0109364745708813
+      ],
+      "worst_paired_reduction_pct": -1.0936474570881316
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-mask-01",
+  "validation_sha256": "479d99d2b59e787cf7297494f663da34191b087c5d0293e0a78a8cb02c9f8296"
+}

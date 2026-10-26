@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-affected-centers-09",
+  "base_commit": "f1cfec74c349fea16fd486b9ca56873920a542cf",
+  "cases": [
+    "interval_affected_centers",
+    "interval_affected_centers.merged"
+  ],
+  "geomean_latency_reduction_pct": -0.3011104711811985,
+  "worst_block_reduction_pct": -4.316341987022065,
+  "worst_case_reduction_pct": -1.006409405967279,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "0a53628cbb558710d2d486a7b113b9f62a1047bbbfd3c8c3be68ee5463760b4f",
+  "operator": "interval_affected_centers",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for interval_affected_centers",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "interval_affected_centers.merged": {
+      "before_ns": 3414.3335571289062,
+      "after_ns": 3440.8861694335938,
+      "latency_reduction_pct": -1.006409405967279,
+      "paired_ratios": [
+        1.0307129856378365,
+        0.9917011383387366,
+        1.0284270497806092,
+        0.9857888666615522
+      ],
+      "worst_paired_reduction_pct": -3.071298563783653
+    },
+    "interval_affected_centers": {
+      "before_ns": 5405.2698974609375,
+      "after_ns": 5383.1402587890625,
+      "latency_reduction_pct": 0.36082501414664847,
+      "paired_ratios": [
+        1.0557642483585568,
+        1.017418011564046,
+        0.9753654881530208,
+        0.9545460465930969
+      ],
+      "worst_paired_reduction_pct": -5.576424835855676
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-affected-centers-09",
+  "validation_sha256": "ec5fbff770f1c43a1411555f94566fe23583c50533e35f479abc937f8ba1281f"
+}

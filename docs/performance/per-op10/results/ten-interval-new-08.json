@@ -1,0 +1,40 @@
+{
+  "label": "ten-interval-new-08",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": -2.4542762333627177,
+  "worst_block_reduction_pct": -3.3742635131300602,
+  "worst_case_reduction_pct": -2.4542762333627177,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "a963947edd1eb959049945e6e86ae5f7ddcc28134364dad483b32480d7de01f2",
+  "operator": "interval_new",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for interval_new",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 3870.8668212890625,
+      "after_ns": 3956.1051025390625,
+      "latency_reduction_pct": -2.4542762333627177,
+      "paired_ratios": [
+        1.0207705378079026,
+        1.028314986859352,
+        1.0042753699587292,
+        1.0337426351313006
+      ],
+      "worst_paired_reduction_pct": -3.3742635131300602
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-new-08",
+  "validation_sha256": "179fd556feac5f81419c91782900ee3dab3976656aae300fe5f09dceca455988"
+}

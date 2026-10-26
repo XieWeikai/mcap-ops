@@ -1,0 +1,79 @@
+{
+  "label": "ten-interval-mask-09",
+  "base_commit": "7e4ad1c52e23fbdff6feec42e10025bbe2b4de87",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled",
+    "interval_mask.empty",
+    "interval_mask.late"
+  ],
+  "geomean_latency_reduction_pct": -0.4034914534324363,
+  "worst_block_reduction_pct": -3.4549224841915693,
+  "worst_case_reduction_pct": -0.7139946073611902,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "508eb2fef3375985f0087720ba8e821791b901ff78f0ed5e4dcd968c1450baf8",
+  "operator": "interval_mask",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for interval_mask",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "interval_mask.empty": {
+      "before_ns": 116.54308700561523,
+      "after_ns": 117.48368835449219,
+      "latency_reduction_pct": -0.4770529663164602,
+      "paired_ratios": [
+        1.0018044294350779,
+        1.0023835528713858,
+        1.0280781493925972,
+        1.0071575064549436
+      ],
+      "worst_paired_reduction_pct": -2.807814939259723
+    },
+    "interval_mask.late": {
+      "before_ns": 21192.90234375,
+      "after_ns": 21355.21142578125,
+      "latency_reduction_pct": -0.7139946073611902,
+      "paired_ratios": [
+        1.0011937902488597,
+        0.9773416225421712,
+        1.0339137742413478,
+        1.0130861018983641
+      ],
+      "worst_paired_reduction_pct": -3.3913774241347783
+    },
+    "interval_mask.ordered": {
+      "before_ns": 26469.24658203125,
+      "after_ns": 27040.8916015625,
+      "latency_reduction_pct": -0.5992903174040887,
+      "paired_ratios": [
+        1.0131995431185683,
+        0.9987862632295135,
+        1.0373902241008472,
+        0.996564869328576
+      ],
+      "worst_paired_reduction_pct": -3.7390224100847247
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 281990.375,
+      "after_ns": 285386.96875,
+      "latency_reduction_pct": -0.25509783988217904,
+      "paired_ratios": [
+        0.9961868445618915,
+        1.0018668213121589,
+        1.0388480703907526,
+        1.0032351354854847
+      ],
+      "worst_paired_reduction_pct": -3.8848070390752554
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-mask-09",
+  "validation_sha256": "2bf4a641958c039ae23c67756c644a9e0ef9708a40de9b5997b9332ec6599936"
+}

@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index be94ccc..362fc52 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -12,6 +12,7 @@ pub struct IntervalSet {
+     intervals: Vec<Interval>,
+ }
+ impl IntervalSet {
++    #[inline(never)]
+     pub fn new(mut intervals: Vec<Interval>) -> Result<Self> {
+         if intervals.iter().any(|v| v.start_ns >= v.end_ns) {
+             return Err(invalid("intervals must be nonempty [start,end)"));

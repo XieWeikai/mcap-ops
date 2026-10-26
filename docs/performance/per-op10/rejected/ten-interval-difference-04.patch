@@ -1,0 +1,14 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 926c080..13b2784 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -98,8 +98,7 @@ impl IntervalSet {
+             }
+             let mut cursor = a.start_ns;
+             let mut k = j;
+-            while k < other.intervals.len() && other.intervals[k].start_ns < a.end_ns {
+-                let b = other.intervals[k];
++            while let Some(b) = other.intervals.get(k).filter(|b| b.start_ns < a.end_ns) {
+                 if cursor < b.start_ns {
+                     result.push(Interval {
+                         start_ns: cursor,

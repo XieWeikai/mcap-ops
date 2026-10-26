@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 7505069..eaf2886 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -46,7 +46,7 @@ impl IntervalSet {
+         if self.intervals.is_empty() {
+             return vec![false; times.len()];
+         }
+-        if times.windows(2).any(|w| w[1] < w[0]) {
++        if !times.is_sorted() {
+             return times.iter().map(|&t| self.contains(t)).collect();
+         }
+         let mut result = Vec::with_capacity(times.len());

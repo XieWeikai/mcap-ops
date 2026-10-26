@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-affected-centers-03",
+  "base_commit": "7d0cb4e458315bb59c29d7fddc786021a735b00d",
+  "cases": [
+    "interval_affected_centers",
+    "interval_affected_centers.merged"
+  ],
+  "geomean_latency_reduction_pct": -47.925970876305435,
+  "worst_block_reduction_pct": -49.925953033815794,
+  "worst_case_reduction_pct": -141.47170858181752,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Reuse owned storage via library compaction rather than re-sorting expanded intervals.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "df36155f432ca460e02999816b9ecc23bcd1bc9a6ef060b7c585f4e51fc2a00a",
+  "operator": "interval_affected_centers",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "compact expanded intervals in the cloned input buffer",
+  "profile_hotspot": "Reuse owned storage via library compaction rather than re-sorting expanded intervals.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Reuse owned storage via library compaction rather than re-sorting expanded intervals.",
+  "case_results": {
+    "interval_affected_centers.merged": {
+      "before_ns": 5073.557373046875,
+      "after_ns": 12283.130615234375,
+      "latency_reduction_pct": -141.47170858181752,
+      "paired_ratios": [
+        2.4249192514317524,
+        2.4045149202045977,
+        2.370006407448685,
+        2.469211495014767
+      ],
+      "worst_paired_reduction_pct": -146.9211495014767
+    },
+    "interval_affected_centers": {
+      "before_ns": 5357.7376708984375,
+      "after_ns": 4873.269287109375,
+      "latency_reduction_pct": 9.61298403185834,
+      "paired_ratios": [
+        0.9081186019844725,
+        0.8996217173783607,
+        0.9484274524512916,
+        0.8805840794448465
+      ],
+      "worst_paired_reduction_pct": 5.157254754870843
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-affected-centers-03",
+  "validation_sha256": "ae3efb60450dc721c751f4e1b478aab4fc49c094aa1a60bdeece917de1a280bf"
+}

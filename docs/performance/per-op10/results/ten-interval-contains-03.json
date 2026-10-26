@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-contains-03",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_contains",
+    "interval_contains.small"
+  ],
+  "geomean_latency_reduction_pct": -1.7676899155183001,
+  "worst_block_reduction_pct": -4.4861443860365835,
+  "worst_case_reduction_pct": -5.770447726303218,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The half-open endpoint can select the candidate directly in canonical disjoint sets.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "b46f47ce9466dc03f2b0772cb2231d4dc7af80af41982a75e3ec1a71ebe16b66",
+  "operator": "interval_contains",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "partition interval end times before checking the start",
+  "profile_hotspot": "The half-open endpoint can select the candidate directly in canonical disjoint sets.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The half-open endpoint can select the candidate directly in canonical disjoint sets.",
+  "case_results": {
+    "interval_contains.small": {
+      "before_ns": 17495.09521484375,
+      "after_ns": 18396.086181640625,
+      "latency_reduction_pct": -5.770447726303218,
+      "paired_ratios": [
+        1.048789702475495,
+        1.0364616145904688,
+        1.0666192520505693,
+        1.0815588312880942
+      ],
+      "worst_paired_reduction_pct": -8.155883128809416
+    },
+    "interval_contains": {
+      "before_ns": 260644.375,
+      "after_ns": 254338.0234375,
+      "latency_reduction_pct": 2.0792806560191446,
+      "paired_ratios": [
+        0.9839432707561907,
+        0.9691016193799348,
+        0.9744711161234263,
+        1.0094092020549215
+      ],
+      "worst_paired_reduction_pct": -0.9409202054921462
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-contains-03",
+  "validation_sha256": "a0bee82b35f28d1ae6146bf34b4dcefeb673d79cc8601f936fbe0091cd3eecc1"
+}

@@ -1,0 +1,18 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index be94ccc..d39b12f 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -34,9 +34,10 @@ impl IntervalSet {
+         &self.intervals
+     }
+     pub fn contains(&self, t: i64) -> bool {
+-        if self.intervals.first().is_none_or(|v| t < v.start_ns)
+-            || self.intervals.last().is_some_and(|v| t >= v.end_ns)
+-        {
++        let Some((first, last)) = self.intervals.first().zip(self.intervals.last()) else {
++            return false;
++        };
++        if t < first.start_ns || t >= last.end_ns {
+             return false;
+         }
+         let i = self.intervals.partition_point(|v| v.start_ns <= t);

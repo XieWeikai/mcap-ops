@@ -1,0 +1,26 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 7505069..dd69611 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -47,7 +47,20 @@ impl IntervalSet {
+             return vec![false; times.len()];
+         }
+         if times.windows(2).any(|w| w[1] < w[0]) {
+-            return times.iter().map(|&t| self.contains(t)).collect();
++            let mut last: Option<(i64, bool)> = None;
++            return times
++                .iter()
++                .map(|&t| {
++                    if let Some((prior, value)) = last {
++                        if prior == t {
++                            return value;
++                        }
++                    }
++                    let value = self.contains(t);
++                    last = Some((t, value));
++                    value
++                })
++                .collect();
+         }
+         let mut result = Vec::with_capacity(times.len());
+         let mut index = 0;

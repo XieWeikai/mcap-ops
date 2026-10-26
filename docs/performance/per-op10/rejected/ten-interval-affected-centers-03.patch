@@ -1,0 +1,38 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 001cb6c..22cf7b4 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -130,20 +130,19 @@ impl IntervalSet {
+         if history_ns == 0 && future_ns == 0 {
+             return Ok(self.clone());
+         }
+-        let mut merged: Vec<Interval> = Vec::with_capacity(self.intervals.len());
+-        for v in &self.intervals {
+-            let interval = Interval {
+-                start_ns: v.start_ns.checked_sub(future_ns).ok_or(Error::Overflow)?,
+-                end_ns: v.end_ns.checked_add(history_ns).ok_or(Error::Overflow)?,
+-            };
+-            if let Some(last) = merged.last_mut() {
+-                if interval.start_ns <= last.end_ns {
+-                    last.end_ns = last.end_ns.max(interval.end_ns);
+-                    continue;
+-                }
+-            }
+-            merged.push(interval);
++        let mut intervals = self.intervals.clone();
++        for v in &mut intervals {
++            v.start_ns = v.start_ns.checked_sub(future_ns).ok_or(Error::Overflow)?;
++            v.end_ns = v.end_ns.checked_add(history_ns).ok_or(Error::Overflow)?;
+         }
+-        Ok(Self { intervals: merged })
++        intervals.dedup_by(|current, previous| {
++            if current.start_ns <= previous.end_ns {
++                previous.end_ns = previous.end_ns.max(current.end_ns);
++                true
++            } else {
++                false
++            }
++        });
++        Ok(Self { intervals })
+     }
+ }

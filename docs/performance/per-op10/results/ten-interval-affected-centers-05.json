@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-affected-centers-05",
+  "base_commit": "f1cfec74c349fea16fd486b9ca56873920a542cf",
+  "cases": [
+    "interval_affected_centers",
+    "interval_affected_centers.merged"
+  ],
+  "geomean_latency_reduction_pct": -81.67416019340065,
+  "worst_block_reduction_pct": -83.07502568802016,
+  "worst_case_reduction_pct": -103.16370862234243,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Measure arithmetic lowering while retaining exact overflow behavior for extreme timestamps.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "ab20e916c9e8e32ac0269a40f171c121b5ff0f326b1cd14caa6ba42cd9806b30",
+  "operator": "interval_affected_centers",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "check context endpoints with wide arithmetic",
+  "profile_hotspot": "Measure arithmetic lowering while retaining exact overflow behavior for extreme timestamps.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Measure arithmetic lowering while retaining exact overflow behavior for extreme timestamps.",
+  "case_results": {
+    "interval_affected_centers.merged": {
+      "before_ns": 3391.9734497070312,
+      "after_ns": 6881.1275634765625,
+      "latency_reduction_pct": -103.16370862234243,
+      "paired_ratios": [
+        1.986942876316845,
+        2.039515079877818,
+        2.0237590925690307,
+        2.043342443837893
+      ],
+      "worst_paired_reduction_pct": -104.33424438378931
+    },
+    "interval_affected_centers": {
+      "before_ns": 5294.7763671875,
+      "after_ns": 8580.758422851562,
+      "latency_reduction_pct": -62.008977890529906,
+      "paired_ratios": [
+        1.530403883301838,
+        1.5999031013730176,
+        1.6495481742487463,
+        1.6402764564375802
+      ],
+      "worst_paired_reduction_pct": -64.95481742487463
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-affected-centers-05",
+  "validation_sha256": "ee1e3adab9ec9098e7bbeb7c91d1d32cdc7556d4544223ba3573ab2011a5e0c1"
+}

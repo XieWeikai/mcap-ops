@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 5f698e6..408dbac 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -16,7 +16,7 @@ impl IntervalSet {
+         if intervals.iter().any(|v| v.start_ns >= v.end_ns) {
+             return Err(invalid("intervals must be nonempty [start,end)"));
+         }
+-        intervals.sort_unstable_by_key(|v| v.start_ns);
++        intervals.sort_by_key(|v| v.start_ns);
+         intervals.dedup_by(|current, previous| {
+             if current.start_ns <= previous.end_ns {
+                 previous.end_ns = previous.end_ns.max(current.end_ns);

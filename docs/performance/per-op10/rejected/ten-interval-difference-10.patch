@@ -1,0 +1,45 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 926c080..d0f8431 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -87,19 +87,14 @@ impl IntervalSet {
+         Self { intervals: result }
+     }
+     pub fn difference(&self, other: &Self) -> Self {
+-        if other.intervals.is_empty() {
+-            return self.clone();
+-        }
+         let mut result = Vec::with_capacity(self.intervals.len() + other.intervals.len());
+-        let mut j = 0;
++        let mut exclusions = other.intervals.iter().peekable();
+         for a in &self.intervals {
+-            while j < other.intervals.len() && other.intervals[j].end_ns <= a.start_ns {
+-                j += 1;
++            while exclusions.peek().is_some_and(|b| b.end_ns <= a.start_ns) {
++                exclusions.next();
+             }
+             let mut cursor = a.start_ns;
+-            let mut k = j;
+-            while k < other.intervals.len() && other.intervals[k].start_ns < a.end_ns {
+-                let b = other.intervals[k];
++            while let Some(b) = exclusions.peek().copied().filter(|b| b.start_ns < a.end_ns) {
+                 if cursor < b.start_ns {
+                     result.push(Interval {
+                         start_ns: cursor,
+@@ -110,7 +105,7 @@ impl IntervalSet {
+                 if cursor >= a.end_ns {
+                     break;
+                 }
+-                k += 1;
++                exclusions.next();
+             }
+             if cursor < a.end_ns {
+                 result.push(Interval {
+@@ -118,7 +113,6 @@ impl IntervalSet {
+                     end_ns: a.end_ns,
+                 });
+             }
+-            j = k;
+         }
+         Self { intervals: result }
+     }

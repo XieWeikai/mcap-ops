@@ -1,0 +1,40 @@
+{
+  "label": "ten-interval-new-02",
+  "base_commit": "bf27051a0690192d4fabfbc6405b6cfda283c1f4",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": -33.510674428233166,
+  "worst_block_reduction_pct": -34.688603341180354,
+  "worst_case_reduction_pct": -33.510674428233166,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Tie ordering may change merge locality without changing the canonical union.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "0d75399aa1e90d68ae7a2e835e7496ece99a11f8f458f956bf9df4d133431a2d",
+  "operator": "interval_new",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "order equal-start intervals by their ends",
+  "profile_hotspot": "Tie ordering may change merge locality without changing the canonical union.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Tie ordering may change merge locality without changing the canonical union.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 4969.1593017578125,
+      "after_ns": 6657.6102294921875,
+      "latency_reduction_pct": -33.510674428233166,
+      "paired_ratios": [
+        1.3468860334118036,
+        1.3279009694056345,
+        1.320531020303015,
+        1.3423125191590288
+      ],
+      "worst_paired_reduction_pct": -34.688603341180354
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-new-02",
+  "validation_sha256": "097ba9e2ade62aeb28eda25442549c6f7ed72fb5d62cb02093e860210dcc0f1c"
+}

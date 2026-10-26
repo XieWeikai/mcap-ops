@@ -1,0 +1,40 @@
+{
+  "label": "ten-interval-new-03",
+  "base_commit": "bf27051a0690192d4fabfbc6405b6cfda283c1f4",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": -1.280043605406611,
+  "worst_block_reduction_pct": -4.061168267504378,
+  "worst_case_reduction_pct": -1.280043605406611,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Already ordered interval runs may favor adaptive stable sorting; preserve merging semantics.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "9dc22a74a4f5babec4a32a8f392aaab6297c058fb8f5342abc2743ea598634bf",
+  "operator": "interval_new",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "use stable adaptive interval sorting",
+  "profile_hotspot": "Already ordered interval runs may favor adaptive stable sorting; preserve merging semantics.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Already ordered interval runs may favor adaptive stable sorting; preserve merging semantics.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 5005.0916748046875,
+      "after_ns": 5111.004150390625,
+      "latency_reduction_pct": -1.280043605406611,
+      "paired_ratios": [
+        1.0115914448909995,
+        1.0406116826750438,
+        0.9985471241861082,
+        1.014009427217133
+      ],
+      "worst_paired_reduction_pct": -4.061168267504378
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-new-03",
+  "validation_sha256": "0c83d7e3ff6db590636cf0a9bad71dc60943a7f84f2ec27ea3d8a0bd58073bc2"
+}

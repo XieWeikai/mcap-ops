@@ -1,0 +1,40 @@
+{
+  "label": "ten-interval-new-10",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": -128.08144174050452,
+  "worst_block_reduction_pct": -143.59916824005805,
+  "worst_case_reduction_pct": -128.08144174050452,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Avoid repeatedly borrowing the output vector tail during merging; retain one active interval and original order.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "d1e90818335ad43b2e0b5a3a599d60083f9c6bdc0a0ce8eeba78b63df899054d",
+  "operator": "interval_new",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "keep the active merge interval in a local slot",
+  "profile_hotspot": "Avoid repeatedly borrowing the output vector tail during merging; retain one active interval and original order.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Avoid repeatedly borrowing the output vector tail during merging; retain one active interval and original order.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 3925.6348876953125,
+      "after_ns": 8922.2705078125,
+      "latency_reduction_pct": -128.08144174050452,
+      "paired_ratios": [
+        1.6865871219259578,
+        2.4117021057632475,
+        2.149926729046843,
+        2.4359916824005805
+      ],
+      "worst_paired_reduction_pct": -143.59916824005805
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-new-10",
+  "validation_sha256": "ce38e015ea5ccfb8ab46d74c7b2257af754cb09c76443ce0804fccc542835630"
+}

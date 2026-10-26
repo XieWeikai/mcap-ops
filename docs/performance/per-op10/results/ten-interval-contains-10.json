@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-contains-10",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_contains",
+    "interval_contains.small"
+  ],
+  "geomean_latency_reduction_pct": -16.629060215058054,
+  "worst_block_reduction_pct": -17.237914118615905,
+  "worst_case_reduction_pct": -32.346840451568724,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Preserve extent rejection while reducing repeated optional access to the interval slice.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "0818e5e4953409850c4ba12833fa20917d81862999dfbd1dc3da93b6a3acab60",
+  "operator": "interval_contains",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "load outer interval bounds together",
+  "profile_hotspot": "Preserve extent rejection while reducing repeated optional access to the interval slice.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Preserve extent rejection while reducing repeated optional access to the interval slice.",
+  "case_results": {
+    "interval_contains.small": {
+      "before_ns": 16733.456298828125,
+      "after_ns": 22198.130859375,
+      "latency_reduction_pct": -32.346840451568724,
+      "paired_ratios": [
+        1.2996105889873204,
+        1.3257482738098543,
+        1.3211885352215202,
+        1.3452991587799052
+      ],
+      "worst_paired_reduction_pct": -34.529915877990526
+    },
+    "interval_contains": {
+      "before_ns": 249959.3828125,
+      "after_ns": 256832.75781249997,
+      "latency_reduction_pct": -2.708461010110197,
+      "paired_ratios": [
+        1.0436723126185523,
+        1.0196141722262286,
+        1.0324835663325105,
+        1.0216856538696932
+      ],
+      "worst_paired_reduction_pct": -4.367231261855231
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-contains-10",
+  "validation_sha256": "bcee6481f725d97943a16ce02dd8600d4773c64eedd279188e88d2fc55a33e87"
+}

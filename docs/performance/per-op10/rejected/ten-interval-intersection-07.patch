@@ -1,0 +1,24 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 19c4fbf..19ce426 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -61,6 +61,19 @@ impl IntervalSet {
+             .collect()
+     }
+     pub fn intersection(&self, other: &Self) -> Self {
++        if self
++            .intervals
++            .last()
++            .zip(other.intervals.first())
++            .is_some_and(|(a, b)| a.end_ns <= b.start_ns)
++            || other
++                .intervals
++                .last()
++                .zip(self.intervals.first())
++                .is_some_and(|(b, a)| b.end_ns <= a.start_ns)
++        {
++            return Self::default();
++        }
+         let (mut i, mut j) = (0, 0);
+         // Pay for a binary search only when the first pair is disjoint.
+         if let (Some(a), Some(b)) = (self.intervals.first(), other.intervals.first()) {

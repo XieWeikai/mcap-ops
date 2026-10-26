@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-intersection-09",
+  "base_commit": "7a893c113f9ec78f78e55c55c8b864fae2b0df14",
+  "cases": [
+    "interval_intersection.dense",
+    "interval_intersection.late"
+  ],
+  "geomean_latency_reduction_pct": -1.1032466540924712,
+  "worst_block_reduction_pct": -1.6389006574579534,
+  "worst_case_reduction_pct": -1.2071399505733549,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "df8e51eb90bbfda79ee7061e821205e0fa0972011dd54b162400731ba4cfcede",
+  "operator": "interval_intersection",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for interval_intersection",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "interval_intersection.dense": {
+      "before_ns": 28246.310546875,
+      "after_ns": 28160.66015625,
+      "latency_reduction_pct": 0.212702200963788,
+      "paired_ratios": [
+        1.0140618897676017,
+        0.9816840662131225,
+        0.9764675473771106,
+        1.0199824419538444
+      ],
+      "worst_paired_reduction_pct": -1.9982441953844354
+    },
+    "interval_intersection.late": {
+      "before_ns": 177.7166519165039,
+      "after_ns": 179.752685546875,
+      "latency_reduction_pct": -1.2071399505733549,
+      "paired_ratios": [
+        1.0113345680121264,
+        0.9652024208826812,
+        1.0433761979322294,
+        1.0128082309993405
+      ],
+      "worst_paired_reduction_pct": -4.3376197932229354
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-intersection-09",
+  "validation_sha256": "1ee959efd5684b7cba5ad840aae9a4eccdc6e13a8175e7422384965c65fbc254"
+}

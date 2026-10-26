@@ -1,0 +1,79 @@
+{
+  "label": "ten-interval-mask-05",
+  "base_commit": "7e4ad1c52e23fbdff6feec42e10025bbe2b4de87",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled",
+    "interval_mask.empty",
+    "interval_mask.late"
+  ],
+  "geomean_latency_reduction_pct": -261.44602545944156,
+  "worst_block_reduction_pct": -276.1448865857547,
+  "worst_case_reduction_pct": -1344.8038260005258,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Bulk boolean fills may reduce per-target work for dense runs; unordered targets retain independent membership checks.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "d97baa39255ae9764008250727e169a14f75f98203301a0fa5db5bff6c1d161a",
+  "operator": "interval_mask",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "fill interval-aligned runs in the mask output",
+  "profile_hotspot": "Bulk boolean fills may reduce per-target work for dense runs; unordered targets retain independent membership checks.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Bulk boolean fills may reduce per-target work for dense runs; unordered targets retain independent membership checks.",
+  "case_results": {
+    "interval_mask.empty": {
+      "before_ns": 115.32246780395508,
+      "after_ns": 117.94410705566406,
+      "latency_reduction_pct": -0.787958216297624,
+      "paired_ratios": [
+        1.0447190460314928,
+        0.9998356063278051,
+        1.009282970289889,
+        1.0064761940360636
+      ],
+      "worst_paired_reduction_pct": -4.471904603149279
+    },
+    "interval_mask.late": {
+      "before_ns": 20812.0419921875,
+      "after_ns": 303406.87109375,
+      "latency_reduction_pct": -1344.8038260005258,
+      "paired_ratios": [
+        15.016541202066824,
+        14.44597326592904,
+        14.06715409628233,
+        14.450103254081474
+      ],
+      "worst_paired_reduction_pct": -1401.6541202066824
+    },
+    "interval_mask.ordered": {
+      "before_ns": 26448.29345703125,
+      "after_ns": 311108.8203125,
+      "latency_reduction_pct": -1073.4899954562152,
+      "paired_ratios": [
+        12.197412866647943,
+        11.70846286238888,
+        11.411250474223937,
+        11.761337046735425
+      ],
+      "worst_paired_reduction_pct": -1119.7412866647942
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 277422.7109375,
+      "after_ns": 280256.60546875,
+      "latency_reduction_pct": -0.3504897093936865,
+      "paired_ratios": [
+        1.0461248061906614,
+        1.0043868695717355,
+        0.9729539564394852,
+        1.0026229246161384
+      ],
+      "worst_paired_reduction_pct": -4.612480619066139
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-mask-05",
+  "validation_sha256": "a8c9b14ad98ed90ee61402fce2a45dabf6cbc89d0b9261da3c1de6f29a71253e"
+}

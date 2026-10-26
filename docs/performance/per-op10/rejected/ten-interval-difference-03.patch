@@ -1,0 +1,15 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 926c080..31b3432 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -91,7 +91,9 @@ impl IntervalSet {
+             return self.clone();
+         }
+         let mut result = Vec::with_capacity(self.intervals.len() + other.intervals.len());
+-        let mut j = 0;
++        let mut j = self.intervals.first().map_or(0, |a| {
++            other.intervals.partition_point(|b| b.end_ns <= a.start_ns)
++        });
+         for a in &self.intervals {
+             while j < other.intervals.len() && other.intervals[j].end_ns <= a.start_ns {
+                 j += 1;

@@ -1,0 +1,16 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index be94ccc..e54aa64 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -39,7 +39,10 @@ impl IntervalSet {
+         {
+             return false;
+         }
+-        let i = self.intervals.partition_point(|v| v.start_ns <= t);
++        let i = match self.intervals.binary_search_by_key(&t, |v| v.start_ns) {
++            Ok(i) => return t < self.intervals[i].end_ns,
++            Err(i) => i,
++        };
+         i > 0 && t < self.intervals[i - 1].end_ns
+     }
+     pub fn mask(&self, times: &[i64]) -> Vec<bool> {

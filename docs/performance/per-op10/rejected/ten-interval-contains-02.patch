@@ -1,0 +1,25 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index be94ccc..ac26bf9 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -39,8 +39,18 @@ impl IntervalSet {
+         {
+             return false;
+         }
+-        let i = self.intervals.partition_point(|v| v.start_ns <= t);
+-        i > 0 && t < self.intervals[i - 1].end_ns
++        let (mut low, mut high) = (0, self.intervals.len());
++        while low < high {
++            if low < high {
++                let middle = low + (high - low) / 2;
++                if self.intervals[middle].start_ns <= t {
++                    low = middle + 1;
++                } else {
++                    high = middle;
++                }
++            }
++        }
++        low > 0 && t < self.intervals[low - 1].end_ns
+     }
+     pub fn mask(&self, times: &[i64]) -> Vec<bool> {
+         if times.windows(2).any(|w| w[1] < w[0]) {

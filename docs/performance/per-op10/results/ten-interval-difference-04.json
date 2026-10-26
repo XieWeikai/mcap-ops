@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-difference-04",
+  "base_commit": "c23981d65e36d8fb36276304f6b1e1409389f047",
+  "cases": [
+    "interval_difference",
+    "interval_difference.empty"
+  ],
+  "geomean_latency_reduction_pct": -1.1708995966396518,
+  "worst_block_reduction_pct": -2.595080894424995,
+  "worst_case_reduction_pct": -1.5288273592501067,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Read each next exclusion through one optional slice access instead of separate bounds and indexing.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "9ddf98706e7a4d3a694ec4fa46697a4beb92cfb7700f8726a1aab7f7d318a011",
+  "operator": "interval_difference",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "combine exclusion bounds checks and interval access",
+  "profile_hotspot": "Read each next exclusion through one optional slice access instead of separate bounds and indexing.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Read each next exclusion through one optional slice access instead of separate bounds and indexing.",
+  "case_results": {
+    "interval_difference.empty": {
+      "before_ns": 1323.7704162597656,
+      "after_ns": 1333.6746826171875,
+      "latency_reduction_pct": -0.42961401786190123,
+      "paired_ratios": [
+        0.9922312272822322,
+        0.9916563984633936,
+        1.0241593935275013,
+        1.0163610530750058
+      ],
+      "worst_paired_reduction_pct": -2.4159393527501294
+    },
+    "interval_difference": {
+      "before_ns": 10113.222412109375,
+      "after_ns": 10279.6083984375,
+      "latency_reduction_pct": -1.5288273592501067,
+      "paired_ratios": [
+        1.0139303043955445,
+        0.9861156159839273,
+        1.0166462427894578,
+        1.0356310478336308
+      ],
+      "worst_paired_reduction_pct": -3.5631047833630802
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-difference-04",
+  "validation_sha256": "738db6a36ac771bd1f2ef231eb39471a389afe657ebd2bb67934317b3b7729f1"
+}

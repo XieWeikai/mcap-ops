@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-contains-06",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_contains",
+    "interval_contains.small"
+  ],
+  "geomean_latency_reduction_pct": 1.402025899013526,
+  "worst_block_reduction_pct": 1.287671332554885,
+  "worst_case_reduction_pct": -0.021738465632537007,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Use one search result to decide membership instead of re-indexing a predecessor.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "d6294298331508ed2ec52019db480f4570e143186ef530c5e8bf4ecf7b81bdf2",
+  "operator": "interval_contains",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "binary-search by complete interval containment",
+  "profile_hotspot": "Use one search result to decide membership instead of re-indexing a predecessor.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. Use one search result to decide membership instead of re-indexing a predecessor.",
+  "case_results": {
+    "interval_contains.small": {
+      "before_ns": 17266.9814453125,
+      "after_ns": 17278.9873046875,
+      "latency_reduction_pct": -0.021738465632537007,
+      "paired_ratios": [
+        1.0011978946004152,
+        0.9992368747122357,
+        0.9991607903704507,
+        1.004954040938658
+      ],
+      "worst_paired_reduction_pct": -0.4954040938657922
+    },
+    "interval_contains": {
+      "before_ns": 259459.078125,
+      "after_ns": 251529.53515625,
+      "latency_reduction_pct": 2.8052824961071643,
+      "paired_ratios": [
+        0.9698382123577441,
+        0.9740561377201125,
+        0.9752308061785487,
+        0.9358168424309685
+      ],
+      "worst_paired_reduction_pct": 2.4769193821451263
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-contains-06",
+  "validation_sha256": "37029d0004319466d2e8883707814a8021b24315adf981dc1dc9635a355da35a"
+}

@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 7505069..a402a55 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -42,6 +42,7 @@ impl IntervalSet {
+         let i = self.intervals.partition_point(|v| v.start_ns <= t);
+         i > 0 && t < self.intervals[i - 1].end_ns
+     }
++    #[inline(always)]
+     pub fn mask(&self, times: &[i64]) -> Vec<bool> {
+         if self.intervals.is_empty() {
+             return vec![false; times.len()];

@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 19c4fbf..251ab63 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -60,6 +60,7 @@ impl IntervalSet {
+             })
+             .collect()
+     }
++    #[inline(always)]
+     pub fn intersection(&self, other: &Self) -> Self {
+         let (mut i, mut j) = (0, 0);
+         // Pay for a binary search only when the first pair is disjoint.

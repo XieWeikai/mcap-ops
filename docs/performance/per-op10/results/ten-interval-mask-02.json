@@ -1,0 +1,79 @@
+{
+  "label": "ten-interval-mask-02",
+  "base_commit": "2e7a32f39d244a75092af44f35a6c6f230e08ed1",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled",
+    "interval_mask.empty",
+    "interval_mask.late"
+  ],
+  "geomean_latency_reduction_pct": 18.20928680564682,
+  "worst_block_reduction_pct": 16.98040531502335,
+  "worst_case_reduction_pct": -3.1628333068749015,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The old prefilled-vector variant failed; test iterator collection with the successful monotone cursor.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "a3dba6952af0ccb5c46e3fe18371df3c70e6d2663520c58d3f2e34d7c550b07b",
+  "operator": "interval_mask",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "collect ordered masks through an exact-size iterator",
+  "profile_hotspot": "The old prefilled-vector variant failed; test iterator collection with the successful monotone cursor.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The old prefilled-vector variant failed; test iterator collection with the successful monotone cursor.",
+  "case_results": {
+    "interval_mask.empty": {
+      "before_ns": 19535.500244140625,
+      "after_ns": 12419.4990234375,
+      "latency_reduction_pct": 36.3548405794464,
+      "paired_ratios": [
+        0.6409675831750883,
+        0.633144798272027,
+        0.6397583901390449,
+        0.6162039248248761
+      ],
+      "worst_paired_reduction_pct": 35.90324168249117
+    },
+    "interval_mask.late": {
+      "before_ns": 20549.47509765625,
+      "after_ns": 13722.276123046875,
+      "latency_reduction_pct": 33.08759081769372,
+      "paired_ratios": [
+        0.6652812642059025,
+        0.6552460333642727,
+        0.672966919440223,
+        0.6920482252897411
+      ],
+      "worst_paired_reduction_pct": 30.79517747102589
+    },
+    "interval_mask.ordered": {
+      "before_ns": 26066.4892578125,
+      "after_ns": 26890.998046875,
+      "latency_reduction_pct": -3.1628333068749015,
+      "paired_ratios": [
+        1.0129119552824586,
+        1.0328613476821398,
+        1.0303953184553583,
+        1.0744184575348752
+      ],
+      "worst_paired_reduction_pct": -7.441845753487519
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 277079.6015625,
+      "after_ns": 282548.46484375,
+      "latency_reduction_pct": -2.2348033733459394,
+      "paired_ratios": [
+        1.010190290371254,
+        0.9991903801828438,
+        1.0345057770956647,
+        1.0367836864681104
+      ],
+      "worst_paired_reduction_pct": -3.6783686468110366
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-mask-02",
+  "validation_sha256": "f8009bb51ad9b0f03c0df2cd90b59732bcab2cb87e12af4b4e02b3e7bcc3fa49"
+}

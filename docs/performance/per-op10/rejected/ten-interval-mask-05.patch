@@ -1,0 +1,27 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 7505069..ea2b8ef 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -49,13 +49,16 @@ impl IntervalSet {
+         if times.windows(2).any(|w| w[1] < w[0]) {
+             return times.iter().map(|&t| self.contains(t)).collect();
+         }
+-        let mut result = Vec::with_capacity(times.len());
+-        let mut index = 0;
+-        for &t in times {
+-            while index < self.intervals.len() && self.intervals[index].end_ns <= t {
+-                index += 1;
++        let mut result = vec![false; times.len()];
++        let mut cursor = 0;
++        for interval in &self.intervals {
++            cursor += times[cursor..].partition_point(|&t| t < interval.start_ns);
++            let end = cursor + times[cursor..].partition_point(|&t| t < interval.end_ns);
++            result[cursor..end].fill(true);
++            cursor = end;
++            if cursor == times.len() {
++                break;
+             }
+-            result.push(index < self.intervals.len() && self.intervals[index].start_ns <= t);
+         }
+         result
+     }

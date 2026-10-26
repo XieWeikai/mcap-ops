@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-difference-07",
+  "base_commit": "c23981d65e36d8fb36276304f6b1e1409389f047",
+  "cases": [
+    "interval_difference",
+    "interval_difference.empty"
+  ],
+  "geomean_latency_reduction_pct": 0.6122270380834127,
+  "worst_block_reduction_pct": -1.1501106051918786,
+  "worst_case_reduction_pct": 0.01368522131606209,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "fb0eead3b9ae324f11b52965ed0d68590093f69b3d913f24fcb230232b1b4162",
+  "operator": "interval_difference",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "reserve difference storage with exclusion fraction 0.25",
+  "profile_hotspot": "The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+  "reason": "Reject: stable 8%/representative-regression gate failed; restore last accepted state. The full upper-bound reserve helped earlier; tune wasted capacity while retaining normal vector growth.",
+  "case_results": {
+    "interval_difference.empty": {
+      "before_ns": 1331.9310913085938,
+      "after_ns": 1320.7508544921875,
+      "latency_reduction_pct": 1.1154471226127338,
+      "paired_ratios": [
+        0.9825917636692996,
+        1.0145385571199952,
+        0.9833035452316932,
+        0.9943875123160523
+      ],
+      "worst_paired_reduction_pct": -1.4538557119995188
+    },
+    "interval_difference": {
+      "before_ns": 10233.106201171875,
+      "after_ns": 10240.065185546875,
+      "latency_reduction_pct": 0.01368522131606209,
+      "paired_ratios": [
+        1.0185440886516417,
+        1.0084727488806946,
+        0.9912535466929842,
+        0.9803603588144718
+      ],
+      "worst_paired_reduction_pct": -1.85440886516417
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-difference-07",
+  "validation_sha256": "b671697663e3533b4613d20efcf57c6110b991303dfc4dd6ca61d21d288cf050"
+}

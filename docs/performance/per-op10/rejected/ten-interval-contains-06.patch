@@ -1,0 +1,24 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index be94ccc..83bdc46 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -39,8 +39,17 @@ impl IntervalSet {
+         {
+             return false;
+         }
+-        let i = self.intervals.partition_point(|v| v.start_ns <= t);
+-        i > 0 && t < self.intervals[i - 1].end_ns
++        self.intervals
++            .binary_search_by(|v| {
++                if t < v.start_ns {
++                    std::cmp::Ordering::Greater
++                } else if t >= v.end_ns {
++                    std::cmp::Ordering::Less
++                } else {
++                    std::cmp::Ordering::Equal
++                }
++            })
++            .is_ok()
+     }
+     pub fn mask(&self, times: &[i64]) -> Vec<bool> {
+         if times.windows(2).any(|w| w[1] < w[0]) {
