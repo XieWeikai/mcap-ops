@@ -5,11 +5,19 @@ pub fn require_strict(times: &[i64]) -> Result<()> {
     let bad = if times.len() < 2 {
         false
     } else {
-        let mut left = times[..times.len() - 1].chunks_exact(4);
-        let mut right = times[1..].chunks_exact(4);
+        let mut left = times[..times.len() - 1].chunks_exact(8);
+        let mut right = times[1..].chunks_exact(8);
         let mut bad = false;
         for (a, b) in left.by_ref().zip(right.by_ref()) {
-            if (a[0] >= b[0]) | (a[1] >= b[1]) | (a[2] >= b[2]) | (a[3] >= b[3]) {
+            if (a[0] >= b[0])
+                | (a[1] >= b[1])
+                | (a[2] >= b[2])
+                | (a[3] >= b[3])
+                | (a[4] >= b[4])
+                | (a[5] >= b[5])
+                | (a[6] >= b[6])
+                | (a[7] >= b[7])
+            {
                 bad = true;
                 break;
             }
