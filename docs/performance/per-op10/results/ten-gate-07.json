@@ -1,0 +1,53 @@
+{
+  "label": "ten-gate-07",
+  "base_commit": "52093013a1efbf4ab2f96fa93dda3b0a54d99d9c",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": 16.733537818115064,
+  "worst_block_reduction_pct": 15.331532228608413,
+  "worst_case_reduction_pct": 1.727439381902529,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Measure an explicit pass fast path while retaining the complete reason construction on failure.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "a87382d8a2843128a79cbf67f39a4b99fc88a5c8309811adb28393b7472c407a",
+  "operator": "gate",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "return an empty decision immediately for fully passing policies",
+  "profile_hotspot": "Measure an explicit pass fast path while retaining the complete reason construction on failure.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Measure an explicit pass fast path while retaining the complete reason construction on failure.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 9.009726524353027,
+      "after_ns": 6.378142833709717,
+      "latency_reduction_pct": 28.958428762643152,
+      "paired_ratios": [
+        0.7301813505874538,
+        0.7199323466556331,
+        0.6888368520412651,
+        0.7008990780915039
+      ],
+      "worst_paired_reduction_pct": 26.981864941254617
+    },
+    "gate.fail": {
+      "before_ns": 30.49349069595337,
+      "after_ns": 29.966716766357422,
+      "latency_reduction_pct": 1.727439381902529,
+      "paired_ratios": [
+        0.9817765722156137,
+        0.985162154972979,
+        0.9836746401463358,
+        0.9588424865467359
+      ],
+      "worst_paired_reduction_pct": 1.4837845027021013
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-gate-07",
+  "validation_sha256": "5ef6a521db636084d2ae159f8130ace601780e1cd749ea0d5cd1bad268fff741"
+}

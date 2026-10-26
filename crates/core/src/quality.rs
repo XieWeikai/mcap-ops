@@ -467,6 +467,19 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
     } else {
         report.flagged_sample_count as f64 / report.time.samples as f64
     };
+    if report.time.samples >= policy.min_samples
+        && fraction <= policy.max_flagged_fraction
+        && policy
+            .reject_codes
+            .iter()
+            .all(|code| !report.all_codes.contains(code))
+    {
+        return Ok(GateDecision {
+            passed: true,
+            reasons: Vec::new(),
+            flagged_fraction: fraction,
+        });
+    }
     let mut reasons = Vec::new();
     if report.time.samples < policy.min_samples {
         reasons.push("too_few_samples".into());
