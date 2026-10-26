@@ -87,6 +87,9 @@ impl IntervalSet {
         Self { intervals: result }
     }
     pub fn difference(&self, other: &Self) -> Self {
+        if other.intervals.is_empty() {
+            return self.clone();
+        }
         let mut result = Vec::with_capacity(self.intervals.len() + other.intervals.len());
         let mut j = 0;
         for a in &self.intervals {

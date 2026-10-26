@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-difference-01",
+  "base_commit": "7a893c113f9ec78f78e55c55c8b864fae2b0df14",
+  "cases": [
+    "interval_difference",
+    "interval_difference.empty"
+  ],
+  "geomean_latency_reduction_pct": 51.28908479059573,
+  "worst_block_reduction_pct": 50.16473520327597,
+  "worst_case_reduction_pct": 0.7704666197213328,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. An empty exclusion set is an identity transformation; include it as an explicit benchmark.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "689c306f2dede5594e07ba62ffaf9e5f1e103d6d4108933539284c5ccbc3fed9",
+  "operator": "interval_difference",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "clone the input when exclusions are empty",
+  "profile_hotspot": "An empty exclusion set is an identity transformation; include it as an explicit benchmark.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. An empty exclusion set is an identity transformation; include it as an explicit benchmark.",
+  "case_results": {
+    "interval_difference.empty": {
+      "before_ns": 5403.617431640625,
+      "after_ns": 1317.0489807128906,
+      "latency_reduction_pct": 75.7844775634283,
+      "paired_ratios": [
+        0.24299517812631377,
+        0.24858869963539024,
+        0.24131527060512034,
+        0.23285337930767294
+      ],
+      "worst_paired_reduction_pct": 75.14113003646098
+    },
+    "interval_difference": {
+      "before_ns": 10307.501220703125,
+      "after_ns": 10227.671142578125,
+      "latency_reduction_pct": 0.7704666197213328,
+      "paired_ratios": [
+        0.9742086728658457,
+        0.9990613495312848,
+        0.9855293180742885,
+        1.0037617872341242
+      ],
+      "worst_paired_reduction_pct": -0.37617872341242364
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-difference-01",
+  "validation_sha256": "c95cbad58bf0c082cdcd1a6f15a3baac819127bbf3ac68b883c0fed0732ad9da"
+}
