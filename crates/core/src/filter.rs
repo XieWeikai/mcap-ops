@@ -222,8 +222,15 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
         {
             continue;
         }
-        for c in 0..signal.channels() {
-            let (a, b) = (signal.row(i - 1)[c], signal.row(i)[c]);
+        let d = signal.channels();
+        let (past, current) = values.split_at_mut(i * d);
+        for (((&a, &b), &old), output) in signal
+            .row(i - 1)
+            .iter()
+            .zip(signal.row(i))
+            .zip(&past[(i - 1) * d..])
+            .zip(&mut current[..d])
+        {
             if !a.is_finite() || !b.is_finite() {
                 continue;
             }
@@ -238,7 +245,7 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
                     wrapped
                 }
             };
-            values[i * signal.channels() + c] = values[(i - 1) * signal.channels() + c] + adjusted;
+            *output = old + adjusted;
         }
     }
     Signal::new(signal.timestamps().to_vec(), values, signal.channels())

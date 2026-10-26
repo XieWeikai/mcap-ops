@@ -1,0 +1,40 @@
+{
+  "label": "extension-20-unwrap-angles",
+  "base_commit": "37b2a7a25d5e4ced3f46bd0ba0cdb6f99d4632f8",
+  "cases": [
+    "unwrap_angles"
+  ],
+  "geomean_latency_reduction_pct": 11.072127234309804,
+  "worst_block_reduction_pct": 9.9056743392262,
+  "worst_case_reduction_pct": 11.072127234309804,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Row-major order and modulo bypass helped; retain those and remove repeated channel-index arithmetic.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "25247a1862c1389e1900058a45a53a9216ef06155971183a30ca67cc32b43890",
+  "operator": "unwrap_angles",
+  "round": 20,
+  "series": "extension",
+  "decision": "accepted",
+  "method": "zip disjoint angle rows and accumulated outputs",
+  "profile_hotspot": "Unwrap loop indexes previous/current original rows and accumulated output separately.",
+  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Row-major order and modulo bypass helped; retain those and remove repeated channel-index arithmetic.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 399641.046875,
+      "after_ns": 356239.7265625,
+      "latency_reduction_pct": 11.072127234309804,
+      "paired_ratios": [
+        0.8907971246514447,
+        0.8637910223788087,
+        0.900943256607738,
+        0.8877603306623593
+      ],
+      "worst_paired_reduction_pct": 9.9056743392262
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-20-unwrap-angles",
+  "validation_sha256": "8ef9d3ed11a6e5c2b45a8e27c60f7fa2595e9e2344c726a8c98e657b3820b418"
+}
