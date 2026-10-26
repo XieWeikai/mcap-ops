@@ -49,15 +49,16 @@ impl IntervalSet {
         if times.windows(2).any(|w| w[1] < w[0]) {
             return times.iter().map(|&t| self.contains(t)).collect();
         }
-        let mut result = Vec::with_capacity(times.len());
-        let mut index = 0;
-        for &t in times {
-            while index < self.intervals.len() && self.intervals[index].end_ns <= t {
-                index += 1;
-            }
-            result.push(index < self.intervals.len() && self.intervals[index].start_ns <= t);
-        }
-        result
+        let mut intervals = self.intervals.iter().peekable();
+        times
+            .iter()
+            .map(|&t| {
+                while intervals.peek().is_some_and(|v| v.end_ns <= t) {
+                    intervals.next();
+                }
+                intervals.peek().is_some_and(|v| v.start_ns <= t)
+            })
+            .collect()
     }
     pub fn intersection(&self, other: &Self) -> Self {
         let (mut i, mut j) = (0, 0);

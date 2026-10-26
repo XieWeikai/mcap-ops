@@ -1,0 +1,79 @@
+{
+  "label": "ten-interval-mask-10",
+  "base_commit": "7e4ad1c52e23fbdff6feec42e10025bbe2b4de87",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled",
+    "interval_mask.empty",
+    "interval_mask.late"
+  ],
+  "geomean_latency_reduction_pct": 9.618965810160462,
+  "worst_block_reduction_pct": 8.61461742271855,
+  "worst_case_reduction_pct": -0.5397830210612797,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Replace indexed sweep bounds with a cached next-interval reference; preserve original query order.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "44d01e6a7694f602e4dd100c838cdfbbaee104402a61e9cb82c06bfe14bedf3e",
+  "operator": "interval_mask",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "walk mask intervals with a peekable iterator",
+  "profile_hotspot": "Replace indexed sweep bounds with a cached next-interval reference; preserve original query order.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Replace indexed sweep bounds with a cached next-interval reference; preserve original query order.",
+  "case_results": {
+    "interval_mask.empty": {
+      "before_ns": 114.46963119506836,
+      "after_ns": 115.09964561462402,
+      "latency_reduction_pct": -0.5397830210612797,
+      "paired_ratios": [
+        0.9967599179670531,
+        1.0215373849886928,
+        0.9986755840762194,
+        1.0121200763450062
+      ],
+      "worst_paired_reduction_pct": -2.1537384988692843
+    },
+    "interval_mask.late": {
+      "before_ns": 20848.7392578125,
+      "after_ns": 17552.368408203125,
+      "latency_reduction_pct": 15.85314519669776,
+      "paired_ratios": [
+        0.8402047330303037,
+        0.8356174059204194,
+        0.8427323630357412,
+        0.8491096623204665
+      ],
+      "worst_paired_reduction_pct": 15.089033767953353
+    },
+    "interval_mask.ordered": {
+      "before_ns": 26435.84765625,
+      "after_ns": 21088.7548828125,
+      "latency_reduction_pct": 19.850231276396514,
+      "paired_ratios": [
+        0.7987393982382333,
+        0.7966193561300744,
+        0.8042559762338365,
+        0.8074840424844743
+      ],
+      "worst_paired_reduction_pct": 19.251595751552575
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 278496.64453125,
+      "after_ns": 276524.80859375,
+      "latency_reduction_pct": 0.884642068995467,
+      "paired_ratios": [
+        0.9941939141048273,
+        0.979016812014432,
+        0.9881132445152634,
+        1.0050256971622158
+      ],
+      "worst_paired_reduction_pct": -0.5025697162215792
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-mask-10",
+  "validation_sha256": "ec912e5fec0cdaac261ac42d03d297a9e4355caa2608502b86b8b09a63907217"
+}
