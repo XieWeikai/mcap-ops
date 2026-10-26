@@ -1,0 +1,53 @@
+{
+  "label": "extension-17-ema",
+  "base_commit": "eca5319e88fde77f11f79ca55e7f9c9dcedbefc5",
+  "cases": [
+    "ema.uniform",
+    "ema.jitter"
+  ],
+  "geomean_latency_reduction_pct": 15.065236550283355,
+  "worst_block_reduction_pct": 14.654355064644431,
+  "worst_case_reduction_pct": 12.951226042619856,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Weight caching and zipped rows succeeded; remove the remaining duplicate input scan while preserving invalid-row reset.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "880a5952e358bb47f0d688630f483ae8b77a649d65a99d5b64181d0850f2bbef",
+  "operator": "ema",
+  "round": 17,
+  "series": "extension",
+  "decision": "accepted",
+  "method": "fuse EMA finite-input checks into output updates",
+  "profile_hotspot": "EMA reads current rows for finite checks and again for arithmetic.",
+  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Weight caching and zipped rows succeeded; remove the remaining duplicate input scan while preserving invalid-row reset.",
+  "case_results": {
+    "ema.uniform": {
+      "before_ns": 361810.3203125,
+      "after_ns": 299808.890625,
+      "latency_reduction_pct": 16.960340174440457,
+      "paired_ratios": [
+        0.8296478360921475,
+        0.8276254905085311,
+        0.8337889175549533,
+        0.8311453604190434
+      ],
+      "worst_paired_reduction_pct": 16.62110824450467
+    },
+    "ema.jitter": {
+      "before_ns": 471065.546875,
+      "after_ns": 409492.40625,
+      "latency_reduction_pct": 12.951226042619856,
+      "paired_ratios": [
+        0.8699437623578741,
+        0.8710317167897288,
+        0.8735879016947616,
+        0.8675208578760892
+      ],
+      "worst_paired_reduction_pct": 12.641209830523836
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-17-ema",
+  "validation_sha256": "65c08ef9d32ed5bb0fff28c6f31e1cf3408d720434767b71e707be5cc1612093"
+}

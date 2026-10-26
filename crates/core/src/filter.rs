@@ -30,10 +30,6 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
     let mut previous: Option<usize> = None;
     let mut cached_weight: Option<(i128, f64)> = None;
     for (i, is_valid) in valid.iter_mut().enumerate() {
-        if signal.row(i).iter().any(|v| !v.is_finite()) {
-            previous = None;
-            continue;
-        }
         let prior = previous.filter(|&p| {
             i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[p])
                 <= i128::from(max_gap_ns)
@@ -55,6 +51,7 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
         let d = signal.channels();
         let (past, tail) = values.split_at_mut(i * d);
         let row = &mut tail[..d];
+        let mut finite = true;
         match prior {
             Some(p) => {
                 for ((value, &old), &current) in row
@@ -62,10 +59,19 @@ pub fn ema(signal: &Signal, tau_seconds: f64, max_gap_ns: i64) -> Result<Filtere
                     .zip(&past[p * d..(p + 1) * d])
                     .zip(signal.row(i))
                 {
+                    finite &= current.is_finite();
                     *value = (1.0 - weight) * old + weight * current;
                 }
             }
-            None => row.copy_from_slice(signal.row(i)),
+            None => {
+                row.copy_from_slice(signal.row(i));
+                finite = row.iter().all(|v| v.is_finite());
+            }
+        }
+        if !finite {
+            row.fill(f64::NAN);
+            previous = None;
+            continue;
         }
         *is_valid = true;
         previous = Some(i);
