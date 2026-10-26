@@ -100,6 +100,12 @@ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<
         ));
     }
     let fc = cutoff_hz / sample_rate_hz;
+    if taps == 3 {
+        let a = (2.0 * std::f64::consts::PI * fc).sin() / std::f64::consts::PI * (0.54 - 0.46);
+        let b = 2.0 * fc;
+        let sum = a + b + a;
+        return Ok(vec![a / sum, b / sum, a / sum]);
+    }
     let middle = (taps - 1) as f64 / 2.0;
     let mut result = vec![0.0; taps];
     let (mut sw, mut cw) = (0.0f64, 1.0f64);

@@ -1,0 +1,66 @@
+{
+  "label": "ten-lowpass-taps-07",
+  "base_commit": "54e45b70c82f1036f89d841cf0dd88208dd23ac6",
+  "cases": [
+    "lowpass_taps",
+    "lowpass_taps.short",
+    "lowpass_taps.long"
+  ],
+  "geomean_latency_reduction_pct": 21.206197251571623,
+  "worst_block_reduction_pct": 20.820835824342034,
+  "worst_case_reduction_pct": -0.9947738074020496,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Evaluate the smallest supported filter without skipping argument checks or DC normalization.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "2117b50ef025514a837b631bf697890a6e871669f323f2ff5173fa4f2318d504",
+  "operator": "lowpass_taps",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "specialize three-tap coefficient construction",
+  "profile_hotspot": "Evaluate the smallest supported filter without skipping argument checks or DC normalization.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Evaluate the smallest supported filter without skipping argument checks or DC normalization.",
+  "case_results": {
+    "lowpass_taps": {
+      "before_ns": 257.59934997558594,
+      "after_ns": 259.64404678344727,
+      "latency_reduction_pct": -0.9947738074020496,
+      "paired_ratios": [
+        1.0002889853422174,
+        1.0180995034963791,
+        1.0093592266435993,
+        1.0105362495044419
+      ],
+      "worst_paired_reduction_pct": -1.8099503496379121
+    },
+    "lowpass_taps.short": {
+      "before_ns": 31.897579669952393,
+      "after_ns": 15.623284339904785,
+      "latency_reduction_pct": 51.459006449772936,
+      "paired_ratios": [
+        0.5051258119191817,
+        0.47881305226818105,
+        0.48186376754174115,
+        0.48895610346280005
+      ],
+      "worst_paired_reduction_pct": 49.48741880808183
+    },
+    "lowpass_taps.long": {
+      "before_ns": 16664.888671875,
+      "after_ns": 16470.935302734375,
+      "latency_reduction_pct": 1.0881983446310972,
+      "paired_ratios": [
+        0.9824437424416458,
+        0.9977018311804687,
+        0.9618300799557038,
+        0.9957922906657323
+      ],
+      "worst_paired_reduction_pct": 0.22981688195312655
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-lowpass-taps-07",
+  "validation_sha256": "83856571caadaa08c74ecd694e30e1a3085aa86591e52e79346e0021bc451d7b"
+}
