@@ -154,47 +154,39 @@ pub fn fir(
     }
     let mut values = vec![f64::NAN; signal.values().len()];
     let mut valid = vec![false; signal.len()];
-    let mut bad_prefix = vec![0usize; signal.len() + 1];
-    for i in 0..signal.len() {
-        let bad_row = signal.row(i).iter().any(|v| !v.is_finite());
-        bad_prefix[i + 1] = bad_prefix[i] + usize::from(bad_row);
-    }
-    let mut gap_prefix = vec![0usize; signal.len() + 1];
-    for i in 1..signal.len() {
-        let delta = i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[i - 1]);
-        gap_prefix[i + 1] = gap_prefix[i]
-            + usize::from((delta - i128::from(period_ns)).abs() > i128::from(tolerance_ns));
-    }
     let lookahead = if mode == FilterMode::Centered {
         taps.len() / 2
     } else {
         0
     };
-    for (i, is_valid) in valid.iter_mut().enumerate() {
-        let Some(end) = i.checked_add(lookahead) else {
-            continue;
-        };
-        if end >= signal.len() || end + 1 < taps.len() {
-            continue;
-        }
-        let start = end + 1 - taps.len();
-        if bad_prefix[end + 1] != bad_prefix[start] || gap_prefix[end + 1] != gap_prefix[start + 1]
-        {
+    let mut supported = 0;
+    for end in 0..signal.len() {
+        if signal.row(end).iter().any(|v| !v.is_finite()) {
+            supported = 0;
             continue;
         }
+        let regular = end == 0
+            || (i128::from(signal.timestamps()[end])
+                - i128::from(signal.timestamps()[end - 1])
+                - i128::from(period_ns))
+            .abs()
+                <= i128::from(tolerance_ns);
+        supported = if regular { supported + 1 } else { 1 };
+        if supported < taps.len() {
+            continue;
+        }
+        let i = end - lookahead;
         for c in 0..signal.channels() {
-            let value = taps
+            values[i * signal.channels() + c] = taps
                 .iter()
                 .enumerate()
                 .map(|(k, w)| w * signal.row(end - k)[c])
                 .sum::<f64>();
-            values[i * signal.channels() + c] = value;
         }
-        *is_valid = values[i * signal.channels()..(i + 1) * signal.channels()]
-            .iter()
-            .all(|v| v.is_finite());
-        if !*is_valid {
-            values[i * signal.channels()..(i + 1) * signal.channels()].fill(f64::NAN);
+        let row = &mut values[i * signal.channels()..(i + 1) * signal.channels()];
+        valid[i] = row.iter().all(|v| v.is_finite());
+        if !valid[i] {
+            row.fill(f64::NAN);
         }
     }
     let symmetric = taps
