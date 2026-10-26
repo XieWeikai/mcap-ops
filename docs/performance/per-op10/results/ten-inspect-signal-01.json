@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-01",
+  "base_commit": "06d455cdd89baa4ca98bece7e52053a65de5f2b4",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": 9.80655264729904,
+  "worst_block_reduction_pct": 9.438578553415466,
+  "worst_case_reduction_pct": 0.6213231518294116,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The accepted merge avoids a second sort; now select its middle rank without visiting half the window.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "ed7de33b561f0ce6a89d9950094821ab8683eba3a21e923399f0ccd6decfa51a",
+  "operator": "inspect_signal",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "binary-select MAD across the two ordered deviation halves",
+  "profile_hotspot": "The accepted merge avoids a second sort; now select its middle rank without visiting half the window.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. The accepted merge avoids a second sort; now select its middle rank without visiting half the window.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 10496057.25,
+      "after_ns": 9642976.625,
+      "latency_reduction_pct": 8.300245974086828,
+      "paired_ratios": [
+        0.8849268591960782,
+        0.9084760136401353,
+        0.9255190668781282,
+        0.9274019011254969
+      ],
+      "worst_paired_reduction_pct": 7.259809887450308
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 1619640.75,
+      "after_ns": 1368128.40625,
+      "latency_reduction_pct": 15.1562961761196,
+      "paired_ratios": [
+        0.826481879532445,
+        0.8693996438015003,
+        0.8555060727330192,
+        0.8413680037445889
+      ],
+      "worst_paired_reduction_pct": 13.060035619849975
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1430446.96875,
+      "after_ns": 1406421.625,
+      "latency_reduction_pct": 1.212811341959985,
+      "paired_ratios": [
+        0.9721010310700581,
+        0.9749050234022042,
+        1.000838749758596,
+        1.015758568767454
+      ],
+      "worst_paired_reduction_pct": -1.5758568767453962
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 3697450.5,
+      "after_ns": 3073192.0,
+      "latency_reduction_pct": 16.94567399363709,
+      "paired_ratios": [
+        0.8311723495500858,
+        0.8299141705771724,
+        0.8442705255041725,
+        0.8203047787583647
+      ],
+      "worst_paired_reduction_pct": 15.572947449582752
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 12305961.5,
+      "after_ns": 10311174.75,
+      "latency_reduction_pct": 16.08869754565765,
+      "paired_ratios": [
+        0.8446457728280818,
+        0.8335802762587652,
+        0.8295772296333619,
+        0.8638041468925004
+      ],
+      "worst_paired_reduction_pct": 13.61958531074996
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1489249.34375,
+      "after_ns": 1484753.75,
+      "latency_reduction_pct": 0.6213231518294116,
+      "paired_ratios": [
+        1.0421484015194966,
+        1.0053182199591189,
+        0.9750063402807139,
+        0.9822553170042928
+      ],
+      "worst_paired_reduction_pct": -4.214840151949661
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-01",
+  "validation_sha256": "5c9535fc1459e2b7c3f1af76d312cd8b6552f9aa38f153780f59f217c2c8d560"
+}

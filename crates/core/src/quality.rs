@@ -489,32 +489,46 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
 // median() has already sorted the finite values. Absolute deviations are two
 // monotone sequences on either side of center; merge only through their median.
 fn sorted_mad(sorted: &[f64], center: f64) -> f64 {
-    let mut left = sorted.partition_point(|&v| v <= center);
-    let mut right = left;
-    let (mut previous, mut current) = (0.0, 0.0);
-    for _ in 0..=sorted.len() / 2 {
-        let a = left.checked_sub(1).map(|i| (sorted[i] - center).abs());
-        let b = sorted.get(right).map(|v| (v - center).abs());
-        previous = current;
-        current = match (a, b) {
-            (Some(a), Some(b)) if a <= b => {
-                left -= 1;
-                a
+    let split = sorted.partition_point(|&v| v <= center);
+    let left = |i: usize| (sorted[split - 1 - i] - center).abs();
+    let right = |i: usize| (sorted[split + i] - center).abs();
+    let kth = |k: usize| {
+        let (mut low, mut high) = (
+            (k + 1).saturating_sub(sorted.len() - split),
+            (k + 1).min(split),
+        );
+        loop {
+            let i = low + (high - low) / 2;
+            let j = k + 1 - i;
+            let al = if i > 0 {
+                left(i - 1)
+            } else {
+                f64::NEG_INFINITY
+            };
+            let ar = if i < split { left(i) } else { f64::INFINITY };
+            let bl = if j > 0 {
+                right(j - 1)
+            } else {
+                f64::NEG_INFINITY
+            };
+            let br = if j < sorted.len() - split {
+                right(j)
+            } else {
+                f64::INFINITY
+            };
+            if al > br {
+                high = i - 1;
+            } else if bl > ar {
+                low = i + 1;
+            } else {
+                return al.max(bl);
             }
-            (Some(a), None) => {
-                left -= 1;
-                a
-            }
-            (_, Some(b)) => {
-                right += 1;
-                b
-            }
-            _ => unreachable!(),
-        };
-    }
-    if sorted.len().is_multiple_of(2) {
-        previous / 2.0 + current / 2.0
+        }
+    };
+    let n = sorted.len();
+    if n.is_multiple_of(2) {
+        kth(n / 2 - 1) / 2.0 + kth(n / 2) / 2.0
     } else {
-        current
+        kth(n / 2)
     }
 }
