@@ -1,0 +1,52 @@
+{
+  "label": "gate-r2",
+  "base_commit": "fb9eb335fd5e751f061d2633527b36451a731b9a",
+  "cases": [
+    "gate.pass",
+    "gate.fail"
+  ],
+  "geomean_latency_reduction_pct": -17.269418171181883,
+  "worst_block_reduction_pct": -18.19347403409153,
+  "worst_case_reduction_pct": -43.5369873775159,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "91ad2e044dd98c7a24107752b0d10522a0099b1a28ec4475eed26a4f908892b0",
+  "operator": "gate",
+  "round": 2,
+  "decision": "rejected",
+  "method": "reserve the bounded reason list",
+  "profile_hotspot": "Gate formatting and small repeated reason-vector allocations dominate failure reports",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "gate.pass": {
+      "before_ns": 9.068167686462402,
+      "after_ns": 13.015713691711426,
+      "latency_reduction_pct": -43.5369873775159,
+      "paired_ratios": [
+        1.440386056654525,
+        1.4602616669800241,
+        1.4005294240797819,
+        1.4303536908957932
+      ],
+      "worst_paired_reduction_pct": -46.02616669800241
+    },
+    "gate.fail": {
+      "before_ns": 30.46966791152954,
+      "after_ns": 29.407089233398438,
+      "latency_reduction_pct": 3.905865168445688,
+      "paired_ratios": [
+        0.9471949875782903,
+        0.9566571266051435,
+        0.9652255700259428,
+        0.9690890403220109
+      ],
+      "worst_paired_reduction_pct": 3.091095967798907
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/gate-r2",
+  "validation_sha256": "b8761eee9f4a46da6fe306c0b944f7294acf4b313803530d27468d792a72f77c"
+}

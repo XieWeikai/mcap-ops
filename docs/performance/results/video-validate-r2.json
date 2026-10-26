@@ -1,0 +1,39 @@
+{
+  "label": "video-validate-r2",
+  "base_commit": "2fe85a7a1a27956d3fd0a7581cdbede7e6a27b80",
+  "cases": [
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": -0.13757011013333376,
+  "worst_block_reduction_pct": -1.808810554364615,
+  "worst_case_reduction_pct": -0.13757011013333376,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "1c4b4c08e8cc3298da0e8291ba7d0ca90355b7649b549431c054595fae0c6986",
+  "operator": "video_validate",
+  "round": 2,
+  "decision": "rejected",
+  "method": "parse final progress status and frame count together",
+  "profile_hotspot": "FFmpeg process/decode dominates; inspect progress emission and final-marker parsing",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "video_validate": {
+      "before_ns": 59081443.0,
+      "after_ns": 59023165.0,
+      "latency_reduction_pct": -0.13757011013333376,
+      "paired_ratios": [
+        1.0061840664192883,
+        0.9775210967889735,
+        0.9965673357833786,
+        1.0180881055436461
+      ],
+      "worst_paired_reduction_pct": -1.808810554364615
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/video-validate-r2",
+  "validation_sha256": "a2462903e506f3e6f119e58526bd0a21ce5f927c2e1edfa4ea3fdadb485f57af"
+}

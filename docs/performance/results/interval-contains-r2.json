@@ -1,0 +1,39 @@
+{
+  "label": "interval-contains-r2",
+  "base_commit": "832dc378bd9fa67279ef65e61adbd240d18bcbbb",
+  "cases": [
+    "interval_contains"
+  ],
+  "geomean_latency_reduction_pct": 2.003841449522903,
+  "worst_block_reduction_pct": -26.80245838876507,
+  "worst_case_reduction_pct": 2.003841449522903,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "c19c9e74f89584b07d91bd1c78ffc368202f87dca95a280e50ad6a2c5bd84cb4",
+  "operator": "interval_contains",
+  "round": 2,
+  "decision": "rejected",
+  "method": "search disjoint interval containment directly",
+  "profile_hotspot": "Binary membership search includes queries outside the entire interval extent",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "interval_contains": {
+      "before_ns": 247619.33203125,
+      "after_ns": 241505.47265625,
+      "latency_reduction_pct": 2.003841449522903,
+      "paired_ratios": [
+        0.9684588681838259,
+        0.9413594274458883,
+        0.9914643028257161,
+        1.2680245838876507
+      ],
+      "worst_paired_reduction_pct": -26.80245838876507
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-contains-r2",
+  "validation_sha256": "f05dae48bc93631b0f69dbe7cc96a92de9d3e38b13f67c691b523e49dd4653b4"
+}

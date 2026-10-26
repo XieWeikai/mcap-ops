@@ -21,9 +21,12 @@ def main():
     parser.add_argument("--paths", nargs="+", required=True)
     parser.add_argument("--python", action="store_true")
     parser.add_argument("--retry", action="store_true")
+    parser.add_argument("--blocks", type=int, default=4)
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9_.-]+", args.label):
         parser.error("label must be a simple identifier")
+    if (ROOT / "docs/performance/results" / f"{args.label}.json").exists():
+        parser.error("trial already has a decision; preserve its evidence and use a new label")
     destination = ROOT / ".artifacts/rsi/trials" / args.label
     destination.mkdir(parents=True, exist_ok=args.retry)
     base = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
@@ -58,13 +61,13 @@ mkdir -p .artifacts/rsi/python/{label}
 cp -r python/mcap_ops .artifacts/rsi/python/{label}/
 .venv/bin/python scripts/check_python_equivalence.py --before .artifacts/rsi/python/accepted --after .artifacts/rsi/python/{label}
 PYTHONPATH="$PWD/.artifacts/rsi/python/{label}" RSI_PYTHON_ROOT="$PWD/.artifacts/rsi/python/{label}" .venv/bin/python scripts/python_benchmark.py --case python.resample.linear --profile .artifacts/rsi/trials/{label}/profile.prof
-python3 scripts/rsi_measure.py --before .artifacts/rsi/python/accepted --after .artifacts/rsi/python/{label} --cases {cases} --output .artifacts/rsi/trials/{label}/measurement.json
+python3 scripts/rsi_measure.py --before .artifacts/rsi/python/accepted --after .artifacts/rsi/python/{label} --cases {cases} --blocks {args.blocks} --output .artifacts/rsi/trials/{label}/measurement.json
 """
     else:
         setup += f"""
 VALGRIND_LIB="$PWD/.tools/valgrind/root/usr/libexec/valgrind" .tools/valgrind/root/usr/bin/valgrind --tool=callgrind --collect-atstart=no --toggle-collect='operator_benchmark::Runner::bench*' --callgrind-out-file=.artifacts/rsi/trials/{label}/profile.callgrind .artifacts/rsi/bin/{label} --case {cases} --profile
 .tools/valgrind/root/usr/bin/callgrind_annotate --auto=no --inclusive=yes --threshold=100 .artifacts/rsi/trials/{label}/profile.callgrind > .artifacts/rsi/trials/{label}/profile.txt
-python3 scripts/rsi_measure.py --before .artifacts/rsi/bin/accepted --after .artifacts/rsi/bin/{label} --cases {cases} --output .artifacts/rsi/trials/{label}/measurement.json
+python3 scripts/rsi_measure.py --before .artifacts/rsi/bin/accepted --after .artifacts/rsi/bin/{label} --cases {cases} --blocks {args.blocks} --output .artifacts/rsi/trials/{label}/measurement.json
 """
     with (destination / "validation.log").open("w") as log:
         result = subprocess.run(["ssh", "reference-linux", setup], stdout=log, stderr=subprocess.STDOUT)

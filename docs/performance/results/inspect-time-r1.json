@@ -1,0 +1,52 @@
+{
+  "label": "inspect-time-r1",
+  "base_commit": "7669197d00fcf987ad7a186336fcce2537cdaff3",
+  "cases": [
+    "inspect_time.uniform",
+    "inspect_time.jitter"
+  ],
+  "geomean_latency_reduction_pct": 0.0918388068994691,
+  "worst_block_reduction_pct": -0.3956945548720503,
+  "worst_case_reduction_pct": -0.14969012736940623,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "387017e493e032fa35c2d15883c5dd6bc64f44ad329bdd46e0d79ac39191b3fe",
+  "operator": "inspect_time",
+  "round": 1,
+  "decision": "rejected",
+  "method": "reserve interval storage",
+  "profile_hotspot": "Interval collection and ordering dominate time-statistic work",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "inspect_time.uniform": {
+      "before_ns": 60186.861328125,
+      "after_ns": 59442.9697265625,
+      "latency_reduction_pct": 0.9721568866194019,
+      "paired_ratios": [
+        0.9873212605819659,
+        0.9774388656384544,
+        0.9932356016856462,
+        1.0039349530724395
+      ],
+      "worst_paired_reduction_pct": -0.39349530724395176
+    },
+    "inspect_time.jitter": {
+      "before_ns": 87033.849609375,
+      "after_ns": 87481.98828125,
+      "latency_reduction_pct": -0.14969012736940623,
+      "paired_ratios": [
+        1.0169825922518803,
+        0.9971478401416792,
+        0.9990148640406136,
+        1.0039789385067746
+      ],
+      "worst_paired_reduction_pct": -1.6982592251880257
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/inspect-time-r1",
+  "validation_sha256": "a37a5e7243cced053b437fc6d501feec8dbbc07d8b82f36656a33fde82c261d5"
+}

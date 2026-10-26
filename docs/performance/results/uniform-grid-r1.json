@@ -1,0 +1,52 @@
+{
+  "label": "uniform-grid-r1",
+  "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+  "cases": [
+    "uniform_grid.integer",
+    "uniform_grid.rational"
+  ],
+  "geomean_latency_reduction_pct": 0.39778461270634224,
+  "worst_block_reduction_pct": -1.8766667419571448,
+  "worst_case_reduction_pct": 0.07268490724188226,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "a686ea90cbb1b4c51cc0ceb19b21a1ec58a073992a435c3de824e991730940d1",
+  "operator": "uniform_grid",
+  "round": 1,
+  "decision": "rejected",
+  "method": "reserve the bounded grid size",
+  "profile_hotspot": "Repeated Vec growth and per-point integer division in rational grid generation",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "uniform_grid.integer": {
+      "before_ns": 90866.033203125,
+      "after_ns": 91016.37109375,
+      "latency_reduction_pct": 0.07268490724188226,
+      "paired_ratios": [
+        0.9948081135567737,
+        1.0017406026247153,
+        0.9968056992304469,
+        1.0059693515509047
+      ],
+      "worst_paired_reduction_pct": -0.5969351550904722
+    },
+    "uniform_grid.rational": {
+      "before_ns": 2769.252685546875,
+      "after_ns": 2745.966064453125,
+      "latency_reduction_pct": 0.8300315381029821,
+      "paired_ratios": [
+        0.9761997666337372,
+        1.0360821153957012,
+        0.9675897493075253,
+        1.0071996026042032
+      ],
+      "worst_paired_reduction_pct": -3.6082115395701164
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/uniform-grid-r1",
+  "validation_sha256": "160ff41cb0a81c622702199ab4c43d463d30cc0daccbe31c57bc7a26049e43b8"
+}

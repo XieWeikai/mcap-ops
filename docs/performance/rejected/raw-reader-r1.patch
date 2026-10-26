@@ -1,0 +1,16 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index a718412..54a06d0 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -86,7 +86,10 @@ impl RawReader {
+             .with_check_finishes_after_end_magic(true)
+             .with_record_length_limit(limits.max_record_bytes);
+         Ok(Self {
+-            reader: MessageReader::new_with_options(BufReader::new(file), options),
++            reader: MessageReader::new_with_options(
++                BufReader::with_capacity(64 * 1024, file),
++                options,
++            ),
+             path,
+             before,
+             filter,

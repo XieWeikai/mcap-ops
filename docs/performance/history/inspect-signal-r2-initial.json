@@ -1,0 +1,65 @@
+{
+  "label": "inspect-signal-r2",
+  "base_commit": "7ba8c8b94cb85fe9450e3b776361533302c0ed37",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel"
+  ],
+  "geomean_latency_reduction_pct": 20.76475522356951,
+  "worst_block_reduction_pct": -5.940993719159371,
+  "worst_case_reduction_pct": -0.3164977762301069,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "ce144a55f88487b44803d0a9052a50d588133ff6bd6a4a7191c19e81d7741899",
+  "operator": "inspect_signal",
+  "round": 2,
+  "decision": "rejected",
+  "method": "select medians without fully sorting wide Hampel windows",
+  "profile_hotspot": "Callgrind identifies two full sorts per Hampel window as the dominant quality hotspot",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "inspect_signal.basic": {
+      "before_ns": 1463969.15625,
+      "after_ns": 1463389.1875,
+      "latency_reduction_pct": -0.3164977762301069,
+      "paired_ratios": [
+        0.9934470003685388,
+        1.0128829551560634,
+        1.0613993223652631,
+        0.9885512794993557
+      ],
+      "worst_paired_reduction_pct": -6.139932236526313
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 6547489.375,
+      "after_ns": 6521331.5,
+      "latency_reduction_pct": 0.5527572832185745,
+      "paired_ratios": [
+        0.9299726828406601,
+        0.9790287525953473,
+        2.081281553065041,
+        1.0099161017402813
+      ],
+      "worst_paired_reduction_pct": -108.1281553065041
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 36484320.5,
+      "after_ns": 18951751.75,
+      "latency_reduction_pct": 48.044141610876345,
+      "paired_ratios": [
+        0.5107862717136334,
+        0.5283308960688397,
+        0.538248075655204,
+        0.2657599259674932
+      ],
+      "worst_paired_reduction_pct": 46.1751924344796
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/inspect-signal-r2",
+  "validation_sha256": "eeb9e28511391ca60d5eb63d645071ef7cd801b584d429d2f9d2507fec907f9d"
+}

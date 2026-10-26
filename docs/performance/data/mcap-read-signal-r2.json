@@ -1,0 +1,179 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "mcap_read_signal": {
+          "case": "mcap_read_signal",
+          "iterations": 4,
+          "median_ns": 6035475.25,
+          "samples_ns": [
+            5989051.5,
+            6035475.25,
+            6037898.75,
+            6041817.25,
+            6018468.0,
+            6040732.25,
+            5956174.25
+          ]
+        }
+      },
+      "after": {
+        "mcap_read_signal": {
+          "case": "mcap_read_signal",
+          "iterations": 4,
+          "median_ns": 6136340.0,
+          "samples_ns": [
+            6247327.0,
+            6309380.75,
+            6222692.5,
+            6133040.25,
+            6101856.25,
+            6136340.0,
+            6070977.75
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "mcap_read_signal": {
+          "case": "mcap_read_signal",
+          "iterations": 4,
+          "median_ns": 6062899.0,
+          "samples_ns": [
+            6069051.0,
+            6003654.5,
+            6060642.75,
+            6062899.0,
+            6045664.0,
+            6086368.75,
+            6091145.25
+          ]
+        }
+      },
+      "before": {
+        "mcap_read_signal": {
+          "case": "mcap_read_signal",
+          "iterations": 4,
+          "median_ns": 6183501.25,
+          "samples_ns": [
+            6424363.25,
+            6226645.25,
+            6156348.0,
+            6223537.25,
+            6117072.0,
+            6183501.25,
+            6142391.5
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "mcap_read_signal": {
+          "case": "mcap_read_signal",
+          "iterations": 4,
+          "median_ns": 6208896.25,
+          "samples_ns": [
+            6357099.0,
+            6208896.25,
+            6189312.0,
+            6119087.25,
+            6125349.75,
+            6864183.0,
+            9708238.5
+          ]
+        }
+      },
+      "after": {
+        "mcap_read_signal": {
+          "case": "mcap_read_signal",
+          "iterations": 4,
+          "median_ns": 6108652.5,
+          "samples_ns": [
+            6089999.25,
+            6108652.5,
+            6157227.75,
+            6134455.0,
+            6122958.75,
+            6092146.0,
+            6071220.25
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "mcap_read_signal": {
+          "case": "mcap_read_signal",
+          "iterations": 4,
+          "median_ns": 6403038.25,
+          "samples_ns": [
+            6403038.25,
+            6428587.25,
+            6399806.5,
+            6504448.75,
+            6435145.75,
+            6336146.25,
+            6239865.0
+          ]
+        }
+      },
+      "before": {
+        "mcap_read_signal": {
+          "case": "mcap_read_signal",
+          "iterations": 4,
+          "median_ns": 6101253.25,
+          "samples_ns": [
+            6103744.5,
+            6139654.0,
+            6098120.5,
+            6101253.25,
+            6047410.5,
+            6070463.75,
+            6137959.0
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "mcap_read_signal": {
+      "before_ns": 6142377.25,
+      "after_ns": 6122496.25,
+      "latency_reduction_pct": -0.02834004935237111,
+      "paired_ratios": [
+        1.0167119813804224,
+        0.9804961226457259,
+        0.9838548196066249,
+        1.049462788649201
+      ],
+      "worst_paired_reduction_pct": -4.946278864920095
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "label": "interval-intersection-r2",
+  "base_commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae",
+  "cases": [
+    "interval_intersection.dense",
+    "interval_intersection.late"
+  ],
+  "geomean_latency_reduction_pct": 87.53642161588219,
+  "worst_block_reduction_pct": 87.50909546290787,
+  "worst_case_reduction_pct": -13.142992367161654,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "e43ff2cab46464e07343d8792b1493881c3be079ed3e684069e585e88359b4ee",
+  "operator": "interval_intersection",
+  "round": 2,
+  "decision": "rejected",
+  "method": "skip non-overlapping prefixes before intersection",
+  "profile_hotspot": "Intersection grows outputs and scans non-overlapping leading intervals",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "interval_intersection.dense": {
+      "before_ns": 25778.46826171875,
+      "after_ns": 29205.19970703125,
+      "latency_reduction_pct": -13.142992367161654,
+      "paired_ratios": [
+        1.1220472486435669,
+        1.128650645877815,
+        1.1342092014654181,
+        1.1384182564273735
+      ],
+      "worst_paired_reduction_pct": -13.841825642737348
+    },
+    "interval_intersection.late": {
+      "before_ns": 12998.53125,
+      "after_ns": 177.50653076171875,
+      "latency_reduction_pct": 98.62300399888629,
+      "paired_ratios": [
+        0.013795028728076513,
+        0.013823825532248857,
+        0.013744891294197537,
+        0.013286048351790382
+      ],
+      "worst_paired_reduction_pct": 98.61761744677511
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-intersection-r2",
+  "validation_sha256": "55c9c8c603fe0c719e084659e5850d19d3562d26c0bb0ab0b73cf6dba3041888"
+}

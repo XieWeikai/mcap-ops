@@ -1,0 +1,52 @@
+{
+  "label": "interval-mask-r2",
+  "base_commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae",
+  "cases": [
+    "interval_mask.ordered",
+    "interval_mask.shuffled"
+  ],
+  "geomean_latency_reduction_pct": 4.867606229352095,
+  "worst_block_reduction_pct": 4.409832436283512,
+  "worst_case_reduction_pct": -1.0475088923284082,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "44e1b68e8615ecd3d2085cf033719fafb8084334a55ef86543c5c00398e323bd",
+  "operator": "interval_mask",
+  "round": 2,
+  "decision": "rejected",
+  "method": "write ordered masks into pre-sized output",
+  "profile_hotspot": "Each ordered query repeats a binary search through the same intervals",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "interval_mask.ordered": {
+      "before_ns": 25319.00439453125,
+      "after_ns": 22511.50732421875,
+      "latency_reduction_pct": 10.94678287916524,
+      "paired_ratios": [
+        0.8978709277835853,
+        0.8831934146331099,
+        0.8992272465885098,
+        0.8791768703917292
+      ],
+      "worst_paired_reduction_pct": 10.077275341149017
+    },
+    "interval_mask.shuffled": {
+      "before_ns": 264157.30859375,
+      "after_ns": 267498.7890625,
+      "latency_reduction_pct": -1.0475088923284082,
+      "paired_ratios": [
+        1.017683037963538,
+        1.0028595715205866,
+        1.0032671398830302,
+        1.0326407038721417
+      ],
+      "worst_paired_reduction_pct": -3.2640703872141685
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-mask-r2",
+  "validation_sha256": "b2b25dcf83b7993e2fc2f9901e9d2614726638dd2f2bbc3ad68bc7b81c5bd0ba"
+}

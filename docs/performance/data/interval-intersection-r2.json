@@ -1,0 +1,303 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 26200.1982421875,
+          "samples_ns": [
+            25807.3623046875,
+            26386.6962890625,
+            26634.2587890625,
+            26200.1982421875,
+            26117.5078125,
+            26396.1220703125,
+            25966.7490234375
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 2048,
+          "median_ns": 12856.18603515625,
+          "samples_ns": [
+            12775.345703125,
+            12907.91748046875,
+            12611.0068359375,
+            12747.365234375,
+            12862.56005859375,
+            13080.83447265625,
+            12856.18603515625
+          ]
+        }
+      },
+      "after": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 29397.8603515625,
+          "samples_ns": [
+            29397.8603515625,
+            29200.4462890625,
+            29089.326171875,
+            29233.9912109375,
+            29696.974609375,
+            29574.806640625,
+            29470.6123046875
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 177.35145568847656,
+          "samples_ns": [
+            175.3860092163086,
+            175.27468872070312,
+            178.33609771728516,
+            177.35145568847656,
+            179.5131607055664,
+            188.42498016357422,
+            175.3850555419922
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 29260.1015625,
+          "samples_ns": [
+            29046.697265625,
+            29294.9619140625,
+            29138.9384765625,
+            29303.8544921875,
+            29260.1015625,
+            29245.875,
+            29443.7451171875
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 180.699951171875,
+          "samples_ns": [
+            183.4608383178711,
+            183.3730239868164,
+            178.74439239501953,
+            179.69901275634766,
+            180.699951171875,
+            181.5875473022461,
+            180.10897827148438
+          ]
+        }
+      },
+      "before": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 25924.8525390625,
+          "samples_ns": [
+            25784.2763671875,
+            25787.4794921875,
+            26248.2138671875,
+            25924.8525390625,
+            25898.345703125,
+            25941.5107421875,
+            26081.935546875
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 2048,
+          "median_ns": 13071.63134765625,
+          "samples_ns": [
+            12943.01904296875,
+            13012.419921875,
+            13093.3955078125,
+            13071.63134765625,
+            13125.3994140625,
+            13140.9755859375,
+            12932.853515625
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 25632.083984375,
+          "samples_ns": [
+            26078.49609375,
+            25885.2109375,
+            25683.634765625,
+            25392.46484375,
+            25414.572265625,
+            25632.083984375,
+            25594.31640625
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 2048,
+          "median_ns": 12925.646484375,
+          "samples_ns": [
+            12992.1015625,
+            13036.6728515625,
+            13072.55615234375,
+            12925.646484375,
+            12821.5,
+            12856.54296875,
+            12860.2568359375
+          ]
+        }
+      },
+      "after": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 29072.1455078125,
+          "samples_ns": [
+            29076.3251953125,
+            28985.4716796875,
+            29212.029296875,
+            28929.7431640625,
+            29072.1455078125,
+            29087.6279296875,
+            29007.3935546875
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 177.66160583496094,
+          "samples_ns": [
+            172.80279541015625,
+            176.23734283447266,
+            177.12196350097656,
+            177.89024353027344,
+            177.81968688964844,
+            177.66160583496094,
+            177.86724853515625
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 29150.2978515625,
+          "samples_ns": [
+            29355.576171875,
+            29074.015625,
+            29150.2978515625,
+            29293.1787109375,
+            29182.6259765625,
+            28864.5107421875,
+            29049.8623046875
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 131072,
+          "median_ns": 173.66746520996094,
+          "samples_ns": [
+            173.59980010986328,
+            173.53567504882812,
+            173.66746520996094,
+            174.20103454589844,
+            172.2655029296875,
+            177.0053482055664,
+            178.0640869140625
+          ]
+        }
+      },
+      "before": {
+        "interval_intersection.dense": {
+          "case": "interval_intersection.dense",
+          "iterations": 1024,
+          "median_ns": 25605.96484375,
+          "samples_ns": [
+            25552.0107421875,
+            25619.9365234375,
+            25573.333984375,
+            25637.0859375,
+            25725.71484375,
+            25543.2001953125,
+            25605.96484375
+          ]
+        },
+        "interval_intersection.late": {
+          "case": "interval_intersection.late",
+          "iterations": 2048,
+          "median_ns": 13071.416015625,
+          "samples_ns": [
+            13071.416015625,
+            13234.8759765625,
+            13377.53076171875,
+            13146.71630859375,
+            13050.083984375,
+            12928.587890625,
+            12945.40087890625
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "interval_intersection.dense": {
+      "before_ns": 25778.46826171875,
+      "after_ns": 29205.19970703125,
+      "latency_reduction_pct": -13.142992367161654,
+      "paired_ratios": [
+        1.1220472486435669,
+        1.128650645877815,
+        1.1342092014654181,
+        1.1384182564273735
+      ],
+      "worst_paired_reduction_pct": -13.841825642737348
+    },
+    "interval_intersection.late": {
+      "before_ns": 12998.53125,
+      "after_ns": 177.50653076171875,
+      "latency_reduction_pct": 98.62300399888629,
+      "paired_ratios": [
+        0.013795028728076513,
+        0.013823825532248857,
+        0.013744891294197537,
+        0.013286048351790382
+      ],
+      "worst_paired_reduction_pct": 98.61761744677511
+    }
+  }
+}

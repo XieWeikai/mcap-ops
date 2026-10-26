@@ -1,0 +1,18 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 5f5a34c..65c090b 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -32,10 +32,11 @@ pub fn decode(bytes: &[u8], options: &ImageOptions) -> Result<DynamicImage> {
+     {
+         return Err(invalid("invalid image limits or exposure thresholds"));
+     }
+-    let mut reader = ImageReader::new(Cursor::new(bytes)).with_guessed_format()?;
+-    if !matches!(reader.format(), Some(ImageFormat::Png | ImageFormat::Jpeg)) {
++    let format = image::guess_format(bytes).ok();
++    if !matches!(format, Some(ImageFormat::Png | ImageFormat::Jpeg)) {
+         return Err(invalid("only PNG and JPEG are supported"));
+     }
++    let mut reader = ImageReader::with_format(Cursor::new(bytes), format.unwrap());
+     let mut limits = Limits::default();
+     limits.max_image_width = Some(options.max_width);
+     limits.max_image_height = Some(options.max_height);

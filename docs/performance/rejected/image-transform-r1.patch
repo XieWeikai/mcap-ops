@@ -1,0 +1,15 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 3a4c1ec..92e3b55 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -154,7 +154,9 @@ pub fn transform_image(
+         {
+             return Err(invalid("crop outside image"));
+         }
+-        image = image.crop_imm(x, y, width, height);
++        if x != 0 || y != 0 || width != image.width() || height != image.height() {
++            image = image.crop_imm(x, y, width, height);
++        }
+     }
+     if let Some([width, height]) = resize {
+         if width == 0

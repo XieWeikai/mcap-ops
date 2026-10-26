@@ -1,0 +1,37 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 4e33606..c082672 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -47,19 +47,20 @@ pub fn map_clock(times: &[i64], origin: i64, offset: i64, rate_ppb: i64) -> Resu
+     if scale <= 0 {
+         return Err(invalid("clock scale must be positive"));
+     }
+-    times
+-        .iter()
+-        .map(|&t| {
+-            let delta = (i128::from(t) - i128::from(origin)) * scale;
+-            let rounded = if delta >= 0 {
+-                (delta + 500_000_000) / 1_000_000_000
+-            } else {
+-                -((-delta + 500_000_000) / 1_000_000_000)
+-            };
++    let mut result = Vec::with_capacity(times.len());
++    for &t in times {
++        let delta = (i128::from(t) - i128::from(origin)) * scale;
++        let rounded = if delta >= 0 {
++            (delta + 500_000_000) / 1_000_000_000
++        } else {
++            -((-delta + 500_000_000) / 1_000_000_000)
++        };
++        result.push(
+             i64::try_from(i128::from(origin) + rounded + i128::from(offset))
+-                .map_err(|_| Error::Overflow)
+-        })
+-        .collect()
++                .map_err(|_| Error::Overflow)?,
++        );
++    }
++    Ok(result)
+ }
+ 
+ #[derive(Clone, Debug, Serialize, Deserialize)]

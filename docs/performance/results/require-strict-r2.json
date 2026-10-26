@@ -1,0 +1,39 @@
+{
+  "label": "require-strict-r2",
+  "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+  "cases": [
+    "require_strict"
+  ],
+  "geomean_latency_reduction_pct": -2.369716151118695,
+  "worst_block_reduction_pct": -3.0631359244620127,
+  "worst_case_reduction_pct": -2.369716151118695,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "df2715e5779bd028f6e70d7037e48882b30393c2fd56b10954398441d5e34c50",
+  "operator": "require_strict",
+  "round": 2,
+  "decision": "rejected",
+  "method": "use a vectorizable complete ordering reduction",
+  "profile_hotspot": "Validation performs a branch for every adjacent timestamp",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "require_strict": {
+      "before_ns": 9245.197998046875,
+      "after_ns": 9464.296508789062,
+      "latency_reduction_pct": -2.369716151118695,
+      "paired_ratios": [
+        1.0248413397770428,
+        1.0306313592446201,
+        1.012716750699415,
+        1.0225529832453308
+      ],
+      "worst_paired_reduction_pct": -3.0631359244620127
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/require-strict-r2",
+  "validation_sha256": "fab052404ae3ab510afee00f7b4d43dfdaadb856e3d1b7fa7766184c897c1a6f"
+}

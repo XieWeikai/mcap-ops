@@ -30,6 +30,11 @@ Trivial field getters and package version are not processing operators.
   representative-case regressions or unstable timing before acceptance.
 - Round two compares with round one's accepted state; rejected candidates do not
   become baselines.
+- A candidate with a positive median but contradictory blocks can receive one
+  independent eight-block confirmation, using the same code change on the
+  current accepted source state. Preserve the initial decision and raw samples
+  in `history/`; the confirmation must independently pass the unchanged gate.
+  This is repeated measurement of a candidate, not a third optimization round.
 
 ## Profiling
 

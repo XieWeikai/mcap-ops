@@ -1,0 +1,15 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 83c68f0..eac5064 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -16,7 +16,9 @@ impl IntervalSet {
+         if intervals.iter().any(|v| v.start_ns >= v.end_ns) {
+             return Err(invalid("intervals must be nonempty [start,end)"));
+         }
+-        intervals.sort_unstable_by_key(|v| v.start_ns);
++        if !intervals.windows(2).all(|w| w[0].start_ns <= w[1].start_ns) {
++            intervals.sort_unstable_by_key(|v| v.start_ns);
++        }
+         let mut merged: Vec<Interval> = Vec::new();
+         for interval in intervals {
+             if let Some(last) = merged.last_mut() {

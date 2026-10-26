@@ -1,0 +1,17 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index a718412..4e80887 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -199,10 +199,8 @@ pub fn inspect_mcap(
+         *bytes += message.data.len() as u64;
+     }
+     let mut channels = Vec::new();
+-    for id in 0..=u16::MAX {
+-        let Some(channel) = reader.reader.get_channel(id) else {
+-            continue;
+-        };
++    for channel in (0..=u16::MAX).filter_map(|id| reader.reader.get_channel(id)) {
++        let id = channel.id;
+         if !filter.topics.is_empty() && !filter.topics.contains(&channel.topic) {
+             continue;
+         }

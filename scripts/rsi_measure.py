@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Run paired binaries on the test host; never accepts based on a single timing."""
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -8,6 +9,13 @@ from pathlib import Path
 import platform
 import statistics
 import subprocess
+
+
+def identity(path):
+    root=Path(path).resolve()
+    files=[root] if root.is_file() else [root/"mcap_ops/__init__.py",*sorted((root/"mcap_ops").glob("_native*.so"))]
+    return [{"path":str(file),"bytes":file.stat().st_size,
+             "sha256":hashlib.sha256(file.read_bytes()).hexdigest()} for file in files]
 
 
 def run(binary, cpu, samples, millis, cases):
@@ -22,8 +30,10 @@ def run(binary, cpu, samples, millis, cases):
         command += ["--case", cases]
     result = subprocess.run(
         ["taskset", "-c", str(cpu), *command],
-        check=True, capture_output=True, text=True, env=env,
+        check=False, capture_output=True, text=True, env=env,
     )
+    if result.returncode:
+        raise RuntimeError(f"benchmark failed ({result.returncode}): {result.stderr[-6000:]}")
     rows = [json.loads(line) for line in result.stdout.splitlines() if line.strip()]
     if not rows or any("samples_ns" not in row for row in rows):
         raise RuntimeError("benchmark did not produce successful timing records")
@@ -70,6 +80,9 @@ def main():
     output.write_text(json.dumps({
         "schema": "mcap-ops-rsi-paired-v1",
         "machine": platform.node(),
+        "platform": platform.platform(),
+        "before_artifacts": identity(args.before),
+        "after_artifacts": identity(args.after),
         "cpu": args.cpu,
         "samples_per_block": args.samples,
         "target_millis_per_sample": args.millis,

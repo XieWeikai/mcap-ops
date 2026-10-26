@@ -1,0 +1,33 @@
+diff --git a/crates/core/src/sampling.rs b/crates/core/src/sampling.rs
+index f27aa0d..241b6fc 100644
+--- a/crates/core/src/sampling.rs
++++ b/crates/core/src/sampling.rs
+@@ -141,7 +141,7 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+         } else if signal
+             .row(a)
+             .iter()
+-            .chain(signal.row(b))
++            .chain(if a == b { &[][..] } else { signal.row(b) })
+             .any(|v| !v.is_finite())
+         {
+             Some(Status::NonFinite)
+@@ -153,7 +153,9 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+             continue;
+         }
+         let values = &mut out.values[i * signal.channels()..(i + 1) * signal.channels()];
+-        if options.method == Method::Slerp {
++        if a == b && options.method != Method::Slerp {
++            values.copy_from_slice(signal.row(a));
++        } else if options.method == Method::Slerp {
+             match slerp(signal.row(a), signal.row(b), alpha) {
+                 Some(v) => values.copy_from_slice(&v),
+                 None => {
+@@ -166,7 +168,7 @@ pub fn resample(signal: &Signal, target: &[i64], options: SampleOptions) -> Resu
+                 *value = (1.0 - alpha) * x + alpha * y;
+             }
+         }
+-        if values.iter().any(|v| !v.is_finite()) {
++        if (a != b || options.method == Method::Slerp) && values.iter().any(|v| !v.is_finite()) {
+             values.fill(f64::NAN);
+             out.status[i] = Status::NonFinite as u8;
+             continue;

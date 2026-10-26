@@ -1,0 +1,39 @@
+{
+  "label": "json-decode-r2",
+  "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+  "cases": [
+    "json_decode"
+  ],
+  "geomean_latency_reduction_pct": 2.1687770128572925,
+  "worst_block_reduction_pct": 0.5819072779421286,
+  "worst_case_reduction_pct": 2.1687770128572925,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "021f1477af9ad256298e1078f6cff9d4ae903ec6277dccfda98f3cb9da684437",
+  "operator": "json_decode",
+  "round": 2,
+  "decision": "rejected",
+  "method": "reserve a bounded numeric field vector",
+  "profile_hotspot": "Callgrind: JSON pointer decoding repeatedly allocates unescaped strings for flat field names",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "json_decode": {
+      "before_ns": 215.49617767333984,
+      "after_ns": 211.56220626831055,
+      "latency_reduction_pct": 2.1687770128572925,
+      "paired_ratios": [
+        0.9854103446405846,
+        0.9941809272205787,
+        0.9712141151022694,
+        0.9680194734043854
+      ],
+      "worst_paired_reduction_pct": 0.5819072779421286
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/json-decode-r2",
+  "validation_sha256": "ab7dfe082cd397bc20c469012d2d0c40848825dff542d8117ddd75de397c44a6"
+}

@@ -1,0 +1,52 @@
+{
+  "label": "video-probe-r2",
+  "base_commit": "2fe85a7a1a27956d3fd0a7581cdbede7e6a27b80",
+  "cases": [
+    "video_probe",
+    "video_validate"
+  ],
+  "geomean_latency_reduction_pct": 0.25504503881403906,
+  "worst_block_reduction_pct": -0.42296308171787533,
+  "worst_case_reduction_pct": -0.44480268348769947,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/video.rs"
+  ],
+  "measurement_sha256": "e6b3daced6c23e08af46f93f1ec2ca05dd2c0bc643ded4f1e5f69d2a69853a71",
+  "operator": "video_probe",
+  "round": 2,
+  "decision": "rejected",
+  "method": "use a timed park for media child completion",
+  "profile_hotspot": "Child-completion observation is quantized by a ten-millisecond polling sleep",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "video_probe": {
+      "before_ns": 27882625.5,
+      "after_ns": 27533432.0,
+      "latency_reduction_pct": 1.3706943933516569,
+      "paired_ratios": [
+        0.9838251164848074,
+        1.0045332535202243,
+        0.9779211302665468,
+        0.9887609956481594
+      ],
+      "worst_paired_reduction_pct": -0.45332535202242674
+    },
+    "video_validate": {
+      "before_ns": 58792305.5,
+      "after_ns": 59126057.0,
+      "latency_reduction_pct": -0.44480268348769947,
+      "paired_ratios": [
+        0.9943428808369117,
+        1.003926099884859,
+        1.0186270104387705,
+        1.0049699537848953
+      ],
+      "worst_paired_reduction_pct": -1.8627010438770464
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/video-probe-r2",
+  "validation_sha256": "ca03b9e3e0e1add37e2a8dc855eb93b0c74a91284ffd38f31931167b8f8a0bee"
+}

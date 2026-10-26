@@ -1,0 +1,65 @@
+{
+  "label": "raw-reader-r2",
+  "base_commit": "652f7c466111f7f5bf8c2efcc271108140e4b510",
+  "cases": [
+    "raw_reader.chunked",
+    "raw_reader.linear",
+    "raw_reader.topics"
+  ],
+  "geomean_latency_reduction_pct": -15.430040711189719,
+  "worst_block_reduction_pct": -18.71216906026283,
+  "worst_case_reduction_pct": -41.43399118612046,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "44862830be85d080609f3cd78ae6d04f8ce4d291cddca5e7c5aad063b837f02c",
+  "operator": "raw_reader",
+  "round": 2,
+  "decision": "rejected",
+  "method": "binary-search long immutable topic filters",
+  "profile_hotspot": "Callgrind: reader buffering and repeated exact topic membership checks",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "raw_reader.chunked": {
+      "before_ns": 1314070.375,
+      "after_ns": 1380960.59375,
+      "latency_reduction_pct": -4.731370188576056,
+      "paired_ratios": [
+        1.017661785311366,
+        1.076965618460155,
+        1.0120382603837121,
+        1.0837320635225545
+      ],
+      "worst_paired_reduction_pct": -8.373206352255448
+    },
+    "raw_reader.linear": {
+      "before_ns": 1624680.96875,
+      "after_ns": 1693487.25,
+      "latency_reduction_pct": -3.5656406062727353,
+      "paired_ratios": [
+        1.01003253028581,
+        1.061280281839645,
+        1.0080752805060293,
+        1.074685467525134
+      ],
+      "worst_paired_reduction_pct": -7.468546752513405
+    },
+    "raw_reader.topics": {
+      "before_ns": 1533423.0625,
+      "after_ns": 2168640.03125,
+      "latency_reduction_pct": -41.43399118612046,
+      "paired_ratios": [
+        1.4456165780579957,
+        1.3922565867102799,
+        1.359594393685117,
+        1.4364232370121293
+      ],
+      "worst_paired_reduction_pct": -44.56165780579957
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/raw-reader-r2",
+  "validation_sha256": "e2341f453495177f20c6a6513a86748e560385b14518f76488813fc21b9f1c90"
+}

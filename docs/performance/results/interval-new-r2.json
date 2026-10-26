@@ -1,0 +1,39 @@
+{
+  "label": "interval-new-r2",
+  "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+  "cases": [
+    "interval_new"
+  ],
+  "geomean_latency_reduction_pct": -3.727802602338537,
+  "worst_block_reduction_pct": -4.052992521887888,
+  "worst_case_reduction_pct": -3.727802602338537,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "e401127b988186173949df7d884893935ef9f045c04aeca286733558d5806d69",
+  "operator": "interval_new",
+  "round": 2,
+  "decision": "rejected",
+  "method": "skip sorting already ordered interval starts",
+  "profile_hotspot": "Repeated allocation and unnecessary sorting of already ordered intervals",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "interval_new": {
+      "before_ns": 8447.10009765625,
+      "after_ns": 8723.8916015625,
+      "latency_reduction_pct": -3.727802602338537,
+      "paired_ratios": [
+        1.014239483376483,
+        1.0405299252188789,
+        1.0402046576620767,
+        1.0343513943846938
+      ],
+      "worst_paired_reduction_pct": -4.052992521887888
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-new-r2",
+  "validation_sha256": "2eb51876bc3f679f60e37d840d716cfcfad2f9873380c9856c55163a4f3f4380"
+}

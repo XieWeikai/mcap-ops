@@ -1,0 +1,364 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "machine": "reference-linux",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": "./.artifacts/rsi/python/base/mcap_ops/__init__.py",
+      "bytes": 5177,
+      "sha256": "07df5b378b1f6690f889994627adda9e16d10f076da450d93ffab0cf9a2744f8"
+    },
+    {
+      "path": "./.artifacts/rsi/python/base/mcap_ops/_native.abi3.so",
+      "bytes": 2402448,
+      "sha256": "9fed37bf717d76dce64385d77bd4c923a55577f3732adfbee40dd169daa2cc85"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": "./.artifacts/rsi/python/final/mcap_ops/__init__.py",
+      "bytes": 5251,
+      "sha256": "56e7d6e14dc2da494c359020bc3e853c80fcc786fe443649d18bb8342ff0d2d5"
+    },
+    {
+      "path": "./.artifacts/rsi/python/final/mcap_ops/_native.abi3.so",
+      "bytes": 16910824,
+      "sha256": "ecfa500fe0a88d16dbb6d65471f19b35c7abdffae277bdad05ab43c51c9c4dc2"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 673151.65625,
+          "samples_ns": [
+            657215.71875,
+            665569.34375,
+            669453.75,
+            674967.8125,
+            673151.65625,
+            675269.5625,
+            677802.21875
+          ],
+          "iterations": 32
+        }
+      },
+      "after": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 646329.21875,
+          "samples_ns": [
+            649920.03125,
+            640069.125,
+            646329.21875,
+            645662.9375,
+            640951.8125,
+            658893.8125,
+            660030.5625
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 658545.4375,
+          "samples_ns": [
+            649608.90625,
+            647668.21875,
+            658545.4375,
+            667677.78125,
+            674521.5,
+            668024.6875,
+            655890.5
+          ],
+          "iterations": 32
+        }
+      },
+      "before": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 653469.78125,
+          "samples_ns": [
+            653469.78125,
+            653754.9375,
+            648134.0,
+            662323.6875,
+            657708.375,
+            652514.1875,
+            650133.3125
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 663023.65625,
+          "samples_ns": [
+            663023.65625,
+            661565.71875,
+            668174.5,
+            663859.78125,
+            662451.125,
+            678409.6875,
+            655038.875
+          ],
+          "iterations": 32
+        }
+      },
+      "after": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 648685.40625,
+          "samples_ns": [
+            640471.34375,
+            645239.25,
+            645021.78125,
+            652204.59375,
+            648685.40625,
+            653127.65625,
+            650703.65625
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 648240.34375,
+          "samples_ns": [
+            643422.03125,
+            639945.59375,
+            643946.75,
+            648240.34375,
+            652333.46875,
+            657688.15625,
+            655395.5
+          ],
+          "iterations": 32
+        }
+      },
+      "before": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 656916.28125,
+          "samples_ns": [
+            648262.09375,
+            648137.75,
+            655581.90625,
+            656916.28125,
+            664720.3125,
+            664139.21875,
+            669593.75
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 4,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 659237.5625,
+          "samples_ns": [
+            656274.96875,
+            656562.09375,
+            661160.84375,
+            664143.4375,
+            653624.71875,
+            659237.5625,
+            671638.875
+          ],
+          "iterations": 32
+        }
+      },
+      "after": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 645468.53125,
+          "samples_ns": [
+            641060.09375,
+            644985.875,
+            673230.78125,
+            653055.9375,
+            651044.78125,
+            645468.53125,
+            641656.0
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 5,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 652690.90625,
+          "samples_ns": [
+            645466.4375,
+            647071.28125,
+            659035.03125,
+            652523.09375,
+            656754.875,
+            652690.90625,
+            663771.6875
+          ],
+          "iterations": 32
+        }
+      },
+      "before": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 656257.375,
+          "samples_ns": [
+            662378.25,
+            661060.8125,
+            656257.375,
+            650533.4375,
+            650341.09375,
+            656402.90625,
+            652883.53125
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 6,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 649663.34375,
+          "samples_ns": [
+            649663.34375,
+            652038.96875,
+            643352.5,
+            645944.59375,
+            650907.9375,
+            646486.78125,
+            660498.1875
+          ],
+          "iterations": 32
+        }
+      },
+      "after": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 641225.34375,
+          "samples_ns": [
+            645218.53125,
+            639371.0,
+            645322.09375,
+            641225.34375,
+            640603.8125,
+            642130.0,
+            636319.875
+          ],
+          "iterations": 32
+        }
+      }
+    },
+    {
+      "block": 7,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 648553.9375,
+          "samples_ns": [
+            644237.34375,
+            647792.625,
+            640624.3125,
+            648553.9375,
+            661207.125,
+            657831.125,
+            665697.8125
+          ],
+          "iterations": 32
+        }
+      },
+      "before": {
+        "python.inspect_mcap": {
+          "case": "python.inspect_mcap",
+          "median_ns": 668214.125,
+          "samples_ns": [
+            668214.125,
+            667089.34375,
+            664921.1875,
+            670375.5625,
+            666112.3125,
+            693624.0,
+            682168.75
+          ],
+          "iterations": 32
+        }
+      }
+    }
+  ],
+  "summary": {
+    "python.inspect_mcap": {
+      "before_ns": 658076.921875,
+      "after_ns": 648397.140625,
+      "latency_reduction_pct": 1.7046681914124395,
+      "paired_ratios": [
+        0.9601539456213735,
+        1.0077672394281048,
+        0.9783744518542584,
+        0.986792932756224,
+        0.9791137034155271,
+        0.994565442026461,
+        0.9870117344911381,
+        0.9705780126991479
+      ],
+      "worst_paired_reduction_pct": -0.7767239428104755
+    }
+  }
+}

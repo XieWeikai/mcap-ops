@@ -54,7 +54,7 @@ def main():
             f"Complexity: {args.complexity}",
             "",
             "reference-linux / i9-14900K / CPU 12 / Rust 1.90 / release, unchanged build flags.",
-            "Four paired AB/BA blocks; seven calibrated samples per side.",
+            f"{len(measurement['runs'])} paired AB/BA blocks; seven calibrated samples per side.",
             f"Geometric paired latency reduction: {audit['geomean_latency_reduction_pct']:.2f}%; "
             f"worst block: {audit['worst_block_reduction_pct']:.2f}%.",
         ]

@@ -1,0 +1,28 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index a718412..69cfcf5 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -207,6 +207,12 @@ pub fn inspect_mcap(
+             continue;
+         }
+         let (logs, pubs, payload_bytes) = times.remove(&id).unwrap_or_default();
++        let log_stats = inspect_time(&logs, max_gap_ns)?;
++        let publish_stats = if logs == pubs {
++            log_stats.clone()
++        } else {
++            inspect_time(&pubs, max_gap_ns)?
++        };
+         channels.push(ChannelReport {
+             channel_id: id,
+             topic: channel.topic.clone(),
+@@ -218,8 +224,8 @@ pub fn inspect_mcap(
+                 .as_ref()
+                 .map(|s| format!("{:x}", Sha256::digest(&s.data))),
+             payload_bytes,
+-            log_time: inspect_time(&logs, max_gap_ns)?,
+-            publish_time: inspect_time(&pubs, max_gap_ns)?,
++            log_time: log_stats,
++            publish_time: publish_stats,
+         });
+     }
+     Ok(McapReport {

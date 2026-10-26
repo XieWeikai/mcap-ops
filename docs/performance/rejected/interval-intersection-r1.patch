@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 43d57ba..49e03d3 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -57,7 +57,7 @@ impl IntervalSet {
+     }
+     pub fn intersection(&self, other: &Self) -> Self {
+         let (mut i, mut j) = (0, 0);
+-        let mut result = Vec::new();
++        let mut result = Vec::with_capacity(self.intervals.len().max(other.intervals.len()));
+         while i < self.intervals.len() && j < other.intervals.len() {
+             let a = self.intervals[i];
+             let b = other.intervals[j];

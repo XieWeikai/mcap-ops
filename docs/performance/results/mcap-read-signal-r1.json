@@ -1,0 +1,39 @@
+{
+  "label": "mcap-read-signal-r1",
+  "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+  "cases": [
+    "mcap_read_signal"
+  ],
+  "geomean_latency_reduction_pct": 0.14960799969606642,
+  "worst_block_reduction_pct": -1.7797662127541303,
+  "worst_case_reduction_pct": 0.14960799969606642,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "773e78725f8261d738474c6627194b4dd0e07e96886bd703b654aa77bf1540ea",
+  "operator": "mcap_read_signal",
+  "round": 1,
+  "decision": "rejected",
+  "method": "reserve bounded decoded signal storage",
+  "profile_hotspot": "Decoded signal vectors repeatedly grow while moving each decoded row",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "mcap_read_signal": {
+      "before_ns": 6142977.375,
+      "after_ns": 6130696.75,
+      "latency_reduction_pct": 0.14960799969606642,
+      "paired_ratios": [
+        0.9863318855229267,
+        1.0177976621275413,
+        1.0010416387141041,
+        0.9959662012919746
+      ],
+      "worst_paired_reduction_pct": -1.7797662127541303
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/mcap-read-signal-r1",
+  "validation_sha256": "906bd277ef92fca8efe48d18d94c8927dbcc91e4919fa9b81d009588a99dfda0"
+}

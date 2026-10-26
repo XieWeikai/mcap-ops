@@ -1,7 +1,8 @@
 # Architecture and first-release contract
 
-Status: design accepted for implementation in this repository. Capability and
-test results will be updated after remote verification.
+Status: first implementation validated on reference-linux. Implemented capabilities are
+listed in `operators.md`; two-round profiling and optimization evidence is in
+`performance/RESULTS.md`.
 
 ## Ownership
 
@@ -51,10 +52,14 @@ or dynamic code execution.
   is an explicit upstream choice; neither sorting nor deduplication is silent.
 - The initial core does not guess units, frames, joint order, or action meaning.
   Callers retain a `SignalSpec` alongside the arrays for those contracts.
-- Python copies input NumPy arrays into an immutable owned snapshot once. Rust
-  work can release the GIL without concurrently reading mutable Python buffers.
-  Output arrays transfer owned allocations where supported. This is not a claim
-  of end-to-end zero-copy input.
+- Python copies input NumPy arrays into an owned snapshot per call. Contiguous
+  values use a slice copy; strided values retain logical iteration order.
+  Numeric outputs use NumPy directly, moving owned buffers where supported;
+  small diagnostic reports still use JSON. Public shapes, dictionary order,
+  NaN handling and provenance remain compatible with the initial interface.
+- The current bindings hold the GIL. Episode-level concurrency can use upstream
+  process scheduling. Input snapshot ownership allows a future explicit GIL
+  release, but no thread-parallel Python speedup is claimed here.
 
 ## Time and sampling
 
@@ -90,10 +95,10 @@ episode splitting, train splits and observation/action label semantics.
 ## IO and media
 
 MCAP inspection preserves file order, reports channel-specific clock reversals,
-and supports topic/time selection. All files are opened read-only. The initial
-reader may map the file; this avoids copying the whole container but decompressed
-chunks and selected decoded values still consume memory. Callers must not modify
-or truncate an input while it is open.
+and supports topic/time selection. Files are opened read-only through the MCAP
+streaming reader and a buffered file. Chunk CRCs are checked before yielding
+their messages, and decompressed chunks and selected decoded values consume
+memory. Callers must not modify or truncate an input while it is open.
 
 Images support bounded PNG/JPEG decode, quality metrics, crop and resize.
 Video probing and complete decode validation use caller-installed FFmpeg tools

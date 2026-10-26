@@ -1,0 +1,14 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 4e33606..2431095 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -26,7 +26,8 @@ pub fn uniform_grid(
+     if period_num < rate {
+         return Err(invalid("rate exceeds nanosecond resolution"));
+     }
+-    let mut result = Vec::new();
++    let estimate = ((i128::from(end) - i128::from(start)) * rate + period_num - 1) / period_num;
++    let mut result = Vec::with_capacity(estimate.min(max_points as i128) as usize);
+     for i in 0..=max_points {
+         let offset = (i as i128 * period_num + rate / 2) / rate;
+         let t = i128::from(start) + offset;

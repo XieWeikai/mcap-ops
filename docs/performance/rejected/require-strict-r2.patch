@@ -1,0 +1,16 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index 4e33606..ac83f40 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -2,7 +2,10 @@ use crate::{invalid, Error, Result};
+ use serde::{Deserialize, Serialize};
+ 
+ pub fn require_strict(times: &[i64]) -> Result<()> {
+-    if times.iter().zip(times.iter().skip(1)).any(|(a, b)| b <= a) {
++    if !times
++        .windows(2)
++        .fold(true, |valid, w| valid & (w[1] > w[0]))
++    {
+         return Err(invalid("source timestamps must be strictly increasing; inspect before resolving duplicates or reversals"));
+     }
+     Ok(())

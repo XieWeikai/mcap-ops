@@ -31,6 +31,7 @@ def equal(a, b, path="result"):
             np.testing.assert_array_equal(a, b, err_msg=path)
     elif isinstance(a, dict):
         assert isinstance(b, dict) and a.keys() == b.keys(), path
+        assert list(a) == list(b), f"{path}: mapping iteration order changed"
         for key in a:
             equal(a[key], b[key], f"{path}.{key}")
     elif isinstance(a, (list, tuple)):
@@ -44,9 +45,9 @@ def equal(a, b, path="result"):
         assert type(a) is type(b) and a == b, (path, a, b)
 
 
-def invoke(module, method, *args, **kwargs):
+def invoke(module, operation_name, *args, **kwargs):
     try:
-        return getattr(module, method)(*args, **kwargs)
+        return getattr(module, operation_name)(*args, **kwargs)
     except Exception as error:
         return {"exception_type": type(error).__name__, "message": str(error)}
 
@@ -60,9 +61,9 @@ def main():
     new = load("_rsi_after", args.after)
     rng = np.random.default_rng(2319)
     checks = 0
-    def compare(method, *args, **kwargs):
+    def compare(operation_name, *args, **kwargs):
         nonlocal checks
-        equal(invoke(old, method, *args, **kwargs), invoke(new, method, *args, **kwargs), method)
+        equal(invoke(old, operation_name, *args, **kwargs), invoke(new, operation_name, *args, **kwargs), operation_name)
         checks += 1
     for count in [0, 1, 3, 17, 64]:
         times = np.arange(count, dtype=np.int64) * 10

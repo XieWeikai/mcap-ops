@@ -3,7 +3,8 @@
 The package is a thin, stable seam over the Rust implementation. It accepts
 NumPy arrays and returns dictionaries containing NumPy arrays for numeric
 operators. Input arrays are copied into Rust-owned memory; the Rust core never
-mutates caller buffers.
+mutates caller buffers. Numeric results pass directly to NumPy instead of being
+serialized to JSON and parsed back. Small diagnostic reports still use JSON.
 
 ```python
 import numpy as np
@@ -41,3 +42,13 @@ replace values: callers decide whether to reject a sample, keep it with a mask,
 or use a provider-specific policy. A causal operation must not silently consume
 future data; use `uses_future`, `lookahead_samples`, and `group_delay_samples`
 when constructing training features.
+
+The bindings currently hold the GIL; use upstream process workers for concurrent
+episodes. The Rust-only interfaces additionally include `gate`, `IntervalSet`,
+`map_clock`, `inspect_time`, `expand_batch_timestamps`, and `RawReader`.
+They are not Python exports in this release.
+
+Performance claims and per-round commits are documented in
+[the RSI results](performance/RESULTS.md). The Python comparisons include the
+public wrapper cost, NumPy conversions and output destruction, and preserve
+dictionary iteration order and non-finite value behavior.

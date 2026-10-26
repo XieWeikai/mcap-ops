@@ -1,0 +1,22 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index e67c9fa..d698451 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -346,7 +346,7 @@ pub fn read_signal(
+     let mut timestamps = Vec::new();
+     let mut values = Vec::new();
+     for item in RawReader::open(path, filter, limits)? {
+-        for sample in decoder.decode(&item?)? {
++        for mut sample in decoder.decode(&item?)? {
+             if timestamps.len() >= max_samples {
+                 return Err(invalid("decoded signal exceeds max_samples"));
+             }
+@@ -354,7 +354,7 @@ pub fn read_signal(
+                 return Err(invalid("decoder returned inconsistent channel count"));
+             }
+             timestamps.push(sample.timestamp_ns);
+-            values.extend(sample.values);
++            values.append(&mut sample.values);
+         }
+     }
+     if timestamps.is_empty() {

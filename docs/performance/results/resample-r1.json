@@ -1,0 +1,78 @@
+{
+  "label": "resample-r1",
+  "base_commit": "fb9eb335fd5e751f061d2633527b36451a731b9a",
+  "cases": [
+    "resample.previous",
+    "resample.nearest",
+    "resample.linear",
+    "resample.slerp"
+  ],
+  "geomean_latency_reduction_pct": 10.44604288659623,
+  "worst_block_reduction_pct": 8.98606790916875,
+  "worst_case_reduction_pct": -22.20965312837859,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/sampling.rs"
+  ],
+  "measurement_sha256": "bdc7cd3a3e565c5e764610fb8751c18a88dc2a089ed44ca2c0953172ea3a57d3",
+  "operator": "resample",
+  "round": 1,
+  "decision": "rejected",
+  "method": "copy held samples without redundant endpoint arithmetic",
+  "profile_hotspot": "Repeated endpoint checks, arithmetic on held values and separate finite passes",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "resample.previous": {
+      "before_ns": 341577.5546875,
+      "after_ns": 225141.4765625,
+      "latency_reduction_pct": 33.74530298803406,
+      "paired_ratios": [
+        0.6449258781298355,
+        0.6732965278006289,
+        0.6645434563366215,
+        0.6605504839026973
+      ],
+      "worst_paired_reduction_pct": 32.67034721993711
+    },
+    "resample.nearest": {
+      "before_ns": 356484.1328125,
+      "after_ns": 246127.3515625,
+      "latency_reduction_pct": 31.308630400982306,
+      "paired_ratios": [
+        0.6838595048479655,
+        0.7125856014630121,
+        0.6886012645989072,
+        0.6852261273814467
+      ],
+      "worst_paired_reduction_pct": 28.741439853698793
+    },
+    "resample.linear": {
+      "before_ns": 430387.015625,
+      "after_ns": 495912.06249999994,
+      "latency_reduction_pct": -15.049586020344186,
+      "paired_ratios": [
+        1.138869344961443,
+        1.1693348375470838,
+        1.1621223754454406,
+        1.1372317736074418
+      ],
+      "worst_paired_reduction_pct": -16.933483754708377
+    },
+    "resample.slerp": {
+      "before_ns": 627515.609375,
+      "after_ns": 766887.3125,
+      "latency_reduction_pct": -22.20965312837859,
+      "paired_ratios": [
+        1.2211290026097383,
+        1.2230640599578335,
+        1.2579229438868575,
+        1.200944858658499
+      ],
+      "worst_paired_reduction_pct": -25.792294388685754
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/resample-r1",
+  "validation_sha256": "5149bf62048ca0c2c9e92c07af0a8c9b4a90f07b87173eb1cef940d79b6723be"
+}

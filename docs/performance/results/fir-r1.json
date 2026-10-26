@@ -1,0 +1,52 @@
+{
+  "label": "fir-r1",
+  "base_commit": "6922813b35be8a132ba557e514ebd67bc8514b34",
+  "cases": [
+    "fir.scalar",
+    "fir.vector"
+  ],
+  "geomean_latency_reduction_pct": -26.745395852392594,
+  "worst_block_reduction_pct": -31.477774783190647,
+  "worst_case_reduction_pct": -94.98367685468172,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "e1bdb3aeb9626c79f282e459c89720e1e38fea36d38bc3224f62656d41fa487e",
+  "operator": "fir",
+  "round": 1,
+  "decision": "rejected",
+  "method": "accumulate FIR taps across contiguous channels",
+  "profile_hotspot": "FIR repeatedly strides across channels and materializes two support-prefix buffers",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "fir.scalar": {
+      "before_ns": 507438.921875,
+      "after_ns": 993440.328125,
+      "latency_reduction_pct": -94.98367685468172,
+      "paired_ratios": [
+        2.0012471329573316,
+        2.054599162404837,
+        1.8984264041363028,
+        1.5077280696914777
+      ],
+      "worst_paired_reduction_pct": -105.45991624048372
+    },
+    "fir.vector": {
+      "before_ns": 1866328.59375,
+      "after_ns": 1547538.96875,
+      "latency_reduction_pct": 16.903904787563086,
+      "paired_ratios": [
+        0.8191132596571041,
+        0.8413517136698463,
+        0.8290880575570984,
+        0.83283384669164
+      ],
+      "worst_paired_reduction_pct": 15.864828633015371
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/fir-r1",
+  "validation_sha256": "c6d3f57d7713b9b786bc0207c2a155dfa9c2edf4610f9036bfbc3c203123ac9e"
+}

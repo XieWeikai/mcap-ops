@@ -66,7 +66,14 @@ def main():
         for round_number in [1, 2] if args.round == "both" else [int(args.round)]:
             label = f"{op.replace('_','-')}-r{round_number}"
             decision = ROOT / "docs/performance/results" / f"{label}.json"
-            if decision.exists():
+            completed = any(
+                (record.get("operator"), record.get("round")) == (op, round_number)
+                for record in (
+                    json.loads(path.read_text())
+                    for path in (ROOT / "docs/performance/results").glob("*.json")
+                )
+            )
+            if decision.exists() or completed:
                 print("already recorded", label, flush=True)
                 continue
             path = ROOT / recipe["path"]

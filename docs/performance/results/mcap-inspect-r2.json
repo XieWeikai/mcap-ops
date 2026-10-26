@@ -1,0 +1,39 @@
+{
+  "label": "mcap-inspect-r2",
+  "base_commit": "652f7c466111f7f5bf8c2efcc271108140e4b510",
+  "cases": [
+    "mcap_inspect"
+  ],
+  "geomean_latency_reduction_pct": -1.0845868695580574,
+  "worst_block_reduction_pct": -4.531464424256626,
+  "worst_case_reduction_pct": -1.0845868695580574,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/mcap_ops.rs"
+  ],
+  "measurement_sha256": "3efb353b07a945448d28b1dcf8b6a7ff7215e96b45b0c54490607262aeab54a0",
+  "operator": "mcap_inspect",
+  "round": 2,
+  "decision": "rejected",
+  "method": "stream channel lookup through a filtered iterator",
+  "profile_hotspot": "Repeated clock summaries and exhaustive channel lookup in the inspection adapter",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "mcap_inspect": {
+      "before_ns": 1749739.75,
+      "after_ns": 1771867.96875,
+      "latency_reduction_pct": -1.0845868695580574,
+      "paired_ratios": [
+        0.9955528169871675,
+        0.9988281573525368,
+        1.0228635800386245,
+        1.0453146442425663
+      ],
+      "worst_paired_reduction_pct": -4.531464424256626
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/mcap-inspect-r2",
+  "validation_sha256": "41e089460cc2ee775f740b3ae27c342722cd016a084033c2d9b0b9dd8d6c7a43"
+}

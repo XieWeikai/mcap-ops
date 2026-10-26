@@ -57,7 +57,7 @@ def main():
     timestamps = np.arange(n, dtype=np.int64) * 1_000_000
     values = np.sin(np.arange(n * d, dtype=np.float64).reshape(n, d) * 0.001)
     target = np.arange(10_000, dtype=np.int64) * 2_000_000 + 500_000
-    centers = timestamps[10:8010:2]
+    centers = timestamps[10:8010:2].copy()
     offsets = np.array([-3_000_000, -2_000_000, -1_000_000, 0], dtype=np.int64)
     taps = np.array(ops.lowpass_taps(1000, 50, 31), dtype=np.float64)
     measure("python.inspect_signal", lambda: ops.inspect_signal(timestamps, values), args)

@@ -99,7 +99,7 @@ def main():
         source=round_one(source)
         wrapper=ROOT / "python/mcap_ops/__init__.py"
         text=replace_once(wrapper.read_text(),"return json.loads(value)",
-                          "return json.loads(value) if isinstance(value, str) else value")
+                          "return json.loads(value) if isinstance(value, str) else {key: value[key] for key in sorted(value)}")
         wrapper.write_text(text)
     else:
         source=replace_once(source,"let flat = array.iter().copied().collect();",'''let flat = if array.is_standard_layout() {

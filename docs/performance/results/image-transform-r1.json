@@ -1,0 +1,52 @@
+{
+  "label": "image-transform-r1",
+  "base_commit": "9e7f7f8592cc328d76de5b93fd0421cc93b15dc3",
+  "cases": [
+    "image_transform.gradient",
+    "image_transform.noise"
+  ],
+  "geomean_latency_reduction_pct": 5.196219237500532,
+  "worst_block_reduction_pct": 3.471281458215525,
+  "worst_case_reduction_pct": 4.95325665534242,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "90bd4580c1d7e6c0196086dd0546b92939eb86d34a9f35c51eea38f41d838802",
+  "operator": "image_transform",
+  "round": 1,
+  "decision": "rejected",
+  "method": "avoid copying identity crops after validation",
+  "profile_hotspot": "Full-image crop copying and lossless PNG row-filter work",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "image_transform.gradient": {
+      "before_ns": 5712650.25,
+      "after_ns": 5418988.625,
+      "latency_reduction_pct": 5.028930293458034,
+      "paired_ratios": [
+        0.9410451779647208,
+        0.9681022072219014,
+        0.9583762161661185,
+        0.93304920969514
+      ],
+      "worst_paired_reduction_pct": 3.1897792778098566
+    },
+    "image_transform.noise": {
+      "before_ns": 4192437.0,
+      "after_ns": 3970637.8750000005,
+      "latency_reduction_pct": 4.95325665534242,
+      "paired_ratios": [
+        0.938075945181721,
+        0.9624803490591864,
+        0.943812217739895,
+        0.9571226491532566
+      ],
+      "worst_paired_reduction_pct": 3.7519650940813554
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/image-transform-r1",
+  "validation_sha256": "ddcea875eeed881f8235df4e5e7b0e2e10bf7d6b35bbe9d9550d469d2e75764e"
+}

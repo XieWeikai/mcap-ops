@@ -1,0 +1,39 @@
+{
+  "label": "expand-batch-timestamps-r1",
+  "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+  "cases": [
+    "expand_batch_timestamps"
+  ],
+  "geomean_latency_reduction_pct": 0.35473871682543123,
+  "worst_block_reduction_pct": -54.03750646962451,
+  "worst_case_reduction_pct": 0.35473871682543123,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "5ec519ad2f9da0890deb58fbc5ba4585520b1c4dda20a9914d8bdc24b3fef671",
+  "operator": "expand_batch_timestamps",
+  "round": 1,
+  "decision": "rejected",
+  "method": "express batch expansion as checked mapped iteration",
+  "profile_hotspot": "Checked per-sample addition and Vec push inside each known batch",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "expand_batch_timestamps": {
+      "before_ns": 29818.4443359375,
+      "after_ns": 29587.10400390625,
+      "latency_reduction_pct": 0.35473871682543123,
+      "paired_ratios": [
+        0.9699090575465499,
+        1.540375064696245,
+        1.004356842114937,
+        0.9885483835485543
+      ],
+      "worst_paired_reduction_pct": -54.03750646962451
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/expand-batch-timestamps-r1",
+  "validation_sha256": "5af85847309304b4e3199cf3cb0257b7cf5949447b0f438fa599258d757522a1"
+}

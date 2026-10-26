@@ -1,0 +1,52 @@
+{
+  "label": "align-timestamps-r1",
+  "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest"
+  ],
+  "geomean_latency_reduction_pct": -9.605997616217055,
+  "worst_block_reduction_pct": -10.844751815089992,
+  "worst_case_reduction_pct": -16.883816693291465,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "4eb41cc06d67b680038005872447f5c071e8a310554963436a40fe00102e2f29",
+  "operator": "align_timestamps",
+  "round": 1,
+  "decision": "rejected",
+  "method": "build alignment outputs in one pass",
+  "profile_hotspot": "Output initialization and wide signed distance checks in the matching loop",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "align_timestamps.previous": {
+      "before_ns": 110887.015625,
+      "after_ns": 131150.978515625,
+      "latency_reduction_pct": -16.883816693291465,
+      "paired_ratios": [
+        1.2000170324884798,
+        1.1641255424542096,
+        1.1575795220772243,
+        1.1735507914116197
+      ],
+      "worst_paired_reduction_pct": -20.00170324884798
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 148459.962890625,
+      "after_ns": 152512.34765625,
+      "latency_reduction_pct": -2.4247415937847405,
+      "paired_ratios": [
+        1.0238653845996013,
+        1.0246294472760935,
+        0.9992482666645631,
+        1.0309976999107409
+      ],
+      "worst_paired_reduction_pct": -3.099769991074086
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/align-timestamps-r1",
+  "validation_sha256": "1cea6ff9dc8e0947e55f0998727d8f85acda64a939f1aeeaefd6cfc7950b132a"
+}

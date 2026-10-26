@@ -1,0 +1,52 @@
+{
+  "label": "interval-intersection-r1",
+  "base_commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae",
+  "cases": [
+    "interval_intersection.dense",
+    "interval_intersection.late"
+  ],
+  "geomean_latency_reduction_pct": -7.4640000618885205,
+  "worst_block_reduction_pct": -10.917486403565757,
+  "worst_case_reduction_pct": -9.045212546833504,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "fde6928e68ecb4e5e90f8f5266f363ec9daf46fbccaaf8476be5adda135c95e7",
+  "operator": "interval_intersection",
+  "round": 1,
+  "decision": "rejected",
+  "method": "reserve intersection output capacity",
+  "profile_hotspot": "Intersection grows outputs and scans non-overlapping leading intervals",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "interval_intersection.dense": {
+      "before_ns": 26018.9580078125,
+      "after_ns": 28371.60888671875,
+      "latency_reduction_pct": -9.045212546833504,
+      "paired_ratios": [
+        1.0604718046871144,
+        1.1719807524747337,
+        1.0968153283317215,
+        1.0840889226049486
+      ],
+      "worst_paired_reduction_pct": -17.198075247473366
+    },
+    "interval_intersection.late": {
+      "before_ns": 12994.87060546875,
+      "after_ns": 13543.893310546875,
+      "latency_reduction_pct": -4.228822135222243,
+      "paired_ratios": [
+        1.0286645506183836,
+        1.0497347131432881,
+        1.0834274939207336,
+        1.0348417295611565
+      ],
+      "worst_paired_reduction_pct": -8.342749392073356
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/interval-intersection-r1",
+  "validation_sha256": "f620ea1b845b523435572c7a671bdc2826653ed00c942bb9d3bf78acbda2d8b2"
+}

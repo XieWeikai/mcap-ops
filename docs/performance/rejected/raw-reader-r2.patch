@@ -1,0 +1,35 @@
+diff --git a/crates/io/src/mcap_ops.rs b/crates/io/src/mcap_ops.rs
+index a718412..be89c5d 100644
+--- a/crates/io/src/mcap_ops.rs
++++ b/crates/io/src/mcap_ops.rs
+@@ -36,7 +36,12 @@ impl MessageFilter {
+         } else {
+             m.log_time
+         };
+-        (self.topics.is_empty() || self.topics.contains(&m.channel.topic))
++        (self.topics.is_empty()
++            || (if self.topics.len() > 8 {
++                self.topics.binary_search(&m.channel.topic).is_ok()
++            } else {
++                self.topics.contains(&m.channel.topic)
++            }))
+             && self.start_ns.is_none_or(|s| t >= s)
+             && self.end_ns.is_none_or(|e| t < e)
+     }
+@@ -68,8 +73,15 @@ pub struct RawReader {
+     done: bool,
+ }
+ impl RawReader {
+-    pub fn open(path: impl AsRef<Path>, filter: MessageFilter, limits: ReadLimits) -> Result<Self> {
++    pub fn open(
++        path: impl AsRef<Path>,
++        mut filter: MessageFilter,
++        limits: ReadLimits,
++    ) -> Result<Self> {
+         filter.validate()?;
++        if filter.topics.len() > 8 {
++            filter.topics.sort_unstable();
++        }
+         if limits.max_messages == 0 || limits.max_record_bytes == 0 {
+             return Err(invalid("read limits must be positive"));
+         }

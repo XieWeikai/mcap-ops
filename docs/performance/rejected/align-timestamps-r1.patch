@@ -1,0 +1,42 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index b406d2c..abd89a1 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -175,12 +175,12 @@ pub fn align_timestamps(
+         ));
+     }
+     let mut result = TimeAlignment {
+-        indices: vec![-1; target.len()],
+-        offsets_ns: vec![0; target.len()],
+-        valid: vec![false; target.len()],
++        indices: Vec::with_capacity(target.len()),
++        offsets_ns: Vec::with_capacity(target.len()),
++        valid: Vec::with_capacity(target.len()),
+     };
+     let mut next = 0;
+-    for (i, &t) in target.iter().enumerate() {
++    for &t in target {
+         while next < source.len() && source[next] <= t {
+             next += 1;
+         }
+@@ -202,10 +202,16 @@ pub fn align_timestamps(
+             (None, b) => b,
+         };
+         if let Some(index) = chosen {
+-            result.indices[i] = index as i64;
+-            result.offsets_ns[i] = i64::try_from(i128::from(source[index]) - i128::from(t))
+-                .map_err(|_| Error::Overflow)?;
+-            result.valid[i] = true;
++            result.indices.push(index as i64);
++            result.offsets_ns.push(
++                i64::try_from(i128::from(source[index]) - i128::from(t))
++                    .map_err(|_| Error::Overflow)?,
++            );
++            result.valid.push(true);
++        } else {
++            result.indices.push(-1);
++            result.offsets_ns.push(0);
++            result.valid.push(false);
+         }
+     }
+     Ok(result)

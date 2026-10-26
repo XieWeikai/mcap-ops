@@ -1,0 +1,3369 @@
+{
+  "operators": 30,
+  "rounds": 60,
+  "accepted": 27,
+  "rejected": 33,
+  "decisions": [
+    {
+      "label": "align-timestamps-r1",
+      "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+      "cases": [
+        "align_timestamps.previous",
+        "align_timestamps.nearest"
+      ],
+      "geomean_latency_reduction_pct": -9.605997616217055,
+      "worst_block_reduction_pct": -10.844751815089992,
+      "worst_case_reduction_pct": -16.883816693291465,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "4eb41cc06d67b680038005872447f5c071e8a310554963436a40fe00102e2f29",
+      "operator": "align_timestamps",
+      "round": 1,
+      "decision": "rejected",
+      "method": "build alignment outputs in one pass",
+      "profile_hotspot": "Output initialization and wide signed distance checks in the matching loop",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "align_timestamps.previous": {
+          "before_ns": 110887.015625,
+          "after_ns": 131150.978515625,
+          "latency_reduction_pct": -16.883816693291465,
+          "paired_ratios": [
+            1.2000170324884798,
+            1.1641255424542096,
+            1.1575795220772243,
+            1.1735507914116197
+          ],
+          "worst_paired_reduction_pct": -20.00170324884798
+        },
+        "align_timestamps.nearest": {
+          "before_ns": 148459.962890625,
+          "after_ns": 152512.34765625,
+          "latency_reduction_pct": -2.4247415937847405,
+          "paired_ratios": [
+            1.0238653845996013,
+            1.0246294472760935,
+            0.9992482666645631,
+            1.0309976999107409
+          ],
+          "worst_paired_reduction_pct": -3.099769991074086
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/align-timestamps-r1",
+      "validation_sha256": "1cea6ff9dc8e0947e55f0998727d8f85acda64a939f1aeeaefd6cfc7950b132a",
+      "record_path": "docs/performance/results/align-timestamps-r1.json"
+    },
+    {
+      "label": "align-timestamps-r2",
+      "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+      "cases": [
+        "align_timestamps.previous",
+        "align_timestamps.nearest"
+      ],
+      "geomean_latency_reduction_pct": -1.1590264967286767,
+      "worst_block_reduction_pct": -1.9591551881719793,
+      "worst_case_reduction_pct": -10.840553539344588,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "6648c0f60b63d10419422926fc6cf6099df1a93d275e22edeb2531fd45cc4f82",
+      "operator": "align_timestamps",
+      "round": 2,
+      "decision": "rejected",
+      "method": "use overflow-safe unsigned timestamp distances",
+      "profile_hotspot": "Output initialization and wide signed distance checks in the matching loop",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "align_timestamps.previous": {
+          "before_ns": 112081.966796875,
+          "after_ns": 124427.97265625,
+          "latency_reduction_pct": -10.840553539344588,
+          "paired_ratios": [
+            1.1132111638812217,
+            1.1031227176403071,
+            1.1035999069056701,
+            1.134773140158688
+          ],
+          "worst_paired_reduction_pct": -13.477314015868803
+        },
+        "align_timestamps.nearest": {
+          "before_ns": 149937.357421875,
+          "after_ns": 137036.14453125,
+          "latency_reduction_pct": 8.121544186998763,
+          "paired_ratios": [
+            0.9214680068143083,
+            0.8760763737446438,
+            0.9250129831267541,
+            0.9161011094457164
+          ],
+          "worst_paired_reduction_pct": 7.498701687324594
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/align-timestamps-r2",
+      "validation_sha256": "d9a17a076e97059b6144e99571856cca7074ec041267bb4e5ac3f3d09601b305",
+      "record_path": "docs/performance/results/align-timestamps-r2.json"
+    },
+    {
+      "label": "ema-r1",
+      "base_commit": "fe9bcaeefb7b41759547923b3f1ac6ece625b4ad",
+      "cases": [
+        "ema.uniform",
+        "ema.jitter"
+      ],
+      "geomean_latency_reduction_pct": 17.409416123147146,
+      "worst_block_reduction_pct": 16.041765693130017,
+      "worst_case_reduction_pct": 16.924530643862546,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "547b9eff75bd8a1892e724d9ecae1be46159d2bbb417b64e282881e0ccdab74a",
+      "operator": "ema",
+      "round": 1,
+      "decision": "accepted",
+      "method": "zip contiguous EMA rows",
+      "profile_hotspot": "Repeated channel indexing and expm1 evaluation in the EMA loop",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "ema.uniform": {
+          "before_ns": 819050.9375,
+          "after_ns": 673457.984375,
+          "latency_reduction_pct": 17.64003614563421,
+          "paired_ratios": [
+            0.8185779325634928,
+            0.8194003463219002,
+            0.8442832831351276,
+            0.8277989307654157
+          ],
+          "worst_paired_reduction_pct": 15.571671686487242
+        },
+        "ema.jitter": {
+          "before_ns": 820059.3125,
+          "after_ns": 677899.8125,
+          "latency_reduction_pct": 16.924530643862546,
+          "paired_ratios": [
+            0.839187131342543,
+            0.8266018094490726,
+            0.8349075776736764,
+            0.8156265592441542
+          ],
+          "worst_paired_reduction_pct": 16.081286865745703
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ema-r1",
+      "validation_sha256": "5eeeba06b8e27b02ac8b477074040b35975146977dd3f03157800d4542b9ed3f",
+      "record_path": "docs/performance/results/ema-r1.json",
+      "commit": "1e54c52ca4c8a991437a44152c1ab8c830335891"
+    },
+    {
+      "label": "ema-r2",
+      "base_commit": "1e54c52ca4c8a991437a44152c1ab8c830335891",
+      "cases": [
+        "ema.uniform",
+        "ema.jitter"
+      ],
+      "geomean_latency_reduction_pct": 36.73994941273606,
+      "worst_block_reduction_pct": 36.43635735374087,
+      "worst_case_reduction_pct": 28.916024630476457,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "2447acfcf3767fd762ed06a029575096e9e089fc9e2fc418e19deef88dafb94a",
+      "operator": "ema",
+      "round": 2,
+      "decision": "accepted",
+      "method": "cache the EMA weight for repeated time deltas",
+      "profile_hotspot": "Repeated channel indexing and expm1 evaluation in the EMA loop",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "ema.uniform": {
+          "before_ns": 672116.8125,
+          "after_ns": 377415.3515625,
+          "latency_reduction_pct": 43.70268142647819,
+          "paired_ratios": [
+            0.5633573419804697,
+            0.5370883304084815,
+            0.5653761081683479,
+            0.5625890294899665
+          ],
+          "worst_paired_reduction_pct": 43.46238918316521
+        },
+        "ema.jitter": {
+          "before_ns": 675393.640625,
+          "after_ns": 479869.2421875,
+          "latency_reduction_pct": 28.916024630476457,
+          "paired_ratios": [
+            0.7125974048977834,
+            0.70906122213004,
+            0.7146281224282423,
+            0.7090821024926874
+          ],
+          "worst_paired_reduction_pct": 28.537187757175776
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ema-r2",
+      "validation_sha256": "60d485718fa53f1d0e2325ac2907e2ca00e827f02327e071bc68d08fa25ab40b",
+      "record_path": "docs/performance/results/ema-r2.json",
+      "commit": "2c74abb1edffe9e82073ecded03b2fb3647890c8"
+    },
+    {
+      "label": "expand-batch-timestamps-r1",
+      "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+      "cases": [
+        "expand_batch_timestamps"
+      ],
+      "geomean_latency_reduction_pct": 0.35473871682543123,
+      "worst_block_reduction_pct": -54.03750646962451,
+      "worst_case_reduction_pct": 0.35473871682543123,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "5ec519ad2f9da0890deb58fbc5ba4585520b1c4dda20a9914d8bdc24b3fef671",
+      "operator": "expand_batch_timestamps",
+      "round": 1,
+      "decision": "rejected",
+      "method": "express batch expansion as checked mapped iteration",
+      "profile_hotspot": "Checked per-sample addition and Vec push inside each known batch",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "expand_batch_timestamps": {
+          "before_ns": 29818.4443359375,
+          "after_ns": 29587.10400390625,
+          "latency_reduction_pct": 0.35473871682543123,
+          "paired_ratios": [
+            0.9699090575465499,
+            1.540375064696245,
+            1.004356842114937,
+            0.9885483835485543
+          ],
+          "worst_paired_reduction_pct": -54.03750646962451
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/expand-batch-timestamps-r1",
+      "validation_sha256": "5af85847309304b4e3199cf3cb0257b7cf5949447b0f438fa599258d757522a1",
+      "record_path": "docs/performance/results/expand-batch-timestamps-r1.json"
+    },
+    {
+      "label": "expand-batch-timestamps-r2",
+      "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+      "cases": [
+        "expand_batch_timestamps"
+      ],
+      "geomean_latency_reduction_pct": -21.503705706708143,
+      "worst_block_reduction_pct": -22.78248638480416,
+      "worst_case_reduction_pct": -21.503705706708143,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "1366076c26fc0fc84e03196ad04b5db028c9c243597cb1a182f712695ef22273",
+      "operator": "expand_batch_timestamps",
+      "round": 2,
+      "decision": "rejected",
+      "method": "check batch extrema before vectorizable additions",
+      "profile_hotspot": "Checked per-sample addition and Vec push inside each known batch",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "expand_batch_timestamps": {
+          "before_ns": 29896.7568359375,
+          "after_ns": 36170.08935546875,
+          "latency_reduction_pct": -21.503705706708143,
+          "paired_ratios": [
+            1.2260597936058275,
+            1.2278248638480416,
+            1.2040143205283356,
+            1.1454410747463126
+          ],
+          "worst_paired_reduction_pct": -22.78248638480416
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/expand-batch-timestamps-r2",
+      "validation_sha256": "9a5f1c1c468f946383a2e1f78a86a818a352085bcbacd57a19d5d5f6163274df",
+      "record_path": "docs/performance/results/expand-batch-timestamps-r2.json"
+    },
+    {
+      "label": "fir-r1",
+      "base_commit": "6922813b35be8a132ba557e514ebd67bc8514b34",
+      "cases": [
+        "fir.scalar",
+        "fir.vector"
+      ],
+      "geomean_latency_reduction_pct": -26.745395852392594,
+      "worst_block_reduction_pct": -31.477774783190647,
+      "worst_case_reduction_pct": -94.98367685468172,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "e1bdb3aeb9626c79f282e459c89720e1e38fea36d38bc3224f62656d41fa487e",
+      "operator": "fir",
+      "round": 1,
+      "decision": "rejected",
+      "method": "accumulate FIR taps across contiguous channels",
+      "profile_hotspot": "FIR repeatedly strides across channels and materializes two support-prefix buffers",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "fir.scalar": {
+          "before_ns": 507438.921875,
+          "after_ns": 993440.328125,
+          "latency_reduction_pct": -94.98367685468172,
+          "paired_ratios": [
+            2.0012471329573316,
+            2.054599162404837,
+            1.8984264041363028,
+            1.5077280696914777
+          ],
+          "worst_paired_reduction_pct": -105.45991624048372
+        },
+        "fir.vector": {
+          "before_ns": 1866328.59375,
+          "after_ns": 1547538.96875,
+          "latency_reduction_pct": 16.903904787563086,
+          "paired_ratios": [
+            0.8191132596571041,
+            0.8413517136698463,
+            0.8290880575570984,
+            0.83283384669164
+          ],
+          "worst_paired_reduction_pct": 15.864828633015371
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/fir-r1",
+      "validation_sha256": "c6d3f57d7713b9b786bc0207c2a155dfa9c2edf4610f9036bfbc3c203123ac9e",
+      "record_path": "docs/performance/results/fir-r1.json"
+    },
+    {
+      "label": "fir-r2",
+      "base_commit": "6922813b35be8a132ba557e514ebd67bc8514b34",
+      "cases": [
+        "fir.scalar",
+        "fir.vector"
+      ],
+      "geomean_latency_reduction_pct": -26.415280444747147,
+      "worst_block_reduction_pct": -27.91614017487227,
+      "worst_case_reduction_pct": -79.5166908796644,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "660f008deca7ae2b21c707a7ff94ddaf194dd9b60388c8c127bdb6e52f029a26",
+      "operator": "fir",
+      "round": 2,
+      "decision": "rejected",
+      "method": "track consecutive valid FIR support without prefix buffers",
+      "profile_hotspot": "FIR repeatedly strides across channels and materializes two support-prefix buffers",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "fir.scalar": {
+          "before_ns": 521762.140625,
+          "after_ns": 936487.0,
+          "latency_reduction_pct": -79.5166908796644,
+          "paired_ratios": [
+            1.7658543242845472,
+            1.8454533539718336,
+            1.8244794933087407,
+            1.6413696385329535
+          ],
+          "worst_paired_reduction_pct": -84.54533539718336
+        },
+        "fir.vector": {
+          "before_ns": 1846473.625,
+          "after_ns": 1621870.8125,
+          "latency_reduction_pct": 11.486303647062535,
+          "paired_ratios": [
+            0.8838104134829196,
+            0.8864635135758299,
+            0.8968332599652125,
+            0.6468324239875629
+          ],
+          "worst_paired_reduction_pct": 10.316674003478754
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/fir-r2",
+      "validation_sha256": "0fdef6a52c56c7b80f08ec51811b208b603d0a1479b5e1c1a705714ac3342dd6",
+      "record_path": "docs/performance/results/fir-r2.json"
+    },
+    {
+      "label": "gate-r1",
+      "base_commit": "7ba8c8b94cb85fe9450e3b776361533302c0ed37",
+      "cases": [
+        "gate.pass",
+        "gate.fail"
+      ],
+      "geomean_latency_reduction_pct": 17.59595911145009,
+      "worst_block_reduction_pct": 16.46862921215744,
+      "worst_case_reduction_pct": -0.01531288191203295,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "measurement_sha256": "1e71d7fc75c689a22f51c530db709fad1fa9b709388f7471551f6a01f7ebd707",
+      "operator": "gate",
+      "round": 1,
+      "decision": "accepted",
+      "method": "copy static reason names instead of invoking Debug formatting",
+      "profile_hotspot": "Gate formatting and small repeated reason-vector allocations dominate failure reports",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "gate.pass": {
+          "before_ns": 8.950040340423584,
+          "after_ns": 8.957534790039062,
+          "latency_reduction_pct": -0.01531288191203295,
+          "paired_ratios": [
+            1.0073404209283054,
+            0.9577538797792141,
+            1.005820649964865,
+            0.9944856076733758
+          ],
+          "worst_paired_reduction_pct": -0.7340420928305447
+        },
+        "gate.fail": {
+          "before_ns": 44.519551277160645,
+          "after_ns": 30.50407123565674,
+          "latency_reduction_pct": 31.7286322073025,
+          "paired_ratios": [
+            0.6803900197622388,
+            0.6850373360917112,
+            0.6937111408420351,
+            0.6764605673473154
+          ],
+          "worst_paired_reduction_pct": 30.628885915796488
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/gate-r1",
+      "validation_sha256": "28c6b0805cf6905f1ef9004891280f13c43b2f1f60f78388dea691856bf49571",
+      "record_path": "docs/performance/results/gate-r1.json",
+      "commit": "fb9eb335fd5e751f061d2633527b36451a731b9a"
+    },
+    {
+      "label": "gate-r2",
+      "base_commit": "fb9eb335fd5e751f061d2633527b36451a731b9a",
+      "cases": [
+        "gate.pass",
+        "gate.fail"
+      ],
+      "geomean_latency_reduction_pct": -17.269418171181883,
+      "worst_block_reduction_pct": -18.19347403409153,
+      "worst_case_reduction_pct": -43.5369873775159,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "measurement_sha256": "91ad2e044dd98c7a24107752b0d10522a0099b1a28ec4475eed26a4f908892b0",
+      "operator": "gate",
+      "round": 2,
+      "decision": "rejected",
+      "method": "reserve the bounded reason list",
+      "profile_hotspot": "Gate formatting and small repeated reason-vector allocations dominate failure reports",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "gate.pass": {
+          "before_ns": 9.068167686462402,
+          "after_ns": 13.015713691711426,
+          "latency_reduction_pct": -43.5369873775159,
+          "paired_ratios": [
+            1.440386056654525,
+            1.4602616669800241,
+            1.4005294240797819,
+            1.4303536908957932
+          ],
+          "worst_paired_reduction_pct": -46.02616669800241
+        },
+        "gate.fail": {
+          "before_ns": 30.46966791152954,
+          "after_ns": 29.407089233398438,
+          "latency_reduction_pct": 3.905865168445688,
+          "paired_ratios": [
+            0.9471949875782903,
+            0.9566571266051435,
+            0.9652255700259428,
+            0.9690890403220109
+          ],
+          "worst_paired_reduction_pct": 3.091095967798907
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/gate-r2",
+      "validation_sha256": "b8761eee9f4a46da6fe306c0b944f7294acf4b313803530d27468d792a72f77c",
+      "record_path": "docs/performance/results/gate-r2.json"
+    },
+    {
+      "label": "history-windows-r1",
+      "base_commit": "e5e9c2380ea26fc47125f202a7a358441c660a91",
+      "cases": [
+        "history_windows.separate",
+        "history_windows.overlap"
+      ],
+      "geomean_latency_reduction_pct": 28.730708513737934,
+      "worst_block_reduction_pct": 28.22190338815943,
+      "worst_case_reduction_pct": -0.38201979754266535,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "measurement_sha256": "47867785cc3d00eb641b6cf20404a91bde561c4524f0ebd61457c2ec2f95a9fc",
+      "operator": "history_windows",
+      "round": 1,
+      "decision": "accepted",
+      "method": "directly sample already ordered history windows",
+      "profile_hotspot": "History windows sort and scatter even when already time-ordered, and repeat duplicate samples",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "history_windows.separate": {
+          "before_ns": 717440.046875,
+          "after_ns": 365455.46875,
+          "latency_reduction_pct": 49.210214231513106,
+          "paired_ratios": [
+            0.5106405440229149,
+            0.5013733670795217,
+            0.5107986828413736,
+            0.505155171346823
+          ],
+          "worst_paired_reduction_pct": 48.92013171586264
+        },
+        "history_windows.overlap": {
+          "before_ns": 824063.078125,
+          "after_ns": 828942.4375,
+          "latency_reduction_pct": -0.38201979754266535,
+          "paired_ratios": [
+            1.004650600321334,
+            1.0029897956295193,
+            1.008635168078278,
+            0.9895934240973329
+          ],
+          "worst_paired_reduction_pct": -0.863516807827791
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/history-windows-r1",
+      "validation_sha256": "98de7876f748b227230c1bfb3511928ae3d61e063c92d52dcf8b9800c5c23d24",
+      "record_path": "docs/performance/results/history-windows-r1.json",
+      "commit": "e8bdffe84847d79db4389ea29dfc28bb0a2f2341"
+    },
+    {
+      "label": "history-windows-r2",
+      "base_commit": "e8bdffe84847d79db4389ea29dfc28bb0a2f2341",
+      "cases": [
+        "history_windows.separate",
+        "history_windows.overlap"
+      ],
+      "geomean_latency_reduction_pct": 16.02929598782644,
+      "worst_block_reduction_pct": 15.305913238613755,
+      "worst_case_reduction_pct": -1.3271973863328013,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "measurement_sha256": "4ec11e3c224f97122f16623dfb4f230ed7e207da515df204145676829b7d7173",
+      "operator": "history_windows",
+      "round": 2,
+      "decision": "accepted",
+      "method": "deduplicate overlapping history requests before sampling",
+      "profile_hotspot": "History windows sort and scatter even when already time-ordered, and repeat duplicate samples",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "history_windows.separate": {
+          "before_ns": 368404.71875,
+          "after_ns": 371876.0234375,
+          "latency_reduction_pct": -1.3271973863328013,
+          "paired_ratios": [
+            1.0111120675202576,
+            1.0154318802063984,
+            1.003212188055592,
+            1.0254373972476882
+          ],
+          "worst_paired_reduction_pct": -2.543739724768823
+        },
+        "history_windows.overlap": {
+          "before_ns": 843830.890625,
+          "after_ns": 584976.4375,
+          "latency_reduction_pct": 30.836480621931727,
+          "paired_ratios": [
+            0.709425647538472,
+            0.6969019750466019,
+            0.6863684125147635,
+            0.685135867898363
+          ],
+          "worst_paired_reduction_pct": 29.057435246152796
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/history-windows-r2",
+      "validation_sha256": "d2c209be64770fd7d1cb4a1ade922f66a3744fcbabc73ab2a24600b995ff61de",
+      "record_path": "docs/performance/results/history-windows-r2.json",
+      "commit": "fe9bcaeefb7b41759547923b3f1ac6ece625b4ad"
+    },
+    {
+      "label": "image-decode-r1",
+      "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+      "cases": [
+        "image_decode.png",
+        "image_decode.jpeg"
+      ],
+      "geomean_latency_reduction_pct": -0.20942446062863773,
+      "worst_block_reduction_pct": -0.8588398219169457,
+      "worst_case_reduction_pct": -0.7173066130926387,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "measurement_sha256": "f1340b51277cf2ccb966c2f9c2fd1161c971145c3aea9c32287f31f26e6b0721",
+      "operator": "image_decode",
+      "round": 1,
+      "decision": "rejected",
+      "method": "guess image format directly from the byte slice",
+      "profile_hotspot": "Most work is in validated third-party decoders; inspect small adapter overhead without relaxing limits",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "image_decode.png": {
+          "before_ns": 1479913.21875,
+          "after_ns": 1472788.09375,
+          "latency_reduction_pct": 0.2958252471178868,
+          "paired_ratios": [
+            1.003837002503244,
+            0.9911958773003166,
+            1.0028876177573258,
+            0.9679588661291547
+          ],
+          "worst_paired_reduction_pct": -0.3837002503243925
+        },
+        "image_decode.jpeg": {
+          "before_ns": 581145.4140625,
+          "after_ns": 581204.1640625,
+          "latency_reduction_pct": -0.7173066130926387,
+          "paired_ratios": [
+            1.013362283404195,
+            1.002972061721548,
+            1.011374070540305,
+            0.9894220088566574
+          ],
+          "worst_paired_reduction_pct": -1.3362283404195097
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/image-decode-r1",
+      "validation_sha256": "5ee45f105e6d048f2ffef6b60672e6fdf703eee5247b021aa53705a0f8a973ee",
+      "record_path": "docs/performance/results/image-decode-r1.json"
+    },
+    {
+      "label": "image-decode-r2",
+      "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+      "cases": [
+        "image_decode.png",
+        "image_decode.jpeg"
+      ],
+      "geomean_latency_reduction_pct": -0.25260763296159894,
+      "worst_block_reduction_pct": -1.4299461272170966,
+      "worst_case_reduction_pct": -0.8178901284982221,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "measurement_sha256": "d3aedfe3b932859032cafa28b6f9471fd850b6b29da27f5fd4ea54b9f1f74e18",
+      "operator": "image_decode",
+      "round": 2,
+      "decision": "rejected",
+      "method": "buffer the in-memory decoder reader",
+      "profile_hotspot": "Most work is in validated third-party decoders; inspect small adapter overhead without relaxing limits",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "image_decode.png": {
+          "before_ns": 1468831.1875,
+          "after_ns": 1475876.34375,
+          "latency_reduction_pct": -0.8178901284982221,
+          "paired_ratios": [
+            1.018031903431182,
+            1.015591846132557,
+            0.997312544320435,
+            1.0007659564374074
+          ],
+          "worst_paired_reduction_pct": -1.8031903431181995
+        },
+        "image_decode.jpeg": {
+          "before_ns": 576976.171875,
+          "after_ns": 577304.4921875,
+          "latency_reduction_pct": 0.42961689896998667,
+          "paired_ratios": [
+            1.0003232871153398,
+            1.0130087210278123,
+            0.990482504721713,
+            0.9910843749052606
+          ],
+          "worst_paired_reduction_pct": -1.3008721027812253
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/image-decode-r2",
+      "validation_sha256": "a50f2a43e2e26f0ccbffb856162d35acc93b8279bd6a3a06e8daf34241ba0540",
+      "record_path": "docs/performance/results/image-decode-r2.json"
+    },
+    {
+      "label": "image-quality-r1",
+      "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+      "cases": [
+        "image_quality.gradient",
+        "image_quality.noise"
+      ],
+      "geomean_latency_reduction_pct": 25.304549291757127,
+      "worst_block_reduction_pct": 25.285700408850243,
+      "worst_case_reduction_pct": 19.07800685661707,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "measurement_sha256": "adc929c07b34140a5d4230ca7e5ac4bd707ff8da17d35a9f0653b62257a882dc",
+      "operator": "image_quality",
+      "round": 1,
+      "decision": "accepted",
+      "method": "use chunked two-pass luminance statistics and consume RGB storage",
+      "profile_hotspot": "Per-pixel online moment division and repeated decoded RGB allocation",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "image_quality.gradient": {
+          "before_ns": 4374023.9375,
+          "after_ns": 3539532.0625,
+          "latency_reduction_pct": 19.07800685661707,
+          "paired_ratios": [
+            0.8036801257043471,
+            0.8062643510554861,
+            0.8121755118121726,
+            0.8147991959713533
+          ],
+          "worst_paired_reduction_pct": 18.520080402864668
+        },
+        "image_quality.noise": {
+          "before_ns": 2989302.6875,
+          "after_ns": 2064394.28125,
+          "latency_reduction_pct": 31.1469287125284,
+          "paired_ratios": [
+            0.6944960737378927,
+            0.6903509654047961,
+            0.6867104603446358,
+            0.6851045743535982
+          ],
+          "worst_paired_reduction_pct": 30.55039262621073
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/image-quality-r1",
+      "validation_sha256": "10ee2a260b0fdaaea245cd855cd8989af089dbf1ed978e1f04aa4b6d7c4616d4",
+      "record_path": "docs/performance/results/image-quality-r1.json",
+      "commit": "06d3a4465be04acc2fbda9f31fd9441443ae6210"
+    },
+    {
+      "label": "image-quality-r2",
+      "base_commit": "06d3a4465be04acc2fbda9f31fd9441443ae6210",
+      "cases": [
+        "image_quality.gradient",
+        "image_quality.noise"
+      ],
+      "geomean_latency_reduction_pct": 23.03071205759992,
+      "worst_block_reduction_pct": 21.719643312237014,
+      "worst_case_reduction_pct": 17.47018750143384,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "measurement_sha256": "84f8e3ff65893a34f25dcde6499d8283f8d806bbc7ef85583ce5dfe32ad85c5a",
+      "operator": "image_quality",
+      "round": 2,
+      "decision": "accepted",
+      "method": "compute Laplacian variance with two stable passes",
+      "profile_hotspot": "Per-pixel online moment division and repeated decoded RGB allocation",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "image_quality.gradient": {
+          "before_ns": 3541535.125,
+          "after_ns": 2939507.25,
+          "latency_reduction_pct": 17.47018750143384,
+          "paired_ratios": [
+            0.8138428631869414,
+            0.8314913810047366,
+            0.8672740468140109,
+            0.8191048689665865
+          ],
+          "worst_paired_reduction_pct": 13.272595318598912
+        },
+        "image_quality.noise": {
+          "before_ns": 2058302.34375,
+          "after_ns": 1481451.71875,
+          "latency_reduction_pct": 28.370297543492917,
+          "paired_ratios": [
+            0.7241525849266962,
+            0.7162021023625273,
+            0.7065603157011713,
+            0.7163919467676144
+          ],
+          "worst_paired_reduction_pct": 27.584741507330378
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/image-quality-r2",
+      "validation_sha256": "9a23b79751af8d1843c37235b70d2f770f2a7dea753134c81ea47515f651cb74",
+      "record_path": "docs/performance/results/image-quality-r2.json",
+      "commit": "9db705beaa858c5e50a2cf8647ccf1d5299605a9"
+    },
+    {
+      "label": "image-transform-r1",
+      "base_commit": "9e7f7f8592cc328d76de5b93fd0421cc93b15dc3",
+      "cases": [
+        "image_transform.gradient",
+        "image_transform.noise"
+      ],
+      "geomean_latency_reduction_pct": 5.196219237500532,
+      "worst_block_reduction_pct": 3.471281458215525,
+      "worst_case_reduction_pct": 4.95325665534242,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "measurement_sha256": "90bd4580c1d7e6c0196086dd0546b92939eb86d34a9f35c51eea38f41d838802",
+      "operator": "image_transform",
+      "round": 1,
+      "decision": "rejected",
+      "method": "avoid copying identity crops after validation",
+      "profile_hotspot": "Full-image crop copying and lossless PNG row-filter work",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "image_transform.gradient": {
+          "before_ns": 5712650.25,
+          "after_ns": 5418988.625,
+          "latency_reduction_pct": 5.028930293458034,
+          "paired_ratios": [
+            0.9410451779647208,
+            0.9681022072219014,
+            0.9583762161661185,
+            0.93304920969514
+          ],
+          "worst_paired_reduction_pct": 3.1897792778098566
+        },
+        "image_transform.noise": {
+          "before_ns": 4192437.0,
+          "after_ns": 3970637.8750000005,
+          "latency_reduction_pct": 4.95325665534242,
+          "paired_ratios": [
+            0.938075945181721,
+            0.9624803490591864,
+            0.943812217739895,
+            0.9571226491532566
+          ],
+          "worst_paired_reduction_pct": 3.7519650940813554
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/image-transform-r1",
+      "validation_sha256": "ddcea875eeed881f8235df4e5e7b0e2e10bf7d6b35bbe9d9550d469d2e75764e",
+      "record_path": "docs/performance/results/image-transform-r1.json"
+    },
+    {
+      "label": "image-transform-r2",
+      "base_commit": "9e7f7f8592cc328d76de5b93fd0421cc93b15dc3",
+      "cases": [
+        "image_transform.gradient",
+        "image_transform.noise"
+      ],
+      "geomean_latency_reduction_pct": 1.7931171621179298,
+      "worst_block_reduction_pct": 1.3719489237289384,
+      "worst_case_reduction_pct": 1.012113516083335,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/image_ops.rs"
+      ],
+      "measurement_sha256": "c1c9288d9a652f6a5d964d352d008aa141053e8b48fcbd0652230b04f82414cd",
+      "operator": "image_transform",
+      "round": 2,
+      "decision": "rejected",
+      "method": "encode lossless PNG with a fixed Sub filter",
+      "profile_hotspot": "Full-image crop copying and lossless PNG row-filter work",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "image_transform.gradient": {
+          "before_ns": 5538438.75,
+          "after_ns": 5483972.125,
+          "latency_reduction_pct": 1.012113516083335,
+          "paired_ratios": [
+            0.9850485562680938,
+            0.9968361021509242,
+            0.9947091734102395,
+            0.9835189142386055
+          ],
+          "worst_paired_reduction_pct": 0.3163897849075781
+        },
+        "image_transform.noise": {
+          "before_ns": 4173549.7500000005,
+          "after_ns": 4089490.0625,
+          "latency_reduction_pct": 2.2188662509653345,
+          "paired_ratios": [
+            0.9797859814546437,
+            0.9758366935260496,
+            0.9598881531345484,
+            0.9799321851824624
+          ],
+          "worst_paired_reduction_pct": 2.006781481753761
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/image-transform-r2",
+      "validation_sha256": "25e939c3b3c057d5bfd4d9c080c5cc38003dec1984208e7d001d12996ce48d56",
+      "record_path": "docs/performance/results/image-transform-r2.json"
+    },
+    {
+      "label": "inspect-signal-r1",
+      "base_commit": "5960628396569113de7e0721c82c48175641cf13",
+      "cases": [
+        "inspect_signal.basic",
+        "inspect_signal.hampel",
+        "inspect_signal.wide_hampel"
+      ],
+      "geomean_latency_reduction_pct": 31.25710234176409,
+      "worst_block_reduction_pct": 30.431788992634466,
+      "worst_case_reduction_pct": 12.195927823415376,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "One reusable Vec and one option guard; same formulas, checks, issue order and public interface",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "measurement_sha256": "4d78ee7093f9fe1ecd53cc626235ff6fb0d07cb8b66bf0b9c8dba0e20358ac0f",
+      "operator": "inspect_signal",
+      "round": 1,
+      "decision": "accepted",
+      "method": "reuse Hampel scratch and bypass disabled derivative work",
+      "profile_hotspot": "Callgrind: inspect_signal spends substantial instructions in Vec growth and repeated window collection; disabled derivative passes still scan all rows",
+      "reason": "All three fixed cases improve; 31.26% paired aggregate and 30.43% worst block exceed 8%; reference differential, 36 Rust tests and 5 Python tests pass",
+      "case_results": {
+        "inspect_signal.basic": {
+          "before_ns": 3002165.1875,
+          "after_ns": 1486224.3125,
+          "latency_reduction_pct": 50.64570799394003,
+          "paired_ratios": [
+            0.49340964663013454,
+            0.49367619349106495,
+            0.5013813253442527,
+            0.4111369384583082
+          ],
+          "worst_paired_reduction_pct": 49.861867465574726
+        },
+        "inspect_signal.hampel": {
+          "before_ns": 8319669.5,
+          "after_ns": 6308018.375,
+          "latency_reduction_pct": 23.775180100179604,
+          "paired_ratios": [
+            0.768672735591834,
+            0.7504768900619173,
+            0.755823662404574,
+            0.7696272421187975
+          ],
+          "worst_paired_reduction_pct": 23.037275788120247
+        },
+        "inspect_signal.wide_hampel": {
+          "before_ns": 40360894.0,
+          "after_ns": 35346732.5,
+          "latency_reduction_pct": 12.195927823415376,
+          "paired_ratios": [
+            0.8676091936111578,
+            0.8655460045474307,
+            0.8884722499205346,
+            0.8968071049637442
+          ],
+          "worst_paired_reduction_pct": 10.319289503625583
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/inspect-signal-r1",
+      "validation_sha256": "d09a60fa3f732bf6105d94eb6c4b70498e5e31ce7d3b38e801df58e026f5a248",
+      "record_path": "docs/performance/results/inspect-signal-r1.json",
+      "commit": "c27fcfd67603e19931b5666534a904a181fe57ac"
+    },
+    {
+      "label": "inspect-signal-r2-confirm",
+      "base_commit": "160b53549db14a8c324b6b81f1796f8cad689b17",
+      "cases": [
+        "inspect_signal.basic",
+        "inspect_signal.hampel",
+        "inspect_signal.wide_hampel"
+      ],
+      "geomean_latency_reduction_pct": 19.1774487060814,
+      "worst_block_reduction_pct": -0.5304957399327348,
+      "worst_case_reduction_pct": 0.29736039269923076,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small select-nth median branch; existing short-window sort and all quality checks retained",
+      "paths": [
+        "crates/core/src/quality.rs"
+      ],
+      "measurement_sha256": "602eef893bcc3839d26814905b7d71e203f635e3b07d772095f0223d9c4a07bb",
+      "operator": "inspect_signal",
+      "round": 2,
+      "decision": "rejected",
+      "method": "select medians without fully sorting wide Hampel windows",
+      "profile_hotspot": "Wide Hampel windows repeatedly sort their values and deviations",
+      "reason": "Eight-block confirmation remains inconsistent: median aggregate gain 19.18%, but worst block -0.53%. Reject under the unchanged stability gate and retain all initial and confirmation evidence.",
+      "case_results": {
+        "inspect_signal.basic": {
+          "before_ns": 1461425.40625,
+          "after_ns": 1454504.375,
+          "latency_reduction_pct": 0.6742475867219655,
+          "paired_ratios": [
+            0.9826870897807825,
+            0.9826262032721499,
+            1.022957060672312,
+            1.01326680701327,
+            0.9936429778728074,
+            0.9969432266665846,
+            0.9926076256524926,
+            0.9928720703927533
+          ],
+          "worst_paired_reduction_pct": -2.2957060672311957
+        },
+        "inspect_signal.hampel": {
+          "before_ns": 6621954.0,
+          "after_ns": 6582233.875,
+          "latency_reduction_pct": 0.29736039269923076,
+          "paired_ratios": [
+            1.362944162252747,
+            0.9989370906066863,
+            0.9714795010257797,
+            0.9723550152942171,
+            0.9951157015393289,
+            1.0031049163553867,
+            1.0082190326737426,
+            0.9023962806462125
+          ],
+          "worst_paired_reduction_pct": -36.294416225274695
+        },
+        "inspect_signal.wide_hampel": {
+          "before_ns": 35794826.0,
+          "after_ns": 19099589.75,
+          "latency_reduction_pct": 46.776830963161565,
+          "paired_ratios": [
+            0.533791986285084,
+            0.5323241794346569,
+            0.2865302526713575,
+            0.5321392013021118,
+            1.027518206761713,
+            0.5319383614320864,
+            0.5312291584888218,
+            0.5725979803886024
+          ],
+          "worst_paired_reduction_pct": -2.7518206761713015
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/inspect-signal-r2-confirm",
+      "validation_sha256": "06a202e967ca7249782e6f5601a80ae7566be8407c16e5b92fcae532cd391748",
+      "initial_measurement": "docs/performance/history/inspect-signal-r2-initial.json",
+      "record_path": "docs/performance/results/inspect-signal-r2-confirm.json"
+    },
+    {
+      "label": "inspect-time-r1",
+      "base_commit": "7669197d00fcf987ad7a186336fcce2537cdaff3",
+      "cases": [
+        "inspect_time.uniform",
+        "inspect_time.jitter"
+      ],
+      "geomean_latency_reduction_pct": 0.0918388068994691,
+      "worst_block_reduction_pct": -0.3956945548720503,
+      "worst_case_reduction_pct": -0.14969012736940623,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "387017e493e032fa35c2d15883c5dd6bc64f44ad329bdd46e0d79ac39191b3fe",
+      "operator": "inspect_time",
+      "round": 1,
+      "decision": "rejected",
+      "method": "reserve interval storage",
+      "profile_hotspot": "Interval collection and ordering dominate time-statistic work",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "inspect_time.uniform": {
+          "before_ns": 60186.861328125,
+          "after_ns": 59442.9697265625,
+          "latency_reduction_pct": 0.9721568866194019,
+          "paired_ratios": [
+            0.9873212605819659,
+            0.9774388656384544,
+            0.9932356016856462,
+            1.0039349530724395
+          ],
+          "worst_paired_reduction_pct": -0.39349530724395176
+        },
+        "inspect_time.jitter": {
+          "before_ns": 87033.849609375,
+          "after_ns": 87481.98828125,
+          "latency_reduction_pct": -0.14969012736940623,
+          "paired_ratios": [
+            1.0169825922518803,
+            0.9971478401416792,
+            0.9990148640406136,
+            1.0039789385067746
+          ],
+          "worst_paired_reduction_pct": -1.6982592251880257
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/inspect-time-r1",
+      "validation_sha256": "a37a5e7243cced053b437fc6d501feec8dbbc07d8b82f36656a33fde82c261d5",
+      "record_path": "docs/performance/results/inspect-time-r1.json"
+    },
+    {
+      "label": "inspect-time-r2",
+      "base_commit": "7669197d00fcf987ad7a186336fcce2537cdaff3",
+      "cases": [
+        "inspect_time.uniform",
+        "inspect_time.jitter"
+      ],
+      "geomean_latency_reduction_pct": 35.00394967173914,
+      "worst_block_reduction_pct": 31.941995616295348,
+      "worst_case_reduction_pct": 0.6259206061379863,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "821708906cd081f8d33358cde0f32b50a6e71c615314a106ad937073cfdc7947",
+      "operator": "inspect_time",
+      "round": 2,
+      "decision": "accepted",
+      "method": "summarize exactly uniform timestamps without allocating intervals",
+      "profile_hotspot": "Interval collection and ordering dominate time-statistic work",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "inspect_time.uniform": {
+          "before_ns": 59669.576171875,
+          "after_ns": 25443.7685546875,
+          "latency_reduction_pct": 57.469116823069186,
+          "paired_ratios": [
+            0.4270889028052683,
+            0.4277391374430738,
+            0.4235287607333479,
+            0.42256450957841735
+          ],
+          "worst_paired_reduction_pct": 57.22608625569262
+        },
+        "inspect_time.jitter": {
+          "before_ns": 88195.43359375,
+          "after_ns": 87617.37890625,
+          "latency_reduction_pct": 0.6259206061379863,
+          "paired_ratios": [
+            0.9767858406030145,
+            0.9799594047254394,
+            1.093642838486849,
+            1.0075221831518009
+          ],
+          "worst_paired_reduction_pct": -9.364283848684906
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/inspect-time-r2",
+      "validation_sha256": "ecdf6232b03a2eb63a4d64d2c55c3a07601442c834a9f629ea753ef1569287b8",
+      "record_path": "docs/performance/results/inspect-time-r2.json",
+      "commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245"
+    },
+    {
+      "label": "interval-affected-centers-r1",
+      "base_commit": "3f93cb66bb9cae00b50e6e17308eb8fd964ccf8b",
+      "cases": [
+        "interval_affected_centers"
+      ],
+      "geomean_latency_reduction_pct": 14.999673844769855,
+      "worst_block_reduction_pct": 13.883804284152745,
+      "worst_case_reduction_pct": 14.999673844769855,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "6629c5397d602d87a16e503d836e5d94bcf6836a0808ab59f22e946c516bfa0c",
+      "operator": "interval_affected_centers",
+      "round": 1,
+      "decision": "accepted",
+      "method": "reserve expanded interval storage",
+      "profile_hotspot": "Fallible collection and repeated sorting of order-preserving expanded intervals",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "interval_affected_centers": {
+          "before_ns": 12995.033203125,
+          "after_ns": 11088.86669921875,
+          "latency_reduction_pct": 14.999673844769855,
+          "paired_ratios": [
+            0.8526574657188338,
+            0.8077270949196037,
+            0.8611619571584725,
+            0.847349057385769
+          ],
+          "worst_paired_reduction_pct": 13.883804284152745
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-affected-centers-r1",
+      "validation_sha256": "4e1b40abeb23399282eca6dd9ba69e5fa6842f5252714e13da5799953785fc77",
+      "record_path": "docs/performance/results/interval-affected-centers-r1.json",
+      "commit": "cd09b7969aa0aac77563c3635ba2b94848a287cb"
+    },
+    {
+      "label": "interval-affected-centers-r2",
+      "base_commit": "cd09b7969aa0aac77563c3635ba2b94848a287cb",
+      "cases": [
+        "interval_affected_centers"
+      ],
+      "geomean_latency_reduction_pct": 49.08938217568086,
+      "worst_block_reduction_pct": 48.90970426715205,
+      "worst_case_reduction_pct": 49.08938217568086,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "841326c1a735f91c786181076e1c250ea40405f9d4ccfc1521e79a881252437e",
+      "operator": "interval_affected_centers",
+      "round": 2,
+      "decision": "accepted",
+      "method": "merge expanded intervals in preserved start order",
+      "profile_hotspot": "Fallible collection and repeated sorting of order-preserving expanded intervals",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "interval_affected_centers": {
+          "before_ns": 11215.481201171875,
+          "after_ns": 5685.3046875,
+          "latency_reduction_pct": 49.08938217568086,
+          "paired_ratios": [
+            0.5088017648551525,
+            0.5094105916312304,
+            0.5109029573284795,
+            0.500111113062467
+          ],
+          "worst_paired_reduction_pct": 48.90970426715205
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-affected-centers-r2",
+      "validation_sha256": "196f9f72ccc3024ff9f1e899bf10c6fd31a425175868d33eb23ebf364e72d3a2",
+      "record_path": "docs/performance/results/interval-affected-centers-r2.json",
+      "commit": "aff99421d1437540fb950be112445d3b63f8f978"
+    },
+    {
+      "label": "interval-contains-r1",
+      "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+      "cases": [
+        "interval_contains"
+      ],
+      "geomean_latency_reduction_pct": 17.330276444330707,
+      "worst_block_reduction_pct": 10.724770963348318,
+      "worst_case_reduction_pct": 17.330276444330707,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "8f3f68b956786c043a5ec8bee0c0f767bbb2592c8984d34976ae3eaa18ecd1c2",
+      "operator": "interval_contains",
+      "round": 1,
+      "decision": "accepted",
+      "method": "reject queries outside the interval extent early",
+      "profile_hotspot": "Binary membership search includes queries outside the entire interval extent",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "interval_contains": {
+          "before_ns": 298860.22265625,
+          "after_ns": 248319.86328125,
+          "latency_reduction_pct": 17.330276444330707,
+          "paired_ratios": [
+            0.8169838062501553,
+            0.8927522903665168,
+            0.8273598510679331,
+            0.8260346200454528
+          ],
+          "worst_paired_reduction_pct": 10.724770963348318
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-contains-r1",
+      "validation_sha256": "6a00c7901667fcc54de82ced0876b8ce926ac1ce8d13ba7c9e6eec60e4f4d2bd",
+      "record_path": "docs/performance/results/interval-contains-r1.json",
+      "commit": "832dc378bd9fa67279ef65e61adbd240d18bcbbb"
+    },
+    {
+      "label": "interval-contains-r2",
+      "base_commit": "832dc378bd9fa67279ef65e61adbd240d18bcbbb",
+      "cases": [
+        "interval_contains"
+      ],
+      "geomean_latency_reduction_pct": 2.003841449522903,
+      "worst_block_reduction_pct": -26.80245838876507,
+      "worst_case_reduction_pct": 2.003841449522903,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "c19c9e74f89584b07d91bd1c78ffc368202f87dca95a280e50ad6a2c5bd84cb4",
+      "operator": "interval_contains",
+      "round": 2,
+      "decision": "rejected",
+      "method": "search disjoint interval containment directly",
+      "profile_hotspot": "Binary membership search includes queries outside the entire interval extent",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "interval_contains": {
+          "before_ns": 247619.33203125,
+          "after_ns": 241505.47265625,
+          "latency_reduction_pct": 2.003841449522903,
+          "paired_ratios": [
+            0.9684588681838259,
+            0.9413594274458883,
+            0.9914643028257161,
+            1.2680245838876507
+          ],
+          "worst_paired_reduction_pct": -26.80245838876507
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-contains-r2",
+      "validation_sha256": "f05dae48bc93631b0f69dbe7cc96a92de9d3e38b13f67c691b523e49dd4653b4",
+      "record_path": "docs/performance/results/interval-contains-r2.json"
+    },
+    {
+      "label": "interval-difference-r1",
+      "base_commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae",
+      "cases": [
+        "interval_difference"
+      ],
+      "geomean_latency_reduction_pct": 99.68132056911236,
+      "worst_block_reduction_pct": 99.67991840817835,
+      "worst_case_reduction_pct": 99.68132056911236,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "c3cb0af4f7c39430bb674266c797d01b1eaa7c7407bcc33292b8f7b50103aa7c",
+      "operator": "interval_difference",
+      "round": 1,
+      "decision": "accepted",
+      "method": "reuse a monotone interval subtraction cursor",
+      "profile_hotspot": "Difference restarts scanning the second interval set for every first-set interval",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "interval_difference": {
+          "before_ns": 3530826.6875,
+          "after_ns": 11199.322998046875,
+          "latency_reduction_pct": 99.68132056911236,
+          "paired_ratios": [
+            0.0031823535132355723,
+            0.0032008159182165324,
+            0.003129100446100658,
+            0.003191235104517405
+          ],
+          "worst_paired_reduction_pct": 99.67991840817835
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-difference-r1",
+      "validation_sha256": "1f73835f59c515509dbb78fc96f6564a43b801bb91c67d4a78fa471b4da1e344",
+      "record_path": "docs/performance/results/interval-difference-r1.json",
+      "commit": "7a1efc75410a4f5f1470228b93cd05053121ab1d"
+    },
+    {
+      "label": "interval-difference-r2",
+      "base_commit": "7a1efc75410a4f5f1470228b93cd05053121ab1d",
+      "cases": [
+        "interval_difference"
+      ],
+      "geomean_latency_reduction_pct": 10.550745725661647,
+      "worst_block_reduction_pct": 9.292616154982047,
+      "worst_case_reduction_pct": 10.550745725661647,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "4fa2727e3d72350961c66186aea5cdbe10df5703a6af6933f7f230e454196f23",
+      "operator": "interval_difference",
+      "round": 2,
+      "decision": "accepted",
+      "method": "reserve the bounded subtraction output",
+      "profile_hotspot": "Difference restarts scanning the second interval set for every first-set interval",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "interval_difference": {
+          "before_ns": 11242.951416015625,
+          "after_ns": 10023.32177734375,
+          "latency_reduction_pct": 10.550745725661647,
+          "paired_ratios": [
+            0.8951983826532953,
+            0.8767757524934379,
+            0.8937867028334717,
+            0.9070738384501795
+          ],
+          "worst_paired_reduction_pct": 9.292616154982047
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-difference-r2",
+      "validation_sha256": "2b0a28c73019886b0907183187580447349799cde60896d7464b251814ae3741",
+      "record_path": "docs/performance/results/interval-difference-r2.json",
+      "commit": "3f93cb66bb9cae00b50e6e17308eb8fd964ccf8b"
+    },
+    {
+      "label": "interval-intersection-r1",
+      "base_commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae",
+      "cases": [
+        "interval_intersection.dense",
+        "interval_intersection.late"
+      ],
+      "geomean_latency_reduction_pct": -7.4640000618885205,
+      "worst_block_reduction_pct": -10.917486403565757,
+      "worst_case_reduction_pct": -9.045212546833504,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "fde6928e68ecb4e5e90f8f5266f363ec9daf46fbccaaf8476be5adda135c95e7",
+      "operator": "interval_intersection",
+      "round": 1,
+      "decision": "rejected",
+      "method": "reserve intersection output capacity",
+      "profile_hotspot": "Intersection grows outputs and scans non-overlapping leading intervals",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "interval_intersection.dense": {
+          "before_ns": 26018.9580078125,
+          "after_ns": 28371.60888671875,
+          "latency_reduction_pct": -9.045212546833504,
+          "paired_ratios": [
+            1.0604718046871144,
+            1.1719807524747337,
+            1.0968153283317215,
+            1.0840889226049486
+          ],
+          "worst_paired_reduction_pct": -17.198075247473366
+        },
+        "interval_intersection.late": {
+          "before_ns": 12994.87060546875,
+          "after_ns": 13543.893310546875,
+          "latency_reduction_pct": -4.228822135222243,
+          "paired_ratios": [
+            1.0286645506183836,
+            1.0497347131432881,
+            1.0834274939207336,
+            1.0348417295611565
+          ],
+          "worst_paired_reduction_pct": -8.342749392073356
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-intersection-r1",
+      "validation_sha256": "f620ea1b845b523435572c7a671bdc2826653ed00c942bb9d3bf78acbda2d8b2",
+      "record_path": "docs/performance/results/interval-intersection-r1.json"
+    },
+    {
+      "label": "interval-intersection-r2",
+      "base_commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae",
+      "cases": [
+        "interval_intersection.dense",
+        "interval_intersection.late"
+      ],
+      "geomean_latency_reduction_pct": 87.53642161588219,
+      "worst_block_reduction_pct": 87.50909546290787,
+      "worst_case_reduction_pct": -13.142992367161654,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "e43ff2cab46464e07343d8792b1493881c3be079ed3e684069e585e88359b4ee",
+      "operator": "interval_intersection",
+      "round": 2,
+      "decision": "rejected",
+      "method": "skip non-overlapping prefixes before intersection",
+      "profile_hotspot": "Intersection grows outputs and scans non-overlapping leading intervals",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "interval_intersection.dense": {
+          "before_ns": 25778.46826171875,
+          "after_ns": 29205.19970703125,
+          "latency_reduction_pct": -13.142992367161654,
+          "paired_ratios": [
+            1.1220472486435669,
+            1.128650645877815,
+            1.1342092014654181,
+            1.1384182564273735
+          ],
+          "worst_paired_reduction_pct": -13.841825642737348
+        },
+        "interval_intersection.late": {
+          "before_ns": 12998.53125,
+          "after_ns": 177.50653076171875,
+          "latency_reduction_pct": 98.62300399888629,
+          "paired_ratios": [
+            0.013795028728076513,
+            0.013823825532248857,
+            0.013744891294197537,
+            0.013286048351790382
+          ],
+          "worst_paired_reduction_pct": 98.61761744677511
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-intersection-r2",
+      "validation_sha256": "55c9c8c603fe0c719e084659e5850d19d3562d26c0bb0ab0b73cf6dba3041888",
+      "record_path": "docs/performance/results/interval-intersection-r2.json"
+    },
+    {
+      "label": "interval-mask-r1",
+      "base_commit": "832dc378bd9fa67279ef65e61adbd240d18bcbbb",
+      "cases": [
+        "interval_mask.ordered",
+        "interval_mask.shuffled"
+      ],
+      "geomean_latency_reduction_pct": 67.26727696917752,
+      "worst_block_reduction_pct": 66.7166801546735,
+      "worst_case_reduction_pct": 0.9047791165674668,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "f81c957022906fafa83b5356d7fa7daf67f39e6aaccd83cf185df42e058474c5",
+      "operator": "interval_mask",
+      "round": 1,
+      "decision": "accepted",
+      "method": "sweep ordered timestamp masks with a monotone cursor",
+      "profile_hotspot": "Each ordered query repeats a binary search through the same intervals",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "interval_mask.ordered": {
+          "before_ns": 234125.46484375,
+          "after_ns": 25465.09765625,
+          "latency_reduction_pct": 89.12927411741829,
+          "paired_ratios": [
+            0.10794241237593946,
+            0.1108165263322232,
+            0.10778940060129516,
+            0.10947210527569476
+          ],
+          "worst_paired_reduction_pct": 88.91834736677768
+        },
+        "interval_mask.shuffled": {
+          "before_ns": 269320.84375,
+          "after_ns": 265465.359375,
+          "latency_reduction_pct": 0.9047791165674668,
+          "paired_ratios": [
+            0.992695037097263,
+            0.9996517817254361,
+            0.9892093805713876,
+            0.9786267891461258
+          ],
+          "worst_paired_reduction_pct": 0.03482182745638829
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-mask-r1",
+      "validation_sha256": "417b5b9284d5c20fc00646836c15d577b0632840477d6ccfc5f6ca21d357d3cb",
+      "record_path": "docs/performance/results/interval-mask-r1.json",
+      "commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae"
+    },
+    {
+      "label": "interval-mask-r2",
+      "base_commit": "b887a19951f8bd50a99d229a1411b64e6359b8ae",
+      "cases": [
+        "interval_mask.ordered",
+        "interval_mask.shuffled"
+      ],
+      "geomean_latency_reduction_pct": 4.867606229352095,
+      "worst_block_reduction_pct": 4.409832436283512,
+      "worst_case_reduction_pct": -1.0475088923284082,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "44e1b68e8615ecd3d2085cf033719fafb8084334a55ef86543c5c00398e323bd",
+      "operator": "interval_mask",
+      "round": 2,
+      "decision": "rejected",
+      "method": "write ordered masks into pre-sized output",
+      "profile_hotspot": "Each ordered query repeats a binary search through the same intervals",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "interval_mask.ordered": {
+          "before_ns": 25319.00439453125,
+          "after_ns": 22511.50732421875,
+          "latency_reduction_pct": 10.94678287916524,
+          "paired_ratios": [
+            0.8978709277835853,
+            0.8831934146331099,
+            0.8992272465885098,
+            0.8791768703917292
+          ],
+          "worst_paired_reduction_pct": 10.077275341149017
+        },
+        "interval_mask.shuffled": {
+          "before_ns": 264157.30859375,
+          "after_ns": 267498.7890625,
+          "latency_reduction_pct": -1.0475088923284082,
+          "paired_ratios": [
+            1.017683037963538,
+            1.0028595715205866,
+            1.0032671398830302,
+            1.0326407038721417
+          ],
+          "worst_paired_reduction_pct": -3.2640703872141685
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-mask-r2",
+      "validation_sha256": "b2b25dcf83b7993e2fc2f9901e9d2614726638dd2f2bbc3ad68bc7b81c5bd0ba",
+      "record_path": "docs/performance/results/interval-mask-r2.json"
+    },
+    {
+      "label": "interval-new-r1",
+      "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+      "cases": [
+        "interval_new"
+      ],
+      "geomean_latency_reduction_pct": 4.010312784824488,
+      "worst_block_reduction_pct": 1.7733954597119461,
+      "worst_case_reduction_pct": 4.010312784824488,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "f9cb78a095ee3a588cb4da01f73f6f9106665b0f450503d71ae1de856f747c8b",
+      "operator": "interval_new",
+      "round": 1,
+      "decision": "rejected",
+      "method": "reserve interval merge capacity",
+      "profile_hotspot": "Repeated allocation and unnecessary sorting of already ordered intervals",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "interval_new": {
+          "before_ns": 8434.162719726562,
+          "after_ns": 8177.6134033203125,
+          "latency_reduction_pct": 4.010312784824488,
+          "paired_ratios": [
+            0.6029704175974284,
+            0.9822660454028805,
+            0.9627827530858909,
+            0.9570109912176195
+          ],
+          "worst_paired_reduction_pct": 1.7733954597119461
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-new-r1",
+      "validation_sha256": "4e12dc7fb1105a5519ca624078d6890830500b62d5378988f9fc071ae8331811",
+      "record_path": "docs/performance/results/interval-new-r1.json"
+    },
+    {
+      "label": "interval-new-r2",
+      "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+      "cases": [
+        "interval_new"
+      ],
+      "geomean_latency_reduction_pct": -3.727802602338537,
+      "worst_block_reduction_pct": -4.052992521887888,
+      "worst_case_reduction_pct": -3.727802602338537,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/selection.rs"
+      ],
+      "measurement_sha256": "e401127b988186173949df7d884893935ef9f045c04aeca286733558d5806d69",
+      "operator": "interval_new",
+      "round": 2,
+      "decision": "rejected",
+      "method": "skip sorting already ordered interval starts",
+      "profile_hotspot": "Repeated allocation and unnecessary sorting of already ordered intervals",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "interval_new": {
+          "before_ns": 8447.10009765625,
+          "after_ns": 8723.8916015625,
+          "latency_reduction_pct": -3.727802602338537,
+          "paired_ratios": [
+            1.014239483376483,
+            1.0405299252188789,
+            1.0402046576620767,
+            1.0343513943846938
+          ],
+          "worst_paired_reduction_pct": -4.052992521887888
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/interval-new-r2",
+      "validation_sha256": "2eb51876bc3f679f60e37d840d716cfcfad2f9873380c9856c55163a4f3f4380",
+      "record_path": "docs/performance/results/interval-new-r2.json"
+    },
+    {
+      "label": "json-decode-r1",
+      "base_commit": "652f7c466111f7f5bf8c2efcc271108140e4b510",
+      "cases": [
+        "json_decode"
+      ],
+      "geomean_latency_reduction_pct": 28.42407845176329,
+      "worst_block_reduction_pct": 28.005571508096804,
+      "worst_case_reduction_pct": 28.42407845176329,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "measurement_sha256": "030a094a56dd00c04bd7c2e9cb7223b1320265696fc727926925394cafae9478",
+      "operator": "json_decode",
+      "round": 1,
+      "decision": "accepted",
+      "method": "fast-path unescaped top-level JSON pointers",
+      "profile_hotspot": "Callgrind: JSON pointer decoding repeatedly allocates unescaped strings for flat field names",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "json_decode": {
+          "before_ns": 300.63939666748047,
+          "after_ns": 214.78143692016602,
+          "latency_reduction_pct": 28.42407845176329,
+          "paired_ratios": [
+            0.7134174283155857,
+            0.7081351838435451,
+            0.719944284919032,
+            0.7181010026491484
+          ],
+          "worst_paired_reduction_pct": 28.005571508096804
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/json-decode-r1",
+      "validation_sha256": "8e94d2c14794c9182c6dc34a904de6d5fdd6a7e0b518e9d211f2f8caf4545143",
+      "record_path": "docs/performance/results/json-decode-r1.json",
+      "commit": "6a5e56033af9f97e0524023440ad8b97b4f45387"
+    },
+    {
+      "label": "json-decode-r2",
+      "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+      "cases": [
+        "json_decode"
+      ],
+      "geomean_latency_reduction_pct": 2.1687770128572925,
+      "worst_block_reduction_pct": 0.5819072779421286,
+      "worst_case_reduction_pct": 2.1687770128572925,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "measurement_sha256": "021f1477af9ad256298e1078f6cff9d4ae903ec6277dccfda98f3cb9da684437",
+      "operator": "json_decode",
+      "round": 2,
+      "decision": "rejected",
+      "method": "reserve a bounded numeric field vector",
+      "profile_hotspot": "Callgrind: JSON pointer decoding repeatedly allocates unescaped strings for flat field names",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "json_decode": {
+          "before_ns": 215.49617767333984,
+          "after_ns": 211.56220626831055,
+          "latency_reduction_pct": 2.1687770128572925,
+          "paired_ratios": [
+            0.9854103446405846,
+            0.9941809272205787,
+            0.9712141151022694,
+            0.9680194734043854
+          ],
+          "worst_paired_reduction_pct": 0.5819072779421286
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/json-decode-r2",
+      "validation_sha256": "ab7dfe082cd397bc20c469012d2d0c40848825dff542d8117ddd75de397c44a6",
+      "record_path": "docs/performance/results/json-decode-r2.json"
+    },
+    {
+      "label": "lowpass-taps-r1",
+      "base_commit": "2c74abb1edffe9e82073ecded03b2fb3647890c8",
+      "cases": [
+        "lowpass_taps"
+      ],
+      "geomean_latency_reduction_pct": 12.06128268592266,
+      "worst_block_reduction_pct": 11.029186651811784,
+      "worst_case_reduction_pct": 12.06128268592266,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "0dcde908624ce87ecc237a8c65cb828f6f72a7a5bba645fbd4ff5bfc30ccde66",
+      "operator": "lowpass_taps",
+      "round": 1,
+      "decision": "accepted",
+      "method": "precompute the Hamming phase increment",
+      "profile_hotspot": "Trigonometric evaluations and repeated phase scaling dominate coefficient construction",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "lowpass_taps": {
+          "before_ns": 697.3641510009766,
+          "after_ns": 614.9538955688477,
+          "latency_reduction_pct": 12.06128268592266,
+          "paired_ratios": [
+            0.8897081334818822,
+            0.8784567954120203,
+            0.8803175508695266,
+            0.8727445890961715
+          ],
+          "worst_paired_reduction_pct": 11.029186651811784
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/lowpass-taps-r1",
+      "validation_sha256": "9514dfb2fa611afb6ceda8e00b0d7cd25c673be6e8f4e03783c0747f5f2088fe",
+      "record_path": "docs/performance/results/lowpass-taps-r1.json",
+      "commit": "9fb2df8eb41ea444c03aac847259ad08b78529d2"
+    },
+    {
+      "label": "lowpass-taps-r2",
+      "base_commit": "9fb2df8eb41ea444c03aac847259ad08b78529d2",
+      "cases": [
+        "lowpass_taps"
+      ],
+      "geomean_latency_reduction_pct": 39.42055279054313,
+      "worst_block_reduction_pct": 36.90334159572626,
+      "worst_case_reduction_pct": 39.42055279054313,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "7c726bfae2681da557a67765853fe624b3e322c90bf7359360db635425b9e7c6",
+      "operator": "lowpass_taps",
+      "round": 2,
+      "decision": "accepted",
+      "method": "compute symmetric lowpass coefficients once",
+      "profile_hotspot": "Trigonometric evaluations and repeated phase scaling dominate coefficient construction",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "lowpass_taps": {
+          "before_ns": 616.5859451293945,
+          "after_ns": 373.3038787841797,
+          "latency_reduction_pct": 39.42055279054313,
+          "paired_ratios": [
+            0.6309665840427374,
+            0.6045611770519747,
+            0.6052794040133026,
+            0.6063095401758347
+          ],
+          "worst_paired_reduction_pct": 36.90334159572626
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/lowpass-taps-r2",
+      "validation_sha256": "b770490af07f526c451e4eefcbf182c54404d0d22a44cc7d55d507b9fff7819c",
+      "record_path": "docs/performance/results/lowpass-taps-r2.json",
+      "commit": "6922813b35be8a132ba557e514ebd67bc8514b34"
+    },
+    {
+      "label": "map-clock-r1",
+      "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+      "cases": [
+        "map_clock.offset",
+        "map_clock.drift"
+      ],
+      "geomean_latency_reduction_pct": 0.06762598436071965,
+      "worst_block_reduction_pct": -2.438916252519019,
+      "worst_case_reduction_pct": -0.8560987767522565,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "f734b3427f5147cce990966419ccda2409e467d3074d4135a39555beb97809ee",
+      "operator": "map_clock",
+      "round": 1,
+      "decision": "rejected",
+      "method": "reserve clock-map output capacity",
+      "profile_hotspot": "Fallible collection grows Vec and applies wide division even to pure offsets",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "map_clock.offset": {
+          "before_ns": 156100.248046875,
+          "after_ns": 155365.970703125,
+          "latency_reduction_pct": 0.7266460336441294,
+          "paired_ratios": [
+            0.9761105695783328,
+            1.0249226861541045,
+            1.0044760246578537,
+            0.9809910546692637
+          ],
+          "worst_paired_reduction_pct": -2.4922686154104534
+        },
+        "map_clock.drift": {
+          "before_ns": 154674.126953125,
+          "after_ns": 156204.17578125,
+          "latency_reduction_pct": -0.8560987767522565,
+          "paired_ratios": [
+            1.0165238226804916,
+            1.0238559166220655,
+            1.0005981528545536,
+            0.9946284414362938
+          ],
+          "worst_paired_reduction_pct": -2.3855916622065543
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/map-clock-r1",
+      "validation_sha256": "2e8a12b8e66eade729a43b1d83c5362d2455d5deae45609d766fb40a674c134c",
+      "record_path": "docs/performance/results/map-clock-r1.json"
+    },
+    {
+      "label": "map-clock-r2",
+      "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+      "cases": [
+        "map_clock.offset",
+        "map_clock.drift"
+      ],
+      "geomean_latency_reduction_pct": 58.886931859198846,
+      "worst_block_reduction_pct": 58.508813443149,
+      "worst_case_reduction_pct": -0.4423279228850552,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "d90063d9f3cbfe41b773c395c93e0e70aa27a44956f1fd064f6f04a05bcf9773",
+      "operator": "map_clock",
+      "round": 2,
+      "decision": "accepted",
+      "method": "fast-path explicitly zero clock drift",
+      "profile_hotspot": "Fallible collection grows Vec and applies wide division even to pure offsets",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "map_clock.offset": {
+          "before_ns": 156727.6640625,
+          "after_ns": 26626.0947265625,
+          "latency_reduction_pct": 83.10309041410284,
+          "paired_ratios": [
+            0.1702405663806961,
+            0.16829446736679193,
+            0.1669273463824114,
+            0.16964372435115146
+          ],
+          "worst_paired_reduction_pct": 82.97594336193039
+        },
+        "map_clock.drift": {
+          "before_ns": 155271.3984375,
+          "after_ns": 155862.62109375,
+          "latency_reduction_pct": -0.4423279228850552,
+          "paired_ratios": [
+            1.0112269939502616,
+            0.9825857804677178,
+            1.0022450782024737,
+            1.0066014802552274
+          ],
+          "worst_paired_reduction_pct": -1.122699395026161
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/map-clock-r2",
+      "validation_sha256": "cc05d6ce2d0cb057496b3f747d55ea65c4066a0105a80ff049a3ec6d2af4dad5",
+      "record_path": "docs/performance/results/map-clock-r2.json",
+      "commit": "7669197d00fcf987ad7a186336fcce2537cdaff3"
+    },
+    {
+      "label": "mcap-inspect-r1",
+      "base_commit": "652f7c466111f7f5bf8c2efcc271108140e4b510",
+      "cases": [
+        "mcap_inspect"
+      ],
+      "geomean_latency_reduction_pct": 1.4543686219943508,
+      "worst_block_reduction_pct": 0.9800868021077047,
+      "worst_case_reduction_pct": 1.4543686219943508,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "measurement_sha256": "5e2f76dd946b2f1d8913db256f65d00d5884e3cb0ef015ba391a95fd4d5b0dfe",
+      "operator": "mcap_inspect",
+      "round": 1,
+      "decision": "rejected",
+      "method": "reuse identical log and publish clock summaries",
+      "profile_hotspot": "Repeated clock summaries and exhaustive channel lookup in the inspection adapter",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "mcap_inspect": {
+          "before_ns": 1739645.5,
+          "after_ns": 1717505.71875,
+          "latency_reduction_pct": 1.4543686219943508,
+          "paired_ratios": [
+            0.9881239390403073,
+            0.9827886885198056,
+            0.9732093255529497,
+            0.990199131978923
+          ],
+          "worst_paired_reduction_pct": 0.9800868021077047
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/mcap-inspect-r1",
+      "validation_sha256": "11330811c9316755822f92e9c6ee8d88104a4794599cfa02a5c09ec5a63f448a",
+      "record_path": "docs/performance/results/mcap-inspect-r1.json"
+    },
+    {
+      "label": "mcap-inspect-r2",
+      "base_commit": "652f7c466111f7f5bf8c2efcc271108140e4b510",
+      "cases": [
+        "mcap_inspect"
+      ],
+      "geomean_latency_reduction_pct": -1.0845868695580574,
+      "worst_block_reduction_pct": -4.531464424256626,
+      "worst_case_reduction_pct": -1.0845868695580574,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "measurement_sha256": "3efb353b07a945448d28b1dcf8b6a7ff7215e96b45b0c54490607262aeab54a0",
+      "operator": "mcap_inspect",
+      "round": 2,
+      "decision": "rejected",
+      "method": "stream channel lookup through a filtered iterator",
+      "profile_hotspot": "Repeated clock summaries and exhaustive channel lookup in the inspection adapter",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "mcap_inspect": {
+          "before_ns": 1749739.75,
+          "after_ns": 1771867.96875,
+          "latency_reduction_pct": -1.0845868695580574,
+          "paired_ratios": [
+            0.9955528169871675,
+            0.9988281573525368,
+            1.0228635800386245,
+            1.0453146442425663
+          ],
+          "worst_paired_reduction_pct": -4.531464424256626
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/mcap-inspect-r2",
+      "validation_sha256": "41e089460cc2ee775f740b3ae27c342722cd016a084033c2d9b0b9dd8d6c7a43",
+      "record_path": "docs/performance/results/mcap-inspect-r2.json"
+    },
+    {
+      "label": "mcap-read-signal-r1",
+      "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+      "cases": [
+        "mcap_read_signal"
+      ],
+      "geomean_latency_reduction_pct": 0.14960799969606642,
+      "worst_block_reduction_pct": -1.7797662127541303,
+      "worst_case_reduction_pct": 0.14960799969606642,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "measurement_sha256": "773e78725f8261d738474c6627194b4dd0e07e96886bd703b654aa77bf1540ea",
+      "operator": "mcap_read_signal",
+      "round": 1,
+      "decision": "rejected",
+      "method": "reserve bounded decoded signal storage",
+      "profile_hotspot": "Decoded signal vectors repeatedly grow while moving each decoded row",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "mcap_read_signal": {
+          "before_ns": 6142977.375,
+          "after_ns": 6130696.75,
+          "latency_reduction_pct": 0.14960799969606642,
+          "paired_ratios": [
+            0.9863318855229267,
+            1.0177976621275413,
+            1.0010416387141041,
+            0.9959662012919746
+          ],
+          "worst_paired_reduction_pct": -1.7797662127541303
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/mcap-read-signal-r1",
+      "validation_sha256": "906bd277ef92fca8efe48d18d94c8927dbcc91e4919fa9b81d009588a99dfda0",
+      "record_path": "docs/performance/results/mcap-read-signal-r1.json"
+    },
+    {
+      "label": "mcap-read-signal-r2",
+      "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+      "cases": [
+        "mcap_read_signal"
+      ],
+      "geomean_latency_reduction_pct": -0.02834004935237111,
+      "worst_block_reduction_pct": -4.946278864920095,
+      "worst_case_reduction_pct": -0.02834004935237111,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "measurement_sha256": "972e74e250d75f95446eb1444ff3eaacfa5b34adb1f39173d889d41456015fb3",
+      "operator": "mcap_read_signal",
+      "round": 2,
+      "decision": "rejected",
+      "method": "append decoded row buffers directly",
+      "profile_hotspot": "Decoded signal vectors repeatedly grow while moving each decoded row",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "mcap_read_signal": {
+          "before_ns": 6142377.25,
+          "after_ns": 6122496.25,
+          "latency_reduction_pct": -0.02834004935237111,
+          "paired_ratios": [
+            1.0167119813804224,
+            0.9804961226457259,
+            0.9838548196066249,
+            1.049462788649201
+          ],
+          "worst_paired_reduction_pct": -4.946278864920095
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/mcap-read-signal-r2",
+      "validation_sha256": "28d60a1bcb785bfcbf4f0d5c491b86623b6335401e3ad22a4a7dd9f7f2cf81a0",
+      "record_path": "docs/performance/results/mcap-read-signal-r2.json"
+    },
+    {
+      "label": "python-bridge-r1",
+      "base_commit": "59f909519f9d0ac9be79c13687fefcd6d7d5cd9a",
+      "cases": [
+        "python.inspect_signal",
+        "python.resample.previous",
+        "python.resample.linear",
+        "python.history_windows",
+        "python.align_timestamps",
+        "python.uniform_grid",
+        "python.ema",
+        "python.fir",
+        "python.lowpass_taps",
+        "python.unwrap_angles",
+        "python.image_quality",
+        "python.transform_image",
+        "python.inspect_mcap",
+        "python.read_json_signal",
+        "python.validate_video"
+      ],
+      "geomean_latency_reduction_pct": 77.76225491711668,
+      "worst_block_reduction_pct": 77.47191688645545,
+      "worst_case_reduction_pct": -0.9516621362168465,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Replace two serialization helpers with small PyDict/NumPy helpers using existing PyO3 and numpy dependencies; preserve non-finite conversion, mapping order and public shapes",
+      "paths": [
+        "crates/python/src/lib.rs",
+        "python/mcap_ops/__init__.py"
+      ],
+      "measurement_sha256": "dc9977d35f9382f8bcb5414a212be706bd2691ae2e1e989c1e17e4be07b67800",
+      "operator": "python_bridge",
+      "round": 1,
+      "decision": "accepted",
+      "method": "transfer numeric results directly into NumPy arrays",
+      "profile_hotspot": "cProfile attributes most resampling interface time to JSON decoding and array reconstruction; native output also serialized large vectors",
+      "reason": "236 public-interface comparisons pass including key order, invalid data and output ownership; all paired aggregate blocks exceed 77%, with no representative-case regression over 3%",
+      "case_results": {
+        "python.inspect_signal": {
+          "before_ns": 1207218.65625,
+          "after_ns": 1205238.421875,
+          "latency_reduction_pct": 1.1759627278870477,
+          "paired_ratios": [
+            0.9849662097728106,
+            0.9915145356694485,
+            1.030840714257938,
+            0.9787927080521386
+          ],
+          "worst_paired_reduction_pct": -3.0840714257938107
+        },
+        "python.resample.previous": {
+          "before_ns": 12805512.25,
+          "after_ns": 434760.5390625,
+          "latency_reduction_pct": 96.58756799844265,
+          "paired_ratios": [
+            0.03410636101084628,
+            0.03417406608434608,
+            0.034142279020300766,
+            0.030767180632077527
+          ],
+          "worst_paired_reduction_pct": 96.5825933915654
+        },
+        "python.resample.linear": {
+          "before_ns": 12983151.25,
+          "after_ns": 506931.71875,
+          "latency_reduction_pct": 96.09707476341973,
+          "paired_ratios": [
+            0.03931452021431054,
+            0.038743984517294924,
+            0.04009934146437652,
+            0.03640578004231364
+          ],
+          "worst_paired_reduction_pct": 95.99006585356234
+        },
+        "python.history_windows": {
+          "before_ns": 20611930.5,
+          "after_ns": 1270747.78125,
+          "latency_reduction_pct": 93.78860093002861,
+          "paired_ratios": [
+            0.06233398324464317,
+            0.05915004750297283,
+            0.0629195706570323,
+            0.06189399815478472
+          ],
+          "worst_paired_reduction_pct": 93.70804293429677
+        },
+        "python.align_timestamps": {
+          "before_ns": 1197925.84375,
+          "after_ns": 27932.0234375,
+          "latency_reduction_pct": 97.67260282897364,
+          "paired_ratios": [
+            0.0235651640434639,
+            0.022943652895388668,
+            0.022982779377063365,
+            0.023917204989010277
+          ],
+          "worst_paired_reduction_pct": 97.60827950109898
+        },
+        "python.uniform_grid": {
+          "before_ns": 175603.41015625,
+          "after_ns": 178568.98828125,
+          "latency_reduction_pct": -0.9516621362168465,
+          "paired_ratios": [
+            1.0026629895112626,
+            1.0068988126743221,
+            1.0121344300500146,
+            1.026542238682368
+          ],
+          "worst_paired_reduction_pct": -2.6542238682367936
+        },
+        "python.ema": {
+          "before_ns": 30466767.0,
+          "after_ns": 1542245.25,
+          "latency_reduction_pct": 94.99055886282645,
+          "paired_ratios": [
+            0.05016093279078673,
+            0.05002788995268439,
+            0.049966804561716247,
+            0.05144584389540154
+          ],
+          "worst_paired_reduction_pct": 94.85541561045984
+        },
+        "python.fir": {
+          "before_ns": 32751735.0,
+          "after_ns": 3796436.9375,
+          "latency_reduction_pct": 88.4084166420178,
+          "paired_ratios": [
+            0.11446181293835771,
+            0.11617241601982885,
+            0.11565925113981528,
+            0.11714366134088107
+          ],
+          "worst_paired_reduction_pct": 88.28563386591189
+        },
+        "python.lowpass_taps": {
+          "before_ns": 718.6342163085938,
+          "after_ns": 709.7213897705078,
+          "latency_reduction_pct": 0.9737262299453375,
+          "paired_ratios": [
+            0.9959558653023554,
+            0.9946062824204808,
+            0.9777796052001689,
+            0.9859191929806126
+          ],
+          "worst_paired_reduction_pct": 0.40441346976446413
+        },
+        "python.unwrap_angles": {
+          "before_ns": 30346047.0,
+          "after_ns": 1445070.3125,
+          "latency_reduction_pct": 95.23742813699081,
+          "paired_ratios": [
+            0.050241283180618095,
+            0.04652489569538137,
+            0.048088928194316115,
+            0.0471625090658677
+          ],
+          "worst_paired_reduction_pct": 94.9758716819382
+        },
+        "python.image_quality": {
+          "before_ns": 393884.9765625,
+          "after_ns": 391565.1171875,
+          "latency_reduction_pct": 0.5707135445631506,
+          "paired_ratios": [
+            0.9901258887487163,
+            1.0185501869769942,
+            0.9929214176461333,
+            0.9956643114626037
+          ],
+          "worst_paired_reduction_pct": -1.8550186976994176
+        },
+        "python.transform_image": {
+          "before_ns": 975856.453125,
+          "after_ns": 974187.234375,
+          "latency_reduction_pct": 0.41828975555284753,
+          "paired_ratios": [
+            0.9876216904158572,
+            1.008110257281006,
+            0.9957467637794569,
+            0.9958874411094862
+          ],
+          "worst_paired_reduction_pct": -0.8110257281005895
+        },
+        "python.inspect_mcap": {
+          "before_ns": 654214.953125,
+          "after_ns": 640728.40625,
+          "latency_reduction_pct": 1.7052924624514243,
+          "paired_ratios": [
+            0.9700761172456014,
+            0.9958180335053701,
+            0.6952596130836359,
+            0.9985158911245825
+          ],
+          "worst_paired_reduction_pct": 0.14841088754175003
+        },
+        "python.read_json_signal": {
+          "before_ns": 2506391.0,
+          "after_ns": 919961.75,
+          "latency_reduction_pct": 63.47572697087165,
+          "paired_ratios": [
+            0.3690737805715556,
+            0.3773182879346368,
+            0.3614116800110115,
+            0.21572032779442898
+          ],
+          "worst_paired_reduction_pct": 62.268171206536316
+        },
+        "python.validate_video": {
+          "before_ns": 58982982.5,
+          "after_ns": 59034163.5,
+          "latency_reduction_pct": -0.3509179726897571,
+          "paired_ratios": [
+            0.9985653337454652,
+            1.011139576941344,
+            0.98388773948586,
+            1.0084530257083302
+          ],
+          "worst_paired_reduction_pct": -1.1139576941344043
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/python-bridge-r1",
+      "validation_sha256": "a80254b3af308b474746dbf11c9e06a3f2c4a5235e9fcd0603b7b9d3465381b8",
+      "record_path": "docs/performance/results/python-bridge-r1.json",
+      "commit": "b54b55f7fbed1212b7b270ecc37d2c12bdce6e41"
+    },
+    {
+      "label": "python-bridge-r2",
+      "base_commit": "b54b55f7fbed1212b7b270ecc37d2c12bdce6e41",
+      "cases": [
+        "python.inspect_signal",
+        "python.resample.previous",
+        "python.resample.linear",
+        "python.history_windows",
+        "python.align_timestamps",
+        "python.uniform_grid",
+        "python.ema",
+        "python.fir",
+        "python.lowpass_taps",
+        "python.unwrap_angles",
+        "python.image_quality",
+        "python.transform_image",
+        "python.inspect_mcap",
+        "python.read_json_signal",
+        "python.validate_video"
+      ],
+      "geomean_latency_reduction_pct": 15.545347020081856,
+      "worst_block_reduction_pct": 14.200628360085865,
+      "worst_case_reduction_pct": -0.8799245798613242,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "One layout check with the existing iterator fallback for strided inputs; identical owned snapshots and public return structures",
+      "paths": [
+        "crates/python/src/lib.rs",
+        "python/mcap_ops/__init__.py"
+      ],
+      "measurement_sha256": "fed2b03836db491685b42e0b95a21e01abd414b9913c53992391316ec3ee827d",
+      "operator": "python_bridge",
+      "round": 2,
+      "decision": "accepted",
+      "method": "copy standard-layout input arrays through contiguous slices",
+      "profile_hotspot": "After eliminating JSON, ndarray element iteration dominates input snapshot creation for contiguous arrays",
+      "reason": "236 public-interface comparisons pass; aggregate latency reduction 15.55%, worst paired block 14.20%, no material case regression",
+      "case_results": {
+        "python.inspect_signal": {
+          "before_ns": 1197713.453125,
+          "after_ns": 933451.296875,
+          "latency_reduction_pct": 22.115635018193213,
+          "paired_ratios": [
+            0.7796239827769744,
+            0.7780633168591613,
+            0.7687392244564549,
+            0.8057957283944205
+          ],
+          "worst_paired_reduction_pct": 19.420427160557953
+        },
+        "python.resample.previous": {
+          "before_ns": 437625.453125,
+          "after_ns": 163948.234375,
+          "latency_reduction_pct": 62.390082002629164,
+          "paired_ratios": [
+            0.3766158130325438,
+            0.37558254691487286,
+            0.3725438792045755,
+            0.3981288126295893
+          ],
+          "worst_paired_reduction_pct": 60.18711873704107
+        },
+        "python.resample.linear": {
+          "before_ns": 503828.53125,
+          "after_ns": 240862.109375,
+          "latency_reduction_pct": 52.15265230663486,
+          "paired_ratios": [
+            0.473101022371234,
+            0.47369679048269847,
+            0.48325016338460436,
+            0.5039447272943364
+          ],
+          "worst_paired_reduction_pct": 49.60552727056636
+        },
+        "python.history_windows": {
+          "before_ns": 1251975.4375,
+          "after_ns": 1054699.15625,
+          "latency_reduction_pct": 16.41015561769199,
+          "paired_ratios": [
+            0.8442106351614417,
+            0.8275862524847185,
+            0.9076480865705295,
+            0.8099506210498078
+          ],
+          "worst_paired_reduction_pct": 9.235191342947047
+        },
+        "python.align_timestamps": {
+          "before_ns": 28014.123046875,
+          "after_ns": 28184.62744140625,
+          "latency_reduction_pct": -0.8799245798613242,
+          "paired_ratios": [
+            1.0130166520708472,
+            1.0004057692334547,
+            1.0082643668564286,
+            1.009334124740798
+          ],
+          "worst_paired_reduction_pct": -1.3016652070847234
+        },
+        "python.uniform_grid": {
+          "before_ns": 179919.12890625,
+          "after_ns": 176690.546875,
+          "latency_reduction_pct": 2.5806859908674706,
+          "paired_ratios": [
+            0.971396374769933,
+            0.6114684067072712,
+            0.9871377383723254,
+            0.9769899054127175
+          ],
+          "worst_paired_reduction_pct": 1.2862261627674565
+        },
+        "python.ema": {
+          "before_ns": 1555168.53125,
+          "after_ns": 1347222.125,
+          "latency_reduction_pct": 13.997098609298142,
+          "paired_ratios": [
+            0.8458399873295102,
+            0.7854597467043419,
+            0.8807673450972447,
+            0.8742180404845269
+          ],
+          "worst_paired_reduction_pct": 11.923265490275526
+        },
+        "python.fir": {
+          "before_ns": 3759545.25,
+          "after_ns": 3806269.75,
+          "latency_reduction_pct": -0.5136986175404257,
+          "paired_ratios": [
+            1.002353032242671,
+            0.9871788810983179,
+            1.0241896972580633,
+            1.0079209401081377
+          ],
+          "worst_paired_reduction_pct": -2.4189697258063303
+        },
+        "python.lowpass_taps": {
+          "before_ns": 717.7883605957031,
+          "after_ns": 713.6183624267578,
+          "latency_reduction_pct": 1.3983721105589098,
+          "paired_ratios": [
+            0.9692611108699316,
+            0.9898452929908818,
+            1.0219363341658771,
+            0.98218726479794
+          ],
+          "worst_paired_reduction_pct": -2.1936334165877147
+        },
+        "python.unwrap_angles": {
+          "before_ns": 1450261.65625,
+          "after_ns": 1238277.5625,
+          "latency_reduction_pct": 14.099492866785667,
+          "paired_ratios": [
+            0.8434409514359211,
+            0.8489373655406118,
+            0.8851620216224404,
+            0.8690727771236748
+          ],
+          "worst_paired_reduction_pct": 11.48379783775596
+        },
+        "python.image_quality": {
+          "before_ns": 395198.96875,
+          "after_ns": 393358.40625,
+          "latency_reduction_pct": -0.162026877550292,
+          "paired_ratios": [
+            1.0059662101947864,
+            1.0161313548176054,
+            0.9972743273562193,
+            0.9515156447599821
+          ],
+          "worst_paired_reduction_pct": -1.6131354817605414
+        },
+        "python.transform_image": {
+          "before_ns": 981931.046875,
+          "after_ns": 970992.859375,
+          "latency_reduction_pct": 1.2376382942811404,
+          "paired_ratios": [
+            0.9709244331746891,
+            1.0140934688239434,
+            0.9837728095071397,
+            0.9914744246072376
+          ],
+          "worst_paired_reduction_pct": -1.4093468823943356
+        },
+        "python.inspect_mcap": {
+          "before_ns": 645602.953125,
+          "after_ns": 644865.875,
+          "latency_reduction_pct": 0.11403900978057546,
+          "paired_ratios": [
+            0.9004983462341642,
+            0.9969687752799575,
+            1.000750444524431,
+            1.007754933026919
+          ],
+          "worst_paired_reduction_pct": -0.7754933026919097
+        },
+        "python.read_json_signal": {
+          "before_ns": 923907.4375,
+          "after_ns": 912550.703125,
+          "latency_reduction_pct": 1.9137995871616242,
+          "paired_ratios": [
+            0.9777074156737409,
+            0.9840165925830267,
+            0.974879250627483,
+            1.0057455102347084
+          ],
+          "worst_paired_reduction_pct": -0.5745510234708373
+        },
+        "python.validate_video": {
+          "before_ns": 59847895.0,
+          "after_ns": 59525531.5,
+          "latency_reduction_pct": 0.8163372909810729,
+          "paired_ratios": [
+            0.9971632827799876,
+            0.9865099714003909,
+            1.0294118476805678,
+            0.9863173370227306
+          ],
+          "worst_paired_reduction_pct": -2.9411847680567815
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/python-bridge-r2",
+      "validation_sha256": "2b39477c31a8ffc3dee8db9326ae0a8bf4aeb8fc445f229d06f5c34850b6e4f7",
+      "record_path": "docs/performance/results/python-bridge-r2.json",
+      "commit": "84c4feede13275212d657ea42d9d51465c18894a"
+    },
+    {
+      "label": "raw-reader-r1",
+      "base_commit": "652f7c466111f7f5bf8c2efcc271108140e4b510",
+      "cases": [
+        "raw_reader.chunked",
+        "raw_reader.linear",
+        "raw_reader.topics"
+      ],
+      "geomean_latency_reduction_pct": 1.084457716230769,
+      "worst_block_reduction_pct": -1.7374420728965,
+      "worst_case_reduction_pct": 0.296408403982118,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "measurement_sha256": "278ee3a2f152cbfaa97accdfabef1da2d4064f2b523e9b7e840c535e8e8bcd1f",
+      "operator": "raw_reader",
+      "round": 1,
+      "decision": "rejected",
+      "method": "increase the bounded reader buffer",
+      "profile_hotspot": "Callgrind: reader buffering and repeated exact topic membership checks",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "raw_reader.chunked": {
+          "before_ns": 1324636.5,
+          "after_ns": 1321545.96875,
+          "latency_reduction_pct": 0.296408403982118,
+          "paired_ratios": [
+            1.0030852300120987,
+            0.9922932525138615,
+            1.0017785794064962,
+            0.9919586380163692
+          ],
+          "worst_paired_reduction_pct": -0.30852300120987053
+        },
+        "raw_reader.linear": {
+          "before_ns": 1657013.46875,
+          "after_ns": 1626295.84375,
+          "latency_reduction_pct": 1.827490093455686,
+          "paired_ratios": [
+            0.9679448879995634,
+            0.9815746202950016,
+            1.0190610978928698,
+            0.9818755778358846
+          ],
+          "worst_paired_reduction_pct": -1.9061097892869805
+        },
+        "raw_reader.topics": {
+          "before_ns": 1548284.90625,
+          "after_ns": 1543808.1875,
+          "latency_reduction_pct": 0.634106435974735,
+          "paired_ratios": [
+            0.9866820451753184,
+            0.9953667847947568,
+            1.0315029599998307,
+            0.9919510864857485
+          ],
+          "worst_paired_reduction_pct": -3.150295999983066
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/raw-reader-r1",
+      "validation_sha256": "0ef555cdd3b1a02c8c30054ab4c8949ca56b1ba12691f3cc5b425ccfd1a3b3d0",
+      "record_path": "docs/performance/results/raw-reader-r1.json"
+    },
+    {
+      "label": "raw-reader-r2",
+      "base_commit": "652f7c466111f7f5bf8c2efcc271108140e4b510",
+      "cases": [
+        "raw_reader.chunked",
+        "raw_reader.linear",
+        "raw_reader.topics"
+      ],
+      "geomean_latency_reduction_pct": -15.430040711189719,
+      "worst_block_reduction_pct": -18.71216906026283,
+      "worst_case_reduction_pct": -41.43399118612046,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/mcap_ops.rs"
+      ],
+      "measurement_sha256": "44862830be85d080609f3cd78ae6d04f8ce4d291cddca5e7c5aad063b837f02c",
+      "operator": "raw_reader",
+      "round": 2,
+      "decision": "rejected",
+      "method": "binary-search long immutable topic filters",
+      "profile_hotspot": "Callgrind: reader buffering and repeated exact topic membership checks",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "raw_reader.chunked": {
+          "before_ns": 1314070.375,
+          "after_ns": 1380960.59375,
+          "latency_reduction_pct": -4.731370188576056,
+          "paired_ratios": [
+            1.017661785311366,
+            1.076965618460155,
+            1.0120382603837121,
+            1.0837320635225545
+          ],
+          "worst_paired_reduction_pct": -8.373206352255448
+        },
+        "raw_reader.linear": {
+          "before_ns": 1624680.96875,
+          "after_ns": 1693487.25,
+          "latency_reduction_pct": -3.5656406062727353,
+          "paired_ratios": [
+            1.01003253028581,
+            1.061280281839645,
+            1.0080752805060293,
+            1.074685467525134
+          ],
+          "worst_paired_reduction_pct": -7.468546752513405
+        },
+        "raw_reader.topics": {
+          "before_ns": 1533423.0625,
+          "after_ns": 2168640.03125,
+          "latency_reduction_pct": -41.43399118612046,
+          "paired_ratios": [
+            1.4456165780579957,
+            1.3922565867102799,
+            1.359594393685117,
+            1.4364232370121293
+          ],
+          "worst_paired_reduction_pct": -44.56165780579957
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/raw-reader-r2",
+      "validation_sha256": "e2341f453495177f20c6a6513a86748e560385b14518f76488813fc21b9f1c90",
+      "record_path": "docs/performance/results/raw-reader-r2.json"
+    },
+    {
+      "label": "require-strict-r1",
+      "base_commit": "9be8a75ac7ce6a1227df2ece0f8b612502be3791",
+      "cases": [
+        "require_strict"
+      ],
+      "geomean_latency_reduction_pct": 18.499922333773135,
+      "worst_block_reduction_pct": 16.73035943260095,
+      "worst_case_reduction_pct": 18.499922333773135,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "547a1897ed2b1f9f48fdbd3f3ae9ac9ebbceac754a3739b434ea7c0e9d85c99b",
+      "operator": "require_strict",
+      "round": 1,
+      "decision": "accepted",
+      "method": "zip adjacent timestamp iterators",
+      "profile_hotspot": "Validation performs a branch for every adjacent timestamp",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "require_strict": {
+          "before_ns": 11448.264404296875,
+          "after_ns": 9384.727416992188,
+          "latency_reduction_pct": 18.499922333773135,
+          "paired_ratios": [
+            0.7938023799844156,
+            0.8326964056739905,
+            0.810779617255251,
+            0.8192219360692863
+          ],
+          "worst_paired_reduction_pct": 16.73035943260095
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/require-strict-r1",
+      "validation_sha256": "138f0e1f63029da242bb7b93229790aef13e40c7d15ef32eaf03c3f3f24ac401",
+      "record_path": "docs/performance/results/require-strict-r1.json",
+      "commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115"
+    },
+    {
+      "label": "require-strict-r2",
+      "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+      "cases": [
+        "require_strict"
+      ],
+      "geomean_latency_reduction_pct": -2.369716151118695,
+      "worst_block_reduction_pct": -3.0631359244620127,
+      "worst_case_reduction_pct": -2.369716151118695,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "df2715e5779bd028f6e70d7037e48882b30393c2fd56b10954398441d5e34c50",
+      "operator": "require_strict",
+      "round": 2,
+      "decision": "rejected",
+      "method": "use a vectorizable complete ordering reduction",
+      "profile_hotspot": "Validation performs a branch for every adjacent timestamp",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "require_strict": {
+          "before_ns": 9245.197998046875,
+          "after_ns": 9464.296508789062,
+          "latency_reduction_pct": -2.369716151118695,
+          "paired_ratios": [
+            1.0248413397770428,
+            1.0306313592446201,
+            1.012716750699415,
+            1.0225529832453308
+          ],
+          "worst_paired_reduction_pct": -3.0631359244620127
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/require-strict-r2",
+      "validation_sha256": "fab052404ae3ab510afee00f7b4d43dfdaadb856e3d1b7fa7766184c897c1a6f",
+      "record_path": "docs/performance/results/require-strict-r2.json"
+    },
+    {
+      "label": "resample-r1",
+      "base_commit": "fb9eb335fd5e751f061d2633527b36451a731b9a",
+      "cases": [
+        "resample.previous",
+        "resample.nearest",
+        "resample.linear",
+        "resample.slerp"
+      ],
+      "geomean_latency_reduction_pct": 10.44604288659623,
+      "worst_block_reduction_pct": 8.98606790916875,
+      "worst_case_reduction_pct": -22.20965312837859,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "measurement_sha256": "bdc7cd3a3e565c5e764610fb8751c18a88dc2a089ed44ca2c0953172ea3a57d3",
+      "operator": "resample",
+      "round": 1,
+      "decision": "rejected",
+      "method": "copy held samples without redundant endpoint arithmetic",
+      "profile_hotspot": "Repeated endpoint checks, arithmetic on held values and separate finite passes",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "resample.previous": {
+          "before_ns": 341577.5546875,
+          "after_ns": 225141.4765625,
+          "latency_reduction_pct": 33.74530298803406,
+          "paired_ratios": [
+            0.6449258781298355,
+            0.6732965278006289,
+            0.6645434563366215,
+            0.6605504839026973
+          ],
+          "worst_paired_reduction_pct": 32.67034721993711
+        },
+        "resample.nearest": {
+          "before_ns": 356484.1328125,
+          "after_ns": 246127.3515625,
+          "latency_reduction_pct": 31.308630400982306,
+          "paired_ratios": [
+            0.6838595048479655,
+            0.7125856014630121,
+            0.6886012645989072,
+            0.6852261273814467
+          ],
+          "worst_paired_reduction_pct": 28.741439853698793
+        },
+        "resample.linear": {
+          "before_ns": 430387.015625,
+          "after_ns": 495912.06249999994,
+          "latency_reduction_pct": -15.049586020344186,
+          "paired_ratios": [
+            1.138869344961443,
+            1.1693348375470838,
+            1.1621223754454406,
+            1.1372317736074418
+          ],
+          "worst_paired_reduction_pct": -16.933483754708377
+        },
+        "resample.slerp": {
+          "before_ns": 627515.609375,
+          "after_ns": 766887.3125,
+          "latency_reduction_pct": -22.20965312837859,
+          "paired_ratios": [
+            1.2211290026097383,
+            1.2230640599578335,
+            1.2579229438868575,
+            1.200944858658499
+          ],
+          "worst_paired_reduction_pct": -25.792294388685754
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/resample-r1",
+      "validation_sha256": "5149bf62048ca0c2c9e92c07af0a8c9b4a90f07b87173eb1cef940d79b6723be",
+      "record_path": "docs/performance/results/resample-r1.json"
+    },
+    {
+      "label": "resample-r2",
+      "base_commit": "fb9eb335fd5e751f061d2633527b36451a731b9a",
+      "cases": [
+        "resample.previous",
+        "resample.nearest",
+        "resample.linear",
+        "resample.slerp"
+      ],
+      "geomean_latency_reduction_pct": 22.708687338610645,
+      "worst_block_reduction_pct": 21.84371592879102,
+      "worst_case_reduction_pct": 6.985236554675279,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/sampling.rs"
+      ],
+      "measurement_sha256": "8c169801a630bfcbc4a1ae9a40c2e1582da0f40986adc4f6200c5ba879146f45",
+      "operator": "resample",
+      "round": 2,
+      "decision": "accepted",
+      "method": "fuse finite checks with interpolation writes",
+      "profile_hotspot": "Repeated endpoint checks, arithmetic on held values and separate finite passes",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "resample.previous": {
+          "before_ns": 349788.2890625,
+          "after_ns": 218753.546875,
+          "latency_reduction_pct": 37.50048350121753,
+          "paired_ratios": [
+            0.6246662076922046,
+            0.6158129470335388,
+            0.6253241222834448,
+            0.6399719465438736
+          ],
+          "worst_paired_reduction_pct": 36.00280534561264
+        },
+        "resample.nearest": {
+          "before_ns": 361342.5859375,
+          "after_ns": 249034.86328125,
+          "latency_reduction_pct": 31.069334269206706,
+          "paired_ratios": [
+            0.6983777418746313,
+            0.6802355727412346,
+            0.6784091026877426,
+            0.7070476613956249
+          ],
+          "worst_paired_reduction_pct": 29.29523386043751
+        },
+        "resample.linear": {
+          "before_ns": 441660.6640625,
+          "after_ns": 410900.6640625,
+          "latency_reduction_pct": 6.985236554675279,
+          "paired_ratios": [
+            0.9368506716529529,
+            0.9234445972535416,
+            0.9205839403107459,
+            0.9481439149011274
+          ],
+          "worst_paired_reduction_pct": 5.185608509887263
+        },
+        "resample.slerp": {
+          "before_ns": 637140.796875,
+          "after_ns": 558767.328125,
+          "latency_reduction_pct": 11.921222511504714,
+          "paired_ratios": [
+            0.8945622657357238,
+            0.8682294225472557,
+            0.8918710406464407,
+            0.869704509123465
+          ],
+          "worst_paired_reduction_pct": 10.543773426427617
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/resample-r2",
+      "validation_sha256": "c2f4df611e044443904b2bf4f226bff3125d9d6e60fb99024f02ea7491bcb930",
+      "record_path": "docs/performance/results/resample-r2.json",
+      "commit": "e5e9c2380ea26fc47125f202a7a358441c660a91"
+    },
+    {
+      "label": "uniform-grid-r1",
+      "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+      "cases": [
+        "uniform_grid.integer",
+        "uniform_grid.rational"
+      ],
+      "geomean_latency_reduction_pct": 0.39778461270634224,
+      "worst_block_reduction_pct": -1.8766667419571448,
+      "worst_case_reduction_pct": 0.07268490724188226,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "a686ea90cbb1b4c51cc0ceb19b21a1ec58a073992a435c3de824e991730940d1",
+      "operator": "uniform_grid",
+      "round": 1,
+      "decision": "rejected",
+      "method": "reserve the bounded grid size",
+      "profile_hotspot": "Repeated Vec growth and per-point integer division in rational grid generation",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "uniform_grid.integer": {
+          "before_ns": 90866.033203125,
+          "after_ns": 91016.37109375,
+          "latency_reduction_pct": 0.07268490724188226,
+          "paired_ratios": [
+            0.9948081135567737,
+            1.0017406026247153,
+            0.9968056992304469,
+            1.0059693515509047
+          ],
+          "worst_paired_reduction_pct": -0.5969351550904722
+        },
+        "uniform_grid.rational": {
+          "before_ns": 2769.252685546875,
+          "after_ns": 2745.966064453125,
+          "latency_reduction_pct": 0.8300315381029821,
+          "paired_ratios": [
+            0.9761997666337372,
+            1.0360821153957012,
+            0.9675897493075253,
+            1.0071996026042032
+          ],
+          "worst_paired_reduction_pct": -3.6082115395701164
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/uniform-grid-r1",
+      "validation_sha256": "160ff41cb0a81c622702199ab4c43d463d30cc0daccbe31c57bc7a26049e43b8",
+      "record_path": "docs/performance/results/uniform-grid-r1.json"
+    },
+    {
+      "label": "uniform-grid-r2-confirm",
+      "base_commit": "84c4feede13275212d657ea42d9d51465c18894a",
+      "cases": [
+        "uniform_grid.integer",
+        "uniform_grid.rational"
+      ],
+      "geomean_latency_reduction_pct": 19.281832582851386,
+      "worst_block_reduction_pct": 18.721589533401094,
+      "worst_case_reduction_pct": 18.472072498019987,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "A quotient/remainder accumulator replaces per-point division; bounds, rounding and overflow contracts remain unchanged",
+      "paths": [
+        "crates/core/src/time.rs"
+      ],
+      "measurement_sha256": "21c55cddeabd0a8ec4ad2edc883be154d515b2f7e1c4e4a9d20203f5a0965721",
+      "operator": "uniform_grid",
+      "round": 2,
+      "decision": "accepted",
+      "method": "advance rational timestamps with quotient and remainder",
+      "profile_hotspot": "Repeated wide integer division in rational timestamp generation",
+      "reason": "Same round-2 candidate independently confirmed in eight paired blocks: 19.28% aggregate, 18.72% worst block. Initial unstable four-block measurement remains in history and raw data.",
+      "case_results": {
+        "uniform_grid.integer": {
+          "before_ns": 90541.744140625,
+          "after_ns": 72132.0087890625,
+          "latency_reduction_pct": 20.446821224321997,
+          "paired_ratios": [
+            0.7991359464235955,
+            0.7969649117103004,
+            0.7851585833809047,
+            0.808136186446939,
+            0.7940986638032597,
+            0.7975621927244633,
+            0.7919987229160804,
+            0.791647034535886
+          ],
+          "worst_paired_reduction_pct": 19.186381355306104
+        },
+        "uniform_grid.rational": {
+          "before_ns": 2761.3388671875,
+          "after_ns": 2254.4191284179688,
+          "latency_reduction_pct": 18.472072498019987,
+          "paired_ratios": [
+            0.8151422033033454,
+            0.8289172974754884,
+            0.7852133806997366,
+            0.8154163467362547,
+            0.825207677555015,
+            0.8062529427168266,
+            0.808240025378071,
+            0.8231889456279716
+          ],
+          "worst_paired_reduction_pct": 17.108270252451163
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/uniform-grid-r2-confirm",
+      "validation_sha256": "d6014a6cc234c6d03e60cf1b35690a8769cb628481694cdd1bf26ffeaad00d1c",
+      "initial_measurement": "docs/performance/history/uniform-grid-r2-initial.json",
+      "record_path": "docs/performance/results/uniform-grid-r2-confirm.json",
+      "commit": "160b53549db14a8c324b6b81f1796f8cad689b17"
+    },
+    {
+      "label": "unwrap-angles-r1",
+      "base_commit": "6922813b35be8a132ba557e514ebd67bc8514b34",
+      "cases": [
+        "unwrap_angles"
+      ],
+      "geomean_latency_reduction_pct": 21.206456395934147,
+      "worst_block_reduction_pct": 21.095335000684855,
+      "worst_case_reduction_pct": 21.206456395934147,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "09ce749d07e416cd0260bf211a705ee7cf75e8775c167498c65c85ef850c5edd",
+      "operator": "unwrap_angles",
+      "round": 1,
+      "decision": "accepted",
+      "method": "process angle channels in row-major order",
+      "profile_hotspot": "Channel-major strides and per-sample modulo dominate angle unwrapping",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 1026777.5,
+          "after_ns": 809556.234375,
+          "latency_reduction_pct": 21.206456395934147,
+          "paired_ratios": [
+            0.7864317215063801,
+            0.7878416404134887,
+            0.7880292316678282,
+            0.7890466499931514
+          ],
+          "worst_paired_reduction_pct": 21.095335000684855
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/unwrap-angles-r1",
+      "validation_sha256": "857ef363af5144fc0beda540ab6dc9fa10277831e5b64289df37224b7714de10",
+      "record_path": "docs/performance/results/unwrap-angles-r1.json",
+      "commit": "418988ea2e8c6ba30b51a1bb53667e4292330e99"
+    },
+    {
+      "label": "unwrap-angles-r2",
+      "base_commit": "418988ea2e8c6ba30b51a1bb53667e4292330e99",
+      "cases": [
+        "unwrap_angles"
+      ],
+      "geomean_latency_reduction_pct": 47.95267398679166,
+      "worst_block_reduction_pct": 47.56680716642094,
+      "worst_case_reduction_pct": 47.95267398679166,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local safe-Rust loop/allocation change; unchanged masks and provenance, no new dependencies",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "4c68982cdfa97ff284186fda2d5df97a33dd9b20adda2be4def83f47ffb38f76",
+      "operator": "unwrap_angles",
+      "round": 2,
+      "decision": "accepted",
+      "method": "bypass modulo for already continuous angle increments",
+      "profile_hotspot": "Channel-major strides and per-sample modulo dominate angle unwrapping",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 802457.609375,
+          "after_ns": 419308.984375,
+          "latency_reduction_pct": 47.95267398679166,
+          "paired_ratios": [
+            0.5140662272953209,
+            0.5243319283357906,
+            0.5202058693758715,
+            0.5207406508882954
+          ],
+          "worst_paired_reduction_pct": 47.56680716642094
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/unwrap-angles-r2",
+      "validation_sha256": "525eaa94411dc7bae3597ca5e7477fdf4c192fc4ceaf0bcd43f0fd716d44609f",
+      "record_path": "docs/performance/results/unwrap-angles-r2.json",
+      "commit": "7bdfd25ccc2c5b6d994ae71a62995019f2358855"
+    },
+    {
+      "label": "video-probe-r1",
+      "base_commit": "9e7f7f8592cc328d76de5b93fd0421cc93b15dc3",
+      "cases": [
+        "video_probe",
+        "video_validate"
+      ],
+      "geomean_latency_reduction_pct": 16.302142264448527,
+      "worst_block_reduction_pct": 16.051742242839495,
+      "worst_case_reduction_pct": 13.305551502729696,
+      "performance_gate": true,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "measurement_sha256": "5ace0fe88785d705f65555d82bcff7de4e8dab8c39323b7b8b2e640f2f578725",
+      "operator": "video_probe",
+      "round": 1,
+      "decision": "accepted",
+      "method": "reduce bounded media child polling latency",
+      "profile_hotspot": "Child-completion observation is quantized by a ten-millisecond polling sleep",
+      "reason": "All paired aggregate blocks clear 8%, no representative-case regression above 3%, differential correctness passes, and the pre-reviewed local change adds no unsafe code or dependencies.",
+      "case_results": {
+        "video_probe": {
+          "before_ns": 33976961.0,
+          "after_ns": 27293316.0,
+          "latency_reduction_pct": 19.581567030389046,
+          "paired_ratios": [
+            0.8062292630579482,
+            0.794679821029575,
+            0.8021393963342709,
+            0.80986855213872
+          ],
+          "worst_paired_reduction_pct": 19.013144786128
+        },
+        "video_validate": {
+          "before_ns": 67994747.0,
+          "after_ns": 58947672.0,
+          "latency_reduction_pct": 13.305551502729696,
+          "paired_ratios": [
+            0.866310700825986,
+            0.8868112406997162,
+            0.8636091990539729,
+            0.86757826911942
+          ],
+          "worst_paired_reduction_pct": 11.318875930028383
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/video-probe-r1",
+      "validation_sha256": "0a955a6954d32a7f61f62f8363ecbffd021546e6cc0039a30b85f19c1e5980c5",
+      "record_path": "docs/performance/results/video-probe-r1.json",
+      "commit": "2fe85a7a1a27956d3fd0a7581cdbede7e6a27b80"
+    },
+    {
+      "label": "video-probe-r2",
+      "base_commit": "2fe85a7a1a27956d3fd0a7581cdbede7e6a27b80",
+      "cases": [
+        "video_probe",
+        "video_validate"
+      ],
+      "geomean_latency_reduction_pct": 0.25504503881403906,
+      "worst_block_reduction_pct": -0.42296308171787533,
+      "worst_case_reduction_pct": -0.44480268348769947,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "measurement_sha256": "e6b3daced6c23e08af46f93f1ec2ca05dd2c0bc643ded4f1e5f69d2a69853a71",
+      "operator": "video_probe",
+      "round": 2,
+      "decision": "rejected",
+      "method": "use a timed park for media child completion",
+      "profile_hotspot": "Child-completion observation is quantized by a ten-millisecond polling sleep",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "video_probe": {
+          "before_ns": 27882625.5,
+          "after_ns": 27533432.0,
+          "latency_reduction_pct": 1.3706943933516569,
+          "paired_ratios": [
+            0.9838251164848074,
+            1.0045332535202243,
+            0.9779211302665468,
+            0.9887609956481594
+          ],
+          "worst_paired_reduction_pct": -0.45332535202242674
+        },
+        "video_validate": {
+          "before_ns": 58792305.5,
+          "after_ns": 59126057.0,
+          "latency_reduction_pct": -0.44480268348769947,
+          "paired_ratios": [
+            0.9943428808369117,
+            1.003926099884859,
+            1.0186270104387705,
+            1.0049699537848953
+          ],
+          "worst_paired_reduction_pct": -1.8627010438770464
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/video-probe-r2",
+      "validation_sha256": "ca03b9e3e0e1add37e2a8dc855eb93b0c74a91284ffd38f31931167b8f8a0bee",
+      "record_path": "docs/performance/results/video-probe-r2.json"
+    },
+    {
+      "label": "video-validate-r1",
+      "base_commit": "2fe85a7a1a27956d3fd0a7581cdbede7e6a27b80",
+      "cases": [
+        "video_validate"
+      ],
+      "geomean_latency_reduction_pct": 1.3543826888432031,
+      "worst_block_reduction_pct": 0.05403419919538521,
+      "worst_case_reduction_pct": 1.3543826888432031,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "measurement_sha256": "4cfa453daa30674aecc5bf27e6a7848f274bd7b15e7ada3668626111956d0784",
+      "operator": "video_validate",
+      "round": 1,
+      "decision": "rejected",
+      "method": "reduce intermediate FFmpeg progress emission",
+      "profile_hotspot": "FFmpeg process/decode dominates; inspect progress emission and final-marker parsing",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "video_validate": {
+          "before_ns": 60094431.0,
+          "after_ns": 59074248.5,
+          "latency_reduction_pct": 1.3543826888432031,
+          "paired_ratios": [
+            0.9947495914517129,
+            0.9777751695616211,
+            0.978162754771423,
+            0.9994596580080461
+          ],
+          "worst_paired_reduction_pct": 0.05403419919538521
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/video-validate-r1",
+      "validation_sha256": "50a80330404140e1f899167282e35aaf4f5bfd40f7b82fde583aab455174c1a3",
+      "record_path": "docs/performance/results/video-validate-r1.json"
+    },
+    {
+      "label": "video-validate-r2",
+      "base_commit": "2fe85a7a1a27956d3fd0a7581cdbede7e6a27b80",
+      "cases": [
+        "video_validate"
+      ],
+      "geomean_latency_reduction_pct": -0.13757011013333376,
+      "worst_block_reduction_pct": -1.808810554364615,
+      "worst_case_reduction_pct": -0.13757011013333376,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+      "paths": [
+        "crates/io/src/video.rs"
+      ],
+      "measurement_sha256": "1c4b4c08e8cc3298da0e8291ba7d0ca90355b7649b549431c054595fae0c6986",
+      "operator": "video_validate",
+      "round": 2,
+      "decision": "rejected",
+      "method": "parse final progress status and frame count together",
+      "profile_hotspot": "FFmpeg process/decode dominates; inspect progress emission and final-marker parsing",
+      "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+      "case_results": {
+        "video_validate": {
+          "before_ns": 59081443.0,
+          "after_ns": 59023165.0,
+          "latency_reduction_pct": -0.13757011013333376,
+          "paired_ratios": [
+            1.0061840664192883,
+            0.9775210967889735,
+            0.9965673357833786,
+            1.0180881055436461
+          ],
+          "worst_paired_reduction_pct": -1.808810554364615
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/video-validate-r2",
+      "validation_sha256": "a2462903e506f3e6f119e58526bd0a21ce5f927c2e1edfa4ea3fdadb485f57af",
+      "record_path": "docs/performance/results/video-validate-r2.json"
+    }
+  ]
+}

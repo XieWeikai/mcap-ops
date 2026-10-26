@@ -1,0 +1,52 @@
+{
+  "label": "image-transform-r2",
+  "base_commit": "9e7f7f8592cc328d76de5b93fd0421cc93b15dc3",
+  "cases": [
+    "image_transform.gradient",
+    "image_transform.noise"
+  ],
+  "geomean_latency_reduction_pct": 1.7931171621179298,
+  "worst_block_reduction_pct": 1.3719489237289384,
+  "worst_case_reduction_pct": 1.012113516083335,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "c1c9288d9a652f6a5d964d352d008aa141053e8b48fcbd0652230b04f82414cd",
+  "operator": "image_transform",
+  "round": 2,
+  "decision": "rejected",
+  "method": "encode lossless PNG with a fixed Sub filter",
+  "profile_hotspot": "Full-image crop copying and lossless PNG row-filter work",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "image_transform.gradient": {
+      "before_ns": 5538438.75,
+      "after_ns": 5483972.125,
+      "latency_reduction_pct": 1.012113516083335,
+      "paired_ratios": [
+        0.9850485562680938,
+        0.9968361021509242,
+        0.9947091734102395,
+        0.9835189142386055
+      ],
+      "worst_paired_reduction_pct": 0.3163897849075781
+    },
+    "image_transform.noise": {
+      "before_ns": 4173549.7500000005,
+      "after_ns": 4089490.0625,
+      "latency_reduction_pct": 2.2188662509653345,
+      "paired_ratios": [
+        0.9797859814546437,
+        0.9758366935260496,
+        0.9598881531345484,
+        0.9799321851824624
+      ],
+      "worst_paired_reduction_pct": 2.006781481753761
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/image-transform-r2",
+  "validation_sha256": "25e939c3b3c057d5bfd4d9c080c5cc38003dec1984208e7d001d12996ce48d56"
+}

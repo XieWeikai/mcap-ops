@@ -1,0 +1,52 @@
+{
+  "label": "map-clock-r1",
+  "base_commit": "c40714e821f5c85e4eadc017cfd77e14bea1a115",
+  "cases": [
+    "map_clock.offset",
+    "map_clock.drift"
+  ],
+  "geomean_latency_reduction_pct": 0.06762598436071965,
+  "worst_block_reduction_pct": -2.438916252519019,
+  "worst_case_reduction_pct": -0.8560987767522565,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "f734b3427f5147cce990966419ccda2409e467d3074d4135a39555beb97809ee",
+  "operator": "map_clock",
+  "round": 1,
+  "decision": "rejected",
+  "method": "reserve clock-map output capacity",
+  "profile_hotspot": "Fallible collection grows Vec and applies wide division even to pure offsets",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "map_clock.offset": {
+      "before_ns": 156100.248046875,
+      "after_ns": 155365.970703125,
+      "latency_reduction_pct": 0.7266460336441294,
+      "paired_ratios": [
+        0.9761105695783328,
+        1.0249226861541045,
+        1.0044760246578537,
+        0.9809910546692637
+      ],
+      "worst_paired_reduction_pct": -2.4922686154104534
+    },
+    "map_clock.drift": {
+      "before_ns": 154674.126953125,
+      "after_ns": 156204.17578125,
+      "latency_reduction_pct": -0.8560987767522565,
+      "paired_ratios": [
+        1.0165238226804916,
+        1.0238559166220655,
+        1.0005981528545536,
+        0.9946284414362938
+      ],
+      "worst_paired_reduction_pct": -2.3855916622065543
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/map-clock-r1",
+  "validation_sha256": "2e8a12b8e66eade729a43b1d83c5362d2455d5deae45609d766fb40a674c134c"
+}

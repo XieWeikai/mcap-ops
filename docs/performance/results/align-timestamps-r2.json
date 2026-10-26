@@ -1,0 +1,52 @@
+{
+  "label": "align-timestamps-r2",
+  "base_commit": "337d96ed4e48e0b7b3bcf76fd6a178198f67f245",
+  "cases": [
+    "align_timestamps.previous",
+    "align_timestamps.nearest"
+  ],
+  "geomean_latency_reduction_pct": -1.1590264967286767,
+  "worst_block_reduction_pct": -1.9591551881719793,
+  "worst_case_reduction_pct": -10.840553539344588,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small safe-Rust local change; unchanged interface and validation; no dependency or unsafe code",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "6648c0f60b63d10419422926fc6cf6099df1a93d275e22edeb2531fd45cc4f82",
+  "operator": "align_timestamps",
+  "round": 2,
+  "decision": "rejected",
+  "method": "use overflow-safe unsigned timestamp distances",
+  "profile_hotspot": "Output initialization and wide signed distance checks in the matching loop",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "align_timestamps.previous": {
+      "before_ns": 112081.966796875,
+      "after_ns": 124427.97265625,
+      "latency_reduction_pct": -10.840553539344588,
+      "paired_ratios": [
+        1.1132111638812217,
+        1.1031227176403071,
+        1.1035999069056701,
+        1.134773140158688
+      ],
+      "worst_paired_reduction_pct": -13.477314015868803
+    },
+    "align_timestamps.nearest": {
+      "before_ns": 149937.357421875,
+      "after_ns": 137036.14453125,
+      "latency_reduction_pct": 8.121544186998763,
+      "paired_ratios": [
+        0.9214680068143083,
+        0.8760763737446438,
+        0.9250129831267541,
+        0.9161011094457164
+      ],
+      "worst_paired_reduction_pct": 7.498701687324594
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/align-timestamps-r2",
+  "validation_sha256": "d9a17a076e97059b6144e99571856cca7074ec041267bb4e5ac3f3d09601b305"
+}

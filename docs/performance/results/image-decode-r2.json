@@ -1,0 +1,52 @@
+{
+  "label": "image-decode-r2",
+  "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+  "cases": [
+    "image_decode.png",
+    "image_decode.jpeg"
+  ],
+  "geomean_latency_reduction_pct": -0.25260763296159894,
+  "worst_block_reduction_pct": -1.4299461272170966,
+  "worst_case_reduction_pct": -0.8178901284982221,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "d3aedfe3b932859032cafa28b6f9471fd850b6b29da27f5fd4ea54b9f1f74e18",
+  "operator": "image_decode",
+  "round": 2,
+  "decision": "rejected",
+  "method": "buffer the in-memory decoder reader",
+  "profile_hotspot": "Most work is in validated third-party decoders; inspect small adapter overhead without relaxing limits",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "image_decode.png": {
+      "before_ns": 1468831.1875,
+      "after_ns": 1475876.34375,
+      "latency_reduction_pct": -0.8178901284982221,
+      "paired_ratios": [
+        1.018031903431182,
+        1.015591846132557,
+        0.997312544320435,
+        1.0007659564374074
+      ],
+      "worst_paired_reduction_pct": -1.8031903431181995
+    },
+    "image_decode.jpeg": {
+      "before_ns": 576976.171875,
+      "after_ns": 577304.4921875,
+      "latency_reduction_pct": 0.42961689896998667,
+      "paired_ratios": [
+        1.0003232871153398,
+        1.0130087210278123,
+        0.990482504721713,
+        0.9910843749052606
+      ],
+      "worst_paired_reduction_pct": -1.3008721027812253
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/image-decode-r2",
+  "validation_sha256": "a50f2a43e2e26f0ccbffb856162d35acc93b8279bd6a3a06e8daf34241ba0540"
+}

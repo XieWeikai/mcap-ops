@@ -1,0 +1,78 @@
+{
+  "label": "inspect-signal-r2-confirm",
+  "base_commit": "160b53549db14a8c324b6b81f1796f8cad689b17",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel"
+  ],
+  "geomean_latency_reduction_pct": 19.1774487060814,
+  "worst_block_reduction_pct": -0.5304957399327348,
+  "worst_case_reduction_pct": 0.29736039269923076,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Small select-nth median branch; existing short-window sort and all quality checks retained",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "602eef893bcc3839d26814905b7d71e203f635e3b07d772095f0223d9c4a07bb",
+  "operator": "inspect_signal",
+  "round": 2,
+  "decision": "rejected",
+  "method": "select medians without fully sorting wide Hampel windows",
+  "profile_hotspot": "Wide Hampel windows repeatedly sort their values and deviations",
+  "reason": "Eight-block confirmation remains inconsistent: median aggregate gain 19.18%, but worst block -0.53%. Reject under the unchanged stability gate and retain all initial and confirmation evidence.",
+  "case_results": {
+    "inspect_signal.basic": {
+      "before_ns": 1461425.40625,
+      "after_ns": 1454504.375,
+      "latency_reduction_pct": 0.6742475867219655,
+      "paired_ratios": [
+        0.9826870897807825,
+        0.9826262032721499,
+        1.022957060672312,
+        1.01326680701327,
+        0.9936429778728074,
+        0.9969432266665846,
+        0.9926076256524926,
+        0.9928720703927533
+      ],
+      "worst_paired_reduction_pct": -2.2957060672311957
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 6621954.0,
+      "after_ns": 6582233.875,
+      "latency_reduction_pct": 0.29736039269923076,
+      "paired_ratios": [
+        1.362944162252747,
+        0.9989370906066863,
+        0.9714795010257797,
+        0.9723550152942171,
+        0.9951157015393289,
+        1.0031049163553867,
+        1.0082190326737426,
+        0.9023962806462125
+      ],
+      "worst_paired_reduction_pct": -36.294416225274695
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 35794826.0,
+      "after_ns": 19099589.75,
+      "latency_reduction_pct": 46.776830963161565,
+      "paired_ratios": [
+        0.533791986285084,
+        0.5323241794346569,
+        0.2865302526713575,
+        0.5321392013021118,
+        1.027518206761713,
+        0.5319383614320864,
+        0.5312291584888218,
+        0.5725979803886024
+      ],
+      "worst_paired_reduction_pct": -2.7518206761713015
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/inspect-signal-r2-confirm",
+  "validation_sha256": "06a202e967ca7249782e6f5601a80ae7566be8407c16e5b92fcae532cd391748",
+  "initial_measurement": "docs/performance/history/inspect-signal-r2-initial.json"
+}

@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/quality.rs b/crates/core/src/quality.rs
+index ec34770..828ca4f 100644
+--- a/crates/core/src/quality.rs
++++ b/crates/core/src/quality.rs
+@@ -454,7 +454,7 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
+     } else {
+         report.flagged_sample_count as f64 / report.time.samples as f64
+     };
+-    let mut reasons = Vec::new();
++    let mut reasons = Vec::with_capacity(policy.reject_codes.len() + 2);
+     if report.time.samples < policy.min_samples {
+         reasons.push("too_few_samples".into());
+     }

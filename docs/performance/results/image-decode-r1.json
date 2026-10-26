@@ -1,0 +1,52 @@
+{
+  "label": "image-decode-r1",
+  "base_commit": "6a5e56033af9f97e0524023440ad8b97b4f45387",
+  "cases": [
+    "image_decode.png",
+    "image_decode.jpeg"
+  ],
+  "geomean_latency_reduction_pct": -0.20942446062863773,
+  "worst_block_reduction_pct": -0.8588398219169457,
+  "worst_case_reduction_pct": -0.7173066130926387,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Local bounded allocation, parsing or loop change; complete checks and payload interpretation retained",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "f1340b51277cf2ccb966c2f9c2fd1161c971145c3aea9c32287f31f26e6b0721",
+  "operator": "image_decode",
+  "round": 1,
+  "decision": "rejected",
+  "method": "guess image format directly from the byte slice",
+  "profile_hotspot": "Most work is in validated third-party decoders; inspect small adapter overhead without relaxing limits",
+  "reason": "Rejected by paired performance gate: insufficient stable 8% gain or a representative-case regression. Restore previous accepted implementation.",
+  "case_results": {
+    "image_decode.png": {
+      "before_ns": 1479913.21875,
+      "after_ns": 1472788.09375,
+      "latency_reduction_pct": 0.2958252471178868,
+      "paired_ratios": [
+        1.003837002503244,
+        0.9911958773003166,
+        1.0028876177573258,
+        0.9679588661291547
+      ],
+      "worst_paired_reduction_pct": -0.3837002503243925
+    },
+    "image_decode.jpeg": {
+      "before_ns": 581145.4140625,
+      "after_ns": 581204.1640625,
+      "latency_reduction_pct": -0.7173066130926387,
+      "paired_ratios": [
+        1.013362283404195,
+        1.002972061721548,
+        1.011374070540305,
+        0.9894220088566574
+      ],
+      "worst_paired_reduction_pct": -1.3362283404195097
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/image-decode-r1",
+  "validation_sha256": "5ee45f105e6d048f2ffef6b60672e6fdf703eee5247b021aa53705a0f8a973ee"
+}

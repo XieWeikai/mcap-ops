@@ -54,7 +54,9 @@ a data-quality pass.
 
 ## Python surface
 
-`mcap_ops` exposes the same operations with NumPy inputs. Numeric results are
-returned as dictionaries containing NumPy arrays, while JSON reports remain
-ordinary dictionaries after decoding. The native extension is built with
-`abi3` for Python 3.10+.
+The Python exports are enumerated in [python.md](python.md) and
+`python/mcap_ops/__init__.py`. Numeric results are returned as dictionaries
+containing NumPy arrays; diagnostic reports are ordinary dictionaries. Some
+lower-level interfaces (including interval selection and clock mapping) remain
+Rust-only. The native extension is built with `abi3` for Python 3.10+; remote
+integration verification currently uses CPython 3.12.
