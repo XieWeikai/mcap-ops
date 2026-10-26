@@ -1,0 +1,144 @@
+{
+  "label": "ten-fir-09",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "fir.scalar",
+    "fir.vector",
+    "fir.short_scalar",
+    "fir.short_vector",
+    "fir.small_scalar",
+    "fir.small_vector",
+    "fir.wide",
+    "fir.gapped",
+    "fir.single"
+  ],
+  "geomean_latency_reduction_pct": -0.2973206969876241,
+  "worst_block_reduction_pct": -0.398068176281563,
+  "worst_case_reduction_pct": -1.2659018005330758,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "5a23dfe8b818158e1259ef41f11678ba087111b3c44f5d353679818d29163cd3",
+  "operator": "fir",
+  "round": 9,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure never inlining for fir",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "fir.single": {
+      "before_ns": 237604.953125,
+      "after_ns": 241851.41796875,
+      "latency_reduction_pct": -1.1211114868207694,
+      "paired_ratios": [
+        0.9989921359453895,
+        1.037562491337117,
+        1.023430093791026,
+        0.9800017984549324
+      ],
+      "worst_paired_reduction_pct": -3.7562491337117088
+    },
+    "fir.short_scalar": {
+      "before_ns": 114197.1640625,
+      "after_ns": 114725.21875,
+      "latency_reduction_pct": -0.30743175662144573,
+      "paired_ratios": [
+        1.0024901689477363,
+        1.02497639792035,
+        1.0036584661846928,
+        0.9978401540620248
+      ],
+      "worst_paired_reduction_pct": -2.497639792034989
+    },
+    "fir.short_vector": {
+      "before_ns": 329854.1953125,
+      "after_ns": 336481.890625,
+      "latency_reduction_pct": -1.2659018005330758,
+      "paired_ratios": [
+        1.0116408031272368,
+        1.0110730387114855,
+        1.0285764943977467,
+        1.0136772328834245
+      ],
+      "worst_paired_reduction_pct": -2.8576494397746677
+    },
+    "fir.small_scalar": {
+      "before_ns": 215.86714935302734,
+      "after_ns": 217.35443878173828,
+      "latency_reduction_pct": -0.6911434179966314,
+      "paired_ratios": [
+        1.0168711665133696,
+        0.9969517018465628,
+        1.019670685727277,
+        0.9865669371025546
+      ],
+      "worst_paired_reduction_pct": -1.9670685727277037
+    },
+    "fir.small_vector": {
+      "before_ns": 393.837890625,
+      "after_ns": 391.2495422363281,
+      "latency_reduction_pct": 0.6085997741663296,
+      "paired_ratios": [
+        0.9826949764858662,
+        0.9898163317657914,
+        1.0021797998678563,
+        0.998011672750882
+      ],
+      "worst_paired_reduction_pct": -0.21797998678563246
+    },
+    "fir.wide": {
+      "before_ns": 6380182.5,
+      "after_ns": 6396175.5,
+      "latency_reduction_pct": -0.46045855600707064,
+      "paired_ratios": [
+        1.009150901967883,
+        0.9712463947877044,
+        1.0032901453833212,
+        1.0059190257368205
+      ],
+      "worst_paired_reduction_pct": -0.9150901967883041
+    },
+    "fir.gapped": {
+      "before_ns": 100624.94921875,
+      "after_ns": 99713.16796875,
+      "latency_reduction_pct": 0.5008444355518948,
+      "paired_ratios": [
+        0.9941946839888648,
+        1.0006519548070594,
+        0.9778261704587408,
+        0.9957884273000974
+      ],
+      "worst_paired_reduction_pct": -0.06519548070593739
+    },
+    "fir.scalar": {
+      "before_ns": 319249.0078125,
+      "after_ns": 315270.1328125,
+      "latency_reduction_pct": 1.6048582287821023,
+      "paired_ratios": [
+        0.9848531260617932,
+        0.997226532194549,
+        0.9830497093625647,
+        0.982330756382958
+      ],
+      "worst_paired_reduction_pct": 0.27734678054509576
+    },
+    "fir.vector": {
+      "before_ns": 1549964.34375,
+      "after_ns": 1548327.28125,
+      "latency_reduction_pct": 0.3056734810996886,
+      "paired_ratios": [
+        1.0269480984298602,
+        0.9985310424459004,
+        0.9953554879321058,
+        0.9862340664828267
+      ],
+      "worst_paired_reduction_pct": -2.6948098429860234
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-09",
+  "validation_sha256": "1d710a27165d607290782f54a3646cc466e29695fc9b36d42a90adf84ddd1d4c"
+}

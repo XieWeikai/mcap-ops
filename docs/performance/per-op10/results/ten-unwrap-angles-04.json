@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-04",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": 2.426366240800437,
+  "worst_block_reduction_pct": 1.1236763679019268,
+  "worst_case_reduction_pct": 1.7740901077545557,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Zipped output rows succeeded previously; extend that locality to the immutable input rows.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "d1051e2e548ec11835557255cd60791cf56a2b86a3e53a9c3f5a9d27d397bb9b",
+  "operator": "unwrap_angles",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "iterate adjacent original angle rows as chunks",
+  "profile_hotspot": "Zipped output rows succeeded previously; extend that locality to the immutable input rows.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Zipped output rows succeeded previously; extend that locality to the immutable input rows.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 370046.5390625,
+      "after_ns": 364008.09375,
+      "latency_reduction_pct": 1.7740901077545557,
+      "paired_ratios": [
+        0.9875857298143619,
+        0.9855350819507237,
+        0.9771635097787374,
+        0.9789831158941852
+      ],
+      "worst_paired_reduction_pct": 1.241427018563812
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 427080.15625,
+      "after_ns": 416523.5,
+      "latency_reduction_pct": 2.6567170006133733,
+      "paired_ratios": [
+        0.9411516311110922,
+        0.9920019646229313,
+        0.9621077671096852,
+        0.9847578928780474
+      ],
+      "worst_paired_reduction_pct": 0.7998035377068669
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-04",
+  "validation_sha256": "f9e6c824bf7c9558312344baac22c4701b6d495dd8ec62b19906c6b76cd4b125"
+}

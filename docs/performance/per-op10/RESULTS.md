@@ -1,6 +1,6 @@
 # Ten rounds per operator
 
-**145/300 measured decisions; 16 accepted, 129 rejected.**
+**160/300 measured decisions; 16 accepted, 144 rejected.**
 
 Baseline source: `9de19ead5df7444a9074c71028129b88970ba6ba`. Builds, profiles, tests and timing run only on reference-linux. Results use generated fixtures, CPU 12 affinity, four AB/BA paired blocks and seven calibrated samples per side.
 
@@ -13,7 +13,7 @@ Retained production diff: 3 files, +112/-62 lines (net +50); pending candidates 
 | `align_timestamps` | 10/10 | 1 |
 | `ema` | 10/10 | 1 |
 | `expand_batch_timestamps` | 10/10 | 0 |
-| `fir` | 5/10 | 1 |
+| `fir` | 10/10 | 1 |
 | `gate` | 0/10 | 0 |
 | `history_windows` | 0/10 | 0 |
 | `image_decode` | 0/10 | 0 |
@@ -37,7 +37,7 @@ Retained production diff: 3 files, +112/-62 lines (net +50); pending candidates 
 | `require_strict` | 10/10 | 2 |
 | `resample` | 0/10 | 0 |
 | `uniform_grid` | 10/10 | 1 |
-| `unwrap_angles` | 0/10 | 0 |
+| `unwrap_angles` | 10/10 | 0 |
 | `video_probe` | 0/10 | 0 |
 | `video_validate` | 0/10 | 0 |
 
@@ -97,6 +97,11 @@ Percentages below compare with each round's previously accepted state. They are 
 | 3 | construct row and gap support prefixes in one pass | [rejected](results/ten-fir-03.json) | -3.47% | -5.58% | `-` |
 | 4 | track consecutive support while retaining channel-outer convolution | [accepted](results/ten-fir-04.json) | +11.67% | +11.24% | `f2981781` |
 | 5 | specialize finite one-tap FIR windows | [rejected](results/ten-fir-05.json) | -12.25% | -13.34% | `-` |
+| 6 | unroll ordered FIR accumulation by 2 coefficients | [rejected](results/ten-fir-06.json) | -13.50% | -14.38% | `-` |
+| 7 | unroll ordered FIR accumulation by 4 coefficients | [rejected](results/ten-fir-07.json) | -5.37% | -5.99% | `-` |
+| 8 | measure always inlining for fir | [rejected](results/ten-fir-08.json) | +5.85% | +5.79% | `-` |
+| 9 | measure never inlining for fir | [rejected](results/ten-fir-09.json) | -0.30% | -0.40% | `-` |
+| 10 | specialize common FIR lengths without transposing data | [rejected](results/ten-fir-10.json) | -9.40% | -9.89% | `-` |
 
 ## inspect_time
 
@@ -262,3 +267,18 @@ Percentages below compare with each round's previously accepted state. They are 
 | 8 | measure always inlining for uniform_grid | [rejected](results/ten-uniform-grid-08.json) | -25.39% | -25.40% | `-` |
 | 9 | measure never inlining for uniform_grid | [rejected](results/ten-uniform-grid-09.json) | -50.17% | -50.40% | `-` |
 | 10 | terminate grid generation from output length and endpoint | [rejected](results/ten-uniform-grid-10.json) | -34.04% | -34.37% | `-` |
+
+## unwrap_angles
+
+| Round | Method | Decision | Gain | Worst block | Commit |
+| ---: | --- | --- | ---: | ---: | --- |
+| 1 | hoist the angle half-period explicitly | [rejected](results/ten-unwrap-angles-01.json) | -1.81% | -2.24% | `-` |
+| 2 | compare angle finiteness through finite magnitudes | [rejected](results/ten-unwrap-angles-02.json) | +3.85% | +3.09% | `-` |
+| 3 | skip repeated gap arithmetic after a gap-free preflight | [rejected](results/ten-unwrap-angles-03.json) | -1.21% | -2.50% | `-` |
+| 4 | iterate adjacent original angle rows as chunks | [rejected](results/ten-unwrap-angles-04.json) | +2.43% | +1.12% | `-` |
+| 5 | expand positive-period Euclidean remainder explicitly | [rejected](results/ten-unwrap-angles-05.json) | +0.82% | -0.78% | `-` |
+| 6 | handle single-turn angle remainders by exact subtraction | [rejected](results/ten-unwrap-angles-06.json) | +4.05% | +3.33% | `-` |
+| 7 | compare ordered angle gaps as unsigned distances | [rejected](results/ten-unwrap-angles-07.json) | +4.62% | +1.98% | `-` |
+| 8 | measure always inlining for unwrap_angles | [rejected](results/ten-unwrap-angles-08.json) | -5.54% | -7.46% | `-` |
+| 9 | measure never inlining for unwrap_angles | [rejected](results/ten-unwrap-angles-09.json) | -1.12% | -2.15% | `-` |
+| 10 | copy each angle row immediately before transforming it | [rejected](results/ten-unwrap-angles-10.json) | +7.88% | +5.57% | `-` |

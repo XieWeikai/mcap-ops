@@ -32,7 +32,7 @@ add('filtered_dict','use static Python filter-mode names instead of formatting',
     'match result.mode {filter::FilterMode::Causal=>"causal",filter::FilterMode::Centered=>"centered"}'),
     'The enum has two fixed public spellings; avoid a temporary formatted lowercase String.')
 def intern_keys(sources):
-    text,count=re.subn(r'\.set_item\("([a-z_]+)"',r'.set_item(pyo3::intern!(py,"\1")',sources[PYTHON])
+    text,count=re.subn(r'\.set_item\("([a-z_]+)"',lambda m:f'.set_item(pyo3::intern!(py,"{m.group(1)}")',sources[PYTHON])
     assert count>10
     sources[PYTHON]=text
 RECIPES.append(dict(operator='python_bridge',paths=[PYTHON],apply=intern_keys,python=True,cases=CASES['python_bridge'],

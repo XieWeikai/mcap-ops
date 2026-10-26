@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-08",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": -5.541176547243376,
+  "worst_block_reduction_pct": -7.464945938379408,
+  "worst_case_reduction_pct": -6.157448691645495,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "7ced17a1c2736d357a95623f7d14990c2e8b76ee997cd60557cce190f29601cf",
+  "operator": "unwrap_angles",
+  "round": 8,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "measure always inlining for unwrap_angles",
+  "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 371339.609375,
+      "after_ns": 389887.625,
+      "latency_reduction_pct": -5.292233747073616,
+      "paired_ratios": [
+        1.0345720858209722,
+        1.0450021645176426,
+        1.0608425104238297,
+        1.0812736286046516
+      ],
+      "worst_paired_reduction_pct": -8.127362860465158
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 426923.6015625,
+      "after_ns": 451693.2265625,
+      "latency_reduction_pct": -6.157448691645495,
+      "paired_ratios": [
+        1.071480637596468,
+        1.0287058952067472,
+        1.05508310225126,
+        1.0680658715816502
+      ],
+      "worst_paired_reduction_pct": -7.1480637596468055
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-08",
+  "validation_sha256": "7552abb6492d54d03f06c765452576468b49f0f414b633f25b1967219c85574a"
+}

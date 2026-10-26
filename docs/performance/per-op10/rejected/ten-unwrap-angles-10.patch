@@ -1,0 +1,18 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 17318c0..90b96eb 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -215,8 +215,12 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
+     if !period.is_finite() || period <= 0.0 || max_gap_ns < 0 {
+         return Err(invalid("positive period and nonnegative gap required"));
+     }
+-    let mut values = signal.values().to_vec();
++    let mut values = Vec::with_capacity(signal.values().len());
++    if !signal.is_empty() {
++        values.extend_from_slice(signal.row(0));
++    }
+     for i in 1..signal.len() {
++        values.extend_from_slice(signal.row(i));
+         if i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[i - 1])
+             > i128::from(max_gap_ns)
+         {

@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-10",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": 7.880368911581392,
+  "worst_block_reduction_pct": 5.568447923278375,
+  "worst_case_reduction_pct": 7.604759713586217,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compare streaming copy-and-transform locality with a full-buffer copy followed by a second pass.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "abc449e23368f54cbba1745266f41f170bfc315b167e533a919fbc04de76d5bf",
+  "operator": "unwrap_angles",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "copy each angle row immediately before transforming it",
+  "profile_hotspot": "Compare streaming copy-and-transform locality with a full-buffer copy followed by a second pass.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Compare streaming copy-and-transform locality with a full-buffer copy followed by a second pass.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 368934.078125,
+      "after_ns": 337310.1875,
+      "latency_reduction_pct": 8.729276394398,
+      "paired_ratios": [
+        0.9087088320337743,
+        0.9121163248557096,
+        0.9640308461513187,
+        0.9132981472563304
+      ],
+      "worst_paired_reduction_pct": 3.596915384868127
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 426967.3046875,
+      "after_ns": 394496.296875,
+      "latency_reduction_pct": 7.604759713586217,
+      "paired_ratios": [
+        0.9229014136460596,
+        0.9413441263211408,
+        0.925003392082216,
+        0.9148679339312638
+      ],
+      "worst_paired_reduction_pct": 5.865587367885916
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-10",
+  "validation_sha256": "bc82a5e6adfc690e3ee92af3dd3a8bf05a6f60a2a69ccf5c3a0265d888fee098"
+}

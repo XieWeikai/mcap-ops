@@ -1,0 +1,144 @@
+{
+  "label": "ten-fir-07",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "fir.scalar",
+    "fir.vector",
+    "fir.short_scalar",
+    "fir.short_vector",
+    "fir.small_scalar",
+    "fir.small_vector",
+    "fir.wide",
+    "fir.gapped",
+    "fir.single"
+  ],
+  "geomean_latency_reduction_pct": -5.37449690405456,
+  "worst_block_reduction_pct": -5.985756561770517,
+  "worst_case_reduction_pct": -19.219681566048628,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "dd4f8cce07c2a0371ca246dc16e1bda31192bcec5803e7711328f441f8ce5af0",
+  "operator": "fir",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "unroll ordered FIR accumulation by 4 coefficients",
+  "profile_hotspot": "Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+  "case_results": {
+    "fir.single": {
+      "before_ns": 242076.703125,
+      "after_ns": 252565.37890625003,
+      "latency_reduction_pct": -4.321412147476877,
+      "paired_ratios": [
+        1.053750123966304,
+        1.0326781189832337,
+        1.0260758741740126,
+        1.0543807637934277
+      ],
+      "worst_paired_reduction_pct": -5.438076379342771
+    },
+    "fir.short_scalar": {
+      "before_ns": 114945.380859375,
+      "after_ns": 119663.26171875,
+      "latency_reduction_pct": -3.860760853403278,
+      "paired_ratios": [
+        1.0337175068228583,
+        1.056778392295751,
+        1.043497710245207,
+        1.0258154019507706
+      ],
+      "worst_paired_reduction_pct": -5.677839229575099
+    },
+    "fir.short_vector": {
+      "before_ns": 333456.5,
+      "after_ns": 356233.625,
+      "latency_reduction_pct": -8.137148419633577,
+      "paired_ratios": [
+        1.0804438628596182,
+        1.0822991055330535,
+        1.0444688693321311,
+        1.0923560875019216
+      ],
+      "worst_paired_reduction_pct": -9.23560875019216
+    },
+    "fir.small_scalar": {
+      "before_ns": 215.1815299987793,
+      "after_ns": 239.87458038330078,
+      "latency_reduction_pct": -12.289706352365481,
+      "paired_ratios": [
+        1.1207122559094045,
+        1.1262392892174744,
+        1.0853213192767799,
+        1.1250818711379054
+      ],
+      "worst_paired_reduction_pct": -12.62392892174744
+    },
+    "fir.small_vector": {
+      "before_ns": 389.7507095336914,
+      "after_ns": 413.97569274902344,
+      "latency_reduction_pct": -6.150409056425632,
+      "paired_ratios": [
+        1.0389625889222318,
+        1.0712580859276948,
+        1.0603999961181545,
+        1.0626081850103584
+      ],
+      "worst_paired_reduction_pct": -7.125808592769478
+    },
+    "fir.wide": {
+      "before_ns": 6386701.375,
+      "after_ns": 6279226.125,
+      "latency_reduction_pct": 1.9827044790757253,
+      "paired_ratios": [
+        0.9706540697839421,
+        0.959125317867171,
+        0.9896918406345434,
+        0.9929584761493692
+      ],
+      "worst_paired_reduction_pct": 0.7041523850630838
+    },
+    "fir.gapped": {
+      "before_ns": 100451.236328125,
+      "after_ns": 119362.49609375,
+      "latency_reduction_pct": -19.219681566048628,
+      "paired_ratios": [
+        1.1805476882511468,
+        1.1982626814966029,
+        1.1861309498243695,
+        1.2066100937953383
+      ],
+      "worst_paired_reduction_pct": -20.661009379533834
+    },
+    "fir.scalar": {
+      "before_ns": 312594.8515625,
+      "after_ns": 318923.1484375,
+      "latency_reduction_pct": -1.537157303172254,
+      "paired_ratios": [
+        1.010048471717228,
+        1.0201656120193652,
+        1.0226130139251774,
+        1.0105775340440797
+      ],
+      "worst_paired_reduction_pct": -2.261301392517745
+    },
+    "fir.vector": {
+      "before_ns": 1558837.9375,
+      "after_ns": 1540315.75,
+      "latency_reduction_pct": 1.3182249179270578,
+      "paired_ratios": [
+        0.9786471583918401,
+        0.9892827946560134,
+        0.986966119501964,
+        0.9866693821394948
+      ],
+      "worst_paired_reduction_pct": 1.0717205343986569
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-07",
+  "validation_sha256": "42077265da183be60838d84caa116daa1a50e733c90aa34a97c5ab4bc0760b72"
+}

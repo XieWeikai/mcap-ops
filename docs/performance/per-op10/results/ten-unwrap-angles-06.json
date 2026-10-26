@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-06",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": 4.050227790983607,
+  "worst_block_reduction_pct": 3.3266503947962156,
+  "worst_case_reduction_pct": 0.13622787851041984,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Avoid fmod only where the quotient is known; preserve half-period tie behavior and the arbitrary-jump fallback.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "c25a1b53192857fe70aa327f7c537f935455206ce03cfb9148555878ffde01c6",
+  "operator": "unwrap_angles",
+  "round": 6,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "handle single-turn angle remainders by exact subtraction",
+  "profile_hotspot": "Avoid fmod only where the quotient is known; preserve half-period tie behavior and the arbitrary-jump fallback.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Avoid fmod only where the quotient is known; preserve half-period tie behavior and the arbitrary-jump fallback.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 368780.1953125,
+      "after_ns": 368692.765625,
+      "latency_reduction_pct": 0.13622787851041984,
+      "paired_ratios": [
+        1.0104752019168495,
+        1.0023576308274607,
+        0.9867258865878388,
+        0.9949178116023308
+      ],
+      "worst_paired_reduction_pct": -1.0475201916849475
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 432101.546875,
+      "after_ns": 399502.9765625,
+      "latency_reduction_pct": 7.877583678557265,
+      "paired_ratios": [
+        0.9040795899260607,
+        0.9323754552728765,
+        0.9402298432062387,
+        0.9100728711559782
+      ],
+      "worst_paired_reduction_pct": 5.97701567937613
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-06",
+  "validation_sha256": "a19703c5a600528362d4b9c60e3c8fe17d92af38e0d3ae1a062fbd4a7734ec95"
+}

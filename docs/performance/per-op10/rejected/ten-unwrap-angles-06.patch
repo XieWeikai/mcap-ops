@@ -1,0 +1,21 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 17318c0..9c4967a 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -238,7 +238,15 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
+             let adjusted = if delta.abs() < period / 2.0 {
+                 delta
+             } else {
+-                let wrapped = (delta + period / 2.0).rem_euclid(period) - period / 2.0;
++                let shifted = delta + period / 2.0;
++                let remainder = if shifted >= period && shifted < 2.0 * period {
++                    shifted - period
++                } else if shifted < 0.0 && shifted > -period {
++                    shifted + period
++                } else {
++                    shifted.rem_euclid(period)
++                };
++                let wrapped = remainder - period / 2.0;
+                 if wrapped == -period / 2.0 && delta > 0.0 {
+                     period / 2.0
+                 } else {

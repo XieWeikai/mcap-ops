@@ -1,9 +1,9 @@
 {
   "baseline": "9de19ead5df7444a9074c71028129b88970ba6ba",
   "target": 300,
-  "completed": 145,
+  "completed": 160,
   "accepted": 16,
-  "rejected": 129,
+  "rejected": 144,
   "decisions": [
     {
       "label": "ten-align-timestamps-01",
@@ -2447,6 +2447,726 @@
       },
       "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-05",
       "validation_sha256": "a1aaf5123254fa85c40df9b7479f1b345f4c63389ae852f78bfb4c8234899fae"
+    },
+    {
+      "label": "ten-fir-06",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "fir.scalar",
+        "fir.vector",
+        "fir.short_scalar",
+        "fir.short_vector",
+        "fir.small_scalar",
+        "fir.small_vector",
+        "fir.wide",
+        "fir.gapped",
+        "fir.single"
+      ],
+      "geomean_latency_reduction_pct": -13.49545839210533,
+      "worst_block_reduction_pct": -14.37536178147738,
+      "worst_case_reduction_pct": -41.99623454982087,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "503943ae47b599b2188b3160cc15c86090c10c46d237d43414db774a9aa60f43",
+      "operator": "fir",
+      "round": 6,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "unroll ordered FIR accumulation by 2 coefficients",
+      "profile_hotspot": "Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "case_results": {
+        "fir.single": {
+          "before_ns": 240244.890625,
+          "after_ns": 339423.0078125,
+          "latency_reduction_pct": -41.99623454982087,
+          "paired_ratios": [
+            1.363112045810213,
+            1.4289431819181229,
+            1.4460599051894811,
+            1.4109815090782947
+          ],
+          "worst_paired_reduction_pct": -44.60599051894811
+        },
+        "fir.short_scalar": {
+          "before_ns": 114093.02734375,
+          "after_ns": 144975.046875,
+          "latency_reduction_pct": -26.953673648245726,
+          "paired_ratios": [
+            1.2610076469622828,
+            1.2780658260026319,
+            1.2989099828811743,
+            1.2609646289310672
+          ],
+          "worst_paired_reduction_pct": -29.89099828811743
+        },
+        "fir.short_vector": {
+          "before_ns": 330797.7421875,
+          "after_ns": 402564.3515625,
+          "latency_reduction_pct": -21.693764702299887,
+          "paired_ratios": [
+            1.2346800248759993,
+            1.2266190050460584,
+            1.1967186934917386,
+            1.2072562889999392
+          ],
+          "worst_paired_reduction_pct": -23.468002487599925
+        },
+        "fir.small_scalar": {
+          "before_ns": 214.39226913452148,
+          "after_ns": 268.8558654785156,
+          "latency_reduction_pct": -25.66693472681849,
+          "paired_ratios": [
+            1.264906594742871,
+            1.2974476365974659,
+            1.248432099793499,
+            1.238054763120103
+          ],
+          "worst_paired_reduction_pct": -29.74476365974659
+        },
+        "fir.small_vector": {
+          "before_ns": 394.6526107788086,
+          "after_ns": 418.59883880615234,
+          "latency_reduction_pct": -6.807454533193402,
+          "paired_ratios": [
+            1.065796503177332,
+            1.079772535239706,
+            1.0410482551031743,
+            1.070352587486536
+          ],
+          "worst_paired_reduction_pct": -7.977253523970607
+        },
+        "fir.wide": {
+          "before_ns": 6395986.625,
+          "after_ns": 5822318.0,
+          "latency_reduction_pct": 9.059288996990777,
+          "paired_ratios": [
+            0.9386070466217361,
+            0.9094616338575278,
+            0.8982887506050125,
+            0.9093525862026568
+          ],
+          "worst_paired_reduction_pct": 6.13929533782639
+        },
+        "fir.gapped": {
+          "before_ns": 100784.7734375,
+          "after_ns": 121054.220703125,
+          "latency_reduction_pct": -20.17942152510819,
+          "paired_ratios": [
+            1.2153577845145696,
+            1.1810293143838266,
+            1.2206285208481105,
+            1.188230645987594
+          ],
+          "worst_paired_reduction_pct": -22.06285208481105
+        },
+        "fir.scalar": {
+          "before_ns": 314078.6015625,
+          "after_ns": 321115.89453125,
+          "latency_reduction_pct": -1.8976868719619677,
+          "paired_ratios": [
+            1.0225049292600725,
+            1.037328480838125,
+            1.015448808179167,
+            1.0142479198378227
+          ],
+          "worst_paired_reduction_pct": -3.73284808381249
+        },
+        "fir.vector": {
+          "before_ns": 1561537.9375,
+          "after_ns": 1475662.625,
+          "latency_reduction_pct": 5.161092619153118,
+          "paired_ratios": [
+            0.9451219218099763,
+            0.9579238286316765,
+            0.9516562258069613,
+            0.9399526893936395
+          ],
+          "worst_paired_reduction_pct": 4.207617136832353
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-06",
+      "validation_sha256": "48b592e9e4e0ec0b01af1e8fef12b0509e80386219fdfe07afa97e8b4eb85cb8"
+    },
+    {
+      "label": "ten-fir-07",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "fir.scalar",
+        "fir.vector",
+        "fir.short_scalar",
+        "fir.short_vector",
+        "fir.small_scalar",
+        "fir.small_vector",
+        "fir.wide",
+        "fir.gapped",
+        "fir.single"
+      ],
+      "geomean_latency_reduction_pct": -5.37449690405456,
+      "worst_block_reduction_pct": -5.985756561770517,
+      "worst_case_reduction_pct": -19.219681566048628,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "dd4f8cce07c2a0371ca246dc16e1bda31192bcec5803e7711328f441f8ce5af0",
+      "operator": "fir",
+      "round": 7,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "unroll ordered FIR accumulation by 4 coefficients",
+      "profile_hotspot": "Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Keep each output summation in original tap order; avoid transpose allocation and reassociation.",
+      "case_results": {
+        "fir.single": {
+          "before_ns": 242076.703125,
+          "after_ns": 252565.37890625003,
+          "latency_reduction_pct": -4.321412147476877,
+          "paired_ratios": [
+            1.053750123966304,
+            1.0326781189832337,
+            1.0260758741740126,
+            1.0543807637934277
+          ],
+          "worst_paired_reduction_pct": -5.438076379342771
+        },
+        "fir.short_scalar": {
+          "before_ns": 114945.380859375,
+          "after_ns": 119663.26171875,
+          "latency_reduction_pct": -3.860760853403278,
+          "paired_ratios": [
+            1.0337175068228583,
+            1.056778392295751,
+            1.043497710245207,
+            1.0258154019507706
+          ],
+          "worst_paired_reduction_pct": -5.677839229575099
+        },
+        "fir.short_vector": {
+          "before_ns": 333456.5,
+          "after_ns": 356233.625,
+          "latency_reduction_pct": -8.137148419633577,
+          "paired_ratios": [
+            1.0804438628596182,
+            1.0822991055330535,
+            1.0444688693321311,
+            1.0923560875019216
+          ],
+          "worst_paired_reduction_pct": -9.23560875019216
+        },
+        "fir.small_scalar": {
+          "before_ns": 215.1815299987793,
+          "after_ns": 239.87458038330078,
+          "latency_reduction_pct": -12.289706352365481,
+          "paired_ratios": [
+            1.1207122559094045,
+            1.1262392892174744,
+            1.0853213192767799,
+            1.1250818711379054
+          ],
+          "worst_paired_reduction_pct": -12.62392892174744
+        },
+        "fir.small_vector": {
+          "before_ns": 389.7507095336914,
+          "after_ns": 413.97569274902344,
+          "latency_reduction_pct": -6.150409056425632,
+          "paired_ratios": [
+            1.0389625889222318,
+            1.0712580859276948,
+            1.0603999961181545,
+            1.0626081850103584
+          ],
+          "worst_paired_reduction_pct": -7.125808592769478
+        },
+        "fir.wide": {
+          "before_ns": 6386701.375,
+          "after_ns": 6279226.125,
+          "latency_reduction_pct": 1.9827044790757253,
+          "paired_ratios": [
+            0.9706540697839421,
+            0.959125317867171,
+            0.9896918406345434,
+            0.9929584761493692
+          ],
+          "worst_paired_reduction_pct": 0.7041523850630838
+        },
+        "fir.gapped": {
+          "before_ns": 100451.236328125,
+          "after_ns": 119362.49609375,
+          "latency_reduction_pct": -19.219681566048628,
+          "paired_ratios": [
+            1.1805476882511468,
+            1.1982626814966029,
+            1.1861309498243695,
+            1.2066100937953383
+          ],
+          "worst_paired_reduction_pct": -20.661009379533834
+        },
+        "fir.scalar": {
+          "before_ns": 312594.8515625,
+          "after_ns": 318923.1484375,
+          "latency_reduction_pct": -1.537157303172254,
+          "paired_ratios": [
+            1.010048471717228,
+            1.0201656120193652,
+            1.0226130139251774,
+            1.0105775340440797
+          ],
+          "worst_paired_reduction_pct": -2.261301392517745
+        },
+        "fir.vector": {
+          "before_ns": 1558837.9375,
+          "after_ns": 1540315.75,
+          "latency_reduction_pct": 1.3182249179270578,
+          "paired_ratios": [
+            0.9786471583918401,
+            0.9892827946560134,
+            0.986966119501964,
+            0.9866693821394948
+          ],
+          "worst_paired_reduction_pct": 1.0717205343986569
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-07",
+      "validation_sha256": "42077265da183be60838d84caa116daa1a50e733c90aa34a97c5ab4bc0760b72"
+    },
+    {
+      "label": "ten-fir-08",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "fir.scalar",
+        "fir.vector",
+        "fir.short_scalar",
+        "fir.short_vector",
+        "fir.small_scalar",
+        "fir.small_vector",
+        "fir.wide",
+        "fir.gapped",
+        "fir.single"
+      ],
+      "geomean_latency_reduction_pct": 5.847575756409984,
+      "worst_block_reduction_pct": 5.786016983710207,
+      "worst_case_reduction_pct": -11.66365530827349,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "0d91c0c87d5f18a9f061e1420ed27a8b533843c6af06aba07ae1ecc02da7318e",
+      "operator": "fir",
+      "round": 8,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "measure always inlining for fir",
+      "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "case_results": {
+        "fir.single": {
+          "before_ns": 242534.60546875,
+          "after_ns": 271189.73828125,
+          "latency_reduction_pct": -11.66365530827349,
+          "paired_ratios": [
+            1.1246243157132587,
+            1.0860584588741442,
+            1.1086487904522113,
+            1.1343392673969035
+          ],
+          "worst_paired_reduction_pct": -13.43392673969035
+        },
+        "fir.short_scalar": {
+          "before_ns": 114476.248046875,
+          "after_ns": 98002.26171875,
+          "latency_reduction_pct": 13.73862678897898,
+          "paired_ratios": [
+            0.8531042632177742,
+            0.8759789481348428,
+            0.8721232010026462,
+            0.8486256528755479
+          ],
+          "worst_paired_reduction_pct": 12.402105186515723
+        },
+        "fir.short_vector": {
+          "before_ns": 330644.2890625,
+          "after_ns": 346283.3203125,
+          "latency_reduction_pct": -4.853244767691112,
+          "paired_ratios": [
+            1.0894229443889505,
+            1.0149721812857977,
+            1.0381723736549073,
+            1.058892521698915
+          ],
+          "worst_paired_reduction_pct": -8.942294438895049
+        },
+        "fir.small_scalar": {
+          "before_ns": 214.4559097290039,
+          "after_ns": 184.13038635253906,
+          "latency_reduction_pct": 13.641093729299868,
+          "paired_ratios": [
+            0.8471315797412244,
+            0.8629013152689948,
+            0.8657499692193044,
+            0.8642768101450077
+          ],
+          "worst_paired_reduction_pct": 13.425003078069564
+        },
+        "fir.small_vector": {
+          "before_ns": 389.2020797729492,
+          "after_ns": 346.6790542602539,
+          "latency_reduction_pct": 11.313941218548873,
+          "paired_ratios": [
+            0.8858684632090144,
+            0.8878527124200082,
+            0.8661664140256262,
+            0.9083883583521426
+          ],
+          "worst_paired_reduction_pct": 9.16116416478574
+        },
+        "fir.wide": {
+          "before_ns": 6430033.75,
+          "after_ns": 6615429.25,
+          "latency_reduction_pct": -2.601896045609564,
+          "paired_ratios": [
+            1.025707374632543,
+            1.0168459191138002,
+            1.0263305462796486,
+            1.0361577352717009
+          ],
+          "worst_paired_reduction_pct": -3.6157735271700853
+        },
+        "fir.gapped": {
+          "before_ns": 100019.607421875,
+          "after_ns": 75399.7734375,
+          "latency_reduction_pct": 24.615219657744404,
+          "paired_ratios": [
+            0.7602658987754418,
+            0.7550667141996421,
+            0.7526288926454698,
+            0.737747968215399
+          ],
+          "worst_paired_reduction_pct": 23.973410122455817
+        },
+        "fir.scalar": {
+          "before_ns": 315571.58984375,
+          "after_ns": 299525.03515625,
+          "latency_reduction_pct": 5.266072146031853,
+          "paired_ratios": [
+            0.9360582672953282,
+            0.940018908085462,
+            0.9815656439573922,
+            0.9546596489939009
+          ],
+          "worst_paired_reduction_pct": 1.8434356042607791
+        },
+        "fir.vector": {
+          "before_ns": 1533823.8125,
+          "after_ns": 1541984.34375,
+          "latency_reduction_pct": -0.7201373392078825,
+          "paired_ratios": [
+            1.0128677547227534,
+            1.0015349920614045,
+            1.021347110112653,
+            1.0014295338465427
+          ],
+          "worst_paired_reduction_pct": -2.1347110112653
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-08",
+      "validation_sha256": "da17dc3d9744668ee2d5c8181945aba2283a2573aac37c107fdea88b056747ab"
+    },
+    {
+      "label": "ten-fir-09",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "fir.scalar",
+        "fir.vector",
+        "fir.short_scalar",
+        "fir.short_vector",
+        "fir.small_scalar",
+        "fir.small_vector",
+        "fir.wide",
+        "fir.gapped",
+        "fir.single"
+      ],
+      "geomean_latency_reduction_pct": -0.2973206969876241,
+      "worst_block_reduction_pct": -0.398068176281563,
+      "worst_case_reduction_pct": -1.2659018005330758,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "5a23dfe8b818158e1259ef41f11678ba087111b3c44f5d353679818d29163cd3",
+      "operator": "fir",
+      "round": 9,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "measure never inlining for fir",
+      "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "case_results": {
+        "fir.single": {
+          "before_ns": 237604.953125,
+          "after_ns": 241851.41796875,
+          "latency_reduction_pct": -1.1211114868207694,
+          "paired_ratios": [
+            0.9989921359453895,
+            1.037562491337117,
+            1.023430093791026,
+            0.9800017984549324
+          ],
+          "worst_paired_reduction_pct": -3.7562491337117088
+        },
+        "fir.short_scalar": {
+          "before_ns": 114197.1640625,
+          "after_ns": 114725.21875,
+          "latency_reduction_pct": -0.30743175662144573,
+          "paired_ratios": [
+            1.0024901689477363,
+            1.02497639792035,
+            1.0036584661846928,
+            0.9978401540620248
+          ],
+          "worst_paired_reduction_pct": -2.497639792034989
+        },
+        "fir.short_vector": {
+          "before_ns": 329854.1953125,
+          "after_ns": 336481.890625,
+          "latency_reduction_pct": -1.2659018005330758,
+          "paired_ratios": [
+            1.0116408031272368,
+            1.0110730387114855,
+            1.0285764943977467,
+            1.0136772328834245
+          ],
+          "worst_paired_reduction_pct": -2.8576494397746677
+        },
+        "fir.small_scalar": {
+          "before_ns": 215.86714935302734,
+          "after_ns": 217.35443878173828,
+          "latency_reduction_pct": -0.6911434179966314,
+          "paired_ratios": [
+            1.0168711665133696,
+            0.9969517018465628,
+            1.019670685727277,
+            0.9865669371025546
+          ],
+          "worst_paired_reduction_pct": -1.9670685727277037
+        },
+        "fir.small_vector": {
+          "before_ns": 393.837890625,
+          "after_ns": 391.2495422363281,
+          "latency_reduction_pct": 0.6085997741663296,
+          "paired_ratios": [
+            0.9826949764858662,
+            0.9898163317657914,
+            1.0021797998678563,
+            0.998011672750882
+          ],
+          "worst_paired_reduction_pct": -0.21797998678563246
+        },
+        "fir.wide": {
+          "before_ns": 6380182.5,
+          "after_ns": 6396175.5,
+          "latency_reduction_pct": -0.46045855600707064,
+          "paired_ratios": [
+            1.009150901967883,
+            0.9712463947877044,
+            1.0032901453833212,
+            1.0059190257368205
+          ],
+          "worst_paired_reduction_pct": -0.9150901967883041
+        },
+        "fir.gapped": {
+          "before_ns": 100624.94921875,
+          "after_ns": 99713.16796875,
+          "latency_reduction_pct": 0.5008444355518948,
+          "paired_ratios": [
+            0.9941946839888648,
+            1.0006519548070594,
+            0.9778261704587408,
+            0.9957884273000974
+          ],
+          "worst_paired_reduction_pct": -0.06519548070593739
+        },
+        "fir.scalar": {
+          "before_ns": 319249.0078125,
+          "after_ns": 315270.1328125,
+          "latency_reduction_pct": 1.6048582287821023,
+          "paired_ratios": [
+            0.9848531260617932,
+            0.997226532194549,
+            0.9830497093625647,
+            0.982330756382958
+          ],
+          "worst_paired_reduction_pct": 0.27734678054509576
+        },
+        "fir.vector": {
+          "before_ns": 1549964.34375,
+          "after_ns": 1548327.28125,
+          "latency_reduction_pct": 0.3056734810996886,
+          "paired_ratios": [
+            1.0269480984298602,
+            0.9985310424459004,
+            0.9953554879321058,
+            0.9862340664828267
+          ],
+          "worst_paired_reduction_pct": -2.6948098429860234
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-09",
+      "validation_sha256": "1d710a27165d607290782f54a3646cc466e29695fc9b36d42a90adf84ddd1d4c"
+    },
+    {
+      "label": "ten-fir-10",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "fir.scalar",
+        "fir.vector",
+        "fir.short_scalar",
+        "fir.short_vector",
+        "fir.small_scalar",
+        "fir.small_vector",
+        "fir.wide",
+        "fir.gapped",
+        "fir.single"
+      ],
+      "geomean_latency_reduction_pct": -9.401776053262822,
+      "worst_block_reduction_pct": -9.889939263661663,
+      "worst_case_reduction_pct": -26.028559389397053,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compile known 3/31-tap reductions with fixed bounds; retain the general path and all eight representative FIR cases.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "d77b86653bb6f82174e7b1365460d6584abd44bb17c45c71fffe9e2d21051f4a",
+      "operator": "fir",
+      "round": 10,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "specialize common FIR lengths without transposing data",
+      "profile_hotspot": "Compile known 3/31-tap reductions with fixed bounds; retain the general path and all eight representative FIR cases.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Compile known 3/31-tap reductions with fixed bounds; retain the general path and all eight representative FIR cases.",
+      "case_results": {
+        "fir.single": {
+          "before_ns": 240354.17578125,
+          "after_ns": 286618.4375,
+          "latency_reduction_pct": -18.94491871093149,
+          "paired_ratios": [
+            1.1863572342469149,
+            1.1855726936040487,
+            1.1925411399717152,
+            1.205289087338687
+          ],
+          "worst_paired_reduction_pct": -20.5289087338687
+        },
+        "fir.short_scalar": {
+          "before_ns": 113876.650390625,
+          "after_ns": 132526.365234375,
+          "latency_reduction_pct": -16.197274190366606,
+          "paired_ratios": [
+            1.1631747121498803,
+            1.1607707716574516,
+            1.194050546728573,
+            1.1504128688905355
+          ],
+          "worst_paired_reduction_pct": -19.40505467285729
+        },
+        "fir.short_vector": {
+          "before_ns": 329155.8515625,
+          "after_ns": 313943.1953125,
+          "latency_reduction_pct": 4.211922718914596,
+          "paired_ratios": [
+            0.9495275262847742,
+            0.9654133285871775,
+            0.9576827737094729,
+            0.9580787719122353
+          ],
+          "worst_paired_reduction_pct": 3.4586671412822456
+        },
+        "fir.small_scalar": {
+          "before_ns": 213.7556495666504,
+          "after_ns": 268.56799697875977,
+          "latency_reduction_pct": -26.028559389397053,
+          "paired_ratios": [
+            1.2150762456279525,
+            1.2935643614772347,
+            1.2270068263107063,
+            1.3120794232079487
+          ],
+          "worst_paired_reduction_pct": -31.207942320794867
+        },
+        "fir.small_vector": {
+          "before_ns": 389.70616149902344,
+          "after_ns": 422.39310455322266,
+          "latency_reduction_pct": -8.557748351422777,
+          "paired_ratios": [
+            1.0954719225121217,
+            1.0712886760303393,
+            1.106348034989749,
+            1.075683044516334
+          ],
+          "worst_paired_reduction_pct": -10.634803498974899
+        },
+        "fir.wide": {
+          "before_ns": 6401315.875,
+          "after_ns": 6705901.125,
+          "latency_reduction_pct": -4.743399591920916,
+          "paired_ratios": [
+            1.1112946572844926,
+            1.0180294084198638,
+            1.0583980775467363,
+            1.036469914291682
+          ],
+          "worst_paired_reduction_pct": -11.129465728449262
+        },
+        "fir.gapped": {
+          "before_ns": 100312.115234375,
+          "after_ns": 116344.9296875,
+          "latency_reduction_pct": -15.370887060278559,
+          "paired_ratios": [
+            1.1774794261577786,
+            1.1643670478424406,
+            1.1430506933631306,
+            1.1216776542471942
+          ],
+          "worst_paired_reduction_pct": -17.747942615777855
+        },
+        "fir.scalar": {
+          "before_ns": 314147.64453125,
+          "after_ns": 336878.7421875,
+          "latency_reduction_pct": -7.785510292908415,
+          "paired_ratios": [
+            1.0733993430454962,
+            1.045489492820559,
+            1.082310862812672,
+            1.083093558958314
+          ],
+          "worst_paired_reduction_pct": -8.309355895831395
+        },
+        "fir.vector": {
+          "before_ns": 1545237.15625,
+          "after_ns": 1462556.125,
+          "latency_reduction_pct": 5.401402813498679,
+          "paired_ratios": [
+            0.9539041661872111,
+            0.9514413770610689,
+            0.9405305666689576,
+            0.9363752953557722
+          ],
+          "worst_paired_reduction_pct": 4.609583381278892
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-10",
+      "validation_sha256": "51d27cc2a5fe58317c41c13aa09aa24bf8db1bd277f4ae2d0907072eb9c0adb7"
     },
     {
       "label": "ten-inspect-time-01",
@@ -8550,6 +9270,536 @@
       },
       "profile_remote_path": "./.artifacts/rsi/trials/ten-uniform-grid-10",
       "validation_sha256": "d0deac5307f974c40c2f69c07ff9624a4519d415893da3a704615adf741fc76e"
+    },
+    {
+      "label": "ten-unwrap-angles-01",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": -1.8071828149245794,
+      "worst_block_reduction_pct": -2.2359119270487504,
+      "worst_case_reduction_pct": -2.1537936893354814,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Preserve the prior modulo bypass while testing invariant arithmetic placement.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "a001ba61546861bbd8fe7888aab070aa70d95a67acb0d4084f21dd51f6e4f5af",
+      "operator": "unwrap_angles",
+      "round": 1,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "hoist the angle half-period explicitly",
+      "profile_hotspot": "Preserve the prior modulo bypass while testing invariant arithmetic placement.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Preserve the prior modulo bypass while testing invariant arithmetic placement.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 369242.40625,
+          "after_ns": 372620.0390625,
+          "latency_reduction_pct": -0.9148558023893472,
+          "paired_ratios": [
+            1.0251368295242202,
+            0.9825674328258763,
+            1.009554476192327,
+            1.00874263985546
+          ],
+          "worst_paired_reduction_pct": -2.513682952422025
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 425841.375,
+          "after_ns": 435012.953125,
+          "latency_reduction_pct": -2.1537936893354814,
+          "paired_ratios": [
+            1.0195889354991048,
+            1.0099965903986878,
+            1.0306659758163614,
+            1.0234869382876048
+          ],
+          "worst_paired_reduction_pct": -3.0665975816361435
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-01",
+      "validation_sha256": "2022791aac7816250de4458fedf271d6460ae052e440e166b3616e4c8f6849f7"
+    },
+    {
+      "label": "ten-unwrap-angles-02",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": 3.854980731174984,
+      "worst_block_reduction_pct": 3.093480224288103,
+      "worst_case_reduction_pct": 3.09892501809943,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Use exact NaN/Inf classification with a different machine comparison form.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "d74436f7237baeabbd9419e7338e63332a575b861524be4531353df158ea7156",
+      "operator": "unwrap_angles",
+      "round": 2,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "compare angle finiteness through finite magnitudes",
+      "profile_hotspot": "Use exact NaN/Inf classification with a different machine comparison form.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Use exact NaN/Inf classification with a different machine comparison form.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 371389.1640625,
+          "after_ns": 353557.2109375,
+          "latency_reduction_pct": 5.10583824290014,
+          "paired_ratios": [
+            0.9353300627546414,
+            0.9667967468649881,
+            0.9569057212116182,
+            0.9409775139303791
+          ],
+          "worst_paired_reduction_pct": 3.3203253135011934
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 429806.2109375,
+          "after_ns": 414566.6484375,
+          "latency_reduction_pct": 3.09892501809943,
+          "paired_ratios": [
+            0.9386953446538504,
+            0.9713389712462349,
+            0.9666825283917766,
+            0.9816909651383422
+          ],
+          "worst_paired_reduction_pct": 1.8309034861657802
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-02",
+      "validation_sha256": "4419e4a22120cf8a612df271e336ae43b90c24fd6111faae2d03a9dff601a326"
+    },
+    {
+      "label": "ten-unwrap-angles-03",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": -1.2056726047628086,
+      "worst_block_reduction_pct": -2.497680829984672,
+      "worst_case_reduction_pct": -2.3865074849278134,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Inspect every gap once, then keep the exact fallback when any discontinuity exists.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "5b8996791bc9849b94654489101b38f271b07d32acea7f867b06d42c23f3494c",
+      "operator": "unwrap_angles",
+      "round": 3,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "skip repeated gap arithmetic after a gap-free preflight",
+      "profile_hotspot": "Inspect every gap once, then keep the exact fallback when any discontinuity exists.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Inspect every gap once, then keep the exact fallback when any discontinuity exists.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 374765.828125,
+          "after_ns": 382507.421875,
+          "latency_reduction_pct": -2.3865074849278134,
+          "paired_ratios": [
+            1.0405562159184516,
+            1.057702142832886,
+            0.9969582703496982,
+            1.007173933780105
+          ],
+          "worst_paired_reduction_pct": -5.7702142832886105
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 433901.796875,
+          "after_ns": 432527.671875,
+          "latency_reduction_pct": -0.03349755292281209,
+          "paired_ratios": [
+            1.0034838225126868,
+            0.9932639965526938,
+            1.0032968439782959,
+            0.9973731070801605
+          ],
+          "worst_paired_reduction_pct": -0.34838225126867517
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-03",
+      "validation_sha256": "844a7e6c3cb9f2bfed935fa3d4cfd84995bd65cbbc7a200fd6b3d2f42b527177"
+    },
+    {
+      "label": "ten-unwrap-angles-04",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": 2.426366240800437,
+      "worst_block_reduction_pct": 1.1236763679019268,
+      "worst_case_reduction_pct": 1.7740901077545557,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Zipped output rows succeeded previously; extend that locality to the immutable input rows.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "d1051e2e548ec11835557255cd60791cf56a2b86a3e53a9c3f5a9d27d397bb9b",
+      "operator": "unwrap_angles",
+      "round": 4,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "iterate adjacent original angle rows as chunks",
+      "profile_hotspot": "Zipped output rows succeeded previously; extend that locality to the immutable input rows.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Zipped output rows succeeded previously; extend that locality to the immutable input rows.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 370046.5390625,
+          "after_ns": 364008.09375,
+          "latency_reduction_pct": 1.7740901077545557,
+          "paired_ratios": [
+            0.9875857298143619,
+            0.9855350819507237,
+            0.9771635097787374,
+            0.9789831158941852
+          ],
+          "worst_paired_reduction_pct": 1.241427018563812
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 427080.15625,
+          "after_ns": 416523.5,
+          "latency_reduction_pct": 2.6567170006133733,
+          "paired_ratios": [
+            0.9411516311110922,
+            0.9920019646229313,
+            0.9621077671096852,
+            0.9847578928780474
+          ],
+          "worst_paired_reduction_pct": 0.7998035377068669
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-04",
+      "validation_sha256": "f9e6c824bf7c9558312344baac22c4701b6d495dd8ec62b19906c6b76cd4b125"
+    },
+    {
+      "label": "ten-unwrap-angles-05",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": 0.819147082614835,
+      "worst_block_reduction_pct": -0.7802197093861984,
+      "worst_case_reduction_pct": -0.49895130949768607,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The period has already been validated positive, so the generic absolute-divisor step is unnecessary.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "bc92cd07e0f82c3246a9dad10d4fa467925a6488f8d468e6b68fcc76f175c75d",
+      "operator": "unwrap_angles",
+      "round": 5,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "expand positive-period Euclidean remainder explicitly",
+      "profile_hotspot": "The period has already been validated positive, so the generic absolute-divisor step is unnecessary.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. The period has already been validated positive, so the generic absolute-divisor step is unnecessary.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 372695.59375,
+          "after_ns": 375158.234375,
+          "latency_reduction_pct": -0.49895130949768607,
+          "paired_ratios": [
+            0.9873187858610857,
+            1.0013713581818138,
+            1.0086076680081402,
+            1.015450035835133
+          ],
+          "worst_paired_reduction_pct": -1.5450035835133047
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 433571.3203125,
+          "after_ns": 424973.359375,
+          "latency_reduction_pct": 1.0698390818217218,
+          "paired_ratios": [
+            0.9918826717043753,
+            0.9867205466591904,
+            0.9536623674624826,
+            1.0002119578753135
+          ],
+          "worst_paired_reduction_pct": -0.02119578753134732
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-05",
+      "validation_sha256": "9e338de1ba926954719ecca6adf0539dc33ad382f41a0a51ef73ba93c5b7db99"
+    },
+    {
+      "label": "ten-unwrap-angles-06",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": 4.050227790983607,
+      "worst_block_reduction_pct": 3.3266503947962156,
+      "worst_case_reduction_pct": 0.13622787851041984,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Avoid fmod only where the quotient is known; preserve half-period tie behavior and the arbitrary-jump fallback.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "c25a1b53192857fe70aa327f7c537f935455206ce03cfb9148555878ffde01c6",
+      "operator": "unwrap_angles",
+      "round": 6,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "handle single-turn angle remainders by exact subtraction",
+      "profile_hotspot": "Avoid fmod only where the quotient is known; preserve half-period tie behavior and the arbitrary-jump fallback.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Avoid fmod only where the quotient is known; preserve half-period tie behavior and the arbitrary-jump fallback.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 368780.1953125,
+          "after_ns": 368692.765625,
+          "latency_reduction_pct": 0.13622787851041984,
+          "paired_ratios": [
+            1.0104752019168495,
+            1.0023576308274607,
+            0.9867258865878388,
+            0.9949178116023308
+          ],
+          "worst_paired_reduction_pct": -1.0475201916849475
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 432101.546875,
+          "after_ns": 399502.9765625,
+          "latency_reduction_pct": 7.877583678557265,
+          "paired_ratios": [
+            0.9040795899260607,
+            0.9323754552728765,
+            0.9402298432062387,
+            0.9100728711559782
+          ],
+          "worst_paired_reduction_pct": 5.97701567937613
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-06",
+      "validation_sha256": "a19703c5a600528362d4b9c60e3c8fe17d92af38e0d3ae1a062fbd4a7734ec95"
+    },
+    {
+      "label": "ten-unwrap-angles-07",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": 4.6191509766403405,
+      "worst_block_reduction_pct": 1.9807652709266876,
+      "worst_case_reduction_pct": 3.4434837232225624,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Source timestamps are strictly ordered; abs_diff preserves full-range integer gaps without signed subtraction overflow.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "5ec51be524f6ea2d3816c45c5958e9a43fdfad3d8dbed21f6779462d5c83fe2f",
+      "operator": "unwrap_angles",
+      "round": 7,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "compare ordered angle gaps as unsigned distances",
+      "profile_hotspot": "Source timestamps are strictly ordered; abs_diff preserves full-range integer gaps without signed subtraction overflow.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Source timestamps are strictly ordered; abs_diff preserves full-range integer gaps without signed subtraction overflow.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 373287.4375,
+          "after_ns": 360367.3828125,
+          "latency_reduction_pct": 3.4434837232225624,
+          "paired_ratios": [
+            0.995158440775747,
+            0.9508764238268164,
+            0.9468136813926398,
+            0.9802539017087325
+          ],
+          "worst_paired_reduction_pct": 0.48415592242530003
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 437457.8515625,
+          "after_ns": 410782.15625,
+          "latency_reduction_pct": 5.77671892544509,
+          "paired_ratios": [
+            0.9654513274673843,
+            0.9398414495747719,
+            0.9234726657542917,
+            0.9446241719163262
+          ],
+          "worst_paired_reduction_pct": 3.454867253261573
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-07",
+      "validation_sha256": "30c439dd601f64e9596d200b441279607af9ea14a82f5758adc5ce51552356c0"
+    },
+    {
+      "label": "ten-unwrap-angles-08",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": -5.541176547243376,
+      "worst_block_reduction_pct": -7.464945938379408,
+      "worst_case_reduction_pct": -6.157448691645495,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "7ced17a1c2736d357a95623f7d14990c2e8b76ee997cd60557cce190f29601cf",
+      "operator": "unwrap_angles",
+      "round": 8,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "measure always inlining for unwrap_angles",
+      "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 371339.609375,
+          "after_ns": 389887.625,
+          "latency_reduction_pct": -5.292233747073616,
+          "paired_ratios": [
+            1.0345720858209722,
+            1.0450021645176426,
+            1.0608425104238297,
+            1.0812736286046516
+          ],
+          "worst_paired_reduction_pct": -8.127362860465158
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 426923.6015625,
+          "after_ns": 451693.2265625,
+          "latency_reduction_pct": -6.157448691645495,
+          "paired_ratios": [
+            1.071480637596468,
+            1.0287058952067472,
+            1.05508310225126,
+            1.0680658715816502
+          ],
+          "worst_paired_reduction_pct": -7.1480637596468055
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-08",
+      "validation_sha256": "7552abb6492d54d03f06c765452576468b49f0f414b633f25b1967219c85574a"
+    },
+    {
+      "label": "ten-unwrap-angles-09",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": -1.119361654366946,
+      "worst_block_reduction_pct": -2.149774403704119,
+      "worst_case_reduction_pct": -1.1935003983063464,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "a5ad054eb09fe2d4e6ab7bd9abde87885c6f67eedf973e23c666b740fb8b9b4e",
+      "operator": "unwrap_angles",
+      "round": 9,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "measure never inlining for unwrap_angles",
+      "profile_hotspot": "Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Combined-build differences in the prior campaign require measuring code generation; keep identical semantics and flags.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 367279.625,
+          "after_ns": 375391.1015625,
+          "latency_reduction_pct": -1.1587665865367969,
+          "paired_ratios": [
+            0.9959913809875331,
+            1.016351460706056,
+            1.037368948067971,
+            1.00682387102468
+          ],
+          "worst_paired_reduction_pct": -3.7368948067971086
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 429724.8671875,
+          "after_ns": 432459.6484375,
+          "latency_reduction_pct": -1.1935003983063464,
+          "paired_ratios": [
+            1.0206520373023653,
+            1.0036691471950423,
+            1.0058693611526865,
+            1.0180006468134406
+          ],
+          "worst_paired_reduction_pct": -2.065203730236531
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-09",
+      "validation_sha256": "7d023cef74923abe95968e13e86be19f13eb4cbde92a19936cc360b05973573f"
+    },
+    {
+      "label": "ten-unwrap-angles-10",
+      "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+      "cases": [
+        "unwrap_angles",
+        "unwrap_angles.wraps"
+      ],
+      "geomean_latency_reduction_pct": 7.880368911581392,
+      "worst_block_reduction_pct": 5.568447923278375,
+      "worst_case_reduction_pct": 7.604759713586217,
+      "performance_gate": false,
+      "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+      "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compare streaming copy-and-transform locality with a full-buffer copy followed by a second pass.",
+      "paths": [
+        "crates/core/src/filter.rs"
+      ],
+      "measurement_sha256": "abc449e23368f54cbba1745266f41f170bfc315b167e533a919fbc04de76d5bf",
+      "operator": "unwrap_angles",
+      "round": 10,
+      "series": "per-op10",
+      "decision": "rejected",
+      "method": "copy each angle row immediately before transforming it",
+      "profile_hotspot": "Compare streaming copy-and-transform locality with a full-buffer copy followed by a second pass.",
+      "reason": "Reject: performance or resource gate failed; restore last accepted state. Compare streaming copy-and-transform locality with a full-buffer copy followed by a second pass.",
+      "case_results": {
+        "unwrap_angles": {
+          "before_ns": 368934.078125,
+          "after_ns": 337310.1875,
+          "latency_reduction_pct": 8.729276394398,
+          "paired_ratios": [
+            0.9087088320337743,
+            0.9121163248557096,
+            0.9640308461513187,
+            0.9132981472563304
+          ],
+          "worst_paired_reduction_pct": 3.596915384868127
+        },
+        "unwrap_angles.wraps": {
+          "before_ns": 426967.3046875,
+          "after_ns": 394496.296875,
+          "latency_reduction_pct": 7.604759713586217,
+          "paired_ratios": [
+            0.9229014136460596,
+            0.9413441263211408,
+            0.925003392082216,
+            0.9148679339312638
+          ],
+          "worst_paired_reduction_pct": 5.865587367885916
+        }
+      },
+      "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-10",
+      "validation_sha256": "bc82a5e6adfc690e3ee92af3dd3a8bf05a6f60a2a69ccf5c3a0265d888fee098"
     }
   ]
 }

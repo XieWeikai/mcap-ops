@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-03",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": -1.2056726047628086,
+  "worst_block_reduction_pct": -2.497680829984672,
+  "worst_case_reduction_pct": -2.3865074849278134,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Inspect every gap once, then keep the exact fallback when any discontinuity exists.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "5b8996791bc9849b94654489101b38f271b07d32acea7f867b06d42c23f3494c",
+  "operator": "unwrap_angles",
+  "round": 3,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "skip repeated gap arithmetic after a gap-free preflight",
+  "profile_hotspot": "Inspect every gap once, then keep the exact fallback when any discontinuity exists.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Inspect every gap once, then keep the exact fallback when any discontinuity exists.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 374765.828125,
+      "after_ns": 382507.421875,
+      "latency_reduction_pct": -2.3865074849278134,
+      "paired_ratios": [
+        1.0405562159184516,
+        1.057702142832886,
+        0.9969582703496982,
+        1.007173933780105
+      ],
+      "worst_paired_reduction_pct": -5.7702142832886105
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 433901.796875,
+      "after_ns": 432527.671875,
+      "latency_reduction_pct": -0.03349755292281209,
+      "paired_ratios": [
+        1.0034838225126868,
+        0.9932639965526938,
+        1.0032968439782959,
+        0.9973731070801605
+      ],
+      "worst_paired_reduction_pct": -0.34838225126867517
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-03",
+  "validation_sha256": "844a7e6c3cb9f2bfed935fa3d4cfd84995bd65cbbc7a200fd6b3d2f42b527177"
+}

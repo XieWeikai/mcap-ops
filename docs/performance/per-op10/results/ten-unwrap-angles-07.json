@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-07",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": 4.6191509766403405,
+  "worst_block_reduction_pct": 1.9807652709266876,
+  "worst_case_reduction_pct": 3.4434837232225624,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Source timestamps are strictly ordered; abs_diff preserves full-range integer gaps without signed subtraction overflow.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "5ec51be524f6ea2d3816c45c5958e9a43fdfad3d8dbed21f6779462d5c83fe2f",
+  "operator": "unwrap_angles",
+  "round": 7,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "compare ordered angle gaps as unsigned distances",
+  "profile_hotspot": "Source timestamps are strictly ordered; abs_diff preserves full-range integer gaps without signed subtraction overflow.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Source timestamps are strictly ordered; abs_diff preserves full-range integer gaps without signed subtraction overflow.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 373287.4375,
+      "after_ns": 360367.3828125,
+      "latency_reduction_pct": 3.4434837232225624,
+      "paired_ratios": [
+        0.995158440775747,
+        0.9508764238268164,
+        0.9468136813926398,
+        0.9802539017087325
+      ],
+      "worst_paired_reduction_pct": 0.48415592242530003
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 437457.8515625,
+      "after_ns": 410782.15625,
+      "latency_reduction_pct": 5.77671892544509,
+      "paired_ratios": [
+        0.9654513274673843,
+        0.9398414495747719,
+        0.9234726657542917,
+        0.9446241719163262
+      ],
+      "worst_paired_reduction_pct": 3.454867253261573
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-07",
+  "validation_sha256": "30c439dd601f64e9596d200b441279607af9ea14a82f5758adc5ce51552356c0"
+}

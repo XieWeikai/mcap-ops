@@ -1,0 +1,144 @@
+{
+  "label": "ten-fir-10",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "fir.scalar",
+    "fir.vector",
+    "fir.short_scalar",
+    "fir.short_vector",
+    "fir.small_scalar",
+    "fir.small_vector",
+    "fir.wide",
+    "fir.gapped",
+    "fir.single"
+  ],
+  "geomean_latency_reduction_pct": -9.401776053262822,
+  "worst_block_reduction_pct": -9.889939263661663,
+  "worst_case_reduction_pct": -26.028559389397053,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Compile known 3/31-tap reductions with fixed bounds; retain the general path and all eight representative FIR cases.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "d77b86653bb6f82174e7b1365460d6584abd44bb17c45c71fffe9e2d21051f4a",
+  "operator": "fir",
+  "round": 10,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "specialize common FIR lengths without transposing data",
+  "profile_hotspot": "Compile known 3/31-tap reductions with fixed bounds; retain the general path and all eight representative FIR cases.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Compile known 3/31-tap reductions with fixed bounds; retain the general path and all eight representative FIR cases.",
+  "case_results": {
+    "fir.single": {
+      "before_ns": 240354.17578125,
+      "after_ns": 286618.4375,
+      "latency_reduction_pct": -18.94491871093149,
+      "paired_ratios": [
+        1.1863572342469149,
+        1.1855726936040487,
+        1.1925411399717152,
+        1.205289087338687
+      ],
+      "worst_paired_reduction_pct": -20.5289087338687
+    },
+    "fir.short_scalar": {
+      "before_ns": 113876.650390625,
+      "after_ns": 132526.365234375,
+      "latency_reduction_pct": -16.197274190366606,
+      "paired_ratios": [
+        1.1631747121498803,
+        1.1607707716574516,
+        1.194050546728573,
+        1.1504128688905355
+      ],
+      "worst_paired_reduction_pct": -19.40505467285729
+    },
+    "fir.short_vector": {
+      "before_ns": 329155.8515625,
+      "after_ns": 313943.1953125,
+      "latency_reduction_pct": 4.211922718914596,
+      "paired_ratios": [
+        0.9495275262847742,
+        0.9654133285871775,
+        0.9576827737094729,
+        0.9580787719122353
+      ],
+      "worst_paired_reduction_pct": 3.4586671412822456
+    },
+    "fir.small_scalar": {
+      "before_ns": 213.7556495666504,
+      "after_ns": 268.56799697875977,
+      "latency_reduction_pct": -26.028559389397053,
+      "paired_ratios": [
+        1.2150762456279525,
+        1.2935643614772347,
+        1.2270068263107063,
+        1.3120794232079487
+      ],
+      "worst_paired_reduction_pct": -31.207942320794867
+    },
+    "fir.small_vector": {
+      "before_ns": 389.70616149902344,
+      "after_ns": 422.39310455322266,
+      "latency_reduction_pct": -8.557748351422777,
+      "paired_ratios": [
+        1.0954719225121217,
+        1.0712886760303393,
+        1.106348034989749,
+        1.075683044516334
+      ],
+      "worst_paired_reduction_pct": -10.634803498974899
+    },
+    "fir.wide": {
+      "before_ns": 6401315.875,
+      "after_ns": 6705901.125,
+      "latency_reduction_pct": -4.743399591920916,
+      "paired_ratios": [
+        1.1112946572844926,
+        1.0180294084198638,
+        1.0583980775467363,
+        1.036469914291682
+      ],
+      "worst_paired_reduction_pct": -11.129465728449262
+    },
+    "fir.gapped": {
+      "before_ns": 100312.115234375,
+      "after_ns": 116344.9296875,
+      "latency_reduction_pct": -15.370887060278559,
+      "paired_ratios": [
+        1.1774794261577786,
+        1.1643670478424406,
+        1.1430506933631306,
+        1.1216776542471942
+      ],
+      "worst_paired_reduction_pct": -17.747942615777855
+    },
+    "fir.scalar": {
+      "before_ns": 314147.64453125,
+      "after_ns": 336878.7421875,
+      "latency_reduction_pct": -7.785510292908415,
+      "paired_ratios": [
+        1.0733993430454962,
+        1.045489492820559,
+        1.082310862812672,
+        1.083093558958314
+      ],
+      "worst_paired_reduction_pct": -8.309355895831395
+    },
+    "fir.vector": {
+      "before_ns": 1545237.15625,
+      "after_ns": 1462556.125,
+      "latency_reduction_pct": 5.401402813498679,
+      "paired_ratios": [
+        0.9539041661872111,
+        0.9514413770610689,
+        0.9405305666689576,
+        0.9363752953557722
+      ],
+      "worst_paired_reduction_pct": 4.609583381278892
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-fir-10",
+  "validation_sha256": "51d27cc2a5fe58317c41c13aa09aa24bf8db1bd277f4ae2d0907072eb9c0adb7"
+}

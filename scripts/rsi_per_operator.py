@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+import fcntl
+import os
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'benchmarks/ten_rounds'))
@@ -18,6 +20,10 @@ def run(*args):subprocess.run(args,cwd=ROOT,check=True)
 def main():
     p=argparse.ArgumentParser();p.add_argument('--only',required=True);p.add_argument('--retry',action='store_true')
     args=p.parse_args();groups={}
+    lock=(ROOT/'.artifacts/rsi/per-op10.lock').open('a+')
+    try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    except BlockingIOError:raise SystemExit('Another per-operator campaign runner already holds the workspace lock')
+    lock.seek(0);lock.truncate();lock.write(str(os.getpid())+'\n');lock.flush()
     for file in sorted((ROOT/'benchmarks/ten_rounds').glob('group_*.py')):
         spec=importlib.util.spec_from_file_location(file.stem,file);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
         for recipe in module.RECIPES:groups.setdefault(recipe['operator'],[]).append(recipe)

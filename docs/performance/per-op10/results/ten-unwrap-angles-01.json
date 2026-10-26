@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-01",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": -1.8071828149245794,
+  "worst_block_reduction_pct": -2.2359119270487504,
+  "worst_case_reduction_pct": -2.1537936893354814,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Preserve the prior modulo bypass while testing invariant arithmetic placement.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "a001ba61546861bbd8fe7888aab070aa70d95a67acb0d4084f21dd51f6e4f5af",
+  "operator": "unwrap_angles",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "hoist the angle half-period explicitly",
+  "profile_hotspot": "Preserve the prior modulo bypass while testing invariant arithmetic placement.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Preserve the prior modulo bypass while testing invariant arithmetic placement.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 369242.40625,
+      "after_ns": 372620.0390625,
+      "latency_reduction_pct": -0.9148558023893472,
+      "paired_ratios": [
+        1.0251368295242202,
+        0.9825674328258763,
+        1.009554476192327,
+        1.00874263985546
+      ],
+      "worst_paired_reduction_pct": -2.513682952422025
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 425841.375,
+      "after_ns": 435012.953125,
+      "latency_reduction_pct": -2.1537936893354814,
+      "paired_ratios": [
+        1.0195889354991048,
+        1.0099965903986878,
+        1.0306659758163614,
+        1.0234869382876048
+      ],
+      "worst_paired_reduction_pct": -3.0665975816361435
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-01",
+  "validation_sha256": "2022791aac7816250de4458fedf271d6460ae052e440e166b3616e4c8f6849f7"
+}

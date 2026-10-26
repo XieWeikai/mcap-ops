@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-02",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": 3.854980731174984,
+  "worst_block_reduction_pct": 3.093480224288103,
+  "worst_case_reduction_pct": 3.09892501809943,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Use exact NaN/Inf classification with a different machine comparison form.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "d74436f7237baeabbd9419e7338e63332a575b861524be4531353df158ea7156",
+  "operator": "unwrap_angles",
+  "round": 2,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "compare angle finiteness through finite magnitudes",
+  "profile_hotspot": "Use exact NaN/Inf classification with a different machine comparison form.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. Use exact NaN/Inf classification with a different machine comparison form.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 371389.1640625,
+      "after_ns": 353557.2109375,
+      "latency_reduction_pct": 5.10583824290014,
+      "paired_ratios": [
+        0.9353300627546414,
+        0.9667967468649881,
+        0.9569057212116182,
+        0.9409775139303791
+      ],
+      "worst_paired_reduction_pct": 3.3203253135011934
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 429806.2109375,
+      "after_ns": 414566.6484375,
+      "latency_reduction_pct": 3.09892501809943,
+      "paired_ratios": [
+        0.9386953446538504,
+        0.9713389712462349,
+        0.9666825283917766,
+        0.9816909651383422
+      ],
+      "worst_paired_reduction_pct": 1.8309034861657802
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-02",
+  "validation_sha256": "4419e4a22120cf8a612df271e336ae43b90c24fd6111faae2d03a9dff601a326"
+}

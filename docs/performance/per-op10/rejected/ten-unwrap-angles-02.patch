@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 17318c0..0b5c208 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -231,7 +231,7 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
+             .zip(&past[(i - 1) * d..])
+             .zip(&mut current[..d])
+         {
+-            if !a.is_finite() || !b.is_finite() {
++            if !(a.abs() <= f64::MAX && b.abs() <= f64::MAX) {
+                 continue;
+             }
+             let delta = b - a;

@@ -1,0 +1,33 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 17318c0..5cff4ee 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -216,7 +216,14 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
+         return Err(invalid("positive period and nonnegative gap required"));
+     }
+     let mut values = signal.values().to_vec();
+-    for i in 1..signal.len() {
++    let d = signal.channels();
++    for (index, (left, right)) in signal
++        .values()
++        .chunks_exact(d)
++        .zip(signal.values().chunks_exact(d).skip(1))
++        .enumerate()
++    {
++        let i = index + 1;
+         if i128::from(signal.timestamps()[i]) - i128::from(signal.timestamps()[i - 1])
+             > i128::from(max_gap_ns)
+         {
+@@ -224,10 +231,9 @@ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Si
+         }
+         let d = signal.channels();
+         let (past, current) = values.split_at_mut(i * d);
+-        for (((&a, &b), &old), output) in signal
+-            .row(i - 1)
++        for (((&a, &b), &old), output) in left
+             .iter()
+-            .zip(signal.row(i))
++            .zip(right)
+             .zip(&past[(i - 1) * d..])
+             .zip(&mut current[..d])
+         {

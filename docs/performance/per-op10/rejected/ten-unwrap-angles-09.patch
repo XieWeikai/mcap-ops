@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 17318c0..897732f 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -210,6 +210,7 @@ pub fn fir(
+ }
+ 
+ /// Explicit periodic-angle unwrapping; non-finite values and gaps reset support.
++#[inline(never)]
+ pub fn unwrap_angles(signal: &Signal, period: f64, max_gap_ns: i64) -> Result<Signal> {
+     signal.require_ordered()?;
+     if !period.is_finite() || period <= 0.0 || max_gap_ns < 0 {

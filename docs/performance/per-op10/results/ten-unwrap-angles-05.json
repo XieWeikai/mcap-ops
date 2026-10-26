@@ -1,0 +1,53 @@
+{
+  "label": "ten-unwrap-angles-05",
+  "base_commit": "4b36faba21623edfd523881666881b9623f3c8e4",
+  "cases": [
+    "unwrap_angles",
+    "unwrap_angles.wraps"
+  ],
+  "geomean_latency_reduction_pct": 0.819147082614835,
+  "worst_block_reduction_pct": -0.7802197093861984,
+  "worst_case_reduction_pct": -0.49895130949768607,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. The period has already been validated positive, so the generic absolute-divisor step is unnecessary.",
+  "paths": [
+    "crates/core/src/filter.rs"
+  ],
+  "measurement_sha256": "bc92cd07e0f82c3246a9dad10d4fa467925a6488f8d468e6b68fcc76f175c75d",
+  "operator": "unwrap_angles",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "rejected",
+  "method": "expand positive-period Euclidean remainder explicitly",
+  "profile_hotspot": "The period has already been validated positive, so the generic absolute-divisor step is unnecessary.",
+  "reason": "Reject: performance or resource gate failed; restore last accepted state. The period has already been validated positive, so the generic absolute-divisor step is unnecessary.",
+  "case_results": {
+    "unwrap_angles": {
+      "before_ns": 372695.59375,
+      "after_ns": 375158.234375,
+      "latency_reduction_pct": -0.49895130949768607,
+      "paired_ratios": [
+        0.9873187858610857,
+        1.0013713581818138,
+        1.0086076680081402,
+        1.015450035835133
+      ],
+      "worst_paired_reduction_pct": -1.5450035835133047
+    },
+    "unwrap_angles.wraps": {
+      "before_ns": 433571.3203125,
+      "after_ns": 424973.359375,
+      "latency_reduction_pct": 1.0698390818217218,
+      "paired_ratios": [
+        0.9918826717043753,
+        0.9867205466591904,
+        0.9536623674624826,
+        1.0002119578753135
+      ],
+      "worst_paired_reduction_pct": -0.02119578753134732
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-unwrap-angles-05",
+  "validation_sha256": "9e338de1ba926954719ecca6adf0539dc33ad382f41a0a51ef73ba93c5b7db99"
+}

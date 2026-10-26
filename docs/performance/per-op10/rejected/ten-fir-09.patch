@@ -1,0 +1,12 @@
+diff --git a/crates/core/src/filter.rs b/crates/core/src/filter.rs
+index 17318c0..a0a3f44 100644
+--- a/crates/core/src/filter.rs
++++ b/crates/core/src/filter.rs
+@@ -130,6 +130,7 @@ pub fn lowpass_taps(sample_rate_hz: f64, cutoff_hz: f64, taps: usize) -> Result<
+ }
+ 
+ /// FIR on a regular grid. Gaps invalidate full support; edges are not padded.
++#[inline(never)]
+ pub fn fir(
+     signal: &Signal,
+     taps: &[f64],
