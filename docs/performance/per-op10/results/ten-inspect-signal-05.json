@@ -1,0 +1,105 @@
+{
+  "label": "ten-inspect-signal-05",
+  "base_commit": "274e3383e419fc20e0ae4d77d2811d701f173071",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel",
+    "inspect_signal.random_hampel",
+    "inspect_signal.constant_hampel",
+    "inspect_signal.issues"
+  ],
+  "geomean_latency_reduction_pct": 44.00136494344928,
+  "worst_block_reduction_pct": 43.96746503611841,
+  "worst_case_reduction_pct": -1.3467954037320151,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Adjacent windows overlap heavily; retain gap boundaries, finite filtering, sample limits and exact median ordering.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "a08311ed55948145f65a0158659b139c0f783fb16eb8f73841ee51681ba040a6",
+  "operator": "inspect_signal",
+  "round": 5,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "maintain a sorted Hampel window by insertion and removal",
+  "profile_hotspot": "Adjacent windows overlap heavily; retain gap boundaries, finite filtering, sample limits and exact median ordering.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Adjacent windows overlap heavily; retain gap boundaries, finite filtering, sample limits and exact median ordering.",
+  "case_results": {
+    "inspect_signal.random_hampel": {
+      "before_ns": 9631978.75,
+      "after_ns": 1026058.15625,
+      "latency_reduction_pct": 89.3714961630443,
+      "paired_ratios": [
+        0.10587504815209646,
+        0.10552599057520307,
+        0.10799981175873637,
+        0.1066950285870177
+      ],
+      "worst_paired_reduction_pct": 89.20001882412636
+    },
+    "inspect_signal.constant_hampel": {
+      "before_ns": 1369444.40625,
+      "after_ns": 843075.359375,
+      "latency_reduction_pct": 38.39788449368686,
+      "paired_ratios": [
+        0.6043146806155348,
+        0.617132151550973,
+        0.6232011285377227,
+        0.6149101585752899
+      ],
+      "worst_paired_reduction_pct": 37.67988714622773
+    },
+    "inspect_signal.basic": {
+      "before_ns": 1423094.21875,
+      "after_ns": 1415787.5,
+      "latency_reduction_pct": 0.580085427495769,
+      "paired_ratios": [
+        0.9963243783017625,
+        1.0115010428439137,
+        0.98658416748921,
+        0.992073913148322
+      ],
+      "worst_paired_reduction_pct": -1.1501042843913734
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 3041411.1875,
+      "after_ns": 2647100.875,
+      "latency_reduction_pct": 12.781121990043898,
+      "paired_ratios": [
+        0.8768267551884832,
+        0.8528004521286232,
+        0.8675508050106389,
+        0.8813973424476074
+      ],
+      "worst_paired_reduction_pct": 11.860265755239263
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 10205219.25,
+      "after_ns": 5440290.5,
+      "latency_reduction_pct": 46.79485998023887,
+      "paired_ratios": [
+        0.5315948010117855,
+        0.5393385255868675,
+        0.5274188399180246,
+        0.5325079993834372
+      ],
+      "worst_paired_reduction_pct": 46.066147441313255
+    },
+    "inspect_signal.issues": {
+      "before_ns": 1472848.96875,
+      "after_ns": 1496849.25,
+      "latency_reduction_pct": -1.3467954037320151,
+      "paired_ratios": [
+        1.0134215724986448,
+        1.0191791362503908,
+        1.0135143355759952,
+        1.0130802994491852
+      ],
+      "worst_paired_reduction_pct": -1.9179136250390805
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-inspect-signal-05",
+  "validation_sha256": "be6b7054e27ae9989ab514bd1add8dfd03cec2bc5edad5d3ee868483caa775b8"
+}

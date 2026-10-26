@@ -325,7 +325,7 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
         }
         if let Some(window) = config.hampel_window_ns {
             let mut start = 0;
-            let mut values = Vec::new();
+            let mut values: Vec<f64> = Vec::new();
             while start < signal.len() {
                 let mut end = start + 1;
                 while end < signal.len()
@@ -334,6 +334,8 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
                 {
                     end += 1;
                 }
+                values.clear();
+                let (mut loaded_a, mut loaded_b) = (start, start);
                 for i in start..end {
                     let value = signal.row(i)[channel];
                     if !value.is_finite() {
@@ -346,12 +348,24 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
                     if b - a > config.max_hampel_samples {
                         return Err(invalid("Hampel window exceeds max_hampel_samples"));
                     }
-                    values.clear();
-                    values.extend(
-                        (a..b)
-                            .map(|j| signal.row(j)[channel])
-                            .filter(|v| v.is_finite()),
-                    );
+                    for j in loaded_a..a.min(loaded_b) {
+                        let old = signal.row(j)[channel];
+                        if old.is_finite() {
+                            let index = values
+                                .binary_search_by(|v| v.total_cmp(&old))
+                                .expect("tracked finite sample");
+                            values.remove(index);
+                        }
+                    }
+                    for j in loaded_b.max(a)..b {
+                        let value = signal.row(j)[channel];
+                        if value.is_finite() {
+                            let index = values.partition_point(|v| v.total_cmp(&value).is_lt());
+                            values.insert(index, value);
+                        }
+                    }
+                    loaded_a = a;
+                    loaded_b = b;
                     if values.len() < 3 {
                         continue;
                     }
