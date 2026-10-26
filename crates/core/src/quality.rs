@@ -356,8 +356,7 @@ pub fn inspect_signal(signal: &Signal, config: &QualityConfig) -> Result<Quality
                         continue;
                     }
                     let center = median(&mut values);
-                    values.iter_mut().for_each(|v| *v = (*v - center).abs());
-                    let threshold = (config.hampel_sigma * 1.4826 * median(&mut values))
+                    let threshold = (config.hampel_sigma * 1.4826 * sorted_mad(&values, center))
                         .max(config.hampel_min_deviation);
                     if (value - center).abs() > threshold {
                         emit(
@@ -485,4 +484,37 @@ pub fn gate(report: &QualityReport, policy: &GatePolicy) -> Result<GateDecision>
         reasons,
         flagged_fraction: fraction,
     })
+}
+
+// median() has already sorted the finite values. Absolute deviations are two
+// monotone sequences on either side of center; merge only through their median.
+fn sorted_mad(sorted: &[f64], center: f64) -> f64 {
+    let mut left = sorted.partition_point(|&v| v <= center);
+    let mut right = left;
+    let (mut previous, mut current) = (0.0, 0.0);
+    for _ in 0..=sorted.len() / 2 {
+        let a = left.checked_sub(1).map(|i| (sorted[i] - center).abs());
+        let b = sorted.get(right).map(|v| (v - center).abs());
+        previous = current;
+        current = match (a, b) {
+            (Some(a), Some(b)) if a <= b => {
+                left -= 1;
+                a
+            }
+            (Some(a), None) => {
+                left -= 1;
+                a
+            }
+            (_, Some(b)) => {
+                right += 1;
+                b
+            }
+            _ => unreachable!(),
+        };
+    }
+    if sorted.len().is_multiple_of(2) {
+        previous / 2.0 + current / 2.0
+    } else {
+        current
+    }
 }

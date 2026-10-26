@@ -1,0 +1,66 @@
+{
+  "label": "extension-04-inspect-signal",
+  "base_commit": "a38997934ed1b82a1630e615b57a1a1c1b1e045b",
+  "cases": [
+    "inspect_signal.basic",
+    "inspect_signal.hampel",
+    "inspect_signal.wide_hampel"
+  ],
+  "geomean_latency_reduction_pct": 41.08114240970278,
+  "worst_block_reduction_pct": 40.95189879818485,
+  "worst_case_reduction_pct": 0.1311787624316052,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. The first median sorts already; exploit that order instead of repeating the previously rejected quickselect hypothesis.",
+  "paths": [
+    "crates/core/src/quality.rs"
+  ],
+  "measurement_sha256": "4c67d62ac5eec1caaf789d8f865cfc630ed4dcf7c338c91b2108183b5220a764",
+  "operator": "inspect_signal",
+  "round": 4,
+  "series": "extension",
+  "decision": "accepted",
+  "method": "merge ordered absolute deviations through their median",
+  "profile_hotspot": "Baseline Callgrind attributes most Hampel instructions to two sorts per window.",
+  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. The first median sorts already; exploit that order instead of repeating the previously rejected quickselect hypothesis.",
+  "case_results": {
+    "inspect_signal.basic": {
+      "before_ns": 1434085.53125,
+      "after_ns": 1432204.5625,
+      "latency_reduction_pct": 0.1311787624316052,
+      "paired_ratios": [
+        0.9979098784832434,
+        0.9970441837107139,
+        1.0064822947306773,
+        0.9994665462681245
+      ],
+      "worst_paired_reduction_pct": -0.6482294730677296
+    },
+    "inspect_signal.hampel": {
+      "before_ns": 6171013.375,
+      "after_ns": 3581213.3125,
+      "latency_reduction_pct": 42.00215615484637,
+      "paired_ratios": [
+        0.5841258058250901,
+        0.5791588315472225,
+        0.5797721162743495,
+        0.5801847606287229
+      ],
+      "worst_paired_reduction_pct": 41.58741941749099
+    },
+    "inspect_signal.wide_hampel": {
+      "before_ns": 34575641.0,
+      "after_ns": 12207236.75,
+      "latency_reduction_pct": 64.69817879521231,
+      "paired_ratios": [
+        0.35319951210691863,
+        0.35323223479030497,
+        0.35039171821231696,
+        0.35283691198883516
+      ],
+      "worst_paired_reduction_pct": 64.6767765209695
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-04-inspect-signal",
+  "validation_sha256": "99dda9c108e8c13912df3de3dbefe93ba9c597daeb68bf31147cceb92b472325"
+}
