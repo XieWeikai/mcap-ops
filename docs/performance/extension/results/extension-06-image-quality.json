@@ -1,0 +1,53 @@
+{
+  "label": "extension-06-image-quality",
+  "base_commit": "0f3098d81e0a77da179a2d0fef5a258fd990afeb",
+  "cases": [
+    "image_quality.gradient",
+    "image_quality.noise"
+  ],
+  "geomean_latency_reduction_pct": 10.246328214853119,
+  "worst_block_reduction_pct": 9.542753052650921,
+  "worst_case_reduction_pct": 6.6618516871740034,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded safe-Rust local change; no new runtime dependencies. Two-pass moments helped; preserve those arithmetic orders while reducing per-pixel stencil indexing.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "c8c25000e505c6f283c3271b9603e1c9cc7ec93fac65f73763966b4c43f8a6f3",
+  "operator": "image_quality",
+  "round": 6,
+  "series": "extension",
+  "decision": "accepted",
+  "method": "zip bounded image rows for Laplacian stencils",
+  "profile_hotspot": "Image profile shows repeated neighbor indexing alongside decoding and hashing.",
+  "reason": "All paired blocks clear 8%, no case regresses more than 3%, correctness passes. Two-pass moments helped; preserve those arithmetic orders while reducing per-pixel stencil indexing.",
+  "case_results": {
+    "image_quality.gradient": {
+      "before_ns": 2862597.25,
+      "after_ns": 2673154.25,
+      "latency_reduction_pct": 6.6618516871740034,
+      "paired_ratios": [
+        0.9469307347509902,
+        0.9178366237431461,
+        0.9386471981735622,
+        0.9281157680829577
+      ],
+      "worst_paired_reduction_pct": 5.3069265249009785
+    },
+    "image_quality.noise": {
+      "before_ns": 1443100.75,
+      "after_ns": 1233231.96875,
+      "latency_reduction_pct": 13.692475165572526,
+      "paired_ratios": [
+        0.8641089812599029,
+        0.8447174055090912,
+        0.8631188900849809,
+        0.8630316066035685
+      ],
+      "worst_paired_reduction_pct": 13.589101874009712
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/extension-06-image-quality",
+  "validation_sha256": "5d4dab0faee7056100840e10b6fbc40e246e691fa15a56109c363081c6632fe6"
+}

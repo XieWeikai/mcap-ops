@@ -96,18 +96,30 @@ pub fn image_quality(bytes: &[u8], options: &ImageOptions) -> Result<ImageQualit
     let laplacian_variance = if width >= 3 && height >= 3 {
         let w = width as usize;
         let n = (width as usize - 2) * (height as usize - 2);
-        let lap = |i: usize| gray[i - w] + gray[i + w] + gray[i - 1] + gray[i + 1] - 4.0 * gray[i];
+        let stencil = |row: usize| {
+            let top = &gray[(row - 1) * w + 1..row * w - 1];
+            let bottom = &gray[(row + 1) * w + 1..(row + 2) * w - 1];
+            let left = &gray[row * w..(row + 1) * w - 2];
+            let right = &gray[row * w + 2..(row + 1) * w];
+            let center = &gray[row * w + 1..(row + 1) * w - 1];
+            top.iter()
+                .zip(bottom)
+                .zip(left)
+                .zip(right)
+                .zip(center)
+                .map(|((((&a, &b), &c), &d), &e)| a + b + c + d - 4.0 * e)
+        };
         let mut sum = 0.0;
-        for y in 1..height as usize - 1 {
-            for x in 1..w - 1 {
-                sum += lap(y * w + x);
+        for row in 1..height as usize - 1 {
+            for value in stencil(row) {
+                sum += value;
             }
         }
         let average = sum / n as f64;
         let mut variance = 0.0;
-        for y in 1..height as usize - 1 {
-            for x in 1..w - 1 {
-                let delta = lap(y * w + x) - average;
+        for row in 1..height as usize - 1 {
+            for value in stencil(row) {
+                let delta = value - average;
                 variance += delta * delta;
             }
         }
