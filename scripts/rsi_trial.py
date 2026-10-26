@@ -22,10 +22,14 @@ def main():
     parser.add_argument("--python", action="store_true")
     parser.add_argument("--retry", action="store_true")
     parser.add_argument("--blocks", type=int, default=4)
+    parser.add_argument("--series", choices=["initial", "extension"], default="initial")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9_.-]+", args.label):
         parser.error("label must be a simple identifier")
-    if (ROOT / "docs/performance/results" / f"{args.label}.json").exists():
+    report_root = ROOT / "docs/performance"
+    if args.series != "initial":
+        report_root /= args.series
+    if (report_root / "results" / f"{args.label}.json").exists():
         parser.error("trial already has a decision; preserve its evidence and use a new label")
     destination = ROOT / ".artifacts/rsi/trials" / args.label
     destination.mkdir(parents=True, exist_ok=args.retry)
@@ -45,6 +49,17 @@ export CARGO_HOME="$PWD/.tools/cargo" RUSTUP_HOME="$PWD/.tools/rustup"
 export PATH="$CARGO_HOME/bin:$PATH" VIRTUAL_ENV="$PWD/.venv"
 export CARGO_PROFILE_RELEASE_DEBUG=1 CARGO_BUILD_JOBS=12
 mkdir -p .artifacts/rsi/trials/{label}
+"""
+    if args.series == "extension" and not args.python:
+        setup += f"""
+VALGRIND_LIB="$PWD/.tools/valgrind/root/usr/libexec/valgrind" .tools/valgrind/root/usr/bin/valgrind --tool=callgrind --collect-atstart=no --toggle-collect='operator_benchmark::Runner::bench*' --callgrind-out-file=.artifacts/rsi/trials/{label}/before.callgrind .artifacts/rsi/bin/accepted --case {cases} --profile
+.tools/valgrind/root/usr/bin/callgrind_annotate --auto=no --inclusive=yes --threshold=98 .artifacts/rsi/trials/{label}/before.callgrind > .artifacts/rsi/trials/{label}/before-profile.txt
+"""
+    if args.series == "extension" and args.python:
+        setup += f"""
+PYTHONPATH="$PWD/.artifacts/rsi/python/accepted" RSI_PYTHON_ROOT="$PWD/.artifacts/rsi/python/accepted" .venv/bin/python scripts/python_benchmark.py --case {cases} --profile .artifacts/rsi/trials/{label}/before.prof
+"""
+    setup += f"""
 cargo fmt --all
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace --locked -j 12

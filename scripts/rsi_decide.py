@@ -14,13 +14,19 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("label")
     parser.add_argument("--operator", required=True)
-    parser.add_argument("--round", type=int, choices=[1, 2], required=True)
+    parser.add_argument("--round", type=int, required=True)
+    parser.add_argument("--series", choices=["initial", "extension"], default="initial")
     parser.add_argument("--accept", action="store_true")
     parser.add_argument("--method", required=True)
     parser.add_argument("--hotspot", required=True)
     parser.add_argument("--complexity", required=True)
     parser.add_argument("--reason", required=True)
     args = parser.parse_args()
+    if args.round < 1:
+        parser.error("round must be positive")
+    report_root = ROOT / "docs/performance"
+    if args.series != "initial":
+        report_root /= args.series
     trial = ROOT / ".artifacts/rsi/trials" / args.label
     audit = json.loads((trial / "audit.json").read_text())
     if args.accept and not audit["performance_gate"]:
@@ -30,6 +36,7 @@ def main():
         **audit,
         "operator": args.operator,
         "round": args.round,
+        "series": args.series,
         "decision": "accepted" if args.accept else "rejected",
         "method": args.method,
         "profile_hotspot": args.hotspot,
@@ -39,15 +46,15 @@ def main():
         "profile_remote_path": f"./.artifacts/rsi/trials/{args.label}",
         "validation_sha256": hashlib.sha256((trial / "validation.log").read_bytes()).hexdigest(),
     }
-    output = ROOT / "docs/performance/results" / f"{args.label}.json"
+    output = report_root / "results" / f"{args.label}.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(record, indent=2) + "\n")
-    data = ROOT / "docs/performance/data" / f"{args.label}.json"
+    data = report_root / "data" / f"{args.label}.json"
     data.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(trial / "measurement.json", data)
     if args.accept:
         body = [
-            f"perf({args.operator}): {args.method} [RSI round {args.round}]",
+            f"perf({args.operator}): {args.method} [RSI {'extension ' if args.series != 'initial' else ''}round {args.round}]",
             "",
             f"Profile: {args.hotspot}",
             f"Change: {args.method}",
@@ -68,7 +75,7 @@ def main():
                  f"Raw samples: {data.relative_to(ROOT)}", ""]
         (trial / "commit-message.txt").write_text("\n".join(body))
     else:
-        patch = ROOT / "docs/performance/rejected" / f"{args.label}.patch"
+        patch = report_root / "rejected" / f"{args.label}.patch"
         patch.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(trial / "candidate.patch", patch)
         for name in audit["paths"]:
