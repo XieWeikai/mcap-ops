@@ -130,19 +130,26 @@ impl IntervalSet {
         if history_ns == 0 && future_ns == 0 {
             return Ok(self.clone());
         }
-        let mut merged: Vec<Interval> = Vec::with_capacity(self.intervals.len());
+        let mut merged = Vec::with_capacity(self.intervals.len());
+        let mut pending: Option<Interval> = None;
         for v in &self.intervals {
             let interval = Interval {
                 start_ns: v.start_ns.checked_sub(future_ns).ok_or(Error::Overflow)?,
                 end_ns: v.end_ns.checked_add(history_ns).ok_or(Error::Overflow)?,
             };
-            if let Some(last) = merged.last_mut() {
-                if interval.start_ns <= last.end_ns {
-                    last.end_ns = last.end_ns.max(interval.end_ns);
-                    continue;
+            match pending.as_mut() {
+                Some(last) if interval.start_ns <= last.end_ns => {
+                    last.end_ns = last.end_ns.max(interval.end_ns)
+                }
+                _ => {
+                    if let Some(last) = pending.replace(interval) {
+                        merged.push(last);
+                    }
                 }
             }
-            merged.push(interval);
+        }
+        if let Some(last) = pending {
+            merged.push(last);
         }
         Ok(Self { intervals: merged })
     }

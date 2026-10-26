@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-affected-centers-04",
+  "base_commit": "7d0cb4e458315bb59c29d7fddc786021a735b00d",
+  "cases": [
+    "interval_affected_centers",
+    "interval_affected_centers.merged"
+  ],
+  "geomean_latency_reduction_pct": 19.113426342384987,
+  "worst_block_reduction_pct": 17.39743962093655,
+  "worst_case_reduction_pct": 0.7718871800557414,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Use one active interval to avoid repeated output-tail access without changing chronological merging.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "80876ed97126644ec7cf9b6c243a7d93196707142da69237167eda5ab6652bde",
+  "operator": "interval_affected_centers",
+  "round": 4,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "keep the expanding merge frontier in a local slot",
+  "profile_hotspot": "Use one active interval to avoid repeated output-tail access without changing chronological merging.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Use one active interval to avoid repeated output-tail access without changing chronological merging.",
+  "case_results": {
+    "interval_affected_centers.merged": {
+      "before_ns": 5167.220703125,
+      "after_ns": 3381.2586059570312,
+      "latency_reduction_pct": 34.444857722325686,
+      "paired_ratios": [
+        0.651357264495381,
+        0.6674570636003733,
+        0.6346069709449345,
+        0.6597455810581053
+      ],
+      "worst_paired_reduction_pct": 33.254293639962675
+    },
+    "interval_affected_centers": {
+      "before_ns": 5352.2391357421875,
+      "after_ns": 5340.6246337890625,
+      "latency_reduction_pct": 0.7718871800557414,
+      "paired_ratios": [
+        0.9981134672077606,
+        0.9864487891911246,
+        0.9692435612764746,
+        1.0342142754838535
+      ],
+      "worst_paired_reduction_pct": -3.4214275483853474
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-affected-centers-04",
+  "validation_sha256": "51e1f048c9fc52d4caa58625514d7c3deeb50f9bba6478680f0d10632bdf2f55"
+}
