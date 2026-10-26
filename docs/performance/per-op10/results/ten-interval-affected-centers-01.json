@@ -1,0 +1,53 @@
+{
+  "label": "ten-interval-affected-centers-01",
+  "base_commit": "c23981d65e36d8fb36276304f6b1e1409389f047",
+  "cases": [
+    "interval_affected_centers",
+    "interval_affected_centers.merged"
+  ],
+  "geomean_latency_reduction_pct": 25.997618104692034,
+  "worst_block_reduction_pct": 25.259856959355275,
+  "worst_case_reduction_pct": 8.46011409593781,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Bounded operator-local change. No new unsafe code, runtime dependencies or relaxed checks. Identity context expansion needs no per-interval arithmetic; keep validation of negative context first.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "870d26f56acb4a01ebd7badc4f6ff6be3a5013690820ce8cb912f7fecb215e39",
+  "operator": "interval_affected_centers",
+  "round": 1,
+  "series": "per-op10",
+  "decision": "accepted",
+  "method": "return unchanged intervals for zero context",
+  "profile_hotspot": "Identity context expansion needs no per-interval arithmetic; keep validation of negative context first.",
+  "reason": "Accept: every paired block >=8%, representative regression <=3%, correctness passed. Identity context expansion needs no per-interval arithmetic; keep validation of negative context first.",
+  "case_results": {
+    "interval_affected_centers.merged": {
+      "before_ns": 8715.98974609375,
+      "after_ns": 5146.503662109375,
+      "latency_reduction_pct": 40.305072015945385,
+      "paired_ratios": [
+        0.5872984456169144,
+        0.6066001140641779,
+        0.5857322903753445,
+        0.6086296475337868
+      ],
+      "worst_paired_reduction_pct": 39.13703524662132
+    },
+    "interval_affected_centers": {
+      "before_ns": 5938.44677734375,
+      "after_ns": 5435.1490478515625,
+      "latency_reduction_pct": 8.46011409593781,
+      "paired_ratios": [
+        0.9419170579377751,
+        0.8936893713042398,
+        0.9129835753802946,
+        0.9178141427009492
+      ],
+      "worst_paired_reduction_pct": 5.808294206222486
+    }
+  },
+  "profile_remote_path": "./.artifacts/rsi/trials/ten-interval-affected-centers-01",
+  "validation_sha256": "e049bed32966259fcf48a22ebaff507755b0e901c7d0bd996877818d1822a120"
+}

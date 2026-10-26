@@ -127,6 +127,9 @@ impl IntervalSet {
         if history_ns < 0 || future_ns < 0 {
             return Err(invalid("context lengths must be nonnegative"));
         }
+        if history_ns == 0 && future_ns == 0 {
+            return Ok(self.clone());
+        }
         let mut merged: Vec<Interval> = Vec::with_capacity(self.intervals.len());
         for v in &self.intervals {
             let interval = Interval {
