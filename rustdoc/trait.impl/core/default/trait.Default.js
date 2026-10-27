@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["mcap_ops_core",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"mcap_ops_core/quality/struct.QualityConfig.html\" title=\"struct mcap_ops_core::quality::QualityConfig\">QualityConfig</a>"],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"mcap_ops_core/selection/struct.IntervalSet.html\" title=\"struct mcap_ops_core::selection::IntervalSet\">IntervalSet</a>"]]],["mcap_ops_io",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"mcap_ops_io/image_ops/struct.ImageOptions.html\" title=\"struct mcap_ops_io::image_ops::ImageOptions\">ImageOptions</a>"],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"mcap_ops_io/mcap_ops/struct.MessageFilter.html\" title=\"struct mcap_ops_io::mcap_ops::MessageFilter\">MessageFilter</a>"],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.90.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"mcap_ops_io/mcap_ops/struct.ReadLimits.html\" title=\"struct mcap_ops_io::mcap_ops::ReadLimits\">ReadLimits</a>"]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[631,923]}

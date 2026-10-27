@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Error","SignalKind"],"mod":["filter","quality","sampling","selection","time"],"struct":["Signal","SignalSpec"],"type":["Result"]};

@@ -1,0 +1,2862 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Explicit time, inspectable quality, and traceable samples. Rust operators with NumPy interfaces.">
+      
+      
+      
+        <link rel="canonical" href="https://xieweikai.github.io/mcap-ops/zh/reference/rust/">
+      
+      
+        <link rel="prev" href="../types/">
+      
+      
+        <link rel="next" href="../../rust/">
+      
+      
+        
+          <link rel="alternate" href="../../../reference/rust/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../../assets/mark.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Rust 接口索引 - MCAP Ops</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/site.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rust" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../" title="MCAP Ops" class="md-header__button md-logo" aria-label="MCAP Ops" data-md-component="logo">
+      
+  <img src="../../../assets/mark.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MCAP Ops
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Rust 接口索引
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../reference/rust/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/XieWeikai/mcap-ops" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    XieWeikai/mcap-ops
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorials/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  教程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  接口手册
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../rsi/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  RSI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  开发
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="MCAP Ops" class="md-nav__button md-logo" aria-label="MCAP Ops" data-md-component="logo">
+      
+  <img src="../../../assets/mark.svg" alt="logo">
+
+    </a>
+    MCAP Ops
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/XieWeikai/mcap-ops" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    XieWeikai/mcap-ops
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    教程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    教程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    设计理念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安装
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/first-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一个处理流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    质检与筛选
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    同步模型时间步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/media/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCAP 与媒体
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/best-practices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最佳实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    接口手册
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    接口手册
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据契约
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python 算子
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python 算子
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/inspect_signal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    inspect_signal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/uniform_grid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    uniform_grid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/align_timestamps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    align_timestamps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/resample/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    resample
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/history_windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    history_windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/ema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/lowpass_taps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    lowpass_taps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/fir/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    fir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/unwrap_angles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    unwrap_angles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/inspect_mcap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    inspect_mcap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/read_json_signal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    read_json_signal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/image_quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    image_quality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/transform_image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    transform_image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python/validate_video/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    validate_video
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    类型与抽象
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rust 接口索引
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rust 接口索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何查询
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_corefilter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::filter
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_corequality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::quality
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_coresampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::sampling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_coreselection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_coretime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_io
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_ioimage_ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_io::image_ops
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_iomcap_ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_io::mcap_ops
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_iovideo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_io::video
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rust_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rust 独有接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rust/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    解码器扩展
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    算子目录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python 速查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../rsi/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RSI
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RSI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rsi/workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工作流
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rsi/profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    性能剖析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rsi/correctness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正确性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rsi/evidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    探索记录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rsi/templates/campaign/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    实验系列模板
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rsi/templates/experiment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    单轮实验模板
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    开发
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    开发
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贡献指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentation-site/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文档站发布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    性能证据
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../publication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公开历史
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../handbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    指南索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        如何查询
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_corefilter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::filter
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_corequality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::quality
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_coresampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::sampling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_coreselection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_coretime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_core::time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_io
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_ioimage_ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_io::image_ops
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_iomcap_ops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_io::mcap_ops
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcap_ops_iovideo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mcap_ops_io::video
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rust_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rust 独有接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="rust">Rust 接口索引<a class="headerlink" href="#rust" title="Permanent link">&para;</a></h1>
+<p>以下链接进入与本站同一源码版本构建的 rustdoc，可查询完整签名、字段、方法、trait 实现和源码。这个双语索引解释用途；编译器生成的 Rust 语法及源注释共用一份英文参考。</p>
+<p><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/index.html">mcap-ops-core</a> · <a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/index.html">mcap-ops-io</a></p>
+<h2 id="_1">如何查询<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>点击类型名后查看 <strong>Fields / Implementations / Trait Implementations</strong>；<code>Signal</code> 的构造与所有权方法、<code>IntervalSet</code> 的交差集和窗口扩展、<code>RawReader</code> 的 Iterator 实现都在那里。rustdoc 搜索支持按符号名和类型查询，可直接打开字段/方法锚点。</p>
+<h2 id="mcap_ops_core">mcap_ops_core<a class="headerlink" href="#mcap_ops_core" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/enum.Error.html">Error</a></td>
+<td>enum</td>
+<td>有类型的验证与处理错误</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/type.Result.html">Result</a></td>
+<td>type</td>
+<td>crate 专属结果别名</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/struct.Signal.html">Signal</a></td>
+<td>struct</td>
+<td>自有行优先数值信号</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/struct.SignalSpec.html">SignalSpec</a></td>
+<td>struct</td>
+<td>描述单位、坐标系、时钟和种类</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/enum.SignalKind.html">SignalKind</a></td>
+<td>enum</td>
+<td>连续、四元数、命令、离散、事件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_corefilter">mcap_ops_core::filter<a class="headerlink" href="#mcap_ops_corefilter" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/filter/enum.FilterMode.html">FilterMode</a></td>
+<td>enum</td>
+<td>因果或居中支持</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/filter/struct.Filtered.html">Filtered</a></td>
+<td>struct</td>
+<td>信号、掩码、前视与群延迟</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/filter/fn.ema.html">ema</a></td>
+<td>fn</td>
+<td>感知时间的因果平滑</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/filter/fn.lowpass_taps.html">lowpass_taps</a></td>
+<td>fn</td>
+<td>归一化加窗 sinc 系数</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/filter/fn.fir.html">fir</a></td>
+<td>fn</td>
+<td>规则网格的有限冲激响应滤波</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/filter/fn.unwrap_angles.html">unwrap_angles</a></td>
+<td>fn</td>
+<td>带 gap 重置的周期值展开</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_corequality">mcap_ops_core::quality<a class="headerlink" href="#mcap_ops_corequality" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/enum.IssueCode.html">IssueCode</a></td>
+<td>enum</td>
+<td>稳定的质量问题分类</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/struct.QualityConfig.html">QualityConfig</a></td>
+<td>struct</td>
+<td>检测阈值与资源上限</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/struct.Issue.html">Issue</a></td>
+<td>struct</td>
+<td>源区间、测量值与阈值</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/struct.ChannelStats.html">ChannelStats</a></td>
+<td>struct</td>
+<td>有限值统计与溢出标记</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/struct.QualityReport.html">QualityReport</a></td>
+<td>struct</td>
+<td>有上限的明细与完整计数</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/fn.inspect_signal.html">inspect_signal</a></td>
+<td>fn</td>
+<td>时间、范围、变化率、尖峰与平线检测</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/struct.GatePolicy.html">GatePolicy</a></td>
+<td>struct</td>
+<td>显式拒绝策略</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/struct.GateDecision.html">GateDecision</a></td>
+<td>struct</td>
+<td>通过结果与拒绝原因</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/quality/fn.gate.html">gate</a></td>
+<td>fn</td>
+<td>基于完整证据评估策略</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_coresampling">mcap_ops_core::sampling<a class="headerlink" href="#mcap_ops_coresampling" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/sampling/enum.Method.html">Method</a></td>
+<td>enum</td>
+<td>Previous、Nearest、Linear、Slerp</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/sampling/struct.SampleOptions.html">SampleOptions</a></td>
+<td>struct</td>
+<td>方法、gap、age、未来许可</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/sampling/enum.Status.html">Status</a></td>
+<td>enum</td>
+<td>稳定的 0-6 样本状态码</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/sampling/struct.Sampled.html">Sampled</a></td>
+<td>struct</td>
+<td>数值、来源支持与状态</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/sampling/fn.resample.html">resample</a></td>
+<td>fn</td>
+<td>采样到有序目标时间轴</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/sampling/struct.Windowed.html">Windowed</a></td>
+<td>struct</td>
+<td>中心、偏移与扁平 Sampled 缓冲区</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/sampling/fn.history_windows.html">history_windows</a></td>
+<td>fn</td>
+<td>按每个中心的显式历史偏移采样</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_coreselection">mcap_ops_core::selection<a class="headerlink" href="#mcap_ops_coreselection" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/selection/struct.Interval.html">Interval</a></td>
+<td>struct</td>
+<td>半开纳秒区间</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/selection/struct.IntervalSet.html">IntervalSet</a></td>
+<td>struct</td>
+<td>规范区间运算与上下文扩展</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_coretime">mcap_ops_core::time<a class="headerlink" href="#mcap_ops_coretime" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/fn.require_strict.html">require_strict</a></td>
+<td>fn</td>
+<td>拒绝重复和时钟回退</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/fn.uniform_grid.html">uniform_grid</a></td>
+<td>fn</td>
+<td>[start,end) 的有理频率舍入网格</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/fn.map_clock.html">map_clock</a></td>
+<td>fn</td>
+<td>围绕原点显式应用偏移和 ppb 缩放</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/struct.TimeStats.html">TimeStats</a></td>
+<td>struct</td>
+<td>时钟质量与正间隔统计</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/fn.inspect_time.html">inspect_time</a></td>
+<td>fn</td>
+<td>原始顺序时间统计</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/struct.TimeAlignment.html">TimeAlignment</a></td>
+<td>struct</td>
+<td>索引、有符号偏移、有效性</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/fn.align_timestamps.html">align_timestamps</a></td>
+<td>fn</td>
+<td>有界过去/最近索引匹配</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/fn.expand_batch_timestamps.html">expand_batch_timestamps</a></td>
+<td>fn</td>
+<td>按显式样本偏移展开消息时间</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_io">mcap_ops_io<a class="headerlink" href="#mcap_ops_io" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/enum.Error.html">Error</a></td>
+<td>enum</td>
+<td>有类型的验证与处理错误</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/type.Result.html">Result</a></td>
+<td>type</td>
+<td>crate 专属结果别名</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_ioimage_ops">mcap_ops_io::image_ops<a class="headerlink" href="#mcap_ops_ioimage_ops" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/image_ops/struct.ImageOptions.html">ImageOptions</a></td>
+<td>struct</td>
+<td>图像上限与曝光阈值</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/image_ops/fn.decode.html">decode</a></td>
+<td>fn</td>
+<td>有界 PNG/JPEG 解码器</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/image_ops/struct.ImageQuality.html">ImageQuality</a></td>
+<td>struct</td>
+<td>图像指标与解码 RGB hash</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/image_ops/fn.image_quality.html">image_quality</a></td>
+<td>fn</td>
+<td>计算曝光与清晰度指标</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/image_ops/enum.ResizeFilter.html">ResizeFilter</a></td>
+<td>enum</td>
+<td>Nearest、Triangle、Lanczos3</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/image_ops/fn.transform_image.html">transform_image</a></td>
+<td>fn</td>
+<td>先裁剪再缩放，返回编码 PNG</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_iomcap_ops">mcap_ops_io::mcap_ops<a class="headerlink" href="#mcap_ops_iomcap_ops" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/struct.MessageFilter.html">MessageFilter</a></td>
+<td>struct</td>
+<td>topic 与 MCAP 时钟选择</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/struct.ReadLimits.html">ReadLimits</a></td>
+<td>struct</td>
+<td>record 大小与扫描消息上限</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/struct.RawReader.html">RawReader</a></td>
+<td>struct</td>
+<td>可失败的原始顺序 MCAP 迭代器</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/struct.ChannelReport.html">ChannelReport</a></td>
+<td>struct</td>
+<td>通道/schema 标识与双时钟</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/struct.McapReport.html">McapReport</a></td>
+<td>struct</td>
+<td>完整容器扫描报告</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/fn.inspect_mcap.html">inspect_mcap</a></td>
+<td>fn</td>
+<td>验证并汇总容器</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/struct.DecodedSample.html">DecodedSample</a></td>
+<td>struct</td>
+<td>解码器输出：timestamp_ns 与 values</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/trait.SignalDecoder.html">SignalDecoder</a></td>
+<td>trait</td>
+<td>schema 专属 payload 到信号 trait</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/struct.JsonSignalSpec.html">JsonSignalSpec</a></td>
+<td>struct</td>
+<td>显式 RFC 6901 字段解码器</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/mcap_ops/fn.read_signal.html">read_signal</a></td>
+<td>fn</td>
+<td>有界收集解码结果为 Signal</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcap_ops_iovideo">mcap_ops_io::video<a class="headerlink" href="#mcap_ops_iovideo" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/video/fn.probe_video.html">probe_video</a></td>
+<td>fn</td>
+<td>有超时限制的视频流元数据读取</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/video/struct.VideoValidation.html">VideoValidation</a></td>
+<td>struct</td>
+<td>完整解码完成报告</td>
+</tr>
+<tr>
+<td><a href="https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/video/fn.validate_video.html">validate_video</a></td>
+<td>fn</td>
+<td>探测并完整解码第一个视频流</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rust_1">Rust 独有接口<a class="headerlink" href="#rust_1" title="Permanent link">&para;</a></h2>
+<p><code>gate</code>、<code>IntervalSet</code>、<code>map_clock</code>、<code>inspect_time</code>、<code>expand_batch_timestamps</code>、<code>RawReader</code>、<code>SignalDecoder</code>、独立 <code>probe_video</code> 没有 Python 导出。<code>map_clock</code> 使用调用方提供的参数，不拟合时钟。</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>输入与输出</th>
+<th>行为和错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>require_strict</code></td>
+<td><code>&amp;[i64] -&gt; Result&lt;()&gt;</code></td>
+<td>空/单样本通过；重复或回退返回 Invalid</td>
+</tr>
+<tr>
+<td><code>inspect_time</code></td>
+<td>times、非负 max_gap_ns -&gt; <code>TimeStats</code></td>
+<td>检查原始顺序，只汇总正间隔，使用插值 median/p95；estimated_hz 为 1e9/median；不可用统计为 None</td>
+</tr>
+<tr>
+<td><code>map_clock</code></td>
+<td>times、origin、offset（ns）、rate_ppb -&gt; <code>Vec&lt;i64&gt;</code></td>
+<td>计算 <code>origin + round((t-origin)*(1+rate_ppb/1e9)) + offset</code>；缩放必须为正；半数远离零舍入；检查 int64 溢出</td>
+</tr>
+<tr>
+<td><code>expand_batch_timestamps</code></td>
+<td>message_times、counts、扁平 offsets（ns）-&gt; <code>Vec&lt;i64&gt;</code></td>
+<td>每条消息对应一个 count；sum(counts) 等于 offsets.len()；每个偏移加对应消息时间并检查溢出</td>
+</tr>
+<tr>
+<td><code>gate</code></td>
+<td><code>&amp;QualityReport</code>、<code>&amp;GatePolicy</code> -&gt; <code>GateDecision</code></td>
+<td>样本太少、标记比例超限或包含拒绝代码时拒绝；明细截断不影响内部完整标记；空输入比例为 0</td>
+</tr>
+<tr>
+<td><code>IntervalSet</code></td>
+<td>规范半开区间 -&gt; 集合 / 掩码</td>
+<td>见<a href="../types/#interval-intervalset">方法契约</a>；无效区间或上下文扩展溢出时失败</td>
+</tr>
+<tr>
+<td><code>RawReader::open</code></td>
+<td>path、filter、limits -&gt; 可失败的消息迭代器</td>
+<td>保留文件顺序与 CRC/错误处理；提前结束不能证明 EOF 或完整源已验证</td>
+</tr>
+<tr>
+<td><code>read_signal</code></td>
+<td>path、filter、limits、<code>&amp;dyn SignalDecoder</code>、max_samples -&gt; <code>Signal</code></td>
+<td>在正上限内收集样本并验证通道数，保留顺序；损坏的相关消息或没有解码样本时失败</td>
+</tr>
+<tr>
+<td><code>decode</code></td>
+<td>PNG/JPEG 字节、<code>&amp;ImageOptions</code> -&gt; <code>image::DynamicImage</code></td>
+<td>返回解码图像前检查格式、尺寸、像素和分配限制</td>
+</tr>
+<tr>
+<td><code>probe_video</code></td>
+<td>本地路径、ffprobe 可执行文件、<code>Duration</code> -&gt; <code>serde_json::Value</code></td>
+<td>在有界超时内要求工具成功且存在视频流；不解码帧，也不证明画面质量</td>
+</tr>
+</tbody>
+</table>
+<p><code>map_clock</code> 返回新时间，不覆盖源时钟、不排序、不去重，
+也不保证舍入后仍严格递增。应保存映射参数并保留原始时间。
+批次展开同样不会猜测采样频率或保证全局有序。</p>
+<p>完整的带断言质量 gate、区间筛选和重采样例子见
+<a href="https://github.com/XieWeikai/mcap-ops/blob/9de407cc1a1c8b020677679522446141150c9757/crates/core/examples/quality_pipeline.rs">quality_pipeline.rs</a>。
+实现 <code>SignalDecoder</code> 的方式见 <a href="../../rust/">Rust 扩展指南</a>。</p>
+<p><a href="../types/">类型与契约</a> · <a href="../../rust/">Rust 使用与扩展</a> · <a href="../">Python API</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../types/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 类型与抽象">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                类型与抽象
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../rust/" class="md-footer__link md-footer__link--next" aria-label="下一页: 解码器扩展">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                解码器扩展
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      MCAP Ops 0.1.0 · MIT License
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.footer", "navigation.top", "content.code.copy", "search.highlight", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

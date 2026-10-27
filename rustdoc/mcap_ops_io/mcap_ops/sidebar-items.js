@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["inspect_mcap","read_signal"],"struct":["ChannelReport","DecodedSample","JsonSignalSpec","McapReport","MessageFilter","RawReader","ReadLimits"],"trait":["SignalDecoder"]};

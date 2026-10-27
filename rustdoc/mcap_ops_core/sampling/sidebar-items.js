@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Method","Status"],"fn":["history_windows","resample"],"struct":["SampleOptions","Sampled","Windowed"]};

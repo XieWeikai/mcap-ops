@@ -1,0 +1,58 @@
+:root {
+  --md-primary-fg-color: #173e35;
+  --md-accent-fg-color: #26765d;
+  --md-accent-fg-color--transparent: #26765d18;
+  --md-default-bg-color: #fafbf7;
+  --md-code-bg-color: #eef2eb;
+  --ops-line: #dce4d8;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #15352e;
+  --md-accent-fg-color: #9fd6b3;
+  --md-default-bg-color: #192420;
+  --md-code-bg-color: #22312b;
+  --ops-line: #3c5147;
+}
+body, input {
+  font-family: "Avenir Next", "Source Sans 3", "Noto Sans CJK SC", sans-serif;
+}
+.md-typeset h1, .md-typeset h2 {
+  font-family: Georgia, "Noto Serif CJK SC", serif;
+  letter-spacing: -.025em;
+  color: var(--md-default-fg-color);
+}
+.md-typeset h1 { font-size: 2.15em; margin-bottom: .65em; }
+.md-typeset h2 { margin-top: 1.8em; }
+.md-typeset code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-variant-ligatures: none;
+}
+.md-header { box-shadow: none; }
+.md-tabs { border-bottom: 1px solid #ffffff24; }
+.md-content__inner { max-width: 54rem; margin-inline: auto; }
+.md-main__inner { margin-top: 1.4rem; }
+.md-typeset .grid.cards > ul > li {
+  border: 1px solid var(--ops-line);
+  border-radius: .65rem;
+  background: linear-gradient(125deg, #a7c3aa10, transparent);
+  box-shadow: none;
+}
+.md-typeset .grid.cards > ul > li:hover { border-color: var(--md-accent-fg-color); }
+.md-typeset .md-button { border-radius: .35rem; }
+.md-typeset .md-button--primary { color: #fff; background: #215b48; border-color: #215b48; }
+.md-typeset table:not([class]) { box-shadow: none; border-color: var(--ops-line); }
+.md-typeset table code { white-space: nowrap; word-break: normal; }
+.md-typeset .admonition { border-radius: .4rem; }
+.md-typeset img { height: auto; }
+.md-typeset a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .md-typeset h1 { font-size: 1.75em; }
+  .md-content__inner { margin-inline: .8rem; }
+  .md-typeset table:not([class]) td:last-child { min-width: 12rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}

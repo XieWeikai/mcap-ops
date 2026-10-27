@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["ResizeFilter"],"fn":["decode","image_quality","transform_image"],"struct":["ImageOptions","ImageQuality"]};
