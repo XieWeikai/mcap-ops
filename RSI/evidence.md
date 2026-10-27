@@ -17,6 +17,10 @@ they are not 30 Python functions. There are 380 completed decisions. Interrupted
 runs, compile repairs, confirmations, and integration corrections are not extra
 candidate rounds. Per-candidate percentages cannot be added together.
 
+Archived IDs resolve through the [publication mapping](../docs/publication.md).
+Published logs have redacted deployment metadata and corresponding updated hashes;
+measurements and decisions are unchanged.
+
 ## Lessons for the next experiment
 
 | Lesson | Evidence / counterexample |

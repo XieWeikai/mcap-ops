@@ -23,6 +23,7 @@
 | [Data contracts](concepts.md) | Signals, clocks, quality evidence, shapes, validity, causality, provenance |
 | [Contributing](contributing.md) | Separate authoring/execution environments, tests, examples, synchronization |
 | [Performance evidence](performance.md) | Benchmark environment, acceptance criteria, interpreting the archive |
+| [Public history](publication.md) | Redacted metadata, archived commit mapping, evidence hashes |
 | [RSI workflow](../RSI/workflow.md) | Exploration through profiling, verification, measurement, and commit |
 
 Every maintained guide and RSI template has a matching Chinese page, linked at

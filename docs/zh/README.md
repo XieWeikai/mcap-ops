@@ -22,6 +22,7 @@
 | [设计与架构](architecture.md) | 模块边界、依赖方向、设计取舍、上游职责 |
 | [抽象与数据契约](concepts.md) | Signal、时间、质量事件、掩码、来源与因果性 |
 | [性能环境与证据](performance.md) | 可复现的硬件、软件条件与共享历史记录 |
+| [公开历史与证据身份](publication.md) | 脱敏元信息、历史提交映射与证据哈希 |
 | [贡献与验证](contributing.md) | 本地编辑、独立 Linux 环境验证、Git 同步、文档示例验证 |
 | [RSI 工作流](../../RSI/zh/workflow.md) | 如何从瓶颈探索走到可审计的优化提交 |
 
