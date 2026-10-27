@@ -10,6 +10,11 @@
 </p>
 
 <p align="center">
+  <strong>Documentation:</strong>
+  <a href="https://xieweikai.github.io/mcap-ops/">https://xieweikai.github.io/mcap-ops/</a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Rust-1.90-e4572e" alt="Rust 1.90">
   <img src="https://img.shields.io/badge/Python-3.10%2B-3567d6" alt="Python 3.10 or newer">
   <img src="https://img.shields.io/badge/NumPy-compatible-168a82" alt="NumPy compatible">
