@@ -1,49 +1,61 @@
-# RSI 操作手册
+# RSI Workflow
 
-[导航](README.md) · [Profiling](profiling.md) · [正确性](correctness.md) · [证据](evidence.md)
+**Language: English | [Chinese](zh/workflow.md)**
 
-## 0. 先确认环境和所有权
+[Overview](README.md) · [Profiling](profiling.md) · [Correctness](correctness.md) · [Evidence](evidence.md)
 
-在本地仓库根目录：
+## 0. Verify environment and ownership
+
+Configure the execution target as described in [contributing](../docs/contributing.md).
+Check the local checkout, then independently inspect HEAD and worktree state in
+the execution checkout:
 
 ```bash
 git status --short
 git log -1 --oneline
-ssh reference-linux 'cd . && git status --short && git log -1 --oneline'
 ```
 
-确认两端基线一致、没有未知文件改动和正在运行的候选。活动进程须核对真实 PID/命令；
-不要根据历史 lock 文件里的 PID 杀进程。`rsi_per_operator.py` 带 advisory lock，但手工
-trial 流程没有全局调度器，必须串行操作，不能两个 shell 同时共享 accepted 缓存。
+Both baselines must agree. Investigate unknown edits and running candidates.
+Validate real process identity rather than killing a PID copied from an old
+lock file. The historical per-operator runner has an advisory lock, but manual
+trials do not provide a global scheduler: never run two trials against the same
+accepted cache concurrently.
 
-本地同步和提交是独立阶段：`sync_sources.py` 只发源码，不推进远端 Git HEAD；
-`publish_remote.py` 才校验哈希并发布 fast-forward 历史。开始前检查远端脏文件，不能只依赖
-HEAD 一致。源同步工具不复制 `.git`、不删除远端文件，但会更新同名源码。
+Source synchronization and Git publication are different steps. sync_sources.py
+transfers files without advancing remote HEAD. publish_remote.py verifies hashes
+and fast-forwards history. Inspect dirty state before synchronizing; matching
+HEADs do not prove matching files. Synchronization neither copies .git nor deletes
+remote files, but it updates same-name sources.
 
-## 1. 冻结 campaign
+## 1. Freeze the campaign
 
-先读 [历史与失败经验](evidence.md)，再创建新 series。例如 `next-20261027` 只是一个
-新名称示例，不表示仓库已经执行了该轮。将 [campaign 模板](templates/campaign.md)
-放入 `docs/performance/<series>/PLAN.md` 并填写：
+Read [past successes, failures, and counterexamples](evidence.md). Create a new
+series, for example next-20261027, and copy the
+[campaign template](templates/campaign.md) to its PLAN.md. That example name does
+not mean the campaign has already run. Record:
 
-1. baseline commit 与 tree、工具链、Cargo.lock、目标 CPU/OS/boot_id；
-2. 明确的算子/调用方/输出契约，代表数据规模和输入分布；
-3. 固定 cases、计时边界、资源预算、正确性容差；
-4. 候选轮数或停止条件、复杂度约束、同一假设允许的一次独立确认规则。
+1. Baseline commit/tree, toolchain, lockfile, CPU topology/affinity, OS, and an
+   opaque run identifier, not a deployment name or private session identifier.
+2. Operators, real callers, output contracts, sizes, and input distributions.
+3. Frozen cases, timing boundaries, resource budgets, and correctness tolerances.
+4. Experiment budget/stop conditions, complexity constraints, and a predeclared
+   single independent-confirmation rule if needed.
 
-先补缺失的 fixture/guard，再把基准脚手架单独提交。before/after 必须共享同一 harness；
-不能把新 fixture 带来的变化算成实现优化。不可变 oracle 仍为最初正确实现，候选性能
-baseline 则是最近接受状态，这是两种不同的参照。
+Add missing fixtures and regression guards before candidates, in a separate
+scaffolding commit. Both sides must use the same harness. The immutable
+correctness oracle and the latest accepted performance baseline have different
+roles; do not confuse them.
 
-## 2. 建立当前接受版本
+## 2. Build the accepted baseline
 
-本地确认清洁基线后同步：
+From the clean authoring checkout:
 
 ```bash
 python3 scripts/sync_sources.py
 ```
 
-以下在 reference-linux 仓库根目录执行，已有 `.tools` 和 `.venv` 的配置见贡献指南：
+Run the following in the configured Linux execution checkout. It assumes the
+project-local toolchain and environment have been installed:
 
 ```bash
 export CARGO_HOME="$PWD/.tools/cargo"
@@ -59,34 +71,41 @@ cp target/release/examples/operator_benchmark .artifacts/rsi/bin/accepted
 cp python/mcap_ops/__init__.py python/mcap_ops/_native.abi3.so .artifacts/rsi/python/accepted/mcap_ops/
 ```
 
-accepted 是可更新的工作缓存，不是永久证据；确认它对应 PLAN 中基线，再开始改源码。
-把基线 commit、工具版本、二进制 SHA-256 写入 PLAN/首轮记录，另保存只读副本。
-不要将几个月前残留的 accepted 二进制自动认作当前 HEAD。
+accepted is a mutable working cache, not permanent evidence. Check that it matches
+the planned baseline before changing sources. Record its commit, tool versions,
+and binary SHA-256 and keep an immutable copy. A stale accepted binary does not
+become the current baseline just because its filename exists.
 
-## 3. 探索与 profiling
+## 3. Explore and profile
 
-沿公开调用入口读完相连代码：Python wrapper → 绑定 → core/io → 输出构造。
-先量化时间在哪里，再提出一个改动。例如“30% 耗时用于重复排序，邻近窗口只移动一个点”
-比“把 iterator 改成 for 应该更快”更可证伪。
+Follow the public call path through wrapper, bindings, core/IO, and output
+construction. Quantify the cost before proposing a change. “Repeated sorting
+costs 30%, while adjacent windows only move one sample” is a falsifiable hypothesis;
+“a for loop should be faster” is not sufficient evidence.
 
-每个候选填写 [experiment 模板](templates/experiment.md)：已有失败是否涉及同一输入？
-哪些场景预计受益、哪些可能变慢？完整缓存键是什么？临时内存增长多少？
-是否增加数据遍历、预处理、分支、复制或生命周期耦合？
+Fill the [experiment template](templates/experiment.md). Which prior failure
+used the same distribution? Which cases should win or lose? Is the cache key
+complete? How much temporary memory is added? Does the candidate add traversal,
+preparation, branches, copying, or ownership coupling?
 
-具体命令见 [profiling.md](profiling.md)。可以做短的探索计时，但它不能通过接受门槛。
-参数扫描要写明参数扫描；同一补丁的重测不能声称新的算法。
+Use [profiling commands](profiling.md). Short exploratory timings are allowed,
+but cannot pass acceptance. Label parameter sweeps as such. Repeating a patch's
+measurement does not create another algorithm.
 
-## 4. 本地只改一个候选
+## 4. Make one local change
 
-声明 owned paths，并确保它们在候选开始前无其他改动。不在同一轮改编译参数、依赖版本、
-benchmark 输入和生产算法。不要减少 CRC、验证、样本、输出字段或精度换取速度。
+Declare owned paths and ensure they contain no unrelated changes before editing.
+Do not change compiler settings, dependency versions, fixtures, and production
+algorithms in the same experiment. Never reduce validation, CRC coverage, samples,
+output fields, or precision to claim speed.
 
-新文件/接口要先有单独 scaffold 提交；当前 trial 用 `git show HEAD:path` 保存旧版本，
-因此 owned paths 必须已受 Git 跟踪。
+Add new files/interfaces in a separate scaffold commit first. The trial snapshots
+`git show HEAD:path`, so its owned paths must already be tracked.
 
-## 5. 运行验证、profile 与配对计时
+## 5. Validate, profile, and measure
 
-在本地执行；脚本自动通过 SSH 到 reference-linux 做全部构建/测试/测量：
+Run locally; the CLI dispatches compilation, tests, profiling, and timing to the
+configured execution environment:
 
 ```bash
 python3 scripts/rsi_trial.py next-align-01 \
@@ -95,34 +114,40 @@ python3 scripts/rsi_trial.py next-align-01 \
   --paths crates/core/src/time.rs
 ```
 
-case 列表只是命令格式示例；具体任务应包含预先冻结的全部代表输入（例如稀疏目标）。
-Python 候选加 `--python` 并指定 `python.*` cases；PNG 编码候选加 `--png-size-gate`。
-使用 `--blocks 8` 可做事先允许的独立确认；普通验收最低 4，不能降为 2。
+The case list illustrates command syntax. Freeze all representative cases,
+including sparse targets where appropriate. Python candidates add --python and
+python.* cases. PNG encoder candidates add --png-size-gate. Use --blocks 8 only
+for a predeclared confirmation; ordinary acceptance requires at least four.
 
-脚本执行：保存 before/patch → 同步 → baseline profile → fmt/Clippy/Rust tests →
-不可变参考差分 → maturin/Python tests → candidate profile → AB/BA 计时 → audit。
-Python 路径还运行公开接口对比。格式化结果只回收声明的 owned paths；本地源中途发生变化
-会拒绝覆盖。退出失败不会形成有效测量决策，检查 validation.log 后再处理。
+The trial saves baseline files/patch, synchronizes, profiles the baseline, runs
+fmt/Clippy/Rust tests, checks the immutable oracle, builds the Python extension,
+runs Python tests, profiles the candidate, measures AB/BA, and writes an audit.
+Python trials additionally compare public interfaces. Formatting results return
+only for owned paths; concurrent local source edits prevent overwrite.
 
-`--retry` 用于未形成决策的中断/编译修复，旧日志保存在 attempts/。完成决策的 label
-不能重用。独立确认用新 label，保留原决定及其证据；不得反复跑到出现漂亮数字。
+A failed command does not create a valid measured decision. Read validation.log.
+Use --retry for interrupted or compile-repair attempts without a decision;
+previous logs survive in attempts/. Completed labels cannot be reused. Independent
+confirmation uses a new label and retains the original result. Do not keep
+rerunning until a favorable number appears.
 
-## 6. 阅读结果，不把 performance_gate 当完整审批
+## 6. Review more than the machine gate
 
-本地 `.artifacts/rsi/trials/<label>/` 里有 measurement.json、audit.json、验证日志、
-前后 profile、candidate.patch 和 before 快照。逐项检查：
+Inspect measurement.json, audit.json, validation.log, profiles, candidate.patch,
+and before/ under `.artifacts/rsi/trials/<label>/`:
 
-- stdout 确实是成功计算，case 集合一致、每侧样本数足够；
-- 每块几何平均降低 >=8%，每个 case 中位数退化 <=3%；
-- 复杂度/内存/输出大小合适，未改变接口或数据语义；
-- 哪个瓶颈实际减少，是否只是布局/噪声偶然变化；
-- 正确性覆盖触及的公共行为，浮点变化有事先指定的容差。
+- Computation succeeded, case sets match, and each side has enough samples.
+- Every aggregate block clears 8%; each case's paired median stays above -3%.
+- Complexity, memory, and output size are acceptable without semantic changes.
+- Profiling explains reduced work rather than an unexplained layout/noise effect.
+- Tests cover touched public behavior; floating-point tolerances were chosen beforehand.
 
-机器 gate 主要处理数值门槛；人或代理仍需 review diff、热点解释和复杂度。
+performance_gate is a numeric gate, not complete approval. A human or agent still
+reviews the diff, correctness scope, hotspot explanation, and maintenance cost.
 
-## 7. 接受或拒绝
+## 7. Accept or reject
 
-在本地记录决定，填写真实说明，不能照抄占位解释：
+Write a factual decision, replacing the explanatory placeholders:
 
 ```bash
 python3 scripts/rsi_decide.py next-align-01 \
@@ -133,11 +158,12 @@ python3 scripts/rsi_decide.py next-align-01 \
   --reason 'Describe why all gates passed' --accept
 ```
 
-拒绝时去掉 `--accept` 并改 reason。接受会写 results/data 和 commit-message.txt，但不会
-自动 commit；拒绝会归档 patch 并恢复 owned paths 的基线内容。决定前会核对 HEAD、当前
-patch 和 before 快照；有新改动时拒绝执行，避免误覆盖。已有 decision 文件不允许覆盖。
+For rejection, omit --accept and explain why. Acceptance writes results/data and
+a commit-message file but does not commit. Rejection archives the patch and
+restores owned paths. The decision tool checks current HEAD, patch, series, and
+baseline snapshot; changed work or an existing decision fails closed.
 
-接受后只暂存本轮文件与证据，查看 staged diff，再使用生成的提交说明：
+Stage only this candidate and its evidence, review, then commit:
 
 ```bash
 git add crates/core/src/time.rs \
@@ -147,47 +173,51 @@ git diff --cached --stat
 git commit -F .artifacts/rsi/trials/next-align-01/commit-message.txt
 ```
 
-接受后，在 reference-linux 将本轮二进制提升为 accepted，Python 缓存也更新为本轮通过验证的扩展
-和 wrapper；只有在两端源码仍与该候选一致时才执行：
+After acceptance, promote the validated candidate in the execution checkout,
+only after confirming that both source trees still match that candidate:
 
 ```bash
 cp .artifacts/rsi/bin/next-align-01 .artifacts/rsi/bin/accepted
 cp python/mcap_ops/__init__.py python/mcap_ops/_native.abi3.so .artifacts/rsi/python/accepted/mcap_ops/
 ```
 
-拒绝不提升缓存；本地恢复后重新同步，下一轮必须基于最近接受状态。拒绝记录可作为独立
-`docs(perf)` 提交保存，不伪装成性能成功提交。
+Do not promote rejected binaries. Synchronize restored source before the next
+trial. Rejected records may be committed separately as documentation, never as
+successful performance changes.
 
-## 8. 归档证据与最终集成
+## 8. Archive and integrate
 
-本地 trial 完整存在后：
+Once the full trial is available locally:
 
 ```bash
 python3 scripts/archive_extension_evidence.py --series next-20261027
 ```
 
-它归档验证文本、profile 摘要与哈希，不把巨大的原始 Callgrind 文件提交 Git。
-新 series 的 RESULTS/LESSONS 按模板记录；历史 report_* 脚本有固定 baseline/覆盖数量，
-不能拿来“生成”新 campaign 的完整通过报告。
+This preserves validation text, profile summaries, hashes, and relative artifact
+locations, not huge raw profiles. Write the new series' results and lessons from
+its records. Historical report scripts have fixed baselines/counts; they are not
+new-campaign completion generators.
 
 ```mermaid
 flowchart LR
-    A["逐轮接受版本"] --> B["重建 campaign 初始实现<br/>使用最终相同 harness"]
-    B --> C["全套 native + Python 用例"]
-    C --> D["真实 release wheel 安装验证"]
-    D --> E{"存在退化？"}
-    E -->|"是"| F["保留证据 / 修正或撤销 / 重新验收"]
+    A["Individually accepted changes"] --> B["Rebuild campaign baseline<br/>Same final harness"]
+    B --> C["Full native + Python comparison"]
+    C --> D["Install and validate actual release wheel"]
+    D --> E{"Regression found?"}
+    E -->|"Yes"| F["Preserve evidence / Fix or withdraw / Requalify"]
     F --> C
-    E -->|"否"| G["记录源/二进制/wheel 哈希<br/>提交并同步发布"]
+    E -->|"No"| G["Record hashes<br/>Commit / Synchronize / Publish"]
 ```
 
-运行格式、Clippy、Rust/Python 公共测试、oracle、完整 before/after 和 wheel 安装验证。
-profile 构建与正式 wheel 的 debug 选项可能不同：两个计时对象须配置一致，最终必须
-计时与交付一致的 release 扩展，并记录 SHA-256；不要比较 debug baseline 和 release candidate。
+Repeat formatting, Clippy, public tests, oracle, full comparison, and installed-wheel
+checks. Profiling binaries and final wheels can use different debug settings;
+both timed sides must match. Time the extension actually delivered, retaining
+source/binary/wheel SHA-256.
 
-原 300 轮的 `verify_per_operator.sh` 是特定历史 campaign 的收尾脚本，会写固定报告；
-新 campaign 应复用其中检查命令，并改成自己的 baseline 和输出路径，而不是覆盖旧目录。
+The historical verification shell scripts target fixed campaigns and write their
+reports. New campaigns reuse the checks with new baseline/output paths, not old
+report destinations. Keep isolated acceptance and final delivery claims separate.
 
-无新数据/环境变化时，不无限扩大重复测试。通过后本地 commit，运行
-`python3 scripts/publish_remote.py` 验证两端哈希与 fast-forward 历史，再正常 `git push`。
-Git 分叉或意外改动必须停下调查，不 force push。单项通过与整版交付通过分别报告。
+With clean commits, run publish_remote.py to verify file hashes and fast-forward
+history, then push normally. Stop for divergent history or unexpected edits;
+never force through them. Avoid endless retesting without changed evidence.

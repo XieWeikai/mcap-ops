@@ -1,42 +1,66 @@
-# 贡献、验证与发布
+# Contributing, Validation, and Publication
 
-[文档导航](README.md) · [仓库工作规则](../AGENTS.md) · [RSI](../RSI/README.md)
+**Language: English | [Chinese](zh/contributing.md)**
 
-## 日常路径
+[Documentation](README.md) · [Repository rules](../AGENTS.md) · [RSI](../RSI/README.md)
+
+## Separate authoring from execution
 
 ```mermaid
 flowchart LR
-    A["本地编辑 / 检查 diff"] --> B["同步相对路径源码"]
-    B --> C["reference-linux 构建 / 测试"]
-    C --> D["本地 commit"]
-    D --> E["Git bundle + 全文件哈希"]
-    E --> F["reference-linux fast-forward"]
-    F --> G["GitHub push"]
+    A["Author and review locally"] --> B["Synchronize relative source paths"]
+    B --> C["Linux execution environment<br/>Build and test"]
+    C --> D["Commit locally"]
+    D --> E["Git bundle + tracked-file hashes"]
+    E --> F["Verified remote fast-forward"]
+    F --> G["Push reviewed history"]
 ```
 
-本地：`.`。执行端：SSH `reference-linux`，
-`.`。外部贡献者若无法访问 reference-linux，应提供变更供维护者在
-该环境验证，不能将未经验证的平台声称为受支持环境。
+Use an isolated Linux x86-64 execution checkout with project-local Rust/Python
+tooling. The historical reference environment used 32 logical CPU threads,
+a fixed performance-core affinity, Rust 1.90.0, and a release build. See the
+[performance guide](performance.md) for the full reproducibility conditions.
+A different environment needs its own validation, not a claim of identical speed.
 
-开始先核对两端 HEAD 与脏文件。不要覆盖用户修改、远端分叉或其他任务正在使用的工作树。
-本地同步工具会更新同名文件，HEAD 检查不能替代手工检查远端工作树。
+Do not publish deployment aliases, account names, absolute workspace paths, or
+boot identifiers. Supply execution coordinates through environment variables or
+a Git-ignored `.mcap-ops.local.json` file:
 
-## 本地编辑与同步
+```json
+{
+  "host": "your-ssh-alias",
+  "destination": "/absolute/path/to/mcap-ops"
+}
+```
+
+These are placeholders, not a working deployment. Alternatively set
+MCAP_OPS_TEST_HOST and MCAP_OPS_TEST_ROOT. Explicit sync CLI options take precedence,
+then environment variables, then local configuration. The project path must be
+absolute and contain no spaces or parent traversal. Never put credentials in
+this file; use normal SSH authentication.
+
+Before each sync, compare HEAD and worktree changes on both sides. Do not overwrite
+other tasks' edits or divergent history. A matching HEAD alone does not prove
+the remote worktree is clean.
+
+## Synchronize reviewed sources
 
 ```bash
 git status --short
-ssh reference-linux 'cd . && git status --short && git log -1 --oneline'
 python3 scripts/sync_sources.py
 ```
 
-该脚本同步 tracked 和非忽略的新文件，按相对路径保留目录。不复制 `.git`，不删除远端
-文件，不自动运行测试。新增删除操作应单独审查；发布工具不会替你清理任意旧源码。
-Xpark、`.tools`、`.venv`、`.artifacts` 和 wheel 都不应加入 Git。
+The script preserves repository-relative paths and includes tracked and
+nonignored new files. It does not copy .git, delete files, advance Git history,
+or run tests. It updates same-name source files, so inspect the execution
+checkout first. Never add third-party showcase material, tooling, environments,
+private configuration, or binary artifacts to Git.
 
-## reference-linux 的项目本地工具
+## Project-local tools
+
+At the execution checkout's root:
 
 ```bash
-cd .
 export CARGO_HOME="$PWD/.tools/cargo"
 export RUSTUP_HOME="$PWD/.tools/rustup"
 export PATH="$CARGO_HOME/bin:$PATH"
@@ -45,8 +69,9 @@ rustc --version
 .venv/bin/python --version
 ```
 
-工具已在该项目安装；新环境按 getting-started 准备，不借用其他训练/机器人项目环境。
-常规验证：
+This assumes the toolchain has been installed into those locations. For a new
+environment, follow [getting started](getting-started.md); do not borrow another
+training or robot-control project's environment.
 
 ```bash
 cargo fmt --all --check
@@ -58,44 +83,54 @@ cargo run --locked --release -p mcap-ops-core --example quality_pipeline
 .venv/bin/python examples/quickstart.py
 ```
 
-需要差分/profiling/benchmark 时按 [RSI](../RSI/workflow.md)，不要无理由重跑几百个历史候选。
-普通 CI 与共享机器不用于性能接受计时。现有 workflow 是可审计 runbook + CLI，尚未部署
-GitHub Actions 或 self-hosted runner，也不要求配置 GitHub SSH secrets。
+For differential checking, profiling, and benchmarks, follow [RSI](../RSI/workflow.md).
+Do not rerun hundreds of historical candidates for an ordinary documentation
+change. Shared CI is not a controlled performance-acceptance environment.
+The workflow consists of runbooks and CLI tools; no GitHub Actions/self-hosted
+runner or SSH secret deployment is implied.
 
-## 改动覆盖面
+## Scope every change
 
-- 新算子：公共类型/函数、边界错误、生成 fixture、文档中的单位/shape/因果性。
-- Python 导出：PyO3 注册、wrapper、`__all__`、返回类型、公共测试、API 文档。
-- Decoder：schema/clock/field 规则、未知编码失败、最大解码样本、原始顺序。
-- 性能优化：一候选一假设、完整 before/after、接受单独 commit、失败也归档。
-- 文档/示例：检查相对链接、SVG、Mermaid，并在 reference-linux 运行可执行片段。
+- Operators: public types, error boundaries, generated fixtures, units, shapes, causality.
+- Python exports: bindings, wrapper, __all__, return types, public tests, API documentation.
+- Decoders: schemas, clocks, fields, unknown-encoding failures, limits, original ordering.
+- Optimizations: one hypothesis, comparable artifacts, separate accepted commits, rejected evidence.
+- Documentation: equivalent English/Chinese pages, working links/diagrams, executable snippets.
 
-RSI CLI 的防覆盖测试位于 `tests/test_rsi_workflow.py`，用临时 Git 仓库验证：新 series、
-接受不自动 commit、拒绝只恢复 owned paths、旧决定不可覆盖、stale 候选拒绝恢复、
-非法命名和不足配对块数在执行前失败。
+Workflow safety tests use temporary Git repositories. They cover separate
+series, decision preservation, stale-candidate rejection, owned-path restore,
+acceptance without implicit commit, invalid names, and minimum paired blocks.
 
-## Commit 与同步远端历史
+## Commit and publish the execution checkout
 
-审查后只提交相关路径，避免 `git add .` 带入无关内容。性能 commit 用 RSI 生成说明；
-文档、验证脚手架和正确性修复独立描述。
+Stage only related files and inspect the diff. Keep performance commits separate
+from documentation, scaffolding, and correctness fixes.
 
 ```bash
 git diff --check
 git diff --cached
-# git commit ... 完成后，工作树应干净。
+# Commit the reviewed files; the worktree must then be clean.
 python3 scripts/publish_remote.py
 ```
 
-publish_remote 创建 Git bundle，通过 SSH 验证所有 tracked 文件哈希、目标 tree、无未知
-untracked 文件以及 fast-forward 关系，成功后写 `.artifacts/rsi/sync-receipt.json`。
-不同历史会拒绝推进，不能用 force/reset 绕过。随后正常推送已授权的 GitHub remote：
+The publication tool transfers a Git bundle, validates tracked-file hashes and
+tree identity, checks unexpected untracked files, and requires a fast-forward.
+Committed deletions are moved into a local artifact backup only when the remote
+file still matches its prior committed bytes. Unexpected edits fail closed.
+A local receipt records the verified target; it is not published.
+
+Never bypass divergent history with force/reset. After successful verification,
+push the authorized remote normally:
 
 ```bash
 git push origin main
 ```
 
-## 文档和分发边界
+## Documentation and distribution
 
-README 的 SVG 为仓库自有资产，Mermaid 在支持的平台渲染，不额外引入文档站构建依赖。
-性能原始证据含开发主机路径/版本，是可审计记录；不上传凭据、真实数据或第三方演示包。
-PyPI/crates.io/GitHub Release 发布是独立操作，单次 git push 不等于安装包已发布。
+README graphics are checked-in SVG, with Mermaid diagrams in the guides. There
+is no extra documentation-site build dependency. Maintain each English/Chinese
+pair together; shared raw measurements remain a single evidence source.
+Do not upload credentials, recordings, or third-party demonstration packages.
+Registry packages and release attachments are separate deliverables: a Git push
+does not publish an installable package.

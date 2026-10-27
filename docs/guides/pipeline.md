@@ -1,40 +1,44 @@
-# 多路信号到模型时间步
+# From Multiple Signals to Model Steps
 
-[文档导航](../README.md) · [数据契约](../concepts.md) · [Python API](../python.md)
+**Language: English | [Chinese](../zh/guides/pipeline.md)**
 
-## 先定义信号含义，再选择方法
+[Documentation](../README.md) · [Contracts](../concepts.md) · [Python API](../python.md)
 
-| 信号 | 一种可用处理方式 | 需要明确的政策 |
+## Choose semantics before a sampling method
+
+| Signal | Possible processing | Explicit policy |
 | --- | --- | --- |
-| 连续位置 | linear；在线观测也可 previous | 单位、最大支撑间隔、是否允许未来 |
-| 命令/模式 | previous | 有效期；超龄是否使样本失效 |
-| 四元数 | slerp | xyzw、模长要求、坐标系 |
-| 力/IMU | 高频历史窗口，或先低通再降采样 | 带宽、延迟、是否要保留冲击 |
-| 图像帧 | align_timestamps 返回帧索引 | 最大帧龄；失效不索引 -1 |
-| 事件 | 保留事件时间，由上游聚合 | 事件不一定适合连续插值 |
+| Continuous position | linear; previous for causal observations | Units, support gap, future permission |
+| Commands/modes | previous | Validity age and treatment of stale commands |
+| Quaternions | slerp | xyzw, norm requirements, frame |
+| Force/IMU | High-frequency history or lowpass then downsample | Bandwidth, latency, preservation of impacts |
+| Images | align_timestamps selects frame indices | Maximum frame age; never index invalid -1 |
+| Events | Preserve event time and aggregate upstream | Continuous interpolation may be inappropriate |
 
-上述是组合方式，不是库隐式执行的规则。所有信号进入同步前应已位于可比较的时钟域；
-时间戳数值接近不等于同一个时钟。当前 map_clock 仅 Rust 可用，并且修正参数须显式提供。
+These are composition choices, not hidden library policy. Signals must first
+share comparable clocks. Similar numbers do not establish a common clock.
+map_clock is currently Rust-only and requires explicit correction parameters.
 
 ```mermaid
 flowchart TB
-    P["位置 100 Hz"] --> Q["原始顺序质检"]
-    W["力 200 Hz"] --> Q
-    C["相机约 30 Hz"] --> Q
-    Q --> POLICY["上游审核异常、分段、解释时钟"]
-    POLICY --> GRID["目标时间轴 50 Hz"]
-    GRID --> POS["位置采样 (T,D)"]
-    GRID --> FORCE["力历史窗口 (T,4,D)"]
-    GRID --> IMAGE["匹配历史帧索引 (T,)"]
-    POS --> MASK["组合必需信号的有效性"]
+    P["Position 100 Hz"] --> Q["Inspect original ordering"]
+    W["Force 200 Hz"] --> Q
+    C["Camera about 30 Hz"] --> Q
+    Q --> POLICY["Upstream review / Segmentation / Clock interpretation"]
+    POLICY --> GRID["Target timeline 50 Hz"]
+    GRID --> POS["Position (T,D)"]
+    GRID --> FORCE["Force history (T,4,D)"]
+    GRID --> IMAGE["Past-frame indices (T,)"]
+    POS --> MASK["Combine required-signal validity"]
     FORCE --> MASK
     IMAGE --> MASK
-    MASK --> OUT["保留时间轴和 mask<br/>上游写入 episode"]
+    MASK --> OUT["Preserve timestamps and masks<br/>Upstream writes episodes"]
 ```
 
-## 可运行的最小多信号例子
+## Runnable example
 
-以下都是生成数组。真实场景把它们替换为解码数据，不要改变单位和维度契约。
+These arrays are generated. Replace them with decoded observations without
+changing their unit and shape contracts.
 
 ```python
 import numpy as np
@@ -66,30 +70,37 @@ assert force["values"].shape == (5, 4, 6)
 assert step_valid.all()
 ```
 
-相机帧是索引匹配，不是把压缩图片当作 f64 做插值。先检查 frames.valid，再按 indices
-取帧并处理图像；同一帧可能被多个目标时间步使用。
+Image matching selects indices, not interpolated compressed bytes. Check
+frames.valid before indexing. Several model steps may reuse one frame.
 
-## 质量筛选
+## Quality selection
 
-Python 示例可以读取 report 作业务决策，但当前没有 Python gate/IntervalSet。
-需要完整区间运算时用 Rust 接口，或由上游实现明确的策略。特别注意 issues_truncated，
-不能仅凭已截断明细推断所有坏点。
+Python can use reports for business decisions, but gate/IntervalSet are
+currently Rust-only. Use Rust or an explicit upstream policy for interval
+operations. Truncated issue detail is not a complete bad-sample mask.
 
-异常不应默认消除：接触、冲击、长时间静止可能是示教目标。业务策略应说明哪些 code
-拒绝 episode、哪些只供复核，以及坏区间是否扩展到历史窗口中心。
+Impacts, contact, and long periods of stillness can be desired behavior. Define
+which codes reject an episode, which require review, and whether bad intervals
+invalidate history-window centers.
 
-不要直接 `values[step_valid]` 后重建一条没有断点的时间轴；可保持 mask，或按连续有效段
-切分 episode，并保留原始时间和来源。
+Do not filter values by step_valid and fabricate a continuous timeline.
+Preserve the mask or split into contiguous valid episodes with original time
+and provenance.
 
-## 降采样与延迟
+## Downsampling and delay
 
-resample 本身不抗混叠。对规则高频数据先 `lowpass_taps` + `fir`，在有效支持段内降采样。
-例如 200 Hz 降到 50 Hz，低通 cutoff 需低于新 Nyquist 25 Hz，并结合实际信号频带选择。
-31 taps 的因果对称 FIR 延迟为 15 个输入步，即 75 ms；centered 版本需要前视 75 ms。
-训练观测是否允许这种前视，必须与部署一致，不能仅因为输出时间戳相同就认定同步。
+resample is not an anti-aliasing filter. For regular high-rate signals, use
+lowpass_taps and fir before downsampling supported segments. When converting
+200 Hz to 50 Hz, choose a cutoff below the new 25 Hz Nyquist limit, based on the
+signal bandwidth. A symmetric causal 31-tap FIR delays the signal by 15 input
+steps, or 75 ms; centered mode instead needs 75 ms of lookahead.
 
-## 上游需要持久化什么
+Training features must obey deployment causality. Equal output timestamps do
+not automatically compensate for processing delay.
 
-建议将 source 文件身份、topic/字段/单位、时钟来源与变换参数、算子版本与配置、
-原始/目标时间轴、valid/status、source_left/right/alpha、分段策略一起存储。
-库不提供统一 dataset writer；这些元信息由 LeTools/providers 的输出格式承载。
+## Upstream persistence
+
+Retain source identity, topics/fields/units, clock source and mapping, operator
+version/configuration, original and target timestamps, valid/status,
+source_left/right/alpha, and segmentation policy. The library does not include
+a dataset writer; the consuming pipeline owns serialization.

@@ -1,4 +1,4 @@
-"""CLI safety checks run only on reference-linux, using isolated temporary Git repositories."""
+"""CLI safety checks run in the configured execution environment, using isolated temporary Git repositories."""
 import json
 from pathlib import Path
 import shutil

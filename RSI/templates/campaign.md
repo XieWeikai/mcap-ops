@@ -1,5 +1,7 @@
 # Campaign: <unique-series>
 
+**Language: English | [Chinese](../zh/templates/campaign.md)**
+
 Status: planned | running | completed | stopped
 
 ## Frozen scope
@@ -14,7 +16,7 @@ Status: planned | running | completed | stopped
 
 ## Environment and workloads
 
-- Host / CPU affinity / OS / boot_id:
+- CPU model/topology / affinity / OS / opaque run ID:
 - Rust / Cargo.lock hash / build flags:
 - Python / NumPy / FFmpeg / profile tools:
 - Benchmark harness commit / fixture hashes and seeds:

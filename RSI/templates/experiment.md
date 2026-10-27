@@ -1,5 +1,7 @@
 # Experiment: <globally-unique-label>
 
+**Language: English | [Chinese](../zh/templates/experiment.md)**
+
 Series / operator / round:
 Status: planned | validation-failed | measured-rejected | measured-accepted | withdrawn
 Baseline commit / candidate patch hash / owned paths:
@@ -25,7 +27,7 @@ Baseline commit / candidate patch hash / owned paths:
 
 ## Measurement
 
-- Host / boot_id / CPU / toolchain / flags:
+- CPU / OS / opaque run ID / toolchain / flags:
 - Before/after binary hashes:
 - Paired blocks / calibrated samples / timing boundary:
 

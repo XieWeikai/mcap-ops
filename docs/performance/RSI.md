@@ -1,7 +1,7 @@
 # RSI protocol
 
 Reference implementation: `66248dacb608859d2cbd0f9f27227c65013a8027`.
-All execution is on reference-linux. Input recordings are generated, not user data.
+All execution is on Linux execution environment. Input recordings are generated, not user data.
 
 ## Coverage
 

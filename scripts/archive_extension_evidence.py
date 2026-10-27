@@ -37,7 +37,7 @@ def main():
             if path.suffix not in {".prof",".callgrind"}:continue
             item={"file":path.name,"bytes":path.stat().st_size,
                   "sha256":hashlib.sha256(path.read_bytes()).hexdigest(),
-                  "remote_path":f"./.artifacts/rsi/trials/{label}/{path.name}"}
+                  "remote_path":f".artifacts/rsi/trials/{label}/{path.name}"}
             if path.suffix==".callgrind":
                 match=re.search(r"(?m)^summary: (\d+)",path.read_text())
                 if match:item["instruction_events"]=int(match.group(1))

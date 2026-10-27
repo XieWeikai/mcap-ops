@@ -1,4 +1,4 @@
-All final checks passed on reference-linux: rustfmt, Clippy, 36 Rust tests, 180 randomized
+All final checks passed on Linux execution environment: rustfmt, Clippy, 36 Rust tests, 180 randomized
 core scenarios, 13 image fixtures, two MCAP fixtures, 3630 clock edge cases,
 168 grid cases, 75 Hampel cases, 50 SLERP cases, five Python smoke tests and
 236 public-interface comparisons. The installed release wheel separately passed

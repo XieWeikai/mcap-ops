@@ -63,7 +63,7 @@ def main():
         "complexity_review": args.complexity,
         "reason": args.reason,
         "case_results": measurement["summary"],
-        "profile_remote_path": f"./.artifacts/rsi/trials/{args.label}",
+        "profile_remote_path": f".artifacts/rsi/trials/{args.label}",
         "validation_sha256": hashlib.sha256((trial / "validation.log").read_bytes()).hexdigest(),
     }
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -81,7 +81,8 @@ def main():
             f"Change: {args.method}",
             f"Complexity: {args.complexity}",
             "",
-            "reference-linux / i9-14900K / CPU 12 / Rust 1.90 / release, unchanged build flags.",
+            f"Execution environment: {measurement.get('platform', 'see raw measurements')}; "
+            f"pinned logical CPU {measurement.get('cpu', 'see raw measurements')}; unchanged build flags.",
             f"{len(measurement['runs'])} paired AB/BA blocks; seven calibrated samples per side.",
             f"Geometric paired latency reduction: {audit['geomean_latency_reduction_pct']:.2f}%; "
             f"worst block: {audit['worst_block_reduction_pct']:.2f}%.",

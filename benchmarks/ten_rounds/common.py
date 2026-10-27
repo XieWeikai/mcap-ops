@@ -7,8 +7,9 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'scripts'))
 from rsi_batch import function_span
+from history_revision import resolve_revision
 
-BASE='9de19ead5df7444a9074c71028129b88970ba6ba'
+BASE=resolve_revision('9de19ead5df7444a9074c71028129b88970ba6ba')
 TIME='crates/core/src/time.rs'
 FILTER='crates/core/src/filter.rs'
 QUALITY='crates/core/src/quality.rs'

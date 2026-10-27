@@ -2,7 +2,7 @@
 
 Completed **20/20**: **7 accepted**, **13 rejected**. The original 60 decisions are preserved, for 80 total experiments.
 
-Baseline: `bc58f81bb2c3dc43676450ee6685d8015fb99081`. All execution on reference-linux, i9-14900K, CPU 12, Rust 1.90, release with unchanged flags. Every trial used generated inputs, before/after profiles, four alternating AB/BA blocks, and seven calibrated samples per side.
+Baseline: `bc58f81bb2c3dc43676450ee6685d8015fb99081`. All execution on Linux execution environment, i9-14900K, CPU 12, Rust 1.90, release with unchanged flags. Every trial used generated inputs, before/after profiles, four alternating AB/BA blocks, and seven calibrated samples per side.
 
 Acceptance: every block's geometric-mean latency reduction >=8%, no case's median regression >3%, correctness passed, and bounded implementation complexity. Percentages below compare with the previously accepted state, not the initial repo.
 
@@ -79,7 +79,7 @@ Each candidate passes rustfmt, Clippy, 36 Rust tests, the immutable-reference di
 
 The unconditional FIR channel-plane candidate was withdrawn after additional workloads revealed regressions, even though its original fixed-case gate passed. Its initial acceptance and counterevidence remain in `history/`. The guarded follow-up must pass the extra sensitivity gate; channel planes, when used, need an additional 8*N*D bytes of temporary memory. Sorted MAD adds a small private merge helper and preserves window boundaries, exact medians, issue ordering and overflow behavior. No unsafe buffers, reduced precision, discarded checks, source modifications or external services are involved.
 
-Raw timing samples live in `data/`; rejected patches in `rejected/`. Complete validation logs and before/after profiles live on reference-linux at `.artifacts/rsi/trials/extension-*`. This series uses Callgrind/cProfile because perf_event_paranoid remains 4. Profiler times are excluded from benchmark claims.
+Raw timing samples live in `data/`; rejected patches in `rejected/`. Complete validation logs and before/after profiles live on Linux execution environment at `.artifacts/rsi/trials/extension-*`. This series uses Callgrind/cProfile because perf_event_paranoid remains 4. Profiler times are excluded from benchmark claims.
 
 ## Final native comparison
 
@@ -176,7 +176,7 @@ Extension baseline versus the complete accepted extension; negative values are r
 
 ## Final verification notes
 
-All final checks passed on reference-linux: rustfmt, Clippy, 36 Rust tests, 180 randomized
+All final checks passed on Linux execution environment: rustfmt, Clippy, 36 Rust tests, 180 randomized
 core scenarios, 13 image fixtures, two MCAP fixtures, 3630 clock edge cases,
 168 grid cases, 75 Hampel cases, 50 SLERP cases, five Python smoke tests and
 236 public-interface comparisons. The installed release wheel separately passed

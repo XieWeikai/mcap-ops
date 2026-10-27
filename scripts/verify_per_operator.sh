@@ -1,7 +1,7 @@
 #!/bin/sh
-# Run on reference-linux after all 300 decisions and the final source review.
+# Run in the configured Linux test environment after all 300 decisions and the final source review.
 set -eu
-cd .
+cd -- "$(dirname -- "$0")/.."
 MCAP_TASK_ROOT="$PWD"
 export CARGO_HOME="$PWD/.tools/cargo" RUSTUP_HOME="$PWD/.tools/rustup"
 export PATH="$CARGO_HOME/bin:$PATH" VIRTUAL_ENV="$PWD/.venv"
@@ -44,14 +44,13 @@ import hashlib,json,pathlib,platform,subprocess
 import numpy
 root=pathlib.Path.cwd();wheel=next((root/'.artifacts/rsi/per-op10/wheel').glob('*.whl'))
 paths=subprocess.check_output(['git','ls-files','crates/core/src','crates/io/src','crates/python/src','python/mcap_ops'],text=True).splitlines()
-report={'baseline':'9de19ead5df7444a9074c71028129b88970ba6ba','host':platform.node(),'platform':platform.platform(),
+report={'baseline':'9de19ead5df7444a9074c71028129b88970ba6ba','environment':'Linux x86-64 reference environment','platform':platform.platform(),
  'python':platform.python_version(),'numpy':numpy.__version__,'rustc':subprocess.check_output(['rustc','--version'],text=True).strip(),
- 'boot_id':pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
  'rust_tests':36,'python_tests':5,'public_interface_comparisons':291,
  'reference_oracle':'180 randomized core scenarios, original image/MCAP fixtures, clock/grid/Hampel/SLERP edges, coefficient extremes, gapped FIR and large images',
  'native_profile':'release, thin LTO, one codegen unit, debug line tables on both sides',
  'python_profile':'release wheels, thin LTO, one codegen unit, debug disabled on both sides',
- 'wheel':{'path':str(wheel),'bytes':wheel.stat().st_size,'sha256':hashlib.sha256(wheel.read_bytes()).hexdigest()},
+ 'wheel':{'path':str(wheel.relative_to(root)),'bytes':wheel.stat().st_size,'sha256':hashlib.sha256(wheel.read_bytes()).hexdigest()},
  'source_sha256':{name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in paths}}
 (root/'docs/performance/per-op10/final/verification.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))

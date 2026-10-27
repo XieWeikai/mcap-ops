@@ -4,9 +4,10 @@ from pathlib import Path
 import argparse
 import re
 import subprocess
+from history_revision import resolve_revision
 
 ROOT=Path(__file__).resolve().parents[1]
-BASE="bc58f81bb2c3dc43676450ee6685d8015fb99081"
+BASE=resolve_revision("bc58f81bb2c3dc43676450ee6685d8015fb99081")
 OUT=ROOT/".artifacts/rsi/extension/sensitivity"
 
 

@@ -2,7 +2,7 @@
 
 Completed: **30 implementation units x 2 rounds = 60 final decisions**. Accepted 27; rejected 33.
 
-Reference: `66248dacb608859d2cbd0f9f27227c65013a8027`. All builds, profiles, tests and timing runs execute on reference-linux (i9-14900K, CPU 12 affinity, Rust 1.90, release).
+Reference: `66248dacb608859d2cbd0f9f27227c65013a8027`. All builds, profiles, tests and timing runs execute on Linux execution environment (i9-14900K, CPU 12 affinity, Rust 1.90, release).
 
 Production source changes: 10 files, 358 added lines and 178 removed lines (net +180). Runtime dependencies and public operator signatures are unchanged.
 
@@ -49,7 +49,7 @@ Uniform-grid and wide-Hampel candidates with contradictory initial timing receiv
 - `data/`: all paired samples and calibration counts; accepted commits contain their corresponding records.
 - `rejected/`: candidate patches, including historical rejections that were later confirmed.
 - `history/`: superseded unstable observations, kept without altering the raw data.
-- reference-linux `.artifacts/rsi/trials/`: complete validation logs and Callgrind/cProfile output.
+- Linux execution environment `.artifacts/rsi/trials/`: complete validation logs and Callgrind/cProfile output.
 
 ## Correctness
 

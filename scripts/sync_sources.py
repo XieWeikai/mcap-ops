@@ -10,17 +10,23 @@ import subprocess
 import tempfile
 import json
 import shlex
+from remote_config import execution_target
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--host", default="reference-linux")
-    parser.add_argument("--destination", default=".")
+    parser.add_argument("--host")
+    parser.add_argument("--destination")
     args = parser.parse_args()
+    args.host, args.destination = execution_target(args.host, args.destination)
     root = Path(__file__).resolve().parents[1]
     receipt = root / '.artifacts/rsi/sync-receipt.json'
-    if args.host == 'reference-linux' and args.destination == '.' and receipt.exists():
-        expected = json.loads(receipt.read_text())['head']
+    if receipt.exists():
+        previous = json.loads(receipt.read_text())
+        target = {'host': args.host, 'destination': args.destination}
+        if previous.get('target', target) != target:
+            raise RuntimeError('execution target differs from the last publication receipt; inspect it first')
+        expected = previous['head']
         actual = subprocess.check_output(['ssh', args.host, shlex.join(['git', '-C', args.destination, 'rev-parse', 'HEAD'])], text=True).strip()
         if actual != expected:
             raise RuntimeError('remote HEAD changed since the last verified publication; inspect it before synchronizing')

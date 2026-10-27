@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate, profile and measure one candidate on reference-linux. Never commits code."""
+"""Validate, profile and measure a candidate in the configured execution environment."""
 import argparse
 import hashlib
 import json
@@ -10,9 +10,9 @@ import shlex
 import statistics
 import subprocess
 import shutil
+from remote_config import execution_target
 
 ROOT = Path(__file__).resolve().parents[1]
-REMOTE = "."
 
 
 def main():
@@ -31,6 +31,7 @@ def main():
         parser.error("label and series must start with a lowercase letter/digit and use only a-z0-9_.-")
     if args.blocks < 4:
         parser.error("RSI decisions require at least four paired blocks")
+    host, remote = execution_target()
     report_root = ROOT / "docs/performance"
     if args.series != "initial":
         report_root /= args.series
@@ -58,7 +59,7 @@ def main():
     label = shlex.quote(args.label)
     cases = shlex.quote(args.cases)
     setup = f"""set -eu
-cd {REMOTE}
+cd {shlex.quote(remote)}
 export CARGO_HOME="$PWD/.tools/cargo" RUSTUP_HOME="$PWD/.tools/rustup"
 export PATH="$CARGO_HOME/bin:$PATH" VIRTUAL_ENV="$PWD/.venv"
 export CARGO_PROFILE_RELEASE_DEBUG=1 CARGO_BUILD_JOBS=12
@@ -106,16 +107,16 @@ CARGO_TARGET_DIR="$PWD/target/reference" cargo build --offline --release --manif
 python3 scripts/rsi_measure.py --before .artifacts/rsi/extension/sensitivity/before --after .artifacts/rsi/extension/sensitivity/after --output .artifacts/rsi/trials/{label}/sensitivity.json
 """
     with (destination / "validation.log").open("w") as log:
-        result = subprocess.run(["ssh", "reference-linux", setup], stdout=log, stderr=subprocess.STDOUT)
+        result = subprocess.run(["ssh", host, setup], stdout=log, stderr=subprocess.STDOUT)
     # Formatting is an expected output of this trial; fetch only explicitly owned paths.
     for name in args.paths:
         if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != input_hashes[name]:
             raise RuntimeError(f"local source changed during remote validation; refusing to overwrite {name}")
-        subprocess.run(["rsync", "-az", f"reference-linux:{REMOTE}/{name}", str(ROOT / name)], check=True)
+        subprocess.run(["rsync", "-az", f"{host}:{remote}/{name}", str(ROOT / name)], check=True)
     if result.returncode:
         print((destination / "validation.log").read_text()[-9000:])
         raise SystemExit(result.returncode)
-    subprocess.run(["rsync", "-az", f"reference-linux:{REMOTE}/.artifacts/rsi/trials/{args.label}/", str(destination) + "/"], check=True)
+    subprocess.run(["rsync", "-az", f"{host}:{remote}/.artifacts/rsi/trials/{args.label}/", str(destination) + "/"], check=True)
     result = json.loads((destination / "measurement.json").read_text())
     block_ratios = []
     for block in result["runs"]:

@@ -1,29 +1,33 @@
-# 快速上手
+# Getting Started
 
-[文档导航](README.md) · [Python API](python.md) · [Rust API](rust.md)
+**Language: English | [Chinese](zh/getting-started.md)**
 
-## 运行环境
+[Documentation](README.md) · [Python API](python.md) · [Rust API](rust.md)
 
-| 项目 | 要求或验证范围 |
+## Environment
+
+| Component | Requirement or verified scope |
 | --- | --- |
-| Python | 包声明 Python >=3.10；已验证 CPython 3.12.3 |
-| NumPy | 包声明 >=1.24；最近一次最终验证为 2.5.4 |
-| Rust | `rust-toolchain.toml` 固定 1.90.0 |
-| Python 构建 | maturin >=1.9,<2；常规本机 C/C++ 编译工具 |
-| MCAP / 图片 | 通过 Rust 依赖实现；无需安装 ROS |
-| 视频 | 另需调用方安装 `ffmpeg` 和 `ffprobe`，可传入绝对路径 |
-| 现有 wheel | Linux x86-64，glibc 2.39+，`cp310-abi3`；未验证 macOS/Windows |
+| Python | Package requirement: >=3.10; verified with CPython 3.12.3 |
+| NumPy | Package requirement: >=1.24; final campaign used 2.5.4 |
+| Rust | 1.90.0, pinned in `rust-toolchain.toml` |
+| Python build | maturin >=1.9,<2; a working native compiler/linker |
+| MCAP and images | Implemented through Rust dependencies; ROS is not required |
+| Video | Caller-installed `ffmpeg` and `ffprobe`; explicit executable paths are supported |
+| Verified wheel | Linux x86-64 / glibc 2.39+, `cp310-abi3`; macOS/Windows are not verified |
 
-目前没有 PyPI/crates.io 发布；不要把 `pip install mcap-ops` 当成本项目已验证的安装方式。
-下载源码时保留完整 Git 历史，RSI 的不可变 oracle 依赖旧提交。
+No package has been published to PyPI or crates.io. Do not assume a similarly
+named registry package is this implementation. Keep full Git history when
+cloning: the RSI reference oracle materializes an older commit.
 
-维护者：按 [AGENTS.md](../AGENTS.md) 在本地编辑，所有构建、测试、profiling
-在 `reference-linux:.` 执行。以下安装命令均在选定的构建主机
-仓库根目录执行，外部使用者可在自己的受控环境构建。
+Maintainers author locally and execute builds/tests in a separate configured
+Linux environment, using project-local tools. The commands below run at the
+repository root on the chosen build environment; external users can build in
+their own controlled environment.
 
-## 从源码使用 Python
+## Python from source
 
-确保 `rustc --version` 对应 1.90.0，然后执行：
+Make Rust 1.90.0 available, then run:
 
 ```bash
 python3 -m venv .venv
@@ -33,7 +37,7 @@ python3 -m venv .venv
 .venv/bin/python -m pytest -q tests
 ```
 
-预期示例输出：
+Expected example output:
 
 ```text
 linear: [0.0, 0.5, 1.0, 1.5, 2.0]
@@ -42,9 +46,10 @@ quality: [('above_range', 1)]
 history shape: (1, 3, 1)
 ```
 
-[示例源码](../examples/quickstart.py) 内置断言，不读用户数据、不启动服务。
+The [example](../examples/quickstart.py) uses generated arrays and assertions;
+it does not read recordings or start services.
 
-## 构建和安装 wheel
+## Build and install a wheel
 
 ```bash
 .venv/bin/maturin build --release --locked --out dist
@@ -53,13 +58,14 @@ python3 -m venv .tools/consumer
 .tools/consumer/bin/python examples/quickstart.py
 ```
 
-`dist/` 应仅包含本次目标平台的 wheel。构建产物的具体平台标签取决于构建环境。
-原 RSI 已验证 wheel 位于维护者的 `.artifacts/rsi/per-op10/wheel/`，不提交到 Git，
-也尚未作为 GitHub Release 附件发布。
+Keep only the intended wheel in `dist/`. The platform tag depends on the build
+environment. The historical verified wheel is retained in the artifact store
+under `.artifacts/rsi/per-op10/wheel/`; it is not tracked by Git and has not been
+published as a release attachment.
 
-## Rust 直接使用
+## Rust dependencies
 
-在消费方 `Cargo.toml` 中使用本地 path 依赖；将路径替换为实际 checkout：
+In the consuming project's `Cargo.toml`, adapt these paths to your checkout:
 
 ```toml
 [dependencies]
@@ -67,26 +73,27 @@ mcap-ops-core = { path = "../mcap-ops/crates/core" }
 mcap-ops-io = { path = "../mcap-ops/crates/io" }
 ```
 
-只处理数组时仅依赖 core。仓库内的完整示例：
+Array-only applications need only core. Run the complete repository example:
 
 ```bash
 cargo run --locked --release -p mcap-ops-core --example quality_pipeline
 ```
 
-该示例通过公共接口串联质检、门控、区间选择与重采样。
-参见 [Rust 用法](rust.md)和[示例源码](../crates/core/examples/quality_pipeline.rs)。
+It combines inspection, gating, interval selection, and resampling through
+public interfaces. See the [Rust guide](rust.md) and
+[example source](../crates/core/examples/quality_pipeline.rs).
 
-## 常见问题
+## Troubleshooting
 
-| 现象 | 原因与处理 |
+| Symptom | Check |
 | --- | --- |
-| `No module named mcap_ops._native` | Rust 扩展尚未安装，或执行的 Python 不属于安装环境 |
-| dtype 错误 | 时间使用 `np.int64`，数值使用 `np.float64`；不自动转换输入 dtype |
-| 时间数组不是连续布局 | 用 `np.ascontiguousarray(times, dtype=np.int64)`；values 可为跨步视图 |
-| 输出大多无效 | 检查 ns/ms 单位、时钟来源、`max_age_ns`/`max_gap_ns` 和未来值策略 |
-| `source timestamps must be strictly increasing` | 先质检，再由上游决定重复/倒退的处理方式 |
-| 未知 CDR/Protobuf 消息 | 通过上游 schema adapter 解码；MCAP 容器检查不等于数值解码 |
-| FFmpeg 找不到或退出失败 | 检查可执行文件和解码能力；工具不可用不是数据质量通过 |
-| 当前 wheel 无法装在 macOS | 该 wheel 是 Linux 产物；其他平台需要单独构建与验证 |
+| `No module named mcap_ops._native` | Build/install the native extension into the interpreter you are running |
+| dtype error | Use `np.int64` timestamps and `np.float64` values; input dtypes are not implicitly converted |
+| Noncontiguous timestamps | Use `np.ascontiguousarray(times, dtype=np.int64)`; values may be strided |
+| Mostly invalid outputs | Verify units, clock source, age/gap limits, and future-support policy |
+| Source timestamps must be strictly increasing | Inspect first; resolve duplicates/reversals through an explicit upstream policy |
+| Unknown CDR/Protobuf encoding | Supply a schema adapter; container inspection does not imply numeric decoding |
+| FFmpeg missing or failing | Check executable availability and decoding; an unavailable tool is not a quality pass |
+| Linux wheel rejected on macOS | Build and verify for the target platform; the existing wheel is Linux-specific |
 
-下一步：[设计多信号管线](guides/pipeline.md)。
+Next: [prepare a multi-signal pipeline](guides/pipeline.md).

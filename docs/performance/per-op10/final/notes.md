@@ -3,7 +3,7 @@ final decision count is 23 accepted and 277 rejected; earlier 60- and 20-round
 campaigns remain separate and unchanged. Compiler repairs and interrupted runs
 were preserved and resumed, not counted as additional completed rounds.
 
-Final validation passed on reference-linux: rustfmt, Clippy, 36 Rust tests, five Python smoke
+Final validation passed on Linux execution environment: rustfmt, Clippy, 36 Rust tests, five Python smoke
 tests, 291 public-interface comparisons, and the immutable-reference oracle.
 The oracle covers 180 randomized core scenarios; clock, grid, Hampel and SLERP
 edge cases; 6 coefficient extremes; 16 gapped FIR cases; 15 image fixtures and
@@ -39,6 +39,6 @@ recorded in `verification.json`. No runtime dependencies, public processing
 signatures, source-data transformations or relaxed validation checks were added.
 
 Limits: all data was generated. No real recording, upstream LeTools/providers
-pipeline, GPU path, multi-worker throughput or non-reference-linux platform was benchmarked.
+pipeline, GPU path, multi-worker throughput or non-Linux execution environment platform was benchmarked.
 The Python bindings still hold the GIL. Callgrind/cProfile supplied profiling
 evidence; their instrumented times were not used as benchmark results.

@@ -3,8 +3,9 @@
 from pathlib import Path
 import re
 import subprocess
+from history_revision import resolve_revision
 
-REV = "66248dacb608859d2cbd0f9f27227c65013a8027"
+REV = resolve_revision("66248dacb608859d2cbd0f9f27227c65013a8027")
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / ".artifacts/rsi"
 

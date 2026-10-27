@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+from remote_config import execution_target
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,6 +60,7 @@ def main():
     parser.add_argument("--round", choices=["1", "2", "both"], default="both")
     parser.add_argument("--retry", action="store_true")
     args = parser.parse_args()
+    host, remote = execution_target()
     for recipe in candidates.RECIPES:
         op = recipe["operator"]
         if args.only and op not in args.only.split(","):
@@ -115,8 +117,8 @@ def main():
                     f"docs/performance/results/{label}.json",
                     f"docs/performance/data/{label}.json"], cwd=ROOT, check=True)
                 subprocess.run(["git", "commit", "-F", str(trial / "commit-message.txt")], cwd=ROOT, check=True)
-                subprocess.run(["ssh", "reference-linux",
-                    f"cd . && "
+                subprocess.run(["ssh", host,
+                    f"cd {remote} && "
                     f"cp .artifacts/rsi/bin/{label} .artifacts/rsi/bin/accepted && "
                     "cp python/mcap_ops/_native.abi3.so .artifacts/rsi/python/accepted/mcap_ops/_native.abi3.so"],
                     check=True)

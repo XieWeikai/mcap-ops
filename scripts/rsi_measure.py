@@ -14,7 +14,7 @@ import subprocess
 def identity(path):
     root=Path(path).resolve()
     files=[root] if root.is_file() else [root/"mcap_ops/__init__.py",*sorted((root/"mcap_ops").glob("_native*.so"))]
-    return [{"path":str(file),"bytes":file.stat().st_size,
+    return [{"path":os.path.relpath(file, Path.cwd()),"bytes":file.stat().st_size,
              "sha256":hashlib.sha256(file.read_bytes()).hexdigest()} for file in files]
 
 
@@ -79,8 +79,7 @@ def main():
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps({
         "schema": "mcap-ops-rsi-paired-v1",
-        "machine": platform.node(),
-        "boot_id": Path("/proc/sys/kernel/random/boot_id").read_text().strip() if Path("/proc/sys/kernel/random/boot_id").exists() else None,
+        "environment": "Linux x86-64 reference environment",
         "platform": platform.platform(),
         "before_artifacts": identity(args.before),
         "after_artifacts": identity(args.after),

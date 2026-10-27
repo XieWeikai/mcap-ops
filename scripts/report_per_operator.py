@@ -9,10 +9,11 @@ import statistics
 import subprocess
 
 from report_rsi import EXPECTED
+from history_revision import resolve_revision
 
 ROOT=Path(__file__).resolve().parents[1]
 REPORT=ROOT/'docs/performance/per-op10'
-BASE='9de19ead5df7444a9074c71028129b88970ba6ba'
+BASE=resolve_revision('9de19ead5df7444a9074c71028129b88970ba6ba')
 
 
 def git(*args):return subprocess.check_output(['git',*args],cwd=ROOT,text=True)
@@ -66,7 +67,7 @@ def main():
     stats=[line.split('\t',2) for line in git('diff','--numstat',BASE,'HEAD','--','crates/core/src','crates/io/src','crates/python/src','python/mcap_ops').splitlines()]
     added=sum(int(v[0]) for v in stats);removed=sum(int(v[1]) for v in stats)
     text=['# Ten rounds per operator','',f"**{len(rows)}/300 measured decisions; {accepted} accepted, {len(rows)-accepted} rejected.**",'',
-        f'Baseline source: `{BASE}`. Builds, profiles, tests and timing run only on reference-linux. '
+        f'Baseline source: `{BASE}`. Builds, profiles, tests and timing run only in the reference Linux environment. '
         'Results use generated fixtures, CPU 12 affinity, four AB/BA paired blocks and seven calibrated samples per side.', '',
         'Acceptance requires >=8% latency reduction in every aggregate block, no representative case slower by >3%, '
         'correctness and complexity checks passing. PNG encoder choices additionally preserve decoded pixels and cap measured output growth at 1.25x.', '',

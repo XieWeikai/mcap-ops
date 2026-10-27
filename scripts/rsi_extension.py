@@ -5,6 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 import subprocess
+from remote_config import execution_target
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +24,7 @@ def main():
     parser.add_argument("--through", type=int, default=20)
     parser.add_argument("--retry", action="store_true")
     args = parser.parse_args()
+    host, remote = execution_target()
     assert len(module.RECIPES) == 20
     for number, recipe in enumerate(module.RECIPES, 1):
         if not args.from_round <= number <= args.through:
@@ -76,7 +78,7 @@ def main():
                 f"docs/performance/extension/results/{label}.json",
                 *[str(path.relative_to(ROOT)) for path in sorted((result_root / "data").glob(f"{label}*.json"))])
             run("git", "commit", "-F", str(trial / "commit-message.txt"))
-            run("ssh", "reference-linux", f"cd . && "
+            run("ssh", host, f"cd {remote} && "
                 f"cp .artifacts/rsi/bin/{label} .artifacts/rsi/bin/accepted && "
                 "cp python/mcap_ops/_native.abi3.so .artifacts/rsi/python/accepted/mcap_ops/_native.abi3.so && "
                 "cp python/mcap_ops/__init__.py .artifacts/rsi/python/accepted/mcap_ops/__init__.py")

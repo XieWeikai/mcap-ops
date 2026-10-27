@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+from history_revision import resolve_revision
 
 ROOT=Path(__file__).resolve().parents[1]
 EXPECTED={
@@ -45,14 +46,14 @@ def main():
         body=subprocess.check_output(["git","show","-s","--format=%B",matches[0]],cwd=ROOT,text=True)
         assert row["record_path"] in body and "ns/op" in body and "Correctness:" in body
     accepted=sum(r["decision"]=="accepted" for r in rows)
-    stats=subprocess.check_output(["git","diff","--numstat","66248da","--",
+    stats=subprocess.check_output(["git","diff","--numstat",resolve_revision("66248da"),"--",
         "crates/core/src","crates/io/src","crates/python/src","python/mcap_ops"],cwd=ROOT,text=True)
     changes=[line.split("\t",2) for line in stats.splitlines()]
     added=sum(int(row[0]) for row in changes);removed=sum(int(row[1]) for row in changes)
     report=["# RSI results", "",f"Completed: **30 implementation units x 2 rounds = 60 final decisions**. "
             f"Accepted {accepted}; rejected {60-accepted}.","",
             "Reference: `66248dacb608859d2cbd0f9f27227c65013a8027`. All builds, profiles, "
-            "tests and timing runs execute on reference-linux (i9-14900K, CPU 12 affinity, Rust 1.90, release).", "",
+            "tests and timing runs execute in the reference Linux environment (i9-14900K, CPU 12 affinity, Rust 1.90, release).", "",
             f"Production source changes: {len(changes)} files, {added} added lines and {removed} removed "
             f"lines (net {added-removed:+d}). Runtime dependencies and public operator signatures are unchanged.", "",
             "Each percentage is paired geometric-mean **latency reduction** across that operator's "
@@ -76,7 +77,7 @@ def main():
         "- `data/`: all paired samples and calibration counts; accepted commits contain their corresponding records.",
         "- `rejected/`: candidate patches, including historical rejections that were later confirmed.",
         "- `history/`: superseded unstable observations, kept without altering the raw data.",
-        "- reference-linux `.artifacts/rsi/trials/`: complete validation logs and Callgrind/cProfile output.",
+        "- Execution environment `.artifacts/rsi/trials/`: complete validation logs and Callgrind/cProfile output.",
         "", "## Correctness", "",
         "Every decision follows rustfmt, Clippy, 36 Rust tests, immutable-reference differential "
         "checks and 5 Python smoke tests. The differential suite exercises 180 randomized core "

@@ -6,14 +6,14 @@ from pathlib import Path
 import shlex
 import subprocess
 import sys
+from remote_config import execution_target
 
 ROOT=Path(__file__).resolve().parents[1]
-REMOTE="."
 RECEIVE=r'''
 import hashlib,json,os,subprocess,sys
 from pathlib import Path
-root=Path(".");os.chdir(root)
 manifest=json.load(sys.stdin)
+root=Path(manifest["destination"]);os.chdir(root)
 def git(*args):return subprocess.check_output(["git",*args],text=True).strip()
 assert git("symbolic-ref","--short","HEAD")=="main"
 old=git("rev-parse","HEAD")
@@ -21,6 +21,17 @@ subprocess.run(["git","fetch",manifest["bundle"],"main:refs/remotes/author/main"
 target=git("rev-parse","refs/remotes/author/main")
 assert target==manifest["head"]
 subprocess.run(["git","merge-base","--is-ancestor",old,target],check=True)
+deleted=subprocess.check_output(["git","diff","--name-only","--diff-filter=D","-z",old,target]).decode().split("\0")
+for name in filter(None,deleted):
+    path=root/name
+    if path.exists():
+        assert path.is_file() and not path.is_symlink(),name
+        original=subprocess.check_output(["git","show",f"{old}:{name}"])
+        assert path.read_bytes()==original,f"deleted source changed unexpectedly: {name}"
+        dest=root/".artifacts/rsi/superseded"/old/name
+        dest.parent.mkdir(parents=True,exist_ok=True)
+        if dest.exists():assert dest.read_bytes()==original
+        os.replace(path,dest)
 for name,expected in manifest["superseded"].items():
     path=root/name
     if path.exists():
@@ -41,11 +52,12 @@ subprocess.run(["git","add","--all","--","."],check=True)
 assert git("write-tree")==git("rev-parse",target+"^{tree}")
 subprocess.run(["git","update-ref","-m","sync verified RSI source tree","refs/heads/main",target,old],check=True)
 assert not git("status","--porcelain","--untracked-files=all")
-print(json.dumps({"head":target,"tree":git("rev-parse","HEAD^{tree}"),"files":len(manifest["files"]),"clean":True}))
+print(json.dumps({"head":target,"tree":git("rev-parse","HEAD^{tree}"),"files":len(manifest["files"]),"clean":True,"target":manifest["target"]}))
 '''
 
 
 def main():
+    host,remote=execution_target()
     if subprocess.check_output(["git","status","--porcelain","--untracked-files=all"],cwd=ROOT).strip():
         raise RuntimeError("commit the reviewed tree before publishing")
     head=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
@@ -59,10 +71,11 @@ def main():
     subprocess.run([sys.executable,"scripts/sync_sources.py"],cwd=ROOT,check=True)
     bundle=ROOT/".artifacts/rsi"/f"source-{head[:12]}.bundle"
     subprocess.run(["git","bundle","create",str(bundle),"main"],cwd=ROOT,check=True)
-    remote_bundle=f"{REMOTE}/.artifacts/rsi/{bundle.name}"
-    subprocess.run(["rsync","-az",str(bundle),f"reference-linux:{remote_bundle}"],check=True)
-    payload={"head":head,"files":files,"superseded":superseded,"bundle":remote_bundle}
-    result=subprocess.run(["ssh","reference-linux",shlex.join(["python3","-c",RECEIVE])],
+    remote_bundle=f"{remote}/.artifacts/rsi/{bundle.name}"
+    subprocess.run(["rsync","-az",str(bundle),f"{host}:{remote_bundle}"],check=True)
+    payload={"head":head,"files":files,"superseded":superseded,"bundle":remote_bundle,
+             "destination":remote,"target":{"host":host,"destination":remote}}
+    result=subprocess.run(["ssh",host,shlex.join(["python3","-c",RECEIVE])],
         input=json.dumps(payload),text=True,check=True,capture_output=True)
     print(result.stdout.strip())
     (ROOT/".artifacts/rsi/sync-receipt.json").write_text(result.stdout)

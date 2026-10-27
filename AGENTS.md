@@ -1,7 +1,10 @@
 # Repository workflow
 
-- Author in the local checkout. Run all builds and tests on SSH host `reference-linux`,
-  in `.`, using project-local tooling.
+- Author in the local checkout. Run all builds and tests in the configured
+  remote Linux checkout, using project-local tooling. Resolve its SSH target
+  and project root from the ignored `.mcap-ops.local.json` or
+  `MCAP_OPS_TEST_HOST` / `MCAP_OPS_TEST_ROOT`; never put deployment coordinates
+  in public documentation.
 - Keep `mcap-ops-core` independent of files, Python, robot schemas and datasets.
 - Preserve original timestamps and source data. Detection, selection and
   transformation are separate interfaces.

@@ -13,7 +13,7 @@ Parameter sweeps are identified as such; they are not claimed as ten distinct
 algorithms. Identical source changes and prior failed patches are not replayed.
 
 All source authoring is local; builds, profiles, correctness tests and timings
-run only on reference-linux with project-local tools. Benchmarks are serial on CPU 12.
+run only on Linux execution environment with project-local tools. Benchmarks are serial on CPU 12.
 The Cargo release settings remain thin LTO and one codegen unit. Expanded FIR,
 Hampel, alignment and identity-clock workloads use the same benchmark executable
 and build settings on both sides, avoiding a separate performance-reference crate.

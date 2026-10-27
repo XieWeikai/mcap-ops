@@ -5,6 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 import subprocess
+from remote_config import execution_target
 import sys
 import fcntl
 import os
@@ -20,6 +21,7 @@ def run(*args):subprocess.run(args,cwd=ROOT,check=True)
 def main():
     p=argparse.ArgumentParser();p.add_argument('--only',required=True);p.add_argument('--retry',action='store_true')
     args=p.parse_args();groups={}
+    host, remote = execution_target()
     lock=(ROOT/'.artifacts/rsi/per-op10.lock').open('a+')
     try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError:raise SystemExit('Another per-operator campaign runner already holds the workspace lock')
@@ -59,7 +61,7 @@ def main():
             if accepted:
                 run('git','add',*recipe['paths'],f'docs/performance/per-op10/results/{label}.json',f'docs/performance/per-op10/data/{label}.json')
                 run('git','commit','-F',str(trial/'commit-message.txt'))
-                run('ssh','reference-linux',f'cd . && cp .artifacts/rsi/bin/{label} .artifacts/rsi/bin/accepted && cp python/mcap_ops/_native.abi3.so .artifacts/rsi/python/accepted/mcap_ops/_native.abi3.so && cp python/mcap_ops/__init__.py .artifacts/rsi/python/accepted/mcap_ops/__init__.py')
+                run('ssh',host,f'cd {remote} && cp .artifacts/rsi/bin/{label} .artifacts/rsi/bin/accepted && cp python/mcap_ops/_native.abi3.so .artifacts/rsi/python/accepted/mcap_ops/_native.abi3.so && cp python/mcap_ops/__init__.py .artifacts/rsi/python/accepted/mcap_ops/__init__.py')
             print('END',op,number,'accepted' if accepted else 'rejected',flush=True)
             rows=[json.loads(x.read_text()) for x in (reports/'results').glob('*.json')]
             (ROOT/'.artifacts/rsi/per-op10-status.json').write_text(json.dumps({'complete':len(rows),'target':300,

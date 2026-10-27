@@ -11,7 +11,7 @@ are restored. The unchanged acceptance gate requires 8% latency reduction in
 every one of four AB/BA aggregate blocks, no per-case median regression over 3%,
 all correctness checks passing, and a small, reviewable implementation.
 
-All builds, tests, profiles and benchmarks execute on reference-linux with project-local
+All builds, tests, profiles and benchmarks execute on Linux execution environment with project-local
 tools. CPU affinity, build flags, fixture generation, calibration and numerical
 tolerances follow [the existing protocol](../RSI.md). Native candidates retain
 both before/after Callgrind profiles, Python candidates cProfile snapshots.

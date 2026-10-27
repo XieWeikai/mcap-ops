@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Materialize the campaign-start source with the completed benchmark harness on reference-linux."""
+"""Materialize the campaign-start source with the completed benchmark harness in the reference Linux environment."""
 import hashlib
 import json
 from pathlib import Path
 import subprocess
+from history_revision import resolve_revision
 
 ROOT=Path(__file__).resolve().parents[1]
-BASE='9de19ead5df7444a9074c71028129b88970ba6ba'
+BASE=resolve_revision('9de19ead5df7444a9074c71028129b88970ba6ba')
 OUT=ROOT/'.artifacts/rsi/per-op10/baseline'
 
 

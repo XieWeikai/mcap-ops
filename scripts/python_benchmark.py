@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Python bridge benchmarks. Run only on reference-linux with an explicit package snapshot."""
+"""Python bridge benchmarks. Run only in the reference Linux environment with an explicit package snapshot."""
 import argparse
 import cProfile
 import io

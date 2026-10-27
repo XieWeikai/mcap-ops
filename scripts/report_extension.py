@@ -6,10 +6,11 @@ import math
 from pathlib import Path
 import statistics
 import subprocess
+from history_revision import resolve_revision
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "docs/performance/extension"
-BASE = "bc58f81bb2c3dc43676450ee6685d8015fb99081"
+BASE = resolve_revision("bc58f81bb2c3dc43676450ee6685d8015fb99081")
 
 
 def git(*args):
@@ -79,7 +80,7 @@ def main():
     text = ["# Twenty additional RSI experiments", "",
         f"Completed **20/20**: **{accepted} accepted**, **{20-accepted} rejected**. "
         "The original 60 decisions are preserved, for 80 total experiments.", "",
-        f"Baseline: `{BASE}`. All execution on reference-linux, i9-14900K, CPU 12, Rust 1.90, "
+        f"Baseline: `{BASE}`. All execution in the reference Linux environment, i9-14900K, CPU 12, Rust 1.90, "
         "release with unchanged flags. Every trial used generated inputs, before/after profiles, "
         "four alternating AB/BA blocks, and seven calibrated samples per side.", "",
         "Acceptance: every block's geometric-mean latency reduction >=8%, no case's median "
@@ -114,7 +115,7 @@ def main():
         "exact medians, issue ordering and overflow behavior. No unsafe buffers, reduced "
         "precision, discarded checks, source modifications or external services are involved.", "",
         "Raw timing samples live in `data/`; rejected patches in `rejected/`. Complete "
-        "validation logs and before/after profiles live on reference-linux at "
+        "validation logs and before/after profiles live in the reference Linux environment at "
         "`.artifacts/rsi/trials/extension-*`. This series uses Callgrind/cProfile because "
         "perf_event_paranoid remains 4. Profiler times are excluded from benchmark claims.", ""]
     for name in ("native", "python", "sensitivity"):
