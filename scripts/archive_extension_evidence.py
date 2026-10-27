@@ -12,13 +12,20 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--series',choices=['extension','per-op10'],default='extension')
+    parser.add_argument('--series',default='extension',help='Evidence namespace under docs/performance')
     args=parser.parse_args()
+    if not re.fullmatch(r'[a-z0-9][a-z0-9_.-]*',args.series):
+        parser.error('series must start with a lowercase letter/digit and use only a-z0-9_.-')
+    if args.series=='initial':
+        parser.error('initial-series evidence uses the legacy report layout')
     report=ROOT/'docs/performance'/args.series
+    records=sorted((report/'results').glob('*.json'))
+    if not records:
+        parser.error('series has no measured decisions to archive')
     out=report/'evidence'
     out.mkdir(parents=True,exist_ok=True)
     rows=[]
-    for record in sorted((report/'results').glob("*.json")):
+    for record in records:
         decision=json.loads(record.read_text())
         label=decision["label"]
         trial=ROOT/".artifacts/rsi/trials"/label

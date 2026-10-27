@@ -23,11 +23,14 @@ def main():
     parser.add_argument("--python", action="store_true")
     parser.add_argument("--retry", action="store_true")
     parser.add_argument("--blocks", type=int, default=4)
-    parser.add_argument("--series", choices=["initial", "extension", "per-op10"], default="initial")
+    parser.add_argument("--series", default="initial", help="Existing or new evidence namespace")
     parser.add_argument("--sensitivity", action="store_true")
+    parser.add_argument("--png-size-gate", action="store_true", help="Require exact-image oracle size evidence and <=1.25x output growth")
     args = parser.parse_args()
-    if not re.fullmatch(r"[a-z0-9_.-]+", args.label):
-        parser.error("label must be a simple identifier")
+    if any(not re.fullmatch(r"[a-z0-9][a-z0-9_.-]*", name) for name in (args.label, args.series)):
+        parser.error("label and series must start with a lowercase letter/digit and use only a-z0-9_.-")
+    if args.blocks < 4:
+        parser.error("RSI decisions require at least four paired blocks")
     report_root = ROOT / "docs/performance"
     if args.series != "initial":
         report_root /= args.series
@@ -123,7 +126,7 @@ python3 scripts/rsi_measure.py --before .artifacts/rsi/extension/sensitivity/bef
     worst = 100 * (1 - max(block_ratios))
     regression = min(record["latency_reduction_pct"] for record in result["summary"].values())
     audit = {
-        "label": args.label, "base_commit": base, "cases": args.cases.split(","),
+        "label": args.label, "series": args.series, "base_commit": base, "cases": args.cases.split(","),
         "geomean_latency_reduction_pct": improvement,
         "worst_block_reduction_pct": worst,
         "worst_case_reduction_pct": regression,
@@ -139,7 +142,7 @@ python3 scripts/rsi_measure.py --before .artifacts/rsi/extension/sensitivity/bef
         audit["sensitivity_worst_case_pct"] = worst_case
         audit["sensitivity_sha256"] = hashlib.sha256((destination / "sensitivity.json").read_bytes()).hexdigest()
         audit["performance_gate"] &= worst_case >= -3
-    if args.series == "per-op10" and args.label.startswith("ten-image-transform-"):
+    if args.png_size_gate or (args.series == "per-op10" and args.label.startswith("ten-image-transform-")):
         sizes = [tuple(map(int, pair)) for pair in re.findall(
             r"(?m)^resource_png (\d+) (\d+)$", (destination / "validation.log").read_text())]
         if not sizes:

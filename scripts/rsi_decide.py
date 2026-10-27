@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 
@@ -15,20 +16,39 @@ def main():
     parser.add_argument("label")
     parser.add_argument("--operator", required=True)
     parser.add_argument("--round", type=int, required=True)
-    parser.add_argument("--series", choices=["initial", "extension", "per-op10"], default="initial")
+    parser.add_argument("--series", default="initial", help="Existing or new evidence namespace")
     parser.add_argument("--accept", action="store_true")
     parser.add_argument("--method", required=True)
     parser.add_argument("--hotspot", required=True)
     parser.add_argument("--complexity", required=True)
     parser.add_argument("--reason", required=True)
     args = parser.parse_args()
+    if any(not re.fullmatch(r"[a-z0-9][a-z0-9_.-]*", name) for name in (args.label, args.series)):
+        parser.error("label and series must start with a lowercase letter/digit and use only a-z0-9_.-")
     if args.round < 1:
         parser.error("round must be positive")
     report_root = ROOT / "docs/performance"
     if args.series != "initial":
         report_root /= args.series
+    output = report_root / "results" / f"{args.label}.json"
+    if output.exists():
+        raise RuntimeError("trial already has a decision; preserve its evidence and use a new label")
     trial = ROOT / ".artifacts/rsi/trials" / args.label
     audit = json.loads((trial / "audit.json").read_text())
+    if audit.get("series", args.series) != args.series:
+        raise RuntimeError("trial series does not match the requested evidence namespace")
+    if audit["label"] != args.label or audit["base_commit"] != subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+    ).strip():
+        raise RuntimeError("trial baseline changed; refusing a stale decision")
+    current_patch = subprocess.check_output(["git", "diff", "HEAD", "--", *audit["paths"]], cwd=ROOT)
+    if current_patch != (trial / "candidate.patch").read_bytes():
+        raise RuntimeError("candidate changed after validation; refusing to record or restore it")
+    for name in audit["paths"]:
+        if (trial / "before" / name).read_bytes() != subprocess.check_output(
+            ["git", "show", f"HEAD:{name}"], cwd=ROOT
+        ):
+            raise RuntimeError(f"trial snapshot does not match its baseline: {name}")
     if args.accept and not audit["performance_gate"]:
         raise RuntimeError("cannot accept a candidate that failed the performance gate")
     measurement = json.loads((trial / "measurement.json").read_text())
@@ -46,7 +66,6 @@ def main():
         "profile_remote_path": f"./.artifacts/rsi/trials/{args.label}",
         "validation_sha256": hashlib.sha256((trial / "validation.log").read_bytes()).hexdigest(),
     }
-    output = report_root / "results" / f"{args.label}.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(record, indent=2) + "\n")
     data = report_root / "data" / f"{args.label}.json"
