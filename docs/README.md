@@ -4,6 +4,11 @@
 
 [Project overview](../README.md) · [RSI playbook](../RSI/README.md)
 
+Browse the [documentation website](https://xieweikai.github.io/mcap-ops/),
+follow [Tutorials](tutorials/index.md), or look up an operator in
+[Documentation](reference/index.md). These Markdown guides remain readable on
+GitHub; the website adds search, bilingual navigation, and generated Rust docs.
+
 ## Use the library
 
 | Guide | What it covers |

@@ -2,6 +2,11 @@
 
 **语言：中文 | [English](../README.md)**
 
+访问[文档站](https://xieweikai.github.io/mcap-ops/zh/)，
+按 [Tutorials](tutorials/index.md) 学习，或在
+[Documentation](reference/index.md) 查询算子。
+这些 Markdown 在 GitHub 上同样可读，站点额外提供搜索、双语导航与 Rust 生成文档。
+
 [项目首页](../../README.md) · [RSI 手册](../../RSI/zh/README.md)
 
 ## 我想使用

@@ -1,0 +1,154 @@
+site_name: MCAP Ops
+site_description: Explicit time, inspectable quality, and traceable samples. Rust operators with NumPy interfaces.
+site_url: https://xieweikai.github.io/mcap-ops/
+repo_url: https://github.com/XieWeikai/mcap-ops
+repo_name: XieWeikai/mcap-ops
+edit_uri: ""
+docs_dir: .artifacts/docs/source
+site_dir: .artifacts/docs/site
+strict: true
+theme:
+  name: material
+  font: false
+  logo: assets/mark.svg
+  favicon: assets/mark.svg
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.footer
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+    - toc.follow
+nav:
+  - Home: index.md
+  - Tutorials:
+      - Learning path: tutorials/index.md
+      - Design philosophy: architecture.md
+      - Installation: getting-started.md
+      - First pipeline: tutorials/first-pipeline.md
+      - Inspect and select: tutorials/quality.md
+      - Synchronize model steps: guides/pipeline.md
+      - MCAP and media: guides/media.md
+      - Best practices: tutorials/best-practices.md
+  - Documentation:
+      - API overview: reference/index.md
+      - Data contracts: concepts.md
+      - Python operators:
+          - inspect_signal: reference/python/inspect_signal.md
+          - uniform_grid: reference/python/uniform_grid.md
+          - align_timestamps: reference/python/align_timestamps.md
+          - resample: reference/python/resample.md
+          - history_windows: reference/python/history_windows.md
+          - ema: reference/python/ema.md
+          - lowpass_taps: reference/python/lowpass_taps.md
+          - fir: reference/python/fir.md
+          - unwrap_angles: reference/python/unwrap_angles.md
+          - inspect_mcap: reference/python/inspect_mcap.md
+          - read_json_signal: reference/python/read_json_signal.md
+          - image_quality: reference/python/image_quality.md
+          - transform_image: reference/python/transform_image.md
+          - validate_video: reference/python/validate_video.md
+      - Types and abstractions: reference/types.md
+      - Rust symbols: reference/rust.md
+      - Decoder extensions: rust.md
+      - Operator catalog: operators.md
+      - Python compact reference: python.md
+  - RSI:
+      - Overview: rsi/index.md
+      - Workflow: rsi/workflow.md
+      - Profiling: rsi/profiling.md
+      - Correctness: rsi/correctness.md
+      - Evidence: rsi/evidence.md
+      - Campaign template: rsi/templates/campaign.md
+      - Experiment template: rsi/templates/experiment.md
+  - Development:
+      - Contributing: contributing.md
+      - Documentation publishing: documentation-site.md
+      - Performance evidence: performance.md
+      - Public history: publication.md
+      - Guide index: handbook.md
+plugins:
+  - search:
+      lang: [en, zh]
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: false
+      reconfigure_material: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: zh
+          name: 中文
+          build: true
+          nav_translations:
+            Home: 首页
+            Tutorials: 教程
+            Learning path: 学习路线
+            Design philosophy: 设计理念
+            Installation: 安装
+            First pipeline: 第一个处理流程
+            Inspect and select: 质检与筛选
+            Synchronize model steps: 同步模型时间步
+            MCAP and media: MCAP 与媒体
+            Best practices: 最佳实践
+            Documentation: 接口手册
+            API overview: API 总览
+            Data contracts: 数据契约
+            Python operators: Python 算子
+            Types and abstractions: 类型与抽象
+            Rust symbols: Rust 接口索引
+            Decoder extensions: 解码器扩展
+            Operator catalog: 算子目录
+            Python compact reference: Python 速查
+            Overview: 概览
+            Workflow: 工作流
+            Profiling: 性能剖析
+            Correctness: 正确性
+            Evidence: 探索记录
+            Campaign template: 实验系列模板
+            Experiment template: 单轮实验模板
+            Development: 开发
+            Contributing: 贡献指南
+            Documentation publishing: 文档站发布
+            Performance evidence: 性能证据
+            Public history: 公开历史
+            Guide index: 指南索引
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+extra_css:
+  - assets/stylesheets/site.css
+extra:
+  generator: false
+copyright: MCAP Ops 0.1.0 · MIT License

@@ -18,10 +18,10 @@
 </p>
 
 <p align="center">
-  <a href="docs/getting-started.md">Quick Start</a> ·
-  <a href="docs/README.md">English Documentation</a> ·
-  <a href="docs/zh/README.md">Chinese Documentation</a> ·
-  <a href="docs/python.md">Python API</a> ·
+  <a href="https://xieweikai.github.io/mcap-ops/tutorials/">Tutorials</a> ·
+  <a href="https://xieweikai.github.io/mcap-ops/reference/">Documentation</a> ·
+  <a href="https://xieweikai.github.io/mcap-ops/zh/">Chinese Documentation</a> ·
+  <a href="https://xieweikai.github.io/mcap-ops/reference/rust/">Rust API</a> ·
   <a href="RSI/README.md">RSI Workflow</a>
 </p>
 
@@ -156,6 +156,13 @@ The complete playbook and experiment templates are available in
 [English](RSI/README.md) and [Chinese](RSI/zh/README.md).
 
 ## Documentation
+
+The [documentation website](https://xieweikai.github.io/mcap-ops/) provides
+English/Chinese search, a progressive tutorial path, individual operator pages,
+types and abstractions, generated Rust API docs, and the RSI playbook.
+Start with [Tutorials](https://xieweikai.github.io/mcap-ops/tutorials/) to learn
+the library, or [Documentation](https://xieweikai.github.io/mcap-ops/reference/)
+to look up a signature, parameter, return value, or example.
 
 | Read about | English | Chinese |
 | --- | --- | --- |
