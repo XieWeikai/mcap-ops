@@ -1,0 +1,66 @@
+{
+  "label": "align4-polyphase-fir-04",
+  "series": "provider-align4",
+  "base_commit": "eb2b340d741d9354b38019d174e27aefe4fd2887",
+  "cases": [
+    "polyphase_fir.scalar",
+    "polyphase_fir.multi",
+    "polyphase_fir.short"
+  ],
+  "geomean_latency_reduction_pct": 1.0604526495927136,
+  "worst_block_reduction_pct": -1.7554407982713682,
+  "worst_case_reduction_pct": -3.338195585228587,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "One coefficient buffer and one short preprocessing pass trade memory traffic for per-sample gain multiplies.",
+  "paths": [
+    "crates/core/src/polyphase.rs"
+  ],
+  "measurement_sha256": "972d25a592374cc7f06c261f26158538bbada810409f1d3eaa084a41b0e9752a",
+  "operator": "polyphase_fir",
+  "round": 4,
+  "decision": "rejected",
+  "method": "scale each coefficient once per filter invocation",
+  "profile_hotspot": "Native profile is dominated by the FIR accumulation loop, including wide integer conversions, tap addresses and row bounds.",
+  "reason": "Restore baseline: paired performance gate not met.",
+  "case_results": {
+    "polyphase_fir.scalar": {
+      "before_ns": 183252.5390625,
+      "after_ns": 170214.578125,
+      "latency_reduction_pct": 7.266049948964204,
+      "paired_ratios": [
+        0.9361778535950938,
+        0.9024454881720257,
+        0.9185011474256223,
+        1.0612093235653652
+      ],
+      "worst_paired_reduction_pct": -6.120932356536524
+    },
+    "polyphase_fir.multi": {
+      "before_ns": 989717.6875,
+      "after_ns": 984247.453125,
+      "latency_reduction_pct": 0.35280300447491086,
+      "paired_ratios": [
+        1.0045019228338963,
+        1.0185914352927972,
+        0.9884420170766056,
+        0.9801721754061493
+      ],
+      "worst_paired_reduction_pct": -1.8591435292797165
+    },
+    "polyphase_fir.short": {
+      "before_ns": 646.6767120361328,
+      "after_ns": 673.515869140625,
+      "latency_reduction_pct": -3.338195585228587,
+      "paired_ratios": [
+        1.0433126807625648,
+        1.023451230942007,
+        1.0530298883934095,
+        1.0129068149227622
+      ],
+      "worst_paired_reduction_pct": -5.30298883934095
+    }
+  },
+  "profile_remote_path": ".artifacts/rsi/trials/align4-polyphase-fir-04",
+  "validation_sha256": "83051892d87511f602af27ec6f1db1d1bfcf8ce2b07bc9e3dc42010183f08d45"
+}
