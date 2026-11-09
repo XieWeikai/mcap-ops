@@ -1,0 +1,66 @@
+{
+  "label": "align4-sample-support-04",
+  "series": "provider-align4",
+  "base_commit": "da5f5e9d0ce0b89d0890ca5d8f7e0d456a1ffcfa",
+  "cases": [
+    "sample_support.scalar",
+    "sample_support.multi",
+    "sample_support.sparse"
+  ],
+  "geomean_latency_reduction_pct": -7.3688570156684285,
+  "worst_block_reduction_pct": -10.872917705521324,
+  "worst_case_reduction_pct": -8.196071440593666,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Single integer expression; no new allocation or control-flow path.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "f184afcf28e808fb10125875a78ed5d702c84567d4de0dc819d7c8fde3fa6990",
+  "operator": "sample_support",
+  "round": 4,
+  "decision": "rejected",
+  "method": "compute the predecessor by subtracting the exact-match bit",
+  "profile_hotspot": "Bracket search accounts for the largest native instruction share; output and coverage validation remain in the measured path.",
+  "reason": "Restore baseline: paired performance gate not met.",
+  "case_results": {
+    "sample_support.scalar": {
+      "before_ns": 5565.4161376953125,
+      "after_ns": 6012.9356689453125,
+      "latency_reduction_pct": -7.246480672495115,
+      "paired_ratios": [
+        1.0596580199711632,
+        1.0596907992911988,
+        1.0852388141587035,
+        1.2352307751459377
+      ],
+      "worst_paired_reduction_pct": -23.523077514593773
+    },
+    "sample_support.multi": {
+      "before_ns": 11177.298828125,
+      "after_ns": 12028.900634765625,
+      "latency_reduction_pct": -8.196071440593666,
+      "paired_ratios": [
+        1.0616478268323202,
+        1.0894978861137479,
+        1.1672709805745252,
+        1.0744235426981257
+      ],
+      "worst_paired_reduction_pct": -16.727098057452515
+    },
+    "sample_support.sparse": {
+      "before_ns": 5924.421875,
+      "after_ns": 5951.3125,
+      "latency_reduction_pct": -0.4539566809685258,
+      "paired_ratios": [
+        1.0068592127255782,
+        0.9958861514233299,
+        1.0759186175811246,
+        1.002219920893792
+      ],
+      "worst_paired_reduction_pct": -7.5918617581124614
+    }
+  },
+  "profile_remote_path": ".artifacts/rsi/trials/align4-sample-support-04",
+  "validation_sha256": "3e3e1cb8b2e42e15eb9a07c3c8287128b95ca80c32b026a904c0e4abc4b114ff"
+}

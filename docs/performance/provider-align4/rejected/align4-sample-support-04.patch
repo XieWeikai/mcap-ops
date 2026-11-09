@@ -1,0 +1,13 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index d842c41..07fa435 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -305,7 +305,7 @@ pub fn sample_support(source: &[i64], target: &[i64], max_gap_ns: i64) -> Result
+             source.partition_point(|&s| s < t)
+         };
+         let exact = source.get(r) == Some(&t);
+-        let left = if exact { r as i64 } else { r as i64 - 1 };
++        let left = r as i64 - i64::from(!exact);
+         result.previous.push(left);
+         result
+             .next
