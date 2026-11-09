@@ -1,0 +1,22 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 9f01df3..6abf4f0 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -180,12 +180,13 @@ pub fn motion_bounds(
+         (0..signal.channels())
+             .map(|c| {
+                 let mut x: Vec<_> = range.clone().map(|i| signal.row(i)[c]).collect();
+-                x.sort_unstable_by(f64::total_cmp);
+                 let m = x.len() / 2;
+-                if x.len() % 2 == 0 {
+-                    (x[m - 1] + x[m]) * 0.5
++                let even = x.len().is_multiple_of(2);
++                let (lo, mid, _) = x.select_nth_unstable_by(m, f64::total_cmp);
++                if even {
++                    (*lo.iter().max_by(|x, y| x.total_cmp(y)).unwrap() + *mid) * 0.5
+                 } else {
+-                    x[m]
++                    *mid
+                 }
+             })
+             .collect()
