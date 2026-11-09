@@ -1,0 +1,16 @@
+diff --git a/crates/core/src/polyphase.rs b/crates/core/src/polyphase.rs
+index 9d0fcf4..b5dc0c9 100644
+--- a/crates/core/src/polyphase.rs
++++ b/crates/core/src/polyphase.rs
+@@ -39,8 +39,10 @@ pub fn polyphase_fir(
+     for j in 0..m {
+         let last = (j as i128 * down + half).div_euclid(up);
+         let first = -(half - j as i128 * down).div_euclid(up);
++        let mut tap = half + j as i128 * down - first * up;
+         for i in first..=last {
+-            let h = taps[(half + j as i128 * down - i * up) as usize] * up as f64;
++            let h = taps[tap as usize] * up as f64;
++            tap -= up;
+             if (0..n).contains(&i) {
+                 let src = &values[i as usize * channels..(i as usize + 1) * channels];
+                 let dest = &mut out[j * channels..(j + 1) * channels];
