@@ -1,0 +1,66 @@
+{
+  "label": "align4-rgb-histogram-03",
+  "series": "provider-align4",
+  "base_commit": "2022bfd20ad45e062134ccdac9fc832e272e106a",
+  "cases": [
+    "rgb_histogram.textured",
+    "rgb_histogram.flat",
+    "rgb_histogram.small"
+  ],
+  "geomean_latency_reduction_pct": -1.3041827596438793,
+  "worst_block_reduction_pct": -2.582306417062563,
+  "worst_case_reduction_pct": -5.009652526332253,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "At most one million pixels per block prevents integer overflow; widening/reduction costs are included.",
+  "paths": [
+    "crates/io/src/image_ops.rs"
+  ],
+  "measurement_sha256": "6402777f9edbef29e313291aefc998472e55d0fb2e4a41cf764f2b67765ff418",
+  "operator": "rgb_histogram",
+  "round": 3,
+  "decision": "rejected",
+  "method": "accumulate bounded tiles in 32-bit counters",
+  "profile_hotspot": "Nearly all collected instructions belong to the RGB pixel loop and its slice iterator. Constant tiles repeatedly update the same three bins.",
+  "reason": "Restore baseline: paired performance gate not met.",
+  "case_results": {
+    "rgb_histogram.textured": {
+      "before_ns": 150537.3984375,
+      "after_ns": 150206.55078125,
+      "latency_reduction_pct": -0.4878056903012684,
+      "paired_ratios": [
+        1.0439046408218635,
+        1.0087131384830583,
+        0.9491188389572133,
+        1.0010429753229668
+      ],
+      "worst_paired_reduction_pct": -4.390464082186352
+    },
+    "rgb_histogram.flat": {
+      "before_ns": 334178.7265625,
+      "after_ns": 327891.734375,
+      "latency_reduction_pct": 1.9660412072550981,
+      "paired_ratios": [
+        1.0043754036714894,
+        0.976304969513639,
+        0.9344002197461688,
+        0.9843742063412592
+      ],
+      "worst_paired_reduction_pct": -0.4375403671489364
+    },
+    "rgb_histogram.small": {
+      "before_ns": 1520.9481506347656,
+      "after_ns": 1598.3622741699219,
+      "latency_reduction_pct": -5.009652526332253,
+      "paired_ratios": [
+        1.0295809089246284,
+        1.0627095987277726,
+        1.0521548075870286,
+        1.0480382429396167
+      ],
+      "worst_paired_reduction_pct": -6.27095987277726
+    }
+  },
+  "profile_remote_path": ".artifacts/rsi/trials/align4-rgb-histogram-03",
+  "validation_sha256": "48a92abbad133445a02e330f4bb0f104ce5ea9f81f4142d115f997d2f432dcbe"
+}

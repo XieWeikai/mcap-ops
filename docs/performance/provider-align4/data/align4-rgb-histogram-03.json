@@ -1,0 +1,442 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "environment": "Linux x86-64 reference environment",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": ".artifacts/rsi/provider-align4/accepted",
+      "bytes": 27572344,
+      "sha256": "e3095e65f9608a24c84ac9b013075cd448dab0f60d1f5473f92c770014cb1c08"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": ".artifacts/rsi/bin/align4-rgb-histogram-03",
+      "bytes": 27572840,
+      "sha256": "ccf9d06072484e6724a331fcb8421f3cfc8342a51295473819039a7510468640"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "rgb_histogram.textured": {
+          "case": "rgb_histogram.textured",
+          "iterations": 256,
+          "median_ns": 143530.52734375,
+          "samples_ns": [
+            142929.79296875,
+            142308.640625,
+            143530.52734375,
+            146487.06640625,
+            144864.515625,
+            144853.08984375,
+            142036.1953125
+          ]
+        },
+        "rgb_histogram.flat": {
+          "case": "rgb_histogram.flat",
+          "iterations": 64,
+          "median_ns": 329083.921875,
+          "samples_ns": [
+            329636.015625,
+            329083.921875,
+            327336.859375,
+            334708.671875,
+            336714.46875,
+            328089.15625,
+            327549.65625
+          ]
+        },
+        "rgb_histogram.small": {
+          "case": "rgb_histogram.small",
+          "iterations": 16384,
+          "median_ns": 1562.0104370117188,
+          "samples_ns": [
+            1708.195556640625,
+            1708.7749633789062,
+            1609.0258178710938,
+            1558.0957641601562,
+            1562.0104370117188,
+            1558.9346923828125,
+            1541.0723876953125
+          ]
+        }
+      },
+      "after": {
+        "rgb_histogram.textured": {
+          "case": "rgb_histogram.textured",
+          "iterations": 256,
+          "median_ns": 149832.18359375,
+          "samples_ns": [
+            151887.12109375,
+            151234.8125,
+            151366.9609375,
+            149633.6796875,
+            148984.32421875,
+            149832.18359375,
+            148986.96484375
+          ]
+        },
+        "rgb_histogram.flat": {
+          "case": "rgb_histogram.flat",
+          "iterations": 64,
+          "median_ns": 330523.796875,
+          "samples_ns": [
+            326335.171875,
+            325862.203125,
+            336749.875,
+            339173.625,
+            333613.640625,
+            330523.796875,
+            329968.265625
+          ]
+        },
+        "rgb_histogram.small": {
+          "case": "rgb_histogram.small",
+          "iterations": 16384,
+          "median_ns": 1608.2161254882812,
+          "samples_ns": [
+            1599.8568725585938,
+            1614.7949829101562,
+            1652.3123168945312,
+            1637.1544189453125,
+            1606.017333984375,
+            1608.2161254882812,
+            1605.795654296875
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "rgb_histogram.textured": {
+          "case": "rgb_histogram.textured",
+          "iterations": 256,
+          "median_ns": 150580.91796875,
+          "samples_ns": [
+            154423.58203125,
+            153737.984375,
+            212320.421875,
+            149817.75390625,
+            150543.69921875,
+            148678.3125,
+            150580.91796875
+          ]
+        },
+        "rgb_histogram.flat": {
+          "case": "rgb_histogram.flat",
+          "iterations": 64,
+          "median_ns": 327268.53125,
+          "samples_ns": [
+            335431.078125,
+            337446.25,
+            332203.546875,
+            327268.53125,
+            326576.390625,
+            326251.0,
+            326117.671875
+          ]
+        },
+        "rgb_histogram.small": {
+          "case": "rgb_histogram.small",
+          "iterations": 16384,
+          "median_ns": 1598.9660034179688,
+          "samples_ns": [
+            1593.4645385742188,
+            1598.9660034179688,
+            1596.4568481445312,
+            1622.8225708007812,
+            1610.30078125,
+            1597.0032958984375,
+            1617.6878051757812
+          ]
+        }
+      },
+      "before": {
+        "rgb_histogram.textured": {
+          "case": "rgb_histogram.textured",
+          "iterations": 256,
+          "median_ns": 149280.21875,
+          "samples_ns": [
+            148232.41796875,
+            148595.72265625,
+            149592.72265625,
+            152648.48828125,
+            150023.17578125,
+            147517.38671875,
+            149280.21875
+          ]
+        },
+        "rgb_histogram.flat": {
+          "case": "rgb_histogram.flat",
+          "iterations": 64,
+          "median_ns": 335211.375,
+          "samples_ns": [
+            332729.21875,
+            331449.734375,
+            335211.375,
+            337475.703125,
+            337617.8125,
+            335431.34375,
+            330588.53125
+          ]
+        },
+        "rgb_histogram.small": {
+          "case": "rgb_histogram.small",
+          "iterations": 16384,
+          "median_ns": 1504.6123657226562,
+          "samples_ns": [
+            1492.9879760742188,
+            1492.49365234375,
+            1504.6123657226562,
+            1492.017333984375,
+            1510.7592163085938,
+            1525.2230224609375,
+            1521.7935180664062
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "rgb_histogram.textured": {
+          "case": "rgb_histogram.textured",
+          "iterations": 256,
+          "median_ns": 151794.578125,
+          "samples_ns": [
+            152183.18359375,
+            153726.59765625,
+            151794.578125,
+            150179.1015625,
+            148207.5546875,
+            148782.1953125,
+            185596.046875
+          ]
+        },
+        "rgb_histogram.flat": {
+          "case": "rgb_histogram.flat",
+          "iterations": 64,
+          "median_ns": 350859.359375,
+          "samples_ns": [
+            350277.140625,
+            349641.078125,
+            353970.03125,
+            350859.359375,
+            350304.03125,
+            359359.59375,
+            362173.1875
+          ]
+        },
+        "rgb_histogram.small": {
+          "case": "rgb_histogram.small",
+          "iterations": 16384,
+          "median_ns": 1517.3731689453125,
+          "samples_ns": [
+            1517.3731689453125,
+            1519.9862060546875,
+            1493.7482299804688,
+            1497.5093383789062,
+            1533.8474731445312,
+            1507.2550659179688,
+            1529.0018310546875
+          ]
+        }
+      },
+      "after": {
+        "rgb_histogram.textured": {
+          "case": "rgb_histogram.textured",
+          "iterations": 256,
+          "median_ns": 144071.09375,
+          "samples_ns": [
+            147164.3671875,
+            144071.09375,
+            141797.3671875,
+            143670.92578125,
+            144902.97265625,
+            143072.7109375,
+            145253.671875
+          ]
+        },
+        "rgb_histogram.flat": {
+          "case": "rgb_histogram.flat",
+          "iterations": 64,
+          "median_ns": 327843.0625,
+          "samples_ns": [
+            328699.28125,
+            326746.546875,
+            330353.515625,
+            331295.09375,
+            327024.875,
+            327843.0625,
+            326744.46875
+          ]
+        },
+        "rgb_histogram.small": {
+          "case": "rgb_histogram.small",
+          "iterations": 16384,
+          "median_ns": 1596.511474609375,
+          "samples_ns": [
+            1611.4517211914062,
+            1599.7086791992188,
+            1595.0879516601562,
+            1596.511474609375,
+            1595.5313110351562,
+            1600.205078125,
+            1595.2154541015625
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "rgb_histogram.textured": {
+          "case": "rgb_histogram.textured",
+          "iterations": 256,
+          "median_ns": 156424.1640625,
+          "samples_ns": [
+            156424.1640625,
+            154603.26953125,
+            154828.16015625,
+            158002.19921875,
+            162315.65234375,
+            156397.6015625,
+            157912.59765625
+          ]
+        },
+        "rgb_histogram.flat": {
+          "case": "rgb_histogram.flat",
+          "iterations": 64,
+          "median_ns": 327940.40625,
+          "samples_ns": [
+            332157.296875,
+            332974.484375,
+            329371.0625,
+            327317.875,
+            327940.40625,
+            326597.171875,
+            326359.5
+          ]
+        },
+        "rgb_histogram.small": {
+          "case": "rgb_histogram.small",
+          "iterations": 16384,
+          "median_ns": 1597.758544921875,
+          "samples_ns": [
+            1605.9622802734375,
+            1602.8535766601562,
+            1608.6268920898438,
+            1597.758544921875,
+            1595.69140625,
+            1595.272705078125,
+            1597.5655517578125
+          ]
+        }
+      },
+      "before": {
+        "rgb_histogram.textured": {
+          "case": "rgb_histogram.textured",
+          "iterations": 128,
+          "median_ns": 156261.1875,
+          "samples_ns": [
+            155231.65625,
+            159341.5078125,
+            156254.1171875,
+            155532.0703125,
+            156261.1875,
+            157593.2578125,
+            160326.2890625
+          ]
+        },
+        "rgb_histogram.flat": {
+          "case": "rgb_histogram.flat",
+          "iterations": 64,
+          "median_ns": 333146.078125,
+          "samples_ns": [
+            338794.140625,
+            334790.34375,
+            334716.171875,
+            333146.078125,
+            330592.921875,
+            330368.578125,
+            330515.671875
+          ]
+        },
+        "rgb_histogram.small": {
+          "case": "rgb_histogram.small",
+          "iterations": 16384,
+          "median_ns": 1524.5231323242188,
+          "samples_ns": [
+            1524.5231323242188,
+            1521.8352661132812,
+            1542.0816040039062,
+            1538.584716796875,
+            1537.7572631835938,
+            1517.3385009765625,
+            1514.4338989257812
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "rgb_histogram.textured": {
+      "before_ns": 150537.3984375,
+      "after_ns": 150206.55078125,
+      "latency_reduction_pct": -0.4878056903012684,
+      "paired_ratios": [
+        1.0439046408218635,
+        1.0087131384830583,
+        0.9491188389572133,
+        1.0010429753229668
+      ],
+      "worst_paired_reduction_pct": -4.390464082186352
+    },
+    "rgb_histogram.flat": {
+      "before_ns": 334178.7265625,
+      "after_ns": 327891.734375,
+      "latency_reduction_pct": 1.9660412072550981,
+      "paired_ratios": [
+        1.0043754036714894,
+        0.976304969513639,
+        0.9344002197461688,
+        0.9843742063412592
+      ],
+      "worst_paired_reduction_pct": -0.4375403671489364
+    },
+    "rgb_histogram.small": {
+      "before_ns": 1520.9481506347656,
+      "after_ns": 1598.3622741699219,
+      "latency_reduction_pct": -5.009652526332253,
+      "paired_ratios": [
+        1.0295809089246284,
+        1.0627095987277726,
+        1.0521548075870286,
+        1.0480382429396167
+      ],
+      "worst_paired_reduction_pct": -6.27095987277726
+    }
+  }
+}
