@@ -26,6 +26,10 @@ return contract, failure behavior, and a complete example.
 | Images | [image_quality](python/image_quality.md) | Exposure, sharpness, RGB hash |
 | Images | [transform_image](python/transform_image.md) | Cropped/resized PNG |
 | Video | [validate_video](python/validate_video.md) | Complete first-stream decoding report |
+| Time | [sample_support](python/sample_support.md) | previous / next / supported |
+| Selection | [motion_bounds](python/motion_bounds.md) | [start, stop) |
+| Filtering | [polyphase_fir](python/polyphase_fir.md) | float64[M,D] |
+| Images | [rgb_histogram](python/rgb_histogram.md) | int64[3,256] |
 
 `ops.__version__` is a string. Private `_native` symbols are not a public API.
 

@@ -25,6 +25,10 @@
 | 图像 | [image_quality](python/image_quality.md) | 曝光、清晰度、RGB hash |
 | 图像 | [transform_image](python/transform_image.md) | 裁剪/缩放后的 PNG |
 | 视频 | [validate_video](python/validate_video.md) | 首个视频流完整解码报告 |
+| 时间 | [sample_support](python/sample_support.md) | previous / next / supported |
+| 选择 | [motion_bounds](python/motion_bounds.md) | [start, stop) |
+| 滤波 | [polyphase_fir](python/polyphase_fir.md) | float64[M,D] |
+| 图像 | [rgb_histogram](python/rgb_histogram.md) | int64[3,256] |
 
 `ops.__version__` 是字符串；私有 `_native` 符号不属于公共 API。
 

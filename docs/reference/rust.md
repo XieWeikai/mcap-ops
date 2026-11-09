@@ -145,3 +145,9 @@ see [quality_pipeline.rs](../../crates/core/examples/quality_pipeline.rs).
 Implementing `SignalDecoder` is explained in the [Rust extension guide](../rust.md).
 
 [Types and contracts](types.md) · [Rust usage and extensions](../rust.md) · [Python API](index.md)
+
+- [sample_support](https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/fn.sample_support.html)
+- [motion_bounds](https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/selection/fn.motion_bounds.html)
+- [polyphase_fir](https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/polyphase/fn.polyphase_fir.html)
+- [rgb_histogram](https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_io/image_ops/fn.rgb_histogram.html)
+- [SampleSupport](https://xieweikai.github.io/mcap-ops/rustdoc/mcap_ops_core/time/struct.SampleSupport.html)

@@ -16,6 +16,11 @@ from ._native import (
     inspect_signal as _inspect_signal,
     lowpass_taps,
     package_version,
+    sample_support,
+    motion_bounds,
+    polyphase_fir,
+    rgb_histogram,
+
     read_json_signal as _read_json_signal,
     resample as _resample,
     transform_image,
@@ -112,6 +117,7 @@ def validate_video(path, *, ffmpeg="ffmpeg", ffprobe="ffprobe", timeout_seconds=
 
 
 __all__ = [
+    "sample_support", "motion_bounds", "polyphase_fir", "rgb_histogram",
     "__version__", "align_timestamps", "ema", "history_windows", "image_quality",
     "inspect_mcap", "inspect_signal", "resample", "uniform_grid", "validate_video",
     "fir", "lowpass_taps", "unwrap_angles", "transform_image", "read_json_signal",

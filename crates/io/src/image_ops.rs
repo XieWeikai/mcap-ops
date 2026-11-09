@@ -191,3 +191,19 @@ pub fn transform_image(
     image.write_to(&mut output, ImageFormat::Png)?;
     Ok(output.into_inner())
 }
+
+/// Exact channel-major counts for interleaved RGB8 (including repeated pixels).
+pub fn rgb_histogram(rgb: &[u8]) -> crate::Result<Vec<i64>> {
+    if !rgb.len().is_multiple_of(3) {
+        return Err(crate::Error::Invalid(
+            "RGB buffer must contain complete triples".into(),
+        ));
+    }
+    let mut counts = vec![0; 3 * 256];
+    for pixel in rgb.chunks_exact(3) {
+        for channel in 0..3 {
+            counts[channel * 256 + usize::from(pixel[channel])] += 1;
+        }
+    }
+    Ok(counts)
+}

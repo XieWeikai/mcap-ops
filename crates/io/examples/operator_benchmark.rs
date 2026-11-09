@@ -182,6 +182,83 @@ fn main() {
             .unwrap_or(20.0),
     };
     assert!(runner.samples > 0 && runner.millis > 0.0);
+    // Independent fixtures for offline support, endpoint selection, rational FIR and RGB pixels.
+    for (suffix, n, c) in [("scalar", 6000, 1), ("multi", 12000, 16)] {
+        let input = signal(n, c, true);
+        let q: Vec<i64> = input
+            .timestamps()
+            .iter()
+            .step_by(3)
+            .map(|t| t + 1)
+            .collect();
+        runner.bench(&format!("sample_support.{suffix}"), || {
+            time::sample_support(black_box(input.timestamps()), black_box(&q), 5_000_000).unwrap()
+        });
+        let limits = vec![0.12; c];
+        runner.bench(&format!("motion_bounds.{suffix}"), || {
+            selection::motion_bounds(black_box(&input), black_box(&limits), 200_000_000).unwrap()
+        });
+        let (up, down) = if c == 1 { (3, 7) } else { (1, 4) };
+        let taps = filter::lowpass_taps(1000.0, 90.0, 81).unwrap();
+        runner.bench(&format!("polyphase_fir.{suffix}"), || {
+            mcap_ops_core::polyphase::polyphase_fir(
+                black_box(input.values()),
+                c,
+                up,
+                down,
+                black_box(&taps),
+            )
+            .unwrap()
+        });
+    }
+    for (suffix, scale) in [("textured", 31), ("flat", 0)] {
+        let rgb: Vec<_> = (0..640 * 360 * 3)
+            .map(|i: usize| (i.wrapping_mul(scale) >> 3) as u8)
+            .collect();
+        runner.bench(&format!("rgb_histogram.{suffix}"), || {
+            image_ops::rgb_histogram(black_box(&rgb)).unwrap()
+        });
+    }
+    let distant = signal(50_000, 1, true);
+    let backwards: Vec<_> = distant
+        .timestamps()
+        .iter()
+        .rev()
+        .step_by(997)
+        .copied()
+        .collect();
+    runner.bench("sample_support.sparse", || {
+        time::sample_support(
+            black_box(distant.timestamps()),
+            black_box(&backwards),
+            2_000_000,
+        )
+        .unwrap()
+    });
+    let quiet = Signal::new(
+        (0..5000).map(|i| i * 10_000_000).collect(),
+        vec![2.0; 5000 * 4],
+        4,
+    )
+    .unwrap();
+    runner.bench("motion_bounds.static", || {
+        selection::motion_bounds(black_box(&quiet), black_box(&[0.1; 4]), 200_000_000).unwrap()
+    });
+    let clip = signal(32, 3, false);
+    runner.bench("polyphase_fir.short", || {
+        mcap_ops_core::polyphase::polyphase_fir(
+            black_box(clip.values()),
+            3,
+            3,
+            7,
+            black_box(&[0.1; 35]),
+        )
+        .unwrap()
+    });
+    let icon = vec![75_u8; 32 * 32 * 3];
+    runner.bench("rgb_histogram.small", || {
+        image_ops::rgb_histogram(black_box(&icon)).unwrap()
+    });
     let dense = signal(50_000, 6, false);
     let jitter = signal(50_000, 6, true);
     let times = dense.timestamps();

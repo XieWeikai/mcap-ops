@@ -1,7 +1,9 @@
 //! Stable Python seam over the Rust implementations.
 use mcap_ops_core::{filter, quality, sampling, time, Signal};
 use mcap_ops_io::{image_ops, mcap_ops, video};
-use numpy::{IntoPyArray, PyReadonlyArray1, PyReadonlyArrayDyn};
+use numpy::{
+    IntoPyArray, PyReadonlyArray1, PyReadonlyArray2, PyReadonlyArray3, PyReadonlyArrayDyn,
+};
 use pyo3::types::PyDict;
 use pyo3::{
     exceptions::{PyIOError, PyValueError},
@@ -411,8 +413,86 @@ fn package_version() -> &'static str {
     env!("CARGO_PKG_VERSION")
 }
 
+#[pyfunction]
+fn sample_support(
+    py: Python<'_>,
+    source: PyReadonlyArray1<'_, i64>,
+    target: PyReadonlyArray1<'_, i64>,
+    max_gap_ns: i64,
+) -> PyResult<Py<PyDict>> {
+    let r = time::sample_support(source.as_slice()?, target.as_slice()?, max_gap_ns)
+        .map_err(map_core_error)?;
+    let d = PyDict::new(py);
+    d.set_item("previous", r.previous.into_pyarray(py))?;
+    d.set_item("next", r.next.into_pyarray(py))?;
+    d.set_item("supported", r.supported.into_pyarray(py))?;
+    Ok(d.unbind())
+}
+
+#[pyfunction]
+fn motion_bounds(
+    timestamps: PyReadonlyArray1<'_, i64>,
+    values: PyReadonlyArrayDyn<'_, f64>,
+    thresholds: PyReadonlyArray1<'_, f64>,
+    edge_ns: i64,
+) -> PyResult<Option<(usize, usize)>> {
+    mcap_ops_core::selection::motion_bounds(
+        &signal_from_arrays(timestamps, values)?,
+        thresholds.as_slice()?,
+        edge_ns,
+    )
+    .map_err(map_core_error)
+}
+
+#[pyfunction]
+fn polyphase_fir<'py>(
+    py: Python<'py>,
+    values: PyReadonlyArray2<'_, f64>,
+    up: u32,
+    down: u32,
+    taps: PyReadonlyArray1<'_, f64>,
+) -> PyResult<Bound<'py, numpy::PyArray2<f64>>> {
+    let a = values.as_array();
+    let c = a.ncols();
+    let input = a.as_standard_layout();
+    let out = mcap_ops_core::polyphase::polyphase_fir(
+        input.as_slice().unwrap(),
+        c,
+        up,
+        down,
+        taps.as_slice()?,
+    )
+    .map_err(map_core_error)?;
+    Ok(
+        numpy::ndarray::Array2::from_shape_vec((out.len() / c, c), out)
+            .expect("validated matrix")
+            .into_pyarray(py),
+    )
+}
+
+#[pyfunction]
+fn rgb_histogram<'py>(
+    py: Python<'py>,
+    image: PyReadonlyArray3<'_, u8>,
+) -> PyResult<Bound<'py, numpy::PyArray2<i64>>> {
+    let a = image.as_array();
+    if a.shape()[2] != 3 {
+        return Err(PyValueError::new_err("expected H,W,3 RGB8"));
+    }
+    let input = a.as_standard_layout();
+    let counts = image_ops::rgb_histogram(input.as_slice().unwrap())
+        .map_err(|e| PyValueError::new_err(e.to_string()))?;
+    Ok(numpy::ndarray::Array2::from_shape_vec((3, 256), counts)
+        .expect("three RGB histograms")
+        .into_pyarray(py))
+}
+
 #[pymodule]
 fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    module.add_function(wrap_pyfunction!(sample_support, module)?)?;
+    module.add_function(wrap_pyfunction!(motion_bounds, module)?)?;
+    module.add_function(wrap_pyfunction!(polyphase_fir, module)?)?;
+    module.add_function(wrap_pyfunction!(rgb_histogram, module)?)?;
     module.add_function(wrap_pyfunction!(inspect_signal, module)?)?;
     module.add_function(wrap_pyfunction!(resample, module)?)?;
     module.add_function(wrap_pyfunction!(history_windows, module)?)?;

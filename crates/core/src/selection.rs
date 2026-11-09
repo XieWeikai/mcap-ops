@@ -154,3 +154,54 @@ impl IntervalSet {
         Ok(Self { intervals: merged })
     }
 }
+
+/// Half-open row bounds around motion relative to endpoint-window medians.
+/// None means no usable motion interval. Thresholds use each input channel's units.
+pub fn motion_bounds(
+    signal: &crate::Signal,
+    thresholds: &[f64],
+    edge_ns: i64,
+) -> crate::Result<Option<(usize, usize)>> {
+    signal.require_ordered()?;
+    if edge_ns < 0
+        || thresholds.len() != signal.channels()
+        || thresholds.iter().any(|&v| !v.is_finite() || v < 0.0)
+        || signal.values().iter().any(|v| !v.is_finite())
+    {
+        return Err(crate::invalid("finite values, one finite nonnegative threshold per channel, and nonnegative edge_ns required"));
+    }
+    let t = signal.timestamps();
+    if t.len() < 2 {
+        return Ok(None);
+    }
+    let head = t.partition_point(|v| v.abs_diff(t[0]) <= edge_ns as u64);
+    let tail = t.partition_point(|v| v.abs_diff(t[t.len() - 1]) > edge_ns as u64);
+    let medians = |range: std::ops::Range<usize>| -> Vec<f64> {
+        (0..signal.channels())
+            .map(|c| {
+                let mut x: Vec<_> = range.clone().map(|i| signal.row(i)[c]).collect();
+                x.sort_unstable_by(f64::total_cmp);
+                let m = x.len() / 2;
+                if x.len() % 2 == 0 {
+                    (x[m - 1] + x[m]) * 0.5
+                } else {
+                    x[m]
+                }
+            })
+            .collect()
+    };
+    let first = medians(0..head);
+    let last = medians(tail..t.len());
+    let differs = |row: &[f64], reference: &[f64]| {
+        row.iter()
+            .zip(reference)
+            .zip(thresholds)
+            .any(|((&x, &y), &limit)| (x - y).abs() > limit)
+    };
+    let a = (0..t.len()).find(|&i| differs(signal.row(i), &first));
+    let b = (0..t.len()).rfind(|&i| differs(signal.row(i), &last));
+    Ok(a.zip(b).and_then(|(a, b)| {
+        let bounds = (a.saturating_sub(1), (b + 2).min(t.len()));
+        (bounds.1.saturating_sub(bounds.0) >= 2).then_some(bounds)
+    }))
+}

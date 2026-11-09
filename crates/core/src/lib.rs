@@ -1,5 +1,6 @@
 //! File-independent operators. All timestamps are integer nanoseconds.
 pub mod filter;
+pub mod polyphase;
 pub mod quality;
 pub mod sampling;
 pub mod selection;

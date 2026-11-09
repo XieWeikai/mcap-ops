@@ -273,3 +273,40 @@ pub fn expand_batch_timestamps(
     }
     Ok(result)
 }
+
+/// Original bracketing sample indices (-1 if absent) and offline gap support.
+#[derive(Clone, Debug, PartialEq)]
+pub struct SampleSupport {
+    pub previous: Vec<i64>,
+    pub next: Vec<i64>,
+    pub supported: Vec<bool>,
+}
+
+/// Query order is preserved. Exact observations remain valid at either edge of a gap.
+pub fn sample_support(source: &[i64], target: &[i64], max_gap_ns: i64) -> Result<SampleSupport> {
+    require_strict(source)?;
+    if max_gap_ns < 0 {
+        return Err(invalid("negative gap limit"));
+    }
+    let mut result = SampleSupport {
+        previous: Vec::with_capacity(target.len()),
+        next: Vec::with_capacity(target.len()),
+        supported: Vec::with_capacity(target.len()),
+    };
+    for &t in target {
+        let r = source.partition_point(|&s| s < t);
+        let exact = source.get(r) == Some(&t);
+        let left = if exact { r as i64 } else { r as i64 - 1 };
+        result.previous.push(left);
+        result
+            .next
+            .push(if r < source.len() { r as i64 } else { -1 });
+        result.supported.push(
+            exact
+                || (r > 0
+                    && r < source.len()
+                    && source[r].abs_diff(source[r - 1]) <= max_gap_ns as u64),
+        );
+    }
+    Ok(result)
+}
