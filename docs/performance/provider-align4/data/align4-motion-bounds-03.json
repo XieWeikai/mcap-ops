@@ -1,0 +1,442 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "environment": "Linux x86-64 reference environment",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": ".artifacts/rsi/provider-align4/accepted",
+      "bytes": 27570656,
+      "sha256": "5b5ecc4475dadda81ca99c41aa8a7665f73b8ce63da6e68d7f120d51cc31a7fc"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": ".artifacts/rsi/bin/align4-motion-bounds-03",
+      "bytes": 27572064,
+      "sha256": "deb2f8d2a699bf6698b2482e9aa623c6d01a7d20b69db61eb84dd853649c9e75"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "motion_bounds.scalar": {
+          "case": "motion_bounds.scalar",
+          "iterations": 8192,
+          "median_ns": 2648.12353515625,
+          "samples_ns": [
+            2799.9666748046875,
+            2648.12353515625,
+            2658.2989501953125,
+            2668.0037841796875,
+            2607.815185546875,
+            2606.1494140625,
+            2609.4326171875
+          ]
+        },
+        "motion_bounds.multi": {
+          "case": "motion_bounds.multi",
+          "iterations": 512,
+          "median_ns": 48704.232421875,
+          "samples_ns": [
+            49430.45703125,
+            47978.720703125,
+            48704.232421875,
+            49064.52734375,
+            48934.046875,
+            48398.2890625,
+            48426.34765625
+          ]
+        },
+        "motion_bounds.static": {
+          "case": "motion_bounds.static",
+          "iterations": 1024,
+          "median_ns": 22370.8310546875,
+          "samples_ns": [
+            22347.8271484375,
+            22320.9873046875,
+            22624.7333984375,
+            22370.8310546875,
+            22646.1494140625,
+            22305.625,
+            22821.458984375
+          ]
+        }
+      },
+      "after": {
+        "motion_bounds.scalar": {
+          "case": "motion_bounds.scalar",
+          "iterations": 8192,
+          "median_ns": 2582.2947998046875,
+          "samples_ns": [
+            2581.196533203125,
+            2582.4588623046875,
+            2571.4239501953125,
+            2564.862548828125,
+            2582.2947998046875,
+            2587.320556640625,
+            2589.682861328125
+          ]
+        },
+        "motion_bounds.multi": {
+          "case": "motion_bounds.multi",
+          "iterations": 512,
+          "median_ns": 47654.041015625,
+          "samples_ns": [
+            48667.916015625,
+            47654.041015625,
+            47472.47265625,
+            47659.6875,
+            47319.556640625,
+            47437.93359375,
+            49065.48046875
+          ]
+        },
+        "motion_bounds.static": {
+          "case": "motion_bounds.static",
+          "iterations": 1024,
+          "median_ns": 23130.3701171875,
+          "samples_ns": [
+            22820.140625,
+            23257.34375,
+            22864.7919921875,
+            23137.896484375,
+            23956.126953125,
+            23130.3701171875,
+            22575.1572265625
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "motion_bounds.scalar": {
+          "case": "motion_bounds.scalar",
+          "iterations": 8192,
+          "median_ns": 2613.50732421875,
+          "samples_ns": [
+            2598.6744384765625,
+            2584.6600341796875,
+            2644.6051025390625,
+            2640.48388671875,
+            2634.648681640625,
+            2613.50732421875,
+            2592.0184326171875
+          ]
+        },
+        "motion_bounds.multi": {
+          "case": "motion_bounds.multi",
+          "iterations": 512,
+          "median_ns": 48134.3515625,
+          "samples_ns": [
+            47759.6875,
+            48456.3359375,
+            47892.029296875,
+            47985.8828125,
+            48400.83203125,
+            48742.68359375,
+            48134.3515625
+          ]
+        },
+        "motion_bounds.static": {
+          "case": "motion_bounds.static",
+          "iterations": 1024,
+          "median_ns": 22144.5087890625,
+          "samples_ns": [
+            22336.1083984375,
+            23330.2099609375,
+            22144.5087890625,
+            22154.568359375,
+            22010.93359375,
+            22095.5341796875,
+            22044.892578125
+          ]
+        }
+      },
+      "before": {
+        "motion_bounds.scalar": {
+          "case": "motion_bounds.scalar",
+          "iterations": 8192,
+          "median_ns": 2670.62890625,
+          "samples_ns": [
+            2650.5533447265625,
+            3109.903076171875,
+            3901.854858398438,
+            2670.62890625,
+            2690.108642578125,
+            2653.698974609375,
+            2623.5821533203125
+          ]
+        },
+        "motion_bounds.multi": {
+          "case": "motion_bounds.multi",
+          "iterations": 512,
+          "median_ns": 49420.24609375,
+          "samples_ns": [
+            48816.580078125,
+            48493.0390625,
+            48676.923828125,
+            50349.541015625,
+            49420.24609375,
+            49499.556640625,
+            50737.703125
+          ]
+        },
+        "motion_bounds.static": {
+          "case": "motion_bounds.static",
+          "iterations": 1024,
+          "median_ns": 22500.9794921875,
+          "samples_ns": [
+            22578.6572265625,
+            22500.9794921875,
+            22545.306640625,
+            22637.662109375,
+            22406.9521484375,
+            22397.91015625,
+            22421.1875
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "motion_bounds.scalar": {
+          "case": "motion_bounds.scalar",
+          "iterations": 8192,
+          "median_ns": 2646.37158203125,
+          "samples_ns": [
+            2646.37158203125,
+            2667.626953125,
+            2642.1370849609375,
+            2640.99755859375,
+            2649.1517333984375,
+            2649.8194580078125,
+            2639.4605712890625
+          ]
+        },
+        "motion_bounds.multi": {
+          "case": "motion_bounds.multi",
+          "iterations": 512,
+          "median_ns": 49338.236328125,
+          "samples_ns": [
+            49686.298828125,
+            49026.087890625,
+            49085.791015625,
+            50226.08984375,
+            48757.486328125,
+            50271.884765625,
+            49338.236328125
+          ]
+        },
+        "motion_bounds.static": {
+          "case": "motion_bounds.static",
+          "iterations": 1024,
+          "median_ns": 22661.830078125,
+          "samples_ns": [
+            23005.4599609375,
+            22661.830078125,
+            22437.4228515625,
+            22543.595703125,
+            22937.3134765625,
+            22665.3837890625,
+            22450.3447265625
+          ]
+        }
+      },
+      "after": {
+        "motion_bounds.scalar": {
+          "case": "motion_bounds.scalar",
+          "iterations": 8192,
+          "median_ns": 2625.963623046875,
+          "samples_ns": [
+            2683.9036865234375,
+            2623.6865234375,
+            2625.963623046875,
+            2633.1513671875,
+            2621.8182373046875,
+            2613.781005859375,
+            2671.137451171875
+          ]
+        },
+        "motion_bounds.multi": {
+          "case": "motion_bounds.multi",
+          "iterations": 512,
+          "median_ns": 48503.505859375,
+          "samples_ns": [
+            48149.64453125,
+            48048.63671875,
+            48576.263671875,
+            47886.54296875,
+            48503.505859375,
+            49005.26953125,
+            49559.42578125
+          ]
+        },
+        "motion_bounds.static": {
+          "case": "motion_bounds.static",
+          "iterations": 1024,
+          "median_ns": 22496.5966796875,
+          "samples_ns": [
+            22423.1357421875,
+            22354.431640625,
+            22565.9287109375,
+            22574.7529296875,
+            22257.7412109375,
+            22603.130859375,
+            22496.5966796875
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "motion_bounds.scalar": {
+          "case": "motion_bounds.scalar",
+          "iterations": 8192,
+          "median_ns": 2652.7884521484375,
+          "samples_ns": [
+            2592.5086669921875,
+            2618.2978515625,
+            2647.4306640625,
+            2652.7884521484375,
+            2658.16015625,
+            2676.4261474609375,
+            2667.1466064453125
+          ]
+        },
+        "motion_bounds.multi": {
+          "case": "motion_bounds.multi",
+          "iterations": 512,
+          "median_ns": 49192.7578125,
+          "samples_ns": [
+            49192.7578125,
+            49944.984375,
+            49724.2265625,
+            48940.912109375,
+            49977.861328125,
+            48924.185546875,
+            48824.48046875
+          ]
+        },
+        "motion_bounds.static": {
+          "case": "motion_bounds.static",
+          "iterations": 1024,
+          "median_ns": 22171.044921875,
+          "samples_ns": [
+            22137.892578125,
+            22131.9462890625,
+            23395.3232421875,
+            21951.576171875,
+            22193.72265625,
+            22315.7734375,
+            22171.044921875
+          ]
+        }
+      },
+      "before": {
+        "motion_bounds.scalar": {
+          "case": "motion_bounds.scalar",
+          "iterations": 8192,
+          "median_ns": 2672.1573486328125,
+          "samples_ns": [
+            2672.1573486328125,
+            2680.3990478515625,
+            2639.845458984375,
+            2716.6822509765625,
+            2705.36767578125,
+            2661.1988525390625,
+            2633.413818359375
+          ]
+        },
+        "motion_bounds.multi": {
+          "case": "motion_bounds.multi",
+          "iterations": 512,
+          "median_ns": 47995.01953125,
+          "samples_ns": [
+            47735.134765625,
+            47995.01953125,
+            47770.37109375,
+            47967.677734375,
+            48361.451171875,
+            52700.716796875,
+            56282.69140625
+          ]
+        },
+        "motion_bounds.static": {
+          "case": "motion_bounds.static",
+          "iterations": 1024,
+          "median_ns": 22162.251953125,
+          "samples_ns": [
+            22162.251953125,
+            22126.4482421875,
+            22083.4130859375,
+            21946.064453125,
+            22505.8408203125,
+            22370.349609375,
+            22247.392578125
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "motion_bounds.scalar": {
+      "before_ns": 2659.376220703125,
+      "after_ns": 2619.7354736328125,
+      "latency_reduction_pct": 1.4550244222897746,
+      "paired_ratios": [
+        0.9751413653941645,
+        0.9786111870887153,
+        0.9922883244654892,
+        0.9927515883395546
+      ],
+      "worst_paired_reduction_pct": 0.7248411660445431
+    },
+    "motion_bounds.multi": {
+      "before_ns": 49021.234375,
+      "after_ns": 48318.9287109375,
+      "latency_reduction_pct": 1.924058102567583,
+      "paired_ratios": [
+        0.9784373687043609,
+        0.9739804101984708,
+        0.9830814692442874,
+        1.0249554702331174
+      ],
+      "worst_paired_reduction_pct": -2.4955470233117394
+    },
+    "motion_bounds.static": {
+      "before_ns": 22435.9052734375,
+      "after_ns": 22333.82080078125,
+      "latency_reduction_pct": 0.34472551285534836,
+      "paired_ratios": [
+        1.0339522059168584,
+        0.9841575473081619,
+        0.9927087354433481,
+        1.0003967542995449
+      ],
+      "worst_paired_reduction_pct": -3.3952205916858436
+    }
+  }
+}

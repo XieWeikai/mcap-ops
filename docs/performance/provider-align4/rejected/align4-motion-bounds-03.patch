@@ -1,0 +1,17 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 9f01df3..b072ec2 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -177,9 +177,11 @@ pub fn motion_bounds(
+     let head = t.partition_point(|v| v.abs_diff(t[0]) <= edge_ns as u64);
+     let tail = t.partition_point(|v| v.abs_diff(t[t.len() - 1]) > edge_ns as u64);
+     let medians = |range: std::ops::Range<usize>| -> Vec<f64> {
++        let mut x = Vec::with_capacity(range.len());
+         (0..signal.channels())
+             .map(|c| {
+-                let mut x: Vec<_> = range.clone().map(|i| signal.row(i)[c]).collect();
++                x.clear();
++                x.extend(range.clone().map(|i| signal.row(i)[c]));
+                 x.sort_unstable_by(f64::total_cmp);
+                 let m = x.len() / 2;
+                 if x.len() % 2 == 0 {
