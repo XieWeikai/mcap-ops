@@ -1,0 +1,23 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index d842c41..18f53a0 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -288,6 +288,9 @@ pub fn sample_support(source: &[i64], target: &[i64], max_gap_ns: i64) -> Result
+     if max_gap_ns < 0 {
+         return Err(invalid("negative gap limit"));
+     }
++    let gap_free = source
++        .windows(2)
++        .all(|w| w[1].abs_diff(w[0]) <= max_gap_ns as u64);
+     let mut result = SampleSupport {
+         previous: Vec::with_capacity(target.len()),
+         next: Vec::with_capacity(target.len()),
+@@ -314,7 +317,7 @@ pub fn sample_support(source: &[i64], target: &[i64], max_gap_ns: i64) -> Result
+             exact
+                 || (r > 0
+                     && r < source.len()
+-                    && source[r].abs_diff(source[r - 1]) <= max_gap_ns as u64),
++                    && (gap_free || source[r].abs_diff(source[r - 1]) <= max_gap_ns as u64)),
+         );
+     }
+     Ok(result)
