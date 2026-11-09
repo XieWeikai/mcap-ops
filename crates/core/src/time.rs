@@ -293,8 +293,17 @@ pub fn sample_support(source: &[i64], target: &[i64], max_gap_ns: i64) -> Result
         next: Vec::with_capacity(target.len()),
         supported: Vec::with_capacity(target.len()),
     };
+    let scan = target.len().saturating_mul(16) >= source.len() && target.is_sorted();
+    let mut cursor = 0;
     for &t in target {
-        let r = source.partition_point(|&s| s < t);
+        let r = if scan {
+            while cursor < source.len() && source[cursor] < t {
+                cursor += 1;
+            }
+            cursor
+        } else {
+            source.partition_point(|&s| s < t)
+        };
         let exact = source.get(r) == Some(&t);
         let left = if exact { r as i64 } else { r as i64 - 1 };
         result.previous.push(left);

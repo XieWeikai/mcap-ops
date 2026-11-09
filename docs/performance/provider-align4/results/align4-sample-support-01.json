@@ -1,0 +1,66 @@
+{
+  "label": "align4-sample-support-01",
+  "series": "provider-align4",
+  "base_commit": "2200cca2a467f5698518c0ace4b73adca6ef2abf",
+  "cases": [
+    "sample_support.scalar",
+    "sample_support.multi",
+    "sample_support.sparse"
+  ],
+  "geomean_latency_reduction_pct": 56.523756629461715,
+  "worst_block_reduction_pct": 56.112323332585866,
+  "worst_case_reduction_pct": 0.3582375294006068,
+  "performance_gate": true,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "One monotonicity pass and bounded cursor. Sparse and unordered queries retain binary search.",
+  "paths": [
+    "crates/core/src/time.rs"
+  ],
+  "measurement_sha256": "c5c497d12380600354ba841414169dd169c25289f7b65eee1345a35a2fe2995e",
+  "operator": "sample_support",
+  "round": 1,
+  "decision": "accepted",
+  "method": "advance a cursor for dense ordered queries",
+  "profile_hotspot": "Bracket search accounts for the largest native instruction share; output and coverage validation remain in the measured path.",
+  "reason": "Retain: correctness and all paired performance gates passed.",
+  "case_results": {
+    "sample_support.scalar": {
+      "before_ns": 18488.250732421875,
+      "after_ns": 5614.983154296875,
+      "latency_reduction_pct": 69.56989972611905,
+      "paired_ratios": [
+        0.3057780220707456,
+        0.30354387293613355,
+        0.30505813254148545,
+        0.2977609293767191
+      ],
+      "worst_paired_reduction_pct": 69.42219779292545
+    },
+    "sample_support.multi": {
+      "before_ns": 40511.4482421875,
+      "after_ns": 11063.354248046875,
+      "latency_reduction_pct": 72.6994000811877,
+      "paired_ratios": [
+        0.27149628631544176,
+        0.26612947601816467,
+        0.27650578963561273,
+        0.27451571206080416
+      ],
+      "worst_paired_reduction_pct": 72.34942103643873
+    },
+    "sample_support.sparse": {
+      "before_ns": 5878.59716796875,
+      "after_ns": 5846.8896484375,
+      "latency_reduction_pct": 0.3582375294006068,
+      "paired_ratios": [
+        0.9906663165239536,
+        0.9521887536063096,
+        1.002168932888034,
+        1.0045683756234562
+      ],
+      "worst_paired_reduction_pct": -0.45683756234562445
+    }
+  },
+  "profile_remote_path": ".artifacts/rsi/trials/align4-sample-support-01",
+  "validation_sha256": "ccb35402bfebc5bf9dc5a163c04cc31563d279ca92f6c8c24dacd279106362e6"
+}
