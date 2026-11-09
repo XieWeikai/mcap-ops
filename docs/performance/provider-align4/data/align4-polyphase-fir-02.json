@@ -1,0 +1,442 @@
+{
+  "schema": "mcap-ops-rsi-paired-v1",
+  "environment": "Linux x86-64 reference environment",
+  "platform": "Linux-6.11.0-17-generic-x86_64-with-glibc2.39",
+  "before_artifacts": [
+    {
+      "path": ".artifacts/rsi/provider-align4/accepted",
+      "bytes": 27570656,
+      "sha256": "5b5ecc4475dadda81ca99c41aa8a7665f73b8ce63da6e68d7f120d51cc31a7fc"
+    }
+  ],
+  "after_artifacts": [
+    {
+      "path": ".artifacts/rsi/bin/align4-polyphase-fir-02",
+      "bytes": 27572344,
+      "sha256": "e3095e65f9608a24c84ac9b013075cd448dab0f60d1f5473f92c770014cb1c08"
+    }
+  ],
+  "cpu": 12,
+  "samples_per_block": 7,
+  "target_millis_per_sample": 20,
+  "runs": [
+    {
+      "block": 0,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "polyphase_fir.scalar": {
+          "case": "polyphase_fir.scalar",
+          "iterations": 64,
+          "median_ns": 429807.359375,
+          "samples_ns": [
+            431858.0,
+            483956.96875,
+            471970.484375,
+            429807.359375,
+            427806.796875,
+            425483.890625,
+            426340.296875
+          ]
+        },
+        "polyphase_fir.multi": {
+          "case": "polyphase_fir.multi",
+          "iterations": 16,
+          "median_ns": 2328206.0625,
+          "samples_ns": [
+            2328206.0625,
+            2760479.0625,
+            2563906.0625,
+            2289194.375,
+            2303134.25,
+            2339459.375,
+            2327445.1875
+          ]
+        },
+        "polyphase_fir.short": {
+          "case": "polyphase_fir.short",
+          "iterations": 16384,
+          "median_ns": 1247.5731201171875,
+          "samples_ns": [
+            1251.52490234375,
+            1257.4354248046875,
+            1261.6561889648438,
+            1238.0413208007812,
+            1236.3054809570312,
+            1247.5731201171875,
+            1238.0497436523438
+          ]
+        }
+      },
+      "after": {
+        "polyphase_fir.scalar": {
+          "case": "polyphase_fir.scalar",
+          "iterations": 128,
+          "median_ns": 179231.828125,
+          "samples_ns": [
+            181311.0,
+            183276.5703125,
+            179231.828125,
+            177067.03125,
+            178712.09375,
+            181464.9140625,
+            179109.359375
+          ]
+        },
+        "polyphase_fir.multi": {
+          "case": "polyphase_fir.multi",
+          "iterations": 32,
+          "median_ns": 976245.75,
+          "samples_ns": [
+            985579.4687500001,
+            984706.15625,
+            976245.75,
+            969053.125,
+            963022.5,
+            956127.0,
+            1039556.625
+          ]
+        },
+        "polyphase_fir.short": {
+          "case": "polyphase_fir.short",
+          "iterations": 32768,
+          "median_ns": 638.0287780761719,
+          "samples_ns": [
+            637.2763366699219,
+            631.6912841796875,
+            636.7818603515625,
+            639.8049011230469,
+            638.1546325683594,
+            645.6703796386719,
+            638.0287780761719
+          ]
+        }
+      }
+    },
+    {
+      "block": 1,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "polyphase_fir.scalar": {
+          "case": "polyphase_fir.scalar",
+          "iterations": 128,
+          "median_ns": 177534.796875,
+          "samples_ns": [
+            178568.4375,
+            175267.7265625,
+            176700.9140625,
+            177280.1015625,
+            178724.875,
+            179224.359375,
+            177534.796875
+          ]
+        },
+        "polyphase_fir.multi": {
+          "case": "polyphase_fir.multi",
+          "iterations": 32,
+          "median_ns": 970707.1875,
+          "samples_ns": [
+            961803.21875,
+            984136.6249999999,
+            970707.1875,
+            963911.625,
+            963195.21875,
+            986331.0,
+            978023.1875000001
+          ]
+        },
+        "polyphase_fir.short": {
+          "case": "polyphase_fir.short",
+          "iterations": 32768,
+          "median_ns": 643.5860290527344,
+          "samples_ns": [
+            647.6716003417969,
+            643.5860290527344,
+            632.1196899414062,
+            635.9071350097656,
+            638.8685607910156,
+            648.1813049316406,
+            644.772216796875
+          ]
+        }
+      },
+      "before": {
+        "polyphase_fir.scalar": {
+          "case": "polyphase_fir.scalar",
+          "iterations": 64,
+          "median_ns": 431450.75,
+          "samples_ns": [
+            428959.953125,
+            431519.390625,
+            432417.28125,
+            425428.953125,
+            429744.15625,
+            438223.625,
+            431450.75
+          ]
+        },
+        "polyphase_fir.multi": {
+          "case": "polyphase_fir.multi",
+          "iterations": 16,
+          "median_ns": 2288362.125,
+          "samples_ns": [
+            2288362.125,
+            2293769.1875,
+            2316848.375,
+            2311911.875,
+            2269297.25,
+            2263507.5625,
+            2255654.0
+          ]
+        },
+        "polyphase_fir.short": {
+          "case": "polyphase_fir.short",
+          "iterations": 16384,
+          "median_ns": 1247.5730590820312,
+          "samples_ns": [
+            1248.8358154296875,
+            1245.5692138671875,
+            1243.088134765625,
+            1247.8233642578125,
+            1243.6505737304688,
+            1247.5730590820312,
+            1262.4010620117188
+          ]
+        }
+      }
+    },
+    {
+      "block": 2,
+      "order": [
+        "before",
+        "after"
+      ],
+      "before": {
+        "polyphase_fir.scalar": {
+          "case": "polyphase_fir.scalar",
+          "iterations": 64,
+          "median_ns": 442971.734375,
+          "samples_ns": [
+            487766.796875,
+            475673.203125,
+            439117.25,
+            448419.6875,
+            440374.265625,
+            442971.734375,
+            432117.5
+          ]
+        },
+        "polyphase_fir.multi": {
+          "case": "polyphase_fir.multi",
+          "iterations": 16,
+          "median_ns": 2842879.1875,
+          "samples_ns": [
+            2842879.1875,
+            4120877.9999999995,
+            4401716.625,
+            4299545.3125,
+            2516417.625,
+            2498737.3125,
+            2317485.8125
+          ]
+        },
+        "polyphase_fir.short": {
+          "case": "polyphase_fir.short",
+          "iterations": 16384,
+          "median_ns": 1290.0410766601562,
+          "samples_ns": [
+            1290.0410766601562,
+            1279.0225219726562,
+            1337.614013671875,
+            1287.7301635742188,
+            1302.460205078125,
+            1391.4185180664062,
+            1247.0339965820312
+          ]
+        }
+      },
+      "after": {
+        "polyphase_fir.scalar": {
+          "case": "polyphase_fir.scalar",
+          "iterations": 128,
+          "median_ns": 179352.625,
+          "samples_ns": [
+            179369.6015625,
+            181764.6484375,
+            179352.625,
+            177889.078125,
+            179066.078125,
+            179564.1171875,
+            176755.59375
+          ]
+        },
+        "polyphase_fir.multi": {
+          "case": "polyphase_fir.multi",
+          "iterations": 32,
+          "median_ns": 979256.8749999999,
+          "samples_ns": [
+            976473.53125,
+            972888.53125,
+            966665.59375,
+            1025854.65625,
+            979256.8749999999,
+            981767.5312500001,
+            988529.5312500001
+          ]
+        },
+        "polyphase_fir.short": {
+          "case": "polyphase_fir.short",
+          "iterations": 32768,
+          "median_ns": 640.9165954589844,
+          "samples_ns": [
+            667.0882568359375,
+            653.2731323242188,
+            636.8302917480469,
+            649.5816345214844,
+            640.9165954589844,
+            640.30712890625,
+            638.5115051269531
+          ]
+        }
+      }
+    },
+    {
+      "block": 3,
+      "order": [
+        "after",
+        "before"
+      ],
+      "after": {
+        "polyphase_fir.scalar": {
+          "case": "polyphase_fir.scalar",
+          "iterations": 128,
+          "median_ns": 176722.1953125,
+          "samples_ns": [
+            177294.1171875,
+            177404.1640625,
+            175856.953125,
+            176722.1953125,
+            180906.3671875,
+            176486.25,
+            175556.125
+          ]
+        },
+        "polyphase_fir.multi": {
+          "case": "polyphase_fir.multi",
+          "iterations": 32,
+          "median_ns": 972770.1875,
+          "samples_ns": [
+            961460.125,
+            983947.75,
+            977794.75,
+            972770.1875,
+            951797.28125,
+            967299.84375,
+            975926.25
+          ]
+        },
+        "polyphase_fir.short": {
+          "case": "polyphase_fir.short",
+          "iterations": 32768,
+          "median_ns": 640.7651062011719,
+          "samples_ns": [
+            629.6501159667969,
+            628.4646606445312,
+            635.3701477050781,
+            660.1742553710938,
+            640.7651062011719,
+            640.9496765136719,
+            641.4194641113281
+          ]
+        }
+      },
+      "before": {
+        "polyphase_fir.scalar": {
+          "case": "polyphase_fir.scalar",
+          "iterations": 64,
+          "median_ns": 429678.375,
+          "samples_ns": [
+            429678.375,
+            426293.4375,
+            427417.078125,
+            431329.125,
+            428132.984375,
+            431486.140625,
+            433564.140625
+          ]
+        },
+        "polyphase_fir.multi": {
+          "case": "polyphase_fir.multi",
+          "iterations": 8,
+          "median_ns": 2466060.25,
+          "samples_ns": [
+            4206350.875,
+            4159890.125,
+            2552298.25,
+            2246767.125,
+            2466060.25,
+            2326106.375,
+            2379333.125
+          ]
+        },
+        "polyphase_fir.short": {
+          "case": "polyphase_fir.short",
+          "iterations": 16384,
+          "median_ns": 1269.8548583984375,
+          "samples_ns": [
+            1339.807373046875,
+            1270.7198486328125,
+            1269.8548583984375,
+            1237.7747802734375,
+            1231.7034301757812,
+            1313.5097045898438,
+            1256.9380493164062
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "polyphase_fir.scalar": {
+      "before_ns": 430629.0546875,
+      "after_ns": 178383.3125,
+      "latency_reduction_pct": 58.861358871300204,
+      "paired_ratios": [
+        0.4170050237986342,
+        0.41148334282649873,
+        0.4048850323442265,
+        0.4112894797474972
+      ],
+      "worst_paired_reduction_pct": 58.29949762013658
+    },
+    "polyphase_fir.multi": {
+      "before_ns": 2397133.15625,
+      "after_ns": 974507.96875,
+      "latency_reduction_pct": 59.311214875159315,
+      "paired_ratios": [
+        0.4193124336046608,
+        0.4241929967705614,
+        0.3444595462606164,
+        0.394463268892153
+      ],
+      "worst_paired_reduction_pct": 57.58070032294387
+    },
+    "polyphase_fir.short": {
+      "before_ns": 1258.7139892578125,
+      "after_ns": 640.8408508300781,
+      "latency_reduction_pct": 49.19934700257234,
+      "paired_ratios": [
+        0.5114159385032601,
+        0.5158704128528451,
+        0.49681875023567573,
+        0.5045971214452931
+      ],
+      "worst_paired_reduction_pct": 48.412958714715494
+    }
+  }
+}

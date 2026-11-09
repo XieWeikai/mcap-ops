@@ -41,10 +41,16 @@ pub fn polyphase_fir(
         let first = -(half - j as i128 * down).div_euclid(up);
         for i in first..=last {
             let h = taps[(half + j as i128 * down - i * up) as usize] * up as f64;
+            if (0..n).contains(&i) {
+                let src = &values[i as usize * channels..(i as usize + 1) * channels];
+                let dest = &mut out[j * channels..(j + 1) * channels];
+                for (y, x) in dest.iter_mut().zip(src) {
+                    *y += x * h;
+                }
+                continue;
+            }
             for c in 0..channels {
-                let x = if (0..n).contains(&i) {
-                    values[i as usize * channels + c]
-                } else {
+                let x = {
                     let left = values[c];
                     let right = values[(n as usize - 1) * channels + c];
                     let slope = (right - left) / (n - 1) as f64;
