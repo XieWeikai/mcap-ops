@@ -1,0 +1,45 @@
+diff --git a/crates/core/src/time.rs b/crates/core/src/time.rs
+index d842c41..d0e4d7b 100644
+--- a/crates/core/src/time.rs
++++ b/crates/core/src/time.rs
+@@ -289,13 +289,13 @@ pub fn sample_support(source: &[i64], target: &[i64], max_gap_ns: i64) -> Result
+         return Err(invalid("negative gap limit"));
+     }
+     let mut result = SampleSupport {
+-        previous: Vec::with_capacity(target.len()),
+-        next: Vec::with_capacity(target.len()),
+-        supported: Vec::with_capacity(target.len()),
++        previous: vec![0; target.len()],
++        next: vec![0; target.len()],
++        supported: vec![false; target.len()],
+     };
+     let scan = target.len().saturating_mul(16) >= source.len() && target.is_sorted();
+     let mut cursor = 0;
+-    for &t in target {
++    for (j, &t) in target.iter().enumerate() {
+         let r = if scan {
+             while cursor < source.len() && source[cursor] < t {
+                 cursor += 1;
+@@ -306,16 +306,12 @@ pub fn sample_support(source: &[i64], target: &[i64], max_gap_ns: i64) -> Result
+         };
+         let exact = source.get(r) == Some(&t);
+         let left = if exact { r as i64 } else { r as i64 - 1 };
+-        result.previous.push(left);
+-        result
+-            .next
+-            .push(if r < source.len() { r as i64 } else { -1 });
+-        result.supported.push(
+-            exact
+-                || (r > 0
+-                    && r < source.len()
+-                    && source[r].abs_diff(source[r - 1]) <= max_gap_ns as u64),
+-        );
++        result.previous[j] = left;
++        result.next[j] = if r < source.len() { r as i64 } else { -1 };
++        result.supported[j] = exact
++            || (r > 0
++                && r < source.len()
++                && source[r].abs_diff(source[r - 1]) <= max_gap_ns as u64);
+     }
+     Ok(result)
+ }
