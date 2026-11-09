@@ -1,0 +1,66 @@
+{
+  "label": "align4-motion-bounds-01",
+  "series": "provider-align4",
+  "base_commit": "78869485192b5c6f3fe15367054e997baa7e0b8c",
+  "cases": [
+    "motion_bounds.scalar",
+    "motion_bounds.multi",
+    "motion_bounds.static"
+  ],
+  "geomean_latency_reduction_pct": 0.8639971571114624,
+  "worst_block_reduction_pct": -0.292917890533162,
+  "worst_case_reduction_pct": 0.6228640000840446,
+  "performance_gate": false,
+  "correctness": "fmt, Clippy, workspace tests, reference differential and Python tests passed",
+  "complexity_review": "Boolean reduction per eight values preserves NaN/infinity handling without a per-value exit.",
+  "paths": [
+    "crates/core/src/selection.rs"
+  ],
+  "measurement_sha256": "9e444f99ad863a5e356749f09d4d408b43755b4bf84c52e6048e1d51da4e67ee",
+  "operator": "motion_bounds",
+  "round": 1,
+  "decision": "rejected",
+  "method": "validate finite observations in small blocks",
+  "profile_hotspot": "Callgrind attributes most input traversal to finite-value checks; endpoint sorting, row indexing and extrema scanning are the remaining bounded costs.",
+  "reason": "Restore baseline: paired performance gate not met.",
+  "case_results": {
+    "motion_bounds.scalar": {
+      "before_ns": 2641.1542358398438,
+      "after_ns": 2607.1348266601562,
+      "latency_reduction_pct": 0.7071503445400973,
+      "paired_ratios": [
+        1.0204595744117024,
+        0.9968801677691628,
+        0.9889768253400352,
+        0.9621273075412479
+      ],
+      "worst_paired_reduction_pct": -2.045957441170243
+    },
+    "motion_bounds.multi": {
+      "before_ns": 48749.0185546875,
+      "after_ns": 47832.9794921875,
+      "latency_reduction_pct": 1.4394199039618583,
+      "paired_ratios": [
+        0.9981472282217566,
+        0.99612692604517,
+        0.9601776034324556,
+        0.9750846758755929
+      ],
+      "worst_paired_reduction_pct": 0.18527717782433895
+    },
+    "motion_bounds.static": {
+      "before_ns": 22375.67236328125,
+      "after_ns": 22387.029296875,
+      "latency_reduction_pct": 0.6228640000840446,
+      "paired_ratios": [
+        0.9904222545606092,
+        1.0093188925475054,
+        0.9971204654377098,
+        0.9865437462609158
+      ],
+      "worst_paired_reduction_pct": -0.9318892547505397
+    }
+  },
+  "profile_remote_path": ".artifacts/rsi/trials/align4-motion-bounds-01",
+  "validation_sha256": "40428974fb163c6e7bc8dbf1aa76c26be6773080d8c6ae20dd1d1ddb4f947010"
+}

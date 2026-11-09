@@ -1,0 +1,16 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 9f01df3..eaabae4 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -166,7 +166,10 @@ pub fn motion_bounds(
+     if edge_ns < 0
+         || thresholds.len() != signal.channels()
+         || thresholds.iter().any(|&v| !v.is_finite() || v < 0.0)
+-        || signal.values().iter().any(|v| !v.is_finite())
++        || signal
++            .values()
++            .chunks(8)
++            .any(|chunk| !chunk.iter().fold(true, |ok, x| ok & x.is_finite()))
+     {
+         return Err(crate::invalid("finite values, one finite nonnegative threshold per channel, and nonnegative edge_ns required"));
+     }
