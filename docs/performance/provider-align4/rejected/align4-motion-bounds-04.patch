@@ -1,0 +1,16 @@
+diff --git a/crates/core/src/selection.rs b/crates/core/src/selection.rs
+index 9f01df3..78db292 100644
+--- a/crates/core/src/selection.rs
++++ b/crates/core/src/selection.rs
+@@ -198,8 +198,9 @@ pub fn motion_bounds(
+             .zip(thresholds)
+             .any(|((&x, &y), &limit)| (x - y).abs() > limit)
+     };
+-    let a = (0..t.len()).find(|&i| differs(signal.row(i), &first));
+-    let b = (0..t.len()).rfind(|&i| differs(signal.row(i), &last));
++    let rows = signal.values().chunks_exact(signal.channels());
++    let a = rows.clone().position(|row| differs(row, &first));
++    let b = rows.clone().rposition(|row| differs(row, &last));
+     Ok(a.zip(b).and_then(|(a, b)| {
+         let bounds = (a.saturating_sub(1), (b + 2).min(t.len()));
+         (bounds.1.saturating_sub(bounds.0) >= 2).then_some(bounds)
