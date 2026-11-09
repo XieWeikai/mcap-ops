@@ -20,6 +20,7 @@ def main():
     parser.add_argument("label")
     parser.add_argument("--cases", required=True)
     parser.add_argument("--paths", nargs="+", required=True)
+    parser.add_argument("--native-baseline", default=".artifacts/rsi/bin/accepted", help="Project-relative accepted benchmark binary for an isolated campaign")
     parser.add_argument("--python", action="store_true")
     parser.add_argument("--retry", action="store_true")
     parser.add_argument("--blocks", type=int, default=4)
@@ -29,6 +30,8 @@ def main():
     args = parser.parse_args()
     if any(not re.fullmatch(r"[a-z0-9][a-z0-9_.-]*", name) for name in (args.label, args.series)):
         parser.error("label and series must start with a lowercase letter/digit and use only a-z0-9_.-")
+    if not re.fullmatch(r"\.artifacts/rsi/[a-zA-Z0-9_/-]+", args.native_baseline):
+        parser.error("native baseline must be a project-local RSI artifact")
     if args.blocks < 4:
         parser.error("RSI decisions require at least four paired blocks")
     host, remote = execution_target()
@@ -67,7 +70,7 @@ mkdir -p .artifacts/rsi/trials/{label}
 """
     if args.series != "initial" and not args.python:
         setup += f"""
-VALGRIND_LIB="$PWD/.tools/valgrind/root/usr/libexec/valgrind" .tools/valgrind/root/usr/bin/valgrind --tool=callgrind --collect-atstart=no --toggle-collect='operator_benchmark::Runner::bench*' --callgrind-out-file=.artifacts/rsi/trials/{label}/before.callgrind .artifacts/rsi/bin/accepted --case {cases} --profile
+VALGRIND_LIB="$PWD/.tools/valgrind/root/usr/libexec/valgrind" .tools/valgrind/root/usr/bin/valgrind --tool=callgrind --collect-atstart=no --toggle-collect='operator_benchmark::Runner::bench*' --callgrind-out-file=.artifacts/rsi/trials/{label}/before.callgrind {args.native_baseline} --case {cases} --profile
 .tools/valgrind/root/usr/bin/callgrind_annotate --auto=no --inclusive=yes --threshold=98 .artifacts/rsi/trials/{label}/before.callgrind > .artifacts/rsi/trials/{label}/before-profile.txt
 """
     if args.series != "initial" and args.python:
@@ -98,7 +101,7 @@ python3 scripts/rsi_measure.py --before .artifacts/rsi/python/accepted --after .
         setup += f"""
 VALGRIND_LIB="$PWD/.tools/valgrind/root/usr/libexec/valgrind" .tools/valgrind/root/usr/bin/valgrind --tool=callgrind --collect-atstart=no --toggle-collect='operator_benchmark::Runner::bench*' --callgrind-out-file=.artifacts/rsi/trials/{label}/profile.callgrind .artifacts/rsi/bin/{label} --case {cases} --profile
 .tools/valgrind/root/usr/bin/callgrind_annotate --auto=no --inclusive=yes --threshold=100 .artifacts/rsi/trials/{label}/profile.callgrind > .artifacts/rsi/trials/{label}/profile.txt
-python3 scripts/rsi_measure.py --before .artifacts/rsi/bin/accepted --after .artifacts/rsi/bin/{label} --cases {cases} --blocks {args.blocks} --output .artifacts/rsi/trials/{label}/measurement.json
+python3 scripts/rsi_measure.py --before {args.native_baseline} --after .artifacts/rsi/bin/{label} --cases {cases} --blocks {args.blocks} --output .artifacts/rsi/trials/{label}/measurement.json
 """
     if args.sensitivity:
         setup += f"""

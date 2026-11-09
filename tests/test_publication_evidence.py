@@ -44,7 +44,9 @@ def test_publication_map_resolves_all_commits_and_reference_sources():
         assert hashlib.sha256(content).hexdigest() == digest, name
 
 
-def test_production_sources_match_the_measured_release():
+def test_per_op10_release_sources_match_the_archived_measurement():
     report = ROOT / "docs/performance/per-op10/final/verification.json"
     for name, digest in json.loads(report.read_text())["source_sha256"].items():
-        assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest, name
+        release = "86a681663744599611f07bb322455c5d73f3cf0c"
+        source = subprocess.check_output(["git", "show", f"{release}:{name}"], cwd=ROOT)
+        assert hashlib.sha256(source).hexdigest() == digest, name

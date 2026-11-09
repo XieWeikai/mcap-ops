@@ -64,14 +64,15 @@ def test_unsafe_targets_fail(configured, host, destination):
         remote_config.execution_target(host, destination)
 
 
+@pytest.mark.parametrize("branch", ["main", "codex/feature"])
 @pytest.mark.parametrize("dirty", [False, True])
-def test_publication_backs_up_only_unchanged_committed_deletions(tmp_path, dirty):
+def test_publication_backs_up_only_unchanged_committed_deletions(tmp_path, dirty, branch):
     def git(path, *args):
         return subprocess.check_output(["git", *args], cwd=path, text=True).strip()
 
     author = tmp_path / "author"
     author.mkdir()
-    git(author, "init", "-q", "-b", "main")
+    git(author, "init", "-q", "-b", branch)
     git(author, "config", "user.name", "fixture")
     git(author, "config", "user.email", "fixture@example.invalid")
     git(author, "config", "commit.gpgsign", "false")
@@ -86,12 +87,12 @@ def test_publication_backs_up_only_unchanged_committed_deletions(tmp_path, dirty
     git(author, "commit", "-qm", "remove old source")
     head = git(author, "rev-parse", "HEAD")
     bundle = tmp_path / "source.bundle"
-    git(author, "bundle", "create", str(bundle), "main")
+    git(author, "bundle", "create", str(bundle), branch)
     if dirty:
         (destination / "old.txt").write_text("unrelated edit\n")
     import hashlib
     payload = {
-        "destination": str(destination), "bundle": str(bundle), "head": head,
+        "branch": branch, "destination": str(destination), "bundle": str(bundle), "head": head,
         "superseded": {}, "target": {"host": "fixture", "destination": str(destination)},
         "files": {".gitignore": hashlib.sha256((author / ".gitignore").read_bytes()).hexdigest()},
     }
