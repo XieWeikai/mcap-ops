@@ -1,0 +1,23 @@
+diff --git a/crates/io/src/image_ops.rs b/crates/io/src/image_ops.rs
+index 193463f..86afcea 100644
+--- a/crates/io/src/image_ops.rs
++++ b/crates/io/src/image_ops.rs
+@@ -199,11 +199,13 @@ pub fn rgb_histogram(rgb: &[u8]) -> crate::Result<Vec<i64>> {
+             "RGB buffer must contain complete triples".into(),
+         ));
+     }
+-    let mut counts = vec![0; 3 * 256];
+-    for pixel in rgb.chunks_exact(3) {
+-        for channel in 0..3 {
+-            counts[channel * 256 + usize::from(pixel[channel])] += 1;
+-        }
++    let mut banks = [[0i64; 768]; 2];
++    for (i, &[r, g, b]) in rgb.as_chunks::<3>().0.iter().enumerate() {
++        let h = &mut banks[i & 1];
++        h[usize::from(r)] += 1;
++        h[256 + usize::from(g)] += 1;
++        h[512 + usize::from(b)] += 1;
+     }
++    let counts = banks[0].iter().zip(banks[1]).map(|(a, b)| a + b).collect();
+     Ok(counts)
+ }
